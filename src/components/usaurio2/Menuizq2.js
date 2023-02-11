@@ -39,12 +39,7 @@ export default function MenuIzq2 ({children}) {
         { 
           text: 'Cursos', 
           icon: <GroupIcon color="primary" />, 
-          path: '/usuario/cursos' 
-        },
-        { 
-          text: 'Perfil', 
-          icon: <GroupIcon color="primary" />, 
-          path: '/usuario/perfil' 
+          path: '/esme/cursos' 
         },
     
       

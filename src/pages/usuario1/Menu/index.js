@@ -14,7 +14,7 @@ export default function Paginas() {
 
     return (
         <MenuUsuario4>
-         Hola
+ Menu usuario 1
   
     </MenuUsuario4> 
     );

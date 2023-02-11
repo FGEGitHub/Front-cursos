@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-//const baseUrl = 'https://api.santacatalinafideicomiso.com/'
+//const baseUrl = 'https://back-loging-production.up.railway.app/'
 const  baseUrl ='http://localhost:4000/'
 
 
@@ -42,13 +42,13 @@ const registro = async (datos) => {
 
       
  }
- const traerusuario = async (cuil_cuit) => {
+ const datosusuario = async (cuil_cuit) => {
   
  
     // const data = await axios.post('http://localhost:4000/signupp', datos)
-      const {data} = await axios.get(baseUrl+'traerusuario/'+ cuil_cuit)
+      const {data} = await axios.get(baseUrl+'datosusuario/'+ cuil_cuit)
 return data
        
   }
 
-export default { usuarios, setToken,registro, traerusuario}
+export default { usuarios, setToken,registro, datosusuario}

@@ -16,7 +16,8 @@ import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import InputLabel from '@mui/material/InputLabel';
+import NativeSelect from '@mui/material/NativeSelect';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -154,7 +155,32 @@ export default function Ingresos() {
             size="small"
             variant="standard"
           />
-          
+          <br/>
+           <InputLabel  className={cardStyles.field} sx={{
+                  mx: 3, width: '75%'
+								}} variant="standard" htmlFor="uncontrolled-native">
+                          Nivel
+                        </InputLabel>
+                        <NativeSelect
+                         className={cardStyles.field}
+                         sx={{
+                          mx: 3, width: '75%'
+                        }}
+                            defaultValue={30}
+                            onChange={handleChange}
+                            inputProps={{
+                                name: 'nivel',
+                                id: 'uncontrolled-native',
+                               
+                            }}
+                        >   <option  value={'1'}>Elegir</option>
+                            <option   value={1}>Alumna</option>
+                            <option  value={2}>Coordinador</option>
+                            <option  value={3}>Administrador</option>
+                           
+                    
+                         
+                        </NativeSelect> 
           
           <TextField
           className={cardStyles.field}
