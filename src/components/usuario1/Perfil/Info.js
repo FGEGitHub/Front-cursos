@@ -134,11 +134,11 @@ const ModificacionC = (props) => {
 
                   <Box>
                     <TextField
-                      label="CUIL"
+                      label="Nombre"
                       id="cuil"
-                      name="cuit_cuil"
+                      name="nombre"
                       // defaultValue="CUIL"
-                      defaultValue={client.cuil_cuit}
+                      defaultValue={client.nombre}
                       onChange={handleChange}
                       variant="filled"
                       sx={{ margin: "10px" }}
@@ -178,8 +178,8 @@ const ModificacionC = (props) => {
                     <TextField
                       label="Email"
                       id="email"
-                      name="email"
-                      defaultValue={client.email}
+                      name="mail"
+                      defaultValue={client.mail}
                       variant="filled"
                       sx={{ margin: "10px" }}
                       onChange={handleChange}
@@ -194,11 +194,11 @@ const ModificacionC = (props) => {
                     />
 
                     <TextField
-                      label="Provincia"
+                      label="Telefono"
                       id="Localidad"
-                      name="provincia"
+                      name="tel"
                       onChange={handleChange}
-                      defaultValue={client.provincia}
+                      defaultValue={client.tel}
                       variant="filled"
                       sx={{ margin: "10px" }}
                       InputProps={{

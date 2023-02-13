@@ -1,8 +1,8 @@
 import axios from "axios"
 
 
-//const baseUrl = 'https://back-loging-production.up.railway.app/'
-const  baseUrl ='http://localhost:4000/personas/'
+//const baseUrl = 'https://back-loging-production.up.railway.app/cursos/'
+const  baseUrl ='http://localhost:4000/cursos/'
 
 
 
@@ -29,11 +29,7 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
  }
 
 
-
-
-
-
-const datosusuario = async (usuario) => {
+ const datosusuario = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'datosusuario/'+ usuario, config)
@@ -41,5 +37,15 @@ return data
        
   }
 
+
+
+const lista = async (usuario) => {
   
-export default {datosusuario }
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'lista/', config)
+return data
+       
+  }
+
+  
+export default {datosusuario,lista }

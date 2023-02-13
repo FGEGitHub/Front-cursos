@@ -14,7 +14,8 @@ import Perfil from '../pages/usuario1/Perfil';
 
 
 ////Usuario 2
-import Menu2 from '../pages/usuario2/Menu';
+import Menu2 from '../pages/usuario2/Cursos';
+import Perfil2 from '../pages/usuario2/Perfil';
 
 const Rutas = [
 	 <Navbar/> ,
@@ -33,7 +34,8 @@ const Rutas = [
 
 
 
-		{ path: '/coordinadores/menu', element: <Menu2 /> },
+		{ path: '/coordinadores/cursos', element: <Menu2 /> },
+		{ path: '/coordinadores/perfil', element: <Perfil2 /> },
 		
 		
 

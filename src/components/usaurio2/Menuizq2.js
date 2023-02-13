@@ -13,7 +13,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import NfcIcon from '@mui/icons-material/Nfc';
 import { useState, useEffect } from "react";
 
-import Navbar from './Navbar1'
+import Navbar from '../Navbar'
 
 
 const drawerWidth = 240;
@@ -39,7 +39,12 @@ export default function MenuIzq2 ({children}) {
         { 
           text: 'Cursos', 
           icon: <GroupIcon color="primary" />, 
-          path: '/esme/cursos' 
+          path: '/coordinadores/cursos' 
+        },
+        { 
+          text: 'Perfil', 
+          icon: <GroupIcon color="primary" />, 
+          path: '/coordinadores/perfil' 
         },
     
       

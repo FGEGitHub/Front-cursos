@@ -75,7 +75,7 @@ const Login = () => {
         case 1: navigate('/usuario/menu')
         window.location.reload(true);
           break;
-          case 2:navigate('/usuario2/clientes')
+          case 2:navigate('/coordinadores/cursos')
                 window.location.reload(true);
           break;
           case 3:navigate('/nivel3')

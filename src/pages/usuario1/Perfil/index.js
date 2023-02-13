@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, Fragment } from "react";
 import Perfil from '../../../components/usuario1/Perfil/Info'
-import MenuUsuario from '../../../components/usuario1/Menuizq1'
+import MenuUsuario from '../../../components/usaurio2/Menuizq2'
 
 
 import { useNavigate } from "react-router-dom";
