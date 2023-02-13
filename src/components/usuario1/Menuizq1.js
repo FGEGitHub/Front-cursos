@@ -36,6 +36,11 @@ export default function MenuIzq2 ({children}) {
         window.location.reload(true);
       } 
     const menuItems = [
+      { 
+        text: 'Novedades', 
+        icon: <GroupIcon color="primary" />, 
+        path: '/usuario/novedades' 
+      },
         { 
           text: 'Cursos', 
           icon: <GroupIcon color="primary" />, 

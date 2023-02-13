@@ -37,8 +37,14 @@ return data
        
   }
 
-
-
+  
+  const detalledelcurso = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'detalledelcurso/'+ usuario, config)
+return data
+       
+  }
 const lista = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -48,4 +54,11 @@ return data
   }
 
   
-export default {datosusuario,lista }
+
+  const crear= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'crear',datos,config)
+     
+     alert(data)  
+ }  
+export default {datosusuario,lista,crear,detalledelcurso}

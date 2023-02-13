@@ -71,12 +71,14 @@ const Navbar = (props) => {
                 value={value}
                 onChange={(e, value) => setValue(value)}
               >
-               
             
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
                   <Tab label= {`hola ${user.nombre}!`}/>
               </Button> </div>:<div></div>}
-              
+              <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
+                  <Tab label= {`Cerrar sesion`}/>
+              </Button>
+            
               </Tabs>
              
 

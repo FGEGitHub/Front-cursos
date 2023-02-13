@@ -56,11 +56,11 @@ export default function ClienteNuevo(props) {
 
 
       <Button variant="outlined" onClick={handleClickOpen}>
-       CARGAR CLIENTE NUEVO <PersonAddAlt1Icon/>
+       CARGAR Nuevo Curso <PersonAddAlt1Icon/>
       </Button>
       <Dialog open={open} onClose={handleClose}>
      
-        <DialogTitle>Cliente Nuevo  </DialogTitle>
+        <DialogTitle>Nuevo Curso  </DialogTitle>
         <Paper
         sx={{
           cursor: 'pointer',
@@ -72,7 +72,7 @@ export default function ClienteNuevo(props) {
       >
         <DialogContent>
           <DialogContentText>
-        Datos del Nuevo Cliente
+        Datos del Nuevo Curso
           </DialogContentText>
           <form  onSubmit={handleDeterminar}> 
       
@@ -80,8 +80,8 @@ export default function ClienteNuevo(props) {
             autoFocus
             margin="dense"
             id="name"
-            label="Nombre"
-            name="Nombre"
+            label="Nombre del curso"
+            name="nombre"
             onChange={handleChange}
             fullWidth
             variant="standard"
@@ -103,7 +103,7 @@ export default function ClienteNuevo(props) {
                          
                         </NativeSelect>    
             <InputLabel  variant="standard" htmlFor="uncontrolled-native">
-                          Tipo DNI
+                        Dato adicional
                         </InputLabel>
                         <NativeSelect
                             defaultValue={30}
@@ -123,8 +123,8 @@ export default function ClienteNuevo(props) {
             autoFocus
             margin="dense"
             id="name"
-            label="Numero (con guiones)"
-            name="cuil_cuit"
+            label="Encargado"
+            name="encargado"
             onChange={handleChange}
             fullWidth
             variant="standard"
@@ -135,35 +135,25 @@ export default function ClienteNuevo(props) {
             autoFocus
             margin="dense"
             id="name"
-            label="Domicilio"
-            name="domicilio"
-            onChange={handleChange}
-            fullWidth
-            variant="standard"
-          />
-              <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Telefono"
-            name="telefono"
-            onChange={handleChange}
-            fullWidth
-            variant="standard"
-          />
-              <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Observaciones"
+            label="Observaciones adicionales"
             name="observaciones"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
+                  <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Cupo"
+            name="cupo"
             onChange={handleChange}
             fullWidth
             variant="standard"
           />
       
           <DialogActions>
-          {form.cuil_cuit && form.observaciones && form.telefono && form.domicilio  && form.tipo_dni  && form.Nombre ? <><Button variant="contained" color="primary"  type="submit">Crear</Button></> : <><h6  style={{color: "red"}} >Completar todos los campos</h6></> } 
+          {form.nombre && form.observaciones && form.encargado && form.cupo ? <><Button variant="contained" color="primary"  type="submit">Crear</Button></> : <><h6  style={{color: "red"}} >Completar todos los campos</h6></> } 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>
