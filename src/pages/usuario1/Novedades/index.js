@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState, Fragment } from "react";
-import Novedades from '../../../components/usuario1/Novedades'
+import Novedades from '../../../components/usuario1/Novedades/Tabla'
 import MenuUsuario from '../../../components/usaurio2/Menuizq2'
 
 
