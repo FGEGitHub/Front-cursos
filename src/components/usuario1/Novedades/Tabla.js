@@ -1,4 +1,4 @@
-import servicioNovedades from '../../services/novedades'
+import servicioNovedades from '../../../services/novedades'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
@@ -54,7 +54,7 @@ const TablaNotificaciones = (props) => {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
-                console.log(usuario.cuil_cuit)
+       
                 setUsuario(usuario)
                 const novedades_aux = await servicioNovedades.todas()
                 setNovedades(novedades_aux)
@@ -76,7 +76,9 @@ const TablaNotificaciones = (props) => {
             <>
                 <div>
                     < ModalVer
-                        id={novedades[dataIndex].id} />
+                    asunto={novedades[dataIndex].asunto} 
+                    detalle={novedades[dataIndex].detalle} 
+                    />
                     
                   
 
@@ -92,14 +94,11 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
-            name: "mes",
+            name: "fecha",
             label: "fecha",
 
         },
-        {
-            name: "cuil_cuit",
-            label: "Cuil/cuit",
-        },
+   
 
      
         {
@@ -108,7 +107,7 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "Ver/Contestar",
+            name: "Ver detalles",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(

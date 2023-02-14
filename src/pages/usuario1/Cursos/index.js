@@ -1,8 +1,7 @@
-
-
 import React, { useEffect, useState, Fragment } from "react";
-import Novedades from '../../../components/usuario1/Novedades/Tabla'
+
 import MenuUsuario from '../../../components/usuario1/Menuizq1'
+import Cursos from '../../../components/usuario1/cursos/listacursosniv1'
 
 
 import { useNavigate } from "react-router-dom";
@@ -43,7 +42,7 @@ export default function Transferencias() {
     <>
       <div>  {logueado ? <div>
         <MenuUsuario>
-        <Novedades/>
+        <Cursos/>
 
  </MenuUsuario> 
    

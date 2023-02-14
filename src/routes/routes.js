@@ -6,7 +6,7 @@ import Login from '../pages/Login';
 
 
 ////Usuario 1
-import Menu1 from '../pages/usuario1/Menu';
+import Menu1 from '../pages/usuario1/Cursos';
 import Perfil from '../pages/usuario1/Perfil';
 import Novedades1 from '../pages/usuario1/Novedades';
 
@@ -30,7 +30,7 @@ const Rutas = [
 		}, */
 		{ path: '/login', element: <Login /> },
 		{ path: '/usuario/novedades', element: <Novedades1 /> },
-		{ path: '/usuario/menu', element: <Menu1 /> },
+		{ path: '/usuario/cursos', element: <Menu1 /> },
 		{ path: '/usuario/perfil', element: <Perfil /> },
 
 		

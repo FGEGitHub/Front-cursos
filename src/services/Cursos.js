@@ -52,13 +52,25 @@ const lista = async (usuario) => {
 return data
        
   }
+  const listaniv1 = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'listaniv1/'+usuario, config)
+return data
+       
+  }
 
   
-
+  const inscribir= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'inscribir',datos,config)
+     
+     alert(data)  
+ } 
   const crear= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'crear',datos,config)
      
      alert(data)  
  }  
-export default {datosusuario,lista,crear,detalledelcurso}
+export default {datosusuario,inscribir,listaniv1,lista,crear,detalledelcurso}

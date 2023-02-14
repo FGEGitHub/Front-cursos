@@ -18,7 +18,7 @@ export default function Paginas() {
           const user = JSON.parse(loggedUserJSON)
           switch (user.nivel) {
             case 1:
-              navigate('/usuario/menu')
+              navigate('/usuario/novedades')
               break;
             case 2:
               navigate('/coordinadores/menu')
