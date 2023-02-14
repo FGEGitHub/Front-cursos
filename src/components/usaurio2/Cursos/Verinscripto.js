@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioCursos from '../../../services/Cursos'
+import servicioPersonas from '../../../services/personas'
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
@@ -29,7 +29,7 @@ export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
   //const usuario  = useUser().userContext
 
-  const [notificacion, setNotidicaciones] = useState()
+  const [usuarioo, setUsuarioo] = useState()
   const [activo, setActivo] = useState(false)
 
 
@@ -37,9 +37,9 @@ export default function SelectTextFields(props) {
 
   const traer = async () => {
 
-   const not = await servicioCursos.leer(props.id)
-   setNotidicaciones(not)
-
+   const not = await servicioPersonas.datosusuarioporid(props.id_usuario)
+   setUsuarioo(not[0])
+console.log(not[0])
    setActivo(true)
 
   }
@@ -56,9 +56,8 @@ export default function SelectTextFields(props) {
 
 
   const handleClickOpen = () => {
-    setOpen(true);
     traer()
-    props.traer()
+    setOpen(true);
   };
 
   const handleClose = () => {
@@ -75,7 +74,7 @@ export default function SelectTextFields(props) {
 
     try {
 
-      await servicioCursos.inscribir(
+      await servicioPersonas.inscribir(
         inscripcion
 
 
@@ -110,7 +109,7 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Leer">
+       < Tooltip title="Ver inscripcion">
       <BorderColorIcon variant="outlined" onClick={handleClickOpen}/>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
@@ -118,8 +117,8 @@ export default function SelectTextFields(props) {
 
         
         
-             <h3>Inscripciona  curso {props.nombre}</h3>
-             
+             <h3>Inscripciona  curso </h3>
+           
                
    
    

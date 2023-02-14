@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import servicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
+import Fuchacurso from './Fichacurso'
 import Nuevo from './NuevaClase'
+import Ver from './Verinscripto'
 import CargaDeTabla from "../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import SearchIcon from '@mui/icons-material/Search';
+
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
@@ -57,6 +58,9 @@ const Lotes = () => {
     let id = params.id
     //configuracion de Hooks
     const [clients, setClients] = useState([]);
+    const [pendientes, setPendientes] = useState([]);
+    const [inscriptos, setInscriptos] = useState([]);
+    const [curso, setCurso] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -66,7 +70,12 @@ const Lotes = () => {
     const getClients = async () => {
         
         const clients = await servicioCursos.detalledelcurso(id)
-        setClients(clients)
+        console.log(clients)
+        setClients(clients[0])
+        setPendientes(clients[1])
+        setInscriptos(clients[2])
+        setCurso(clients[3][0])
+       
         setLoading(false);
     }
 
@@ -102,12 +111,9 @@ const Lotes = () => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-           <b> 
-             <p 
-             onClick={() =>  navigate('/coordinadores/detallecurso/'+clients[dataIndex].id)}
-             style={{ color: 'blue' }}
-            > Ver </p>   </b> 
-           
+          <Ver
+          id_usuario = {inscriptos[dataIndex].id_usuario}
+          />
           </>
         );
       }
@@ -116,10 +122,19 @@ const Lotes = () => {
         return (
           <>
            <b> 
-             <p 
-             onClick={() =>  navigate('/coordinadores/detallecurso/'+clients[dataIndex].id)}
-             style={{ color: '#blue' }}
-            > {clients[dataIndex].nombre} </p>   </b> 
+            {inscriptos[dataIndex].nombre}   </b> 
+           
+          </>
+        );
+      }
+
+      function pendientess(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+
+{inscriptos[dataIndex].inscripcion  = "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptos[dataIndex].inscripcion}    </b> </> : <><b>  <p style={{ color: '#2e7d32' }} > {inscriptos[dataIndex].inscripcion} </p>   </b></>}
+
+           
            
           </>
         );
@@ -128,34 +143,38 @@ const Lotes = () => {
     const columns = [
         {
             name: "fecha",
-            label: "Fecha creacion",
+            label: "Fecha inscripcion",
 
         },
        
+        {
+          name: "Nombre",
+          options: {
+              customBodyRenderLite: (dataIndex, rowIndex) =>
+              Nombre(
+                      dataIndex,
+                      rowIndex,
+                     // overbookingData,
+                     // handleEditOpen
+                  )
+          }
+      
+      },  
+        
+        
       {
-            name: "Nombre",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    Nombre(
-                        dataIndex,
-                        rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
-                    )
-            }
-        
-        },   
-        
-        {
-            name: "encargado",
-            label: "Encargado",
-           
-        },
-        {
-            name: "observaciones",
-            label:"Observaciones",
-           
-        },
+        name: "Estado",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                pendientess(
+                    dataIndex,
+                    rowIndex,
+                   // overbookingData,
+                   // handleEditOpen
+                )
+        }
+    
+    },
        {
             name: "Actions",
             options: {
@@ -183,25 +202,39 @@ const options = {
 // renderiza la data table
 return (
     <>
+    
+    { pendientes.length>0? <>     <Alert severity="success">Tienes {pendientes.length} inscripcion(es) pendiente(s) </Alert></> : <></>}
+ 
+   
+
     {loading ? (<CargaDeTabla/>)
         :(
     <div>
             <Stack spacing={2} sx={{ width: '100%' }}>
  
- <Alert severity="info">Cantidad de clases: {clients.length}</Alert>
+
     </Stack>
-    <br/>
-    <Nuevo
-    getClients =  { async () => {
-        const clients = await servicioCursos.lista({
-        })
-        setClients(clients)
-    }}
-    />
+    <br/> <Paper
+        sx={{
+          cursor: 'pointer',
+          background: '#fafafa',
+          color: '#bdbdbd',
+          border: '1px dashed #ccc',
+          '&:hover': { border: '1px solid #ccc' },
+        }}
+      >
+    <Fuchacurso
+    nombre={curso.nombre}
+    encargado={curso.encargado}
+     fecha={curso.cupo}
+     cupo={curso.cupo}
+    /></Paper>
+        <br/>
+        <br/>
         <MUIDataTable
         
-            title={"Lista de Clases"}
-            data={clients}
+            title={"Lista de Inscriptos"}
+            data={inscriptos}
             columns={columns}
             actions={[
                 {
@@ -217,7 +250,22 @@ return (
     </div>
     )}
      <div>
-    <br/>  <br/> <br/> <br/> 
+    <br/>  <Paper
+        sx={{
+          cursor: 'pointer',
+          background: '#fafafa',
+          color: '#bdbdbd',
+          border: '1px dashed #ccc',
+          '&:hover': { border: '1px solid #ccc' },
+        }}
+      > <br/> <br/> 
+    <Nuevo
+    getClients =  { async () => {
+        const clients = await servicioCursos.lista({
+        })
+        setClients(clients)
+    }}
+    /><br/> 
     < Tooltip> 
     <h2>Clases </h2>
     
@@ -248,6 +296,7 @@ return (
         </TableBody>
       </Table>
     </TableContainer>
+    </Paper>
     </div>
     </>
 

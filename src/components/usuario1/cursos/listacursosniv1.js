@@ -200,7 +200,7 @@ const TablaNotificaciones = (props) => {
                                         <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>ENCARGADO/A</b></TableCell>
                                         <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>CUPO</b></TableCell>
                                         <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>INSCRIPTO/A</b></TableCell>
-                                        <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>VER</b></TableCell>
+                                        <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>INSCRIBIRSE</b></TableCell>
 
 
                                     </TableRow>
@@ -216,7 +216,7 @@ const TablaNotificaciones = (props) => {
                                             <StyledTableCell component="th" scope="row">{row.encargado}</StyledTableCell>
 
                                             <StyledTableCell component="th" scope="row">{row.cupo}</StyledTableCell>
-                                            <StyledTableCell component="th" scope="row">{row.inscripcion === null ? <>No</>:<> {row.inscripcion === 'Pendiente' ?<>Inscripta</>:<></>} </>}</StyledTableCell>
+                                            <StyledTableCell component="th" scope="row">{row.inscripcion === null ? <>NO</>:<> {row.inscripcion === 'Pendiente' ?<>INSCRIPCION EN PROCESO</>:<></>} </>}</StyledTableCell>
                                             <StyledTableCell component="th" scope="row">    < ModalVer id={row.id} 
                                             nombre ={row.nombre}
                                             traer={async () => {

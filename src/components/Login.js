@@ -72,7 +72,7 @@ const Login = () => {
 
       console.log(user.nivel)
       switch(user.nivel){
-        case 1: navigate('/usuario/menu')
+        case 1: navigate('/usuario/novedades')
         window.location.reload(true);
           break;
           case 2:navigate('/coordinadores/cursos')

@@ -31,8 +31,14 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
 
 
-
-
+ 
+ const datosusuarioporid = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'datosusuarioporid/'+ usuario, config)
+return data
+       
+  }
 const datosusuario = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -42,4 +48,4 @@ return data
   }
 
   
-export default {datosusuario }
+export default {datosusuario,datosusuarioporid }
