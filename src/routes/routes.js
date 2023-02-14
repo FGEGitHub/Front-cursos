@@ -28,6 +28,7 @@ const Rutas = [
 	
 	/*{	path: '/',	element: <NotFound />
 		}, */
+		{ path: '/', element: <Login /> },
 		{ path: '/login', element: <Login /> },
 		{ path: '/usuario/novedades', element: <Novedades1 /> },
 		{ path: '/usuario/cursos', element: <Menu1 /> },

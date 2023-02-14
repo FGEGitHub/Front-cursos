@@ -21,7 +21,7 @@ export default function Paginas() {
               navigate('/usuario/novedades')
               break;
             case 2:
-              navigate('/coordinadores/menu')
+              navigate('/coordinadores/cursos')
               break;
           
             case 3:

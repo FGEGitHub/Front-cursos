@@ -219,7 +219,7 @@ const TablaNotificaciones = (props) => {
                                             <StyledTableCell component="th" scope="row">{row.inscripcion === null ? <>NO</>:<> {row.inscripcion === 'Pendiente' ?<>INSCRIPCION EN PROCESO</>:<></>} </>}</StyledTableCell>
                                             <StyledTableCell component="th" scope="row">    < ModalVer id={row.id} 
                                             nombre ={row.nombre}
-                                            traer={async () => {
+                                            traerr={async () => {
                                                 try {
                                                     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                                                     if (loggedUserJSON) {

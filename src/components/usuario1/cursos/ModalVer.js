@@ -58,7 +58,7 @@ export default function SelectTextFields(props) {
   const handleClickOpen = () => {
     setOpen(true);
     traer()
-    props.traer()
+  
   };
 
   const handleClose = () => {
@@ -80,7 +80,7 @@ export default function SelectTextFields(props) {
 
 
       )
-
+      props.traerr()
 
     } catch (error) {
       console.error(error);

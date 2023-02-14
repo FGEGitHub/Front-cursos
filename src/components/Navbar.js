@@ -49,7 +49,7 @@ const Navbar = (props) => {
    } 
 
   const inicio = () => {
-    navigate("/usuario2/clientes")
+    navigate("/")
     
 
   }

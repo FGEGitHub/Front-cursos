@@ -11,6 +11,7 @@ import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import Featured from '../../estadisticas/featured/Featured'
 const currencies = [
   {
     value: 'CBU',
@@ -30,6 +31,7 @@ export default function SelectTextFields(props) {
   //const usuario  = useUser().userContext
 
   const [usuarioo, setUsuarioo] = useState()
+  const [porcent, setPorcent] = useState()
   const [activo, setActivo] = useState(false)
 
 
@@ -38,8 +40,9 @@ export default function SelectTextFields(props) {
   const traer = async () => {
 
    const not = await servicioPersonas.datosusuarioporid(props.id_usuario)
-   setUsuarioo(not[0])
+   setUsuarioo(not[0][0])
 console.log(not[0])
+setPorcent(not[1])
    setActivo(true)
 
   }
@@ -113,14 +116,23 @@ console.log(not[0])
       <BorderColorIcon variant="outlined" onClick={handleClickOpen}/>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
+
+      {activo ? <>
         <DialogContent>
 
         
         
-             <h3>Inscripciona  curso </h3>
+             <h3>Inscripcion a curso </h3>
            
-               
-   
+             <Featured
+            porcentaje={porcent}
+            titulo="Requisitos"
+
+          />
+     <label>Hijos:{usuarioo.hijos} <br />
+            Años:{usuarioo.anios} <br />
+            trabajo:{usuarioo.trabajo} <br />
+     </label>
    
                  <br />
                  <label>inscripcion a curso?</label>
@@ -137,6 +149,7 @@ console.log(not[0])
            
          
         </DialogContent>
+        </>: <>Cargando</>}
       </Dialog>
     </Box >
 
