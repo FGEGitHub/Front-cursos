@@ -59,7 +59,13 @@ return data
 return data
        
   }
-
+  const verclases = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'verclases/'+usuario, config)
+return data
+       
+  }
   
   const inscribir= async  (datos) => {
     console.log(datos)
@@ -73,4 +79,14 @@ return data
      
      alert(data)  
  }  
-export default {datosusuario,inscribir,listaniv1,lista,crear,detalledelcurso}
+
+
+ const nuevaclase= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'nuevaclase',datos,config)
+   
+   alert(data)  
+} 
+
+ 
+export default {datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}

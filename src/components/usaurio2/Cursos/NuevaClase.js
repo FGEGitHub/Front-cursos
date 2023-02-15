@@ -16,12 +16,12 @@ import { Paper } from '@mui/material';
 
 import Box from '@mui/material/Box';
 
-export default function ClienteNuevo(props) {
+export default function Clasenueva(props) {
     let params = useParams()
     let id = params.id
 
     const [open, setOpen] = React.useState(false);
-    const [form, setForm] = useState({ id: id })
+    const [form, setForm] = useState({ id_curso: id })
     const handleChange = (e) => {
         console.log(form)
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -34,7 +34,7 @@ export default function ClienteNuevo(props) {
         event.preventDefault();
         try {
 
-            await servicioCursos.crear(form)
+            await servicioCursos.nuevaclase(form)
 
 
         } catch (error) {
@@ -74,16 +74,16 @@ export default function ClienteNuevo(props) {
                 >
                     <DialogContent>
                         <DialogContentText>
-                            Datos del Nuevo Curso
+                            Datos del Nueva clase
                         </DialogContentText>
-                        <form onSubmit={handleDeterminar}>
+                        <form >
 
                             <TextField
                                 autoFocus
                                 margin="dense"
                                 id="name"
-                                label="Nombre del curso"
-                                name="nombre"
+                                label="Tema"
+                                name="observaciones"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -95,7 +95,7 @@ export default function ClienteNuevo(props) {
                                 <TextField
 
                                     onChange={handleChange}
-                                    name="fechapago"
+                                    name="fecha"
                                     id="date"
                                     label="Fecha del curso"
                                     type="date"
@@ -118,8 +118,8 @@ export default function ClienteNuevo(props) {
 
                                 }}
                             >   <option value={'C.U.I.L.'}>Elegir</option>
-                                <option value={'C.U.I.L.'}>CUIL</option>
-                                <option value={'C.U.I.T.'}>CUIT</option>
+                                <option value={'C.U.I.L.'}>dato 1</option>
+                                <option value={'C.U.I.T.'}>dato 1</option>
 
                             </NativeSelect>
 
@@ -135,20 +135,11 @@ export default function ClienteNuevo(props) {
                                 maxRows="13"
                             />
 
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="name"
-                                label="Observaciones adicionales"
-                                name="observaciones"
-                                onChange={handleChange}
-                                fullWidth
-                                variant="standard"
-                            />
+                        
 
 
                             <DialogActions>
-                                {form.nombre && form.observaciones && form.encargado ? <><Button variant="contained" color="primary" type="submit">Crear</Button></> : <><h6 style={{ color: "red" }} >Completar todos los campos</h6></>}
+                                {form.observaciones && form.fecha ? <><Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button></> : <><h6 style={{ color: "red" }} >Completar todos los campos</h6></>}
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                             </DialogActions>

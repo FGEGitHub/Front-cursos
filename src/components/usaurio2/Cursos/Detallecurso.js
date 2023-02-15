@@ -22,7 +22,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import { SyntheticEvent } from 'react';
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -52,6 +55,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
 
 const Lotes = () => {
+  const [value, setValue] = React.useState(0);
 
       
     let params = useParams()
@@ -62,10 +66,15 @@ const Lotes = () => {
     const [inscriptos, setInscriptos] = useState([]);
     const [curso, setCurso] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [inscriptosacepados, setInscriptosacepados] = useState([]);
+    const [inscriptosacepados, setInscriptosacepados] = useState([]);    
+    const [clases, setClases] = useState([]);
     const navigate = useNavigate();
 
 
+
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
     
 
     const getClients = async () => {
@@ -77,9 +86,23 @@ const Lotes = () => {
         setInscriptos(clients[2])
         setCurso(clients[3][0])
         setInscriptosacepados(clients[4])
+        setClases(clients[5])
         
         setLoading(false);
     }
+
+    
+    const getClases= async () => {
+      const classs = await servicioCursos.verclases(id)
+      console.log(classs)
+
+
+      setClases(classs)
+    
+    
+      setLoading(false);
+  }
+
 
     useEffect(() => {
         getClients()
@@ -219,12 +242,99 @@ const options = {
 // renderiza la data table
 return (
     <>
-    
+    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+    <Paper
+        sx={{
+          cursor: 'pointer',
+          background: '#fafafa',
+          color: '#bdbdbd',
+          border: '1px dashed #ccc',
+          '&:hover': { border: '1px solid #ccc' },
+        }}
+      >
+      <Tabs value={value} onChange={handleChange} centered>
+        <Tab label="Info del curso" />
+        <Tab label="Inscriptos" />
+        <Tab label="Clases" />
+      </Tabs>
+      </Paper>
+    </Box>
+  
+
     { pendientes.length>0? <>     <Alert severity="success">Tienes {pendientes.length} inscripcion(es) pendiente(s), cupo {inscriptosacepados}/{curso.cupo} </Alert></> : <></>}
  
-   
+     { value === 1 ? <> <br/>
+        <MUIDataTable
+        
+            title={"Lista de Inscriptos"}
+            data={inscriptos}
+            columns={columns}
+            actions={[
+                {
+                    icon: 'save',
+                    tooltip: 'Save User',
+                    onClick: (event, rowData) => alert("You saved " + rowData.name)
+                }
+            ]}
+            options={options}
 
-    {loading ? (<CargaDeTabla/>)
+
+        />
+        </>:<>  { value === 2? <>
+          <br/>  <Paper
+        sx={{
+          cursor: 'pointer',
+          background: '#fafafa',
+          color: '#bdbdbd',
+          border: '1px dashed #ccc',
+          '&:hover': { border: '1px solid #ccc' },
+        }}
+      > <br/> <br/> 
+    <Nuevo
+    getClients = {async () => {
+      const classs = await servicioCursos.verclases(id)
+    
+      setClases(classs)
+    
+    
+      setLoading(false);
+  }}
+    /><br/> 
+    < Tooltip> 
+    <h2>Clases </h2>
+    
+     </Tooltip> 
+    <br/>
+<TableContainer component={Paper}>
+      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Fecha</StyledTableCell>
+            <StyledTableCell align="right">Tema</StyledTableCell>
+        
+          
+          </TableRow>
+        </TableHead>
+        <TableBody>
+
+          {clases? <> 
+
+          {clases.map((row) => (
+            <StyledTableRow key={row.name}>
+              <StyledTableCell component="th" scope="row">
+                {row.fecha}
+              </StyledTableCell>
+          
+              <StyledTableCell align="right">{row.observacion}</StyledTableCell>
+              
+            </StyledTableRow>
+          ))}
+
+</>: <></>}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </Paper></>:<>{loading ? (<CargaDeTabla/>)
         :(
     <div>
             <Stack spacing={2} sx={{ width: '100%' }}>
@@ -248,74 +358,14 @@ return (
      inscriptosacepados={inscriptosacepados}
     /></Paper>
         <br/>
-        <br/>
-        <MUIDataTable
-        
-            title={"Lista de Inscriptos"}
-            data={inscriptos}
-            columns={columns}
-            actions={[
-                {
-                    icon: 'save',
-                    tooltip: 'Save User',
-                    onClick: (event, rowData) => alert("You saved " + rowData.name)
-                }
-            ]}
-            options={options}
-
-
-        />
+       
     </div>
     )}
      <div>
-    <br/>  <Paper
-        sx={{
-          cursor: 'pointer',
-          background: '#fafafa',
-          color: '#bdbdbd',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
-        }}
-      > <br/> <br/> 
-    <Nuevo
-    getClients =  { async () => {
-        const clients = await servicioCursos.lista({
-        })
-        setClients(clients)
-    }}
-    /><br/> 
-    < Tooltip> 
-    <h2>Clases </h2>
+   
+    </div></>}</>}
+
     
-     </Tooltip> 
-    <br/>
-<TableContainer component={Paper}>
-      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Fecha</StyledTableCell>
-            <StyledTableCell align="right">Observacion</StyledTableCell>
-            <StyledTableCell align="right">Leida</StyledTableCell>
-            <StyledTableCell align="right">Acciones</StyledTableCell>
-          
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {clients.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.fecha}
-              </StyledTableCell>
-          
-              <StyledTableCell align="right">{row.observacion}</StyledTableCell>
-              
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </Paper>
-    </div>
     </>
 
 
