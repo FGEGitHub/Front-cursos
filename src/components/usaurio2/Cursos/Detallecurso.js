@@ -62,6 +62,7 @@ const Lotes = () => {
     const [inscriptos, setInscriptos] = useState([]);
     const [curso, setCurso] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [inscriptosacepados, setInscriptosacepados] = useState([]);
     const navigate = useNavigate();
 
 
@@ -75,7 +76,8 @@ const Lotes = () => {
         setPendientes(clients[1])
         setInscriptos(clients[2])
         setCurso(clients[3][0])
-       
+        setInscriptosacepados(clients[4])
+        
         setLoading(false);
     }
 
@@ -113,6 +115,19 @@ const Lotes = () => {
           <>
           <Ver
           id_usuario = {inscriptos[dataIndex].id_usuario}
+           getClients = {async () => {
+        
+            const clients = await servicioCursos.detalledelcurso(id)
+            console.log(clients)
+            setClients(clients[0])
+            setPendientes(clients[1])
+            setInscriptos(clients[2])
+            setCurso(clients[3][0])
+            setInscriptosacepados(clients[4])
+            setLoading(false);
+        }}
+
+
           />
           </>
         );
@@ -132,7 +147,9 @@ const Lotes = () => {
         return (
           <>
 
-{inscriptos[dataIndex].inscripcion  = "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptos[dataIndex].inscripcion}    </b> </> : <><b>  <p style={{ color: '#2e7d32' }} > {inscriptos[dataIndex].inscripcion} </p>   </b></>}
+{inscriptos[dataIndex].inscripcion  === "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptos[dataIndex].inscripcion}   </b> </> : 
+   <>{inscriptos[dataIndex].inscripcion   ===  "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptos[dataIndex].inscripcion} c  </b> </> 
+   :    <><b style={{ color: '#d32f2f' }} >  {inscriptos[dataIndex].inscripcion} </b></>}</>} 
 
            
            
@@ -176,7 +193,7 @@ const Lotes = () => {
     
     },
        {
-            name: "Actions",
+            name: "Acciones",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -203,7 +220,7 @@ const options = {
 return (
     <>
     
-    { pendientes.length>0? <>     <Alert severity="success">Tienes {pendientes.length} inscripcion(es) pendiente(s) </Alert></> : <></>}
+    { pendientes.length>0? <>     <Alert severity="success">Tienes {pendientes.length} inscripcion(es) pendiente(s), cupo {inscriptosacepados}/{curso.cupo} </Alert></> : <></>}
  
    
 
@@ -228,6 +245,7 @@ return (
     encargado={curso.encargado}
      fecha={curso.cupo}
      cupo={curso.cupo}
+     inscriptosacepados={inscriptosacepados}
     /></Paper>
         <br/>
         <br/>

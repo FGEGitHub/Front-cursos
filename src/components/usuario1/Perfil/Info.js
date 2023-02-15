@@ -17,6 +17,9 @@ import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import KeyIcon from '@mui/icons-material/Key';
 import { Paper } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import NativeSelect from '@mui/material/NativeSelect';
+
 
 const ModificacionC = (props) => {
   const navigate = useNavigate();
@@ -40,20 +43,22 @@ const ModificacionC = (props) => {
     console.log(preba)
 
 
-    const cliente = await servicioUsuario1.datosusuario(preba.usuario)
+    const client = await servicioUsuario1.datosusuario(preba.usuario)
+    console.log(client[0])
+    console.log(client[0][0])
 
-    setCliente(cliente)
+    setCliente(client[0])
  
 
     setModificaciones({
-      cuil_cuit: cliente[0].cuil_cuit,
-      Nombre: cliente[0].Nombre,
-      email: cliente[0].email,
-      provincia: cliente[0].provincia,
-      telefono: cliente[0].telefono,
-      ingresos: cliente[0].ingresos,
-      domicilio: cliente[0].domicilio,
-      razon_social: cliente[0].razon_social
+      usuario: client[0][0].usuario,
+      nombre: client[0][0].nombre,
+      mail: client[0][0].mail,
+      provincia: client[0][0].provincia,
+      tel: client[0][0].tel,
+      ingresos: client[0][0].ingresos,
+      direccion: client[0][0].direccion,
+      razon_social: client[0][0].razon_social
     })
     setPass({
       cuil_cuit: cliente[0].cuil_cuit,
@@ -138,7 +143,7 @@ const ModificacionC = (props) => {
                       id="cuil"
                       name="nombre"
                       // defaultValue="CUIL"
-                      defaultValue={client.nombre}
+                      defaultValue={modificaciones.nombre}
                       onChange={handleChange}
                       variant="filled"
                       sx={{ margin: "10px" }}
@@ -153,10 +158,10 @@ const ModificacionC = (props) => {
                     />
 
                     <TextField
-                      label="Nombre"
+                      label="Usuario"
                       id="Nombre"
-                      name="Nombre"
-                      defaultValue={client.Nombre}
+                      name="usuario"
+                      defaultValue={modificaciones.usuario}
                       onChange={handleChange}
                       variant="filled"
                       sx={{ margin: "10px" }}
@@ -179,7 +184,7 @@ const ModificacionC = (props) => {
                       label="Email"
                       id="email"
                       name="mail"
-                      defaultValue={client.mail}
+                      defaultValue={modificaciones.mail}
                       variant="filled"
                       sx={{ margin: "10px" }}
                       onChange={handleChange}
@@ -195,10 +200,10 @@ const ModificacionC = (props) => {
 
                     <TextField
                       label="Telefono"
-                      id="Localidad"
+                      id="Telefono"
                       name="tel"
                       onChange={handleChange}
-                      defaultValue={client.tel}
+                      defaultValue={modificaciones.tel}
                       variant="filled"
                       sx={{ margin: "10px" }}
                       InputProps={{
@@ -215,8 +220,8 @@ const ModificacionC = (props) => {
                     <TextField
                       label="Numero de Telefono"
                       id="numero de telefono"
-                      name="telefono"
-                      defaultValue={client.telefono}
+                      name="tel"
+                      defaultValue={modificaciones.tel}
                       onChange={handleChange}
                       variant="filled"
                       sx={{ margin: "10px" }}
@@ -235,8 +240,8 @@ const ModificacionC = (props) => {
                     <TextField
                       label="Domicilio"
                       id="domicilio"
-                      name="domicilio"
-                      defaultValue={client.domicilio}
+                      name="direccion"
+                      defaultValue={modificaciones.direccion}
                       onChange={handleChange}
                       variant="filled"
                       sx={{ margin: "10px" }}
@@ -284,8 +289,79 @@ const ModificacionC = (props) => {
                 </Container>
 
               </Grid>
+
+
+
+
             </Paper>
+
+
+
                         <br/> <br/>
+
+                        <Paper
+                sx={{
+                  cursor: 'pointer',
+                  background: '#fafafa',
+                  color: '#bdbdbd',
+                  border: '1px dashed #ccc',
+                  '&:hover': { border: '1px solid #ccc' },
+                }}
+              >
+                <h2>Informacion adicional</h2>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                               Trabajo
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'accion',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            >   <option value={'Pendiente'}>Sin especificar</option>
+                                <option value={'Si'}>Si</option>
+                                <option value={'No'}>No</option>
+
+                            </NativeSelect>
+                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                               Hijos
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'accion',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            >   <option value={'Pendiente'}>Sin especificar</option>
+                                <option value={'Si'}>Si</option>
+                                <option value={'No'}>No</option>
+
+                            </NativeSelect>
+                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                               Edad
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'accion',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            >   <option value={'Pendiente'}>Sin especificar</option>
+                                <option value={'Si'}>Si</option>
+                                <option value={'No'}>No</option>
+
+                            </NativeSelect>
+
+
+              </Paper>
+
+
                        
                          <br/>
             <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>

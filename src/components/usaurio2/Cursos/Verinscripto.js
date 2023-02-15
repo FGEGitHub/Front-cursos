@@ -12,6 +12,8 @@ import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import Featured from '../../estadisticas/featured/Featured'
+import { useParams } from "react-router-dom"
+import InputLabel from '@mui/material/InputLabel';
 const currencies = [
   {
     value: 'CBU',
@@ -29,7 +31,8 @@ const currencies = [
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
   //const usuario  = useUser().userContext
-
+  let params = useParams()
+  let id_curso = params.id
   const [usuarioo, setUsuarioo] = useState()
   const [porcent, setPorcent] = useState()
   const [activo, setActivo] = useState(false)
@@ -51,8 +54,8 @@ setPorcent(not[1])
 
   const [inscripcion, setInscripcion] = useState({
 
-    usuario: usuario,
-    id:props.id
+    id_usuario: props.id_usuario,
+    id_curso:id_curso
 
 
   })
@@ -68,7 +71,10 @@ setPorcent(not[1])
   };
 
   
-
+  const handleChange = (e) => {
+    console.log(inscripcion)
+    setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
+}
   
   ////
   const handleDeterminar = async (event) => {
@@ -82,7 +88,7 @@ setPorcent(not[1])
 
 
       )
-
+      props.getClients()
 
     } catch (error) {
       console.error(error);
@@ -136,7 +142,22 @@ setPorcent(not[1])
    
                  <br />
                  <label>inscripcion a curso?</label>
-                
+                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                                Dato adicional
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'accion',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            >   <option value={'Pendiente'}>Pendiente</option>
+                                <option value={'Aceptar'}>Aceptar</option>
+                                <option value={'Rechazar'}>Rechazar</option>
+
+                            </NativeSelect>
    
    
    

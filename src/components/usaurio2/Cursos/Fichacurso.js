@@ -131,7 +131,7 @@ const FichaAxios = (props) => {
                 <TextField
                   label="Cupo"
                   id="Nombre"
-                  value= {props.cupo}
+                  value= {props.inscriptosacepados +'/'+props.cupo}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
