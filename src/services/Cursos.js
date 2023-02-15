@@ -66,7 +66,20 @@ return data
 return data
        
   }
+
+
+
+  const asistencia = async (usuario) => {
   
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'asistencia/'+usuario, config)
+return data
+       
+  }
+
+
+
+
   const inscribir= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'inscribir',datos,config)
@@ -89,4 +102,4 @@ return data
 } 
 
  
-export default {datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {asistencia,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}

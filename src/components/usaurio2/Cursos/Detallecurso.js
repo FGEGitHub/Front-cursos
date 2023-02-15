@@ -311,7 +311,7 @@ return (
           <TableRow>
             <StyledTableCell>Fecha</StyledTableCell>
             <StyledTableCell align="right">Tema</StyledTableCell>
-        
+            <StyledTableCell align="right">Tomar asistencia</StyledTableCell>
           
           </TableRow>
         </TableHead>
@@ -325,7 +325,9 @@ return (
                 {row.fecha}
               </StyledTableCell>
           
+              
               <StyledTableCell align="right">{row.observacion}</StyledTableCell>
+              <StyledTableCell  onClick={() => navigate('/coordinadores/asistencia/'+row.id)} align="right">ir</StyledTableCell>
               
             </StyledTableRow>
           ))}

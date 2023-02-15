@@ -18,7 +18,7 @@ import Novedades1 from '../pages/usuario1/Novedades';
 import Menu2 from '../pages/usuario2/Cursos';
 import Perfil2 from '../pages/usuario2/Perfil';
 import Detallecurso from '../pages/usuario2/Detallecurso';
-
+import Asistencia from '../pages/usuario2/Asistencia';
 
 const Rutas = [
 	 <Navbar/> ,
@@ -41,6 +41,7 @@ const Rutas = [
 		{ path: '/coordinadores/cursos', element: <Menu2 /> },
 		{ path: '/coordinadores/perfil', element: <Perfil2 /> },
 		{ path: '/coordinadores/detallecurso/:id', element: <Detallecurso /> },
+		{ path: '/coordinadores/asistencia/:id', element: <Asistencia /> },
 		
 		
 
