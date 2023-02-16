@@ -56,4 +56,12 @@ return data
      
      alert(data)  
  } 
-export default {datosusuario,datosusuarioporid,inscribir }
+
+ const modificardatosadic= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'modificardatosadic',datos,config)
+   
+   alert(data)  
+} 
+ 
+export default {modificardatosadic,datosusuario,datosusuarioporid,inscribir }

@@ -25,6 +25,7 @@ const ModificacionC = (props) => {
   const navigate = useNavigate();
   const [cliente, setCliente] = useState()
   const [modificaciones, setModificaciones] = useState([])
+  const [modificacionesadicionales, setModificacionesadicionales] = useState([])
   const [pass, setPass] = useState([])
 
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
@@ -44,11 +45,10 @@ const ModificacionC = (props) => {
 
 
     const client = await servicioUsuario1.datosusuario(preba.usuario)
-    console.log(client[0])
-    console.log(client[0][0])
+ 
 
     setCliente(client[0])
- 
+
 
     setModificaciones({
       usuario: client[0][0].usuario,
@@ -58,22 +58,30 @@ const ModificacionC = (props) => {
       tel: client[0][0].tel,
       ingresos: client[0][0].ingresos,
       direccion: client[0][0].direccion,
-      razon_social: client[0][0].razon_social
+      edad: client[0][0].edad
     })
-    setPass({
-      cuil_cuit: cliente[0].cuil_cuit,
+ 
+    setModificacionesadicionales({
+      usuario: preba.usuario,
+      hijos: client[0][0].hijos,
+      trabajo: client[0][0].trabajo,
+      anios: client[0][0].anios,
     })
 
   };
+  
 
-
+  const handleChange2 = (e) => {
+    setModificacionesadicionales({ ...modificacionesadicionales, [e.target.name]: e.target.value })
+console.log(modificacionesadicionales)
+  }
   const handleChange = (e) => {
     setModificaciones({ ...modificaciones, [e.target.name]: e.target.value })
-   
+
   }
   const handleChangePass = (e) => {
     setPass({ ...pass, [e.target.name]: e.target.value })
-    
+
   }
   const handleDeterminar = async (event) => {
 
@@ -83,20 +91,31 @@ const ModificacionC = (props) => {
 
       traer()
     } catch (error) {
-  
+
       console.log('Error algo sucedio')
 
     }
 
   };
+  const handleDeterminaradic= async (event) => {
 
+    try {
+      console.log(modificacionesadicionales);
+      const rta = await servicioUsuario1.modificardatosadic(modificacionesadicionales)
+   
+    } catch (error) {
+      console.error(error);
+      console.log('Error algo sucedio')
+
+    }
+
+  };
   const handleDeterminarPass = async (event) => {
 
     try {
 
       const rta = await servicioUsuario1.modificarpass(pass)
-      alert(rta)
-      
+     
     } catch (error) {
       console.error(error);
       console.log('Error algo sucedio')
@@ -297,73 +316,79 @@ const ModificacionC = (props) => {
 
 
 
-                        <br/> <br/>
+            <br /> <br />
 
-                        <Paper
-                sx={{
-                  cursor: 'pointer',
-                  background: '#fafafa',
-                  color: '#bdbdbd',
-                  border: '1px dashed #ccc',
-                  '&:hover': { border: '1px solid #ccc' },
+            <Paper
+              sx={{
+                cursor: 'pointer',
+                background: '#fafafa',
+                color: '#bdbdbd',
+                border: '1px dashed #ccc',
+                '&:hover': { border: '1px solid #ccc' },
+              }}
+            >
+              <h2>Informacion adicional</h2>  
+              
+                 {cliente ? <>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                Trabajo
+                
+              </InputLabel>
+              <NativeSelect
+                defaultValue={cliente[0].trabajo}
+                onChange={handleChange2}
+                inputProps={{
+                  name: 'trabajo',
+                  id: 'uncontrolled-native',
+
                 }}
-              >
-                <h2>Informacion adicional</h2>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Trabajo
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'accion',
-                                    id: 'uncontrolled-native',
+              >   <option value={cliente[0].trabajo}>{cliente[0].trabajo}</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
 
-                                }}
-                            >   <option value={'Pendiente'}>Sin especificar</option>
-                                <option value={'Si'}>Si</option>
-                                <option value={'No'}>No</option>
+              </NativeSelect>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                Hijos
+               
+                
+              </InputLabel>
+              <NativeSelect
+                defaultValue={cliente[0].hijos}
+                onChange={handleChange2}
+                inputProps={{
+                  name: 'hijos',
+                  id: 'uncontrolled-native',
 
-                            </NativeSelect>
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Hijos
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'accion',
-                                    id: 'uncontrolled-native',
+                }}
+              >   <option value={cliente[0].trabajo}>{cliente[0].trabajo}</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
 
-                                }}
-                            >   <option value={'Pendiente'}>Sin especificar</option>
-                                <option value={'Si'}>Si</option>
-                                <option value={'No'}>No</option>
+              </NativeSelect>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                Edad
+              </InputLabel>
+         
+                <TextField
+                  hiddenLabel
+                  onChange={handleChange2}
+                  type="number"
+                  name = "anios"
+                  id="filled-hidden-label-small"
+                  defaultValue={cliente[0].anios}
+                  variant="filled"
+                  size="small"
+                />
+              </> : <></>}
+<br/>
 
-                            </NativeSelect>
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Edad
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'accion',
-                                    id: 'uncontrolled-native',
+              <Button onClick={handleDeterminaradic} variant="contained">Guardar cambios</Button> 
 
-                                }}
-                            >   <option value={'Pendiente'}>Sin especificar</option>
-                                <option value={'Si'}>Si</option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
+            </Paper>
 
 
-              </Paper>
 
-
-                       
-                         <br/>
+            <br />
             <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
               <Paper
                 sx={{
@@ -374,10 +399,10 @@ const ModificacionC = (props) => {
                   '&:hover': { border: '1px solid #ccc' },
                 }}
               >
-                 <h2 style={{textAlign: "center"}}>Modificar contrseña</h2>
+                <h2 style={{ textAlign: "center" }}>Modificar contrseña</h2>
                 <TextField
                   label="Contraseña anterior"
-                  type= "password"
+                  type="password"
                   name="password"
                   variant="filled"
                   sx={{ margin: "10px" }}
@@ -394,7 +419,7 @@ const ModificacionC = (props) => {
                 <TextField
                   label="Nueva Contraseña"
                   id="email"
-                  type= "password"
+                  type="password"
                   name="newpass"
                   variant="filled"
                   sx={{ margin: "10px" }}
@@ -409,15 +434,15 @@ const ModificacionC = (props) => {
                   }}
                 />
                 <TextField
-                 
+
                   label="Repetir conraseña"
-                  type= "password"
+                  type="password"
                   id="email"
                   name="rnewpass"
                   variant="filled"
                   sx={{ margin: "10px" }}
                   onChange={handleChangePass}
-                 
+
                   InputProps={{
                     readOnly: false,
                     startAdornment: (
@@ -428,23 +453,23 @@ const ModificacionC = (props) => {
                   }}
                 />
 
-              
-              {pass.newpass ===pass.rnewpass ? <><Button onClick={handleDeterminarPass} variant="contained">Cambiar</Button>  </>:<><Button  variant="contained">Cambiar</Button> <p style={{ color: 'crimson' }} >Contraseña nueva o coincide </p></>}
+
+                {pass.newpass === pass.rnewpass ? <><Button onClick={handleDeterminarPass} variant="contained">Cambiar</Button>  </> : <><Button variant="contained">Cambiar</Button> <p style={{ color: 'crimson' }} >Contraseña nueva o coincide </p></>}
 
               </Paper>
-              
+
             </Grid>
 
           </Grid>
         </div>
       ))}</div> : <div><Cargando /></div>}
-      
-      <br/> <br/> <br/>  <br/> <br/> <br/>  <br/> <br/> <br/>
-      </>
-      
-      
-      
-      );
+
+    <br /> <br /> <br />  <br /> <br /> <br />  <br /> <br /> <br />
+  </>
+
+
+
+  );
 
 
 }

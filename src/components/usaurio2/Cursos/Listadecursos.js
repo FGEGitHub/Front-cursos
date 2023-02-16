@@ -3,6 +3,7 @@ import servicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
 import Nuevo from './NuevoCurso'
 import CargaDeTabla from "../../CargaDeTabla"
+import imagen from "../../../Assets/imagencurso.jpg"
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import SearchIcon from '@mui/icons-material/Search';
@@ -22,8 +23,19 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+////
 
+import Grid from '@mui/material/Grid';
 
+import Typography from '@mui/material/Typography';
+import ButtonBase from '@mui/material/ButtonBase';
+
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+});
 
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -257,9 +269,70 @@ return (
         </TableBody>
       </Table>
     </TableContainer>
+
+
+<>
+<br/><br/><br/>
+<Paper
+      sx={{
+        p: 2,
+        margin: 'auto',
+        maxWidth: 500,
+        flexGrow: 1,
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+      }}
+    >
+
+{clients.map((row) => (
+   <Grid container spacing={2}>
+   <Grid item>
+     <ButtonBase sx={{ width: 128, height: 128 }}>
+       <Img alt="complex" src={imagen} />
+     </ButtonBase>
+   </Grid>
+   <Grid item xs={12} sm container>
+     <Grid item xs container direction="column" spacing={2}>
+       <Grid item xs>
+         <Typography gutterBottom variant="subtitle1" component="div">
+         {row.nombre}
+         </Typography>
+         <Typography variant="body2" gutterBottom>
+         {row.encargado}
+         </Typography>
+         <Typography variant="body2" color="text.secondary">
+           curso
+         </Typography>
+       </Grid>
+       <Grid item>
+         <Typography sx={{ cursor: 'pointer' }} variant="body2">
+          Borrar
+         </Typography>
+       </Grid>
+     </Grid>
+     <Grid item>
+       <Typography variant="subtitle1" component="div">
+       {row.fecha}
+       </Typography>
+     </Grid>
+   </Grid>
+ </Grid>
+))}
+     
+    </Paper>
+
+
+</>
+
+
     </>}
     </div>
     )}
+
+
+
+
+
     </>
 
 

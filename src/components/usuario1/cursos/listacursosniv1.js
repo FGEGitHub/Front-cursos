@@ -62,6 +62,7 @@ const TablaNotificaciones = (props) => {
                 
                 setUsuario(usuario)
                 const lotes = await servicioCursos.listaniv1(usuario.usuario)
+                console.log(lotes)
                 setNoti(lotes)
            
             }
@@ -216,8 +217,8 @@ const TablaNotificaciones = (props) => {
                                             <StyledTableCell component="th" scope="row">{row.encargado}</StyledTableCell>
 
                                             <StyledTableCell component="th" scope="row">{row.cupo}</StyledTableCell>
-                                            <StyledTableCell component="th" scope="row">{row.inscripcion === null ? <>NO</>:<> {row.inscripcion === 'Pendiente' ?<>INSCRIPCION EN PROCESO</>:<></>} </>}</StyledTableCell>
-                                            <StyledTableCell component="th" scope="row">    < ModalVer id={row.id} 
+                                            <StyledTableCell component="th" scope="row">{row.inscripcion === null ? <>NO</>:<> {row.inscripcion === 'Pendiente' ?<>INSCRIPCION EN PROCESO</>:<>INSCRIPTO/A</>} </>}</StyledTableCell>
+                                            <StyledTableCell component="th" scope="row"> {row.inscripcion === null ? <>  < ModalVer id={row.id} 
                                             nombre ={row.nombre}
                                             traerr={async () => {
                                                 try {
@@ -234,7 +235,7 @@ const TablaNotificaciones = (props) => {
 
                                                 }
 
-                                            }} /> </StyledTableCell>
+                                            }} />   </>: <>   </> }           </StyledTableCell>
 
                                         </StyledTableRow>
                                     ))}
