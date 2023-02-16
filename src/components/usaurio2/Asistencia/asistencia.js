@@ -80,7 +80,41 @@ const TablaNotificaciones = (props) => {
     }
 
 
+    const determinarpresente = async (id_usuario) => {
+        try {
 
+
+
+          
+            const alumn = await servicioCursos.presente({id,id_usuario})
+          
+        } catch (error) {
+
+        }
+
+
+
+
+
+
+    }
+
+
+    const determinarausente = async (id_usuario) => {
+        try {
+
+            const alumn = await servicioCursos.ausente({id,id_usuario})
+          
+        } catch (error) {
+
+        }
+
+
+
+
+
+
+    }
 
     // definimos las columnas
 
@@ -108,12 +142,12 @@ const TablaNotificaciones = (props) => {
                         <Table >
                             <TableHead>
                                 <TableRow>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Fecha</b> <b /></TableCell>
+                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>FECHA </b> <b /></TableCell>
                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>NOMBRE</b></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>ENCARGADO/A</b></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>CUPO</b></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>INSCRIPTO/A</b></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>INSCRIBIRSE</b></TableCell>
+                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>USUARIO</b></TableCell>
+                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>ASISTENCIA</b></TableCell>
+                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>DETERMINAR</b></TableCell>
+                                 
 
 
                                 </TableRow>
@@ -124,13 +158,11 @@ const TablaNotificaciones = (props) => {
                                 {alumnos ? <>
                                 {alumnos.map((row) => (
                                     <StyledTableRow key={row.name}>
-                                        <StyledTableCell component="th" scope="row">{row.fecha}</StyledTableCell>
+                                        <StyledTableCell component="th" scope="row">{clase.fecha}</StyledTableCell>
                                         <StyledTableCell component="th" scope="row"><b>{row.nombre}</b></StyledTableCell>
-                                        <StyledTableCell component="th" scope="row">{row.encargado}</StyledTableCell>
-
-                                        <StyledTableCell component="th" scope="row">{row.cupo}</StyledTableCell>
-                                        <StyledTableCell component="th" scope="row">{row.inscripcion === null ? <>NO</> : <> {row.inscripcion === 'Pendiente' ? <>INSCRIPCION EN PROCESO</> : <></>} </>}</StyledTableCell>
-
+                                        <StyledTableCell component="th" scope="row">{row.usuario}</StyledTableCell>
+                                       {/*  <StyledTableCell component="th" scope="row">{row.presente === null ? <>Sin registrar</> : <> {row.row.presente === 'presente' ? <>PRESENTE</> : <>AUSENTE</>} </>}</StyledTableCell> */}
+                                        <StyledTableCell component="th" scope="row"> <b onClick={() => determinarpresente(row.id_usuario)}>PRESENTE</b>    <b  onClick={() => determinarausente(row.id_usuario)}>AUSENTE</b></StyledTableCell>
 
                                     </StyledTableRow>
                                 ))}
