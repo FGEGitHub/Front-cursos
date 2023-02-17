@@ -49,13 +49,27 @@ const datosusuario = async (usuario) => {
 return data
        
   }
-
+  const lista = async () => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'lista/', config)
+return data
+       
+  }
   const inscribir= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'inscribir',datos,config)
      
      alert(data)  
  } 
+ const crear= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'crear',datos,config)
+   
+   alert(data)  
+} 
+ 
+
 
  const modificardatosadic= async  (datos) => {
   console.log(datos)
@@ -64,4 +78,4 @@ return data
    alert(data)  
 } 
  
-export default {modificardatosadic,datosusuario,datosusuarioporid,inscribir }
+export default {crear,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}

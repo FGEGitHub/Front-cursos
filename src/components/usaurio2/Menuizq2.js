@@ -46,7 +46,11 @@ export default function MenuIzq2 ({children}) {
           icon: <GroupIcon color="primary" />, 
           path: '/coordinadores/perfil' 
         },
-    
+        { 
+          text: 'Personas', 
+          icon: <GroupIcon color="primary" />, 
+          path: '/coordinadores/personas' 
+        },
       
         
      
