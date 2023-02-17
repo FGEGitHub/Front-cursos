@@ -171,7 +171,7 @@ const Lotes = () => {
           <>
 
 {inscriptos[dataIndex].inscripcion  === "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptos[dataIndex].inscripcion}   </b> </> : 
-   <>{inscriptos[dataIndex].inscripcion   ===  "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptos[dataIndex].inscripcion} c  </b> </> 
+   <>{inscriptos[dataIndex].inscripcion   ===  "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptos[dataIndex].inscripcion}   </b> </> 
    :    <><b style={{ color: '#d32f2f' }} >  {inscriptos[dataIndex].inscripcion} </b></>}</>} 
 
            
@@ -200,6 +200,11 @@ const Lotes = () => {
           }
       
       },  
+      {
+        name: "hijos",
+        label: "Hijos",
+
+    },
         
         
       {
