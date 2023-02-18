@@ -21,6 +21,7 @@ import Detallecurso from '../pages/usuario2/Detallecurso';
 import Asistencia from '../pages/usuario2/Asistencia';
 import Personas from '../pages/usuario2/Personas';
 import DetallePersonas from '../pages/usuario2/Detallepersona';
+import Inscripciones from '../pages/usuario2/Inscripciones';
 
 const Rutas = [
 	 <Navbar/> ,
@@ -46,7 +47,7 @@ const Rutas = [
 		{ path: '/coordinadores/asistencia/:id', element: <Asistencia /> },
 		{ path: '/coordinadores/personas', element: <Personas /> },
 		{ path: '/coordinadores/detallepersona/:id', element: <DetallePersonas /> },
-		
+		{ path: '/coordinadores/inscripciones', element: <Inscripciones /> },
 		
 
 ];

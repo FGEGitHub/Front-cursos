@@ -49,6 +49,17 @@ const datosusuario = async (usuario) => {
 return data
        
   }
+
+
+  //////desde el id usaurio coordinador
+  const datosdepersona = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'datospersona/'+ usuario, config)
+return data
+       
+  }
+
   const lista = async () => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -78,4 +89,4 @@ return data
    alert(data)  
 } 
  
-export default {crear,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
+export default {crear,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}

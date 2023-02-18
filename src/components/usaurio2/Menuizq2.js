@@ -51,7 +51,11 @@ export default function MenuIzq2 ({children}) {
           icon: <GroupIcon color="primary" />, 
           path: '/coordinadores/personas' 
         },
-      
+        { 
+          text: 'Inscripciones', 
+          icon: <GroupIcon color="primary" />, 
+          path: '/coordinadores/inscripciones' 
+        },
         
      
       ];
