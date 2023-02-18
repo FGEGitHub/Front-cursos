@@ -5,7 +5,7 @@
 import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Detalle from '../../../components/usaurio2/Personas/DetalleModif'
+import Personas from '../../../components/usaurio2/Personas/todas'
  
 export default function Paginas() {
 
@@ -47,7 +47,7 @@ export default function Paginas() {
 { logueado ? <div> 
     <MenuUsuario4>
   
-  <Detalle/>
+  <Personas/>
 
  </MenuUsuario4> 
 

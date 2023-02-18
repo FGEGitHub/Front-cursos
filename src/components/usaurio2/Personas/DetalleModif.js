@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Container from '@mui/material/Container';
 import servicioUsuario1 from '../../../services/personas'
 import Cargando from '../../CargaDeTabla'
+import Inscribir from './inscripcion'
 import "./profile.css";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
@@ -45,8 +46,8 @@ const ModificacionC = (props) => {
  
     
 
-    const client = await servicioUsuario1.datosusuario(id)
- 
+    const client = await servicioUsuario1.datosdepersona(id)
+ console.log(client)
 
     setCliente(client[0])
 
@@ -55,7 +56,7 @@ const ModificacionC = (props) => {
       usuario: client[0][0].usuario,
       nombre: client[0][0].nombre,
       mail: client[0][0].mail,
-      provincia: client[0][0].provincia,
+      apellido: client[0][0].apellido,
       tel: client[0][0].tel,
       ingresos: client[0][0].ingresos,
       direccion: client[0][0].direccion,
@@ -63,7 +64,7 @@ const ModificacionC = (props) => {
     })
  
     setModificacionesadicionales({
-      id: preba.id,
+      id: id,
       hijos: client[0][0].hijos,
       trabajo: client[0][0].trabajo,
       anios: client[0][0].anios,
@@ -125,10 +126,11 @@ console.log(modificacionesadicionales)
 
   };
 
-  return (<>
+  return (<>  
+  
+
     {cliente ? <div>
-
-
+   
       {cliente.map((client) => (
 
 
@@ -152,7 +154,7 @@ console.log(modificacionesadicionales)
                 <Container>
                   <Box>
                     <h5>
-                      Modificacion de datos personales
+                      Modificacion de datos personales de {modificaciones.nombre} {modificaciones.apellido}
                     </h5>
 
                   </Box>
@@ -180,8 +182,8 @@ console.log(modificacionesadicionales)
                     <TextField
                       label="Usuario"
                       id="Nombre"
-                      name="usuario"
-                      defaultValue={modificaciones.usuario}
+                      name="apellido"
+                      defaultValue={modificaciones.apellido}
                       onChange={handleChange}
                       variant="filled"
                       sx={{ margin: "10px" }}
@@ -278,7 +280,9 @@ console.log(modificacionesadicionales)
 
 
                   </Box>
-
+                  <Inscribir
+      id={id}
+      />
 
                   <Box>
                     <columns lg={8}>
