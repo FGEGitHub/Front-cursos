@@ -22,6 +22,8 @@ import Asistencia from '../pages/usuario2/Asistencia';
 import Personas from '../pages/usuario2/Personas';
 import DetallePersonas from '../pages/usuario2/Detallepersona';
 import Inscripciones from '../pages/usuario2/Inscripciones';
+import InscripcionCurso from '../pages/usuario2/InscripcionCurso.js';
+
 
 const Rutas = [
 	 <Navbar/> ,
@@ -48,6 +50,7 @@ const Rutas = [
 		{ path: '/coordinadores/personas', element: <Personas /> },
 		{ path: '/coordinadores/detallepersona/:id', element: <DetallePersonas /> },
 		{ path: '/coordinadores/inscripciones', element: <Inscripciones /> },
+		{ path: '/coordinadores/inscripciones/curso/:id', element: <InscripcionCurso /> },
 		
 
 ];

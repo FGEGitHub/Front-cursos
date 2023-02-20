@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import servicioInscipciones from '../../../services/inscripciones'
 import MUIDataTable from "mui-datatables";
-import VerDetalles from "./ModalVer"
+import FindInPageOutlinedIcon from '@mui/icons-material/FindInPageOutlined';
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
 import { useNavigate } from "react-router-dom";
@@ -240,15 +240,12 @@ const Lotes = () => {
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                           <TableCell align="left">{row.nombre}</TableCell>
-                          <TableCell align="left">{row.cantidadsi +   row.cantidadno }</TableCell>
+                          <TableCell align="center">{row.cantidadsi +   row.cantidadno }</TableCell>
                           <TableCell align="left">{row.cupo }</TableCell>
                           <TableCell align="left">{row.cantidadsi}  {(row.cantidadsi/(row.cupo))*100 >45 ? <> <p style={{ color: 'crimson' }} >{((row.cantidadsi/(row.cupo))*100).toFixed(2)} %</p></>:<><p style={{ color: 'green' }} >{((row.cantidadsi/(row.cupo))*100).toFixed(2)} %</p></>} </TableCell>
                           <TableCell align="left">{row.cantidadno}  {(row.cantidadno/(row.cupo))*100 >45 ? <> <p style={{ color: 'crimson' }} >{((row.cantidadno/(row.cupo))*100).toFixed(2)} %</p></>:<><p style={{ color: 'green' }} >{((row.cantidadno/(row.cupo))*100).toFixed(2)} %</p></>} </TableCell>
-                          <TableCell align="left">{participo[row.idc] }  </TableCell>
+                          <TableCell align="left">  {row[row.id] }   <FindInPageOutlinedIcon  onClick={() => navigate('/coordinadores/inscripciones/curso/'+row.id)} /> </TableCell>
                          
-                          <TableCell align="left"><VerDetalles
-                          id={row.idc}
-                          /></TableCell>
                           
                         </TableRow>
                       ))}
@@ -293,9 +290,6 @@ const Lotes = () => {
                           <TableCell align="left">{row.cantidadno}</TableCell>
                           <TableCell align="left">{participo[row.idc] }  </TableCell>
                          
-                          <TableCell align="left"><VerDetalles
-                          id={row.idc}
-                          /></TableCell>
                           
                         </TableRow>
                       ))}
@@ -337,11 +331,7 @@ const Lotes = () => {
                           <TableCell align="left">{row.cantidadsi +   row.cantidadno }</TableCell>
                           <TableCell align="left">{row.cantidadsi}</TableCell>
                           <TableCell align="left">{row.cantidadno}</TableCell>
-                          <TableCell align="left">{participo[row.idc] }  </TableCell>
                          
-                          <TableCell align="left"><VerDetalles
-                          id={row.idc}
-                          /></TableCell>
                           
                         </TableRow>
                       ))}

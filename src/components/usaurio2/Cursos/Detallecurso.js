@@ -63,7 +63,8 @@ const Lotes = () => {
     //configuracion de Hooks
     const [clients, setClients] = useState([]);
     const [pendientes, setPendientes] = useState([]);
-    const [inscriptos, setInscriptos] = useState([]);
+    const [inscriptosSi, setInscriptosSi] = useState([]);
+    const [inscriptosNo, setInscriptosNo] = useState([]);
     const [curso, setCurso] = useState([]);
     const [loading, setLoading] = useState(true);
     const [inscriptosacepados, setInscriptosacepados] = useState([]);    
@@ -80,10 +81,12 @@ const Lotes = () => {
     const getClients = async () => {
         
         const clients = await servicioCursos.detalledelcurso(id)
-        console.log(clients)
+        console.log(clients[2][1])
         setClients(clients[0])
         setPendientes(clients[1])
-        setInscriptos(clients[2])
+
+        setInscriptosSi(clients[2][0])
+        setInscriptosNo(clients[2][1])
         setCurso(clients[3][0])
         setInscriptosacepados(clients[4])
         setClases(clients[5])
@@ -137,14 +140,15 @@ const Lotes = () => {
         return (
           <>
           <Ver
-          id_usuario = {inscriptos[dataIndex].id_usuario}
+          id_usuario = {inscriptosSi[dataIndex].id_usuario}
            getClients = {async () => {
         
             const clients = await servicioCursos.detalledelcurso(id)
             console.log(clients)
             setClients(clients[0])
             setPendientes(clients[1])
-            setInscriptos(clients[2])
+            setInscriptosSi(clients[2][0])
+            setInscriptosNo(clients[2][1])
             setCurso(clients[3][0])
             setInscriptosacepados(clients[4])
             setLoading(false);
@@ -156,62 +160,72 @@ const Lotes = () => {
         );
       }
 
-      function Nombre(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-           <b> 
-            {inscriptos[dataIndex].nombre}   </b> 
-           
-          </>
-        );
-      }
+  
 
-      function pendientess(dataIndex, rowIndex, data, onClick) {
+      function pendientessSi(dataIndex, rowIndex, data, onClick) {
         return (
           <>
 
-{inscriptos[dataIndex].inscripcion  === "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptos[dataIndex].inscripcion}   </b> </> : 
-   <>{inscriptos[dataIndex].inscripcion   ===  "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptos[dataIndex].inscripcion}   </b> </> 
-   :    <><b style={{ color: '#d32f2f' }} >  {inscriptos[dataIndex].inscripcion} </b></>}</>} 
+{inscriptosSi[dataIndex].estado  === "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptosSi[dataIndex].estado}   </b> </> : 
+   <>{inscriptosSi[dataIndex].estado   ===  "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptosSi[dataIndex].estado}   </b> </> 
+   :    <><b style={{ color: '#d32f2f' }} >  {inscriptosSi[dataIndex].estado} </b></>}</>} 
 
            
            
           </>
         );
       }
-    // definimos las columnas
+
+      function pendientesNo(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+
+{inscriptosNo[dataIndex].estado  === "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptosNo[dataIndex].estado}   </b> </> : 
+   <>{inscriptosNo[dataIndex].estado   ===  "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptosNo[dataIndex].estado}   </b> </> 
+   :    <><b style={{ color: '#d32f2f' }} >  {inscriptosNo[dataIndex].estado} </b></>}</>} 
+
+           
+           
+          </>
+        );
+      }
+    // definimos las columnas SI
     const columns = [
         {
-            name: "fecha",
-            label: "Fecha inscripcion",
+            name: "apellido",
+            label: "Apellido",
 
         },
        
         {
-          name: "Nombre",
-          options: {
-              customBodyRenderLite: (dataIndex, rowIndex) =>
-              Nombre(
-                      dataIndex,
-                      rowIndex,
-                     // overbookingData,
-                     // handleEditOpen
-                  )
-          }
-      
-      },  
+          name: "nombre",
+          label: "Nombre",
+
+        },
       {
         name: "hijos",
         label: "Hijos",
 
     },
-        
-        
+    {
+      name: "estado",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+          pendientessSi(
+                  dataIndex,
+                  rowIndex,
+                 // overbookingData,
+                 // handleEditOpen
+              )
+      }
+  
+  },   
+  /*       
       {
         name: "Estado",
         options: {
             customBodyRenderLite: (dataIndex, rowIndex) =>
-                pendientess(
+            pendientessSi(
                     dataIndex,
                     rowIndex,
                    // overbookingData,
@@ -219,7 +233,7 @@ const Lotes = () => {
                 )
         }
     
-    },
+    }, */
        {
             name: "Acciones",
             options: {
@@ -233,6 +247,57 @@ const Lotes = () => {
             }
         
         },   
+ 
+
+    ];
+
+
+      // definimos las columnas
+      const columnsno = [
+        {
+            name: "fecha",
+            label: "Fecha inscripcion",
+
+        },
+       
+        {
+          name: "nombre",
+          label: "Nombre",
+
+        },
+      {
+        name: "hijos",
+        label: "Hijos",
+
+    },
+    {
+      name: "estado",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+          pendientesNo(
+                  dataIndex,
+                  rowIndex,
+                 // overbookingData,
+                 // handleEditOpen
+              )
+      }
+  
+  },      
+  /*       
+      {
+        name: "Estado",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+            pendientessSi(
+                    dataIndex,
+                    rowIndex,
+                   // overbookingData,
+                   // handleEditOpen
+                )
+        }
+    
+    }, */
+      
  
 
     ];
@@ -266,13 +331,14 @@ return (
     </Box>
   
 
-    { pendientes.length>0? <>     <Alert severity="success">Tienes {pendientes.length} inscripcion(es) pendiente(s), cupo {inscriptosacepados}/{curso.cupo} </Alert></> : <></>}
+    { pendientes[0]>0 ||pendientes[1]>0 || pendientes[2]>0 ? <>     <Alert severity="success">Tienes {pendientes[0]} inscripcion(es) de prioridad 1 pendiente(s),  {pendientes[1]} inscripcion(es) pendiente(s) prioridad 2,{pendientes[2]} inscripcion(es) pendiente(s) prioridad 3 cupo {inscriptosacepados}/{curso.cupo} </Alert></> : <></>}
  
      { value === 1 ? <> <br/>
+     <>
         <MUIDataTable
         
-            title={"Lista de Inscriptos"}
-            data={inscriptos}
+            title={"Lista de Inscriptos que ya participaron (45%)"}
+            data={inscriptosSi}
             columns={columns}
             actions={[
                 {
@@ -284,7 +350,26 @@ return (
             options={options}
 
 
-        />
+        /></>
+        <>
+        <MUIDataTable
+        
+        title={"Lista de Inscriptos que ya participaron (55%)"}
+        data={inscriptosNo}
+        columns={columnsno}
+        actions={[
+            {
+                icon: 'save',
+                tooltip: 'Save User',
+                onClick: (event, rowData) => alert("You saved " + rowData.name)
+            }
+        ]}
+        options={options}
+
+
+    />
+        </>
+    
         </>:<>  { value === 2? <>
           <br/>  <Paper
         sx={{
