@@ -68,7 +68,8 @@ const Lotes = () => {
     const [curso, setCurso] = useState([]);
     const [loading, setLoading] = useState(true);
     const [inscriptosacepados, setInscriptosacepados] = useState([]);    
-    const [clases, setClases] = useState([]);
+    const [clases, setClases] = useState([]);  
+    const [cupodelcurso, setCupodelcurso] = useState([]);
     const navigate = useNavigate();
 
 
@@ -90,6 +91,7 @@ const Lotes = () => {
         setCurso(clients[3][0])
         setInscriptosacepados(clients[4])
         setClases(clients[5])
+        setCupodelcurso(clients[6])
         
         setLoading(false);
     }
@@ -140,7 +142,33 @@ const Lotes = () => {
         return (
           <>
           <Ver
-          id_usuario = {inscriptosSi[dataIndex].id_usuario}
+          id_usuario = {inscriptosSi[dataIndex].dni}
+           getClients = {async () => {
+        
+            const clients = await servicioCursos.detalledelcurso(id)
+            console.log(clients)
+            setClients(clients[0])
+            setPendientes(clients[1])
+            setInscriptosSi(clients[2][0])
+            setInscriptosNo(clients[2][1])
+            setCurso(clients[3][0])
+            setInscriptosacepados(clients[4])
+            setCupodelcurso(clients[6])
+            setLoading(false);
+        }}
+
+
+          />
+          </>
+        );
+      }
+
+      function CutomButtonsRendererNo(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+          <Ver
+          id_usuario = {inscriptosNo[dataIndex].dni}
+          cupo = {curso.cupo}
            getClients = {async () => {
         
             const clients = await servicioCursos.detalledelcurso(id)
@@ -160,13 +188,11 @@ const Lotes = () => {
         );
       }
 
-  
-
       function pendientessSi(dataIndex, rowIndex, data, onClick) {
         return (
           <>
 
-{inscriptosSi[dataIndex].estado  === "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptosSi[dataIndex].estado}   </b> </> : 
+{inscriptosSi[dataIndex].estado  === "pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptosSi[dataIndex].estado}   </b> </> : 
    <>{inscriptosSi[dataIndex].estado   ===  "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptosSi[dataIndex].estado}   </b> </> 
    :    <><b style={{ color: '#d32f2f' }} >  {inscriptosSi[dataIndex].estado} </b></>}</>} 
 
@@ -180,7 +206,7 @@ const Lotes = () => {
         return (
           <>
 
-{inscriptosNo[dataIndex].estado  === "Pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptosNo[dataIndex].estado}   </b> </> : 
+{inscriptosNo[dataIndex].estado  === "pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptosNo[dataIndex].estado}   </b> </> : 
    <>{inscriptosNo[dataIndex].estado   ===  "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptosNo[dataIndex].estado}   </b> </> 
    :    <><b style={{ color: '#d32f2f' }} >  {inscriptosNo[dataIndex].estado} </b></>}</>} 
 
@@ -255,8 +281,8 @@ const Lotes = () => {
       // definimos las columnas
       const columnsno = [
         {
-            name: "fecha",
-            label: "Fecha inscripcion",
+            name: "apellido",
+            label: "Apellido",
 
         },
        
@@ -283,6 +309,19 @@ const Lotes = () => {
       }
   
   },      
+  {
+    name: "Acciones",
+    options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+            CutomButtonsRendererNo(
+                dataIndex,
+                rowIndex,
+               // overbookingData,
+               // handleEditOpen
+            )
+    }
+
+},   
   /*       
       {
         name: "Estado",
@@ -301,6 +340,23 @@ const Lotes = () => {
  
 
     ];
+
+
+
+    const columnascupo = [
+      {
+          name: "dato",
+          label: "dato",
+
+      },
+     
+      {
+        name: "cantidad",
+        label: "cantidad",
+
+      }
+
+  ];
 
 const options = {
 
@@ -337,7 +393,7 @@ return (
      <>
         <MUIDataTable
         
-            title={"Lista de Inscriptos que ya participaron (45%)"}
+            title={"Lista de Inscriptos que ya participaron - 45% - ("+(curso.cupo*0.45).toFixed(0)+" Personas)"}
             data={inscriptosSi}
             columns={columns}
             actions={[
@@ -354,7 +410,7 @@ return (
         <>
         <MUIDataTable
         
-        title={"Lista de Inscriptos que ya participaron (55%)"}
+        title={"Lista de Inscriptos que ya participaron - 55% - ("+(curso.cupo*0.55).toFixed(0)+" Personas)"}
         data={inscriptosNo}
         columns={columnsno}
         actions={[
@@ -448,7 +504,25 @@ return (
      fecha={curso.cupo}
      cupo={curso.cupo}
      inscriptosacepados={inscriptosacepados}
-    /></Paper>
+    />
+    <MUIDataTable
+        
+        title={"Cupo del curso"}
+        data={cupodelcurso}
+        columns={columnascupo}
+        actions={[
+            {
+                icon: 'save',
+                tooltip: 'Save User',
+                onClick: (event, rowData) => alert("You saved " + rowData.name)
+            }
+        ]}
+        options={options}
+
+
+    />
+    
+    </Paper>
         <br/>
        
     </div>

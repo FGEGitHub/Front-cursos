@@ -41,20 +41,19 @@ export default function SelectTextFields(props) {
 
 
   const traer = async () => {
-
+    setUsuarioo()
    const not = await servicioPersonas.datosusuarioporid(props.id_usuario)
-   setUsuarioo(not[0][0])
-console.log(not[0])
+   console.log(not[1])
+   setUsuarioo(not[0])
+
 setPorcent(not[1])
    setActivo(true)
 
   }
-  const preba = JSON.parse(window.localStorage.getItem('loggedNoteAppUser'))
-  const usuario = preba.usuario
 
   const [inscripcion, setInscripcion] = useState({
 
-    id_usuario: props.id_usuario,
+    dni: props.id_usuario,
     id_curso:id_curso
 
 
@@ -67,6 +66,7 @@ setPorcent(not[1])
   };
 
   const handleClose = () => {
+    setActivo(false)
     setOpen(false);
   };
 
@@ -95,7 +95,7 @@ setPorcent(not[1])
       console.log('Error algo sucedio')
 
     }
-
+    setActivo(false)
     setOpen(false);
   };/////
   const [currency, setCurrency] = React.useState('EUR');
@@ -128,16 +128,23 @@ setPorcent(not[1])
 
         
         
-             <h3>Inscripcion a curso </h3>
-           
+             <h3>Inscripcion a curso {usuarioo.nombre} </h3>
+
+             {usuarioo.participante_anterior === "Sí" ? <>
+             Participante anterior (45%)
+             </>:<>
+             Participante anterior (55%)
+             </>}
              <Featured
             porcentaje={porcent}
             titulo="Requisitos"
 
           />
      <label>Hijos:{usuarioo.hijos} <br />
-            Años:{usuarioo.anios} <br />
-            trabajo:{usuarioo.trabajo} <br />
+          
+            trabajo:{usuarioo.trabaja} <br />
+            {usuarioo.trabaja === "Si" ? <> {usuarioo.tipot}</>:<></>} 
+
      </label>
    
                  <br />
