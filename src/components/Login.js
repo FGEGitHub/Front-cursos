@@ -15,7 +15,7 @@ import {
   } from "@mui/material";
   import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import 'antd/dist/antd.css'
+//import 'antd/dist/antd.css'
 import servicioUsuario from '../services/usuarios'
 import Registro from "./Registro"
 
