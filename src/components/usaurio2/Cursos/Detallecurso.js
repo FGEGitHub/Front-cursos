@@ -449,6 +449,11 @@ const Lotes = () => {
       name: "cantidad",
       label: "cantidad",
 
+    },
+    {
+      name: "aceptados",
+      label: "aceptados",
+
     }
 
   ];
