@@ -35,6 +35,7 @@ export default function SelectTextFields(props) {
   let id_curso = params.id
   const [usuarioo, setUsuarioo] = useState()
   const [porcent, setPorcent] = useState()
+  const [categoria, setCategoria] = useState()
   const [activo, setActivo] = useState(false)
 
 
@@ -45,6 +46,7 @@ export default function SelectTextFields(props) {
    const not = await servicioPersonas.datosusuarioporid(props.id_usuario)
    console.log(not[1])
    setUsuarioo(not[0])
+   setCategoria(not[2])
 
 setPorcent(not[1])
    setActivo(true)
@@ -126,9 +128,10 @@ setPorcent(not[1])
       {activo ? <>
         <DialogContent>
 
-        
+        <h2>Categoria {categoria}</h2>
         
              <h3>Inscripcion a curso {usuarioo.nombre} </h3>
+            
 
              {usuarioo.participante_anterior === "Sí" ? <>
              Participante anterior (45%)

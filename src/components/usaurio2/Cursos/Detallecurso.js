@@ -444,6 +444,11 @@ const Lotes = () => {
       label: "dato",
 
     },
+    {
+      name: "Categoria",
+      label: "Categoria",
+
+    },
 
     {
       name: "cantidad",
