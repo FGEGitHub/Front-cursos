@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import servicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
 import Fuchacurso from './Fichacurso'
-import Nuevo from './NuevaClase'
+import ModalCursado from './ModalCursado'
 import Ver from './Verinscripto'
 import CargaDeTabla from "../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
@@ -61,14 +61,14 @@ const Lotes = () => {
   let params = useParams()
   let id = params.id
   //configuracion de Hooks
-  const [clients, setClients] = useState([]);
+
   const [pendientes, setPendientes] = useState([]);
   const [inscriptosSi, setInscriptosSi] = useState([]);
   const [inscriptosNo, setInscriptosNo] = useState([]);
   const [curso, setCurso] = useState([]);
   const [loading, setLoading] = useState(true);
   const [inscriptosacepados, setInscriptosacepados] = useState([]);
-  const [clases, setClases] = useState([]);
+
   const [cursado, setCursado] = useState([]);
   const [cupodelcurso, setCupodelcurso] = useState([]);
   const navigate = useNavigate();
@@ -83,32 +83,17 @@ const Lotes = () => {
   const getClients = async () => {
 
     const clients = await servicioCursos.detalledelcurso(id)
-    console.log(clients[2][1])
-    setClients(clients[0])
-    setPendientes(clients[1])
-    console.log(clients[1])
-
-    setInscriptosSi(clients[2][0])
-    setInscriptosNo(clients[2][1])
-    setCurso(clients[3][0])
-    setInscriptosacepados(clients[4])
-    setClases(clients[5])
-    setCupodelcurso(clients[6])
-    setCursado(clients[7])
+    
+ 
+    setPendientes(clients[0])
+    setCurso(clients[1])
+    setInscriptosacepados(clients[3])
+    setCupodelcurso(clients[4])
+    setCursado(clients[5])
     setLoading(false);
   }
 
 
-  const getClases = async () => {
-    const classs = await servicioCursos.verclases(id)
-    console.log(classs)
-
-
-    setClases(classs)
-
-
-    setLoading(false);
-  }
 
 
   useEffect(() => {
@@ -119,36 +104,7 @@ const Lotes = () => {
   //opcionde click en el nombre
 
 
-  function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-        <Ver
-          id_usuario={inscriptosSi[dataIndex].dni}
-          getClients={async () => {
-
-            const clients = await servicioCursos.detalledelcurso(id)
-            console.log(clients[2][1])
-            setClients(clients[0])
-            setPendientes(clients[1])
-            console.log(clients[1])
-
-            setInscriptosSi(clients[2][0])
-            setInscriptosNo(clients[2][1])
-            setCurso(clients[3][0])
-            setInscriptosacepados(clients[4])
-            setClases(clients[5])
-            setCupodelcurso(clients[6])
-
-            setLoading(false);
-          }}
-
-
-        />
-      </>
-    );
-  }
-
-
+ 
 
 
   function CutomButtonsRendererpendien(dataIndex, rowIndex, data, onClick) {
@@ -157,21 +113,17 @@ const Lotes = () => {
         <Ver
           id_usuario={pendientes[dataIndex].dni}
           cupo={curso.cupo}
+          id_inscripcion={pendientes[dataIndex].id_inscripcion}
           getClients={async () => {
 
             const clients = await servicioCursos.detalledelcurso(id)
-            console.log(clients[2][1])
-            setClients(clients[0])
-            setPendientes(clients[1])
-            console.log(clients[1])
-
-            setInscriptosSi(clients[2][0])
-            setInscriptosNo(clients[2][1])
-            setCurso(clients[3][0])
-            setInscriptosacepados(clients[4])
-            setClases(clients[5])
-            setCupodelcurso(clients[6])
-
+    
+ 
+            setPendientes(clients[0])
+            setCurso(clients[1])
+            setInscriptosacepados(clients[3])
+            setCupodelcurso(clients[4])
+            setCursado(clients[5])
             setLoading(false);
           }}
 
@@ -181,44 +133,9 @@ const Lotes = () => {
     );
   }
 
-  function CutomButtonsRendererNo(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-        <Ver
-          id_usuario={inscriptosNo[dataIndex].dni}
-          cupo={curso.cupo}
-          getClients={async () => {
-
-            const clients = await servicioCursos.detalledelcurso(id)
-            console.log(clients)
-            setClients(clients[0])
-            setPendientes(clients[1])
-            setInscriptosSi(clients[2][0])
-            setInscriptosNo(clients[2][1])
-            setCurso(clients[3][0])
-            setInscriptosacepados(clients[4])
-            setLoading(false);
-          }}
+  
 
 
-        />
-      </>
-    );
-  }
-
-  function pendientessSi(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-
-        {inscriptosSi[dataIndex].estado === "pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptosSi[dataIndex].estado}   </b> </> :
-          <>{inscriptosSi[dataIndex].estado === "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptosSi[dataIndex].estado}   </b> </>
-            : <><b style={{ color: '#d32f2f' }} >  {inscriptosSi[dataIndex].estado} </b></>}</>}
-
-
-
-      </>
-    );
-  }
   function prioridad(dataIndex, rowIndex, data, onClick) {
     return (
       <>
@@ -232,141 +149,9 @@ const Lotes = () => {
       </>
     );
   }
-  function pendientesNo(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
 
-        {inscriptosNo[dataIndex].estado === "pendiente" ? <><b style={{ color: '#ff9800' }}>     {inscriptosNo[dataIndex].estado}   </b> </> :
-          <>{inscriptosNo[dataIndex].estado === "Cursando" ? <><b style={{ color: '#4caf50' }}>    {inscriptosNo[dataIndex].estado}   </b> </>
-            : <><b style={{ color: '#d32f2f' }} >  {inscriptosNo[dataIndex].estado} </b></>}</>}
-
-
-
-      </>
-    );
-  }
   // definimos las columnas SI
-  const columns = [
-    {
-      name: "apellido",
-      label: "Apellido",
-
-    },
-
-    {
-      name: "nombre",
-      label: "Nombre",
-
-    },
-    {
-      name: "hijos",
-      label: "Hijos",
-
-    },
-    {
-      name: "estado",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          pendientessSi(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    },
-    /*       
-        {
-          name: "Estado",
-          options: {
-              customBodyRenderLite: (dataIndex, rowIndex) =>
-              pendientessSi(
-                      dataIndex,
-                      rowIndex,
-                     // overbookingData,
-                     // handleEditOpen
-                  )
-          }
-      
-      }, */
-    {
-      name: "Acciones",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          CutomButtonsRenderer(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    },
-
-
-  ];
-
-
-  // definimos las columnas
-  const columnsno = [
-    {
-      name: "apellido",
-      label: "Apellido",
-
-    },
-
-    {
-      name: "nombre",
-      label: "Nombre",
-
-    },
-    {
-      name: "hijos",
-      label: "Hijos",
-
-    },
-    {
-      name: "trabajo",
-      label: "Trabajo",
-
-    },
-    {
-      name: "tipot",
-      label: "Tipo de Trabajo",
-
-    },
-    {
-      name: "estado",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          pendientesNo(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    },
-    {
-      name: "Acciones",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          CutomButtonsRendererNo(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    },
-
-
-
-
-  ];
+  
 
   const colpendient = [
     {
@@ -486,7 +271,7 @@ const Lotes = () => {
           <Tabs value={value} onChange={handleChange} centered>
             <Tab label="Info del curso" />
             <Tab label="Inscriptos" />
-            <Tab label="Clases" />
+            <Tab label="Cursado" />
           </Tabs>
         </Paper>
       </Box>
@@ -496,7 +281,7 @@ const Lotes = () => {
 
       {value === 1 ? <> <br />
         <>
-          <MUIDataTable
+          {/* <MUIDataTable
 
             title={"Lista de Inscriptos que ya participaron - 45% - (" + (curso.cupo * 0.45).toFixed(0) + " Personas)"}
             data={inscriptosSi}
@@ -528,7 +313,7 @@ const Lotes = () => {
             options={options}
 
 
-          />
+          /> */}
           <MUIDataTable
 
             title={"Lista de Inscriptos "}
@@ -557,18 +342,9 @@ const Lotes = () => {
             '&:hover': { border: '1px solid #ccc' },
           }}
         > <br /> <br />
-          <Nuevo
-            getClients={async () => {
-              const classs = await servicioCursos.verclases(id)
-
-              setClases(classs)
-
-
-              setLoading(false);
-            }}
-          /><br />
+         
           < Tooltip>
-            <h2>Clases </h2>
+            <h2>Cursado </h2>
 
           </Tooltip>
           <br />
@@ -576,25 +352,44 @@ const Lotes = () => {
             <Table sx={{ minWidth: "20%", maxWidth: "1000%" }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Fecha</StyledTableCell>
-                  <StyledTableCell align="right">Tema</StyledTableCell>
-                  <StyledTableCell align="right">Tomar asistencia</StyledTableCell>
+                  <StyledTableCell>Apellido</StyledTableCell>
+                  <StyledTableCell align="right">Nombre</StyledTableCell>
+                  <StyledTableCell align="right">Categoria </StyledTableCell>
+                  <StyledTableCell align="right">Estado </StyledTableCell>
+                  <StyledTableCell align="right">Acciones </StyledTableCell>
 
                 </TableRow>
               </TableHead>
               <TableBody>
 
-                {clases ? <>
+                {cursado ? <>
 
-                  {clases.map((row) => (
+                  {cursado.map((row) => (
                     <StyledTableRow key={row.name}>
                       <StyledTableCell component="th" scope="row">
-                        {row.fecha}
+                        {row.apellido}
                       </StyledTableCell>
 
 
-                      <StyledTableCell align="right">{row.observacion}</StyledTableCell>
-                      <StyledTableCell onClick={() => navigate('/coordinadores/asistencia/' + row.id)} align="right">ir</StyledTableCell>
+                      <StyledTableCell align="right">{row.nombre}</StyledTableCell>
+                      <StyledTableCell align="right">{row.categoria}</StyledTableCell>
+                      <StyledTableCell align="right">{row.inscripcion}</StyledTableCell>
+                      <StyledTableCell  align="right"><ModalCursado
+                      id_cursado={row.id}
+
+                      getClients = {async () => {
+
+                        const clients = await servicioCursos.detalledelcurso(id)
+                        
+                     
+                        setPendientes(clients[0])
+                        setCurso(clients[1])
+                        setInscriptosacepados(clients[3])
+                        setCupodelcurso(clients[4])
+                        setCursado(clients[5])
+                        setLoading(false);
+                      }}
+                      /></StyledTableCell>
 
                     </StyledTableRow>
                   ))}

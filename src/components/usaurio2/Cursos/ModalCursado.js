@@ -41,17 +41,7 @@ export default function SelectTextFields(props) {
 
 
 
-  const traer = async () => {
-    setUsuarioo()
-   const not = await servicioPersonas.datosusuarioporid(props.id_usuario)
-   console.log(not[1])
-   setUsuarioo(not[0])
-   setCategoria(not[2])
 
-setPorcent(not[1])
-   setActivo(true)
-
-  }
 
   const [inscripcion, setInscripcion] = useState({
 
@@ -63,7 +53,7 @@ setPorcent(not[1])
 
 
   const handleClickOpen = () => {
-    traer()
+
     setOpen(true);
   };
 
@@ -125,35 +115,25 @@ setPorcent(not[1])
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
 
-      {activo ? <>
+   
         <DialogContent>
 
-        <h2>Categoria {categoria}</h2>
-       { props.id_inscripcion}
-             <h3>Inscripcion a curso {usuarioo.nombre} </h3>
+        <h2>Categoria </h2>
+  
+             <h3>Inscripcion a curso  </h3>
             
 
-             {usuarioo.participante_anterior === "Sí" ? <>
-             Participante anterior (45%)
-             </>:<>
-             Participante anterior (55%)
-             </>}
-             <Featured
-            porcentaje={porcent}
-            titulo="Requisitos"
-
-          />
-     <label>Hijos:{usuarioo.hijos} <br />
           
-            trabajo:{usuarioo.trabaja} <br />
-            {usuarioo.trabaja === "Si" ? <> {usuarioo.tipot}</>:<></>} 
+     <label>Hijos:<br />
+          
+       
 
      </label>
    
                  <br />
-                 <label>inscripcion a curso?</label>
+                 <label>Asignar a llamado </label>
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                                Dato adicional
+                             
                             </InputLabel>
                             <NativeSelect
                                 defaultValue={30}
@@ -180,7 +160,7 @@ setPorcent(not[1])
            
          
         </DialogContent>
-        </>: <>Cargando</>}
+      
       </Dialog>
     </Box >
 
