@@ -32,7 +32,7 @@ import InscripcionCurso from '../pages/usuario2/InscripcionCurso.js';
 
 
 import Novedades3 from '../pages/usuario3/Novedades';
-
+import Tareas3 from '../pages/usuario3/Tareas';
 
 
 const Rutas = [
@@ -67,7 +67,7 @@ const Rutas = [
 
 		{ path: '/profesores/novedades', element: <Novedades3 /> },
 		
-		
+		{ path: '/profesores/tareas', element: <Tareas3 /> },
 
 ];
 

@@ -33,7 +33,7 @@ export default function SelectTextFields(props) {
   //const usuario  = useUser().userContext
   let params = useParams()
   let id_curso = params.id
-  const [usuarioo, setUsuarioo] = useState()
+  const [profesores, setProfesores] = useState()
   const [porcent, setPorcent] = useState()
   const [categoria, setCategoria] = useState()
   const [activo, setActivo] = useState(false)
@@ -44,16 +44,14 @@ export default function SelectTextFields(props) {
 
 
   const [inscripcion, setInscripcion] = useState({
-
-    dni: props.id_usuario,
-    id_curso:id_curso,
-    id_inscripcion:props.id_inscripcion
+    id_cursado:props.id_cursado
+  
 
   })
 
 
   const handleClickOpen = () => {
-
+    traer()
     setOpen(true);
   };
 
@@ -68,6 +66,19 @@ export default function SelectTextFields(props) {
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 }
   
+
+
+
+
+const traer = async () => {
+
+ const not = await servicioPersonas.traerprofesores()
+
+ setProfesores(not)
+
+ setActivo(true)
+
+}
   ////
   const handleDeterminar = async (event) => {
     // event.preventDefault();
@@ -75,7 +86,7 @@ export default function SelectTextFields(props) {
 
     try {
 
-      await servicioPersonas.inscribir(
+      await servicioPersonas.asignarllamado(
         inscripcion
 
 
@@ -139,13 +150,23 @@ export default function SelectTextFields(props) {
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'accion',
+                                    name: 'id_profesor',
                                     id: 'uncontrolled-native',
 
                                 }}
-                            >   <option value={'Pendiente'}>Pendiente</option>
-                                <option value={'Aceptar'}>Aceptar</option>
-                                <option value={'Rechazar'}>Rechazar</option>
+                            >  
+                             <option value={'Pendiente'}>Asignar</option>
+                            {activo ? <>
+                            
+                              {profesores.map((row) => (
+                                       
+                                        <option value={row.id}> {row.nombre}</option>
+
+                              ))}
+                            
+                            </> : <>
+                             <option value={'Pendiente'}>Asignar</option></>}
+                           
 
                             </NativeSelect>
    

@@ -44,7 +44,7 @@ export default function MenuIzq2 ({children}) {
         { 
           text: 'Tareas', 
           icon: <GroupIcon color="primary" />, 
-          path: '/profesores/cursos' 
+          path: '/profesores/tareas' 
         },
         { 
           text: 'Perfil', 

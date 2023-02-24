@@ -56,7 +56,7 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
        
                 setUsuario(usuario)
-                const novedades_aux = await servicioTareas.lista(usuario.nombre)
+                const novedades_aux = await servicioTareas.lista(usuario.id)
                 setNovedades(novedades_aux)
             }
 
