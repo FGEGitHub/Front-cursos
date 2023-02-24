@@ -8,8 +8,7 @@ const sesion = () => {
         
         if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON)
-        console.log('hola')
-        console.log(user)
+  
           servicioUsuario.setToken(user.token)  
           return (user)
         }

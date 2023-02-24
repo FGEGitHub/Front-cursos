@@ -25,7 +25,7 @@ export default function Paginas() {
               break;
           
             case 3:
-              navigate('/nivel3/')
+              navigate('/profesores/novedades')
               break;
            
             default:

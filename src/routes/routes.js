@@ -25,6 +25,16 @@ import Inscripciones from '../pages/usuario2/Inscripciones';
 import InscripcionCurso from '../pages/usuario2/InscripcionCurso.js';
 
 
+
+
+
+///usuario 3
+
+
+import Novedades3 from '../pages/usuario3/Novedades';
+
+
+
 const Rutas = [
 	 <Navbar/> ,
 
@@ -51,6 +61,12 @@ const Rutas = [
 		{ path: '/coordinadores/detallepersona/:id', element: <DetallePersonas /> },
 		{ path: '/coordinadores/inscripciones', element: <Inscripciones /> },
 		{ path: '/coordinadores/inscripciones/curso/:id', element: <InscripcionCurso /> },
+
+
+
+
+		{ path: '/profesores/novedades', element: <Novedades3 /> },
+		
 		
 
 ];
