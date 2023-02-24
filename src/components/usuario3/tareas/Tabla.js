@@ -73,8 +73,14 @@ const TablaNotificaciones = (props) => {
             <>
                 <div>
                     < ModalVer
-                    asunto={novedades[dataIndex].asunto} 
-                    detalle={novedades[dataIndex].detalle} 
+                    nombre_curso={novedades[dataIndex].nombre_curso} 
+                    nombre={novedades[dataIndex].nombre}
+                    apellido={novedades[dataIndex].apellido} 
+                    tel={novedades[dataIndex].tel}
+                       tel2={novedades[dataIndex].tel2}
+                       id_cursado={novedades[dataIndex].id_cursado}
+
+                       
                     />
                     
                   

@@ -7,15 +7,17 @@ import DialogContent from '@mui/material/DialogContent';
 import servicioNovedades from '../../../services/novedades'
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
 import React, { useEffect, useState, Fragment } from "react";
+import DialogActions from '@mui/material/DialogActions';
+import InputLabel from '@mui/material/InputLabel';
 
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
   //const usuario  = useUser().userContext
+  const [form, setForm] = useState({ id_cursado: props.id_cursado })
 
-  const [novedad, setNovedad] = useState({})
   //const [activo, setActivo] = useState(false)
 
 
@@ -31,10 +33,12 @@ export default function SelectTextFields(props) {
 
   } */
 
-  const preba = JSON.parse(window.localStorage.getItem('loggedNoteAppUser'))
-  const cuil_cuit = preba.cuil_cuit
 
 
+  const handleChange = (e) => {
+    console.log(form)
+    setForm({ ...form, [e.target.name]: e.target.value })
+}
 
 
   const handleClickOpen = () => {
@@ -48,7 +52,23 @@ export default function SelectTextFields(props) {
     setOpen(false);
   };
 
-  
+  const handleDeterminar = async (event) => {
+
+    try {
+    event.preventDefault();
+      
+
+
+    } catch (error) {
+        console.error(error);
+        console.log('Error algo sucedio')
+
+
+    }
+
+
+    setOpen(false);
+};
 
   const [currency, setCurrency] = React.useState('EUR');
 
@@ -70,8 +90,8 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Leer">
-      <FindInPageTwoToneIcon variant="outlined" onClick={handleClickOpen}/>
+       < Tooltip title="Atender">
+      <PhoneForwardedSharpIcon variant="outlined" onClick={handleClickOpen}/>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
@@ -79,20 +99,37 @@ export default function SelectTextFields(props) {
         
          
            <h3>
-              <b>  Asunto: {props.asunto} </b></h3>
+              <b>  Asunto: {props.nombre_curso} </b></h3>
              
                
    
    
                  <br />
-                <b> <p>Detalle:</p> </b>   
-                 <label>{props.detalle}</label>
-                
+                <b> <p>Detalle:{props.apellido} {props.nombre}</p> </b>   
+                 <label>Telefono: {props.tel} </label><br/>
+                 <label>Telefono: {props.tel2}</label>
+                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                              Contestacion del llamado 
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'tipo_dni',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            >   <option value={'C.U.I.L.'}>Elegir</option>
+                                <option value={'C.U.I.L.'}>Confirmado</option>
+                                <option value={'C.U.I.T.'}>Rechazado</option>
+
+                            </NativeSelect>
    
+                 <DialogActions>
    
-   
-          
-             
+                 <><Button variant="contained" color="primary" onClick={handleDeterminar}> Contestar </Button></>  
+                <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
+                </DialogActions>
         
          
         </DialogContent>

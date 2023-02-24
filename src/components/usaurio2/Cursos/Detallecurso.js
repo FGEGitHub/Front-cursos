@@ -63,8 +63,7 @@ const Lotes = () => {
   //configuracion de Hooks
 
   const [pendientes, setPendientes] = useState([]);
-  const [inscriptosSi, setInscriptosSi] = useState([]);
-  const [inscriptosNo, setInscriptosNo] = useState([]);
+
   const [curso, setCurso] = useState([]);
   const [loading, setLoading] = useState(true);
   const [inscriptosacepados, setInscriptosacepados] = useState([]);
@@ -84,10 +83,11 @@ const Lotes = () => {
 
     const clients = await servicioCursos.detalledelcurso(id)
     
- 
+ console.log(clients[2])
     setPendientes(clients[0])
-    setCurso(clients[1])
-    setInscriptosacepados(clients[3])
+    ///////
+    setCurso(clients[1][0])/////  1 en el arreclo 0 por  el llamdoa la base de datos
+    setInscriptosacepados(clients[2])
     setCupodelcurso(clients[4])
     setCursado(clients[5])
     setLoading(false);
