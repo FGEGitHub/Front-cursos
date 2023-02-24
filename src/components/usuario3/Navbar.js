@@ -12,7 +12,7 @@ import {
   useTheme,
 } from "@mui/material";
 import DrawerNav from "./DrawerNav";
-
+import Typography from '@mui/material/Typography';
 
 const Navbar = (props) => {
   
@@ -64,6 +64,9 @@ const Navbar = (props) => {
             </>
           ) : (
             <>
+             <Typography variant="h6" sx={{ my: 2 }}>
+            Menu Profesores
+           </Typography>
               <Tabs
                 sx={{ marginLeft: "auto" }}
                 indicatorColor="Secondary"

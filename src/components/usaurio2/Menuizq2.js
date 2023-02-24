@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import GroupIcon from '@mui/icons-material/Group';
 import NfcIcon from '@mui/icons-material/Nfc';
 import { useState, useEffect } from "react";
-
+import Typography from '@mui/material/Typography';
 import Navbar from '../Navbar'
 
 
@@ -65,7 +65,7 @@ export default function MenuIzq2 ({children}) {
       <>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      
+   
     
       <Drawer
         sx={{
@@ -79,10 +79,11 @@ export default function MenuIzq2 ({children}) {
         variant="permanent"
         anchor="left"
       >
+          
         <Navbar
       logout = {{hanleLogout}}/>
         <Toolbar />
-
+        
         <Toolbar />
         <Divider />
         <List>

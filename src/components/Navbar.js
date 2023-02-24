@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 //import logo from "../Assets/marcas.png";
-
+import Typography from '@mui/material/Typography';
 import {
   AppBar,
   Button,
@@ -64,6 +64,9 @@ const Navbar = (props) => {
             </>
           ) : (
             <>
+            <Typography variant="h6" sx={{ my: 2 }}>
+            Menu Coordinadores
+           </Typography>
               <Tabs
                 sx={{ marginLeft: "auto" }}
                 indicatorColor="Secondary"
@@ -71,7 +74,7 @@ const Navbar = (props) => {
                 value={value}
                 onChange={(e, value) => setValue(value)}
               >
-            
+             
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
                   <Tab label= {`hola ${user.nombre}!`}/>
               </Button> </div>:<div></div>}

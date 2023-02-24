@@ -74,7 +74,9 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
+            {novedades[dataIndex].asunto === "Asignado a llamado" ?  
                 <div>
+
                     < ModalVer
                     asunto={novedades[dataIndex].asunto} 
                     detalle={novedades[dataIndex].detalle} 
@@ -83,7 +85,7 @@ const TablaNotificaciones = (props) => {
                   
 
 
-                </div>
+                </div> :<></>}
             </>
         );
     }
@@ -94,18 +96,23 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
-            name: "fecha",
-            label: "fecha",
+            name: "apellido",
+            label: "Apellido",
+
+        },
+        {
+            name: "nombre",
+            label: "Nombre",
 
         },
    
-
-     
         {
-            name: "asunto",
-            label: "asunto",
+            name: "inscripcion",
+            label: "Estado",
 
         },
+     
+      
         {
             name: "Ver detalles",
             options: {
