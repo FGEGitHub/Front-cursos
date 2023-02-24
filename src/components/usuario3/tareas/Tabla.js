@@ -66,17 +66,12 @@ const TablaNotificaciones = (props) => {
 
 
 
-
-
-
     }
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-            {novedades[dataIndex].asunto === "Asignado a llamado" ?  
                 <div>
-
                     < ModalVer
                     asunto={novedades[dataIndex].asunto} 
                     detalle={novedades[dataIndex].detalle} 
@@ -85,7 +80,7 @@ const TablaNotificaciones = (props) => {
                   
 
 
-                </div> :<></>}
+                </div>
             </>
         );
     }
@@ -102,17 +97,16 @@ const TablaNotificaciones = (props) => {
         },
         {
             name: "nombre",
-            label: "Nombre",
+            label: "nombre",
 
         },
-   
+
+     
         {
             name: "inscripcion",
             label: "Estado",
 
         },
-     
-      
         {
             name: "Ver detalles",
             options: {
