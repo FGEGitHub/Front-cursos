@@ -43,7 +43,15 @@ const lista = async (usuario) => {
 return data
        
   }
+  const inscribirauto = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'inscribirauto/', config)
+    
 
-
+return data
+       
+  }
+  
    
-export default {lista}
+export default {lista,inscribirauto}

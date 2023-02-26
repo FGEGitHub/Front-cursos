@@ -3,10 +3,9 @@ import servicioInscipciones from '../../../services/inscripciones'
 import MUIDataTable from "mui-datatables";
 import FindInPageOutlinedIcon from '@mui/icons-material/FindInPageOutlined';
 import CargaDeTabla from "../../CargaDeTabla"
-import imagen from "../../../Assets/imagencurso.jpg"
+import ModalInscribirauto from "./ModalInscribirauto"
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import SearchIcon from '@mui/icons-material/Search';
+
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
@@ -203,7 +202,7 @@ const Lotes = () => {
             </Stack>
             <br />
 
-
+            <ModalInscribirauto/>
             <Button variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon /></Button>
 
             {vista ? <>

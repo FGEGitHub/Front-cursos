@@ -197,6 +197,21 @@ export default function Ingresos() {
             size="small"
             variant="standard"
           />
+                <TextField
+          className={cardStyles.field}
+								sx={{
+                  mx: 3, width: '75%'
+								}}
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            label="DNI"
+            name="dni"
+            onChange={handleChange}
+            size="small"
+            variant="standard"
+          />
           <TextField
           className={cardStyles.field}
 								sx={{

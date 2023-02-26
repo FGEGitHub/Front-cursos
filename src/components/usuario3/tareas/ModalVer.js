@@ -106,7 +106,7 @@ export default function SelectTextFields(props) {
    
                  <br />
                 <b> <p>Detalle:{props.apellido} {props.nombre}</p> </b>   
-                 <label>Telefono: {props.tel} </label><br/>
+                 <label>Telefono: {props.tel}</label><br/>
                  <label>Telefono: {props.tel2}</label>
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
                               Contestacion del llamado 
