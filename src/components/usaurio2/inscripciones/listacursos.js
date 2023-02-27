@@ -227,9 +227,11 @@ const Lotes = () => {
                       <TableRow>
                         <TableCell><b>Detalles prioridad 1</b></TableCell>
                         <TableCell><b>Inscriptas</b></TableCell>
+                   
+                        <TableCell><b>Cursando</b></TableCell>
                         <TableCell><b>cupo</b></TableCell>
-                        <TableCell><b>Cantidad Participaron (45%max)</b></TableCell>
-                        <TableCell><b>Cantidad No Participaron(55%max)</b></TableCell>
+                        <TableCell><b>Cantidad Prioridad 1</b></TableCell>
+                       
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -239,11 +241,10 @@ const Lotes = () => {
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                           <TableCell align="left">{row.nombre}</TableCell>
-                          <TableCell align="center">{row.cantidadsi +   row.cantidadno }</TableCell>
+                          <TableCell align="center">{row.cantidad }</TableCell>
+                           <TableCell align="center">{row.cursando }</TableCell>
                           <TableCell align="left">{row.cupo }</TableCell>
-                          <TableCell align="left">{row.cantidadsi}  {(row.cantidadsi/(row.cupo))*100 >45 ? <> <p style={{ color: 'crimson' }} >{((row.cantidadsi/(row.cupo))*100).toFixed(2)} %</p></>:<><p style={{ color: 'green' }} >{((row.cantidadsi/(row.cupo))*100).toFixed(2)} %</p></>} </TableCell>
-                          <TableCell align="left">{row.cantidadno}  {(row.cantidadno/(row.cupo))*100 >45 ? <> <p style={{ color: 'crimson' }} >{((row.cantidadno/(row.cupo))*100).toFixed(2)} %</p></>:<><p style={{ color: 'green' }} >{((row.cantidadno/(row.cupo))*100).toFixed(2)} %</p></>} </TableCell>
-                          <TableCell align="left">  {row[row.id] }   <FindInPageOutlinedIcon  onClick={() => navigate('/coordinadores/inscripciones/curso/'+row.id)} /> </TableCell>
+                        
                          
                           
                         </TableRow>
@@ -258,7 +259,7 @@ const Lotes = () => {
                   background: '#eeeeee',
                   color: '#bdbdbd',
                   border: '1px dashed #ccc',
-                  width: "80%",
+                  width: "90%",
                   '&:hover': { border: '1px solid #ccc' },
                   border: "1px solid black",
                   margin: '75px',
@@ -273,8 +274,11 @@ const Lotes = () => {
                       <TableRow>
                         <TableCell><b>Detalles prioridad 2</b></TableCell>
                         <TableCell><b>Inscriptas</b></TableCell>
-                        <TableCell><b>Cantidad Si</b></TableCell>
-                        <TableCell><b>Cantidad No</b></TableCell>
+                   
+                        <TableCell><b>Cursando</b></TableCell>
+                        <TableCell><b>cupo</b></TableCell>
+                        <TableCell><b>Cantidad Prioridad 2</b></TableCell>
+                       
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -284,10 +288,10 @@ const Lotes = () => {
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                           <TableCell align="left">{row.nombre}</TableCell>
-                          <TableCell align="left">{row.cantidadsi +   row.cantidadno }</TableCell>
-                          <TableCell align="left">{row.cantidadsi}</TableCell>
-                          <TableCell align="left">{row.cantidadno}</TableCell>
-                          <TableCell align="left">{participo[row.idc] }  </TableCell>
+                          <TableCell align="center">{row.cantidad }</TableCell>
+                           <TableCell align="center">{row.cursando }</TableCell>
+                          <TableCell align="left">{row.cupo }</TableCell>
+                        
                          
                           
                         </TableRow>
@@ -295,13 +299,14 @@ const Lotes = () => {
                     </TableBody>
                   </Table>
                 </TableContainer>
-              </Paper>    <Paper
+              </Paper>
+              <Paper
                 sx={{
                   cursor: 'pointer',
                   background: '#eeeeee',
                   color: '#bdbdbd',
                   border: '1px dashed #ccc',
-                  width: "80%",
+                  width: "90%",
                   '&:hover': { border: '1px solid #ccc' },
                   border: "1px solid black",
                   margin: '75px',
@@ -316,8 +321,11 @@ const Lotes = () => {
                       <TableRow>
                         <TableCell><b>Detalles prioridad 3</b></TableCell>
                         <TableCell><b>Inscriptas</b></TableCell>
-                        <TableCell><b>Cantidad Si</b></TableCell>
-                        <TableCell><b>Cantidad No</b></TableCell>
+                   
+                        <TableCell><b>Cursando</b></TableCell>
+                        <TableCell><b>cupo</b></TableCell>
+                        <TableCell><b>Cantidad Prioridad 3</b></TableCell>
+                       
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -327,9 +335,10 @@ const Lotes = () => {
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                           <TableCell align="left">{row.nombre}</TableCell>
-                          <TableCell align="left">{row.cantidadsi +   row.cantidadno }</TableCell>
-                          <TableCell align="left">{row.cantidadsi}</TableCell>
-                          <TableCell align="left">{row.cantidadno}</TableCell>
+                          <TableCell align="center">{row.cantidad }</TableCell>
+                           <TableCell align="center">{row.cursando }</TableCell>
+                          <TableCell align="left">{row.cupo }</TableCell>
+                        
                          
                           
                         </TableRow>
@@ -338,23 +347,7 @@ const Lotes = () => {
                   </Table>
                 </TableContainer>
               </Paper>
-              
-              <MUIDataTable
-
-                title={"Lista de prioridad 3 "}
-                data={priori3}
-                columns={columns}
-                actions={[
-                  {
-                    icon: 'save',
-                    tooltip: 'Save User',
-                    onClick: (event, rowData) => alert("You saved " + rowData.name)
-                  }
-                ]}
-                options={options}
-
-
-              />
+            
             </> : <>
 
 

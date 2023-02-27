@@ -5,7 +5,11 @@
 import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Listaaclaracioncriterios from '../../../components/usaurio2/TablaClasificacion'
 import ListaCursos from '../../../components/usaurio2/inscripciones/listacursos'
+
+import TabladeCriterios from '../../../components/usaurio2/inscripciones/TablaPrioridades'
+import { Paper } from '@mui/material';
  
 export default function Paginas() {
 
@@ -43,12 +47,23 @@ export default function Paginas() {
 
     return (
  
-<>
-{ logueado ? <div> 
+< >
+{ logueado ? <div  > 
     <MenuUsuario4>
-  
+    <Paper
+        sx={{
+          cursor: 'pointer',
+          background: '#2c387e',
+          color: '#bdbdbd',
+          border: '1px dashed #ccc',
+          '&:hover': { border: '1px solid #ccc' },
+        }}
+      >
   <ListaCursos/>
-
+  <br/>  <br/>
+  <Listaaclaracioncriterios/>
+  <TabladeCriterios/>
+  </Paper>
  </MenuUsuario4> 
 
  </div>   :<div></div>  }

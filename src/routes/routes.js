@@ -53,14 +53,14 @@ const Rutas = [
 
 
 
-		{ path: '/coordinadores/cursos', element: <Menu2 /> },
-		{ path: '/coordinadores/perfil', element: <Perfil2 /> },
-		{ path: '/coordinadores/detallecurso/:id', element: <Detallecurso /> },
-		{ path: '/coordinadores/asistencia/:id', element: <Asistencia /> },
-		{ path: '/coordinadores/personas', element: <Personas /> },
-		{ path: '/coordinadores/detallepersona/:id', element: <DetallePersonas /> },
-		{ path: '/coordinadores/inscripciones', element: <Inscripciones /> },
-		{ path: '/coordinadores/inscripciones/curso/:id', element: <InscripcionCurso /> },
+		{ path: '/administracion/cursos', element: <Menu2 /> },
+		{ path: '/administracion/perfil', element: <Perfil2 /> },
+		{ path: '/administracion/detallecurso/:id', element: <Detallecurso /> },
+		{ path: '/administracion/asistencia/:id', element: <Asistencia /> },
+		{ path: '/administracion/personas', element: <Personas /> },
+		{ path: '/administracion/detallepersona/:id', element: <DetallePersonas /> },
+		{ path: '/administracion/inscripciones', element: <Inscripciones /> },
+		{ path: '/administracion/inscripciones/curso/:id', element: <InscripcionCurso /> },
 
 
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//import logo from "../Assets/marcas.png";
+import logo from "../Assets/logocoalicion.png";
 import Typography from '@mui/material/Typography';
 import {
   AppBar,
@@ -26,7 +26,7 @@ const Navbar = (props) => {
 
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const islogo = {
-                  width: "100px",                  
+                  width: "130px",                  
                   };
   const navigate = useNavigate();
 
@@ -57,16 +57,14 @@ const Navbar = (props) => {
     <React.Fragment>
       <AppBar sx={{ background: "#Primary" }}>
         <Toolbar>
-            {/* <img style={islogo} src={logo} alt="logo" /> */}
+           <img style={islogo} src={logo} alt="logo" /> 
           {isMatch ? (
             <>
               <DrawerNav />
             </>
           ) : (
             <>
-            <Typography variant="h6" sx={{ my: 2 }}>
-            Menu Coordinadores
-           </Typography>
+              
               <Tabs
                 sx={{ marginLeft: "auto" }}
                 indicatorColor="Secondary"

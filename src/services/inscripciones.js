@@ -31,8 +31,16 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
 
 
+ const listacriterios = async (usuario) => {
+  
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'listacriterios/', config)
+  
 
-
+return data
+     
+}
+ 
 
 const lista = async (usuario) => {
   
@@ -41,8 +49,23 @@ const lista = async (usuario) => {
     
 
 return data
-       
+      
+
   }
+
+  
+
+  const listaaclaracioncriterios = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'listaaclaracioncriterios/', config)
+    
+
+return data
+      
+
+  }
+
   const inscribirauto = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -54,4 +77,4 @@ return data
   }
   
    
-export default {lista,inscribirauto}
+export default {lista,listaaclaracioncriterios,inscribirauto,listacriterios}

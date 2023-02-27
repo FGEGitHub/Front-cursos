@@ -39,22 +39,22 @@ export default function MenuIzq2 ({children}) {
         { 
           text: 'Cursos', 
           icon: <GroupIcon color="primary" />, 
-          path: '/coordinadores/cursos' 
+          path: '/administracion/cursos' 
         },
         { 
           text: 'Perfil', 
           icon: <GroupIcon color="primary" />, 
-          path: '/coordinadores/perfil' 
+          path: '/administracion/perfil' 
         },
         { 
           text: 'Personas', 
           icon: <GroupIcon color="primary" />, 
-          path: '/coordinadores/personas' 
+          path: '/administracion/personas' 
         },
         { 
           text: 'Inscripciones', 
           icon: <GroupIcon color="primary" />, 
-          path: '/coordinadores/inscripciones' 
+          path: '/administracion/inscripciones' 
         },
         
      
