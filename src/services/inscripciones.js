@@ -52,7 +52,16 @@ return data
       
 
   }
+  const desinscribirtodos = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'desinscribirtodos/', config)
+    
 
+return data
+      
+
+  }
   
 
   const listaaclaracioncriterios = async (usuario) => {
@@ -75,6 +84,10 @@ return data
 return data
        
   }
-  
-   
-export default {lista,listaaclaracioncriterios,inscribirauto,listacriterios}
+  const actualizarprioridades= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'actualizarprioridades',datos,config)
+     
+     alert(data)  
+ }  
+export default {lista,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

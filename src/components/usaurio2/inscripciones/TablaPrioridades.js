@@ -117,7 +117,7 @@ return (
     <Button  variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon/></Button>
 
     <br/>  <br/>  
-
+    {vista ? <>
     <Paper
                 sx={{
                   cursor: 'pointer',
@@ -175,7 +175,7 @@ return (
         </TableBody>
       </Table>
     </TableContainer>
-    </Paper>
+    </Paper></>:<></>}
 
 <>
 

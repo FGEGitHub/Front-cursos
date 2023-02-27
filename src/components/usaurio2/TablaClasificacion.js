@@ -132,7 +132,7 @@ return (
             
             <StyledTableCell >Categoria</StyledTableCell>
             <StyledTableCell >Detalle</StyledTableCell>
-         
+            <StyledTableCell >porcentaje</StyledTableCell>
         
           
           </TableRow>
@@ -144,6 +144,7 @@ return (
           
               <StyledTableCell >{row.Categoria}</StyledTableCell>
               <StyledTableCell >{row.Detalle}</StyledTableCell>
+              <StyledTableCell >{row.porcentaje}</StyledTableCell>
               
              
              

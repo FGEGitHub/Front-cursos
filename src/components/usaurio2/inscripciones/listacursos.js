@@ -4,6 +4,8 @@ import MUIDataTable from "mui-datatables";
 import FindInPageOutlinedIcon from '@mui/icons-material/FindInPageOutlined';
 import CargaDeTabla from "../../CargaDeTabla"
 import ModalInscribirauto from "./ModalInscribirauto"
+import ModalDesInscribirauto from "./ModalDesinscribir"
+
 import { useNavigate } from "react-router-dom";
 
 import * as React from 'react';
@@ -71,7 +73,7 @@ const Lotes = () => {
   const [priori1, setPriori1] = useState([]);
   const [priori2, setPriori2] = useState([]);
   const [priori3, setPriori3] = useState([]);
-    const [participo, setParticipo] = useState([]);
+    const [cantidadpeniente, setCantidadpendiente] = useState([]);
     const [noparticipo, setNoparticipo] = useState([]);
     const [listadef1, setListadef1] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -94,6 +96,7 @@ const Lotes = () => {
     setPriori1(clients[0])
     setPriori2(clients[1])
     setPriori3(clients[2])
+    setCantidadpendiente(clients[3])
   
     setLoading(false);
   }
@@ -107,88 +110,6 @@ const Lotes = () => {
 
 
 
-  function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-        <IconButton>
-
-          <p
-            onClick={() => navigate('/coordinadores/detallecurso/' + priori1[dataIndex].id)}
-            style={{ color: 'blue' }}
-          > Ver </p>    </IconButton>
-
-      </>
-    );
-  }
-
-  function Nombre(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-        <b>
-          <p
-            onClick={() => navigate('/coordinadores/detallecurso/' + priori1[dataIndex].id)}
-            style={{ color: '#blue' }}
-          > {priori1[dataIndex].nombre} </p>   </b>
-
-      </>
-    );
-  }
-  // definimos las columnas
-  const columns = [
-    {
-      name: "nombre",
-      label: "nombre",
-
-    },
-
-    {
-      name: "Nombre",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          Nombre(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    },
-
-    {
-      name: "encargado",
-      label: "Encargado",
-
-    },
-    {
-      name: "observaciones",
-      label: "Observaciones",
-
-    },
-    {
-      name: "Actions",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          CutomButtonsRenderer(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    },
-
-
-  ];
-
-  const options = {
-
-    /*    rowsPerPage: 10,
-       download: false, // hide csv download option
-       onTableInit: this.handleTableInit,
-       onTableChange: this.handleTableChange, */
-  };
   // renderiza la data table
   return (
     <>
@@ -197,15 +118,34 @@ const Lotes = () => {
           <div>
             <Stack spacing={2} sx={{ width: '100%' }}>
 
-              <Alert severity="info">Cantidad de cursos: {priori1.length}</Alert>
+              <Alert severity="info">Cantidad de alumnas sin curso: {cantidadpeniente}<a onClick={() => navigate('/administracion/personas')}>   <u><b>   Ir a Alumnas</b></u> </a></Alert>
               
             </Stack>
             <br />
 
             <ModalInscribirauto/>
-            <Button variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon /></Button>
+            <ModalDesInscribirauto/>
+            <Button variant='contained' onClick={cambiarVista} > Ocultar/ver Resumen de inscriptos <RemoveRedEyeIcon /></Button>
 
             {vista ? <>
+              <Paper
+                sx={{
+                  cursor: 'pointer',
+                  background: '#eeeeee',
+                  color: '#bdbdbd',
+                  border: '1px dashed #ccc',
+                  width: "90%",
+                  '&:hover': { border: '1px solid #ccc' },
+                  border: "1px solid black",
+                  margin: '75px',
+                  display: 'flex'
+
+                }}
+              >
+         <p>* Incriptas: esten aceptadas o no.<br/>
+                *Cursando: asignadas a un curso
+         </p>
+              </Paper>
               <Paper
                 sx={{
                   cursor: 'pointer',

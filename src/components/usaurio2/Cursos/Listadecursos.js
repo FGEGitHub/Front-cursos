@@ -96,28 +96,9 @@ const Lotes = () => {
 
     ///
 //opcionde click en el nombre
-    function CutomButtonsRenderere(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-          
-       
-           <p  onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)} style={{ marginRight: "10px", cursor: "pointer" }}>{clients[dataIndex].Nombre}</p>
-          
-          </>
-        );
-      }
-      //
+   
 
-      function CutomButtonsRendercuil(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-          
-       
-           <p  onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)} style={{ marginRight: "10px", cursor: "pointer" }}>{clients[dataIndex].cuil_cuit}</p>
-          
-          </>
-        );
-      }
+
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
@@ -125,7 +106,7 @@ const Lotes = () => {
           <IconButton>
         
              <p 
-             onClick={() =>  navigate('/coordinadores/detallecurso/'+clients[dataIndex].id)}
+             onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}
              style={{ color: 'blue' }}
             > Ver </p>    </IconButton>
            
@@ -138,7 +119,7 @@ const Lotes = () => {
           <>
            <b> 
              <p 
-             onClick={() =>  navigate('/coordinadores/detallecurso/'+clients[dataIndex].id)}
+             onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}
              style={{ color: '#blue' }}
             > {clients[dataIndex].nombre} </p>   </b> 
            
@@ -262,7 +243,7 @@ return (
               <StyledTableCell align="right">{row.nombre}</StyledTableCell>
               <StyledTableCell align="right">{row.encargado}</StyledTableCell>
               <StyledTableCell align="center">  
-              <IconButton    onClick={() =>  navigate('/coordinadores/detallecurso/'+row.id)} >
+              <IconButton    onClick={() =>  navigate('/administracion/detallecurso/'+row.id)} >
                 Ver mas </IconButton></StyledTableCell>
             </StyledTableRow>
           ))}

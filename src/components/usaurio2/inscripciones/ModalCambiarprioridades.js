@@ -8,7 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from "react";
-import servicioCursos from '../../../services/Cursos'
+import servicioInscripciones from '../../../services/inscripciones'
 import NativeSelect from '@mui/material/NativeSelect';
 import InputLabel from '@mui/material/InputLabel';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -34,7 +34,7 @@ export default function Clasenueva(props) {
         event.preventDefault();
         try {
 
-
+            await servicioInscripciones.actualizarprioridades(form)
 
 
         } catch (error) {
@@ -62,7 +62,7 @@ export default function Clasenueva(props) {
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>Nueva Clase </DialogTitle>
+                <DialogTitle>Asignar valores de prioridad</DialogTitle>
                 {}
                 <Paper
                     sx={{
@@ -86,7 +86,7 @@ export default function Clasenueva(props) {
                                 margin="dense"
                                 id="name"
                                 label="1.1.1"
-                                name="1.1.1"
+                                name="unounouno"
                                 type="number"
                                 onChange={handleChange}
                                 fullWidth
@@ -100,7 +100,7 @@ export default function Clasenueva(props) {
                                 margin="dense"
                                 id="name"
                                 label="1.1.2.1"
-                                name="1.1.2.1"
+                                name="unounodosuno"
                                 onChange={handleChange}
                                 fullWidth
                                 type="number"
@@ -114,7 +114,7 @@ export default function Clasenueva(props) {
                                 id="name"
                                 label="1.1.2.2"
                                 type="number"
-                                name="1.1.2.2"
+                                name="unounodosdos"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -126,7 +126,7 @@ export default function Clasenueva(props) {
                                 id="name"
                                 type="number"
                                 label="1.2.1"
-                                name="1.2.1"
+                                name="unodosuno"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -138,7 +138,7 @@ export default function Clasenueva(props) {
                                 type="number"
                                 id="name"
                                 label="1.2.2.1"
-                                name="1.2.2.1"
+                                name="unodosdosuno"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -150,7 +150,7 @@ export default function Clasenueva(props) {
                                 id="name"
                                 label="1.2.2.2"
                                 type="number"
-                                name="1.2.2.2"
+                                name="unodosdosdos"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -162,7 +162,7 @@ export default function Clasenueva(props) {
                                 id="name"
                                 type="number"
                                 label="2.1.1"
-                                name="2.1.1"
+                                name="dosunouno"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -173,7 +173,7 @@ export default function Clasenueva(props) {
                                 margin="dense"
                                 id="name"
                                 label="2.1.2.1"
-                                name="2.1.2.1"
+                                name="dosunodosuno"
                                 type="number"
                                 onChange={handleChange}
                                 fullWidth
@@ -185,7 +185,7 @@ export default function Clasenueva(props) {
                                 margin="dense"
                                 id="name"
                                 label="2.1.2.2"
-                                name="2.1.2.2"
+                                name="dosunodosdos"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -197,7 +197,7 @@ export default function Clasenueva(props) {
                                 margin="dense"
                                 id="name"
                                 label="2.2.1"
-                                name="2.2.1"
+                                name="dosdosuno"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -209,7 +209,7 @@ export default function Clasenueva(props) {
                                 margin="dense"
                                 id="name"
                                 label="2.2.2"
-                                name="2.2.2"
+                                name="dosdosdos"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -218,7 +218,7 @@ export default function Clasenueva(props) {
                             />
 
                             <DialogActions>
-                                {form["1.1.1"] && form["1.1.2.1"] && form["1.1.2.2"] && form["1.2.1"] && form["1.2.2.1"] && form["1.2.2.2"] && form["2.1.1"] && form["2.1.2.1"] && form["2.1.2.2"] && form["2.2.1"] && form["2.2.2"] ? <><Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button></> : <><h6 style={{ color: "red" }} >Completar todos los campos</h6></>}
+                                {form["unounouno"] && form["unounodosuno"] && form["unounodosdos"] && form["unodosuno"] && form["unodosdosuno"] && form["unodosdosdos"] && form["dosunouno"] && form["dosunodosuno"] && form["dosunodosdos"] && form["dosdosuno"] && form["dosdosdos"] ? <><Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button></> : <><h6 style={{ color: "red" }} >Completar todos los campos</h6></>}
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                             </DialogActions>
