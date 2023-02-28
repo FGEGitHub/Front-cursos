@@ -134,6 +134,7 @@ return (
           <TableRow>
             
             <StyledTableCell >Categoria</StyledTableCell>
+            <StyledTableCell >Aclaracion</StyledTableCell>
             <StyledTableCell >Detalle</StyledTableCell>
             <StyledTableCell >porcentaje</StyledTableCell>
         
@@ -146,6 +147,7 @@ return (
             
           
               <StyledTableCell >{row.Categoria}</StyledTableCell>
+              <StyledTableCell >{row.Aclaracion}</StyledTableCell>
               <StyledTableCell >{row.Detalle}</StyledTableCell>
               <StyledTableCell >{row.porcentaje} %</StyledTableCell>
               

@@ -6,7 +6,7 @@ import ModalCursado from './ModalCursado'
 import Ver from './Verinscripto'
 import CargaDeTabla from "../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
-
+import NuevoTurno from './NuevoTurno'
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
@@ -151,7 +151,16 @@ const Lotes = () => {
   }
 
   // definimos las columnas SI
-  
+  function CutomButtonsRendereaceptdos(dataIndex, rowIndex, data, onClick) {
+    return (
+      <>
+
+            {cupodelcurso[dataIndex].aceptados} /    {cupodelcurso[dataIndex].cantidad}
+
+
+      </>
+    );
+  }
 
   const colpendient = [
     {
@@ -241,10 +250,26 @@ const Lotes = () => {
 
     },
     {
-      name: "aceptados",
-      label: "aceptados",
+      name: "aclaracion",
+      label: "aclaracion",
 
-    }
+    },
+  
+
+    {
+      name: "aceptados",
+      options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+          CutomButtonsRendereaceptdos(
+            dataIndex,
+            rowIndex,
+            // overbookingData,
+            // handleEditOpen
+          )
+      }
+
+    },
+
 
   ];
 
@@ -347,6 +372,7 @@ const Lotes = () => {
             <h2>Cursado </h2>
 
           </Tooltip>
+          <NuevoTurno/>
           <br />
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: "20%", maxWidth: "1000%" }} aria-label="customized table">
@@ -355,6 +381,7 @@ const Lotes = () => {
                   <StyledTableCell>Apellido</StyledTableCell>
                   <StyledTableCell align="right">Nombre</StyledTableCell>
                   <StyledTableCell align="right">Categoria </StyledTableCell>
+                  <StyledTableCell align="right">Horario </StyledTableCell>
                   <StyledTableCell align="right">Estado </StyledTableCell>
                   <StyledTableCell align="right">Acciones </StyledTableCell>
 
@@ -373,6 +400,7 @@ const Lotes = () => {
 
                       <StyledTableCell align="right">{row.nombre}</StyledTableCell>
                       <StyledTableCell align="right">{row.categoria}</StyledTableCell>
+                      <StyledTableCell align="right">{row.horario}</StyledTableCell>
                       <StyledTableCell align="right">{row.inscripcion}</StyledTableCell>
                       <StyledTableCell  align="right"><ModalCursado
                       id_cursado={row.id}
