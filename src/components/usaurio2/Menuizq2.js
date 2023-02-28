@@ -78,11 +78,13 @@ export default function MenuIzq2 ({children}) {
         }}
         variant="permanent"
         anchor="left"
-      >
+      >asdsadsadasdasdsad
+      
         <Navbar
       logout = {{hanleLogout}}/>
         <Toolbar />
-
+          Menu administracion
+        
         <Toolbar />
         <Divider />
         <List>

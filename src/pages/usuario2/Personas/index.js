@@ -6,6 +6,7 @@ import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Personas from '../../../components/usaurio2/Personas/todas'
+import Categorias from '../../../components/usaurio2/TablaClasificacion'
  
 export default function Paginas() {
 
@@ -48,7 +49,7 @@ export default function Paginas() {
     <MenuUsuario4>
   
   <Personas/>
-
+  <Categorias/>
  </MenuUsuario4> 
 
  </div>   :<div></div>  }

@@ -43,8 +43,8 @@ export default function SelectTextFields(props) {
 
   const traer = async () => {
     setUsuarioo()
-   const not = await servicioPersonas.datosusuarioporid(props.id_usuario)
-   console.log(not[1])
+   const not = await servicioPersonas.datosusuarioporid(props.dni_usuario)
+
    setUsuarioo(not[0])
    setCategoria(not[2])
 
@@ -133,14 +133,13 @@ setPorcent(not[1])
              <h3>Inscripcion a curso {usuarioo.nombre} </h3>
             
 
-             {usuarioo.participante_anterior === "Sí" ? <>
-             Participante anterior (45%)
-             </>:<>
-             Participante anterior (55%)
-             </>}
+           Prioridad 1:  {usuarioo.prioridad1}<br/>
+           Prioridad 2:  {usuarioo.prioridad2}<br/>
+
+         <b> actualmente {usuarioo.anotado !== undefined ? <> anotada en curso {usuarioo.anotado} </>:<> no anotada</>}</b> 
              <Featured
             porcentaje={porcent}
-            titulo="Requisitos"
+            titulo="Porcentaje de la categoria"
 
           />
      <label>Hijos:{usuarioo.hijos} <br />

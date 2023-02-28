@@ -11,15 +11,15 @@ import { useState } from "react";
 import servicioInscripciones from '../../../services/inscripciones'
 import NativeSelect from '@mui/material/NativeSelect';
 import InputLabel from '@mui/material/InputLabel';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import ModeIcon from '@mui/icons-material/Mode';
 import { Paper } from '@mui/material';
-
+import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 export default function Clasenueva(props) {
     let params = useParams()
     let id = params.id
-
+    const [cargando, setCargando] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [form, setForm] = useState({ id_curso: id })
     const handleChange = (e) => {
@@ -32,6 +32,7 @@ export default function Clasenueva(props) {
     };
     const handleDeterminar = async (event) => {
         event.preventDefault();
+        setCargando(true)
         try {
 
          const respuesta=  await servicioInscripciones.inscribirauto()
@@ -58,12 +59,12 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="outlined" onClick={handleClickOpen}>
-               Inscribir automaticamente <PersonAddAlt1Icon />
+            <Button variant="contained"  color="success" onClick={handleClickOpen}>
+               Inscribir automaticamente <ModeIcon />
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>Nueva Clase </DialogTitle>
+                <DialogTitle>INSCRIBIR TODAS LAS ALUMNAS SEGUN LOS CRITERIOS </DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
@@ -76,12 +77,15 @@ export default function Clasenueva(props) {
                     <DialogContent>
                         <DialogContentText>
                            Asignar automaticamente todas las inscripciones en base a los criterios?
+                           De todas maneras podrás desinscribir con el boton "Desinscribir"
                         </DialogContentText>
                        
 
                             <DialogActions>
-                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button>
-                                <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
+
+                                { cargando ? <><CircularProgress disableShrink /></>:<><Button variant="contained" color="primary" onClick={handleDeterminar}>Inscribir</Button></>}
+                       
+                                <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Lo pensare mejor</Button>
 
                             </DialogActions>
                       

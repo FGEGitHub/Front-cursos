@@ -11,7 +11,7 @@ import { useState } from "react";
 import servicioInscripciones from '../../../services/inscripciones'
 import NativeSelect from '@mui/material/NativeSelect';
 import InputLabel from '@mui/material/InputLabel';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import EditOffIcon from '@mui/icons-material/EditOff';
 import { Paper } from '@mui/material';
 
 import Box from '@mui/material/Box';
@@ -58,8 +58,8 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="outlined" onClick={handleClickOpen}>
-               Desinscribir a todas<PersonAddAlt1Icon />
+            <Button variant="contained"  color="error" onClick={handleClickOpen}>
+               Desinscribir a todas<EditOffIcon />
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
@@ -80,7 +80,7 @@ export default function Clasenueva(props) {
                        Esta opcion elimina todos los cursados y clasifica a las opciones como "pendientes"
 
                             <DialogActions>
-                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button>
+                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Desinscribir</Button>
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                             </DialogActions>

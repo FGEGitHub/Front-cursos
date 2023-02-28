@@ -108,9 +108,12 @@ return (
     <br/>
    
       <br/>
-    <Button  variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon/></Button>
+ 
 
     <br/>  <br/>  
+    <Typography variant="h3" gutterBottom>
+       Tabla de criterios
+      </Typography>
     <Paper
                 sx={{
                   cursor: 'pointer',
@@ -144,7 +147,7 @@ return (
           
               <StyledTableCell >{row.Categoria}</StyledTableCell>
               <StyledTableCell >{row.Detalle}</StyledTableCell>
-              <StyledTableCell >{row.porcentaje}</StyledTableCell>
+              <StyledTableCell >{row.porcentaje} %</StyledTableCell>
               
              
              

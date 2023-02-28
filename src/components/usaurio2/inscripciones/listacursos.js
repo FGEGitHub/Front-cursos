@@ -125,7 +125,8 @@ const Lotes = () => {
 
             <ModalInscribirauto/>
             <ModalDesInscribirauto/>
-            <Button variant='contained' onClick={cambiarVista} > Ocultar/ver Resumen de inscriptos <RemoveRedEyeIcon /></Button>
+            <br/>  <br/>
+            <Button variant='contained' onClick={cambiarVista} > Ocultar / Ver Resumen de inscriptos <RemoveRedEyeIcon /></Button>
 
             {vista ? <>
               <Paper
@@ -184,7 +185,9 @@ const Lotes = () => {
                           <TableCell align="center">{row.cantidad }</TableCell>
                            <TableCell align="center">{row.cursando }</TableCell>
                           <TableCell align="left">{row.cupo }</TableCell>
-                        
+                          <StyledTableCell align="center">  
+              <div   onClick={() =>  navigate('/administracion/detallecurso/'+row.id)} >
+                Ver detalles </div  ></StyledTableCell>
                          
                           
                         </TableRow>
@@ -231,7 +234,9 @@ const Lotes = () => {
                           <TableCell align="center">{row.cantidad }</TableCell>
                            <TableCell align="center">{row.cursando }</TableCell>
                           <TableCell align="left">{row.cupo }</TableCell>
-                        
+                          <StyledTableCell align="center">  
+              <div   onClick={() =>  navigate('/administracion/detallecurso/'+row.id)} >
+                Ver detalles </div  ></StyledTableCell>
                          
                           
                         </TableRow>
@@ -278,6 +283,9 @@ const Lotes = () => {
                           <TableCell align="center">{row.cantidad }</TableCell>
                            <TableCell align="center">{row.cursando }</TableCell>
                           <TableCell align="left">{row.cupo }</TableCell>
+                          <StyledTableCell align="center">  
+              <div   onClick={() =>  navigate('/administracion/detallecurso/'+row.id)} >
+                Ver detalles </div  ></StyledTableCell>
                         
                          
                           

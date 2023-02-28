@@ -105,7 +105,7 @@ return (
  
 
     </Stack>
-    <br/>
+
     <Nuevo
     getClients =  { async () => {
         const clients = await ServicioInscripciones.lista({
@@ -113,11 +113,12 @@ return (
         setClients(clients)
     }}
     />
-      <br/>
-    <Button  variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon/></Button>
+   
 
-    <br/>  <br/>  
+
+    <br/>  
     {vista ? <>
+   
     <Paper
                 sx={{
                   cursor: 'pointer',

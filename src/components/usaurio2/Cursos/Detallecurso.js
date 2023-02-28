@@ -111,7 +111,7 @@ const Lotes = () => {
     return (
       <>
         <Ver
-          id_usuario={pendientes[dataIndex].dni}
+          dni_usuario={pendientes[dataIndex].dni}
           cupo={curso.cupo}
           id_inscripcion={pendientes[dataIndex].id_inscripcion}
           getClients={async () => {

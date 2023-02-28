@@ -93,36 +93,15 @@ const Lotes = () => {
 
     ///
 //opcionde click en el nombre
-    function CutomButtonsRenderere(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-          
-       
-           <p  onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)} style={{ marginRight: "10px", cursor: "pointer" }}>{clients[dataIndex].Nombre}</p>
-          
-          </>
-        );
-      }
-      //
-
-      function CutomButtonsRendercuil(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-          
-       
-           <p  onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)} style={{ marginRight: "10px", cursor: "pointer" }}>{clients[dataIndex].cuil_cuit}</p>
-          
-          </>
-        );
-      }
-
+   
+     
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
           <IconButton>
         
              <p 
-             onClick={() =>  navigate('/coordinadores/detallepersona/'+clients[dataIndex].id)}
+             onClick={() =>  navigate('/administracion/detallepersona/'+clients[dataIndex].id)}
              style={{ color: 'blue' }}
             > Ver </p>    </IconButton>
            
@@ -130,35 +109,17 @@ const Lotes = () => {
         );
       }
 
-      function Nombre(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-           <b> 
-             <p 
-             onClick={() =>  navigate('/coordinadores/detallecurso/'+clients[dataIndex].id)}
-             style={{ color: '#blue' }}
-            > {clients[dataIndex].nombre} </p>   </b> 
-           
-          </>
-        );
-      }
+ 
     // definimos las columnas
     const columns = [
        
         
+      
       {
-            name: "Nombre",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    Nombre(
-                        dataIndex,
-                        rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
-                    )
-            }
-        
-        },   
+        name: "nombre",
+        label: "Apellido",
+       
+    }, 
         
         {
             name: "apellido",
@@ -170,6 +131,12 @@ const Lotes = () => {
             label:"dni",
            
         },
+        {
+          name: "categoria",
+          label:"categoria",
+         
+      },
+
 
       
         {
@@ -215,7 +182,7 @@ return (
         setClients(clients)
     }}
     />
-    
+  
     <Button  variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon/></Button>
 
 {vista   ? <>
