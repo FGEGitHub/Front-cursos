@@ -87,6 +87,19 @@ const Lotes = () => {
 
     setVista(!vista)
   }
+
+
+
+  
+
+  const designarturnos = async () => {
+
+    const rta = await servicioInscipciones.designarturnos()
+    alert(rta)
+    
+  
+    
+  }    
   const getClients = async () => {
 
     const clients = await servicioInscipciones.lista({
@@ -122,7 +135,7 @@ const Lotes = () => {
               
             </Stack>
             <br />
-
+            <Button variant='contained' onClick={designarturnos} > Designar cursos </Button>
             <ModalInscribirauto/>
             <ModalDesInscribirauto/>
             <br/>  <br/>

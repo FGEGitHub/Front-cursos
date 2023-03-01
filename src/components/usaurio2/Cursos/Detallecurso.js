@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import servicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
 import Fuchacurso from './Fichacurso'
+import Listadeturnos from './Listadeturnosdelcurso'
 import ModalCursado from './ModalCursado'
 import Ver from './Verinscripto'
 import CargaDeTabla from "../../CargaDeTabla"
@@ -367,7 +368,7 @@ const Lotes = () => {
             '&:hover': { border: '1px solid #ccc' },
           }}
         > <br /> <br />
-         
+              <Listadeturnos/>
           < Tooltip>
             <h2>Cursado </h2>
 
@@ -426,7 +427,14 @@ const Lotes = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </Paper></> : <>{loading ? (<CargaDeTabla />)
+
+
+        </Paper>
+   
+        
+        
+        
+        </> : <>{loading ? (<CargaDeTabla />)
           : (
             <div>
               <Stack spacing={2} sx={{ width: '100%' }}>

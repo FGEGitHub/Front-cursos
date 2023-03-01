@@ -62,8 +62,19 @@ return data
       
 
   }
+  const designarturnos = async (usuario) => {
   
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'designarturnos/', config)
+    
 
+return data
+      
+
+  }
+
+
+  
   const listaaclaracioncriterios = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -90,4 +101,4 @@ return data
      
      alert(data)  
  }  
-export default {lista,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+export default {lista,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

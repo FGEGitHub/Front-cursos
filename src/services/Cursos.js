@@ -77,6 +77,16 @@ return data
        
   }
 
+  const listadeturnos = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'listadeturnos/'+id, config)
+    
+
+return data
+      
+
+  }
 
 
 
@@ -109,4 +119,4 @@ const presente= async  (datos) => {
    alert(data)  
 } 
  
-export default {asistencia,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
