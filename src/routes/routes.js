@@ -14,7 +14,7 @@ import Novedades1 from '../pages/usuario1/Novedades';
 
 
 
-////Usuario 2
+////Usuario 2 ADMINISTRACION
 import Menu2 from '../pages/usuario2/Cursos';
 import Perfil2 from '../pages/usuario2/Perfil';
 import Detallecurso from '../pages/usuario2/Detallecurso';
@@ -23,7 +23,7 @@ import Personas from '../pages/usuario2/Personas';
 import DetallePersonas from '../pages/usuario2/Detallepersona';
 import Inscripciones from '../pages/usuario2/Inscripciones';
 import InscripcionCurso from '../pages/usuario2/InscripcionCurso.js';
-
+import Usuarios from '../pages/usuario2/usuarios';
 
 
 
@@ -61,8 +61,8 @@ const Rutas = [
 		{ path: '/administracion/detallepersona/:id', element: <DetallePersonas /> },
 		{ path: '/administracion/inscripciones', element: <Inscripciones /> },
 		{ path: '/administracion/inscripciones/curso/:id', element: <InscripcionCurso /> },
-
-
+		{ path: '/administracion/usuarios', element: <Usuarios /> },
+		
 
 
 		{ path: '/profesores/novedades', element: <Novedades3 /> },

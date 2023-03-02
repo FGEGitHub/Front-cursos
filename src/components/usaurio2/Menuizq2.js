@@ -56,6 +56,11 @@ export default function MenuIzq2 ({children}) {
           icon: <GroupIcon color="primary" />, 
           path: '/administracion/inscripciones' 
         },
+        { 
+          text: 'Gestion de usuarios', 
+          icon: <GroupIcon color="primary" />, 
+          path: '/administracion/usuarios' 
+        },
         
      
       ];

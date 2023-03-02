@@ -65,6 +65,15 @@ const Lotes = () => {
         setLoading(false);
     }
 
+
+    const borrarturno = async () => {
+        
+      const clients = await ServicioCursos.borrarturno(id)
+      setTurnos(clients)
+      setLoading(false);
+  }
+
+
     useEffect(() => {
         getClients()
     }, [])
@@ -73,13 +82,13 @@ const Lotes = () => {
 //opcionde click en el nombre
 const columnas = [
     {
-      name: "dato",
-      label: "dato",
+      name: "apellido",
+      label: "Apellido",
 
     },
     {
-      name: "Categoria",
-      label: "Categoria",
+      name: "nombre",
+      label: "Nombre",
 
     },
 
@@ -114,22 +123,11 @@ return (
     <br/>  
     {vista ? <>
    
-    <Paper
-                sx={{
-                  cursor: 'pointer',
-                  background: '#eeeeee',
-                  color: '#bdbdbd',
-                  border: '1px dashed #ccc',
-                  width: "90%",
-                  '&:hover': { border: '1px solid #ccc' },
-                  border: "1px solid black",
-                  margin: '75px',
-                  display: 'flex'
-
-                }}
-              >
+   
      {turnos.map((row) => ( 
         <>
+         <Button variant="contained"  onClick={borrarturno(row.id_turno)} >Borrar curso  {row.id_turno} </Button>
+        
         <MUIDataTable
 
         title={"curso"+row[0]["descripcion"]}
@@ -149,7 +147,7 @@ return (
       <br/></> 
 
      ))}
-    </Paper></>:<></>}
+  </>:<></>}
 
 <>
 

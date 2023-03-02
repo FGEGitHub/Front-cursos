@@ -273,40 +273,8 @@ const Lotes = () => {
                 }}
               >
 
-                <TableContainer >
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell><b>Detalles prioridad 3</b></TableCell>
-                        <TableCell><b>Inscriptas</b></TableCell>
-                   
-                        <TableCell><b>Cursando</b></TableCell>
-                        <TableCell><b>cupo</b></TableCell>
-                        <TableCell><b>Cantidad Prioridad 3</b></TableCell>
-                       
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {priori3.map((row) => (
-                        <TableRow
-                          key={row.name}
-                          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                          <TableCell align="left">{row.nombre}</TableCell>
-                          <TableCell align="center">{row.cantidad }</TableCell>
-                           <TableCell align="center">{row.cursando }</TableCell>
-                          <TableCell align="left">{row.cupo }</TableCell>
-                          <StyledTableCell align="center">  
-              <div   onClick={() =>  navigate('/administracion/detallecurso/'+row.id)} >
-                Ver detalles </div  ></StyledTableCell>
-                        
-                         
-                          
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+               
+               
               </Paper>
             
             </> : <>

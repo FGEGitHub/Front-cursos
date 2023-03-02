@@ -119,4 +119,13 @@ const presente= async  (datos) => {
    alert(data)  
 } 
  
-export default {asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+
+const borrarturno= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'borrarturno'+datos,datos,config)
+   
+   alert(data)  
+} 
+ 
+
+export default {borrarturno,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
