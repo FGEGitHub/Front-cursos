@@ -39,7 +39,7 @@ export default function MenuIzq2 ({children}) {
         { 
           text: 'Cursos', 
           icon: <GroupIcon color="primary" />, 
-          path: '/administracion/cursos' 
+          path: '/encargados/cursos' 
         },
        
      

@@ -41,6 +41,9 @@ const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
+    
+  let params = useParams()
+  let id = params.id
     useEffect(() => {
         traer()
 
@@ -56,7 +59,8 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-                const novedades_aux = await servicioEncargados.clases(usuario.id)
+
+                const novedades_aux = await servicioEncargados.curso(id)
                 setClases(novedades_aux)
             }
 
