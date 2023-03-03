@@ -70,8 +70,8 @@ export default function Ingresos() {
                                 autoFocus
                                 margin="dense"
                                 id="name"
-                                label="cuil_cuit"
-                                name="cuil_cuit"
+                                label="usuario"
+                                name="usuario"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
@@ -99,10 +99,10 @@ export default function Ingresos() {
                                     <MenuItem value="2">
                                         <em>None</em>
                                     </MenuItem>
-                                    <MenuItem value={'1'}>1-Cliente</MenuItem>
+                                    <MenuItem value={'1'}>1-Alumna***</MenuItem>
                                     <MenuItem value={'2'}>2-Administracion</MenuItem>
-                                    <MenuItem value={'3'}>3-Gerencia</MenuItem>
-                                    <MenuItem value={'4'}>Legales</MenuItem>
+                                    <MenuItem value={'3'}>3-Coordinador</MenuItem>
+                                    <MenuItem value={'4'}>4-Encargado</MenuItem>
                                     
                                 </Select>
                             </FormControl>

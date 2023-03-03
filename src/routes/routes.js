@@ -35,6 +35,16 @@ import Novedades3 from '../pages/usuario3/Novedades';
 import Tareas3 from '../pages/usuario3/Tareas';
 
 
+
+
+///usuario4
+
+import Clases4 from '../pages/usuario4/cursos';
+
+
+
+
+
 const Rutas = [
 	 <Navbar/> ,
 
@@ -68,6 +78,15 @@ const Rutas = [
 		{ path: '/profesores/novedades', element: <Novedades3 /> },
 		
 		{ path: '/profesores/tareas', element: <Tareas3 /> },
+
+
+
+
+
+
+
+
+		{ path: '/encargados/cursos', element: <Clases4 /> },
 
 ];
 

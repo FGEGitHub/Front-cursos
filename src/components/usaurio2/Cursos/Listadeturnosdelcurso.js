@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import ServicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
+import AsignarEncargado from './ModalAsignarEncargado'
+import Asignarllamado from './ModalAsignarllamadoatodos'
 
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
@@ -14,19 +16,14 @@ import Button from "@mui/material/Button";
 import Tooltip from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { Paper } from '@mui/material';
 ////
 
 import Grid from '@mui/material/Grid';
 
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
+import { Modal } from "@material-ui/core";
 
 const Img = styled('img')({
   margin: 'auto',
@@ -61,6 +58,7 @@ const Lotes = () => {
     const getClients = async () => {
         
         const clients = await ServicioCursos.listadeturnos(id)
+
         setTurnos(clients)
         setLoading(false);
     }
@@ -93,8 +91,8 @@ const columnas = [
     },
 
     {
-      name: "cantidad",
-      label: "cantidad",
+      name: "inscripcion",
+      label: "estado",
 
     },
     {
@@ -126,8 +124,27 @@ return (
    
      {turnos.map((row) => ( 
         <>
-         <Button variant="contained"  onClick={borrarturno(row.id_turno)} >Borrar curso  {row.id_turno} </Button>
+         <Paper
+        sx={{
+          cursor: 'pointer',
+          background: '#fafafa',
+          color: '#bdbdbd',
+          border: '1px dashed #ccc',
+          '&:hover': { border: '1px solid #ccc' },
+        }}
+      >
+         <Button variant="contained"  onClick={borrarturno(row.id_turno)} >Borrar curso  {row.id_turno} </Button><br/>
+
+        {row[0].id_encargado === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Encargado {row[0].id_encargado} </b></h2></> } 
+        <AsignarEncargado 
+        id= { row[0].id}
         
+        />
+
+<Asignarllamado
+        id= { row[0].id}
+        
+        />
         <MUIDataTable
 
         title={"curso"+row[0]["descripcion"]}
@@ -143,7 +160,7 @@ return (
   
 
 
-      />
+      /></Paper>
       <br/></> 
 
      ))}

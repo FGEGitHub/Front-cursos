@@ -61,6 +61,10 @@ export default function Ingresos() {
 
     
     const columns = [
+        {
+            name: "id",
+            label: "id",
+        },
    
         {
             name: "nombre",

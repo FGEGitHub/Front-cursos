@@ -78,10 +78,10 @@ const Login = () => {
           case 2:navigate('/administracion/cursos')
                 window.location.reload(true);
           break;
-          case 3:navigate('/profesores/novedades')
+          case 3:navigate('/coordinadores/novedades')
           window.location.reload(true);
           break;
-          case 4:navigate('/legales/estadisticas1')
+          case 4:navigate('/encargados/cursos')
           window.location.reload(true);
           break;
           case 10:navigate('/admin/usuarios')

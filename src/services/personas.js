@@ -39,9 +39,9 @@ return data
   }
 
 
-  const traerprofesores = async (usuario) => { 
+  const traerencargados = async (usuario) => { 
     // const data = await axios.post('http://localhost:4000/signupp', datos)
-      const {data} = await axios.get(baseUrl+'traerprofesores/', config)
+      const {data} = await axios.get(baseUrl+'traerencargados/', config)
 return data
   }
 
@@ -84,8 +84,19 @@ return data
    
    alert(data)  
 } 
+const asignarllamadoatodas= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'asignarllamadoatodas',datos,config)
+   
+   alert(data)  
+} 
 
- 
+const asignarEncargado= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'asignarencargado',datos,config)
+   
+   alert(data)  
+} 
 
 
 
@@ -105,4 +116,4 @@ return data
    alert(data)  
 } 
  
-export default {asignarllamado,crear,traerprofesores,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
+export default {asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}

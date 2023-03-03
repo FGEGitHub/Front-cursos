@@ -42,7 +42,17 @@ return data
        
   }
 
-
+  const registronivel3 = async (datos) => {
+    console.log(datos)
+  
+ 
+      const {data} = await axios.post(baseUrl+'signupp', datos,config)
+ 
+         alert(data)
+    
+ 
+       
+  }
 
   
- export default {todos }
+ export default {todos,registronivel3 }

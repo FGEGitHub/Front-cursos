@@ -44,7 +44,7 @@ export default function SelectTextFields(props) {
 
 
   const [inscripcion, setInscripcion] = useState({
-    id_cursado:props.id_cursado
+    id:props.id
   
 
   })
@@ -86,7 +86,7 @@ const traer = async () => {
 
     try {
 
-      await servicioPersonas.asignarllamado(
+      await servicioPersonas.asignarEncargado(
         inscripcion
 
 
@@ -122,7 +122,8 @@ const traer = async () => {
       autoComplete="off"
     >
        < Tooltip title="Ver inscripcion">
-      <BorderColorIcon variant="outlined" onClick={handleClickOpen}/>
+       <Button variant="contained" onClick={handleClickOpen} >  Asignar Encargado <BorderColorIcon/>    </Button>
+    
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
 
@@ -150,7 +151,7 @@ const traer = async () => {
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'id_profesor',
+                                    name: 'id_encargado',
                                     id: 'uncontrolled-native',
 
                                 }}
