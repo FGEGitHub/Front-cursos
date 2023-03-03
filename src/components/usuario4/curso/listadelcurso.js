@@ -1,4 +1,5 @@
 import servicioEncargados from '../../../services/encargados'
+import ModalVer from './ModalVer'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
@@ -7,11 +8,12 @@ import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -81,7 +83,36 @@ const TablaNotificaciones = (props) => {
                 <div onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['id'])}>
                     ir
 
+                    <ModalVer
+                    id= {clases[dataIndex]['id']}
+                   nombre_curso={'s'}
+                   id_turno= {id}
+                   id_cursado= {clases[dataIndex]['idcursado']}
 
+                    traer= {async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const novedades_aux = await servicioEncargados.curso(id)
+                                setClases(novedades_aux)
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                
+                
+                
+                
+                
+                    }}
+
+                    />
 
 
                 </div>
@@ -95,6 +126,11 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
+            name: "apellido",
+            label: "apellido",
+
+        },
+        {
             name: "nombre",
             label: "nombre",
 
@@ -103,8 +139,8 @@ const TablaNotificaciones = (props) => {
 
 
         {
-            name: "descripcion",
-            label: "descripcion",
+            name: "inscripcion",
+            label: "Estado",
 
         },
         {

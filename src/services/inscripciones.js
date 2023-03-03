@@ -101,4 +101,14 @@ return data
      
      alert(data)  
  }  
-export default {lista,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+
+ const confirmaciondellamado= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'confirmaciondellamado',datos,config)
+   
+   alert(data)  
+} 
+
+
+ 
+export default {lista,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

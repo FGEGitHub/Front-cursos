@@ -74,7 +74,7 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-                <div onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['id'])}>
+                <div onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['turnoid'])}>
                     ir
 
 
@@ -152,8 +152,7 @@ const TablaNotificaciones = (props) => {
 
                             />
                         </>
-                        /* 
-                                      */
+                 
 
                  
                 </div>
