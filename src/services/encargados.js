@@ -51,4 +51,13 @@ return data
   }
 
 
-  export default {clases,curso}
+
+  const confirmarllamado= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'confirmaciondellamado',datos,config)
+     
+     alert(data)  
+  } 
+  
+  
+  export default {clases,curso,confirmarllamado}

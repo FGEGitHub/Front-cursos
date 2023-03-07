@@ -132,6 +132,18 @@ export default function SelectTextFields(props) {
                                 <option value={'Rechazado'}>Rechazado</option>
 
                             </NativeSelect>
+
+
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Observaciones"
+                                name="observaciones"
+                                onChange={handleChange}
+                                fullWidth
+                                variant="standard"
+                            />
    
                  <DialogActions>
    

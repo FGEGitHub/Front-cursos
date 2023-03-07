@@ -100,6 +100,11 @@ const columnas = [
       label: "descripcion",
 
     },
+       {
+      name: "motivo",
+      label: "motivo",
+
+    },
   
 
 

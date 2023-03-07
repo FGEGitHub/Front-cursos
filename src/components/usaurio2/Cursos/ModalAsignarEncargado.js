@@ -130,20 +130,15 @@ const traer = async () => {
    
         <DialogContent>
 
-        <h2>Categoria </h2>
+        <h2>Seleccionar de la lista de encargados </h2>
   
              <h3>Inscripcion a curso  </h3>
             
 
-          
-     <label>Hijos:<br />
-          
-       
-
-     </label>
+      
    
                  <br />
-                 <label>Asignar a llamado </label>
+                 <label>Asignar encargado </label>
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
                              
                             </InputLabel>

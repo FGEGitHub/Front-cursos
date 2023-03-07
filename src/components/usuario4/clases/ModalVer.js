@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioNovedades from '../../../services/novedades'
+import servicioEncargados from '../../../services/encargados'
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
 import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
@@ -57,7 +57,7 @@ export default function SelectTextFields(props) {
     try {
     event.preventDefault();
       
-
+    const respuesta = await servicioEncargados.confirmarllamado(form)
 
     } catch (error) {
         console.error(error);
@@ -115,13 +115,13 @@ export default function SelectTextFields(props) {
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'tipo_dni',
+                                    name: 'estado',
                                     id: 'uncontrolled-native',
 
                                 }}
                             >   <option value={'C.U.I.L.'}>Elegir</option>
-                                <option value={'C.U.I.L.'}>Confirmado</option>
-                                <option value={'C.U.I.T.'}>Rechazado</option>
+                                <option value={'aceptado'}>Confirmado</option>
+                                <option value={'rechazado'}>Rechazado</option>
 
                             </NativeSelect>
    
