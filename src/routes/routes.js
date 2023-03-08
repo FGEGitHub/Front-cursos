@@ -42,6 +42,7 @@ import Tareas3 from '../pages/usuario3/Tareas';
 import Clases4 from '../pages/usuario4/cursos';
 import Curso4 from '../pages/usuario4/curso/index.js';
 import Turno4 from '../pages/usuario4/Turno';
+import Clase4 from '../pages/usuario4/clase';
 
 
 
@@ -92,7 +93,9 @@ const Rutas = [
 		{ path: '/encargados/curso/:id', element: <Curso4 /> },
 		{ path: '/encargados/turno/:id', element: <Turno4 /> },
 		
+		{ path: '/encargados/clase/:id', element: <Clase4 /> },
 
+		
 ];
 
 export default Rutas;

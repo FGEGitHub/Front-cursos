@@ -113,7 +113,7 @@ return data
 
 
 const presente= async  (datos) => {
-  console.log(datos)
+ 
    const {data } = await axios.post(baseUrl+'presente',datos,config)
    
    alert(data)  
@@ -128,4 +128,4 @@ const borrarturno= async  (datos) => {
 } 
  
 
-export default {borrarturno,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}

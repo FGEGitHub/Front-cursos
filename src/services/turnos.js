@@ -37,7 +37,7 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
   const lista = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
-      const {data} = await axios.get(baseUrl+'lista/'+ usuario, config)
+      const {data} = await axios.get(baseUrl+'clasesdelturno/'+ usuario, config)
 return data
        
   }

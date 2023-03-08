@@ -5,7 +5,7 @@ import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
 import Tooltip from '@material-ui/core/Tooltip';
 import NewReleasesTwoToneIcon from '@mui/icons-material/NewReleasesTwoTone';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -77,10 +77,15 @@ const TablaNotificaciones = (props) => {
 
             
                  <>
+                 < Tooltip title="contactar">
                 <PhoneForwardedSharpIcon  onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['turnoid'])}  />
+                </Tooltip>
                 </>
+                    <br/>      
                 <>
-                <NewReleasesTwoToneIcon   onClick={() => navigate('/encargados/turno/'+clases[dataIndex]['turnoid'])} />
+                < Tooltip title="ir a la clase">
+                <ContentPasteGoIcon   onClick={() => navigate('/encargados/turno/'+clases[dataIndex]['turnoid'])} />
+                </Tooltip>
                 </>
             </>
             
@@ -139,7 +144,7 @@ const TablaNotificaciones = (props) => {
                         <>
                             <MUIDataTable
 
-                                title={"Clase"}
+                                title={"Turnos"}
                                 data={clases}
                                 columns={columns}
                                 actions={[

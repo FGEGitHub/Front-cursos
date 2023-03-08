@@ -1,4 +1,4 @@
-import servicioturnos from '../../../services/encargados'
+import servicioturnos from '../../../services/turnos'
 import ModalVer from './ModalVer'
 import ModaNueva from './ModalNuevaclase'
 import React, { useEffect, useState, Fragment } from "react";
@@ -14,7 +14,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -81,39 +81,13 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-                <div onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['id'])}>
-                    ir
-
-                    <ModalVer
-                    id= {clases[dataIndex]['id']}
-                   nombre_curso={'s'}
-                   id_turno= {id}
-                   id_cursado= {clases[dataIndex]['idcursado']}
-
-                    traer= {async () => {
-                        try {
-                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                            if (loggedUserJSON) {
-                                const usuario = JSON.parse(loggedUserJSON)
-                
-                                setUsuario(usuario)
-                
-                                const novedades_aux = await servicioturnos.curso(id)
-                                setClases(novedades_aux)
-                            }
-                
-                        } catch (error) {
-                
-                        }
+                <div onClick={() => navigate('/encargados/clase/'+clases[dataIndex]['id'])}>
+                  
+                    < Tooltip title="Ir a la clase">
+                    <AccountBoxIcon  onClick={() => navigate('/encargados/clase/'+clases[dataIndex]['id'])} />
+                    </Tooltip>
                 
                 
-                
-                
-                
-                
-                    }}
-
-                    />
 
 
                 </div>
@@ -167,6 +141,7 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
+            <h2>CLASES DEL CURSO</h2>
             {clases ? <>
                 <div>
                 <ModaNueva
@@ -176,7 +151,7 @@ const TablaNotificaciones = (props) => {
                         <>
                             <MUIDataTable
 
-                                title={"Clase"}
+                                title={"Clase del curso"}
                                 data={clases}
                                 columns={columns}
                                 actions={[
