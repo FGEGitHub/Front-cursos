@@ -1,8 +1,8 @@
 import axios from "axios"
 
 
-//const baseUrl = 'https://back-loging-production.up.railway.app/cursos/'
-const  baseUrl ='http://localhost:4000/encargados/'
+//const baseUrl = 'https://back-loging-production.up.railway.app/turnos/'
+const  baseUrl ='http://localhost:4000/turnos/'
 
 
 
@@ -30,34 +30,24 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
 
 
-const clases = async (usuario) => {
+
+ 
+
+  //////desde el id usaurio coordinador
+  const lista = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
-      const {data} = await axios.get(baseUrl+'clases/'+usuario, config)
-    
-
+      const {data} = await axios.get(baseUrl+'lista/'+ usuario, config)
 return data
        
   }
 
-  const curso = async (usuario) => {
-  
-    // const data = await axios.post('http://localhost:4000/signupp', datos)
-      const {data} = await axios.get(baseUrl+'curso/'+usuario, config)
-    
 
-return data
-       
-  }
-
-  
-
-  const confirmaciondellamado= async  (datos) => {
+  const nuevaclase= async  (datos) => {
     console.log(datos)
-     const {data } = await axios.post(baseUrl+'confirmaciondellamado',datos,config)
+     const {data } = await axios.post(baseUrl+'nuevaclase',datos,config)
      
      alert(data)  
-  } 
-  
-  
-  export default {clases,curso,confirmaciondellamado}
+ } 
+ 
+export default {lista,nuevaclase}

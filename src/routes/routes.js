@@ -41,6 +41,7 @@ import Tareas3 from '../pages/usuario3/Tareas';
 
 import Clases4 from '../pages/usuario4/cursos';
 import Curso4 from '../pages/usuario4/curso/index.js';
+import Turno4 from '../pages/usuario4/Turno';
 
 
 
@@ -89,6 +90,8 @@ const Rutas = [
 
 		{ path: '/encargados/cursos', element: <Clases4 /> },
 		{ path: '/encargados/curso/:id', element: <Curso4 /> },
+		{ path: '/encargados/turno/:id', element: <Turno4 /> },
+		
 
 ];
 

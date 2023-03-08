@@ -12,7 +12,7 @@ import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import InputLabel from '@mui/material/InputLabel';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
@@ -114,8 +114,8 @@ export default function SelectTextFields(props) {
    
                  <br />
                 <b> <p>Detalle:{datos[0].apellido} {datos[0].nombre}</p> </b>   
-                 <label   >Telefono: {datos[0].tel}</label> <WhatsAppIcon  onClick={() => window.open('https://wa.me/'+datos[0].tel)}  /> <br/>
-                 <label  onClick={() => window.open('https://wa.me/'+datos[0].tel2)}   >Telefono: {datos[0].tel2}</label>  <WhatsAppIcon onClick={() => window.open('https://wa.me/'+datos[0].tel2)}   /> 
+                 <label  onClick={() => window.open('https://wa.me/'+datos[0].tel)}   >Telefono: {datos[0].tel}</label><br/>
+                 <label  onClick={() => window.open('https://wa.me/'+datos[0].tel2)}   >Telefono: {datos[0].tel2}</label>
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
                               Contestacion del llamado 
                             </InputLabel>

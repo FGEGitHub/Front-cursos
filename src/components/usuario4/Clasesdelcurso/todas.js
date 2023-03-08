@@ -1,4 +1,6 @@
-import servicioEncargados from '../../../services/encargados'
+import servicioturnos from '../../../services/encargados'
+import ModalVer from './ModalVer'
+import ModaNueva from './ModalNuevaclase'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
@@ -7,12 +9,13 @@ import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
 import Tooltip from '@material-ui/core/Tooltip';
-import NewReleasesTwoToneIcon from '@mui/icons-material/NewReleasesTwoTone';
+import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -41,6 +44,9 @@ const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
+    
+  let params = useParams()
+  let id = params.id
     useEffect(() => {
         traer()
 
@@ -56,7 +62,8 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-                const novedades_aux = await servicioEncargados.clases(usuario.id)
+
+                const novedades_aux = await servicioturnos.lista(id)
                 setClases(novedades_aux)
             }
 
@@ -74,16 +81,43 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
+                <div onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['id'])}>
+                    ir
 
-            
-                 <>
-                <PhoneForwardedSharpIcon  onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['turnoid'])}  />
-                </>
-                <>
-                <NewReleasesTwoToneIcon   onClick={() => navigate('/encargados/turno/'+clases[dataIndex]['turnoid'])} />
-                </>
+                    <ModalVer
+                    id= {clases[dataIndex]['id']}
+                   nombre_curso={'s'}
+                   id_turno= {id}
+                   id_cursado= {clases[dataIndex]['idcursado']}
+
+                    traer= {async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const novedades_aux = await servicioturnos.curso(id)
+                                setClases(novedades_aux)
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                
+                
+                
+                
+                
+                    }}
+
+                    />
+
+
+                </div>
             </>
-            
         );
     }
 
@@ -93,20 +127,21 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
-            name: "nombre",
-            label: "nombre",
+            name: "fecha",
+            label: "fecha",
+
+        },
+        {
+            name: "observaciones",
+            label: "observaciones",
 
         },
 
 
 
+      
         {
-            name: "descripcion",
-            label: "descripcion",
-
-        },
-        {
-            name: "Llamar/ Ir al curso",
+            name: "Ver detalles",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -134,7 +169,9 @@ const TablaNotificaciones = (props) => {
         <div>
             {clases ? <>
                 <div>
-                  
+                <ModaNueva
+                id_turno= {id}
+                />
 
                         <>
                             <MUIDataTable
@@ -154,7 +191,8 @@ const TablaNotificaciones = (props) => {
 
                             />
                         </>
-                 
+                        /* 
+                                      */
 
                  
                 </div>
