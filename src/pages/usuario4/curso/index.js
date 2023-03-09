@@ -3,6 +3,7 @@ import MenuUsuario4 from '../../../components/usuario4/Menuizq4'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Curso from '../../../components/usuario4/curso/listadelcurso'
+
  
 export default function Paginas() {
 
@@ -43,7 +44,7 @@ export default function Paginas() {
 <>
 { logueado ? <div> 
     <MenuUsuario4>
-  
+   
   <Curso/>
 
  </MenuUsuario4> 

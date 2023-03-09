@@ -3,7 +3,7 @@ import MenuUsuario4 from '../../../components/usuario4/Menuizq4'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Clases from '../../../components/usuario4/Clasesdelcurso/todas'
- 
+import Ficha from '../../../components/usuario4/datosdelturno/fichaturno'
 export default function Paginas() {
 
     const [logueado, setLogueado] = useState(false) 
@@ -43,7 +43,7 @@ export default function Paginas() {
 <>
 { logueado ? <div> 
     <MenuUsuario4>
-  
+    <Ficha/>
   <Clases/>
 
  </MenuUsuario4> 
