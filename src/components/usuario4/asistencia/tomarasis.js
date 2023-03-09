@@ -25,19 +25,15 @@ export default function SelectTextFields(props) {
 
 
 
-
-    /*   const traer = async () => {
-        
-       const nov = await servicioNovedades.leer(props.id)
-    
-      await setNovedad(nov)
-    
-       setActivo(true)
-    
-      } */
+ const traer =  () => {
+    setForm( {id_alumno: props.id_alumno,
+        id_clase: props.id_clase,
+        observaciones:"ninguna"
+    })
+      
 
 
-
+        }
     const handleChange = (e) => {
         console.log(form)
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -47,7 +43,7 @@ export default function SelectTextFields(props) {
     const handleClickOpen = () => {
 
         setOpen(true);
-
+        traer()
 
     };
 
@@ -67,7 +63,7 @@ export default function SelectTextFields(props) {
         }
 
 
-
+        setOpen(false)
 
 
 
@@ -108,7 +104,7 @@ export default function SelectTextFields(props) {
 
 
                     <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                        Contestacion del llamado
+                       Asistencia  {props.id_alumno}
                     </InputLabel>
                     <NativeSelect
                         defaultValue={30}
@@ -121,7 +117,7 @@ export default function SelectTextFields(props) {
                     >   <option value={'C.U.I.L.'}>Elegir</option>
                         <option value={'Presente'}>Presente</option>
                         <option value={'Ausente'}>Ausente Injustificado</option>
-                        <option value={'Ausente justidicado'}>Ausente justificado</option>
+                        <option value={'Ausente justificado'}>Ausente justificado</option>
 
                     </NativeSelect>
                     <TextField

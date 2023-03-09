@@ -123,7 +123,19 @@ export default function SelectTextFields(props) {
               variant="standard"
             />
 
+<TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              type="number"
+              label="Numero de clase"
+              name="numero_clase"
+              onChange={handleChange}
+              fullWidth
+              variant="standard"
+            />
             <DialogActions>
+
 
               <><Button variant="contained" color="primary" onClick={handleDeterminar}> Contestar </Button></>
               <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
