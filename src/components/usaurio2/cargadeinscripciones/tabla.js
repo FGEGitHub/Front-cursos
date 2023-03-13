@@ -40,11 +40,10 @@ const Estracto = () => {
         setDats(datos)
         setLoading(false);
     }
-    const cargar = async () => {
-        setActivo(true)
-        const datos = await servicioInscripciones.VerExtracto(fecha)
-        setDats(datos)
-        setLoading(false);
+    const cargar = async (id) => {
+      
+        console.log(id)
+      
     }
     const handleChange = (e) => {
 
@@ -146,8 +145,8 @@ const Estracto = () => {
                             <br />
 
                             <Button
-                                onClick={() => cargar(index)}
-                            >   Descargar</Button>
+                                onClick={() => cargar(fecha.id)}
+                            >   Cargar inscripciones</Button>
                             <MUIDataTable
 
                                 title={"Tabla de estracto"}
