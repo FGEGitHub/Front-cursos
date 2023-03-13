@@ -147,10 +147,10 @@ return (
         
         />
 <ModalModificarturno
-   id= { row.id}
+   id= { row[0].id_turno}
    />
 <Asignarllamado
-        id= { row[0].id_turno}
+        id=  { row[0].id_turno}
         
         />
         <MUIDataTable

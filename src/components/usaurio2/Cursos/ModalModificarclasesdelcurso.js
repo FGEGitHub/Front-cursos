@@ -44,14 +44,13 @@ export default function SelectTextFields(props) {
 
 
   const [inscripcion, setInscripcion] = useState({
-   
+    id:props.id
   
-
   })
 
 
   const handleClickOpen = () => {
-    setInscripcion({id:props.id})
+
     setOpen(true);
   };
 
@@ -63,6 +62,7 @@ export default function SelectTextFields(props) {
   
   const handleChange = (e) => {
     console.log(inscripcion)
+    console.log(props.id)
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 }
   
