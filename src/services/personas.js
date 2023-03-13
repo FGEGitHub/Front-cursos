@@ -116,4 +116,14 @@ const asignarEncargado= async  (datos) => {
    alert(data)  
 } 
  
-export default {asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
+
+const subirprueba = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'subirprueba', formdata,config)
+  console.log(data)
+
+}
+
+
+
+export default {subirprueba,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}

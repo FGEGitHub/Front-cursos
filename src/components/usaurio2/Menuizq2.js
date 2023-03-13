@@ -61,6 +61,11 @@ export default function MenuIzq2 ({children}) {
           icon: <GroupIcon color="primary" />, 
           path: '/administracion/usuarios' 
         },
+        { 
+          text: 'Carga de inscripciones', 
+          icon: <GroupIcon color="primary" />, 
+          path: '/administracion/cargarinscripciones' 
+        },
         
      
       ];

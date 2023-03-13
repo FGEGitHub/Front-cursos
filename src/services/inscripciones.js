@@ -109,6 +109,19 @@ return data
    alert(data)  
 } 
 
+const listaExtractos= async  () => {
 
- 
-export default {lista,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+
+  const {data } = await axios.get(baseUrl+'todaslasinscripciones',config)
+    console.log(data)
+  return data
+ }  
+
+ const VerExtracto= async  (id) => {
+  ////
+  console.log(id)
+  const {data } = await axios.post(baseUrl+'incripcionesid',id,config)
+    console.log(data)
+   return data
+   } 
+export default {lista,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

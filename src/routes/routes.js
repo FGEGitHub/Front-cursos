@@ -24,7 +24,7 @@ import DetallePersonas from '../pages/usuario2/Detallepersona';
 import Inscripciones from '../pages/usuario2/Inscripciones';
 import InscripcionCurso from '../pages/usuario2/InscripcionCurso.js';
 import Usuarios from '../pages/usuario2/usuarios';
-
+import Cargadeinscrip from '../pages/usuario2/Cargadeinscrip';
 
 
 
@@ -75,8 +75,8 @@ const Rutas = [
 		{ path: '/administracion/inscripciones', element: <Inscripciones /> },
 		{ path: '/administracion/inscripciones/curso/:id', element: <InscripcionCurso /> },
 		{ path: '/administracion/usuarios', element: <Usuarios /> },
+		{ path: '/administracion/cargarinscripciones', element: <Cargadeinscrip /> },
 		
-
 
 		{ path: '/profesores/novedades', element: <Novedades3 /> },
 		
