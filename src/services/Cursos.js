@@ -118,14 +118,19 @@ const presente= async  (datos) => {
    
    alert(data)  
 } 
+const modificarcurso= async  (datos) => {
  
+  const {data } = await axios.post(baseUrl+'modificarcurso',datos,config)
+  
+  alert(data)  
+} 
 
 const borrarturno= async  (datos) => {
   console.log(datos)
-   const {data } = await axios.post(baseUrl+'borrarturno'+datos,datos,config)
+   const {data } = await axios.get(baseUrl+'borrarturno/'+datos,datos,config)
    
    alert(data)  
 } 
  
 
-export default {borrarturno,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}

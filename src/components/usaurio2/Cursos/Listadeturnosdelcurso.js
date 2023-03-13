@@ -65,11 +65,10 @@ const Lotes = () => {
     }
 
 
-    const borrarturno = async () => {
+    const borrarturno = async (ref) => {
         
-      const clients = await ServicioCursos.borrarturno(id)
-      setTurnos(clients)
-      setLoading(false);
+      const clients = await ServicioCursos.borrarturno(ref)
+      getClients()
   }
 
 
@@ -139,7 +138,7 @@ return (
           '&:hover': { border: '1px solid #ccc' },
         }}
       >
-         <Button variant="contained"  onClick={() => borrarturno(row.id_turno)} >Borrar curso  {row.id_turno} </Button><br/>
+         <Button variant="contained"  onClick={() => borrarturno(row[0].id_turno)} >Borrar curso  {row.id_turno} </Button><br/>
 
         {row[0].id_encargado === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Encargado {row[0].id_encargado} </b></h2></> } 
         <AsignarEncargado 

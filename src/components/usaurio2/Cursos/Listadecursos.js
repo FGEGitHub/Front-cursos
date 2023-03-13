@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import servicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
 import Nuevo from './NuevoCurso'
+import ModificarCurso from './ModalModificarCurso'
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
 import { useNavigate } from "react-router-dom";
@@ -24,7 +25,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 ////
-
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Grid from '@mui/material/Grid';
 
 import Typography from '@mui/material/Typography';
@@ -103,13 +104,22 @@ const Lotes = () => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-          <IconButton>
+          <>
+          <ArrowForwardIcon    onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}  />
+         
+          </>
+          <>
+          <ModificarCurso
+          id= {clients[dataIndex].id}
+          getClients = {async () => {
         
-             <p 
-             onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}
-             style={{ color: 'blue' }}
-            > Ver </p>    </IconButton>
-           
+        const clients = await servicioCursos.lista({
+
+        })
+        setClients(clients)
+        setLoading(false);
+    }}/>
+          </>
           </>
         );
       }
@@ -128,11 +138,8 @@ const Lotes = () => {
       }
     // definimos las columnas
     const columns = [
-        {
-            name: "fecha",
-            label: "Fecha creacion",
-
-        },
+    
+  
        
       {
             name: "Nombre",
@@ -148,18 +155,9 @@ const Lotes = () => {
         
         },   
         
-        {
-            name: "encargado",
-            label: "Encargado",
-           
-        },
-        {
-            name: "observaciones",
-            label:"Observaciones",
-           
-        },
+   
        {
-            name: "Actions",
+            name: "Ir/Modificar",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
