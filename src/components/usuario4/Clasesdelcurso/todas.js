@@ -83,7 +83,7 @@ const TablaNotificaciones = (props) => {
             <>
                 <div onClick={() => navigate('/encargados/clase/'+clases[dataIndex]['id'])}>
                   
-                    < Tooltip title="Ir a la clase">
+                    < Tooltip title="ASISTENCIA">
                     <AccountBoxIcon  onClick={() => navigate('/encargados/clase/'+clases[dataIndex]['id'])} />
                     </Tooltip>
                 
@@ -106,16 +106,20 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "observaciones",
-            label: "observaciones",
+            name: "observacion",
+            label: "detalle",
+
+        },
+        {
+            name: "numero_clase",
+            label: "Numero",
 
         },
 
 
-
       
         {
-            name: "Ver detalles",
+            name: "Asistencia",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -146,6 +150,30 @@ const TablaNotificaciones = (props) => {
                 <div>
                 <ModaNueva
                 id_turno= {id}
+                traer = {async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const novedades_aux = await servicioturnos.lista(id)
+                                setClases(novedades_aux)
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                
+                
+                
+                
+                
+                    }
+                
+                }
                 />
 
                         <>

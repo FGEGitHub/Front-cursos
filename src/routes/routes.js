@@ -2,6 +2,7 @@
 import Navbar from "../components/Navbar";
 //////////esme
 import Login from '../pages/Login';
+import Login2 from '../pages/login2';
 
 
 
@@ -58,6 +59,8 @@ const Rutas = [
 		}, */
 		{ path: '/', element: <Login /> },
 		{ path: '/login', element: <Login /> },
+		{ path: '/loginadministracion', element: <Login2 /> },
+		
 		{ path: '/usuario/novedades', element: <Novedades1 /> },
 		{ path: '/usuario/cursos', element: <Menu1 /> },
 		{ path: '/usuario/perfil', element: <Perfil /> },

@@ -50,7 +50,6 @@ export default function Ingresos() {
     const [usuario, setUsuario] = useState({
       cuil_cuit: "",
       password: "",
-      nivel:1,
 });
   const handleChange = (e) =>{
     console.log(usuario)
@@ -157,7 +156,32 @@ export default function Ingresos() {
             variant="standard"
           />
           <br/>
-        
+           <InputLabel  className={cardStyles.field} sx={{
+                  mx: 3, width: '75%'
+								}} variant="standard" htmlFor="uncontrolled-native">
+                          Nivel
+                        </InputLabel>
+                        <NativeSelect
+                         className={cardStyles.field}
+                         sx={{
+                          mx: 3, width: '75%'
+                        }}
+                            defaultValue={30}
+                            onChange={handleChange}
+                            inputProps={{
+                                name: 'nivel',
+                                id: 'uncontrolled-native',
+                               
+                            }}
+                        >   <option  value={'1'}>Elegir</option>
+                            <option   value={1}>Alumna</option>
+                            <option  value={3}>Coordinador</option>
+                            <option  value={2}>Administrador</option>
+                            <option  value={4}>Encargado</option>
+                           
+                    
+                         
+                        </NativeSelect> 
           
           <TextField
           className={cardStyles.field}

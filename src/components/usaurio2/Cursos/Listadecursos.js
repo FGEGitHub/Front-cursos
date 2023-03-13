@@ -25,9 +25,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 ////
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import SocialDistanceSharpIcon from '@mui/icons-material/SocialDistanceSharp';
 import Grid from '@mui/material/Grid';
-
+import GroupIcon from '@mui/icons-material/Group';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 
@@ -104,9 +104,13 @@ const Lotes = () => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
+          <>< Tooltip title="ir a clases">
+          <GroupIcon    onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)} /></Tooltip><br/></>
           <>
-          <ArrowForwardIcon    onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}  />
-         
+          < Tooltip title="Distribucion de alumnas">
+          <SocialDistanceSharpIcon   onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}  />
+          </Tooltip>
+          <br/>
           </>
           <>
           <ModificarCurso

@@ -60,7 +60,7 @@ export default function SelectTextFields(props) {
 
     }
 
-
+    props.traer()
 
     setOpen(false);
   };
@@ -137,7 +137,9 @@ export default function SelectTextFields(props) {
             <DialogActions>
 
 
-              <><Button variant="contained" color="primary" onClick={handleDeterminar}> Contestar </Button></>
+              <>
+              {form.fecha &&form.numero_clase &&form.observaciones ? <> <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></> :  <>Completar los datos</>}
+             </>
               <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
             </DialogActions>
 
