@@ -3,6 +3,7 @@ import ServicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
 import AsignarEncargado from './ModalAsignarEncargado'
 import Asignarllamado from './ModalAsignarllamadoatodos'
+import ModalModificarturno from './ModalModificarclasesdelcurso'
 
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
@@ -58,7 +59,7 @@ const Lotes = () => {
     const getClients = async () => {
         
         const clients = await ServicioCursos.listadeturnos(id)
-
+   console.log(clients[0])
         setTurnos(clients)
         setLoading(false);
     }
@@ -138,16 +139,18 @@ return (
           '&:hover': { border: '1px solid #ccc' },
         }}
       >
-         <Button variant="contained"  onClick={borrarturno(row.id_turno)} >Borrar curso  {row.id_turno} </Button><br/>
+         <Button variant="contained"  onClick={() => borrarturno(row.id_turno)} >Borrar curso  {row.id_turno} </Button><br/>
 
         {row[0].id_encargado === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Encargado {row[0].id_encargado} </b></h2></> } 
         <AsignarEncargado 
-        id= { row[0].id}
+        id= { row[0].id_turno}
         
         />
-
+<ModalModificarturno
+   id= { row.id}
+   />
 <Asignarllamado
-        id= { row[0].id}
+        id= { row[0].id_turno}
         
         />
         <MUIDataTable
