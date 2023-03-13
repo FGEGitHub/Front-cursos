@@ -17,7 +17,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 
 import Person3TwoToneIcon from '@mui/icons-material/Person3TwoTone';
@@ -50,6 +51,7 @@ const TablaNotificaciones = (props) => {
     const [alumnos, setAlumnos] = useState([''])
     const [clase, setClase] = useState([''])
     const [usuario, setUsuario] = useState([''])
+    const [estadisticas, setEstadisticas] = useState([''])
     const navigate = useNavigate();
     let params = useParams()
     let id = params.id
@@ -71,6 +73,7 @@ const TablaNotificaciones = (props) => {
             console.log(alumn[1][0])
             setClase(alumn[0][0])
             setAlumnos(alumn[1])
+            setEstadisticas(alumn[2])
 
         } catch (error) {
 
@@ -106,7 +109,8 @@ const TablaNotificaciones = (props) => {
 
     return (
         <div>
-
+            {estadisticas ? <> <Alert severity="info">Cantidad de presentes: {estadisticas.presentes} Cantidad Ausentes:{estadisticas.ausentes} No Tomados: {estadisticas.notomados}</Alert></>:<></>}
+ 
 
             <>
                 <Paper
@@ -164,6 +168,7 @@ const TablaNotificaciones = (props) => {
                                                 console.log(alumn[1][0])
                                                 setClase(alumn[0][0])
                                                 setAlumnos(alumn[1])
+                                                setEstadisticas(alumn[2])
                                     
                                             } catch (error) {
                                     

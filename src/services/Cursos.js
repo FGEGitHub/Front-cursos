@@ -116,7 +116,7 @@ const presente= async  (datos) => {
  
    const {data } = await axios.post(baseUrl+'presente',datos,config)
    
-   alert(data)  
+
 } 
 const modificarcurso= async  (datos) => {
  

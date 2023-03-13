@@ -82,64 +82,35 @@ export default function Clasenueva(props) {
                                 autoFocus
                                 margin="dense"
                                 id="name"
-                                label="Tema"
-                                name="observaciones"
+                                label="numero"
+                                name="numero"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
+                                type='number'
                             />
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                                Fecha
+                               Numero de referencia
                             </InputLabel>
-                            <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                                <TextField
-
-                                    onChange={handleChange}
-                                    name="fecha"
-                                    id="date"
-                                    label="Fecha del curso"
-                                    type="date"
-                                    defaultValue="2020-01-01"
-                                    sx={{ width: 220 }}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </Box>
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                                Dato adicional
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'tipo_dni',
-                                    id: 'uncontrolled-native',
-
-                                }}
-                            >   <option value={'C.U.I.L.'}>Elegir</option>
-                                <option value={'C.U.I.L.'}>dato 1</option>
-                                <option value={'C.U.I.T.'}>dato 1</option>
-
-                            </NativeSelect>
-
                             <TextField
                                 autoFocus
                                 margin="dense"
                                 id="name"
-                                label="Encargado"
-                                name="encargado"
+                                label="Tema"
+                                name="descripcion"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
-                                maxRows="13"
                             />
-
+                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                               Rango horario ( ej  8-10  12-14)
+                            </InputLabel>
+                           
                         
 
 
                             <DialogActions>
-                                {form.observaciones && form.fecha ? <><Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button></> : <><h6 style={{ color: "red" }} >Completar todos los campos</h6></>}
+                                {form.descripcion && form.numero ? <><Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button></> : <><h6 style={{ color: "red" }} >Completar todos los campos</h6></>}
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                             </DialogActions>

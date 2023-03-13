@@ -82,7 +82,7 @@ export default function Clasenueva(props) {
 
                             <DialogActions>
 
-                                { cargando ? <><CircularProgress disableShrink /></>:<><Button variant="contained" color="primary" onClick={handleDeterminar}>Inscribir</Button></>}
+                                { cargando ? <><CircularProgress disableShrink /></>:<><Button variant="contained" color="primary" onClick={handleDeterminar}>Borrar</Button></>}
                        
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Lo pensare mejor</Button>
 

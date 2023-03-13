@@ -92,13 +92,21 @@ const Lotes = () => {
 
 
   
+  
+  const borrarturnos = async () => {
 
+    const rta = await servicioInscipciones.borrarturnos()
+    alert(rta)
+    
+ 
+    
+  }   
   const designarturnos = async () => {
 
     const rta = await servicioInscipciones.designarturnos()
     alert(rta)
     
-  
+ 
     
   }    
   const getClients = async () => {
@@ -136,7 +144,8 @@ const Lotes = () => {
               
             </Stack>
             <br />
-            <Button variant='contained' onClick={designarturnos} > Designar cursos </Button>
+            <Button variant='contained' onClick={designarturnos} > crear turnos automaticamente </Button>
+            <Button variant='contained' onClick={borrarturnos} > borrar turnos </Button>
             <ModalInscribirauto
                  getClients =  { async () => {
 
