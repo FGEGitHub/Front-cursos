@@ -42,7 +42,8 @@ const Estracto = () => {
     }
     const cargar = async (id) => {
       
-        console.log(id)
+      const datos = await servicioInscripciones.cargarinscripciones(fecha)
+      alert(datos)
       
     }
     const handleChange = (e) => {

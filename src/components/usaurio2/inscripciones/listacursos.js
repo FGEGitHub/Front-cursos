@@ -5,6 +5,7 @@ import FindInPageOutlinedIcon from '@mui/icons-material/FindInPageOutlined';
 import CargaDeTabla from "../../CargaDeTabla"
 import ModalInscribirauto from "./ModalInscribirauto"
 import ModalDesInscribirauto from "./ModalDesinscribir"
+import Modalborrarinscript from "./Modalborrarinscript"
 
 import { useNavigate } from "react-router-dom";
 
@@ -136,8 +137,49 @@ const Lotes = () => {
             </Stack>
             <br />
             <Button variant='contained' onClick={designarturnos} > Designar cursos </Button>
-            <ModalInscribirauto/>
-            <ModalDesInscribirauto/>
+            <ModalInscribirauto
+                 getClients =  { async () => {
+
+                  const clients = await servicioInscipciones.lista({
+              
+                  })
+                  console.log(clients)
+                  setPriori1(clients[0])
+                  setPriori2(clients[1])
+                  setPriori3(clients[2])
+                  setCantidadpendiente(clients[3])
+                
+                  setLoading(false);
+                }}/>
+            <ModalDesInscribirauto
+              getClients = { async () => {
+
+                  const clients = await servicioInscipciones.lista({
+              
+                  })
+                  console.log(clients)
+                  setPriori1(clients[0])
+                  setPriori2(clients[1])
+                  setPriori3(clients[2])
+                  setCantidadpendiente(clients[3])
+                
+                  setLoading(false);
+                }}/>
+            <Modalborrarinscript
+           getClients = { async () => {
+
+              const clients = await servicioInscipciones.lista({
+          
+              })
+              console.log(clients)
+              setPriori1(clients[0])
+              setPriori2(clients[1])
+              setPriori3(clients[2])
+              setCantidadpendiente(clients[3])
+            
+              setLoading(false);
+            }}
+            />
             <br/>  <br/>
             <Button variant='contained' onClick={cambiarVista} > Ocultar / Ver Resumen de inscriptos <RemoveRedEyeIcon /></Button>
 

@@ -124,4 +124,23 @@ const listaExtractos= async  () => {
     console.log(data)
    return data
    } 
-export default {lista,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+
+   
+   const cargarinscripciones= async  (id) => {
+    ////
+    console.log(id)
+    const {data } = await axios.post(baseUrl+'cargarinscripciones',id,config)
+      console.log(data)
+     return data
+     } 
+
+     
+
+     const borrarincripciones= async  () => {
+
+
+      const {data } = await axios.get(baseUrl+'borrarincripciones',config)
+        console.log(data)
+      return data
+     }  
+export default {lista,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
