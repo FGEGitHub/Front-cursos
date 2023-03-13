@@ -73,7 +73,7 @@ const Estracto = () => {
     const columns = [
         {
             name: "dni",
-            label: "fecdniha",
+            label: "dni",
 
         },
         {
