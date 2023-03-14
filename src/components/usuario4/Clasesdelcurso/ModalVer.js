@@ -65,7 +65,7 @@ export default function SelectTextFields(props) {
     event.preventDefault();
       
     const nov = await servicioEncargados.confirmaciondellamado(form)
-    alert(nov)
+   
     } catch (error) {
         console.error(error);
         console.log('Error algo sucedio')

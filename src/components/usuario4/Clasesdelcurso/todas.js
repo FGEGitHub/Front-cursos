@@ -148,6 +148,8 @@ const TablaNotificaciones = (props) => {
             <h2>CLASES DEL CURSO</h2>
             {clases ? <>
                 <div>
+              
+
                 <ModaNueva
                 id_turno= {id}
                 traer = {async () => {
@@ -175,7 +177,7 @@ const TablaNotificaciones = (props) => {
                 
                 }
                 />
-
+  {clases.length>0 ? <>
                         <>
                             <MUIDataTable
 
@@ -193,9 +195,8 @@ const TablaNotificaciones = (props) => {
 
 
                             />
-                        </>
-                        /* 
-                                      */
+                        </></>:<> <h2>El curso aun no tiene clases</h2></>}
+                     
 
                  
                 </div>

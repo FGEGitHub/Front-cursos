@@ -28,7 +28,7 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
      }
  }
 
-
+/////////////ver ruta al back
  const datosusuario = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -73,6 +73,11 @@ return data
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'asistencia/'+usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
 return data
        
   }
@@ -81,7 +86,11 @@ return data
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'listadeturnos/'+id, config)
-    console.log(data)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
 
 return data
       
@@ -89,46 +98,69 @@ return data
   }
 
 
-
+/////nivel1
   const inscribir= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'inscribir',datos,config)
      
-     alert(data)  
+     if(data=== 'error login'){
+       
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    } 
  } 
+
+ ///// crear curso conectar
   const crear= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'crear',datos,config)
-     
-     alert(data)  
+     if(data=== 'error login'){
+       
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }  
  }  
 
 
  const nuevaclase= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'nuevaclase',datos,config)
-   
-   alert(data)  
+   if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  } 
 } 
 
 
 const presente= async  (datos) => {
  
    const {data } = await axios.post(baseUrl+'presente',datos,config)
-   
+   if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
 
 } 
 const modificarcurso= async  (datos) => {
  
   const {data } = await axios.post(baseUrl+'modificarcurso',datos,config)
-  
-  alert(data)  
+  if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }  
 } 
 
 const borrarturno= async  (datos) => {
   console.log(datos)
    const {data } = await axios.get(baseUrl+'borrarturno/'+datos,datos,config)
-   
+   if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
    alert(data)  
 } 
  

@@ -193,19 +193,37 @@ const Lotes = () => {
               <Alert severity="info">Cantidad de alumnas sin curso: {cantidadpeniente}<a onClick={() => navigate('/administracion/personas')}>   <u><b>   Ir a Alumnas</b></u> </a></Alert>
               
             </Stack>
+            <Paper
+                sx={{
+                  cursor: 'pointer',
+                  background: '#2c387e',
+             
+                
+                  width: "90%",
+                
+               
+                  margin: '75px',
+                  display: 'flex'
 
+                }}
+              >
 
             <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {arreglo.map((_,index) => (
-          <Grid item xs={2} sm={4} md={4} key={index}>
-            <Item>{arreglo[index]}</Item>
+          <Grid item xs={2} sm={4} md={4} key={index}   >
+            <Item  sx={{
+          
+          background: '#311b92',
+   
+
+        }}>{arreglo[index]}</Item>
           </Grid>
         ))}
       </Grid>
     </Box>
 
-
+    </Paper>
 
 
 

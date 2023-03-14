@@ -80,9 +80,9 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-                <div onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['id'])}>
-                    ir
-
+                <div >
+                  
+                  
                     <ModalVer
                     id= {clases[dataIndex]['id']}
                    nombre_curso={'s'}

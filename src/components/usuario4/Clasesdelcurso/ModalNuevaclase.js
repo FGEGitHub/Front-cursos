@@ -52,7 +52,7 @@ export default function SelectTextFields(props) {
       event.preventDefault();
 
       const nov = await servicioTurnos.nuevaclase(form)
-      alert(nov)
+
     } catch (error) {
       console.error(error);
       console.log('Error algo sucedio')
