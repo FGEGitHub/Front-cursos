@@ -1,8 +1,8 @@
 import axios from "axios"
 
 
-//const baseUrl = 'https://back-loging-production.up.railway.app/tareas/'
-const  baseUrl ='http://localhost:4000/tareas/'
+const baseUrl = 'http://esme.cuquicalvano.com:3000/tareas/'
+//const  baseUrl ='http://localhost:4000/tareas/'
 
 
 
