@@ -4,7 +4,7 @@ import MUIDataTable from "mui-datatables";
 import AsignarEncargado from './ModalAsignarEncargado'
 import Asignarllamado from './ModalAsignarllamadoatodos'
 import ModalModificarturno from './ModalModificarclasesdelcurso'
-
+import NuevoTurno from './NuevoTurno'
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
 import { useNavigate } from "react-router-dom";
@@ -171,8 +171,9 @@ return (
       <br/></> 
 
      ))}
-  </>:<></>}
 
+  </>:<></>}
+<NuevoTurno/>
 <>
 
 </>

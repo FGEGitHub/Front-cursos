@@ -373,7 +373,7 @@ const Lotes = () => {
             <h2>Cursado </h2>
 
           </Tooltip>
-          <NuevoTurno/>
+      
           <br />
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: "20%", maxWidth: "1000%" }} aria-label="customized table">

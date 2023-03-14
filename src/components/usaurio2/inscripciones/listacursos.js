@@ -322,7 +322,8 @@ const Lotes = () => {
                    
                         <TableCell><b>Cursando</b></TableCell>
                         <TableCell><b>cupo</b></TableCell>
-                        <TableCell><b>Cantidad Prioridad 1</b></TableCell>
+                        <TableCell><b>Cantidad turnos</b></TableCell>
+                        <TableCell><b>Ir a detalles</b></TableCell>
                        
                       </TableRow>
                     </TableHead>
@@ -336,6 +337,7 @@ const Lotes = () => {
                           <TableCell align="center">{row.cantidad }</TableCell>
                            <TableCell align="center">{row.cursando }</TableCell>
                           <TableCell align="left">{row.cupo }</TableCell>
+                          <TableCell align="left">{row.turnos }</TableCell>
                           <StyledTableCell align="center">  
               <div   onClick={() =>  navigate('/administracion/detallecurso/'+row.id)} >
                 Ver detalles </div  ></StyledTableCell>

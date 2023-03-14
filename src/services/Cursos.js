@@ -120,8 +120,16 @@ return data
       window.location.reload();
     }  
  }  
-
-
+ 
+ const nuevoturno= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'nuevoturno',datos,config)
+   if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  } 
+} 
  const nuevaclase= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'nuevaclase',datos,config)
@@ -165,4 +173,4 @@ const borrarturno= async  (datos) => {
 } 
  
 
-export default {borrarturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}

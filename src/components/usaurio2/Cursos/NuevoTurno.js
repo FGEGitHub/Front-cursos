@@ -34,7 +34,7 @@ export default function Clasenueva(props) {
         event.preventDefault();
         try {
 
-            await servicioCursos.nuevaclase(form)
+            await servicioCursos.nuevoturno(form)
 
 
         } catch (error) {
