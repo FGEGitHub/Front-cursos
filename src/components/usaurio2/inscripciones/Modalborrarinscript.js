@@ -15,7 +15,7 @@ import ModeIcon from '@mui/icons-material/Mode';
 import { Paper } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 export default function Clasenueva(props) {
     let params = useParams()
     let id = params.id
@@ -60,7 +60,7 @@ export default function Clasenueva(props) {
 
 
             <Button variant="contained"   color="error"  onClick={handleClickOpen}>
-              BORRAR TODOS LOS INCRIPTOS <ModeIcon />
+              BORRAR TODOS LOS INCRIPTOS <DeleteForeverIcon />
             </Button>
             <Dialog open={open} onClose={handleClose}>
 

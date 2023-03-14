@@ -26,12 +26,17 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 ////
+import Box from '@mui/material/Box';
 
 import Grid from '@mui/material/Grid';
 
-import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
@@ -90,7 +95,6 @@ const Lotes = () => {
   }
 
 
-
   
   
   const borrarturnos = async () => {
@@ -133,6 +137,52 @@ const Lotes = () => {
 
 
   // renderiza la data table
+  
+  const arreglo = [ <Button variant='contained' onClick={designarturnos} > crear turnos automaticamente </Button>,
+  <Button variant='contained' onClick={borrarturnos} > borrar turnos </Button>,
+  <ModalInscribirauto
+  getClients =  { async () => {
+
+   const clients = await servicioInscipciones.lista({
+
+   })
+   console.log(clients)
+   setPriori1(clients[0])
+   setPriori2(clients[1])
+   setPriori3(clients[2])
+   setCantidadpendiente(clients[3])
+ 
+   setLoading(false);
+ }}/>,
+ <ModalDesInscribirauto
+              getClients = { async () => {
+
+                  const clients = await servicioInscipciones.lista({
+              
+                  })
+                  console.log(clients)
+                  setPriori1(clients[0])
+                  setPriori2(clients[1])
+                  setPriori3(clients[2])
+                  setCantidadpendiente(clients[3])
+                
+                  setLoading(false);
+                }}/>,
+                <Modalborrarinscript
+                getClients = { async () => {
+     
+                   const clients = await servicioInscipciones.lista({
+               
+                   })
+                   console.log(clients)
+                   setPriori1(clients[0])
+                   setPriori2(clients[1])
+                   setPriori3(clients[2])
+                   setCantidadpendiente(clients[3])
+                 
+                   setLoading(false);
+                 }}
+                 /> ]
   return (
     <>
       {loading ? (<CargaDeTabla />)
@@ -143,8 +193,27 @@ const Lotes = () => {
               <Alert severity="info">Cantidad de alumnas sin curso: {cantidadpeniente}<a onClick={() => navigate('/administracion/personas')}>   <u><b>   Ir a Alumnas</b></u> </a></Alert>
               
             </Stack>
+
+
+            <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        {arreglo.map((_,index) => (
+          <Grid item xs={2} sm={4} md={4} key={index}>
+            <Item>{arreglo[index]}</Item>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+
+
+
+
+
+
+
+
             <br />
-            <Button variant='contained' onClick={designarturnos} > crear turnos automaticamente </Button>
+           {/*  <Button variant='contained' onClick={designarturnos} > crear turnos automaticamente </Button>
             <Button variant='contained' onClick={borrarturnos} > borrar turnos </Button>
             <ModalInscribirauto
                  getClients =  { async () => {
@@ -190,7 +259,7 @@ const Lotes = () => {
             }}
             />
             <br/>  <br/>
-            <Button variant='contained' onClick={cambiarVista} > Ocultar / Ver Resumen de inscriptos <RemoveRedEyeIcon /></Button>
+            <Button variant='contained' onClick={cambiarVista} > Ocultar / Ver Resumen de inscriptos <RemoveRedEyeIcon /></Button> */}
 
             {vista ? <>
               <Paper
