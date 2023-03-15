@@ -106,7 +106,7 @@ const asignarEncargado= async  (datos) => {
 
 const asignarcoordinador= async  (datos) => {
   console.log(datos)
-   const {data } = await axios.post(baseUrl+'id_coordinador',datos,config)
+   const {data } = await axios.post(baseUrl+'asignarcoordinador',datos,config)
    
    alert(data)  
 }
