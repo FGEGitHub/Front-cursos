@@ -81,9 +81,9 @@ const Rutas = [
 		{ path: '/administracion/cargarinscripciones', element: <Cargadeinscrip /> },
 		
 
-		{ path: '/profesores/novedades', element: <Novedades3 /> },
+		{ path: '/coordinadores/novedades', element: <Novedades3 /> },
 		
-		{ path: '/profesores/tareas', element: <Tareas3 /> },
+		{ path: '/coordinadores/tareas', element: <Tareas3 /> },
 
 
 

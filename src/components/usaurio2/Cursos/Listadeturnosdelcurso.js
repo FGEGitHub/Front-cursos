@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ServicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
 import AsignarEncargado from './ModalAsignarEncargado'
-import Asignarllamado from './ModalAsignarllamadoatodos'
+import Asignarllamado from './ModalAsignarcoordinador'
 import ModalModificarturno from './ModalModificarclasesdelcurso'
 import NuevoTurno from './NuevoTurno'
 import CargaDeTabla from "../../CargaDeTabla"

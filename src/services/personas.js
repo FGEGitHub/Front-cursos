@@ -37,8 +37,13 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
       const {data} = await axios.get(baseUrl+'datosusuarioporid/'+ usuario, config)
 return data
   }
+  
 
-
+  const traercoordiandores = async (usuario) => { 
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traercoordiandores/', config)
+return data
+  }
   const traerencargados = async (usuario) => { 
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'traerencargados/', config)
@@ -99,6 +104,13 @@ const asignarEncargado= async  (datos) => {
 } 
 
 
+const asignarcoordinador= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'id_coordinador',datos,config)
+   
+   alert(data)  
+}
+
 
  const crear= async  (datos) => {
   console.log(datos)
@@ -108,7 +120,13 @@ const asignarEncargado= async  (datos) => {
 } 
  
 
-
+const modificarpersona= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'modificarpersona',datos,config)
+   
+   alert(data)  
+} 
+ 
  const modificardatosadic= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'modificardatosadic',datos,config)
@@ -126,4 +144,4 @@ const subirprueba = async (formdata) => {
 
 
 
-export default {subirprueba,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
+export default {subirprueba,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}

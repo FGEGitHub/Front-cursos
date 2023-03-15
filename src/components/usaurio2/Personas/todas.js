@@ -5,8 +5,7 @@ import Nuevo from './NuevaPersona'
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import SearchIcon from '@mui/icons-material/Search';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
@@ -98,12 +97,12 @@ const Lotes = () => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-          <IconButton>
+    
         
-             <p 
+          <PersonSearchIcon
              onClick={() =>  navigate('/administracion/detallepersona/'+clients[dataIndex].id)}
-             style={{ color: 'blue' }}
-            > Ver </p>    </IconButton>
+            
+            />   
            
           </>
         );
@@ -113,7 +112,11 @@ const Lotes = () => {
     // definimos las columnas
     const columns = [
        
-        
+      {
+        name: "id",
+        label:"id",
+       
+    },
       
       {
         name: "nombre",
@@ -137,7 +140,7 @@ const Lotes = () => {
          
       },
 
-
+    
       
         {
             name: "Actions",

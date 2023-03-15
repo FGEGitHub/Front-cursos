@@ -453,9 +453,10 @@ const Lotes = () => {
                 <Fuchacurso
                   nombre={curso.nombre}
                   encargado={curso.encargado}
-                  fecha={curso.cupo}
+                  turnos={curso.turnos}
                   cupo={curso.cupo}
                   inscriptosacepados={inscriptosacepados}
+
                 />
                 <MUIDataTable
 

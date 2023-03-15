@@ -39,17 +39,17 @@ export default function MenuIzq2 ({children}) {
       { 
         text: 'Novedades', 
         icon: <GroupIcon color="primary" />, 
-        path: '/profesores/novedades' 
+        path: '/coordinadores/novedades' 
       },
         { 
           text: 'Tareas', 
           icon: <GroupIcon color="primary" />, 
-          path: '/profesores/tareas' 
+          path: '/coordinadores/tareas' 
         },
         { 
           text: 'Perfil', 
           icon: <GroupIcon color="primary" />, 
-          path: '/profesores/perfil' 
+          path: '/coordinadores/perfil' 
         },
     
       

@@ -100,10 +100,10 @@ const FichaAxios = (props) => {
               </Box>
               <Box>
               <TextField
-                  label="Fecha"
+                  label="Turnos"
                   id="cuil"
                  // defaultValue="CUIL"
-                  value= {props.fecha}
+                  value= {props.turnos}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{

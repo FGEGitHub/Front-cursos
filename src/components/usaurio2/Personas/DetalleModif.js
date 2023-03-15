@@ -10,7 +10,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import Avatar from "@mui/material/Avatar";
 import Container from '@mui/material/Container';
-import servicioUsuario1 from '../../../services/personas'
+import servicioPersonas from '../../../services/personas'
 import Cargando from '../../CargaDeTabla'
 import Inscribir from './inscripcion'
 import "./profile.css";
@@ -46,28 +46,32 @@ const ModificacionC = (props) => {
  
     
 
-    const client = await servicioUsuario1.datosdepersona(id)
+    const client = await servicioPersonas.datosdepersona(id)
  console.log(client)
 
-    setCliente(client[0])
+    setCliente(client)
 
 
     setModificaciones({
-      usuario: client[0][0].usuario,
-      nombre: client[0][0].nombre,
-      mail: client[0][0].mail,
-      apellido: client[0][0].apellido,
-      tel: client[0][0].tel,
-      ingresos: client[0][0].ingresos,
-      direccion: client[0][0].direccion,
-      edad: client[0][0].edad
+      id: id,
+      nombre: client[0].nombre,
+      mail: client[0].mail,
+      apellido: client[0].apellido,
+      tel: client[0].tel,
+      tel2: client[0].tel2,
+     
+      direccion: client[0].direccion,
+      adicional_direccion: client[0].adicional_direccion,
+      barrio: client[0].barrio,
+      residencia: client[0].residencia,
+      edad: client[0].edad
     })
  
     setModificacionesadicionales({
       id: id,
-      hijos: client[0][0].hijos,
-      trabajo: client[0][0].trabajo,
-      anios: client[0][0].anios,
+      hijos: client[0].hijos,
+      trabajo: client[0].trabajo,
+      anios: client[0].anios,
     })
 
   };
@@ -78,6 +82,7 @@ const ModificacionC = (props) => {
 console.log(modificacionesadicionales)
   }
   const handleChange = (e) => {
+    console.log(modificaciones)
     setModificaciones({ ...modificaciones, [e.target.name]: e.target.value })
 
   }
@@ -89,7 +94,7 @@ console.log(modificacionesadicionales)
 
     try {
 
-      const rta = await servicioUsuario1.modificarCliente(modificaciones)
+      const rta = await servicioPersonas.modificarpersona(modificaciones)
 
       traer()
     } catch (error) {
@@ -103,7 +108,7 @@ console.log(modificacionesadicionales)
 
     try {
       console.log(modificacionesadicionales);
-      const rta = await servicioUsuario1.modificardatosadic(modificacionesadicionales)
+      const rta = await servicioPersonas.modificardatosadic(modificacionesadicionales)
    
     } catch (error) {
       console.error(error);
@@ -116,7 +121,7 @@ console.log(modificacionesadicionales)
 
     try {
 
-      const rta = await servicioUsuario1.modificarpass(pass)
+      const rta = await servicioPersonas.modificarpass(pass)
      
     } catch (error) {
       console.error(error);
@@ -129,7 +134,7 @@ console.log(modificacionesadicionales)
   return (<>  
   
 
-    {cliente ? <div>
+    {cliente &&  modificaciones ? <div>
    
       {cliente.map((client) => (
 
@@ -196,11 +201,7 @@ console.log(modificacionesadicionales)
                         )
                       }}
                     />
-                  </Box>
-
-
-
-                  <Box>
+                
 
                     <TextField
                       label="Email"
@@ -219,7 +220,11 @@ console.log(modificacionesadicionales)
                         )
                       }}
                     />
+  </Box>
 
+
+
+<Box>
                     <TextField
                       label="Telefono"
                       id="Telefono"
@@ -237,13 +242,12 @@ console.log(modificacionesadicionales)
                         )
                       }}
                     />
-                  </Box>
-                  <Box>
+                 
                     <TextField
                       label="Numero de Telefono"
-                      id="numero de telefono"
-                      name="tel"
-                      defaultValue={modificaciones.tel}
+                      id="telefono 2"
+                      name="tel2"
+                      defaultValue={modificaciones.tel2}
                       onChange={handleChange}
                       variant="filled"
                       sx={{ margin: "10px" }}
@@ -277,7 +281,63 @@ console.log(modificacionesadicionales)
                       }}
                     />
 
+</Box>
+                  <Box>
+                  <TextField
+                      label="adicional direccion"
+                      id="Telefono"
+                      name="adicional_direccion"
+                      onChange={handleChange}
+                      defaultValue={modificaciones.adicional_direccion}
+                      variant="filled"
+                      sx={{ margin: "10px" }}
+                      InputProps={{
+                        readOnly: editMode,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <HomeWorkIcon />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                 
+                    <TextField
+                      label="Barrio"
+                      id="telefono 2"
+                      name="barrio"
+                      defaultValue={modificaciones.barrio}
+                      onChange={handleChange}
+                      variant="filled"
+                      sx={{ margin: "10px" }}
+                      InputProps={{
+                        readOnly: editMode,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <LocalPhoneIcon />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
 
+
+
+                    <TextField
+                      label="Residencia"
+                      id="domicilio"
+                      name="residencia"
+                      defaultValue={modificaciones.residencia}
+                      onChange={handleChange}
+                      variant="filled"
+                      sx={{ margin: "10px" }}
+                      InputProps={{
+                        readOnly: editMode,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <LocalPhoneIcon />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
 
                   </Box>
                   <Inscribir
@@ -404,7 +464,7 @@ console.log(modificacionesadicionales)
                   '&:hover': { border: '1px solid #ccc' },
                 }}
               >
-                <h2 style={{ textAlign: "center" }}>Modificar contrseña</h2>
+                <h2 style={{ textAlign: "center" }}>Modificar contrseña(no conectado)</h2>
                 <TextField
                   label="Contraseña anterior"
                   type="password"

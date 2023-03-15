@@ -46,7 +46,6 @@ export default function SelectTextFields(props) {
   const [inscripcion, setInscripcion] = useState({
     id:props.id
   
-  
 
   })
 
@@ -73,7 +72,7 @@ export default function SelectTextFields(props) {
 
 const traer = async () => {
 
- const not = await servicioPersonas.traerencargados()
+ const not = await servicioPersonas.traercoordiandores()
 
  setProfesores(not)
 
@@ -87,7 +86,7 @@ const traer = async () => {
 
     try {
 
-      await servicioPersonas.asignarllamadoatodas(
+      await servicioPersonas.asignarcoordinador(
         inscripcion
 
 
@@ -123,34 +122,55 @@ const traer = async () => {
       autoComplete="off"
     >
        < Tooltip title="Ver inscripcion">
-       <Button variant="contained" onClick={handleClickOpen} >  Asignar Llamado<BorderColorIcon/>    </Button>
+       <Button variant="contained" onClick={handleClickOpen} > Asignar Coordinador <BorderColorIcon/>    </Button>
+    
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
 
    
         <DialogContent>
 
-        <h2>Categoria </h2>
+        <h2>Seleccionar de la lista de Coordinadores </h2>
   
              <h3>Inscripcion a curso  </h3>
             
 
-          
-
-          
-       
-
-
+      
    
                  <br />
-                 <label>Asignar a llamado  toda la clase  </label>
+                 <label>Asignar Coordinador </label>
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
                              
                             </InputLabel>
-                          
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'id_coordinador',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            >  
+                             <option value={'Pendiente'}>Asignar</option>
+                            {activo ? <>
+                            
+                              {profesores.map((row) => (
+                                       
+                                        <option value={row.id}> {row.nombre}</option>
+
+                              ))}
+                            
+                            </> : <>
+                             <option value={'Pendiente'}>Asignar</option></>}
+                           
+
+                            </NativeSelect>
+   
+   
+   
 
                  <DialogActions>
-         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Enviar al encargado </Button>
+         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button>
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>
