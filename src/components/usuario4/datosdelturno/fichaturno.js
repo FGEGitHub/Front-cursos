@@ -7,10 +7,10 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import HomeIcon from "@mui/icons-material/Home";
 import InputAdornment from "@mui/material/InputAdornment";
-import HomeWorkIcon from '@mui/icons-material/HomeWork';
+import { useParams } from "react-router-dom"
 import Avatar from "@mui/material/Avatar";
 import Container from '@mui/material/Container';
-import servicioCliente from '../../../services/Cursos';
+import servicioCursos from '../../../services/Cursos';
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import "../../usaurio2/Cursos/profile.css";
@@ -18,24 +18,26 @@ import "../../usaurio2/Cursos/profile.css";
 
 const FichaAxios = (props) => {
   const navigate = useNavigate();
-    const [cliente, setCliente] = useState([])
+    const [turno, setTurno] = useState([])
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
-  const [address, setAddress] = useState(null);
+  let params = useParams()
+    let id = params.id
   const [editMode, setEditMode] = useState(false);
   function submitFormHandler(event) {
     event.preventDefault();
   }
   useEffect(() => {
       
-    //traer()
+    traer()
     
 }, []) 
 
   const traer = async() => {
        
    
-     // const  cliente = await servicioCliente.cliente(props.cuil_cuit)
-      
+      const  tur = await servicioCursos.datosdelturno(id)
+      setTurno(tur[0])
+      console.log(turno.nombrecurso)
    //   setCliente(cliente)
   
      
@@ -63,13 +65,14 @@ const FichaAxios = (props) => {
             </h5>
                 
             </Box>
-       
+        {turno ? <>
               <Box>
+               
               <TextField
-                  label="Nombre"
+                  label="Curso"
                   id="cuil"
-                 // defaultValue="CUIL"
-                  value= {props.nombre}
+                
+                  value= {turno.nombrecurso}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -132,7 +135,7 @@ const FichaAxios = (props) => {
                   }}
                 />
               </Box>
-                   
+              </>:<></>}  
 
             </Container>
           

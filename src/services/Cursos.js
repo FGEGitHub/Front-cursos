@@ -15,6 +15,9 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
  
       config = {
          headers:{
+          'mode': 'cors',
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
              Authorization:`Bearer ${userContext.token}`
          }
      }
@@ -66,8 +69,14 @@ return data
 return data
        
   }
-
-
+  const datosdelturno = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'datosdelturno/'+usuario, config)
+return data
+       
+  }
+  
 
   const asistencia = async (usuario) => {
   
@@ -187,4 +196,4 @@ const borrarturno= async  (datos) => {
 } 
  
 
-export default {borrarturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}

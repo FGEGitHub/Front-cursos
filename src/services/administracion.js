@@ -15,6 +15,9 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
  
       config = {
          headers:{
+            'mode': 'cors',
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
              Authorization:`Bearer ${userContext.token}`
          }
      }
