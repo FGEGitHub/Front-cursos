@@ -13,6 +13,13 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
 import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import Button from "@mui/material/Button";
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -40,6 +47,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
     const [usuario, setUsuario] = useState([''])
+    const [vista, setvista] = useState(true)
     const navigate = useNavigate();
     useEffect(() => {
         traer()
@@ -65,12 +73,13 @@ const TablaNotificaciones = (props) => {
         }
 
 
-
-
+    }
+    const cambiarvista =  () => {
+        setvista(!vista)
 
 
     }
-
+    
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
@@ -139,8 +148,37 @@ const TablaNotificaciones = (props) => {
         <div>
             {clases ? <>
                 <div>
-                  
+                <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
+                {vista ? <>
 
+                <TableContainer component={Paper}>
+      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>NOMBRE</StyledTableCell>
+            <StyledTableCell >DESCRIPCION</StyledTableCell>
+            
+            <StyledTableCell align="left">ACCIONES</StyledTableCell>
+          
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {clases.map((row) => (
+            <StyledTableRow key={row.name}>       
+              <StyledTableCell >{row.nombre}</StyledTableCell>
+              <StyledTableCell >{row.descripcion}</StyledTableCell>
+              <StyledTableCell >   < Tooltip title="contactar">
+                <PhoneForwardedSharpIcon  onClick={() => navigate('/encargados/curso/'+row.turnoid)}  />
+                </Tooltip>
+                < Tooltip title="ir a la clase">
+                <ContentPasteGoIcon   onClick={() => navigate('/encargados/turno/'+row.turnoid)} />
+                </Tooltip></StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </>:<>
                         <>
                             <MUIDataTable
 
@@ -158,12 +196,14 @@ const TablaNotificaciones = (props) => {
 
 
                             />
-                        </>
+                        </></>}
                  
 
                  
                 </div>
             </> : <></>}
+
+     
         </div>
     )
 }

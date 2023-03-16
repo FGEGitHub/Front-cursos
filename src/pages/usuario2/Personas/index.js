@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Personas from '../../../components/usaurio2/Personas/todas'
 import Categorias from '../../../components/usaurio2/TablaClasificacion'
- 
+
 export default function Paginas() {
 
     const [logueado, setLogueado] = useState(false) 
@@ -47,9 +47,9 @@ export default function Paginas() {
 <>
 { logueado ? <div> 
     <MenuUsuario4>
-  
+    
   <Personas/>
-  <Categorias/>
+  <Categorias/> 
  </MenuUsuario4> 
 
  </div>   :<div></div>  }

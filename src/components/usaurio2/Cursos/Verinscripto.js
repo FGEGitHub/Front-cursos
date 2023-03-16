@@ -5,6 +5,8 @@ import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioPersonas from '../../../services/personas'
+import servicioCursos from '../../../services/Cursos'
+
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
@@ -35,6 +37,7 @@ export default function SelectTextFields(props) {
   let id_curso = params.id
   const [usuarioo, setUsuarioo] = useState()
   const [porcent, setPorcent] = useState()
+  const [turnos, setTurnos] = useState()
   const [categoria, setCategoria] = useState()
   const [activo, setActivo] = useState(false)
 
@@ -47,9 +50,12 @@ export default function SelectTextFields(props) {
 
    setUsuarioo(not[0])
    setCategoria(not[2])
-
-setPorcent(not[1])
-   setActivo(true)
+   setPorcent(not[1]) 
+   
+   const turnos = await servicioCursos.traerlosturnos({id:id_curso})
+   setTurnos(turnos)
+setActivo(true)
+  
 
   }
 
@@ -167,7 +173,25 @@ setPorcent(not[1])
                                 <option value={'Rechazar'}>Rechazar</option>
 
                             </NativeSelect>
-   
+                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                               curso
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'accion',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            
+                            >   {turnos.map((row) => (
+                                       
+                              <option value={row.id}> {row.descripcion}</option>
+
+                    ))}
+
+                            </NativeSelect>
    
    
 

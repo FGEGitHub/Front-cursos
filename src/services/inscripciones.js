@@ -156,4 +156,13 @@ const listaExtractos= async  () => {
         console.log(data)
       return data
      }  
-export default {lista,borrarturnos,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+     const incriptoss= async  () => {
+
+
+      const {data } = await axios.get(baseUrl+'incriptoss',config)
+        console.log(data)
+      return data
+     } 
+
+     
+export default {lista,incriptoss,borrarturnos,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

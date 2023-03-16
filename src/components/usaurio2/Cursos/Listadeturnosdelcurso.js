@@ -18,13 +18,12 @@ import Tooltip from '@mui/material/Tooltip';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import { Paper } from '@mui/material';
+import ButtonGroup from '@mui/material/ButtonGroup';
 ////
 
-import Grid from '@mui/material/Grid';
 
-import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-import { Modal } from "@material-ui/core";
+import Box from '@mui/material/Box';
+
 
 const Img = styled('img')({
   margin: 'auto',
@@ -120,15 +119,15 @@ return (
 
     </Stack>
 
-
-
-
-    <br/>  
     {vista ? <>
-   
-   
+      <Alert variant="filled" severity="success">
+       Lista de clases del curso, actualmente    {turnos.length} 
+      </Alert>
      {turnos.map((row) => ( 
         <>
+         {row[0].nombrecoordinador === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Coordinador {row[0].nombrecoordinador} </b></h2></> } 
+        {row[0].nombreencargado === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Encargado {row[0].nombreencargado} </b></h2></> }
+         {row[0]["descripcion"]} 
          <Paper
         sx={{
           cursor: 'pointer',
@@ -138,11 +137,9 @@ return (
           '&:hover': { border: '1px solid #ccc' },
         }}
       >
+        <ButtonGroup size="small" aria-label="small button group">
          <Button variant="contained"  onClick={() => borrarturno(row[0]['id_turno'])} >Borrar turno  {row[0].id_turno} </Button><br/>
-         {row[0].nombrecoordinador === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Coordinador {row[0].nombrecoordinador} </b></h2></> } <br/>
-
-        {row[0].nombreencargado === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Encargado {row[0].nombreencargado} </b></h2></> } 
-
+        
         <AsignarEncargado 
         id= { row[0].id_turno}
         
@@ -153,7 +150,7 @@ return (
 <Asignarllamado
         id=  { row[0].id_turno}
         
-        />
+        /></ButtonGroup>
         <MUIDataTable
 
         title={"curso"+row[0]["descripcion"]}
@@ -175,6 +172,8 @@ return (
      ))}
 
   </>:<></>}
+
+  
 <NuevoTurno/>
 <>
 

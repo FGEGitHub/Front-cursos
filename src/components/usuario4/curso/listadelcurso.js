@@ -13,7 +13,12 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-
+import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import Button from "@mui/material/Button";
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -173,7 +178,55 @@ const TablaNotificaciones = (props) => {
             {clases ? <>
                 <div>
                   
+                <TableContainer component={Paper}>
+      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>APELLDO</StyledTableCell>
+            <StyledTableCell >NOMBRE</StyledTableCell>
+            <StyledTableCell  >ESTADO</StyledTableCell>
+            <StyledTableCell align="left">ACCIONES</StyledTableCell>
+          
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {clases.map((row) => (
+            <StyledTableRow  key={row.id}>       
+              <StyledTableCell >{row.apellido}</StyledTableCell>
+              <StyledTableCell >{row.nombre}</StyledTableCell>
+              <StyledTableCell >{row.inscripcion}</StyledTableCell>
+              <StyledTableCell >   <ModalVer
+                    id= {row.id}
+                   nombre_curso={'s'}
+                   id_turno= {id}
+                   id_cursado= {row.idcursado}
 
+                    traer= {async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const novedades_aux = await servicioEncargados.curso(id)
+                                setClases(novedades_aux)
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                
+                    }}
+
+                    />
+               </StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
                         <>
                             <MUIDataTable
 

@@ -6,7 +6,7 @@ import CargaDeTabla from "../../CargaDeTabla"
 import ModalInscribirauto from "./ModalInscribirauto"
 import ModalDesInscribirauto from "./ModalDesinscribir"
 import Modalborrarinscript from "./Modalborrarinscript"
-
+import Listainscripciones from "./listatotaldeinscripciones"
 import { useNavigate } from "react-router-dom";
 
 import * as React from 'react';
@@ -433,7 +433,7 @@ const Lotes = () => {
 
 
 
-
+<Listainscripciones/>
 
     </>
 

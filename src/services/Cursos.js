@@ -96,6 +96,20 @@ return data
       
 
   }
+  
+
+  const traerlosturnos= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'traerlosturnos',datos,config)
+      console.log(data)
+     if(data=== 'error login'){
+       
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    } 
+   
+    return data
+ } 
 
 
 /////nivel1
@@ -173,4 +187,4 @@ const borrarturno= async  (datos) => {
 } 
  
 
-export default {borrarturno,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
