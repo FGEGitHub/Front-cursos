@@ -64,10 +64,10 @@ const Lotes = () => {
         setLoading(false);
     }
 
-
-    const borrarturno = async (ref) => {
-        
-      const clients = await ServicioCursos.borrarturno(ref)
+ 
+    const borrarturno = async (id) => {
+        console.log(id)
+      const clients = await ServicioCursos.borrarturno(id)
       getClients()
   }
 
@@ -80,12 +80,12 @@ const Lotes = () => {
 //opcionde click en el nombre
 const columnas = [
     {
-      name: "apellido",
+      name: "apellidopersona",
       label: "Apellido",
 
     },
     {
-      name: "nombre",
+      name: "nombrepersona",
       label: "Nombre",
 
     },
@@ -138,9 +138,11 @@ return (
           '&:hover': { border: '1px solid #ccc' },
         }}
       >
-         <Button variant="contained"  onClick={() => borrarturno(row[0].id_turno)} >Borrar curso  {row.id_turno} </Button><br/>
+         <Button variant="contained"  onClick={() => borrarturno(row[0]['id_turno'])} >Borrar turno  {row[0].id_turno} </Button><br/>
+         {row[0].nombrecoordinador === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Coordinador {row[0].nombrecoordinador} </b></h2></> } <br/>
 
-        {row[0].id_encargado === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Encargado {row[0].id_encargado} </b></h2></> } 
+        {row[0].nombreencargado === undefined ? <>Sin designado { row[0].id} </> :<> <h2> <b>Encargado {row[0].nombreencargado} </b></h2></> } 
+
         <AsignarEncargado 
         id= { row[0].id_turno}
         

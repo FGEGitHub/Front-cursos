@@ -122,7 +122,7 @@ const Lotes = () => {
     setPriori1(clients[0])
     setPriori2(clients[1])
     setPriori3(clients[2])
-    setCantidadpendiente(clients[3])
+    setCantidadpendiente(clients[2])
   
     setLoading(false);
   }
@@ -150,7 +150,7 @@ const Lotes = () => {
    setPriori1(clients[0])
    setPriori2(clients[1])
    setPriori3(clients[2])
-   setCantidadpendiente(clients[3])
+   setCantidadpendiente(clients[2])
  
    setLoading(false);
  }}/>,
@@ -164,7 +164,7 @@ const Lotes = () => {
                   setPriori1(clients[0])
                   setPriori2(clients[1])
                   setPriori3(clients[2])
-                  setCantidadpendiente(clients[3])
+                  setCantidadpendiente(clients[2])
                 
                   setLoading(false);
                 }}/>,
@@ -178,7 +178,7 @@ const Lotes = () => {
                    setPriori1(clients[0])
                    setPriori2(clients[1])
                    setPriori3(clients[2])
-                   setCantidadpendiente(clients[3])
+                   setCantidadpendiente(clients[2])
                  
                    setLoading(false);
                  }}
@@ -243,7 +243,7 @@ const Lotes = () => {
                   setPriori1(clients[0])
                   setPriori2(clients[1])
                   setPriori3(clients[2])
-                  setCantidadpendiente(clients[3])
+                  setCantidadpendiente(clients[2])
                 
                   setLoading(false);
                 }}/>
@@ -257,7 +257,7 @@ const Lotes = () => {
                   setPriori1(clients[0])
                   setPriori2(clients[1])
                   setPriori3(clients[2])
-                  setCantidadpendiente(clients[3])
+                  setCantidadpendiente(clients[2])
                 
                   setLoading(false);
                 }}/>
@@ -271,7 +271,7 @@ const Lotes = () => {
               setPriori1(clients[0])
               setPriori2(clients[1])
               setPriori3(clients[2])
-              setCantidadpendiente(clients[3])
+              setCantidadpendiente(clients[2])
             
               setLoading(false);
             }}
