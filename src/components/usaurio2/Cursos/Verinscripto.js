@@ -180,7 +180,7 @@ setActivo(true)
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'accion',
+                                    name: 'id_turno',
                                     id: 'uncontrolled-native',
 
                                 }}
