@@ -1,8 +1,8 @@
 import axios from "axios"
 
 
-const baseUrl = 'http://esme.cuquicalvano.com:3000/turnos/'
-//const  baseUrl ='http://localhost:4000/turnos/'
+//const baseUrl = 'http://esme.cuquicalvano.com:3000/turnos/'
+const  baseUrl ='http://localhost:4000/turnos/'
 
 
 
