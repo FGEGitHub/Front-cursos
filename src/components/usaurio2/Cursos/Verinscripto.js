@@ -61,7 +61,7 @@ setActivo(true)
 
   const [inscripcion, setInscripcion] = useState({
 
-    dni: props.id_usuario,
+    dni: props.dni_usuario,
     id_curso:id_curso,
     id_inscripcion:props.id_inscripcion
 
@@ -157,22 +157,7 @@ setActivo(true)
    
                  <br />
                  <label>inscripcion a curso?</label>
-                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                                Dato adicional
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'accion',
-                                    id: 'uncontrolled-native',
-
-                                }}
-                            >   <option value={'Pendiente'}>Pendiente</option>
-                                <option value={'Aceptar'}>Aceptar</option>
-                                <option value={'Rechazar'}>Rechazar</option>
-
-                            </NativeSelect>
+                 
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                                curso
                             </InputLabel>
@@ -185,7 +170,9 @@ setActivo(true)
 
                                 }}
                             
-                            >   {turnos.map((row) => (
+                            >  
+                             <option value={'1'}> Elegir</option>
+                             {turnos.map((row) => (
                                        
                               <option value={row.id}> {row.descripcion}</option>
 
