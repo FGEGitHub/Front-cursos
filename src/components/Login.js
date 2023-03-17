@@ -101,8 +101,9 @@ const Login = () => {
   };
 
 
-  const handleChange = (e) =>
-    setUsuario({ ...usuario, [e.target.name]: e.target.value });
+  const handleChange = (e) =>{
+  console.log(usuario)
+    setUsuario({ ...usuario, [e.target.name]: e.target.value })}
 
 
 
