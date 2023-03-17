@@ -11,21 +11,17 @@ const setToken = newToken =>{
     token = `Bearer ${newToken}`
 }
 
-const config = {
-  headers:{
-    "Referrer-Policy": "no-referrer",
-    'mode': 'cors',
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "*",
-    
-  }
-}
+
 
 
 const usuarios = async () => {
-   
+  const config = {
+    headers: {
+      Authorization: token
+    }
+  }//ver 
   //ver 
-    const request = await axios.get(baseUrl+'prueba', config)
+    const request = await axios.get(baseUrl+'prueba')
     let dataa = request.data
    console.log('hola')
 
@@ -41,7 +37,7 @@ const registro = async (datos) => {
 
 
    // const data = await axios.post('http://localhost:4000/signupp', datos)
-     const {data} = await axios.post(baseUrl+'signup', datos,config)
+     const {data} = await axios.post(baseUrl+'signup', datos)
 
         alert(data)
  

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const baseUrl = 'http://esme.cuquicalvano.com:3000/novedades/'
+const baseUrl = 'http://esme.cuquicalvano.com:4000/novedades/'
 //const  baseUrl ='http://localhost:4000/novedades/'
 
 
@@ -15,9 +15,7 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
  
       config = {
          headers:{
-            'mode': 'cors',
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+
              Authorization:`Bearer ${userContext.token}`
          }
      }

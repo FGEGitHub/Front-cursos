@@ -53,13 +53,14 @@ const Login = () => {
   const loginSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    try {
 
+    try {
+      console.log('user')
       const user = await loginService.login({
         usuario: usuario.usuario,
         password: usuario.password
       })
-
+      console.log(user)
       window.localStorage.setItem(
         'loggedNoteAppUser', JSON.stringify(user)
       )
