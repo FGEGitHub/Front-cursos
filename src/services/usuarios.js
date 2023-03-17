@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const baseUrl = 'http://esme.cuquicalvano.com:3000/'
+const baseUrl = 'http://esme.cuquicalvano.com:4000/'
 //const  baseUrl ='http://localhost:4000/'
 
 let token = null
@@ -13,10 +13,11 @@ const setToken = newToken =>{
 
 const config = {
   headers:{
+    "Referrer-Policy": "no-referrer",
     'mode': 'cors',
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      Authorization:token
+    "Access-Control-Allow-Methods": "*",
+    
   }
 }
 

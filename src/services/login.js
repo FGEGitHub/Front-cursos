@@ -1,13 +1,14 @@
 import axios from "axios"
 
 
-const  baseUrl ='http://esme.cuquicalvano.com:3000/signin'
+const  baseUrl ='http://esme.cuquicalvano.com:4000/signin'
 //const  baseUrl ='http://localhost:4000/signin'
 const config = {
     headers: {
+      "Referrer-Policy": "no-referrer",
       'mode': 'cors',
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      "Access-Control-Allow-Methods": "*",
     }
   };
 
