@@ -157,7 +157,7 @@ const TablaNotificaciones = (props) => {
           <TableRow>
             <StyledTableCell>NOMBRE</StyledTableCell>
             <StyledTableCell >DESCRIPCION</StyledTableCell>
-            
+            <StyledTableCell >PENDIENTES POR CONTESTAR</StyledTableCell>
             <StyledTableCell align="left">ACCIONES</StyledTableCell>
           
           </TableRow>
@@ -167,6 +167,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableRow key={row.name}>       
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.descripcion}</StyledTableCell>
+              <StyledTableCell >{row.cantsinresp}/{row.total}</StyledTableCell>
               <StyledTableCell >   < Tooltip title="contactar">
                 <PhoneForwardedSharpIcon  onClick={() => navigate('/encargados/curso/'+row.turnoid)}  />
                 </Tooltip>

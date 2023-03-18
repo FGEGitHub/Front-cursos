@@ -128,6 +128,7 @@ export default function SelectTextFields(props) {
 
                                 }}
                             >   <option value={'Rechazado'}>Elegir</option>
+                             <option value={'Contactada esperando respuesta'}>Contactada esperando respuesta</option>
                                 <option value={'Confirmado'}>Confirmado</option>
                                 <option value={'Rechazado'}>Rechazado</option>
 

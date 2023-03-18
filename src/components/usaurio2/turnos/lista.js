@@ -133,7 +133,7 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            dsad
+         <p  style={{ color: 'crimson' }}  >***Nota: si no asignaste el encargado entonces habra 0(cero) Alumnas por responder llamado</p>
             {clases ? <>
                 <div>
                   
@@ -146,6 +146,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell>Referencia de turno</StyledTableCell>
             <StyledTableCell  >Horario</StyledTableCell>
             <StyledTableCell align="left">Cantidad de alumnas</StyledTableCell>
+            <StyledTableCell align="left">Faltan responder a llamado</StyledTableCell>
           
           </TableRow>
         </TableHead>
@@ -157,6 +158,7 @@ const TablaNotificaciones = (props) => {
                <StyledTableCell >{row.numero}</StyledTableCell>
               <StyledTableCell >{row.descripcion}</StyledTableCell>
               <StyledTableCell >{row.cant}/44</StyledTableCell>
+              <StyledTableCell >{row.faltanporresp}</StyledTableCell>
               {/* <StyledTableCell >   <ModalVer
                     id= {row.id}
                    nombre_curso={'s'}
