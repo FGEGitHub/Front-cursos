@@ -6,7 +6,7 @@ import Asignarllamado from './ModalAsignarcoordinador'
 import ModalModificarturno from './ModalModificarclasesdelcurso'
 import NuevoTurno from './NuevoTurno'
 import CargaDeTabla from "../../CargaDeTabla"
-import imagen from "../../../Assets/imagencurso.jpg"
+
 import { useNavigate } from "react-router-dom";
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
@@ -77,7 +77,30 @@ const Lotes = () => {
 
     ///
 //opcionde click en el nombre
+
+
+
+
+function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
+  return (
+   
+   <>
+    </>
+  );
+}
+
+
+
+
+
+
+
 const columnas = [
+  {
+    name: "dni",
+    label: "dni",
+
+  },
     {
       name: "apellidopersona",
       label: "Apellido",
@@ -105,8 +128,8 @@ const columnas = [
 
     },
   
-
-
+   
+  
 
   ];
 return (

@@ -51,7 +51,7 @@ export default function SelectTextFields(props) {
 
 
   const handleClickOpen = () => {
-    traer()
+   
     setOpen(true);
   };
 
@@ -60,25 +60,10 @@ export default function SelectTextFields(props) {
     setOpen(false);
   };
 
-  
-  const handleChange = (e) => {
-    console.log(inscripcion)
-    setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
-}
-  
 
 
 
 
-const traer = async () => {
-
- const not = await servicioPersonas.traerencargados()
-
- setProfesores(not)
-
- setActivo(true)
-
-}
   ////
   const handleDeterminar = async (event) => {
     // event.preventDefault();
@@ -86,7 +71,7 @@ const traer = async () => {
 
     try {
 
-      await servicioPersonas.asignarllamado(
+      await servicioPersonas.desinscribir(
         inscripcion
 
 
@@ -129,52 +114,25 @@ const traer = async () => {
    
         <DialogContent>
 
-        <h2>Categoria </h2>
+        <h2>Desinscribir alumna </h2>
   
-             <h3>Inscripcion a curso  </h3>
+            
             
 
           
-     <label>Hijos:<br />
+     <label>Seguro desea desinscribir?<br />
           
        
 
      </label>
    
-                 <br />
-                 <label>Asignar a llamado </label>
-                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                             
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'id_profesor',
-                                    id: 'uncontrolled-native',
+               
 
-                                }}
-                            >  
-                             <option value={'Pendiente'}>Asignar</option>
-                            {activo ? <>
-                            
-                              {profesores.map((row) => (
-                                       
-                                        <option value={row.id}> {row.nombre}</option>
-
-                              ))}
-                            
-                            </> : <>
-                             <option value={'Pendiente'}>Asignar</option></>}
-                           
-
-                            </NativeSelect>
-   
    
    
 
                  <DialogActions>
-         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button>
+         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Desinscribir</Button>
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>

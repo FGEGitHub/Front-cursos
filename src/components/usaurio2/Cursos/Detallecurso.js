@@ -3,7 +3,7 @@ import servicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
 import Fuchacurso from './Fichacurso'
 import Listadeturnos from './Listadeturnosdelcurso'
-import ModalCursado from './ModalCursado'
+import ModalCursado from './ModalDesinscribir'
 import Ver from './Verinscripto'
 import CargaDeTabla from "../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";

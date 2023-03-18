@@ -144,5 +144,10 @@ const subirprueba = async (formdata) => {
 }
 
 
+const desinscribir = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'desinscribir', formdata,config)
+  console.log(data)
 
-export default {subirprueba,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
+}
+export default {subirprueba,desinscribir,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
