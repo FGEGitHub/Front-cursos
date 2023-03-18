@@ -42,9 +42,9 @@ export default function MenuIzq2 ({children}) {
           path: '/administracion/cursos' 
         },
         { 
-          text: 'Perfil', 
+          text: 'turnos', 
           icon: <GroupIcon color="primary" />, 
-          path: '/administracion/perfil' 
+          path: '/administracion/turnos' 
         },
         { 
           text: 'Personas', 

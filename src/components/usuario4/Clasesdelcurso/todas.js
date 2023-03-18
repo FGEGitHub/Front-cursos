@@ -44,9 +44,9 @@ const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
-    
-  let params = useParams()
-  let id = params.id
+
+    let params = useParams()
+    let id = params.id
     useEffect(() => {
         traer()
 
@@ -81,16 +81,31 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-                <div onClick={() => navigate('/encargados/clase/'+clases[dataIndex]['id'])}>
-                  
-                    < Tooltip title="ASISTENCIA">
-                    <AccountBoxIcon  onClick={() => navigate('/encargados/clase/'+clases[dataIndex]['id'])} />
-                    </Tooltip>
-                
-                
+
+                {usuario.nivel == 2 ? <>
+                    <div onClick={() => navigate('/administracion/clase/' + clases[dataIndex]['id'])}>
+
+                        < Tooltip title="ASISTENCIA">
+                            <AccountBoxIcon onClick={() => navigate('/administracion/clase/' + clases[dataIndex]['id'])} />
+                        </Tooltip>
 
 
-                </div>
+
+
+                    </div>
+
+                </> : <>
+                    <div onClick={() => navigate('/encargados/clase/' + clases[dataIndex]['id'])}>
+
+                        < Tooltip title="ASISTENCIA">
+                            <AccountBoxIcon onClick={() => navigate('/encargados/clase/' + clases[dataIndex]['id'])} />
+                        </Tooltip>
+
+
+
+
+                    </div>
+                </>}
             </>
         );
     }
@@ -117,7 +132,7 @@ const TablaNotificaciones = (props) => {
         },
 
 
-      
+
         {
             name: "Asistencia",
             options: {
@@ -148,36 +163,36 @@ const TablaNotificaciones = (props) => {
             <h2>CLASES DEL CURSO</h2>
             {clases ? <>
                 <div>
-              
 
-                <ModaNueva
-                id_turno= {id}
-                traer = {async () => {
-                        try {
-                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                            if (loggedUserJSON) {
-                                const usuario = JSON.parse(loggedUserJSON)
-                
-                                setUsuario(usuario)
-                
-                                const novedades_aux = await servicioturnos.lista(id)
-                                setClases(novedades_aux)
+
+                    <ModaNueva
+                        id_turno={id}
+                        traer={async () => {
+                            try {
+                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                if (loggedUserJSON) {
+                                    const usuario = JSON.parse(loggedUserJSON)
+
+                                    setUsuario(usuario)
+
+                                    const novedades_aux = await servicioturnos.lista(id)
+                                    setClases(novedades_aux)
+                                }
+
+                            } catch (error) {
+
                             }
-                
-                        } catch (error) {
-                
+
+
+
+
+
+
                         }
-                
-                
-                
-                
-                
-                
-                    }
-                
-                }
-                />
-  {clases.length>0 ? <>
+
+                        }
+                    />
+                    {clases.length > 0 ? <>
                         <>
                             <MUIDataTable
 
@@ -195,10 +210,10 @@ const TablaNotificaciones = (props) => {
 
 
                             />
-                        </></>:<> <h2>El curso aun no tiene clases</h2></>}
-                     
+                        </></> : <> <h2>El curso aun no tiene clases</h2></>}
 
-                 
+
+
                 </div>
             </> : <></>}
         </div>

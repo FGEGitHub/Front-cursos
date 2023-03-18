@@ -19,7 +19,7 @@ import TableBody from '@mui/material/TableBody';
 import Button from "@mui/material/Button";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -147,6 +147,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell  >Horario</StyledTableCell>
             <StyledTableCell align="left">Cantidad de alumnas</StyledTableCell>
             <StyledTableCell align="left">Faltan responder a llamado</StyledTableCell>
+            <StyledTableCell align="left">Ir a Turno</StyledTableCell>
           
           </TableRow>
         </TableHead>
@@ -154,11 +155,14 @@ const TablaNotificaciones = (props) => {
           {clases.map((row) => (
             <StyledTableRow  key={row.id}>       
           
-              <StyledTableCell >{row.nombrecurso}</StyledTableCell>
+              <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.nombrecurso}</StyledTableCell>
                <StyledTableCell >{row.numero}</StyledTableCell>
-              <StyledTableCell >{row.descripcion}</StyledTableCell>
+              <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>
               <StyledTableCell >{row.cant}/44</StyledTableCell>
               <StyledTableCell >{row.faltanporresp}</StyledTableCell>
+
+              <StyledTableCell ><AssignmentIndIcon  onClick={() => navigate('/administracion/turno/'+row.id)} /></StyledTableCell>
+              
               {/* <StyledTableCell >   <ModalVer
                     id= {row.id}
                    nombre_curso={'s'}
@@ -192,22 +196,7 @@ const TablaNotificaciones = (props) => {
       </Table>
     </TableContainer>
                         <>
-                            <MUIDataTable
-
-                                title={"Clase"}
-                                data={clases}
-                                columns={columns}
-                                actions={[
-                                    {
-                                        icon: 'save',
-                                        tooltip: 'Save User',
-                                        onClick: (event, rowData) => alert("You saved " + rowData.name)
-                                    }
-                                ]}
-                                options={options}
-
-
-                            />
+                            
                         </>
                         /* 
                                       */

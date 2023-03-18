@@ -26,8 +26,9 @@ import Inscripciones from '../pages/usuario2/Inscripciones';
 import InscripcionCurso from '../pages/usuario2/InscripcionCurso.js';
 import Usuarios from '../pages/usuario2/usuarios';
 import Cargadeinscrip from '../pages/usuario2/Cargadeinscrip';
-
-
+import Turnoadmin from '../pages/usuario2/Turno';
+import Claseadmin from '../pages/usuario2/Clase';
+import TurnosAdmin from '../pages/usuario2/turnos';
 
 ///usuario 3
 
@@ -79,6 +80,11 @@ const Rutas = [
 		{ path: '/administracion/inscripciones/curso/:id', element: <InscripcionCurso /> },
 		{ path: '/administracion/usuarios', element: <Usuarios /> },
 		{ path: '/administracion/cargarinscripciones', element: <Cargadeinscrip /> },
+		{ path: '/administracion/turno/:id', element: <Turnoadmin /> },
+		{ path: '/administracion/clase/:id', element: <Claseadmin /> },
+		{ path: '/administracion/turnos', element: <TurnosAdmin /> },
+
+
 		
 
 		{ path: '/coordinadores/novedades', element: <Novedades3 /> },
