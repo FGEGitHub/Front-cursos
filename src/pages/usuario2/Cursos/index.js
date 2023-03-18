@@ -6,6 +6,7 @@ import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cursos from '../../../components/usaurio2/Cursos/Listadecursos'
+import Turnos from '../../../components/usaurio2/turnos/lista'
  
 export default function Paginas() {
 
@@ -46,8 +47,9 @@ export default function Paginas() {
 <>
 { logueado ? <div> 
     <MenuUsuario4>
-  
+
     <Cursos/>
+    <Turnos/>
  </MenuUsuario4> 
 
  </div>   :<div></div>  }

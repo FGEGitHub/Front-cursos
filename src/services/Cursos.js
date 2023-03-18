@@ -9,25 +9,34 @@ const baseUrl = 'http://esme.cuquicalvano.com:4000/cursos/'
 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 /////loggedUserJSON Recupera lasesion el tokeny lo envia mediante la constante config. el back lo filtra 
  let config = ''
+
  if (loggedUserJSON) {
-     const userContext = JSON.parse(loggedUserJSON)
-  
- 
+
+  try {
+      const userContext = JSON.parse(loggedUserJSON)
       config = {
          headers:{
-   
              Authorization:`Bearer ${userContext.token}`
          }
      }
+  } catch (error) {
+        window.localStorage.removeItem('loggedNoteAppUser')
+   
+  }
  
-     
- }else{
-      config = {
-         headers:{
-             Authorization:`Bearer `
-         }
-     }
- }
+
+  
+}else{
+   config = {
+      headers:{
+          Authorization:`Bearer `
+      }
+  }
+}
+
+
+
+
 
 /////////////ver ruta al back
  const datosusuario = async (usuario) => {
@@ -192,6 +201,18 @@ const borrarturno= async  (datos) => {
   }
    alert(data)  
 } 
- 
+//
 
-export default {borrarturno,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+
+const listadetodoslosturnos= async  (datos) => {
+  console.log(config)
+   const {data } = await axios.get(baseUrl+'listadetodoslosturnos/',datos,config)
+   if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+   return data
+} 
+
+export default {borrarturno,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
