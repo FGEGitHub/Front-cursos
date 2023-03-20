@@ -10,6 +10,7 @@ import Nuevo from './AgregarUsuario';
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import EditIcon from "@material-ui/icons/Edit";
+import Modificar from './modificarusuario';
 
 
 
@@ -41,11 +42,13 @@ export default function Ingresos() {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-                <EditIcon
-                    onClick={() => onClick(data[dataIndex].id, dataIndex)}
-                    style={{ marginRight: "10px", cursor: "pointer" }}
-                />
-
+               <Modificar
+               id= {usuarios[dataIndex].id}
+               nivel= {usuarios[dataIndex].nivel}
+               usuario={usuarios[dataIndex].usuario}
+               nombre={usuarios[dataIndex].nombre}
+              
+               />
             </>
         );
     }

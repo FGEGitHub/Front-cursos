@@ -2,14 +2,15 @@ import axios from "axios"
 
 
 const  baseUrl ='http://esme.cuquicalvano.com:4000/signin2'
-//const  baseUrl ='http://localhost:4000/signin'
+//const  baseUrl ='http://localhost:4000/signin2'
 
 
 
 const login= async  (credentials) => {
  
   const {data } = await axios.post(baseUrl,credentials)
-    console.log(data)
+  if (data ==='Sin Exito'){
+   alert(data)}
     return data 
 }   
 

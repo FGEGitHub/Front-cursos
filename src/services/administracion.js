@@ -54,6 +54,16 @@ return data
  
        
   }
-
+  const modificarusuario = async (datos) => {
+    console.log(datos)
   
- export default {todos,registronivel3 }
+ 
+      const {data} = await axios.post(baseUrl+'modificarusuario', datos,config)
+ 
+         alert(data)
+    
+ 
+       
+  }
+  
+ export default {todos,registronivel3,modificarusuario }
