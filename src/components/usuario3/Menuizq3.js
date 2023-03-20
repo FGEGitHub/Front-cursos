@@ -42,9 +42,9 @@ export default function MenuIzq2 ({children}) {
         path: '/coordinadores/novedades' 
       },
         { 
-          text: 'Tareas', 
+          text: 'Cursos', 
           icon: <GroupIcon color="primary" />, 
-          path: '/coordinadores/tareas' 
+          path: '/coordinadores/cursos' 
         },
         { 
           text: 'Perfil', 
