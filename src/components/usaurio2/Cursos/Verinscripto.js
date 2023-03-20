@@ -141,14 +141,10 @@ setActivo(true)
 
            Prioridad 1:  {usuarioo.prioridad1}<br/>
            Prioridad 2:  {usuarioo.prioridad2}<br/>
-
+           <br/>
          <b> actualmente {usuarioo.anotado !== undefined ? <> anotada en curso {usuarioo.anotado} </>:<> no anotada</>}</b> 
-             <Featured
-            porcentaje={porcent}
-            titulo="Porcentaje de la categoria"
-
-          />
-     <label>Hijos:{usuarioo.hijos} <br />
+            <br/>
+     <label>Hijos:  {usuarioo.hijos != undefined ?<>{usuarioo.hijos}</>:<>NO</>} <br />
           
             trabajo:{usuarioo.trabaja} <br />
             {usuarioo.trabaja === "Si" ? <> {usuarioo.tipot}</>:<></>} 
