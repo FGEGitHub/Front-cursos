@@ -103,6 +103,12 @@ const asignarEncargado= async  (datos) => {
    
    alert(data)  
 } 
+const cambiarestadocursado= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'cambiarestadocursado',datos,config)
+   
+   alert(data)  
+} 
 
 
 const asignarcoordinador= async  (datos) => {
@@ -150,4 +156,4 @@ const desinscribir = async (formdata) => {
   console.log(data)
 
 }
-export default {subirprueba,desinscribir,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
+export default {subirprueba,desinscribir,cambiarestadocursado,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}

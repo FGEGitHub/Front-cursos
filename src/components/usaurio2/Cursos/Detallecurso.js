@@ -4,6 +4,7 @@ import MUIDataTable from "mui-datatables";
 import Fuchacurso from './Fichacurso'
 import Listadeturnos from './Listadeturnosdelcurso'
 import ModalCursado from './ModalDesinscribir'
+import ModalCambiarEstado from './ModalCAmbiarestado'
 import Ver from './Verinscripto'
 import CargaDeTabla from "../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
@@ -425,7 +426,26 @@ const Lotes = () => {
                         setCursado(clients[5])
                         setLoading(false);
                       }}
-                      /></StyledTableCell>
+                      />
+                      <ModalCambiarEstado
+                      id_cursado={row.id}
+
+                      getClients = {async () => {
+
+                        const clients = await servicioCursos.detalledelcurso(id)
+                        
+                     
+                        setPendientes(clients[0])
+                        setCurso(clients[1])
+                        setInscriptosacepados(clients[3])
+                        setCupodelcurso(clients[4])
+                        setCursado(clients[5])
+                        setLoading(false);
+                      }}
+                      />
+                      
+                      
+                      </StyledTableCell>
 
                     </StyledTableRow>
                   ))}

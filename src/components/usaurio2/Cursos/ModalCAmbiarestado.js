@@ -7,10 +7,9 @@ import DialogContent from '@mui/material/DialogContent';
 import servicioPersonas from '../../../services/personas'
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import Featured from '../../estadisticas/featured/Featured'
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
@@ -44,7 +43,7 @@ export default function SelectTextFields(props) {
 
 
   const [inscripcion, setInscripcion] = useState({
-    id_cursado:props.id_cursado
+  
   
 
   })
@@ -53,6 +52,7 @@ export default function SelectTextFields(props) {
   const handleClickOpen = () => {
    
     setOpen(true);
+setInscripcion(  {id_cursado:props.id_cursado})
   };
 
   const handleClose = () => {
@@ -71,8 +71,9 @@ export default function SelectTextFields(props) {
 
     try {
 
-      await servicioPersonas.desinscribir(
-        inscripcion
+      await servicioPersonas.cambiarestadocursado(
+       inscripcion
+   
 
 
       )
@@ -92,7 +93,10 @@ export default function SelectTextFields(props) {
       setCurrency(event.target.value);
     }; */
 
-
+    const handleChange = (e) => {
+        console.log(inscripcion)
+        setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
+    }
   return (
 
 
@@ -106,8 +110,9 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Ver inscripcion">
-      <PersonRemoveIcon variant="outlined" onClick={handleClickOpen}/>
+       < Tooltip title="Cambiar estado">
+       
+      <PublishedWithChangesIcon variant="outlined" onClick={handleClickOpen}/>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
 
@@ -116,7 +121,34 @@ export default function SelectTextFields(props) {
 
         <h2>Desinscribir alumna </h2>
   
-            
+        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                             
+                             </InputLabel>
+                             <NativeSelect
+                                 defaultValue={30}
+                                 onChange={handleChange}
+                                 inputProps={{
+                                     name: 'estado',
+                                     id: 'uncontrolled-native',
+ 
+                                 }}
+                             >  
+                              <option value={'Pendiente'}>Asignar</option>
+                  
+                             
+                        
+                                        
+                                         <option value='Asignado a curso'> 'Asignado a curso'</option>
+                                         <option value='Contactada esperando respuesta'> 'Contactada esperando respuesta'</option>
+                                         <option value='Confirmado'> 'Confirmado'</option>
+                                         <option value='Rechazado'> 'Rechazado'</option>
+                                         <option value='Asignado a llamado'> 'Asignado a llamado'</option>
+                        
+                              <option value={'Pendiente'}>Asignar</option>
+                            
+ 
+                             </NativeSelect>
+    
             
 
           

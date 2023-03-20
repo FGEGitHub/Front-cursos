@@ -21,8 +21,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 
 export default function Clasenueva(props) {
-    let params = useParams()
-    let id = params.id
+   
     const [modifcontra, setModifcontra] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [form, setForm] = useState({ 
@@ -45,6 +44,14 @@ export default function Clasenueva(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
+        setForm   ({ 
+            nivel:props.nivel,
+            usuario:props.usuario,
+            nombre:props.nombre,
+        id:props.id,
+        password:'undefined'
+    
+     })
     };
     const handleDeterminar = async (event) => {
         event.preventDefault();
