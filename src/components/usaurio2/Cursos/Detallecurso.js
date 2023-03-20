@@ -164,6 +164,8 @@ const Lotes = () => {
   }
 
   const colpendient = [
+ 
+
     {
       name: "prioridad",
       options: {
@@ -186,6 +188,11 @@ const Lotes = () => {
     {
       name: "nombre",
       label: "Nombre",
+
+    },
+    {
+      name: "horario",
+      label: "horario",
 
     },
     {
