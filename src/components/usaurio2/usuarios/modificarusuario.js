@@ -61,7 +61,7 @@ export default function Clasenueva(props) {
 
 
         }
-        props.getClients()
+        props.traer()
 
         setOpen(false);
     };

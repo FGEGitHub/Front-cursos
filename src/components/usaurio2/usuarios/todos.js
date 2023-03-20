@@ -7,6 +7,7 @@ import servicioAdministracion from '../../../services/administracion'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Nuevo from './AgregarUsuario';
+import Borrar from './borrarusuario';
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import EditIcon from "@material-ui/icons/Edit";
@@ -47,8 +48,31 @@ export default function Ingresos() {
                nivel= {usuarios[dataIndex].nivel}
                usuario={usuarios[dataIndex].usuario}
                nombre={usuarios[dataIndex].nombre}
-              
+               traer= { async () => {
+                console.log('Historial')
+                       const historial = await servicioAdministracion.todos()
+                      
+                 
+                       setUsuarios(historial)
+                       // 
+               
+                   }}
                />
+<Borrar
+               id= {usuarios[dataIndex].id}
+                           usuario={usuarios[dataIndex].usuario}
+               nombre={usuarios[dataIndex].nombre}
+              traer= {async () => {
+                console.log('Historial')
+                       const historial = await servicioAdministracion.todos()
+                      
+                 
+                       setUsuarios(historial)
+                       // 
+               
+                   }}
+               />
+
             </>
         );
     }

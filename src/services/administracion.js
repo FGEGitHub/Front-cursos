@@ -66,4 +66,16 @@ return data
        
   }
   
- export default {todos,registronivel3,modificarusuario }
+
+  const borrarusuario = async (datos) => {
+    console.log(datos)
+  
+ 
+      const {data} = await axios.post(baseUrl+'borrarusuario', datos,config)
+ 
+         alert(data)
+    
+ 
+       
+  }
+ export default {todos,registronivel3,modificarusuario,borrarusuario }
