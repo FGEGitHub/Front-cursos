@@ -116,7 +116,7 @@ return data
 
   const traerlosturnos= async  (datos) => {
     console.log(datos)
-     const {data } = await axios.post(baseUrl+'traerlosturnos',config,datos)
+     const {data } = await axios.post(baseUrl+'traerlosturnos',datos,config)
       console.log(data)
      if(data=== 'error login'){
        
