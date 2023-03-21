@@ -24,6 +24,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import ServicioInscripciones from '../../../services/inscripciones'
 ////
 import SocialDistanceSharpIcon from '@mui/icons-material/SocialDistanceSharp';
 import Grid from '@mui/material/Grid';
@@ -82,23 +83,32 @@ const Lotes = () => {
         
       setVista(!vista)
   }
-    const getClients = async () => {
+    const actualizarcursado = async () => {
         
-        const clients = await servicioCursos.lista({
+        const clients = await ServicioInscripciones.actualizarcursado({
 
         })
         setClients(clients)
         setLoading(false);
     }
 
-    useEffect(() => {
-        getClients()
-    }, [])
+
 
     ///
 //opcionde click en el nombre
-   
 
+const getClients = async () => {
+        
+  const clients = await servicioCursos.lista({
+
+  })
+  setClients(clients)
+  setLoading(false);
+}
+
+useEffect(() => {
+  getClients()
+}, [])
 
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
@@ -202,8 +212,10 @@ return (
         setClients(clients)
     }}
     />
-    
-    <Button  variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon/></Button>
+    <Button
+                          onClick={() => actualizarcursado()}
+                      >   Corregir estados/ ver repetidos</Button> 
+    <Button  variant='contained' onClick={actualizarcursado} > Cambiar vista <RemoveRedEyeIcon/></Button>
 
 {vista   ? <>
         <MUIDataTable

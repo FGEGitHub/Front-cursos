@@ -63,7 +63,7 @@ export default function Clasenueva(props) {
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>Nueva Clase </DialogTitle>
+                <DialogTitle>Desinscribir </DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',

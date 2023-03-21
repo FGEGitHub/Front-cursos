@@ -120,6 +120,13 @@ const listaExtractos= async  () => {
  
  
  
+ const actualizarcursado= async  () => {
+
+
+  const {data } = await axios.get(baseUrl+'actualizarcursado',config)
+    alert(data)
+  return data
+ } 
 
  const borrarturnos= async  () => {
 
@@ -166,4 +173,4 @@ const listaExtractos= async  () => {
      } 
 
      
-export default {lista,incriptoss,borrarturnos,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+export default {lista,incriptoss,actualizarcursado,borrarturnos,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
