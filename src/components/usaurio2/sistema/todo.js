@@ -17,7 +17,7 @@ export default function Ingresos() {
 
 
     const [cursado, setCursado] = useState([]);
-    const [inscripciones, setinscripciones] = useState([]);
+    const [turnos, setTurnos] = useState([]);
     const [personas, setpersonas] = useState([]);
     const [cursos, setCursos] = useState([]);
 
@@ -29,10 +29,10 @@ export default function Ingresos() {
  console.log('Historial')
         const historial = await servicioAdministracion.sistemas()
         console.log(historial[0])
-        setCursado(historial[0][0])
-        setinscripciones(historial[0][1])
-        setpersonas(historial[0][2])
-        setCursos(historial[0][3])
+        setCursado(historial[0])
+        setTurnos(historial[1])
+        setpersonas(historial[2])
+        setCursos(historial[3])
         // 
 
     };
@@ -48,17 +48,17 @@ export default function Ingresos() {
         },
    
         {
-            name: "nombre",
-            label: "nombre",
+            name: "id_curso",
+            label: "id_curso",
         },
         {
-            name: "usuario",
-            label: "usuario",
+            name: "id_persona",
+            label: "id_persona",
 
         },
         {
-            name: "nivel",
-            label: "nivel",
+            name: "id_turno",
+            label: "id_turno",
 
         },
  
@@ -66,8 +66,79 @@ export default function Ingresos() {
 
     ];
 
+    const columnsp = [
+        {
+            name: "id",
+            label: "id",
+        },
+   
+        {
+            name: "apellido",
+            label: "apellido",
+        },
+        {
+            name: "nombre",
+            label: "nombre",
+
+        },
+        {
+            name: "dni",
+            label: "dni",
+
+        },
+ 
 
 
+    ];
+
+    const columnst = [
+        {
+            name: "id",
+            label: "id",
+        },
+   
+        {
+            name: "id_curso",
+            label: "id_curso",
+        },
+        {
+            name: "numero",
+            label: "numero",
+
+        },
+        {
+            name: "descripcion",
+            label: "descripcion",
+
+        },
+ 
+
+
+    ];
+    const columnsc = [
+        {
+            name: "id",
+            label: "id",
+        },
+   
+        {
+            name: "nombre",
+            label: "nombre",
+        },
+        {
+            name: "numero",
+            label: "numero",
+
+        },
+        {
+            name: "descripcion",
+            label: "descripcion",
+
+        },
+ 
+
+
+    ];
     return (
         <div>
              <Paper
@@ -96,30 +167,12 @@ export default function Ingresos() {
 
 
 
-                />
+                /> 
                  <MUIDataTable
 
-title={"Lista de inscripciones"}
-data={inscripciones}
-columns={inscripciones}
-actions={[
-    {
-        icon: 'save',
-        tooltip: 'Save User',
-        onClick: (event, rowData) => alert("You saved " + rowData.name)
-    }
-]}
-
-
-
-/>
-                
-                
-<MUIDataTable
-
-title={"Lista de personas"}
-data={personas}
-columns={columns}
+title={"Lista de turnos"}
+data={turnos}
+columns={columnst}
 actions={[
     {
         icon: 'save',
@@ -131,11 +184,31 @@ actions={[
 
 
 /> 
+       
+
+             
+                
+<MUIDataTable
+
+title={"Lista de personas"}
+data={personas}
+columns={columnsp}
+actions={[
+    {
+        icon: 'save',
+        tooltip: 'Save User',
+        onClick: (event, rowData) => alert("You saved " + rowData.name)
+    }
+]}
+
+
+
+/>  
 <MUIDataTable
 
 title={"Lista de cursos"}
 data={cursos}
-columns={columns}
+columns={columnsc}
 actions={[
     {
         icon: 'save',
