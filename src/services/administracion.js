@@ -32,13 +32,30 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
 
 
-
-
+ 
+ const sistemas = async (usuario) => {
+  console.log('sistemas/')
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'sistemas/', config)
+    console.log(data)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+     
+}
 
  const todos = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'todos/', config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
 return data
        
   }
@@ -78,4 +95,4 @@ return data
  
        
   }
- export default {todos,registronivel3,modificarusuario,borrarusuario }
+ export default {todos,registronivel3,sistemas,modificarusuario,borrarusuario }

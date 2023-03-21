@@ -29,7 +29,7 @@ import Cargadeinscrip from '../pages/usuario2/Cargadeinscrip';
 import Turnoadmin from '../pages/usuario2/Turno';
 import Claseadmin from '../pages/usuario2/Clase';
 import TurnosAdmin from '../pages/usuario2/turnos';
-
+import Sistemas from '../pages/usuario2/Sistema';
 ///usuario 3
 
 
@@ -83,7 +83,7 @@ const Rutas = [
 		{ path: '/administracion/turno/:id', element: <Turnoadmin /> },
 		{ path: '/administracion/clase/:id', element: <Claseadmin /> },
 		{ path: '/administracion/turnos', element: <TurnosAdmin /> },
-
+		{ path: '/administracion/sistemas', element: <Sistemas /> },
 
 		
 
