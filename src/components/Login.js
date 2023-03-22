@@ -67,7 +67,7 @@ const Login = () => {
 
       servicioUsuario.setToken(user.token)
       console.log(user)
-      setUser(user)
+     await setUser(user)
 
       setLoading(false);
 
