@@ -88,7 +88,7 @@ const DrawerNav = () => {
    
     
      window.localStorage.removeItem('loggedNoteAppUser')
-     window.location.reload();
+     navigate("/")
 
    } 
 

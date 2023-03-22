@@ -65,7 +65,7 @@ const traer = async () => {
   
      window.localStorage.removeItem('loggedNoteAppUser')
    
-    window.location.reload();
+     navigate("/")
    } 
 
   const inicio = () => {
