@@ -31,8 +31,20 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
 
 
-
  
+ const traertodoelcursado = async () => {
+  console.log('sistemas/')
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'traertodoelcursado/', config)
+    console.log(data)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+     
+}
  const sistemas = async (usuario) => {
   console.log('sistemas/')
   // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -95,4 +107,4 @@ return data
  
        
   }
- export default {todos,registronivel3,sistemas,modificarusuario,borrarusuario }
+ export default {todos,registronivel3,traertodoelcursado,sistemas,modificarusuario,borrarusuario }

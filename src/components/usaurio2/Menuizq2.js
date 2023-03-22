@@ -66,7 +66,11 @@ export default function MenuIzq2 ({children}) {
           icon: <GroupIcon color="primary" />, 
           path: '/administracion/cargarinscripciones' 
         },
-        
+        { 
+          text: 'Cursado completos', 
+          icon: <GroupIcon color="primary" />, 
+          path: '/administracion/cursadocompleto' 
+        },
      
       ];
 
