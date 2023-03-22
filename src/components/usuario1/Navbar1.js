@@ -64,7 +64,7 @@ const Navbar = (props) => {
     navigate("/usuario/contacto");
   }
   const irAyuda = () => {
-    navigate("/usuario/menu");
+    navigate("/");
   }
 
   const hanleLogout = () => {
@@ -78,7 +78,7 @@ const Navbar = (props) => {
   }
 
   const inicio = () => {
-    navigate("/usuario/menu");
+    navigate("/");
 
   }
 

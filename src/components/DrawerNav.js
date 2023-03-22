@@ -69,7 +69,7 @@ const DrawerNav = () => {
     navigate("/usuario/contacto");
   }
   const irAyuda = () => {
-    navigate("/usuario/menu");
+    navigate("/");
   }
   const nomb = () => {
     navigate("/usuario/datosPers");

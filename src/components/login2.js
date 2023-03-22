@@ -39,7 +39,7 @@ const Login = () => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-     navigate('/usuario/menu')
+     navigate('/')
     }
   }, [])
 
