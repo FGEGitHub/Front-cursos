@@ -62,10 +62,10 @@ const traer = async () => {
         //  navigate('/login')
      */
    
-      window.location.reload();
+  
      window.localStorage.removeItem('loggedNoteAppUser')
    
-
+    window.location.reload();
    } 
 
   const inicio = () => {
