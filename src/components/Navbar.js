@@ -94,7 +94,7 @@ const traer = async () => {
               >
               <Tab label= '' />
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`hola  ${user.nombre}!`}/>
+                  <Tab label= {`hola  ${user[0].nombre} !`}/>
               </Button> </div>:<div></div>}
               {user? <>
               <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
