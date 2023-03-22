@@ -77,15 +77,23 @@ const DrawerNav = () => {
   const notif = () => {
     navigate("/usuario/notificaciones");
   };
+
+
   const hanleLogout = () => {
     /* console.log('click')
      setUser(null)
-     servicioUsuario.setToken(user.token) */
+     servicioUsuario.setToken(user.token) 
+        //  navigate('/login')
+     */
+   
+      window.location.reload();
+     window.localStorage.removeItem('loggedNoteAppUser')
+   
 
-    window.localStorage.removeItem('loggedNoteAppUser')
-    navigate('/login')
-    // window.location.reload(true);
-  }
+   } 
+
+
+
   function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
     switch (rowIndex) {
       case 0:
@@ -140,6 +148,8 @@ const DrawerNav = () => {
     const notificaciones = () => {
       navigate("/usuario/notificaciones");
     }
+
+    
     return (
       <React.Fragment>
         <Drawer
