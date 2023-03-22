@@ -104,7 +104,7 @@ const DrawerNav = () => {
         hanleLogout()
         break;
       case 2:
-        irAyuda()
+        hanleLogout()
         break;
       case 2:
         irContacto()
@@ -129,7 +129,7 @@ const DrawerNav = () => {
           hanleLogout()
           break;
         case 2:
-          irAyuda()
+          hanleLogout()
           break;
         case 2:
           irContacto()
