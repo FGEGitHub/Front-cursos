@@ -126,7 +126,7 @@ const DrawerNav = () => {
           break;
 
         case 1:
-          irNosotros()
+          hanleLogout()
           break;
         case 2:
           irAyuda()
