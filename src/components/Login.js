@@ -61,7 +61,7 @@ const Login = () => {
         password: usuario.password
       })
       console.log(user)
-      window.localStorage.setItem(
+    await  window.localStorage.setItem(
         'loggedNoteAppUser', JSON.stringify(user)
       )
 
