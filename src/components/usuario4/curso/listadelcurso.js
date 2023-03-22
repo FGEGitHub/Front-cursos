@@ -19,7 +19,7 @@ import TableBody from '@mui/material/TableBody';
 import Button from "@mui/material/Button";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -48,7 +48,7 @@ const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
-    
+    const [vista, setvista] = useState(true)
   let params = useParams()
   let id = params.id
     useEffect(() => {
@@ -58,7 +58,12 @@ const TablaNotificaciones = (props) => {
 
     }, [])
 
+    const cambiarvista =  () => {
+        setvista(!vista)
 
+
+    }
+    
     const traer = async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -177,7 +182,8 @@ const TablaNotificaciones = (props) => {
         <div>
             {clases ? <>
                 <div>
-                  
+                <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
+                {vista ? <>
                 <TableContainer component={Paper}>
       <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
         <TableHead>
@@ -227,6 +233,7 @@ const TablaNotificaciones = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
+    </>:<>  
                         <>
                             <MUIDataTable
 
@@ -247,8 +254,8 @@ const TablaNotificaciones = (props) => {
                         </>
                         /* 
                                       */
-
-                 
+                  
+                     </> }
                 </div>
             </> : <></>}
         </div>
