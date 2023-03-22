@@ -19,6 +19,7 @@ import "../../usaurio2/Cursos/profile.css";
 const FichaAxios = (props) => {
   const navigate = useNavigate();
     const [turno, setTurno] = useState([])
+    const [carga, setCarga] = useState(false)
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
   let params = useParams()
     let id = params.id
@@ -36,8 +37,9 @@ const FichaAxios = (props) => {
        
    
       const  tur = await servicioCursos.datosdelturno(id)
-      setTurno(tur[0])
-      console.log(turno.nombrecurso)
+      console.log(tur)
+      setTurno(tur)
+      setCarga(true)
    //   setCliente(cliente)
   
      
@@ -50,7 +52,7 @@ const FichaAxios = (props) => {
 
   return (<>    
     
-   
+    { carga ? <>
     <div className="profile">
       <Grid Container style={{ direction: "column", alignItems:"center", justifyContent: "center", display: "flex"}}>
         <Grid item xs={8} style={{ direction: "column", justifyContent: "center", display: "flex" }}>
@@ -72,7 +74,7 @@ const FichaAxios = (props) => {
                   label="Curso"
                   id="cuil"
                 
-                  value= {turno.nombrecurso}
+                  value= {turno[0].nombrecurso}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -88,7 +90,7 @@ const FichaAxios = (props) => {
                 <TextField
                   label="Encargado"
                   id="Nombre"
-                  value= {props.encargado}
+                  value= {turno[2].encargado}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -103,10 +105,10 @@ const FichaAxios = (props) => {
               </Box>
               <Box>
               <TextField
-                  label="Fecha"
+                  label="Coordinador"
                   id="cuil"
                  // defaultValue="CUIL"
-                  value= {props.fecha}
+                 value= {turno[3].coordinador}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -122,7 +124,7 @@ const FichaAxios = (props) => {
                 <TextField
                   label="Cupo"
                   id="Nombre"
-                  value= {props.inscriptosacepados +'/'+props.cupo}
+                  value= {turno[1].cantidad}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -147,6 +149,12 @@ const FichaAxios = (props) => {
         </Grid>
       </Grid>
     </div>
+
+    </>:<></>}
+
+
+
+
   </>);
 }
 
