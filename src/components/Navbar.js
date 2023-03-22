@@ -12,6 +12,7 @@ import {
   useTheme,
 } from "@mui/material";
 import DrawerNav from "./DrawerNav";
+import servicioPErsonas from '../services/personas'
 
 
 const Navbar = (props) => {
@@ -30,7 +31,26 @@ const Navbar = (props) => {
                   };
   const navigate = useNavigate();
 
+  useEffect(() => {
+    traer()
+}, [])
+const traer = async () => {
 
+  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+
+    const user = JSON.parse(loggedUserJSON)
+ 
+  const notis = await servicioPErsonas.traerusuario(user.id)
+  console.log(notis)
+  setUser(notis)
+  setCargado(true)
+
+
+  /* if (notificaciones>0) {
+    document.title= 'Santa Catalina ('+notificaciones+')'
+ 
+  }   */
+}
 
   const handleClick = () => {
     navigate("/login");
@@ -72,14 +92,18 @@ const Navbar = (props) => {
                 value={value}
                 onChange={(e, value) => setValue(value)}
               >
-             
+              <Tab label= '' />
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`hola ${user.nombre}!`}/>
+                  <Tab label= {`hola  ${user.nombre}!`}/>
               </Button> </div>:<div></div>}
+              {user? <>
               <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
                   <Tab label= {`Cerrar sesion`}/>
               </Button>
-            
+              </>:<>
+              <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
+                  <Tab label= {`Iniciar sesion`}/>
+              </Button></>}
               </Tabs>
              
 
