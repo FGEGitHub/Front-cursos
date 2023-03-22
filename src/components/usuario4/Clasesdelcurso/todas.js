@@ -130,7 +130,21 @@ const TablaNotificaciones = (props) => {
             label: "Numero",
 
         },
+        {
+            name: "presentes",
+            label: "presentes",
 
+        },
+          {
+            name: "ausentes",
+            label: "No tomados",
+            
+        },
+        {
+            name: "notomados",
+            label: "no tomados",
+
+        },
 
 
         {
