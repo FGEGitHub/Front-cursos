@@ -162,7 +162,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.coor}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.enc}</StyledTableCell>
-              <StyledTableCell >{row.cant}/44</StyledTableCell>
+              <StyledTableCell >{row.cant}/44  ({row.rechazados}) Rechazados </StyledTableCell>
               <StyledTableCell >{row.faltanporresp}</StyledTableCell>
 
               <StyledTableCell ><AssignmentIndIcon  onClick={() => navigate('/administracion/turno/'+row.id)} /></StyledTableCell>
