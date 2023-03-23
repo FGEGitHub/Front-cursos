@@ -26,7 +26,7 @@ import PersonOffTwoToneIcon from '@mui/icons-material/PersonOffTwoTone';
 import PersonAddDisabledTwoToneIcon from '@mui/icons-material/PersonAddDisabledTwoTone';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "#4caf50",
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {

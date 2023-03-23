@@ -52,6 +52,10 @@ export default function SelectTextFields(props) {
   const handleClickOpen = () => {
 
     setOpen(true);
+    setCategoria({
+      id:props.id
+    
+    })
   };
 
   const handleClose = () => {
@@ -121,7 +125,7 @@ export default function SelectTextFields(props) {
    
         <DialogContent>
 
-        <h2>Modificar nombre del curso</h2>
+        <h2>Modificar nombre {props.nombre}</h2>
   
          
             
@@ -129,7 +133,7 @@ export default function SelectTextFields(props) {
       
    
                  <br />
-                 <label>Definir el horario </label>
+                 <label>Nombre del curso {props.id}</label>
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
                              
                             </InputLabel>
@@ -137,7 +141,8 @@ export default function SelectTextFields(props) {
             autoFocus
             margin="dense"
             id="name"
-            label="Nombre dle curso"
+            defaultValue={props.nombre}
+            label="Nombre del curso"
             name="nombre"
             onChange={handleChange}
             fullWidth

@@ -114,8 +114,7 @@ useEffect(() => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-          <>< Tooltip title="ir a clases">
-          <GroupIcon    onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)} /></Tooltip><br/></>
+        
           <>
           < Tooltip title="Distribucion de alumnas">
           <SocialDistanceSharpIcon   onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}  />
@@ -125,6 +124,7 @@ useEffect(() => {
           <>
           <ModificarCurso
           id= {clients[dataIndex].id}
+          nombre= {clients[dataIndex].nombre}
           getClients = {async () => {
         
         const clients = await servicioCursos.lista({

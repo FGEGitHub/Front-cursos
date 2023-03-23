@@ -23,7 +23,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "#4caf50",
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -158,7 +158,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell>NOMBRE</StyledTableCell>
             <StyledTableCell >DESCRIPCION</StyledTableCell>
             <StyledTableCell >PENDIENTES POR CONTESTAR</StyledTableCell>
-            <StyledTableCell align="left">ACCIONES</StyledTableCell>
+            <StyledTableCell align="left">CONTACTAR  / IR A CLASES</StyledTableCell>
           
           </TableRow>
         </TableHead>
@@ -170,7 +170,8 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.cantsinresp}/{row.total}</StyledTableCell>
               <StyledTableCell >   < Tooltip title="contactar">
                 <PhoneForwardedSharpIcon  onClick={() => navigate('/encargados/curso/'+row.turnoid)}  />
-                </Tooltip>
+                </Tooltip> 
+                  
                 < Tooltip title="ir a la clase">
                 <ContentPasteGoIcon   onClick={() => navigate('/encargados/turno/'+row.turnoid)} />
                 </Tooltip></StyledTableCell>
