@@ -154,6 +154,11 @@ const TablaNotificaciones = (props) => {
 
         },
         {
+            name: "motivo",
+            label: "motivo",
+
+        },
+        {
             name: "Ver detalles",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
@@ -191,6 +196,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell>APELLDO</StyledTableCell>
             <StyledTableCell >NOMBRE</StyledTableCell>
             <StyledTableCell  >ESTADO</StyledTableCell>
+            <StyledTableCell  >MOTIVO</StyledTableCell>
             <StyledTableCell align="left">ACCIONES</StyledTableCell>
           
           </TableRow>
@@ -201,6 +207,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.inscripcion}</StyledTableCell>
+              <StyledTableCell  >{row.motivo}</StyledTableCell>
               <StyledTableCell >   <ModalVer
                     id= {row.id}
                    nombre_curso={'s'}
