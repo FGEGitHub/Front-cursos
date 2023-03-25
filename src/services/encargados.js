@@ -32,9 +32,33 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
 
 const clases = async (usuario) => {
-  
+
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'clases/'+usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+    
+
+return data
+       
+  }
+
+  
+
+
+  
+  const alumnasdelcurso = async (usuario) => {
+ 
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'alumnasdelcurso/'+usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
     
 
 return data
@@ -42,9 +66,14 @@ return data
   }
 
   const curso = async (usuario) => {
-  
+ 
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'curso/'+usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
     
 
 return data
@@ -55,10 +84,10 @@ return data
 
   const confirmaciondellamado= async  (datos) => {
     console.log(datos)
-     const {data } = await axios.post(baseUrl+'confirmaciondellamado',datos,config)
+     const {data } = await axios.post(baseUrl+'',datos,config)
      
      alert(data)  
   } 
   
   
-  export default {clases,curso,confirmaciondellamado}
+  export default {clases,curso,confirmaciondellamado,alumnasdelcurso}

@@ -1,6 +1,5 @@
-import servicioturnos from '../../../services/turnos'
-import ModalVer from './ModalVer'
-import ModaNueva from './ModalNuevaclase'
+import servicioEncargados from '../../../services/encargados'
+
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
@@ -14,8 +13,15 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import Button from "@mui/material/Button";
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
+import Featured from '../../estadisticas/featured/Featured'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -42,11 +48,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
+    const [datos, setDatos] = useState()
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
-
-    let params = useParams()
-    let id = params.id
+    const [vista, setvista] = useState(true)
+  let params = useParams()
+  let id = params.id
     useEffect(() => {
         traer()
 
@@ -54,7 +61,12 @@ const TablaNotificaciones = (props) => {
 
     }, [])
 
+    const cambiarvista =  () => {
+        setvista(!vista)
 
+
+    }
+    
     const traer = async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -63,8 +75,11 @@ const TablaNotificaciones = (props) => {
 
                 setUsuario(usuario)
 
-                const novedades_aux = await servicioturnos.lista(id)
-                setClases(novedades_aux)
+                const novedades_aux = await servicioEncargados.alumnasdelcurso(id)
+                console.log(novedades_aux)
+                setClases(novedades_aux[0])
+                console.log(novedades_aux[1])
+                setDatos(novedades_aux[1])
             }
 
         } catch (error) {
@@ -81,31 +96,11 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
+                <div >
+                  
+                {clases[dataIndex]['presente']}/{clases[dataIndex]['ausente']}/{clases[dataIndex]['sintomar']}
 
-                {usuario.nivel == 2 ? <>
-                    <div onClick={() => navigate('/administracion/clase/' + clases[dataIndex]['id'])}>
-
-                        < Tooltip title="ASISTENCIA">
-                            <AccountBoxIcon onClick={() => navigate('/administracion/clase/' + clases[dataIndex]['id'])} />
-                        </Tooltip>
-
-
-
-
-                    </div>
-
-                </> : <>
-                    <div onClick={() => navigate('/encargados/clase/' + clases[dataIndex]['id'])}>
-
-                        < Tooltip title="ASISTENCIA">
-                            <AccountBoxIcon onClick={() => navigate('/encargados/clase/' + clases[dataIndex]['id'])} />
-                        </Tooltip>
-
-
-
-
-                    </div>
-                </>}
+                </div>
             </>
         );
     }
@@ -116,39 +111,25 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
-            name: "fecha",
-            label: "fecha",
+            name: "apellido",
+            label: "apellido",
 
         },
         {
-            name: "observacion",
-            label: "detalle",
+            name: "nombre",
+            label: "nombre",
 
         },
-        {
-            name: "numero_clase",
-            label: "Numero",
 
-        },
-        {
-            name: "presentes",
-            label: "presentes",
-
-        },
-          {
-            name: "ausentes",
-            label: "Ausentes",
-            
-        },
-        {
-            name: "notomados",
-            label: "no tomados",
-
-        },
 
 
         {
-            name: "Asistencia",
+            name: "inscripcion",
+            label: "Estado",
+
+        },
+        {
+            name: "Presente/ausente/Sin tomar",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -174,43 +155,51 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            <h2>CLASES DEL CURSO</h2>
+            {datos ? <>
+
+                <Featured
+                titulo1={'Porcentaje presentes/clases'}
+                titulo2={'Porcentaje Presentes/ no tomados'}
+                porcentaje1={(datos.totalpresentes/datos.total*100).toFixed(2)}
+                porcentaje2={datos.totalpresentes/datos.totalreal *100}
+
+                />
+               
+            
+            </>:<></>}
             {clases ? <>
                 <div>
-
-
-                    <ModaNueva
-                        id_turno={id}
-                        traer={async () => {
-                            try {
-                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                                if (loggedUserJSON) {
-                                    const usuario = JSON.parse(loggedUserJSON)
-
-                                    setUsuario(usuario)
-
-                                    const novedades_aux = await servicioturnos.lista(id)
-                                    setClases(novedades_aux)
-                                }
-
-                            } catch (error) {
-
-                            }
-
-
-
-
-
-
-                        }
-
-                        }
-                    />
-                    {clases.length > 0 ? <>
+                <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
+                {vista ? <>
+                <TableContainer component={Paper}>
+      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>APELLDO</StyledTableCell>
+            <StyledTableCell >NOMBRE</StyledTableCell>
+            <StyledTableCell  >ESTADO</StyledTableCell>
+            <StyledTableCell align="left">Presente/Ausente/Sin tomar</StyledTableCell>
+          
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {clases.map((row) => (
+            <StyledTableRow  key={row.id}>       
+              <StyledTableCell >{row.apellido}</StyledTableCell>
+              <StyledTableCell >{row.nombre}</StyledTableCell>
+              <StyledTableCell >{row.inscripcion}</StyledTableCell>
+              <StyledTableCell >{row.presente}/{row.ausente}/{row.sintomar}</StyledTableCell>
+             
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </>:<>  
                         <>
                             <MUIDataTable
 
-                                title={"Clase del curso"}
+                                title={"Clase"}
                                 data={clases}
                                 columns={columns}
                                 actions={[
@@ -224,10 +213,11 @@ const TablaNotificaciones = (props) => {
 
 
                             />
-                        </></> : <> <h2>El curso aun no tiene clases</h2></>}
-
-
-
+                        </>
+                        /* 
+                                      */
+                  
+                     </> }
                 </div>
             </> : <></>}
         </div>

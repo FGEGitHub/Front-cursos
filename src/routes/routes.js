@@ -48,6 +48,7 @@ import Clases4 from '../pages/usuario4/cursos';
 import Curso4 from '../pages/usuario4/curso/index.js';
 import Turno4 from '../pages/usuario4/Turno';
 import Clase4 from '../pages/usuario4/clase';
+import Alumnosdelturno from '../pages/usuario4/alumnos';
 
 
 
@@ -105,9 +106,9 @@ const Rutas = [
 		{ path: '/encargados/cursos', element: <Clases4 /> },
 		{ path: '/encargados/curso/:id', element: <Curso4 /> },
 		{ path: '/encargados/turno/:id', element: <Turno4 /> },
-		
+		{ path: '/encargados/alumnosdelturno/:id', element: <Alumnosdelturno /> },
 		{ path: '/encargados/clase/:id', element: <Clase4 /> },
-
+		
 		
 ];
 

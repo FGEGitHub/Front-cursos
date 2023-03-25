@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
 import Tooltip from '@material-ui/core/Tooltip';
-import NewReleasesTwoToneIcon from '@mui/icons-material/NewReleasesTwoTone';
+import Face3Icon from '@mui/icons-material/Face3';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
@@ -96,6 +96,13 @@ const TablaNotificaciones = (props) => {
                 <ContentPasteGoIcon   onClick={() => navigate('/encargados/turno/'+clases[dataIndex]['turnoid'])} />
                 </Tooltip>
                 </>
+                <br/>  
+                <>
+                < Tooltip title="ir a la clase">
+                <Face3Icon   onClick={() => navigate('/encargados/alumnosdelturno/'+clases[dataIndex]['turnoid'])} />
+                </Tooltip>
+                </>
+                
             </>
             
         );
@@ -174,7 +181,11 @@ const TablaNotificaciones = (props) => {
                   
                 < Tooltip title="ir a la clase">
                 <ContentPasteGoIcon   onClick={() => navigate('/encargados/turno/'+row.turnoid)} />
-                </Tooltip></StyledTableCell>
+                </Tooltip>
+                < Tooltip title="ir a la clase">
+                <Face3Icon   onClick={() => navigate('/encargados/alumnosdelturno/'+row.turnoid)} />
+                </Tooltip>
+                </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
