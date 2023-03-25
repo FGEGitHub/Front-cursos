@@ -154,7 +154,6 @@ const FichaAxios = (props) => {
 
 
 
-
   </>);
 }
 

@@ -33,7 +33,7 @@ const Featured = (props) => {
         </div>
         <div className="bottom">
             <div className="featuredChart">
-                <CircularProgressbar value={props.porcentaje2} text={props.porcentaje2+"%"} strokeWidth={5}/>
+                <CircularProgressbar value={props.porcentaje2} text= {props.porcentaje2 == NaN ? <>{ props.porcentaje2+"%"} </>:<>0</>} strokeWidth={5}/>
             </div>
             <p className="title">Teniendo en cuenta que hay asistencias no tomadas</p>
             <p className="amount">{props.titulo}</p>

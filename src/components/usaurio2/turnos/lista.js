@@ -13,7 +13,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
+import InsertChartIcon from '@mui/icons-material/InsertChart';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import Button from "@mui/material/Button";
@@ -165,7 +165,14 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.cant}/44  ({row.rechazados}) Rechazados </StyledTableCell>
               <StyledTableCell >{row.faltanporresp}</StyledTableCell>
 
-              <StyledTableCell ><AssignmentIndIcon  onClick={() => navigate('/administracion/turno/'+row.id)} /></StyledTableCell>
+              <StyledTableCell >  < Tooltip title="ir al turno">
+              <AssignmentIndIcon  onClick={() => navigate('/administracion/turno/'+row.id)} />
+                </Tooltip>
+              < Tooltip title="Estadisticas">
+              <InsertChartIcon  onClick={() => navigate('/administracion/alumnosdelturno/'+row.id)} />
+                </Tooltip>            
+              </StyledTableCell>
+
               
               {/* <StyledTableCell >   <ModalVer
                     id= {row.id}

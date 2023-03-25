@@ -47,7 +47,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 const TablaNotificaciones = (props) => {
-    const [clases, setClases] = useState([''])
+    const [clases, setClases] = useState()
     const [datos, setDatos] = useState()
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
@@ -160,7 +160,7 @@ const TablaNotificaciones = (props) => {
                 <Featured
                 titulo1={'Porcentaje presentes/clases'}
                 titulo2={'Porcentaje Presentes/ no tomados'}
-                porcentaje1={(datos.totalpresentes/datos.total*100).toFixed(2)}
+                porcentaje1={(datos.totalpresentes/datos.total*100).toFixed(2)} 
                 porcentaje2={datos.totalpresentes/datos.totalreal *100}
 
                 />

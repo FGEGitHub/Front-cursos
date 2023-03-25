@@ -98,7 +98,7 @@ const TablaNotificaciones = (props) => {
                 </>
                 <br/>  
                 <>
-                < Tooltip title="ir a la clase">
+                < Tooltip title="Estadisticas">
                 <Face3Icon   onClick={() => navigate('/encargados/alumnosdelturno/'+clases[dataIndex]['turnoid'])} />
                 </Tooltip>
                 </>

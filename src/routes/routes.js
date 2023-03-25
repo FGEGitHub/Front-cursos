@@ -31,6 +31,7 @@ import Claseadmin from '../pages/usuario2/Clase';
 import TurnosAdmin from '../pages/usuario2/turnos';
 import Sistemas from '../pages/usuario2/Sistema';
 import Cursadocompleto from '../pages/usuario2/cursadocompl';
+import Alumnosdelturno2 from '../pages/usuario2/AlumnosTurno';
 
 
 /// 3
@@ -89,6 +90,10 @@ const Rutas = [
 		{ path: '/administracion/turnos', element: <TurnosAdmin /> },
 		{ path: '/administracion/sistemas', element: <Sistemas /> },
 		{ path: '/administracion/cursadocompleto', element: <Cursadocompleto /> },
+		{ path: '/administracion/alumnosdelturno/:id', element: <Alumnosdelturno2 /> },
+
+
+
 		
 
 		{ path: '/coordinadores/novedades', element: <Novedades3 /> },

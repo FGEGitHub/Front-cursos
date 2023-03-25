@@ -1,10 +1,12 @@
 
-import MenuUsuario4 from '../../../components/usuario4/Menuizq4'
+
+
+
+import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Clases from '../../../components/usuario4/Clasesdelcurso/todas'
-import Ficha from '../../../components/usuario4/datosdelturno/fichaturno'
-
+import Alumnostabla from '../../../components/usuario4/alumnos/tabla'
+ 
 export default function Paginas() {
 
     const [logueado, setLogueado] = useState(false) 
@@ -16,7 +18,7 @@ export default function Paginas() {
       if (loggedUserJSON) {
         
         const user = JSON.parse(loggedUserJSON)
-        if ( user.nivel != 4    ){
+        if (user.nivel != 2 && user.nivel != 3    ){
           window.localStorage.removeItem('loggedNoteAppUser')
      
     
@@ -44,8 +46,8 @@ export default function Paginas() {
 <>
 { logueado ? <div> 
     <MenuUsuario4>
-    <Ficha/>
-  <Clases/>
+  
+  <Alumnostabla/>
 
  </MenuUsuario4> 
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Clases from '../../../components/usuario3/Clasesdelcurso/todas'
 import Ficha from '../../../components/usuario3/datosdelturno/fichaturno'
+
 export default function Paginas() {
 
     const [logueado, setLogueado] = useState(false) 
