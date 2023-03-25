@@ -61,21 +61,21 @@ setActivo(true)
 
   const [inscripcion, setInscripcion] = useState({
 
-    dni: props.dni_usuario,
-    id_curso:id_curso,
-    id_inscripcion:props.id_inscripcion
 
   })
 
 
-  const handleClickOpen = () => {
-    traer()
+  const handleClickOpen = async () => {
+    await traer()
     setOpen(true);
-    inscripcion({    dni: props.dni_usuario,
+    setInscripcion(({
+
+      dni: props.dni_usuario,
       id_curso:id_curso,
-      id_inscripcion:props.id_inscripcion})
-    
-  };
+      id_inscripcion:props.id_inscripcion
+  
+    }))
+  }
 
   const handleClose = () => {
     setActivo(false)
@@ -91,8 +91,8 @@ setActivo(true)
   ////
   const handleDeterminar = async (event) => {
     // event.preventDefault();
-
-
+    // setInscripcion({ ...inscripcion, ['dni']:  props.dni_usuario })
+//    setInscripcion({ ...inscripcion, ['id_inscripcion']:  props.id_inscripcion })
     try {
 
       await servicioPersonas.inscribir(
@@ -142,7 +142,7 @@ setActivo(true)
        { props.id_inscripcion}
              <h3>Inscripcion a curso {usuarioo.nombre} </h3>
             
-
+          DNI:  { props.dni_usuario}<br/>
            Prioridad 1:  {usuarioo.prioridad1}<br/>
            Prioridad 2:  {usuarioo.prioridad2}<br/>
            <br/>
