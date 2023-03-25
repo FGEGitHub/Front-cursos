@@ -71,6 +71,10 @@ setActivo(true)
   const handleClickOpen = () => {
     traer()
     setOpen(true);
+    inscripcion({    dni: props.dni_usuario,
+      id_curso:id_curso,
+      id_inscripcion:props.id_inscripcion})
+    
   };
 
   const handleClose = () => {
