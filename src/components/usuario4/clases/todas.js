@@ -182,7 +182,7 @@ const TablaNotificaciones = (props) => {
                 < Tooltip title="ir a la clase">
                 <ContentPasteGoIcon   onClick={() => navigate('/encargados/turno/'+row.turnoid)} />
                 </Tooltip>
-                < Tooltip title="ir a la clase">
+                < Tooltip title="Estado alumnas">
                 <Face3Icon   onClick={() => navigate('/encargados/alumnosdelturno/'+row.turnoid)} />
                 </Tooltip>
                 </StyledTableCell>

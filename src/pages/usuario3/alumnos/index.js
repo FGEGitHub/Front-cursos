@@ -1,11 +1,8 @@
 
-
-
-
-import MenuUsuario3 from '../../../components/usuario3/Menuizq3'
+import MenuUsuario4 from '../../../components/usuario3/Menuizq3'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Clases from '../../../components/usuario3/clases/todas'
+import Curso from '../../../components/usuario4/alumnos/tabla'
  
 export default function Paginas() {
 
@@ -45,11 +42,11 @@ export default function Paginas() {
  
 <>
 { logueado ? <div> 
-    <MenuUsuario3>
+    <MenuUsuario4>
   
-  <Clases/>
+  <Curso/>
 
- </MenuUsuario3> 
+ </MenuUsuario4> 
 
  </div>   :<div></div>  }
 
