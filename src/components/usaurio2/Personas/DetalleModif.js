@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import servicioPersonas from '../../../services/personas'
 import Cargando from '../../CargaDeTabla'
 import Inscribir from './inscripcion'
+
 import "./profile.css";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
@@ -381,7 +382,9 @@ console.log(modificacionesadicionales)
 
 
 
-            <br /> <br />
+            <br /> 
+  
+            <br />
 
             <Paper
               sx={{
@@ -453,7 +456,8 @@ console.log(modificacionesadicionales)
 
 
 
-            <br />
+
+      <br />
             <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
               <Paper
                 sx={{

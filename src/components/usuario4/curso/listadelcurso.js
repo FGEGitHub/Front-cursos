@@ -154,6 +154,16 @@ const TablaNotificaciones = (props) => {
 
         },
         {
+            name: "tel",
+            label: "Telefono",
+
+        },
+        {
+            name: "tel2",
+            label: "Telefono alt",
+
+        },
+        {
             name: "Ver detalles",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
@@ -191,7 +201,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell>APELLDO</StyledTableCell>
             <StyledTableCell >NOMBRE</StyledTableCell>
             <StyledTableCell  >ESTADO</StyledTableCell>
-            <StyledTableCell align="left">ACCIONES</StyledTableCell>
+            <StyledTableCell align="left">Contactar</StyledTableCell>
           
           </TableRow>
         </TableHead>
@@ -226,7 +236,7 @@ const TablaNotificaciones = (props) => {
                 
                     }}
 
-                    />
+                    /> (tel1:{row.tel}/tel2:{row.tel2})
                </StyledTableCell>
             </StyledTableRow>
           ))}
