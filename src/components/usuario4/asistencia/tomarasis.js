@@ -134,7 +134,7 @@ export default function SelectTextFields(props) {
 
                     <DialogActions>
 
-                        <><Button variant="contained" color="primary" onClick={determinarpresente}> Contestar </Button></>
+                        <><Button variant="contained" color="primary" onClick={determinarpresente}> Aceptar </Button></>
                         <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
                     </DialogActions>
 
