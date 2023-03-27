@@ -133,8 +133,9 @@ const TablaNotificaciones = (props) => {
                             <TableHead>
                                 <TableRow>
                                     <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>FECHA </b> <b /></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>NOMBRE</b></TableCell>
                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>APELLIDO</b></TableCell>
+                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>NOMBRE</b></TableCell>
+                                    
                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>DNI</b></TableCell>
                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>ASISTENCIA</b></TableCell>
                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>DETERMINAR</b></TableCell>
@@ -150,8 +151,9 @@ const TablaNotificaciones = (props) => {
                                 {alumnos.map((row) => (
                                     <StyledTableRow key={row.name}>
                                         <StyledTableCell component="th" scope="row">{clase.fecha}</StyledTableCell>
-                                        <StyledTableCell component="th" scope="row"><b>{row.nombre}</b></StyledTableCell>
                                         <StyledTableCell component="th" scope="row">{row.apellido}</StyledTableCell>
+                                        <StyledTableCell component="th" scope="row"><b>{row.nombre}</b></StyledTableCell>
+                                       
                                         <StyledTableCell component="th" scope="row">{row.dni}</StyledTableCell>
                                         <StyledTableCell component="th" scope="row">   {row.asistencia === 'Presente'? <>  Presente<Person3TwoToneIcon /> </>: <> {row.asistencia === 'Ausente'?  <>Ausente<PersonOffTwoToneIcon/></>:<>  {row.asistencia === 'Ausente justificado'? <>Ausente injustificado<PersonAddDisabledTwoToneIcon/></>:<> Sin determinar</>}     </>} </>      }   </StyledTableCell>
                                        {/*  <StyledTableCell component="th" scope="row">{row.presente === null ? <>Sin registrar</> : <> {row.row.presente === 'presente' ? <>PRESENTE</> : <>AUSENTE</>} </>}</StyledTableCell> */}
