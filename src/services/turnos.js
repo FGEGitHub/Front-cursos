@@ -39,6 +39,11 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'clasesdelturno/'+ usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
 return data
        
   }
@@ -58,4 +63,12 @@ return data
      
      alert(data)  
  } 
-export default {lista,nuevaclase,modificarTurno}
+
+
+ const modificarclase= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'modificarclase',datos,config)
+   
+   alert(data)  
+} 
+export default {lista,nuevaclase,modificarTurno,modificarclase}

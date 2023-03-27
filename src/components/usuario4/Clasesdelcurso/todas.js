@@ -15,7 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-
+import ModificarClase from './ModalModificarClase'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -93,6 +93,37 @@ const TablaNotificaciones = (props) => {
 
 
                     </div>
+                    <>
+                    <ModificarClase
+                    id={clases[dataIndex]['id']}
+                    fecha={clases[dataIndex]['fecha']}
+                    observacion={clases[dataIndex]['observacion']} 
+                    numero_clase={clases[dataIndex]['numero']}
+                    traer =  {async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const novedades_aux = await servicioturnos.lista(id)
+                                setClases(novedades_aux)
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                
+                
+                
+                
+                
+                    }}
+                    
+                    />
+                    </>
 
                 </> : <>
                     <div onClick={() => navigate('/encargados/clase/' + clases[dataIndex]['id'])}>
@@ -126,7 +157,7 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "numero_clase",
+            name: "numero",
             label: "Numero",
 
         },
@@ -210,7 +241,7 @@ const TablaNotificaciones = (props) => {
                         <>
                             <MUIDataTable
 
-                                title={"Clase del curso"}
+                                title={"Clases del curso"}
                                 data={clases}
                                 columns={columns}
                                 actions={[

@@ -35,13 +35,7 @@ const Login = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-     navigate('/')
-    }
-  }, [])
+
 
 
   const hanleLogout = () => {
