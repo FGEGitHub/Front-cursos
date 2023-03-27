@@ -16,7 +16,7 @@ import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ModificarClase from './ModalModificarClase'
-
+import BorrarClase from './Modalborrar'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -123,6 +123,26 @@ const TablaNotificaciones = (props) => {
                     }}
                     
                     />
+                    <><BorrarClase
+                        id={clases[dataIndex]['id']}
+                        traer =  {async () => {
+                            try {
+                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                if (loggedUserJSON) {
+                                    const usuario = JSON.parse(loggedUserJSON)
+                    
+                                    setUsuario(usuario)
+                    
+                                    const novedades_aux = await servicioturnos.lista(id)
+                                    setClases(novedades_aux)
+                                }
+                    
+                            } catch (error) {
+                    
+                            }             
+                    
+                        }}
+                    /></>
                     </>
 
                 </> : <>

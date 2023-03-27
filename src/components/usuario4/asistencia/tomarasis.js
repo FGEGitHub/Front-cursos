@@ -28,7 +28,8 @@ export default function SelectTextFields(props) {
  const traer =  () => {
     setForm( {id_alumno: props.id_alumno,
         id_clase: props.id_clase,
-        observaciones:"ninguna"
+        observaciones:"ninguna",
+        asistencia:"Sin determinar"
     })
       
 

@@ -71,4 +71,15 @@ return data
    
    alert(data)  
 } 
-export default {lista,nuevaclase,modificarTurno,modificarclase}
+
+
+const borrarclase= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'borrarclase',datos,config)
+   
+   alert(data)  
+} 
+
+
+
+export default {lista,nuevaclase,modificarTurno,modificarclase,borrarclase}
