@@ -18,8 +18,8 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
 import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
-
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import Button from "@mui/material/Button";
 
 import Person3TwoToneIcon from '@mui/icons-material/Person3TwoTone';
 import PersonOffTwoToneIcon from '@mui/icons-material/PersonOffTwoTone';
@@ -52,6 +52,7 @@ const TablaNotificaciones = (props) => {
     const [clase, setClase] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const [estadisticas, setEstadisticas] = useState([''])
+    const [vista, setvista] = useState(true)
     const navigate = useNavigate();
     let params = useParams()
     let id = params.id
@@ -62,7 +63,11 @@ const TablaNotificaciones = (props) => {
 
     }, [])
 
+    const cambiarvista =  () => {
+        setvista(!vista)
 
+
+    }
     const traer = async () => {
         try {
 
@@ -104,8 +109,84 @@ const TablaNotificaciones = (props) => {
 
 
     }
+    function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
+        return (
+            <>
+                <div >
+                  
+                <TomarAsis
+                                        id_alumno={alumnos[dataIndex]['id_alumno']}
+                                        id_clase={alumnos[dataIndex]['id_clase']}
+                                        traer= {async () => {
+                                            try {
+                                    
+                                    
+                                    
+                                                setUsuario(usuario)
+                                                const alumn = await servicioCursos.asistencia(id)
+                                                console.log(alumn[1][0])
+                                                setClase(alumn[0][0])
+                                                setAlumnos(alumn[1])
+                                                setEstadisticas(alumn[2])
+                                    
+                                            } catch (error) {
+                                    
+                                            }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                        }}
+
+                                        />
+                  
+
+                </div>
+            </>
+        );
+    }
+
 
     // definimos las columnas
+    const columns = [
+        {
+            name: "dni",
+            label: "dni",
+
+        },
+        {
+            name: "apellido",
+            label: "apellido",
+
+        },
+       
+
+
+
+        {
+            name: "asistencia",
+            label: "asistencia",
+
+        },
+      
+        {
+            name: "Tomar asistencia",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer(
+                        dataIndex,
+                        rowIndex,
+                        // overbookingData,
+                        // handleEditOpen
+                    )
+            }
+
+        },
+
+
+    ];
 
     return (
         <div>
@@ -126,6 +207,9 @@ const TablaNotificaciones = (props) => {
 
                     }}
                 >   {!clase ? <Skeleton /> : <>
+
+<Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
+{vista ? <>
                     <h2>Fecha {clase.fecha}</h2>
                     <TableContainer>
 
@@ -196,6 +280,29 @@ const TablaNotificaciones = (props) => {
 
 
                     </TableContainer>
+
+                    </>:<>  
+                        <>
+                            <MUIDataTable
+
+                                title={"Clase"}
+                                data={alumnos}
+                                columns={columns}
+                                actions={[
+                                    {
+                                        icon: 'save',
+                                        tooltip: 'Save User',
+                                        onClick: (event, rowData) => alert("You saved " + rowData.name)
+                                    }
+                                ]}
+                               
+
+
+                            />
+                        </>
+                  
+                  
+                     </> }
                 </>}
                 </Paper>
             </>
