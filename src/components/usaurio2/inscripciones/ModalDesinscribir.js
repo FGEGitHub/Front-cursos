@@ -58,7 +58,7 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="contained"  color="error" onClick={handleClickOpen}>
+            <Button variant="contained"  color="error" onClick={handleClickOpen} >
                Desinscribir a todas<EditOffIcon />
             </Button>
             <Dialog open={open} onClose={handleClose}>

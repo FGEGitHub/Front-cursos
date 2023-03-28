@@ -89,5 +89,13 @@ return data
      alert(data)  
   } 
   
+  const cambiarestadocurado= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'cambiarestadocurado',datos,config)
+     
+   return 
+  } 
+
   
-  export default {clases,curso,confirmaciondellamado,alumnasdelcurso}
+  
+  export default {clases,curso,confirmaciondellamado,cambiarestadocurado,alumnasdelcurso}

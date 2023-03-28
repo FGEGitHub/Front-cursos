@@ -59,7 +59,7 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="contained"   color="error"  onClick={handleClickOpen}>
+            <Button variant="contained"   color="error"  onClick={handleClickOpen} disabled>
               BORRAR TODOS LOS INCRIPTOS <DeleteForeverIcon />
             </Button>
             <Dialog open={open} onClose={handleClose}>

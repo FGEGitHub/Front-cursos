@@ -138,8 +138,8 @@ const Lotes = () => {
 
   // renderiza la data table
   
-  const arreglo = [ <Button variant='contained' onClick={designarturnos} > crear turnos automaticamente </Button>,
-  <Button variant='contained' onClick={borrarturnos} > borrar turnos </Button>,
+  const arreglo = [ <Button variant='contained' onClick={designarturnos} disabled> crear turnos automaticamente </Button>,
+  <Button variant='contained' onClick={borrarturnos} disabled> borrar turnos </Button>,
   <ModalInscribirauto
   getClients =  { async () => {
 

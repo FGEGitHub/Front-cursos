@@ -32,8 +32,8 @@ import TurnosAdmin from '../pages/usuario2/turnos';
 import Sistemas from '../pages/usuario2/Sistema';
 import Cursadocompleto from '../pages/usuario2/cursadocompl';
 import Alumnosdelturno2 from '../pages/usuario2/AlumnosTurno';
-
-
+import Curso2 from '../pages/usuario2/Curso';
+import Estadoalumnas4 from '../pages/usuario2/cambiarestado';
 /// 3
 
 
@@ -50,7 +50,7 @@ import Curso4 from '../pages/usuario4/curso/index.js';
 import Turno4 from '../pages/usuario4/Turno';
 import Clase4 from '../pages/usuario4/clase';
 import Alumnosdelturno from '../pages/usuario4/alumnos';
-
+import Estadoalumnas from '../pages/usuario4/cambiarestado';
 
 
 
@@ -91,8 +91,9 @@ const Rutas = [
 		{ path: '/administracion/sistemas', element: <Sistemas /> },
 		{ path: '/administracion/cursadocompleto', element: <Cursadocompleto /> },
 		{ path: '/administracion/alumnosdelturno/:id', element: <Alumnosdelturno2 /> },
-
-
+		{ path: '/administracion/curso/:id', element: <Curso2 /> },
+		{ path: '/administracion/estadoalumnas/:id', element: <Estadoalumnas4 /> },
+		
 
 		
 
@@ -113,7 +114,7 @@ const Rutas = [
 		{ path: '/encargados/turno/:id', element: <Turno4 /> },
 		{ path: '/encargados/alumnosdelturno/:id', element: <Alumnosdelturno /> },
 		{ path: '/encargados/clase/:id', element: <Clase4 /> },
-		
+		{ path: '/encargados/estadoalumnas/:id', element: <Estadoalumnas /> },
 		
 ];
 

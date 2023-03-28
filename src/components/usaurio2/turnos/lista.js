@@ -2,18 +2,16 @@ import servicioCursos from '../../../services/Cursos'
 //import ModalVer from './ModalVer'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
-import MUIDataTable from "mui-datatables";
+import Face3Icon from '@mui/icons-material/Face3';
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
-import Skeleton from '@mui/material/Skeleton';
-import InsertChartIcon from '@mui/icons-material/InsertChart';
+import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import Button from "@mui/material/Button";
@@ -168,9 +166,16 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >  < Tooltip title="ir al turno">
               <AssignmentIndIcon  onClick={() => navigate('/administracion/turno/'+row.id)} />
                 </Tooltip>
-              < Tooltip title="Estadisticas">
-              <InsertChartIcon  onClick={() => navigate('/administracion/alumnosdelturno/'+row.id)} />
-                </Tooltip>            
+                < Tooltip title="contacto">
+                <PhoneForwardedSharpIcon  onClick={() => navigate('/administracion/curso/'+row.id)}  />
+                </Tooltip>     
+                < Tooltip title="Estado alumnas">
+                <Face3Icon   onClick={() => navigate('/administracion/alumnosdelturno/'+row.id)} />
+                </Tooltip>
+
+                < Tooltip title="cambiar estado ">
+                <ManageAccountsIcon   onClick={() => navigate('/administracion/estadoalumnas/'+row.id)} />
+                </Tooltip>       
               </StyledTableCell>
 
               
