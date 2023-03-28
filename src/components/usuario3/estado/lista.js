@@ -1,13 +1,14 @@
-import servicioCoordinadores from '../../../services/coordinadores'
+import servicioEncargados from '../../../services/encargados'
+
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
-import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
+import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
 import Tooltip from '@material-ui/core/Tooltip';
-import Face3Icon from '@mui/icons-material/Face3';
+import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
@@ -19,7 +20,9 @@ import Button from "@mui/material/Button";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import Modalestado from './modalestado'
+
+import Featured from '../../estadisticas/featured/Featured'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -45,10 +48,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 const TablaNotificaciones = (props) => {
-    const [clases, setClases] = useState([''])
+    const [clases, setClases] = useState()
+    const [datos, setDatos] = useState()
     const [usuario, setUsuario] = useState([''])
-    const [vista, setvista] = useState(true)
     const navigate = useNavigate();
+    const [vista, setvista] = useState(true)
+  let params = useParams()
+  let id = params.id
     useEffect(() => {
         traer()
 
@@ -56,7 +62,12 @@ const TablaNotificaciones = (props) => {
 
     }, [])
 
+    const cambiarvista =  () => {
+        setvista(!vista)
 
+
+    }
+    
     const traer = async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -64,8 +75,12 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-                const novedades_aux = await servicioCoordinadores.clases(usuario.id)
-                setClases(novedades_aux)
+
+                const novedades_aux = await servicioEncargados.alumnasdelcurso(id)
+                console.log(novedades_aux)
+                setClases(novedades_aux[0])
+                console.log(novedades_aux[1])
+                setDatos(novedades_aux[1])
             }
 
         } catch (error) {
@@ -73,34 +88,21 @@ const TablaNotificaciones = (props) => {
         }
 
 
-    }
-    const cambiarvista =  () => {
-        setvista(!vista)
+
+
 
 
     }
-    
+
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
+                <div >
+                  
+                {clases[dataIndex]['presente']}/{clases[dataIndex]['ausente']}/{clases[dataIndex]['sintomar']}
 
-            
-                 <>
-                 < Tooltip title="contactar">
-                <PhoneForwardedSharpIcon  onClick={() => navigate('/coordinadores/curso/'+clases[dataIndex]['turnoid'])}  />
-                </Tooltip>
-                </>
-                    <br/>      
-                <>
-                < Tooltip title="ir a la clase">
-                <ContentPasteGoIcon   onClick={() => navigate('/coordinadores/turno/'+clases[dataIndex]['turnoid'])} />
-                </Tooltip>
-                </>
-                < Tooltip title="Estado alumnas">
-                <Face3Icon   onClick={() => navigate('/encargados/alumnosdelturno/'+clases[dataIndex]['turnoid'])} />
-                </Tooltip>
+                </div>
             </>
-            
         );
     }
 
@@ -110,6 +112,11 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
+            name: "apellido",
+            label: "apellido",
+
+        },
+        {
             name: "nombre",
             label: "nombre",
 
@@ -118,12 +125,12 @@ const TablaNotificaciones = (props) => {
 
 
         {
-            name: "descripcion",
-            label: "descripcion",
+            name: "inscripcion",
+            label: "Estado",
 
         },
         {
-            name: "Llamar/ Ir al curso",
+            name: "Presente/ausente/Sin tomar",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -149,64 +156,78 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            {clases ? <>
+                       {clases ? <>
                 <div>
                 <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
                 {vista ? <>
-
                 <TableContainer component={Paper}>
       <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>NOMBRE</StyledTableCell>
-            <StyledTableCell >DESCRIPCION</StyledTableCell>
-            <StyledTableCell >PENDIENTES POR CONTESTAR</StyledTableCell>
-            <StyledTableCell align="left">ACCIONES</StyledTableCell>
+            <StyledTableCell>APELLDO</StyledTableCell>
+            <StyledTableCell >NOMBRE</StyledTableCell>
+            <StyledTableCell  >INSCRIPCION</StyledTableCell>
+            <StyledTableCell align="left">Presente/Ausente/Sin tomar</StyledTableCell>
+            <StyledTableCell  >ESTADO</StyledTableCell>
+            <StyledTableCell  >PRIMER CLASE</StyledTableCell>
+            <StyledTableCell  >CAMBIAR ESTADO</StyledTableCell>
           
           </TableRow>
         </TableHead>
         <TableBody>
           {clases.map((row) => (
-            <StyledTableRow key={row.name}>       
+            <StyledTableRow  key={row.id}>       
+              <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
-              <StyledTableCell >{row.descripcion}</StyledTableCell>
-              <StyledTableCell >{row.cantsinresp}/{row.total}</StyledTableCell>
-              <StyledTableCell >  
+              <StyledTableCell >{row.inscripcion}</StyledTableCell>
+              <StyledTableCell >{row.presente}/{row.ausente}/{row.sintomar}</StyledTableCell>
+              <StyledTableCell >{row.observaciones=== null ? <>Cursando</>:<>{row.observaciones} </>}</StyledTableCell>
+              <StyledTableCell >{row.primerclase}</StyledTableCell>
+              <StyledTableCell >
+                <Modalestado
                 
-              < Tooltip title="contactar">
-                <PhoneForwardedSharpIcon  onClick={() => navigate('/coordinadores/curso/'+row.turnoid)}  />
-                </Tooltip>
-                < Tooltip title="ir a la clase">
-                <ContentPasteGoIcon   onClick={() => navigate('/coordinadores/turno/'+row.turnoid)} />
-                </Tooltip>
-                < Tooltip title="Estado alumnas">
-                <Face3Icon   onClick={() => navigate('/coordinadores/alumnosdelturno/'+row.turnoid)} />
-                </Tooltip>
-                
+        
+                nombre_curso={'s'}
+                id_turno= {id}
+                id_cursado= {row.idcursado}
+
+                 traer= {async () => {
+                    try {
+                        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                        if (loggedUserJSON) {
+                            const usuario = JSON.parse(loggedUserJSON)
             
-                < Tooltip title="cambiar estado ">
-                <ManageAccountsIcon   onClick={() => navigate('/coordinadores/estadoalumnas/'+row.turnoid)} />
-                </Tooltip>
-                
-                
-                
-                
-                
-                
-                
-                
-             
-                </StyledTableCell>
-            </StyledTableRow>
+                            setUsuario(usuario)
+            
+                            const novedades_aux = await servicioEncargados.alumnasdelcurso(id)
+                            console.log(novedades_aux)
+                            setClases(novedades_aux[0])
+                            console.log(novedades_aux[1])
+                            setDatos(novedades_aux[1])
+                        }
+            
+                    } catch (error) {
+            
+                    }
+            
+            
+            
+            
+                }
+            
+                }/>
+              
+              </StyledTableCell>
+                  </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-    </>:<>
+    </>:<>  
                         <>
                             <MUIDataTable
 
-                                title={"Turnos"}
+                                title={"Clase"}
                                 data={clases}
                                 columns={columns}
                                 actions={[
@@ -220,14 +241,13 @@ const TablaNotificaciones = (props) => {
 
 
                             />
-                        </></>}
-                 
-
-                 
+                        </>
+                        /* 
+                                      */
+                  
+                     </> }
                 </div>
             </> : <></>}
-
-     
         </div>
     )
 }
