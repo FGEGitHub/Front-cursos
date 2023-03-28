@@ -155,7 +155,7 @@ const TablaNotificaciones = (props) => {
                                         <StyledTableCell component="th" scope="row"><b>{row.nombre}</b></StyledTableCell>
                                        
                                         <StyledTableCell component="th" scope="row">{row.dni}</StyledTableCell>
-                                        <StyledTableCell component="th" scope="row">   {row.asistencia === 'Presente'? <>  Presente<Person3TwoToneIcon /> </>: <> {row.asistencia === 'Ausente'?  <>Ausente<PersonOffTwoToneIcon/></>:<>  {row.asistencia === 'Ausente justificado'? <>Ausente injustificado<PersonAddDisabledTwoToneIcon/></>:<> Sin determinar</>}     </>} </>      }   </StyledTableCell>
+                                        <StyledTableCell component="th" scope="row">   {row.asistencia === 'Presente'? <>  Presente<Person3TwoToneIcon /> </>: <> {row.asistencia === 'Ausente'?  <>Ausente<PersonOffTwoToneIcon/></>:<>  {row.asistencia === 'Ausente justificado'? <>Ausente justificado<PersonAddDisabledTwoToneIcon/></>:<> Sin determinar</>}     </>} </>      }   </StyledTableCell>
                                        {/*  <StyledTableCell component="th" scope="row">{row.presente === null ? <>Sin registrar</> : <> {row.row.presente === 'presente' ? <>PRESENTE</> : <>AUSENTE</>} </>}</StyledTableCell> */}
                                         <StyledTableCell component="th" scope="row"> <TomarAsis
                                         id_alumno={row.id_alumno}
