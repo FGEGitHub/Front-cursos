@@ -25,12 +25,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ServicioInscripciones from '../../../services/inscripciones'
-////
+import { useParams } from "react-router-dom"
 import SocialDistanceSharpIcon from '@mui/icons-material/SocialDistanceSharp';
-import Grid from '@mui/material/Grid';
-import GroupIcon from '@mui/icons-material/Group';
-import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
+
 
 const Img = styled('img')({
   margin: 'auto',
@@ -74,6 +71,9 @@ const Lotes = () => {
     const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(true);
     const [vista, setVista] = useState(true);
+    
+  let params = useParams()
+  let id = params.id
     const navigate = useNavigate();
 
 
@@ -83,25 +83,14 @@ const Lotes = () => {
         
       setVista(!vista)
   }
-    const actualizarcursado = async () => {
-        
-        const clients = await ServicioInscripciones.actualizarcursado({
-
-        })
-        setClients(clients)
-        setLoading(false);
-    }
-
-
+   
 
     ///
 //opcionde click en el nombre
 
 const getClients = async () => {
         
-  const clients = await servicioCursos.lista({
-
-  })
+  const clients = await servicioCursos.avancedelcurso(id)
   setClients(clients)
   setLoading(false);
 }
@@ -158,25 +147,21 @@ useEffect(() => {
   
        
       {
-            name: "Nombre",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    Nombre(
-                        dataIndex,
-                        rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
-                    )
-            }
+            name: "dato1",
+           label:"Clase"
         
         },   
         
         {
-          name: "cantidad_turnos",
-         label: 'cantidad turnos',
+          name: "presentes",
+         label: 'Presentes',
         } ,
 
-    
+        {
+            name: "ausentes",
+           label: 'Ausentes',
+          } ,
+  
 
 
         
@@ -211,22 +196,9 @@ return (
     {loading ? (<CargaDeTabla/>)
         :(
     <div>
-            <Stack spacing={2} sx={{ width: '100%' }}>
+        
+
  
- <Alert severity="info">Cantidad de cursos: {clients.length}</Alert>
-    </Stack>
-    <br/>
-    <Nuevo
-    getClients =  { async () => {
-        const clients = await servicioCursos.lista({
-        })
-        setClients(clients)
-    }}
-    />
-    <Button
-                          onClick={() => actualizarcursado()}
-                      >   Corregir estados/ ver repetidos</Button> 
-    <Button  variant='contained' onClick={actualizarcursado} > Cambiar vista <RemoveRedEyeIcon/></Button>
 
 {vista   ? <>
         <MUIDataTable
@@ -279,53 +251,7 @@ return (
 
 <>
 <br/><br/><br/>
-<Paper
-      sx={{
-        p: 2,
-        margin: 'auto',
-        maxWidth: 500,
-        flexGrow: 1,
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-      }}
-    >
 
-{clients.map((row) => (
-   <Grid container spacing={2}>
-   <Grid item>
-     <ButtonBase sx={{ width: 128, height: 128 }}>
-       <Img alt="complex" src={imagen} />
-     </ButtonBase>
-   </Grid>
-   <Grid item xs={12} sm container>
-     <Grid item xs container direction="column" spacing={2}>
-       <Grid item xs>
-         <Typography gutterBottom variant="subtitle1" component="div">
-         {row.nombre}
-         </Typography>
-         <Typography variant="body2" gutterBottom>
-         {row.encargado}
-         </Typography>
-         <Typography variant="body2" color="text.secondary">
-           curso
-         </Typography>
-       </Grid>
-       <Grid item>
-         <Typography sx={{ cursor: 'pointer' }} variant="body2">
-          Borrar
-         </Typography>
-       </Grid>
-     </Grid>
-     <Grid item>
-       <Typography variant="subtitle1" component="div">
-       {row.fecha}
-       </Typography>
-     </Grid>
-   </Grid>
- </Grid>
-))}
-     
-    </Paper>
 
 
 </>

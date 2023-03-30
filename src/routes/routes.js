@@ -34,6 +34,7 @@ import Cursadocompleto from '../pages/usuario2/cursadocompl';
 import Alumnosdelturno2 from '../pages/usuario2/AlumnosTurno';
 import Curso2 from '../pages/usuario2/Curso';
 import Estadoalumnas4 from '../pages/usuario2/cambiarestado';
+import Avancedelcurso from '../pages/usuario2/avancedelcurso';
 /// 3
 
 
@@ -96,8 +97,8 @@ const Rutas = [
 		{ path: '/administracion/alumnosdelturno/:id', element: <Alumnosdelturno2 /> },
 		{ path: '/administracion/curso/:id', element: <Curso2 /> },
 		{ path: '/administracion/estadoalumnas/:id', element: <Estadoalumnas4 /> },
+		{ path: '/administracion/avancedelcurso/:id', element: <Avancedelcurso /> },
 		
-
 		
 
 		{ path: '/coordinadores/novedades', element: <Novedades3 /> },
