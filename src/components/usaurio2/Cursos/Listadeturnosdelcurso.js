@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ServicioCursos from '../../../services/Cursos'
+import servicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
 import AsignarEncargado from './ModalAsignarEncargado'
 import Asignarllamado from './ModalAsignarcoordinador'
@@ -57,7 +57,7 @@ const Lotes = () => {
 
     const getClients = async () => {
         
-        const clients = await ServicioCursos.listadeturnos(id)
+        const clients = await servicioCursos.listadeturnos(id)
    console.log(clients[0])
         setTurnos(clients)
         setLoading(false);
@@ -66,7 +66,7 @@ const Lotes = () => {
  
     const borrarturno = async (id) => {
         console.log(id)
-      const clients = await ServicioCursos.borrarturno(id)
+      const clients = await servicioCursos.borrarturno(id)
       getClients()
   }
 

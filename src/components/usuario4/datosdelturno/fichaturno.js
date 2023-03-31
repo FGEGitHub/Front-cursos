@@ -137,6 +137,40 @@ const FichaAxios = (props) => {
                   }}
                 />
               </Box>
+              <Box>
+              <TextField
+                  label="Presentes"
+                  id="cuil"
+                 // defaultValue="CUIL"
+                 value= {turno[4].presentes}
+                  variant="filled"
+                  sx={{ margin: "10px" }}
+                  InputProps={{
+                    readOnly: !editMode,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+
+                <TextField
+                  label="Ausentes"
+                  id="Nombre"
+                  value= {turno[4].ausentes}
+                  variant="filled"
+                  sx={{ margin: "10px" }}
+                  InputProps={{
+                    readOnly: true,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Box>
               </>:<></>}  
 
             </Container>

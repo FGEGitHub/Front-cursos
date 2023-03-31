@@ -145,7 +145,7 @@ useEffect(() => {
           <>
            <b> 
              <p 
-             onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}
+            onClick={() =>  navigate('/administracion/avancedelcurso/'+clients[dataIndex].id)} 
              style={{ color: '#blue' }}
             > {clients[dataIndex].nombre} </p>   </b> 
            
