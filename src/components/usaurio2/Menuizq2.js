@@ -71,6 +71,11 @@ export default function MenuIzq2 ({children}) {
           icon: <GroupIcon color="primary" />, 
           path: '/administracion/cursadocompleto' 
         },
+        { 
+          text: 'Resumen Contactos', 
+          icon: <GroupIcon color="primary" />, 
+          path: '/administracion/contacto' 
+        },
      
       ];
 

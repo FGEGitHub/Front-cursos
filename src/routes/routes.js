@@ -35,6 +35,7 @@ import Alumnosdelturno2 from '../pages/usuario2/AlumnosTurno';
 import Curso2 from '../pages/usuario2/Curso';
 import Estadoalumnas4 from '../pages/usuario2/cambiarestado';
 import Avancedelcurso from '../pages/usuario2/avancedelcurso';
+import Contacto from '../pages/usuario2/Contacto';
 /// 3
 
 
@@ -98,6 +99,7 @@ const Rutas = [
 		{ path: '/administracion/curso/:id', element: <Curso2 /> },
 		{ path: '/administracion/estadoalumnas/:id', element: <Estadoalumnas4 /> },
 		{ path: '/administracion/avancedelcurso/:id', element: <Avancedelcurso /> },
+		{ path: '/administracion/contacto', element: <Contacto /> },
 		
 		
 
