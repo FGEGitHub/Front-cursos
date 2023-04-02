@@ -211,6 +211,7 @@ const TablaNotificaciones = (props) => {
 <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
 {vista ? <>
                     <h2>Fecha {clase.fecha}</h2>
+                    <h4>(*) No estuvieron presente primer clase</h4>
                     <TableContainer>
 
                         <Table >
@@ -235,7 +236,7 @@ const TablaNotificaciones = (props) => {
                                 {alumnos.map((row) => (
                                     <StyledTableRow key={row.name}>
                                         <StyledTableCell component="th" scope="row">{clase.fecha}</StyledTableCell>
-                                        <StyledTableCell component="th" scope="row">{row.apellido}</StyledTableCell>
+                                        <StyledTableCell component="th" scope="row">  {row.primera==="No"?<div  style={{ color: 'crimson' }}  >(*) {row.apellido}</div >:<> <b>{row.apellido}</b></>} </StyledTableCell>
                                         <StyledTableCell component="th" scope="row"><b>{row.nombre}</b></StyledTableCell>
                                        
                                         <StyledTableCell component="th" scope="row">{row.dni}</StyledTableCell>
@@ -244,6 +245,7 @@ const TablaNotificaciones = (props) => {
                                         <StyledTableCell component="th" scope="row"> <TomarAsis
                                         id_alumno={row.id_alumno}
                                         id_clase={row.id_clase}
+                                        primera={row.primera}
                                         traer= {async () => {
                                             try {
                                     

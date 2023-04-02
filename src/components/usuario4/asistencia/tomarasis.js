@@ -102,7 +102,7 @@ export default function SelectTextFields(props) {
                         <b> TOMAR ASISENCIA </b></h3>
 
 
-
+                    {props.primera==="No"? <><p style={{ color: 'crimson' }} > Alumna no estuvo presente primer clase</p></>:<></>}
 
                     <InputLabel variant="standard" htmlFor="uncontrolled-native">
                        Asistencia  {props.id_alumno}
