@@ -211,7 +211,7 @@ const TablaNotificaciones = (props) => {
 <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
 {vista ? <>
                     <h2>Fecha {clase.fecha}</h2>
-                    <h4>(*) No estuvieron presente primer clase</h4>
+                    <h4 style={{ color: 'crimson' }}> (*) No estuvieron presente primer clase</h4>
                     <TableContainer>
 
                         <Table >
