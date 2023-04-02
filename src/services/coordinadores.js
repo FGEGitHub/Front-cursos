@@ -35,6 +35,11 @@ const clases = async (usuario) => {
 
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'clases/'+usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
     
 
 return data
@@ -45,6 +50,11 @@ return data
  
     // const data = await axios.post('http://localhost:4000/signupp', datos)
       const {data} = await axios.get(baseUrl+'curso/'+usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
     
 
 return data
@@ -60,5 +70,17 @@ return data
      alert(data)  
   } 
   
+  const contactos = async (id) => {
+   console.log(id)
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'contactos/'+id, config)
+      console.log(data)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+  return data
   
-  export default {clases,curso,confirmaciondellamado}
+  }
+  export default {clases,contactos,curso,confirmaciondellamado}

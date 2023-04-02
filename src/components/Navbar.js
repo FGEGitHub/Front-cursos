@@ -93,9 +93,18 @@ const traer = async () => {
                 onChange={(e, value) => setValue(value)}
               >
               <Tab label= '' />
+
+         
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
+                {user[0].nombre !== undefined? <>
                   <Tab label= {`hola  ${user[0].nombre} !`}/>
+                  </>:<>
+                  <Tab label= {` No se pudo leer nombre !`}/>
+</>}
+
               </Button> </div>:<div></div>}
+
+
               {user? <>
               <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
                   <Tab label= {`Cerrar sesion`}/>
