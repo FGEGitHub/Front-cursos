@@ -176,7 +176,7 @@ console.log(modificacionesadicionales)
                       variant="filled"
                       sx={{ margin: "10px" }}
                       InputProps={{
-                        readOnly: !editMode,
+                        readOnly: false,
                         startAdornment: (
                           <InputAdornment position="start">
                             <AccountCircle />
@@ -194,7 +194,7 @@ console.log(modificacionesadicionales)
                       variant="filled"
                       sx={{ margin: "10px" }}
                       InputProps={{
-                        readOnly: true,
+                        readOnly: false,
                         startAdornment: (
                           <InputAdornment position="start">
                             <AccountCircle />
