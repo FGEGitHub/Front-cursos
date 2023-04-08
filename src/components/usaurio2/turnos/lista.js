@@ -145,7 +145,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell  >Horario</StyledTableCell>
             <StyledTableCell  >Coordinador</StyledTableCell>
             <StyledTableCell  >Encargado</StyledTableCell>
-            <StyledTableCell align="left">Cantidad de alumnas</StyledTableCell>
+            <StyledTableCell align="left">Asignadas / Confirmadas / Rechazadas</StyledTableCell>
             <StyledTableCell align="left">Faltan responder a llamado</StyledTableCell>
             <StyledTableCell align="left">Ir a Turno</StyledTableCell>
           
@@ -160,7 +160,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.coor}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.enc}</StyledTableCell>
-              <StyledTableCell >{row.cant}/{row.cant-row.rechazados-row.faltanporresp}  ({row.rechazados}) Rechazados </StyledTableCell>
+              <StyledTableCell >{row.cant} / {row.cant-row.rechazados-row.faltanporresp} / {row.rechazados}  </StyledTableCell>
               <StyledTableCell >{row.faltanporresp}</StyledTableCell>
 
               <StyledTableCell >  < Tooltip title="ir al turno">
