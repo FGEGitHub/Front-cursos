@@ -160,7 +160,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.coor}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.enc}</StyledTableCell>
-              <StyledTableCell >{row.cant}/44  ({row.rechazados}) Rechazados </StyledTableCell>
+              <StyledTableCell >{row.cant}/{row.cant-row.rechazados-row.faltanporresp}  ({row.rechazados}) Rechazados </StyledTableCell>
               <StyledTableCell >{row.faltanporresp}</StyledTableCell>
 
               <StyledTableCell >  < Tooltip title="ir al turno">
