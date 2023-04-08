@@ -155,6 +155,7 @@ const TablaNotificaciones = (props) => {
           {clases.map((row) => (
             <StyledTableRow  key={row.id}>       
           
+          
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.nombrecurso}</StyledTableCell>
                <StyledTableCell >{row.numero}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>

@@ -1,7 +1,10 @@
 import axios from "axios"
+const url =require ('./url')
 
 
-const baseUrl = 'http://esme.cuquicalvano.com:4000/cursos/'
+const baseUrl = url.database+'cursos/'
+
+//const baseUrl = 'http://esme.cuquicalvano.com:4000/cursos/'
 //const  baseUrl ='http://localhost:4000/cursos/'
 
 
@@ -241,7 +244,7 @@ const listadetodoslosturnos= async  (datos) => {
    if(data=== 'error login'){
        
     window.localStorage.removeItem('loggedNoteAppUser')
-    window.location.reload();
+  //  window.location.reload();
   }
    return data
 } 

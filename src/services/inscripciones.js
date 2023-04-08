@@ -1,7 +1,10 @@
 import axios from "axios"
+const url =require ('./url')
 
 
-const baseUrl = 'http://esme.cuquicalvano.com:4000/inscripciones/'
+const baseUrl = url.database+'inscripciones/'
+
+
 //const  baseUrl ='http://localhost:4000/inscripciones/'
 
 

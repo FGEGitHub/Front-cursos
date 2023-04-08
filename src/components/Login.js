@@ -49,7 +49,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      console.log('user')
+ 
       const user = await loginService.login({
         usuario: usuario.usuario,
         password: usuario.password
@@ -87,7 +87,7 @@ const Login = () => {
     } catch (error) {
       console.error(error);
       console.log('error credenciales')
-      window.location.reload(true);
+     // window.location.reload(true);
       alert('error credenciales')
     
     }
@@ -96,7 +96,7 @@ const Login = () => {
 
 
   const handleChange = (e) =>{
-  console.log(usuario)
+ 
     setUsuario({ ...usuario, [e.target.name]: e.target.value })}
 
 
