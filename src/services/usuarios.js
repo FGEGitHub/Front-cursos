@@ -2,7 +2,7 @@ import axios from "axios"
 const url =require ('./url')
 
 
-const baseUrl = url.database+'/'
+const baseUrl = url.database+''
 //const  baseUrl ='http://localhost:4000/'
 
 let token = null

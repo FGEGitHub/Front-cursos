@@ -35,13 +35,6 @@ const Login = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-     navigate('/')
-    }
-  }, [])
 
 
   const hanleLogout = () => {
@@ -72,21 +65,17 @@ const Login = () => {
 
       console.log(user.nivel)
       switch(user.nivel){
-        case 1: navigate('/usuario/novedades')
-        window.location.reload(true);
+       
+          case 5:navigate('/fiscalizacion/administracion/menu')
+
+         
           break;
-          case 2:navigate('/administracion/cursos')
-                window.location.reload(true);
+          case 6:navigate('/fiscalizacion/fiscal')
+        
           break;
-          case 3:navigate('/coordinadores/novedades')
-          window.location.reload(true);
+            default:hanleLogout();
           break;
-          case 4:navigate('/encargados/cursos')
-          window.location.reload(true);
-          break;
-          case 10:navigate('/admin/usuarios')
-          window.location.reload(true);
-          break;
+
 
       }
     } catch (error) {

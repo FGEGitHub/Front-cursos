@@ -58,6 +58,8 @@ import Alumnosdelturno from '../pages/usuario4/alumnos';
 import Estadoalumnas from '../pages/usuario4/cambiarestado';
 
 
+import Loginfis from '../pages/fiscalizacion/login';
+import Menuadmin from '../pages/fiscalizacion/Admin/Menuprinc';
 
 
 const Rutas = [
@@ -70,7 +72,7 @@ const Rutas = [
 		}, */
 		{ path: '/', element: <Login /> },
 		{ path: '/login', element: <Login /> },
-		{ path: '/loginadministracion', element: <Login2 /> },
+	
 		
 		{ path: '/usuario/novedades', element: <Novedades1 /> },
 		{ path: '/usuario/cursos', element: <Menu1 /> },
@@ -122,6 +124,12 @@ const Rutas = [
 		{ path: '/encargados/alumnosdelturno/:id', element: <Alumnosdelturno /> },
 		{ path: '/encargados/clase/:id', element: <Clase4 /> },
 		{ path: '/encargados/estadoalumnas/:id', element: <Estadoalumnas /> },
+
+
+
+
+		{ path: '/fiscalizacion/login', element: <Loginfis /> },
+		{ path: '/fiscalizacion/administracion/menu', element: <Menuadmin /> },
 		
 ];
 

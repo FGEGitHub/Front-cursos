@@ -174,10 +174,9 @@ export default function Ingresos() {
                                
                             }}
                         >   <option  value={'1'}>Elegir</option>
-                            <option   value={1}>Alumna</option>
-                            <option  value={3}>Coordinador</option>
-                            <option  value={2}>Administrador</option>
-                            <option  value={4}>Encargado</option>
+                         
+                            <option  value={5}>Administrador</option>
+                            <option  value={6}>Fiscal</option>
                            
                     
                          
