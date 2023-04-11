@@ -1,5 +1,6 @@
 import * as React from 'react';
-import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+
+import EventNoteTwoToneIcon from '@mui/icons-material/EventNoteTwoTone';
 import "./CardStyle.css";
 import { useNavigate } from 'react-router-dom';
 const CardUno = () => {
@@ -12,8 +13,8 @@ const CardUno = () => {
             <div className="container__article">
     
                 <div onClick={ir} className="box__article">
-                   <i onClick={ir}> < CurrencyExchangeIcon fontSize="large"/></i>
-                    <h5 onClick={ir}>Consulta tus Cuotas</h5>
+                   <i onClick={ir}> < EventNoteTwoToneIcon fontSize="large"/></i>
+                    <h5 onClick={ir}>Cargar Excel</h5>
                 </div>
                
                 

@@ -48,7 +48,7 @@ const Login = () => {
     event.preventDefault();
     setLoading(true);
 
-    try {
+
  
       const user = await loginService.login({
         usuario: usuario.usuario,
@@ -63,7 +63,7 @@ const Login = () => {
       console.log(user)
      await setUser(user)
 
-      setLoading(false);
+
 
       console.log(user.nivel)
       switch(user.nivel){
@@ -82,15 +82,12 @@ const Login = () => {
           case 10:navigate('/admin/usuarios')
           window.location.reload(true);
           break;
+          default:
+            window.localStorage.removeItem('loggedNoteAppUser')
+            navigate('/login')
 
       }
-    } catch (error) {
-      console.error(error);
-      console.log('error credenciales')
-     // window.location.reload(true);
-      alert('error credenciales')
-    
-    }
+      setLoading(false);
 
   };
 

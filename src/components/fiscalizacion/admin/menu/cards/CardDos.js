@@ -13,7 +13,7 @@ const CardUno = () => {
     
                 <div onClick={ir} className="box__article">
                    <i onClick={ir}> < CurrencyExchangeIcon fontSize="large"/></i>
-                    <h5 onClick={ir}>Consulta tus Cuotas</h5>
+                    <h5 onClick={ir}>Ver todos losincriptos</h5>
                 </div>
                
                 

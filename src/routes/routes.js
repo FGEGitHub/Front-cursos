@@ -60,6 +60,9 @@ import Estadoalumnas from '../pages/usuario4/cambiarestado';
 
 import Loginfis from '../pages/fiscalizacion/login';
 import Menuadmin from '../pages/fiscalizacion/Admin/Menuprinc';
+import CargarFisca from '../pages/fiscalizacion/Admin/cargarexcel';
+import Fiscainscripc from '../pages/fiscalizacion/Admin/inscripciones';
+
 
 
 const Rutas = [
@@ -130,7 +133,11 @@ const Rutas = [
 
 		{ path: '/fiscalizacion/login', element: <Loginfis /> },
 		{ path: '/fiscalizacion/administracion/menu', element: <Menuadmin /> },
+		{ path: '/fiscalizacion/administracion/cargar', element: <CargarFisca /> },
+		{ path: '/fiscalizacion/administracion/inscripciones', element: <Fiscainscripc /> },
+
 		
+
 ];
 
 export default Rutas;

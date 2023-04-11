@@ -36,6 +36,7 @@ const Navbar = (props) => {
 }, [])
 const traer = async () => {
 
+
   const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
     const user = JSON.parse(loggedUserJSON)
@@ -96,10 +97,10 @@ const traer = async () => {
 
          
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
-                {user[0].nombre !== undefined? <>
+                {user.length > 0? <>
                   <Tab label= {`hola  ${user[0].nombre} !`}/>
                   </>:<>
-                  <Tab label= {` No se pudo leer nombre !`}/>
+                  <Tab />
 </>}
 
               </Button> </div>:<div></div>}
@@ -110,7 +111,7 @@ const traer = async () => {
                   <Tab label= {`Cerrar sesion`}/>
               </Button>
               </>:<>
-              <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
+              <Button sx={{ marginLeft: "10px" }} variant="Outlined">
                   <Tab label= {`Iniciar sesion`}/>
               </Button></>}
               </Tabs>
