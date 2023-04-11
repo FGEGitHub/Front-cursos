@@ -7,7 +7,7 @@ import servicioFidei from '../../../../services/fiscalizacion'
 
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import Vernscripto from "./verinscripto";
+import Vernscripto from "./modallamado";
 
 
 
@@ -27,7 +27,7 @@ export default function Ingresos() {
     }, [])
     const traer = async () => {
 
-        const ins = await servicioFidei.todasincripciones()
+        const ins = await servicioFidei.todaslasasignaciones()
         setInscrip(ins[0])
         // 
 
@@ -41,7 +41,7 @@ export default function Ingresos() {
           <Vernscripto
           dni= {inscrip[dataIndex].dni}
           nombre= {inscrip[dataIndex].nombre}
-          escuela={inscrip[dataIndex].nombre_escuela}
+          telefono={inscrip[dataIndex].telefono}
 
           id_inscripcion={inscrip[dataIndex].id}
           getClients = { async () => {
@@ -69,23 +69,14 @@ export default function Ingresos() {
             label: "nombre",
         },
         {
-            name: "movilidad",
-            label: "movilidad",
+            name: "nombreescuela",
+            label: "escuela",
 
         },
+       
         {
-            name: "nombre_escuela",
-            label: "nombre_escuela",
-
-        },
-        {
-            name: "vegano",
-            label: "vegano",
-
-        },
-        {
-            name: "celiaco",
-            label: "celiaco",
+            name: "telefono",
+            label: "telefono",
 
         },
         {
@@ -95,7 +86,7 @@ export default function Ingresos() {
         },
 
         {
-            name: "Ir/Modificar",
+            name: "Acciones/llamado",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(

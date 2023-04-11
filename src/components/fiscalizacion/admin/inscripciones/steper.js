@@ -3,7 +3,10 @@ import { Container } from "@mui/system";
 import React from "react";
 import { useState, useEffect } from "react";
 import Tablaincrip from './Tablainscrip'
+import Tablaasig from './TablaAsignados'
 import { Paper } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const SubirLegajo = () => {
     const [activeStep, setActiveStep] = useState(0);
     let [steps, setSteps] = useState([
@@ -28,8 +31,8 @@ const SubirLegajo = () => {
        
         setSteps([
             { label: 'Lista', completed: false },
-            { label: 'isncripto', completed: false },
-            { label: 'confirmado', completed:false },
+            { label: 'inscriptos', completed: false },
+            { label: 'confirmados', completed:false },
             
 
         ])
@@ -59,6 +62,27 @@ const SubirLegajo = () => {
         <Container sx={{ my: 4 }}>
 
           {listo ?  <div>
+            <Stack
+                direction="row"
+                sx={{ pt: 2, pb: 7, justifyContent: "space-around" }}
+            >
+                <Button
+
+                    disabled={!activeStep}
+                    onClick={() => setActiveStep(activeStep => activeStep - 1)}
+                >
+                 <ArrowBackIcon/>  Izquierda
+                </Button>
+                <Button
+                    disabled={checkDisabled()}
+                    onClick={() => setActiveStep(activeStep => activeStep + 1)}
+                >
+                    Derecha <ArrowForwardIcon/>
+                </Button>
+
+
+
+            </Stack>
                 <Stepper
                     alternativeLabel
                     nonLinear
@@ -85,7 +109,7 @@ const SubirLegajo = () => {
                     0: <Tablaincrip
                   
                         />,
-                    1: <h2>hola</h2>,
+                    1: <Tablaasig/>,
                         2:  <h2>dos</h2>,
 
                   

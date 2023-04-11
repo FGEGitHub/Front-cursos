@@ -98,6 +98,40 @@ const traerescuelas = async (usuario) => {
     }
 return data
 }
+const todaslasasignaciones = async () => { 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'todaslasasignaciones/', config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+}
+const listademesas = async () => { 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'listademesas/', config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+}
+
+const inscribir= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'inscribir',datos,config)
+   
+   alert(data)  
+} 
+const crearmesa= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'crearmesa',datos,config)
+   
+   alert(data)  
+} 
 
 
-export default {listaExtractos,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
+
+export default {listaExtractos,crearmesa,listademesas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}

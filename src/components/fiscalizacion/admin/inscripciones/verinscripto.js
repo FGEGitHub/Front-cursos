@@ -46,11 +46,7 @@ export default function SelectTextFields(props) {
 
   const traer = async () => {
     setUsuarioo()
-   const not = await servicioFide.datosusuarioporid(props.dni_usuario)
-
-   setUsuarioo(not[0])
-   setCategoria(not[2])
-   setPorcent(not[1]) 
+  
    
    const turnos = await servicioFide.traerescuelas()
    setTurnos(turnos)
@@ -70,8 +66,8 @@ setActivo(true)
     setOpen(true);
     setInscripcion(({
 
-      dni: props.dni_usuario,
-      id_curso:id_curso,
+      dni: props.dni,
+
       id_inscripcion:props.id_inscripcion
   
     }))
@@ -140,32 +136,30 @@ setActivo(true)
 
 
        { props.id_inscripcion}
-             <h3>Inscripcion a curso {usuarioo.nombre} </h3>
+             <h3>Asignaciona escuela {props.nombre} </h3>
             
-          DNI:  { props.dni_usuario}<br/>
-           Prioridad 1:  {usuarioo.prioridad1}<br/>
-           Prioridad 2:  {usuarioo.prioridad2}<br/>
+          DNI:  { props.dni}<br/>
+           Prioridad 1:  {props.escuela}<br/>
+           Prioridad 2:En caos que elija 2<br/>
            <br/>
-         <b> actualmente {usuarioo.anotado !== undefined ? <> anotada en curso {usuarioo.anotado} </>:<> no anotada</>}</b> 
+         <b> Agregar detalles en caso q este inscripto de donde</b> 
             <br/>
-     <label>Hijos:  {usuarioo.hijos != undefined ?<>{usuarioo.hijos}</>:<>NO</>} <br />
+     
           
-            trabajo:{usuarioo.trabaja} <br />
-            {usuarioo.trabaja === "Si" ? <> {usuarioo.tipot}</>:<></>} 
 
-     </label>
+   
    
                  <br />
-                 <label>inscripcion a curso?</label>
+                 <label>Cual escuela?</label>
                  
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               curso
+                               Escuela
                             </InputLabel>
                             <NativeSelect
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'id_turno',
+                                    name: 'id_escuela',
                                     id: 'uncontrolled-native',
 
                                 }}
@@ -180,7 +174,27 @@ setActivo(true)
 
                             </NativeSelect>
    
-   
+                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                               Mesa
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'mesa',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            
+                            >  
+                             <option value={'1'}> Elegir</option>
+                          
+                                       
+                              <option value={1}>1</option>
+                              <option value={1}>1</option>
+                              <option value={1}>1</option>
+
+                            </NativeSelect>
 
                  <DialogActions>
          <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button>

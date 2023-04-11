@@ -62,7 +62,7 @@ import Loginfis from '../pages/fiscalizacion/login';
 import Menuadmin from '../pages/fiscalizacion/Admin/Menuprinc';
 import CargarFisca from '../pages/fiscalizacion/Admin/cargarexcel';
 import Fiscainscripc from '../pages/fiscalizacion/Admin/inscripciones';
-
+import Mesasfisc from '../pages/fiscalizacion/Admin/mesas';
 
 
 const Rutas = [
@@ -135,7 +135,7 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/menu', element: <Menuadmin /> },
 		{ path: '/fiscalizacion/administracion/cargar', element: <CargarFisca /> },
 		{ path: '/fiscalizacion/administracion/inscripciones', element: <Fiscainscripc /> },
-
+		{ path: '/fiscalizacion/administracion/mesas', element: <Mesasfisc /> },
 		
 
 ];
