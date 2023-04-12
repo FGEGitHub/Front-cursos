@@ -40,6 +40,17 @@ const listaExtractos= async  () => {
       console.log(data)
     return data
    } 
+
+   
+   const listaExtractosescuelas= async  () => {
+
+
+    const {data } = await axios.get(baseUrl+'todaslasinscripcionesescuelas',config)
+      console.log(data)
+    return data
+   } 
+
+
    const todasincripciones= async  () => {
 
 
@@ -57,7 +68,13 @@ const listaExtractos= async  () => {
      return data
      } 
   
-
+     const VerExtractoescuelas= async  (id) => {
+      ////
+      console.log(id)
+      const {data } = await axios.post(baseUrl+'incripcionesidescuelas',id,config)
+        console.log(data)
+       return data
+       } 
    
      const cargarinscripciones= async  (id) => {
         ////
@@ -66,15 +83,26 @@ const listaExtractos= async  () => {
           console.log(data)
          return data
          } 
-
-
+         
+         const cargarinscripcionesescuelas= async  (id) => {
+          ////
+          console.log(id)
+          const {data } = await axios.post(baseUrl+'cargarinscripcionesescuelas',id,config)
+            console.log(data)
+           return data
+           }  
          const subirprueba = async (formdata) => {
             console.log(formdata)
             const { data } = await axios.post(baseUrl + 'subirprueba', formdata,config)
             console.log(data)
           
           }
-
+          const subirpruebaescuelas = async (formdata) => {
+            console.log(formdata)
+            const { data } = await axios.post(baseUrl + 'subirpruebaescuelas', formdata,config)
+            console.log(data)
+          
+          }
 
           
  const datosusuarioporid = async (usuario) => { 
@@ -119,6 +147,19 @@ const listademesas = async () => {
 return data
 }
 
+const datosdemesas = async () => { 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+
+    const {data} = await axios.get(baseUrl+'datosdemesas/', config)
+
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+}
+
 const inscribir= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'inscribir',datos,config)
@@ -131,7 +172,12 @@ const crearmesa= async  (datos) => {
    
    alert(data)  
 } 
+const traermesas= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.get(baseUrl+'traermesas/'+datos,config)
+   
+  return data  
+} 
 
 
-
-export default {listaExtractos,crearmesa,listademesas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
+export default {listaExtractos,traermesas,datosdemesas,crearmesa,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}

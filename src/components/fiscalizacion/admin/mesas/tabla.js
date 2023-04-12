@@ -133,7 +133,7 @@ return (
     <br/>
     <Nuevo
     getClients =  { async () => {
-        const clients = await servicioFisca.lista({
+        const clients = await servicioFisca.listademesas({
         })
         setClients(clients)
     }}

@@ -7,6 +7,10 @@ import Tablaasig from './TablaAsignados'
 import { Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import '../../../estadisticas/Home.scss'
+import Widget from '../../Widget/Widget'
+import servicioFisca from '../../../../services/fiscalizacion'
+
 const SubirLegajo = () => {
     const [activeStep, setActiveStep] = useState(0);
     let [steps, setSteps] = useState([
@@ -15,7 +19,7 @@ const SubirLegajo = () => {
 
     ]);
 
-    const [user, setUser] = useState([''])
+    const [datos, setDatos] = useState()
     const [completo, setCompleto] = useState()
     const [listo, setListo] = useState(false)
 
@@ -29,6 +33,8 @@ const SubirLegajo = () => {
 
     const traer = async () => {
        
+        const dat = await servicioFisca.datosdemesas()
+        setDatos(dat)
         setSteps([
             { label: 'Lista', completed: false },
             { label: 'inscriptos', completed: false },
@@ -50,6 +56,24 @@ const SubirLegajo = () => {
 
     return (
         <>
+        {datos ? <>
+        <div className="home">
+
+        <Widget type="Cantidad de mesas "
+                      cantidad={datos[0]}
+                    />
+                     <Widget type="Mesas asignadas"
+                      cantidad={datos[1]}
+                    />
+                        <Widget type="Cantidad confirmadas"
+                      cantidad={1}
+                    />
+                     <Widget type="Cantidad mesas"
+                      cantidad={1}
+                    />
+
+                    </div>
+                    </>:<></>}
         <Paper
         sx={{
           cursor: 'pointer',

@@ -36,9 +36,9 @@ export default function SelectTextFields(props) {
   let params = useParams()
   let id_curso = params.id
   const [usuarioo, setUsuarioo] = useState()
-  const [porcent, setPorcent] = useState()
+  const [cargandomesas, setCargandomesas] = useState(false)
   const [turnos, setTurnos] = useState()
-  const [categoria, setCategoria] = useState()
+  const [mesas, setMesas] = useState()
   const [activo, setActivo] = useState(false)
 
 
@@ -59,6 +59,18 @@ setActivo(true)
 
 
   })
+  const traermesas = async (e) => {
+
+    setCargandomesas(false)
+   
+   const mes = await servicioFide.traermesas(e)
+   setMesas(mes)
+   console.log('antes')
+   setCargandomesas(true)
+   console.log('dps')
+  
+
+  }
 
 
   const handleClickOpen = async () => {
@@ -83,12 +95,17 @@ setActivo(true)
     console.log(inscripcion)
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 }
+const handleChange2 = (e) => {
   
+  setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
+
+  traermesas(e.target.value)
+}
+
+
   ////
   const handleDeterminar = async (event) => {
-    // event.preventDefault();
-    // setInscripcion({ ...inscripcion, ['dni']:  props.dni_usuario })
-//    setInscripcion({ ...inscripcion, ['id_inscripcion']:  props.id_inscripcion })
+
     try {
 
       await servicioFide.inscribir(
@@ -157,7 +174,7 @@ setActivo(true)
                             </InputLabel>
                             <NativeSelect
                                 defaultValue={30}
-                                onChange={handleChange}
+                                onChange={handleChange2}
                                 inputProps={{
                                     name: 'id_escuela',
                                     id: 'uncontrolled-native',
@@ -187,14 +204,19 @@ setActivo(true)
                                 }}
                             
                             >  
+
+                            {cargandomesas ? <>
                              <option value={'1'}> Elegir</option>
                           
+                             {mesas.map((row) => (
                                        
-                              <option value={1}>1</option>
-                              <option value={1}>1</option>
-                              <option value={1}>1</option>
-
+                                       <option value={row.id}> {row.nombre}</option>
+         
+                             ))}
+                                  </>:<>Cargando</>}
                             </NativeSelect>
+
+                           
 
                  <DialogActions>
          <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button>
