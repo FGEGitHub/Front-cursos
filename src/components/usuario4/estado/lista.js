@@ -12,8 +12,7 @@ import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
-import Skeleton from '@mui/material/Skeleton';
-import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
+import Widget from '../../estadisticas/Widget/Widget'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import Button from "@mui/material/Button";
@@ -21,7 +20,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import Modalestado from './modalestado'
-
+import '../../estadisticas/Home.scss'
 import Featured from '../../estadisticas/featured/Featured'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -50,11 +49,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState()
     const [datos, setDatos] = useState()
+    const [estadisticas, setEstadisticas] = useState()
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
     const [vista, setvista] = useState(true)
-  let params = useParams()
-  let id = params.id
+    let params = useParams()
+    let id = params.id
     useEffect(() => {
         traer()
 
@@ -62,12 +62,12 @@ const TablaNotificaciones = (props) => {
 
     }, [])
 
-    const cambiarvista =  () => {
+    const cambiarvista = () => {
         setvista(!vista)
 
 
     }
-    
+
     const traer = async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -81,6 +81,7 @@ const TablaNotificaciones = (props) => {
                 setClases(novedades_aux[0])
                 console.log(novedades_aux[1])
                 setDatos(novedades_aux[1])
+                setEstadisticas(novedades_aux[2])
             }
 
         } catch (error) {
@@ -98,8 +99,41 @@ const TablaNotificaciones = (props) => {
         return (
             <>
                 <div >
-                  
-                {clases[dataIndex]['presente']}/{clases[dataIndex]['ausente']}/{clases[dataIndex]['sintomar']}
+
+
+                    <Modalestado
+
+
+                        nombre_curso={'s'}
+                        id_turno={id}
+
+                        id_cursado={clases[dataIndex]['idcursado']}
+
+                        traer={async () => {
+                            try {
+                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                if (loggedUserJSON) {
+                                    const usuario = JSON.parse(loggedUserJSON)
+
+                                    setUsuario(usuario)
+
+                                    const novedades_aux = await servicioEncargados.alumnasdelcurso(id)
+                                    console.log(novedades_aux)
+                                    setClases(novedades_aux[0])
+                                    console.log(novedades_aux[1])
+                                    setDatos(novedades_aux[1])
+                                }
+
+                            } catch (error) {
+
+                            }
+
+
+
+
+                        }
+
+                        } />
 
                 </div>
             </>
@@ -130,7 +164,29 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "Presente/ausente/Sin tomar",
+            name: "presente",
+            label: "Presentes",
+
+        },
+        {
+            name: "ausente",
+            label: "Ausentes",
+
+        },
+        {
+            name: "justificadas",
+            label: "Justificado",
+
+        },
+        {
+            name: "primerclase",
+            label: "Primer clase",
+
+        },
+
+
+        {
+            name: "Ausentes(Justificadas)",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -156,74 +212,101 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-                       {clases ? <>
-                <div>
-                <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
-                {vista ? <>
-                <TableContainer component={Paper}>
-      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>APELLDO</StyledTableCell>
-            <StyledTableCell >NOMBRE</StyledTableCell>
-            <StyledTableCell  >INSCRIPCION</StyledTableCell>
-            <StyledTableCell align="left">Presente/Ausente/Sin tomar</StyledTableCell>
-            <StyledTableCell  >ESTADO</StyledTableCell>
-            <StyledTableCell  >PRIMER CLASE</StyledTableCell>
-            <StyledTableCell  >CAMBIAR ESTADO</StyledTableCell>
-          
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {clases.map((row) => (
-            <StyledTableRow  key={row.id}>       
-              <StyledTableCell >{row.apellido}</StyledTableCell>
-              <StyledTableCell >{row.nombre}</StyledTableCell>
-              <StyledTableCell >{row.inscripcion}</StyledTableCell>
-              <StyledTableCell >{row.presente}/{row.ausente}/{row.sintomar}</StyledTableCell>
-              <StyledTableCell >{row.observaciones=== null ? <>Cursando</>:<>{row.observaciones} </>}</StyledTableCell>
-              <StyledTableCell >{row.primerclase}</StyledTableCell>
-              <StyledTableCell >
-                <Modalestado
-                
-        
-                nombre_curso={'s'}
-                id_turno= {id}
-                id_cursado= {row.idcursado}
+            {clases ? <>
 
-                 traer= {async () => {
-                    try {
-                        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                        if (loggedUserJSON) {
-                            const usuario = JSON.parse(loggedUserJSON)
-            
-                            setUsuario(usuario)
-            
-                            const novedades_aux = await servicioEncargados.alumnasdelcurso(id)
-                            console.log(novedades_aux)
-                            setClases(novedades_aux[0])
-                            console.log(novedades_aux[1])
-                            setDatos(novedades_aux[1])
-                        }
-            
-                    } catch (error) {
-            
-                    }
-            
-            
-            
-            
-                }
-            
-                }/>
-              
-              </StyledTableCell>
-                  </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </>:<>  
+          
+
+          
+                    <div className="home">
+      {estadisticas.map((row) => (
+                 <>       <h3>Clase {row.numero} </h3>
+                        <div className="widgets">
+
+                            <Widget type="total Presentes"
+                                cantidad={row.presenteclase}
+                            />
+                        </div>
+                        <div className="widgets">
+                            <Widget type="total ausentes"
+                                cantidad={row.ausenteclase}
+                            />
+                        </div> 
+                        
+                             </>
+            ))}
+                    </div>
+
+                  
+
+                <div>
+                    <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon /></Button>
+                    {vista ? <>
+                        <TableContainer component={Paper}>
+                            <Table sx={{ minWidth: "20%", maxWidth: "1000%" }} aria-label="customized table">
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>APELLDO</StyledTableCell>
+                                        <StyledTableCell >NOMBRE</StyledTableCell>
+                                        <StyledTableCell  >INSCRIPCION</StyledTableCell>
+                                        <StyledTableCell align="left">Presentes</StyledTableCell>
+                                        <StyledTableCell align="left">Ausentes(Justificados)</StyledTableCell>
+                                        <StyledTableCell  >ESTADO</StyledTableCell>
+                                        <StyledTableCell  >PRIMER CLASE</StyledTableCell>
+                                        <StyledTableCell  >CAMBIAR ESTADO</StyledTableCell>
+
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {clases.map((row) => (
+                                        <StyledTableRow key={row.id}>
+                                            <StyledTableCell >{row.apellido}</StyledTableCell>
+                                            <StyledTableCell >{row.nombre}</StyledTableCell>
+                                            <StyledTableCell >{row.inscripcion}</StyledTableCell>
+                                            <StyledTableCell >{row.presente}</StyledTableCell>
+                                            <StyledTableCell >{row.ausente}/({row.justificadas})</StyledTableCell>
+                                            <StyledTableCell >{row.observaciones === null ? <>Cursando</> : <>{row.observaciones} </>}</StyledTableCell>
+                                            <StyledTableCell >{row.primerclase}</StyledTableCell>
+                                            <StyledTableCell >
+                                                <Modalestado
+
+
+                                                    nombre_curso={'s'}
+                                                    id_turno={id}
+                                                    id_cursado={row.idcursado}
+
+                                                    traer={async () => {
+                                                        try {
+                                                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                                            if (loggedUserJSON) {
+                                                                const usuario = JSON.parse(loggedUserJSON)
+
+                                                                setUsuario(usuario)
+
+                                                                const novedades_aux = await servicioEncargados.alumnasdelcurso(id)
+                                                                console.log(novedades_aux)
+                                                                setClases(novedades_aux[0])
+                                                                console.log(novedades_aux[1])
+                                                                setDatos(novedades_aux[1])
+                                                            }
+
+                                                        } catch (error) {
+
+                                                        }
+
+
+
+
+                                                    }
+
+                                                    } />
+
+                                            </StyledTableCell>
+                                        </StyledTableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </> : <>
                         <>
                             <MUIDataTable
 
@@ -242,10 +325,10 @@ const TablaNotificaciones = (props) => {
 
                             />
                         </>
-                        /* 
-                                      */
-                  
-                     </> }
+                        /*
+                        */
+
+                    </>}
                 </div>
             </> : <></>}
         </div>
