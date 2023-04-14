@@ -5,9 +5,8 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
-import Tooltip from '@material-ui/core/Tooltip';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
@@ -49,6 +48,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState()
     const [datos, setDatos] = useState()
+    const [datosconfirmados, setDatosconfirmados] = useState()
     const [estadisticas, setEstadisticas] = useState()
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
@@ -82,6 +82,7 @@ const TablaNotificaciones = (props) => {
                 console.log(novedades_aux[1])
                 setDatos(novedades_aux[1])
                 setEstadisticas(novedades_aux[2])
+                setDatosconfirmados(novedades_aux[3])
             }
 
         } catch (error) {
@@ -214,7 +215,9 @@ const TablaNotificaciones = (props) => {
         <div>
             {clases ? <>
 
-          
+                <Alert variant="outlined" severity="error">
+        Detalles del curso: Confirmadas: {datosconfirmados.confirmados} Rechazados: {datosconfirmados.rechazados}
+      </Alert>
 
           
                     <div className="home">
