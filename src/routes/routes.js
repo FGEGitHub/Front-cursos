@@ -63,7 +63,12 @@ import Menuadmin from '../pages/fiscalizacion/Admin/Menuprinc';
 import CargarFisca from '../pages/fiscalizacion/Admin/cargarexcel';
 import Fiscainscripc from '../pages/fiscalizacion/Admin/inscripciones';
 import Mesasfisc from '../pages/fiscalizacion/Admin/mesas';
-import Subiresc from '../pages/fiscalizacion/Admin/cargarescuelas.js';
+import Subiresc from '../pages/fiscalizacion/Admin/cargarescuelas.js'
+import InscripcionFisca from '../pages/fiscalizacion/inscripciones'
+
+
+
+
 
 const Rutas = [
 	 <Navbar/> ,
@@ -137,6 +142,7 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/inscripciones', element: <Fiscainscripc /> },
 		{ path: '/fiscalizacion/administracion/mesas', element: <Mesasfisc /> },
 		{ path: '/fiscalizacion/administracion/subirescuelas', element: <Subiresc /> },
+		{ path: '/fiscalizacion/inscripcion', element: <InscripcionFisca /> },
 		
 
 ];
