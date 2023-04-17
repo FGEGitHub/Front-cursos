@@ -97,12 +97,12 @@ export default function Ingresos() {
                                     onChange={handleChange}
                                 >
                                     <MenuItem value="2">
-                                        <em>None</em>
+                                        <em>Seleciconar</em>
                                     </MenuItem>
                                
                                     <MenuItem value={'5'}>Administracion</MenuItem>
                              
-                                    <MenuItem value={'7'}>Encargado</MenuItem>
+                                    <MenuItem value={'7'}>Aliado</MenuItem>
                                     
                                 </Select>
                             </FormControl>
