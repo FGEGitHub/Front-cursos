@@ -97,16 +97,24 @@ const Estracto = () => {
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="Nombre y Apellido"
+                    label="Nombre "
                     name="nombre"
                     onChange={handleChange}
                     fullWidth
                     variant="standard"
                 />
               
-
-                 
-                <TextField
+              <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Apellido"
+                    name="apellido"
+                    onChange={handleChange}
+                    fullWidth
+                    variant="standard"
+                />
+                 <TextField
                     autoFocus
                     margin="dense"
                     id="name"
@@ -117,6 +125,29 @@ const Estracto = () => {
                     type="number"
                     variant="standard"
                 />
+                     <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Telefono"
+                    name="telefono"
+                    onChange={handleChange}
+                    fullWidth
+                    type="number"
+                    variant="standard"
+                />
+                    <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Telefono alternativo"
+                    name="telefono2"
+                    onChange={handleChange}
+                    fullWidth
+                    type="number"
+                    variant="standard"
+                />
+               {/* 
                   <TextField
                     autoFocus
                     margin="dense"
@@ -244,7 +275,7 @@ const Estracto = () => {
                         <option value={row.id}> {row.nombre}</option>
 
                     ))}
-                </NativeSelect>
+                </NativeSelect> */}
                         <br/>
                 <CardActions>
                <Button variant="outlined"

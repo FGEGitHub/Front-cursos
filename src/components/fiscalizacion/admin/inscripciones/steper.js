@@ -38,7 +38,7 @@ const SubirLegajo = () => {
         setDatos(dat)
         setSteps([
             { label: 'Lista', completed: false },
-            { label: 'inscriptos', completed: false },
+            { label: 'Asignados', completed: false },
             { label: 'confirmados', completed:false },
             
 

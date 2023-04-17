@@ -65,7 +65,7 @@ import Fiscainscripc from '../pages/fiscalizacion/Admin/inscripciones';
 import Mesasfisc from '../pages/fiscalizacion/Admin/mesas';
 import Subiresc from '../pages/fiscalizacion/Admin/cargarescuelas.js'
 import InscripcionFisca from '../pages/fiscalizacion/inscripciones'
-
+import Usersfisca from '../pages/fiscalizacion/Admin/Usuarios'
 
 
 
@@ -143,6 +143,7 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/mesas', element: <Mesasfisc /> },
 		{ path: '/fiscalizacion/administracion/subirescuelas', element: <Subiresc /> },
 		{ path: '/fiscalizacion/inscripcion', element: <InscripcionFisca /> },
+		{ path: '/fiscalizacion/usuarios', element: <Usersfisca /> },
 		
 
 ];

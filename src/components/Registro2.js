@@ -77,7 +77,7 @@ export default function Ingresos() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} disabled>
        Registrarme
       </Button>
       <Dialog maxWidth="md" open={open} onClose={handleClose}>

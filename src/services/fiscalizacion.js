@@ -186,4 +186,32 @@ const enviarinscripcion= async  (datos) => {
     
    return(data)
 } 
-export default {listaExtractos,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
+
+const todos = async (usuario) => {
+  ////////usaurios 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'todos/', config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+     
+}
+
+const registronivel3 = async (datos) => {
+  console.log(datos)
+
+
+    const {data} = await axios.post(baseUrl+'signupp', datos,config)
+
+       alert(data)
+  
+
+     
+}
+
+
+
+export default {listaExtractos,registronivel3,todos,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}

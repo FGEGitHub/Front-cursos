@@ -23,7 +23,7 @@ export default function Paginas() {
             console.log(user)
             switch (user.nivel) {
               case 5:
-                navigate('/fiscalizacion/menu')
+                navigate('/fiscalizacion/administracion/menu')
                 break;
              
               default:

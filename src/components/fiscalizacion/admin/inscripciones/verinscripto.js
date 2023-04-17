@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioFide from '../../../../services/fiscalizacion'
-
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -58,14 +58,14 @@ setActivo(true)
   const [inscripcion, setInscripcion] = useState({
 
 
-  })
+})
   const traermesas = async (e) => {
 
     setCargandomesas(false)
    
    const mes = await servicioFide.traermesas(e)
    setMesas(mes)
-   console.log('antes')
+
    setCargandomesas(true)
    console.log('dps')
   
@@ -80,7 +80,9 @@ setActivo(true)
 
       dni: props.dni,
 
-      id_inscripcion:props.id_inscripcion
+      id_inscripcion:props.id_inscripcion,
+     
+  
   
     }))
   }
@@ -153,12 +155,13 @@ const handleChange2 = (e) => {
 
 
        { props.id_inscripcion}
-             <h3>Asignaciona escuela {props.nombre} </h3>
+             <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
             
           DNI:  { props.dni}<br/>
-           Prioridad 1:  {props.escuela}<br/>
-           Prioridad 2:En caos que elija 2<br/>
+   
            <br/>
+            <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
+            <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
          <b> Agregar detalles en caso q este inscripto de donde</b> 
             <br/>
      
@@ -167,7 +170,7 @@ const handleChange2 = (e) => {
    
    
                  <br />
-                 <label>Cual escuela?</label>
+                 <label>Escuela prioridad 1</label>
                  
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                                Escuela
@@ -190,7 +193,29 @@ const handleChange2 = (e) => {
                     ))}
 
                             </NativeSelect>
-   
+                            <label>Escuela prioridad 2</label>
+                 
+                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    Escuela
+                 </InputLabel>
+                 <NativeSelect
+                     defaultValue={30}
+                     onChange={handleChange2}
+                     inputProps={{
+                         name: 'id_escuela2',
+                         id: 'uncontrolled-native',
+
+                     }}
+                 
+                 >  
+                  <option value={'1'}> Elegir</option>
+                  {turnos.map((row) => (
+                            
+                   <option value={row.id}> {row.nombre}</option>
+
+         ))}
+
+                 </NativeSelect>
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                                Mesa
                             </InputLabel>
@@ -216,10 +241,74 @@ const handleChange2 = (e) => {
                                   </>:<>Cargando</>}
                             </NativeSelect>
 
-                           
+             
+                 <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Domicilio"
+                    name="domicilio"
+                    onChange={handleChange}
+                    fullWidth
+                    variant="standard"
+                />
+                <br/>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                   ¿ Fuiste fiscal antes?
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    onChange={handleChange}
+                    inputProps={{
+                        name: 'fiscal_antes',
+                        id: 'uncontrolled-native',
+
+                    }}
+                >   <option value={'Sin determinar'}>Sin determinar</option>
+                    <option value={'Si'}>Si</option>
+                    <option value={'No'}>No</option>
+
+                </NativeSelect>
+
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                   ¿ Dispones de movilidad ?
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    onChange={handleChange}
+                    inputProps={{
+                        name: 'movilidad',
+                        id: 'uncontrolled-native',
+
+                    }}
+                >   <option value={'Sin determinar'}>Sin determinar</option>
+                    <option value={'Si'}>Si</option>
+                    <option value={'No'}>No</option>
+
+                </NativeSelect>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                   ¿ Sos Vegano?
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    onChange={handleChange}
+                    inputProps={{
+                        name: 'vegano',
+                        id: 'uncontrolled-native',
+
+                    }}
+                >   <option value={'Sin determinar'}>Sin determinar</option>
+                    <option value={'Si'}>Si</option>
+                    <option value={'No'}>No</option>
+
+                </NativeSelect>
+    
+               
 
                  <DialogActions>
-         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button>
+                 {inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
+
+
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>

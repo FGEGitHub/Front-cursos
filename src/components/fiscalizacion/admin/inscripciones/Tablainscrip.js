@@ -42,7 +42,8 @@ export default function Ingresos() {
           dni= {inscrip[dataIndex].dni}
           nombre= {inscrip[dataIndex].nombre}
           escuela={inscrip[dataIndex].nombre_escuela}
-
+            telefono ={inscrip[dataIndex].telefono}
+            telefono2 ={inscrip[dataIndex].telefono}
           id_inscripcion={inscrip[dataIndex].id}
           getClients = { async () => {
 
@@ -63,37 +64,22 @@ export default function Ingresos() {
             name: "dni",
             label: "dni",
         },
+        {
+            name: "apellido",
+            label: "apellido",
+        },
    
         {
             name: "nombre",
             label: "nombre",
         },
         {
-            name: "movilidad",
-            label: "movilidad",
+            name: "cargadopor",
+            label: "Cargado por",
 
         },
-        {
-            name: "nombre_escuela",
-            label: "nombre_escuela",
-
-        },
-        {
-            name: "vegano",
-            label: "vegano",
-
-        },
-        {
-            name: "celiaco",
-            label: "celiaco",
-
-        },
-        {
-            name: "estado",
-            label: "estado",
-
-        },
-
+      
+   
         {
             name: "Ir/Modificar",
             options: {
