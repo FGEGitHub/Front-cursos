@@ -10,7 +10,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import '../../../estadisticas/Home.scss'
 import Widget from '../../Widget/Widget'
 import servicioFisca from '../../../../services/fiscalizacion'
-
+import StackK from '../../infoskack'
 const SubirLegajo = () => {
     const [activeStep, setActiveStep] = useState(0);
     let [steps, setSteps] = useState([
@@ -57,6 +57,7 @@ const SubirLegajo = () => {
 
     return (
         <>
+        <StackK/>
         {datos ? <>
         <div className="home">
 
