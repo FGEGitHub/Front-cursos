@@ -56,8 +56,17 @@ const Estracto = () => {
 
     //
 
-
-
+    
+    const Inscribir = async (event) => {
+     
+    
+        const rta=  await servicioFisca.enviarinscripcion(
+            fecha
+         )
+        alert(rta)
+     
+        
+      };
 
 
 
@@ -79,7 +88,8 @@ const Estracto = () => {
                 }}
             >
             <Card sx={{  textAlign: 'center'  }}>
-                  <h2>INSCRIPCIONA  FISCALIZACION <AccountBalanceTwoToneIcon/> </h2>
+            <AccountBalanceTwoToneIcon/>
+                  <h2>INSCRIPCIONA  FISCALIZACION  </h2>
                  </Card>
                 
                
@@ -136,7 +146,7 @@ const Estracto = () => {
                     defaultValue={30}
                     onChange={handleChange}
                     inputProps={{
-                        name: 'asistencia',
+                        name: 'movilidad',
                         id: 'uncontrolled-native',
 
                     }}
@@ -154,6 +164,38 @@ const Estracto = () => {
                     onChange={handleChange}
                     inputProps={{
                         name: 'movilidad',
+                        id: 'uncontrolled-native',
+
+                    }}
+                >   <option value={'Sin determinar'}>Sin determinar</option>
+                    <option value={'Si'}>Si</option>
+                    <option value={'No'}>No</option>
+
+                </NativeSelect>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                   ¿ Sos Vegano?
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    onChange={handleChange}
+                    inputProps={{
+                        name: 'vegano',
+                        id: 'uncontrolled-native',
+
+                    }}
+                >   <option value={'Sin determinar'}>Sin determinar</option>
+                    <option value={'Si'}>Si</option>
+                    <option value={'No'}>No</option>
+
+                </NativeSelect>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                   ¿ Fuiste fiscal antes ?
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    onChange={handleChange}
+                    inputProps={{
+                        name: 'fiscal_antes',
                         id: 'uncontrolled-native',
 
                     }}
@@ -190,7 +232,7 @@ const Estracto = () => {
                     defaultValue={30}
                     onChange={handleChange}
                     inputProps={{
-                        name: 'id_escuela',
+                        name: 'id_escuela2',
                         id: 'uncontrolled-native',
 
                     }}
@@ -203,7 +245,13 @@ const Estracto = () => {
 
                     ))}
                 </NativeSelect>
-               
+                        <br/>
+                <CardActions>
+               <Button variant="outlined"
+                          onClick={() => Inscribir()}
+                      >  Enviar inscripcion</Button> 
+                       </CardActions>
+                
           
             </Paper>
 

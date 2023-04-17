@@ -1,7 +1,7 @@
 
 
 
-import Navbar from '../../../../components/Navbar'
+import Navbar from '../../../../components/fiscalizacion/Navbar'
 import { useNavigate, useParams } from "react-router-dom";
 import Steper from '../../../../components/fiscalizacion/admin/inscripciones/steper'
 import React, { useEffect, useState } from "react";

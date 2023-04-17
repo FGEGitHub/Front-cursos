@@ -179,5 +179,11 @@ const traermesas= async  (datos) => {
   return data  
 } 
 
-
-export default {listaExtractos,traermesas,datosdemesas,crearmesa,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
+const enviarinscripcion= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'enviarinscripcion',datos,config)
+   
+    
+   return(data)
+} 
+export default {listaExtractos,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}

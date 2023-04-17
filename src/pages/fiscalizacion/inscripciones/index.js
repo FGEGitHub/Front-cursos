@@ -1,6 +1,6 @@
 
 
-import Navbar from '../../../components/fiscalizacion/Navbar'
+import Navbar from '../../../components/fiscalizacion/Navinscrip'
 import { useNavigate, useParams } from "react-router-dom";
 import Formulario from '../../../components/fiscalizacion/componenteinscrip'
 import React, { useEffect, useState } from "react";

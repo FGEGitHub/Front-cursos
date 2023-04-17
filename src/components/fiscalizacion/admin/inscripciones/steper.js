@@ -20,6 +20,7 @@ const SubirLegajo = () => {
     ]);
 
     const [datos, setDatos] = useState()
+   
     const [completo, setCompleto] = useState()
     const [listo, setListo] = useState(false)
 
@@ -66,10 +67,10 @@ const SubirLegajo = () => {
                       cantidad={datos[1]}
                     />
                         <Widget type="Cantidad confirmadas"
-                      cantidad={1}
+                      cantidad={'Sin determ'}
                     />
-                     <Widget type="Cantidad mesas"
-                      cantidad={1}
+                     <Widget type="Cantidad mesas que nadie se inscribio"
+                      cantidad={datos[2]}
                     />
 
                     </div>

@@ -210,7 +210,7 @@ const handleChange2 = (e) => {
                           
                              {mesas.map((row) => (
                                        
-                                       <option value={row.id}> {row.nombre}</option>
+                                       <option value={row.id}> {row.numero}</option>
          
                              ))}
                                   </>:<>Cargando</>}

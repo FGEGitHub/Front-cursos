@@ -14,7 +14,35 @@ import {
 export default function Paginas() {
     const navigate = useNavigate();
 
-
+    useEffect(() => {
+      
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+          
+        if (loggedUserJSON) {
+          
+          const user = JSON.parse(loggedUserJSON)
+          if (user.nivel != 5 ){
+            window.localStorage.removeItem('loggedNoteAppUser')
+            navigate('/login')
+      
+          }else{
+      
+    
+          }
+        
+          //servicioUsuario.setToken(user.token)  
+         
+          
+        }else{
+             window.localStorage.removeItem('loggedNoteAppUser')
+          navigate('/login')
+         
+        }
+       
+      }, []) 
+      
+      
+      
     const volver = (e) => {
         navigate('/fiscalizacion/administracion/menu')
         

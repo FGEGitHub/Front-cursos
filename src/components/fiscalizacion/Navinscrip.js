@@ -89,14 +89,7 @@ const Navbar = (props) => {
               >
               <Tab label= '' />
 
-              {user ? <>
-              <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`Cerrar sesion`}/>
-              </Button>
-              </>:<>
-              <Button sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`Iniciar sesion`}/>
-              </Button></>}
+             
                
               </Tabs>
              
