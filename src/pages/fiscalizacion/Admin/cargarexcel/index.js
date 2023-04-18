@@ -1,7 +1,7 @@
 
 
 
-import Navbar from '../../../../components/Navbar'
+import Navbar from '../../../../components/fiscalizacion/Navbar'
 import { useNavigate, useParams } from "react-router-dom";
 import Subir from '../../../../components/fiscalizacion/admin/cargadeinscripciones/subir'
 import Lista from '../../../../components/fiscalizacion/admin/cargadeinscripciones/tabla'

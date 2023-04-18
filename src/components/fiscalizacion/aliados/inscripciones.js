@@ -43,7 +43,7 @@ const Estracto = () => {
                 const usuario = JSON.parse(loggedUserJSON)
                 console.log(usuario)
                 setUsuario(usuario)
-               
+                setFecha({id_aliado:usuario.id})
 
         
             }
@@ -58,7 +58,7 @@ const Estracto = () => {
     }, [])
     const handleChange = (e) => {
 
-
+console.log(fecha)
         // setPago({ ...pago, ['id']: props.id })
         setFecha({ ...fecha, [e.target.name]: e.target.value })
 
@@ -103,7 +103,7 @@ const Estracto = () => {
             >
             <Card sx={{  textAlign: 'center'  }}>
             <AccountBalanceTwoToneIcon/>
-                  <h2>INSCRIPCIONA  FISCALIZACION  </h2>
+                  <h2>INSCRIPCION A FISCALIZACION  </h2>
                   usuario: {usuario ? <>{usuario.usuario}</>:<></> }
                  </Card>
                 
