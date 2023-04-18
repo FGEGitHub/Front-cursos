@@ -67,6 +67,7 @@ import Subiresc from '../pages/fiscalizacion/Admin/cargarescuelas.js'
 import InscripcionFisca from '../pages/fiscalizacion/inscripciones'
 import Usersfisca from '../pages/fiscalizacion/Admin/Usuarios'
 import Aliadoscarga from '../pages/fiscalizacion/Aliados/aliadoscarga'
+import EscuelasAdmin from '../pages/fiscalizacion/Admin/escuelas'
 
 
 
@@ -146,6 +147,7 @@ const Rutas = [
 		{ path: '/fiscalizacion/inscripcion', element: <InscripcionFisca /> },
 		{ path: '/fiscalizacion/usuarios', element: <Usersfisca /> },
 		{ path: '/fiscalizacion/alia', element: <Aliadoscarga /> },
+		{ path: '/fiscalizacion/administracion/escuelas', element: <EscuelasAdmin /> },
 		
 		
 

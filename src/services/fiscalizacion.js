@@ -116,6 +116,18 @@ const listaExtractos= async  () => {
 return data
 }
 
+
+
+const traerescuelasymesas = async (id) => { 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'traerescuelasymesas/'+id, config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+}
 const traerescuelas = async (usuario) => { 
   // const data = await axios.post('http://localhost:4000/signupp', datos)
     const {data} = await axios.get(baseUrl+'traerescuelas/', config)
@@ -211,7 +223,16 @@ const registronivel3 = async (datos) => {
 
      
 }
+const listadeescuelas = async () => { 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'listadeescuelas/', config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+}
 
 
-
-export default {listaExtractos,registronivel3,todos,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
+export default {listaExtractos,traerescuelasymesas,registronivel3,todos,listadeescuelas,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
