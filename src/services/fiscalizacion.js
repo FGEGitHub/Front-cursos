@@ -184,6 +184,14 @@ const crearmesa= async  (datos) => {
    
    alert(data)  
 } 
+
+
+const borrarescuela= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'borrarescuela',datos,config)
+   
+   return data 
+} 
 const traermesas= async  (datos) => {
   console.log(datos)
    const {data } = await axios.get(baseUrl+'traermesas/'+datos,config)
@@ -235,4 +243,4 @@ return data
 }
 
 
-export default {listaExtractos,traerescuelasymesas,registronivel3,todos,listadeescuelas,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
+export default {listaExtractos,traerescuelasymesas,borrarescuela,registronivel3,todos,listadeescuelas,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}

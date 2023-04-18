@@ -67,9 +67,9 @@ setActivo(true)
     setOpen(true);
     setInscripcion(({
 
-      dni: props.dni,
+  
 
-      id_inscripcion:props.id_inscripcion,
+      id:props.id,
      
   
   
@@ -87,18 +87,27 @@ setActivo(true)
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 }
 
+const handleChange2 = (e) => {
 
+  setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
+  if( e.target.value==="Si"){
+    setCargandomesas(true)
+  }else{
+    setCargandomesas(false)
+  }
+}
 
   ////
   const handleDeterminar = async (event) => {
 
     try {
 
-      await servicioFide.inscribir(
+      const rta = await servicioFide.borrarescuela(
         inscripcion
 
 
       )
+      alert(rta)
       props.getClients()
 
     } catch (error) {
@@ -139,131 +148,66 @@ setActivo(true)
 
 
        { props.id}
-             <h3>ATENCION: Borrar la escuela {props.nombre} </h3>
+             <h3  style={{ color: 'crimson' }} >ATENCION: Borrar la escuela {props.nombre} </h3>
             
-
-   
-         
-          
-
+                  <p>la misma cuenta con las mesas:  {mesas.map((row) => (
+                                     row.numero  
+                                     
+                             ))}</p>
    
    
                  <br />
-                 <label>Elegir a que escuela asignar las mesas </label>
+               
+
+                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                   ¿Deseas asignar esas mesas a otra escuela?
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    onChange={handleChange2}
+                    inputProps={{
+                        name: 'decision',
+                        id: 'uncontrolled-native',
+
+                    }}
+                >   <option value={'Sin determinar'}>Sin determinar</option>
+                    <option value={'Si'}>Si</option>
+                    <option value={'No'}>No</option>
+
+                </NativeSelect>
+                    {cargandomesas ? <>
+
+                <label>Elegir a que escuela asignar las mesas de la escuela borrada. </label>
+                
+                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    Escuela
+                 </InputLabel>
+                 <NativeSelect
+                     defaultValue={30}
+                     onChange={handleChange}
+                     inputProps={{
+                         name: 'id_escuela',
+                         id: 'uncontrolled-native',
+
+                     }}
                  
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Escuela
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'id_escuela',
-                                    id: 'uncontrolled-native',
-
-                                }}
+                 >  
+                  <option value={'1'}> Elegir</option>
+                  {turnos.map((row) => (
                             
-                            >  
-                             <option value={'1'}> Elegir</option>
-                             {turnos.map((row) => (
-                                       
-                              <option value={row.id}> {row.nombre}</option>
+                   <option value={row.id}> {row.nombre}</option>
 
-                    ))}
+         ))}
 
-                            </NativeSelect>
+                 </NativeSelect>
                            
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Mesa
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'mesa',
-                                    id: 'uncontrolled-native',
+                         
 
-                                }}
-                            
-                            >  
-
-                            {cargandomesas ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {mesas.map((row) => (
-                                       
-                                       <option value={row.id}> {row.numero}</option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
-                            </NativeSelect>
-
-             
-                 <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Domicilio"
-                    name="domicilio"
-                    onChange={handleChange}
-                    fullWidth
-                    variant="standard"
-                />
-                <br/>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Fuiste fiscal antes?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'fiscal_antes',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Dispones de movilidad ?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'movilidad',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Sos Vegano?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'vegano',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-    
+                            </>:<></>}
                
 
                  <DialogActions>
-                 {inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
+                 {inscripcion.decision ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
 
 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
