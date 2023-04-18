@@ -60,7 +60,9 @@ const SubirLegajo = () => {
         <StackK/>
         {datos ? <>
         <div className="home">
-
+        <Widget type="Escuelas"
+                      cantidad={datos[3]}
+                    />
         <Widget type="Cantidad de mesas "
                       cantidad={datos[0]}
                     />

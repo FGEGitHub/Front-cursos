@@ -14,6 +14,7 @@ const CardUno = () => {
                 <div onClick={ir} className="box__article">
                    <i onClick={ir}> < EventNoteTwoToneIcon fontSize="large"/></i>
                     <h5 onClick={ir}>Ver inscripciones</h5>
+                    <p>Distribuir fiscales </p>
                 </div>
                
                 

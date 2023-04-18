@@ -4,9 +4,7 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
-import Tooltip from '@material-ui/core/Tooltip';
+
 import TomarAsis from './tomarasis';
 import { useParams } from "react-router-dom"
 import Table from '@mui/material/Table';

@@ -140,7 +140,7 @@ return (
     />
         <MUIDataTable
         
-            title={"Lista de Clientes"}
+            title={"Lista de Mesas"}
             data={clients}
             columns={columns}
             actions={[

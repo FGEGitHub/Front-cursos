@@ -15,6 +15,7 @@ const CardUno = () => {
                 <div onClick={ir} className="box__article">
                    <i onClick={ir}> < TableRestaurantIcon fontSize="large"/></i>
                     <h5 onClick={ir}>Ver mesas</h5>
+                    <p>Ver lista de Mesas y escuelas</p>
                 </div>
                
                 

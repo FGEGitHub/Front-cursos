@@ -14,6 +14,7 @@ const CardUno = () => {
                 <div onClick={ir} className="box__article">
                    <i onClick={ir}> < PeopleAltIcon fontSize="large"/></i>
                     <h5 onClick={ir}>Usuarios y encargados</h5>
+                   <p>Menu para agregar/modificar/borrar usuarios (Administradores y Aliados)</p>
                 </div>
                
                 

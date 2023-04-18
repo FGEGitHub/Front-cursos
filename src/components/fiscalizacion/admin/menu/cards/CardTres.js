@@ -14,6 +14,7 @@ const CardUno = () => {
                 <div onClick={ir} className="box__article">
                    <i onClick={ir}> < EventNoteTwoToneIcon fontSize="large"/></i>
                     <h5 onClick={ir}>Cargar excel</h5>
+                    <p>Menu reservado para cargar los fiscales mediante EXCEL de google forms </p>
                 </div>
                
                 
