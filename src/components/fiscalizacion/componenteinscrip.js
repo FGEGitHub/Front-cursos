@@ -64,7 +64,9 @@ const Estracto = () => {
             fecha
          )
         alert(rta)
-     
+        if (rta ==="inscripto correctamente"){
+            window.location.reload();
+        }
         
       };
 
@@ -278,9 +280,11 @@ const Estracto = () => {
                 </NativeSelect> */}
                         <br/>
                 <CardActions>
-               <Button variant="outlined"
+                {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? <>     <Button variant="outlined"
                           onClick={() => Inscribir()}
-                      >  Enviar inscripcion</Button> 
+                      >  Enviar inscripcion</Button> </>: <>     <Button variant="outlined" disabled
+                      onClick={() => Inscribir()}
+                  >  Enviar inscripcion</Button> </>}
                        </CardActions>
                 
           

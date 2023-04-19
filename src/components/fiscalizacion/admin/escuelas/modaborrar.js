@@ -138,7 +138,7 @@ const handleChange2 = (e) => {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Ver inscripcion">
+       < Tooltip title="Borrar Mesa">
       <DeleteIcon variant="outlined" onClick={handleClickOpen}/>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
