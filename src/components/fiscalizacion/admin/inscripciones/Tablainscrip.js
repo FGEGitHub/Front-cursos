@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 import servicioFidei from '../../../../services/fiscalizacion'
-
+import ModalBorrar from './borrarinscripcion'
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import Vernscripto from "./verinscripto";
@@ -52,6 +52,9 @@ export default function Ingresos() {
             // 
     
           }}/>
+          <ModalBorrar
+                id= {inscrip[dataIndex].id}
+                />
           </>
 
         );
@@ -81,7 +84,7 @@ export default function Ingresos() {
       
    
         {
-            name: "Ir/Modificar",
+            name: "Contactar/borrar",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
