@@ -88,8 +88,8 @@ const Lotes = () => {
 
         },
         {
-            name: "numero",
-            label: "numero",
+            name: "circuito",
+            label: "Circuito",
 
         },
        

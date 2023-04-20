@@ -26,23 +26,11 @@ export default function ClienteNuevo(props) {
  }
 
 
- const traer = async () => {
-   
-   
-   const turnos = await servicioFisca.traerescuelas()
-   console.log(turnos)
-   setTurnos(turnos)
-   setActivo(true)
-  
-
-  }
-
-  
 
   
   const handleClickOpen = () => {
     setOpen(true);
-     traer()
+   
   };
 
 
@@ -51,8 +39,8 @@ export default function ClienteNuevo(props) {
     event.preventDefault();
     try {
 
-      await servicioFisca.crearmesa(form)
- 
+     const rta= await servicioFisca.crearescuela(form)
+      alert(rta)
      
      } catch (error) {
        console.error(error);
@@ -79,7 +67,7 @@ export default function ClienteNuevo(props) {
       </Button>
       <Dialog open={open} onClose={handleClose}>
      
-        <DialogTitle>Mesa Nueva </DialogTitle>
+        <DialogTitle>Nueva escuela</DialogTitle>
         <Paper
         sx={{
           cursor: 'pointer',
@@ -91,52 +79,48 @@ export default function ClienteNuevo(props) {
       >
         <DialogContent>
           <DialogContentText>
-        Datos de la mesa
+        Datos de la escuela
           </DialogContentText>
           <form  onSubmit={handleDeterminar}> 
       
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Escuela
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
+         
+         
+          <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Nombre"
+                                name="nombre"
                                 onChange={handleChange}
-                                inputProps={{
-                                    name: 'id_escuela',
-                                    id: 'uncontrolled-native',
-
-                                }}
-                            
-                            >  
-                             <option value={'1'}> Elegir</option>
-                 
-                    
-                     {activo ? <>
-                    {turnos.map((row) => (
-                                       
-                              <option value={row.id}> {row.nombre}</option>
-
-                    ))}
-                     </>: <>Cargando</>}
-               
-                    </NativeSelect>
+                                fullWidth
+                                variant="standard"
+                              
+                            />
                     <TextField
                                 autoFocus
                                 margin="dense"
                                 id="name"
-                                label="Numero de mesa"
-                                name="numero"
+                                label="Circuito"
+                                name="circuito"
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
-                                type='number'
+                              
                             />
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Numero de referencia
-                            </InputLabel>
+                             <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Observaciones"
+                                name="observaciones"
+                                onChange={handleChange}
+                                fullWidth
+                                variant="standard"
+                             
+                            />
       
           <DialogActions>
-          {form.id_escuela && form.numero ? <><Button variant="contained" color="primary"  type="submit">Crear</Button></> : <><h6  style={{color: "red"}} >Completar todos los campos</h6></> } 
+          {form.nombre && form.circuito ? <><Button variant="contained" color="primary"  type="submit">Crear</Button></> : <><h6  style={{color: "red"}} >Completar todos los campos</h6></> } 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>
