@@ -30,19 +30,14 @@ export default function Clasenueva(props) {
         setForm({id:props.id})
     };
     const handleDeterminar = async (event) => {
-        event.preventDefault();
-        try {
+  
+   
 
-         const respuesta=  await servicioInscripciones.borrarinscripcion()
+         const respuesta=  await servicioInscripciones.borrarinscripcion(props.id)
          alert(respuesta)
 
 
-        } catch (error) {
-            console.error(error);
-            console.log('Error algo sucedio')
-
-
-        }
+    
         props.getClients()
 
         setOpen(false);

@@ -54,7 +54,24 @@ export default function Ingresos() {
           }}/>
           <ModalBorrar
                 id= {inscrip[dataIndex].id}
+                getClients = { async () => {
+
+                    const ins = await servicioFidei.todasincripciones()
+                    setInscrip(ins[0])
+                    // 
+            
+                  }}
                 />
+          </>
+
+        );
+      }
+      function CutomButtonsRenderercargado(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      {inscrip[dataIndex].nombre_aliado === null ? <>Autoinscripcion</>:<>{inscrip[dataIndex].nombre_aliado}</>}
+      
+      
           </>
 
         );
@@ -76,9 +93,18 @@ export default function Ingresos() {
             name: "nombre",
             label: "nombre",
         },
+    
         {
-            name: "cargadopor",
-            label: "Cargado por",
+            name: "nombre_aliado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderercargado(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
 
         },
       

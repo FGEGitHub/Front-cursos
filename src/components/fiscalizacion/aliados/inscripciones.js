@@ -16,7 +16,33 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import AccountBalanceTwoToneIcon from '@mui/icons-material/AccountBalanceTwoTone';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { styled } from '@mui/material/styles';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: "#311b92",
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
 
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor:"#7c9c99"
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -27,30 +53,26 @@ const Estracto = () => {
     const [loading, setLoading] = useState(true);
     const [escuelas, setEscuelas] = useState([''])
     const [fecha, setFecha] = useState([''])
-    const [activo, setActivo] = useState(false);
+    const [vista, setVista] = useState(false);
     const navigate = useNavigate();
 
     const getClients = async () => {
 
-        const clients = await servicioFisca.traerescuelas({
+  
 
-        })
-        setEscuelas(clients)
-        setLoading(false);
-        try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
                 console.log(usuario)
                 setUsuario(usuario)
                 setFecha({id_aliado:usuario.id})
-
-        
+ const clients = await servicioFisca.traerincripcionesdealiado(usuario.id)
+          setEscuelas(clients)
             }
+           
+          
+            setLoading(false);
 
-        } catch (error) {
-
-        }
     }
 
     useEffect(() => {
@@ -69,6 +91,11 @@ console.log(fecha)
     //opcionde click en el nombre
 
     //
+    const cambiarvista =  () => {
+        setVista(!vista)
+
+
+    }
 
     
     const Inscribir = async (event) => {
@@ -166,135 +193,7 @@ console.log(fecha)
                     type="number"
                     variant="standard"
                 />
-               {/* 
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Telefono"
-                    name="telefono"
-                    onChange={handleChange}
-                    fullWidth
-                    type="number"
-                    variant="standard"
-                />
-                 <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Domicilio"
-                    name="domicilio"
-                    onChange={handleChange}
-                    fullWidth
-                    variant="standard"
-                />
-                <br/>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Fuiste fiscal antes?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'movilidad',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Dispones de movilidad ?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'movilidad',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Sos Vegano?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'vegano',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Fuiste fiscal antes ?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'fiscal_antes',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Elegir escuela prioridad 1
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'id_escuela',
-                        id: 'uncontrolled-native',
-
-                    }}
-
-                >
-                    <option value={'1'}> Elegir</option>
-                    {escuelas.map((row) => (
-
-                        <option value={row.id}> {row.nombre}</option>
-
-                    ))}
-                </NativeSelect>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Elegir escuela prioridad 2
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'id_escuela2',
-                        id: 'uncontrolled-native',
-
-                    }}
-
-                >
-                    <option value={'1'}> Elegir</option>
-                    {escuelas.map((row) => (
-
-                        <option value={row.id}> {row.nombre}</option>
-
-                    ))}
-                </NativeSelect> */}
+             
                         <br/>
                 <CardActions>
                     {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? <>     <Button variant="outlined"
@@ -308,8 +207,57 @@ console.log(fecha)
           
             </Paper>
 
+            {vista ?  <>
+                <Button variant="contained" onClick={cambiarvista} >OCULTAR INSCRIPTOS <RemoveRedEyeIcon/></Button>
+                {escuelas.length > 0 ?  <> 
+            <TableContainer>
+                    <Table >
+                        <TableHead>
+                            <TableRow>
+                                <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>DNI </b> <b /></TableCell>
+                               
+                                <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>APELLIDO</b></TableCell>
+
+                                <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>NOMBRE</b></TableCell>
+                                <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>TELEFONO</b></TableCell>
+                                <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>TELEFONO2</b></TableCell>
 
 
+
+
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+
+
+                            {escuelas ? <>
+                                {escuelas.map((row) => (
+                                    <StyledTableRow key={row.name}>
+                                        <StyledTableCell component="th" scope="row">{row.dni}</StyledTableCell>
+                                       
+                                        <StyledTableCell component="th" scope="row"><b>{row.apellidoo}</b></StyledTableCell>
+
+                                        <StyledTableCell component="th" scope="row">{row.nombree}</StyledTableCell>
+                                        <StyledTableCell component="th" scope="row"> {row.telefono}  </StyledTableCell>
+                                        <StyledTableCell component="th" scope="row"> {row.telefono2}  </StyledTableCell>
+                                        {/*  <StyledTableCell component="th" scope="row">{row.presente === null ? <>Sin registrar</> : <> {row.row.presente === 'presente' ? <>PRESENTE</> : <>AUSENTE</>} </>}</StyledTableCell> */}
+                                       
+
+                                    </StyledTableRow>
+                                ))}
+
+                            </> : <> <StyledTableCell component="th" scope="row">No hay inscriptos</StyledTableCell> </>}
+
+
+                        </TableBody>
+                    </Table>
+
+
+                </TableContainer>
+                </> : <> NO HAY INSCRIPTOS  </>}
+                </>: <>
+                <Button variant="contained" onClick={cambiarvista} >VER INSCRIPTOS <RemoveRedEyeIcon/></Button> </>} 
+                <br/>    <br/>    <br/>    <br/>    <br/>    <br/>    <br/>
         </>
 
 

@@ -243,4 +243,29 @@ return data
 }
 
 
-export default {listaExtractos,traerescuelasymesas,borrarescuela,registronivel3,todos,listadeescuelas,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
+
+
+const traerincripcionesdealiado = async (id) => { 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+ 
+    const {data} = await axios.get(baseUrl+'traerincripcionesdealiado/'+id, config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+}
+
+
+const borrarinscripcion = async (id) => { 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'borrarinscripcion/'+id, config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+}
+export default {listaExtractos,traerincripcionesdealiado,borrarinscripcion,traerescuelasymesas,borrarescuela,registronivel3,todos,listadeescuelas,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
