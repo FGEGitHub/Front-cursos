@@ -220,6 +220,17 @@ return data
      
 }
 
+const crearescuela = async (datos) => {
+  console.log(datos)
+
+
+    const {data} = await axios.post(baseUrl+'crearescuela', datos,config)
+
+       return data
+  
+
+     
+}
 const registronivel3 = async (datos) => {
   console.log(datos)
 
@@ -268,4 +279,4 @@ const borrarinscripcion = async (id) => {
     }
 return data
 }
-export default {listaExtractos,traerincripcionesdealiado,borrarinscripcion,traerescuelasymesas,borrarescuela,registronivel3,todos,listadeescuelas,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
+export default {listaExtractos,crearescuela,traerincripcionesdealiado,borrarinscripcion,traerescuelasymesas,borrarescuela,registronivel3,todos,listadeescuelas,traermesas,datosdemesas,crearmesa,enviarinscripcion,subirpruebaescuelas,cargarinscripcionesescuelas,listademesas,listaExtractosescuelas,VerExtractoescuelas,inscribir,todaslasasignaciones,traerescuelas,datosusuarioporid,todasincripciones,VerExtracto,cargarinscripciones,subirprueba}
