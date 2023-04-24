@@ -10,6 +10,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
 import Borrar from "./modaborrar"
+import Modificar from "./modificarescuela"
 
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -71,7 +72,12 @@ const Lotes = () => {
              id = {clients[dataIndex].id}
              nombre = {clients[dataIndex].nombre}
             />
-           
+            
+            <Modificar
+             id = {clients[dataIndex].id}
+             nombre = {clients[dataIndex].nombre}
+             circuito = {clients[dataIndex].circuito}
+            />
           </>
         );
       }
@@ -95,7 +101,7 @@ const Lotes = () => {
        
     
         {
-            name: "Actions",
+            name: "Modificar/borrar",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(

@@ -84,6 +84,7 @@ export default function Ingresos() {
             name: "dni",
             label: "dni",
         },
+        
         {
             name: "apellido",
             label: "apellido",
@@ -93,6 +94,18 @@ export default function Ingresos() {
             name: "nombre",
             label: "nombre",
         },
+        
+        {
+            name: "telefono",
+            label: "TELEFONO",
+        },
+    
+        
+        {
+            name: "telefono2",
+            label: "TELEFONO 2",
+        },
+    
     
         {
             name: "nombre_aliado",
