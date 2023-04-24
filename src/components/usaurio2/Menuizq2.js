@@ -10,7 +10,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import GroupIcon from '@mui/icons-material/Group';
-import NfcIcon from '@mui/icons-material/Nfc';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
+import Face3Icon from '@mui/icons-material/Face3';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import PermPhoneMsgIcon from '@mui/icons-material/PermPhoneMsg';
+import BadgeIcon from '@mui/icons-material/Badge';
+import SchoolIcon from '@mui/icons-material/School';
 import { useState, useEffect } from "react";
 
 import Navbar from '../Navbar'
@@ -38,43 +46,48 @@ export default function MenuIzq2 ({children}) {
     const menuItems = [
         { 
           text: 'Cursos', 
-          icon: <GroupIcon color="primary" />, 
+          icon: <ApartmentIcon color="primary" />, 
           path: '/administracion/cursos' 
         },
         { 
-          text: 'turnos', 
-          icon: <GroupIcon color="primary" />, 
+          text: 'ContentPasteGoIcon', 
+          icon: <ContentPasteGoIcon color="primary" />, 
           path: '/administracion/turnos' 
         },
         { 
           text: 'Personas', 
-          icon: <GroupIcon color="primary" />, 
+          icon: <Face3Icon color="primary" />, 
           path: '/administracion/personas' 
         },
         { 
           text: 'Inscripciones', 
-          icon: <GroupIcon color="primary" />, 
+          icon: <HistoryEduIcon color="primary" />, 
           path: '/administracion/inscripciones' 
         },
         { 
           text: 'Gestion de usuarios', 
-          icon: <GroupIcon color="primary" />, 
+          icon: <PeopleAltIcon color="primary" />, 
           path: '/administracion/usuarios' 
         },
         { 
           text: 'Carga de inscripciones', 
-          icon: <GroupIcon color="primary" />, 
+          icon: <GetAppIcon color="primary" />, 
           path: '/administracion/cargarinscripciones' 
         },
         { 
           text: 'Cursado completos', 
-          icon: <GroupIcon color="primary" />, 
+          icon: <BadgeIcon color="primary" />, 
           path: '/administracion/cursadocompleto' 
         },
         { 
           text: 'Resumen Contactos', 
-          icon: <GroupIcon color="primary" />, 
+          icon: <PermPhoneMsgIcon color="primary" />, 
           path: '/administracion/contacto' 
+        },
+        { 
+          text: 'Egresadxs', 
+          icon: <SchoolIcon color="primary" />, 
+          path: '/administracion/egresadxs' 
         },
      
       ];
