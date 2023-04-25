@@ -13,8 +13,9 @@ import Widget from '../../Widget/Widget'
 import servicioFisca from '../../../../services/fiscalizacion'
 import StackK from '../../infoskack'
 import Alert from '@mui/material/Alert';
-
+import { useNavigate, useParams } from "react-router-dom";
 const SubirLegajo = () => {
+    const navigate = useNavigate();
     const [activeStep, setActiveStep] = useState(0);
     let [steps, setSteps] = useState([
     
@@ -33,7 +34,11 @@ const SubirLegajo = () => {
         traer()
 
     }, [])
-
+    const volver = (e) => {
+        navigate('/fiscalizacion/administracion/menu')
+        
+        
+            }
 
     const traer = async () => {
        
@@ -71,6 +76,7 @@ const SubirLegajo = () => {
 <Alert variant="filled" severity="info">
         Paso 3: Fiscales ya confirmados, asignados a una mesa, confirmar cuando realicen las capacitaciones
       </Alert>
+      <Button variant="contained" color="success" onClick={volver}>Volver</Button><br/>
         {datos ? <>
         <div className="home">
         <Widget type="Escuelas"

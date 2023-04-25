@@ -14,17 +14,13 @@ export default function Paginas() {
     const navigate = useNavigate();
 
 
-    const volver = (e) => {
-        navigate('/fiscalizacion/administracion/menu')
-        
-        
-            }
+  
 
     return (
         <>
         <Navbar/>
-        <br/>     <br/>   <br/>     <br/>  
-        <Button onClick={volver}>Volver</Button><br/>     <br/>     
+  <br/>     <br/>  
+            <br/>     
         <Steper/>
         </>
    

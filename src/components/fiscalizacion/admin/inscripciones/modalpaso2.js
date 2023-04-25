@@ -71,10 +71,22 @@ setActivo(true)
   
 
   }
+  const traerestadistica = async (e) => {
 
+    setCargandomesas(false)
+   
+   const mes = await servicioFide.traerestadisticasdeescuelas({id1:props.id_escuela, id2:props.id_escuela2})
+   setMesas(mes)
+
+   setCargandomesas(true)
+   console.log('dps')
+  
+
+  }
 
   const handleClickOpen = async () => {
     await traer()
+    await traerestadistica()
     setOpen(true);
     setInscripcion(({
 
@@ -230,7 +242,7 @@ const handleChange2 = (e) => {
                
 
                  <DialogActions>
-                 {inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
+                 {inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS(Momentaneamente desactivado)</p></>  }
 
 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>

@@ -45,6 +45,8 @@ export default function Ingresos() {
           escuela1={inscrip[dataIndex].nombreescuela}
           escuela2={inscrip[dataIndex].nombreescuela2}
           id_inscripcion={inscrip[dataIndex].id}
+          id_escuela={inscrip[dataIndex].id_escuela}
+          id_escuela2={inscrip[dataIndex].id_escuela2}
           getClients = { async () => {
 
             const ins = await servicioFidei.todasincripciones()
@@ -72,6 +74,11 @@ export default function Ingresos() {
         {
             name: "nombreescuela",
             label: "escuela",
+
+        },
+        {
+            name: "nombreescuela2",
+            label: "escuela2",
 
         },
        

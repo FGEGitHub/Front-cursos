@@ -36,9 +36,9 @@ export default function SelectTextFields(props) {
   let params = useParams()
   let id_curso = params.id
   const [usuarioo, setUsuarioo] = useState()
-  const [cargandomesas, setCargandomesas] = useState(false)
+
   const [turnos, setTurnos] = useState()
-  const [mesas, setMesas] = useState()
+
   const [activo, setActivo] = useState(false)
 
 
@@ -59,18 +59,7 @@ setActivo(true)
 
 
 })
-  const traermesas = async (e) => {
 
-    setCargandomesas(false)
-   
-   const mes = await servicioFide.traermesas(e)
-   setMesas(mes)
-
-   setCargandomesas(true)
-   console.log('dps')
-  
-
-  }
 
 
   const handleClickOpen = async () => {
@@ -97,12 +86,7 @@ setActivo(true)
     console.log(inscripcion)
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 }
-const handleChange2 = (e) => {
-  
-  setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 
-  traermesas(e.target.value)
-}
 
 
   ////
@@ -178,7 +162,7 @@ const handleChange2 = (e) => {
                             </InputLabel>
                             <NativeSelect
                                 defaultValue={30}
-                                onChange={handleChange2}
+                                onChange={handleChange}
                                 inputProps={{
                                     name: 'id_escuela',
                                     id: 'uncontrolled-native',
@@ -201,7 +185,7 @@ const handleChange2 = (e) => {
                  </InputLabel>
                  <NativeSelect
                      defaultValue={30}
-                     onChange={handleChange2}
+                     onChange={handleChange}
                      inputProps={{
                          name: 'id_escuela2',
                          id: 'uncontrolled-native',
@@ -217,30 +201,7 @@ const handleChange2 = (e) => {
          ))}
 
                  </NativeSelect>
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Mesa
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'mesa',
-                                    id: 'uncontrolled-native',
-
-                                }}
-                            
-                            >  
-
-                            {cargandomesas ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {mesas.map((row) => (
-                                       
-                                       <option value={row.id}> {row.numero}</option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
-                            </NativeSelect>
+                  
 
              
                  <TextField

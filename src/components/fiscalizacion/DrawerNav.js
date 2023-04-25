@@ -57,10 +57,10 @@ const DrawerNav = () => {
     //
   }
   const handleClick = () => {
-    navigate("/");
+    navigate("/fiscalizacion/login");
   };
   const iraMenu = () => {
-    navigate("/");
+    navigate("//fiscalizacion/login");
   };
   const irNosotros = () => {
     navigate("/usuario/nosotros");
@@ -68,12 +68,7 @@ const DrawerNav = () => {
   const irContacto = () => {
     navigate("/usuario/contacto");
   }
-  const irAyuda = () => {
-    navigate("/");
-  }
-  const nomb = () => {
-    navigate("/usuario/datosPers");
-  };
+
   const notif = () => {
     navigate("/usuario/notificaciones");
   };
@@ -88,7 +83,7 @@ const DrawerNav = () => {
    
     
      window.localStorage.removeItem('loggedNoteAppUser')
-     navigate("/")
+     navigate("/fiscalizacion/login")
 
    } 
 
@@ -140,14 +135,7 @@ const DrawerNav = () => {
       }
     }
 
-    const inicio = () => {
-      navigate("/");
 
-    }
-
-    const notificaciones = () => {
-      navigate("/usuario/notificaciones");
-    }
 
     
     return (
@@ -158,7 +146,26 @@ const DrawerNav = () => {
           onClose={() => setOpenDrawer(false)}
         >
 
-         
+          {usuario ? <>
+            <List>
+              {pages.map((page, index) => (
+                <ListItemButton key={index}>
+                  <ListItemIcon>
+                    <ListItemText onClick={() => CutomButtonsRenderer(page, index)} >  {page}  </ListItemText>
+                  </ListItemIcon>
+                </ListItemButton>
+              ))} </List>
+          </> : <>
+            <List>
+              {pagesdeslogueado.map((page, index) => (
+                <ListItemButton key={index}>
+                  <ListItemIcon>
+                    <ListItemText onClick={() => CutomButtonsRendererdesloqueado(page, index)} >  {page}  </ListItemText>
+                  </ListItemIcon>
+                </ListItemButton>
+              ))} </List></>
+          }
+
 
 
         </Drawer>
