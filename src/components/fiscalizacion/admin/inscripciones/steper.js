@@ -4,6 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Tablaincrip from './Tablainscrip'
 import Tablaasig from './TablaAsignados'
+import Tablapaso2 from './Tablapaso2'
 import { Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -11,6 +12,8 @@ import '../../../estadisticas/Home.scss'
 import Widget from '../../Widget/Widget'
 import servicioFisca from '../../../../services/fiscalizacion'
 import StackK from '../../infoskack'
+import Alert from '@mui/material/Alert';
+
 const SubirLegajo = () => {
     const [activeStep, setActiveStep] = useState(0);
     let [steps, setSteps] = useState([
@@ -37,9 +40,9 @@ const SubirLegajo = () => {
         const dat = await servicioFisca.datosdemesas()
         setDatos(dat)
         setSteps([
-            { label: 'Lista', completed: false },
-            { label: 'Asignados', completed: false },
-            { label: 'confirmados', completed:false },
+            { label: 'PAso 1: Lista Inscriptos', completed: false },
+            { label: 'Paso 2: Contactados', completed: false },
+            { label: 'Paso 3: Asignados', completed:false },
             
 
         ])
@@ -58,6 +61,16 @@ const SubirLegajo = () => {
     return (
         <>
         <StackK/>
+        <Alert variant="filled" severity="info">
+        Paso 1: Inscripciones cargadas por link o por aliados. Llamar y completar datos
+      </Alert>
+      
+      <Alert variant="outlined" severity="info">
+   Paso 2: Fiscales  contactados. Asignar la escuela y la mesa
+</Alert>
+<Alert variant="filled" severity="info">
+        Paso 3: Fiscales ya confirmados, asignados a una mesa, confirmar cuando realicen las capacitaciones
+      </Alert>
         {datos ? <>
         <div className="home">
         <Widget type="Escuelas"
@@ -137,8 +150,8 @@ const SubirLegajo = () => {
                     0: <Tablaincrip
                   
                         />,
-                    1: <Tablaasig/>,
-                        2:  <h2>dos</h2>,
+                    1: <Tablapaso2/>,
+                        2:  <Tablaasig/>,
 
                   
 

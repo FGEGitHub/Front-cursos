@@ -280,10 +280,23 @@ const borrarinscripcion = async (id) => {
   return data
 }
 
+
+
+const traerpaso2inscrip = async () => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'traerpaso2inscrip/' , config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
+
 const modificarescuela = async (formdata) => {
   console.log(formdata)
   const { data } = await axios.post(baseUrl + 'modificarescuela', formdata, config)
   return data
 
 }
-export default { listaExtractos,modificarescuela, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default { listaExtractos,modificarescuela,traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

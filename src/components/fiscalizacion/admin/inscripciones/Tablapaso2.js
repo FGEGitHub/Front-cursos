@@ -4,10 +4,10 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 import servicioFidei from '../../../../services/fiscalizacion'
-import ModalBorrar from './borrarinscripcion'
+
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import Vernscripto from "./verinscripto";
+import Vernscripto from "./modalpaso2";
 
 
 
@@ -27,8 +27,8 @@ export default function Ingresos() {
     }, [])
     const traer = async () => {
 
-        const ins = await servicioFidei.todasincripciones()
-        setInscrip(ins[0])
+        const ins = await servicioFidei.traerpaso2inscrip()
+        setInscrip(ins)
         // 
 
     };
@@ -41,10 +41,9 @@ export default function Ingresos() {
           <Vernscripto
           dni= {inscrip[dataIndex].dni}
           nombre= {inscrip[dataIndex].nombre}
-          escuela={inscrip[dataIndex].nombre_escuela}
-          fecha_carga={inscrip[dataIndex].fecha_carga}
-            telefono ={inscrip[dataIndex].telefono}
-            telefono2 ={inscrip[dataIndex].telefono}
+          telefono={inscrip[dataIndex].telefono}
+          escuela1={inscrip[dataIndex].nombreescuela}
+          escuela2={inscrip[dataIndex].nombreescuela2}
           id_inscripcion={inscrip[dataIndex].id}
           getClients = { async () => {
 
@@ -53,26 +52,6 @@ export default function Ingresos() {
             // 
     
           }}/>
-          <ModalBorrar
-                id= {inscrip[dataIndex].id}
-                getClients = { async () => {
-
-                    const ins = await servicioFidei.todasincripciones()
-                    setInscrip(ins[0])
-                    // 
-            
-                  }}
-                />
-          </>
-
-        );
-      }
-      function CutomButtonsRenderercargado(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-      {inscrip[dataIndex].nombre_aliado === null ? <>Autoinscripcion</>:<>{inscrip[dataIndex].nombre_aliado}</>}
-      
-      
           </>
 
         );
@@ -85,46 +64,30 @@ export default function Ingresos() {
             name: "dni",
             label: "dni",
         },
-        
-        {
-            name: "apellido",
-            label: "apellido",
-        },
    
         {
             name: "nombre",
             label: "nombre",
         },
-        
         {
-            name: "telefono",
-            label: "TELEFONO",
-        },
-    
-        
-        {
-            name: "telefono2",
-            label: "TELEFONO 2",
-        },
-    
-    
-        {
-            name: "nombre_aliado",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    CutomButtonsRenderercargado(
-                        dataIndex,
-                        rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
-                    )
-            }
+            name: "nombreescuela",
+            label: "escuela",
 
         },
-      
-   
+       
         {
-            name: "Contactar/borrar",
+            name: "telefono",
+            label: "telefono",
+
+        },
+        {
+            name: "estado",
+            label: "estado",
+
+        },
+
+        {
+            name: "Acciones/llamado",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -136,7 +99,6 @@ export default function Ingresos() {
             }
         
         },   
-    
 
     ];
 

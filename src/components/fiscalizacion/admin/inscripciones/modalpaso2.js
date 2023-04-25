@@ -154,16 +154,17 @@ const handleChange2 = (e) => {
         <DialogContent>
 
 
-       { props.id_inscripcion}
+ 
              <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
              
-             {props.fecha_carga}
+         
           DNI:  { props.dni}<br/>
    
            <br/>
-            <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
-            <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
-         <b> Agregar detalles en caso q este inscripto de donde</b> 
+          
+         <b> 
+            Prioridad 1:  { props.escuela1}<br/>
+            Prioridad 2:  { props.escuela2}</b> 
             <br/>
      
           
@@ -171,7 +172,7 @@ const handleChange2 = (e) => {
    
    
                  <br />
-                 <label>Escuela prioridad 1</label>
+                 <label>Elegir escuela</label>
                  
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                                Escuela
@@ -194,29 +195,9 @@ const handleChange2 = (e) => {
                     ))}
 
                             </NativeSelect>
-                            <label>Escuela prioridad 2</label>
+                           
                  
-                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Escuela
-                 </InputLabel>
-                 <NativeSelect
-                     defaultValue={30}
-                     onChange={handleChange2}
-                     inputProps={{
-                         name: 'id_escuela2',
-                         id: 'uncontrolled-native',
-
-                     }}
-                 
-                 >  
-                  <option value={'1'}> Elegir</option>
-                  {turnos.map((row) => (
-                            
-                   <option value={row.id}> {row.nombre}</option>
-
-         ))}
-
-                 </NativeSelect>
+                
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                                Mesa
                             </InputLabel>
@@ -243,67 +224,9 @@ const handleChange2 = (e) => {
                             </NativeSelect>
 
              
-                 <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Domicilio"
-                    name="domicilio"
-                    onChange={handleChange}
-                    fullWidth
-                    variant="standard"
-                />
-                <br/>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Fuiste fiscal antes?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'fiscal_antes',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Dispones de movilidad ?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'movilidad',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Sos Vegano?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'vegano',
-                        id: 'uncontrolled-native',
-
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-    
+         
+                            <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> 
+            <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
                
 
                  <DialogActions>
