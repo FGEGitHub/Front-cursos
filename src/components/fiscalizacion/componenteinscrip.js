@@ -168,7 +168,7 @@ const Estracto = () => {
                     <option value={'Otra'}>Otra</option>
                 </NativeSelect>
                 <br/>
-                {fecha.como_se_entero  =="Amigo" ? <>
+                {fecha.como_se_entero  ==="Amigo" ? <>
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
                    ¿ Como se llama ese amigo ?
                 </InputLabel>
@@ -195,7 +195,7 @@ const Estracto = () => {
                     variant="standard"
                 />
                 </>:<></> }
-                {fecha.como_se_entero  =="Otra" ? <> 
+                {fecha.como_se_entero  !="Amigo" &&fecha.como_se_entero  !="Sin determinar" && fecha.como_se_entero  !="Flyer" && fecha.como_se_entero  !="Pagina web"&& fecha.como_se_entero  !=null  ? <> 
                 <TextField
                     autoFocus
                     margin="dense"
