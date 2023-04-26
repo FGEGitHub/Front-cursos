@@ -6,6 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioFide from '../../../../services/fiscalizacion'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import Rating from './rating'
 
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -39,6 +40,7 @@ export default function SelectTextFields(props) {
   const [cargandomesas, setCargandomesas] = useState(false)
   const [turnos, setTurnos] = useState()
   const [mesas, setMesas] = useState()
+  const [datos, setDatos] = useState()
   const [activo, setActivo] = useState(false)
 
 
@@ -67,18 +69,17 @@ setActivo(true)
    setMesas(mes)
 
    setCargandomesas(true)
-   console.log('dps')
+
   
 
   }
   const traerestadistica = async (e) => {
 
-    setCargandomesas(false)
-   
-   const mes = await servicioFide.traerestadisticasdeescuelas({id1:props.id_escuela, id2:props.id_escuela2})
-   setMesas(mes)
 
-   setCargandomesas(true)
+   
+  const dat = await servicioFide.traerestadisticasdeescuelas({id1:props.id_escuela, id2:props.id_escuela2})
+   setDatos(dat)
+
    console.log('dps')
   
 
@@ -86,7 +87,7 @@ setActivo(true)
 
   const handleClickOpen = async () => {
     await traer()
-    await traerestadistica()
+   
     setOpen(true);
     setInscripcion(({
 
@@ -97,6 +98,7 @@ setActivo(true)
   
   
     }))
+     traerestadistica()
   }
 
   const handleClose = () => {
@@ -168,8 +170,21 @@ const handleChange2 = (e) => {
 
  
              <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
-             
-         
+             { datos ? <>
+              Cantidad de mesas  en escuela 1: {datos.cantidad_escuela1}<br/>
+              <Rating    
+              valor={datos.cantidad_escuela1}
+              texto={"Rating cantidad de mesas"}
+              />
+      
+              Cantidad de mesas en escuela 2: {datos.cantidad_escuela2}<br/>
+              <Rating    
+              valor={datos.cantidad_escuela2}
+              texto={"Rating cantidad de mesas"}
+              />
+             </>:<></>}
+          
+
           DNI:  { props.dni}<br/>
    
            <br/>
