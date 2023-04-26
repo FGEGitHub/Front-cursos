@@ -149,6 +149,66 @@ const Estracto = () => {
                     type="number"
                     variant="standard"
                 />
+                <br/>      <br/>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                  <b> ¿Como te enteraste?</b>
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    onChange={handleChange}
+                    inputProps={{
+                        name: 'como_se_entero',
+                        id: 'uncontrolled-native',
+
+                    }}
+                >   <option value={'Sin determinar'}>Elegir</option>
+                    <option value={'Flyer'}>Lo vi en un Flyer</option>
+                    <option value={'Pagina web'}>Por una Pagina web</option>
+                    <option value={'Amigo'}>Me comento un amigo</option>
+                    <option value={'Otra'}>Otra</option>
+                </NativeSelect>
+                <br/>
+                {fecha.como_se_entero  =="Amigo" ? <>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                   ¿ Como se llama ese amigo ?
+                </InputLabel>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Apellido amigo"
+                    name="apellido_referido"
+                    onChange={handleChange}
+                    fullWidth
+                   
+                    variant="standard"
+                />
+                   <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Nombre amigo"
+                    name="nombre_referido"
+                    onChange={handleChange}
+                    fullWidth
+                   
+                    variant="standard"
+                />
+                </>:<></> }
+                {fecha.como_se_entero  =="Otra" ? <> 
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="De que otra manera?"
+                    name="como_se_entero"
+                    onChange={handleChange}
+                    fullWidth
+                   
+                    variant="standard"
+                />
+                </>:<></> }
+
                {/* 
                   <TextField
                     autoFocus
