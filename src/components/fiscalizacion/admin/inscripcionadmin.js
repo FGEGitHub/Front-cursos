@@ -202,7 +202,7 @@ console.log(fecha)
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="Apellido amigo"
+                    label="Apellido referido"
                     name="apellido_referido"
                     onChange={handleChange}
                     fullWidth
@@ -213,7 +213,7 @@ console.log(fecha)
                     autoFocus
                     margin="dense"
                     id="name"
-                    label="Nombre amigo"
+                    label="Nombre referido"
                     name="nombre_referido"
                     onChange={handleChange}
                     fullWidth
