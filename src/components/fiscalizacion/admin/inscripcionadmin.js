@@ -193,8 +193,33 @@ console.log(fecha)
                     type="number"
                     variant="standard"
                 />
+
              
-                        <br/>
+                        <br/><InputLabel variant="standard" htmlFor="uncontrolled-native">
+                  Datos de la persona que recomendo
+                </InputLabel>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Apellido amigo"
+                    name="apellido_referido"
+                    onChange={handleChange}
+                    fullWidth
+                   
+                    variant="standard"
+                />
+                   <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Nombre amigo"
+                    name="nombre_referido"
+                    onChange={handleChange}
+                    fullWidth
+                   
+                    variant="standard"
+                />
                 <CardActions>
                     {fecha.nombre && fecha.telefono? <>     <Button variant="outlined"
                           onClick={() => Inscribir()}
