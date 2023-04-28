@@ -103,6 +103,7 @@ export default function Ingresos() {
                                     <MenuItem value={'5'}>Administracion</MenuItem>
                              
                                     <MenuItem value={'7'}>Aliado</MenuItem>
+                                    <MenuItem value={'8'}>Admin de carga</MenuItem>
                                     
                                 </Select>
                             </FormControl>
@@ -118,17 +119,7 @@ export default function Ingresos() {
                             />
 
 
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="name"
-                                label="mail"
-                                name="mail"
-                                onChange={handleChange}
-                                fullWidth
-                                variant="standard"
-                            />
-
+               
 
 
 

@@ -76,6 +76,9 @@ const Login = () => {
           case 7:navigate('/fiscalizacion/alia')
         
           break;
+          case 8:navigate('/fiscalizacion/inscripcionadmin')
+        
+          break;
             default:hanleLogout();
           break;
 

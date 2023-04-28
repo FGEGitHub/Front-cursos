@@ -140,10 +140,14 @@ setActivo(true)
 
        { props.id_inscripcion}
              <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
-             
-             {props.fecha_carga}
+             <br/>
+             {props.fecha_carga}<br/>
           DNI:  { props.dni}<br/>
-   
+          
+         Se entero mediante: {props.como_se_entero}
+        { props.como_se_entero ==="Amigo"? <> 
+        <br/> Apellido Amigo: {props.apellido_referido}  <br/>
+        Nombre Amigo:{props.nombre_referido}  <br/></>:<></>}
            <br/>
             <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
             <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>

@@ -45,6 +45,9 @@ export default function Ingresos() {
           fecha_carga={inscrip[dataIndex].fecha_carga}
             telefono ={inscrip[dataIndex].telefono}
             telefono2 ={inscrip[dataIndex].telefono}
+            como_se_entero ={inscrip[dataIndex].como_se_entero}
+            apellido_referido ={inscrip[dataIndex].apellido_referido}
+            nombre_referido ={inscrip[dataIndex].nombre_referido}
           id_inscripcion={inscrip[dataIndex].id}
           getClients = { async () => {
 

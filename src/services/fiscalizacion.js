@@ -207,6 +207,14 @@ const enviarinscripcion = async (datos) => {
   return (data)
 }
 
+const enviarinscripcionadmin = async (datos) => {
+  console.log(datos)
+  const { data } = await axios.post(baseUrl + 'enviarinscripcionadmin', datos, config)
+
+
+  return (data)
+}
+
 const todos = async (usuario) => {
   ////////usaurios 
   // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -307,4 +315,4 @@ const traerestadisticasdeescuelas = async (formdata) => {
 
 }
 
-export default { listaExtractos,modificarescuela,traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default { listaExtractos,enviarinscripcionadmin,modificarescuela,traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
