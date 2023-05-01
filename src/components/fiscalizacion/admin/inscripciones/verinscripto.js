@@ -6,7 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioFide from '../../../../services/fiscalizacion'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-
+import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
@@ -16,19 +16,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
-const currencies = [
-  {
-    value: 'CBU',
-    label: 'CBU N°1',
-  },
-  {
-    value: 'CBU',
-    label: 'CBU N°2',
-  },
 
-
-  
-];
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
@@ -70,8 +58,9 @@ setActivo(true)
       dni: props.dni,
 
       id_inscripcion:props.id_inscripcion,
-     
-  
+     nombre:props.nombre,
+     apellido:props.apellido,
+  dni: props.dni
   
     }))
   }
@@ -109,7 +98,7 @@ setActivo(true)
     setActivo(false)
     setOpen(false);
   };/////
-  const [currency, setCurrency] = React.useState('EUR');
+
 
   /*   const handleChange = (event) => {
       setCurrency(event.target.value);
@@ -143,6 +132,7 @@ setActivo(true)
              <br/>
              {props.fecha_carga}<br/>
           DNI:  { props.dni}<br/>
+     
           
          Se entero mediante: {props.como_se_entero}
         { props.como_se_entero ==="Amigo"? <> 
@@ -205,8 +195,44 @@ setActivo(true)
          ))}
 
                  </NativeSelect>
-                  
-
+                 
+                 <h3> MODIFICAR DATOS PERSONALES <ContactEmergencyIcon/></h3>
+               
+                 <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Nombre "
+                    name="nombre"
+                    onChange={handleChange}
+                    fullWidth
+                    variant="standard"
+                    defaultValue={props.nombre}
+                />
+              
+              <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Apellido"
+                    name="apellido"
+                    onChange={handleChange}
+                    fullWidth
+                    variant="standard"
+                    defaultValue={props.apellido}
+                />
+                 <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="DNI"
+                    name="dni"
+                    onChange={handleChange}
+                    fullWidth
+                    type="number"
+                    variant="standard"
+                    defaultValue={props.dni}
+                />
              
                  <TextField
                     autoFocus

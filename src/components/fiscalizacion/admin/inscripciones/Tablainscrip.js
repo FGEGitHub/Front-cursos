@@ -41,6 +41,7 @@ export default function Ingresos() {
           <Vernscripto
           dni= {inscrip[dataIndex].dni}
           nombre= {inscrip[dataIndex].nombre}
+          apellido= {inscrip[dataIndex].apellido}
           escuela={inscrip[dataIndex].nombre_escuela}
           fecha_carga={inscrip[dataIndex].fecha_carga}
             telefono ={inscrip[dataIndex].telefono}
