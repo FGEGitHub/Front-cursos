@@ -33,7 +33,7 @@ export default function Clasenueva(props) {
   
    
 
-         const respuesta=  await servicioInscripciones.borrarinscripcion(props.id)
+         const respuesta=  await servicioInscripciones.volverapaso1(form)
          alert(respuesta)
 
 
@@ -52,7 +52,7 @@ export default function Clasenueva(props) {
         <div>
 
 
-< Tooltip title="Borrar inscripto">
+< Tooltip title="Mover a paso 1">
               < KeyboardReturnIcon  onClick={handleClickOpen}/>
         </Tooltip>
             <Dialog open={open} onClose={handleClose}>
