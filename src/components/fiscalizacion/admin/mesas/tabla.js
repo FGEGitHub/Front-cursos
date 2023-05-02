@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import servicioFisca from '../../../../services/fiscalizacion'
 import MUIDataTable from "mui-datatables";
 import Nuevo from './nueva'
+import Modificar from './modificar'
 import CargaDeTabla from "../../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
@@ -65,14 +66,19 @@ const Lotes = () => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-            <EditIcon
-             onClick={() =>  navigate('/usuario2/modificarcliente/'+clients[dataIndex].cuil_cuit)}
-              style={{ marginRight: "10px", cursor: "pointer" }}
+            <Modificar
+            id_mesa={clients[dataIndex].id}
+            traer ={async () => {
+        
+                const clients = await servicioFisca.listademesas({
+        
+                })
+                console.log(clients)
+                setClients(clients)
+                setLoading(false);
+            }}
             />
-             <SearchIcon
-             onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)}
-              style={{ marginRight: "10px", cursor: "pointer" }}
-            />
+        
            
           </>
         );
@@ -80,8 +86,13 @@ const Lotes = () => {
     // definimos las columnas
     const columns = [
         {
-            name: "id",
-            label: "ID",
+            name: "circuito",
+            label: "circuito",
+
+        }, 
+         {
+            name: "numero",
+            label: "numero",
 
         },
         {
@@ -90,14 +101,15 @@ const Lotes = () => {
 
         },
         {
-            name: "numero",
-            label: "numero",
+            name: "cantidad",
+            label: "cantidad",
 
         },
+      
        
     
         {
-            name: "Actions",
+            name: "Modificar",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
