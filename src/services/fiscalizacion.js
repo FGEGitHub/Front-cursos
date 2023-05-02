@@ -264,6 +264,20 @@ const listadeescuelas = async () => {
 
 
 
+const traerincripcionesdealiadoadmin = async (id) => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+
+  const { data } = await axios.get(baseUrl + 'traerincripcionesdealiadoadmin/' + id, config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
+
+
+
 const traerincripcionesdealiado = async (id) => {
   // const data = await axios.post('http://localhost:4000/signupp', datos)
 
@@ -315,4 +329,4 @@ const traerestadisticasdeescuelas = async (formdata) => {
 
 }
 
-export default { listaExtractos,enviarinscripcionadmin,modificarescuela,traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default { listaExtractos,enviarinscripcionadmin,traerincripcionesdealiadoadmin,modificarescuela,traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

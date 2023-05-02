@@ -74,7 +74,7 @@ export default function Ingresos() {
       function CutomButtonsRenderercargado(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-      {inscrip[dataIndex].nombre_aliado === null ? <>Autoinscripcion</>:<>{inscrip[dataIndex].nombre_aliado}</>}
+      {inscrip[dataIndex].cargadopor === undefined ? <>Autoinscripcion</>:<>{inscrip[dataIndex].cargadopor}</>}
       
       
           </>

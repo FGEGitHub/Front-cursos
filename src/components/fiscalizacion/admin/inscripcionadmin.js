@@ -66,7 +66,7 @@ const Estracto = () => {
                 console.log(usuario)
                 setUsuario(usuario)
                 setFecha({id_aliado:usuario.id})
- const clients = await servicioFisca.traerincripcionesdealiado(usuario.id)
+ const clients = await servicioFisca.traerincripcionesdealiadoadmin(usuario.id)
           setEscuelas(clients)
             }
            
@@ -260,9 +260,9 @@ console.log(fecha)
                                     <StyledTableRow key={row.name}>
                                         <StyledTableCell component="th" scope="row">{row.dni}</StyledTableCell>
                                        
-                                        <StyledTableCell component="th" scope="row"><b>{row.apellidoo}</b></StyledTableCell>
+                                        <StyledTableCell component="th" scope="row"><b>{row.apellido}</b></StyledTableCell>
 
-                                        <StyledTableCell component="th" scope="row">{row.nombree}</StyledTableCell>
+                                        <StyledTableCell component="th" scope="row">{row.nombre}</StyledTableCell>
                                         <StyledTableCell component="th" scope="row"> {row.telefono}  </StyledTableCell>
                                         <StyledTableCell component="th" scope="row"> {row.telefono2}  </StyledTableCell>
                                         {/*  <StyledTableCell component="th" scope="row">{row.presente === null ? <>Sin registrar</> : <> {row.row.presente === 'presente' ? <>PRESENTE</> : <>AUSENTE</>} </>}</StyledTableCell> */}

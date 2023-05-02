@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 import servicioFidei from '../../../../services/fiscalizacion'
-
+import Volver from './volverpaso2'
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import Vernscripto from "./modalpaso2";
@@ -54,6 +54,11 @@ export default function Ingresos() {
             // 
     
           }}/>
+
+<Volver
+ dni= {inscrip[dataIndex].dni}
+ id_inscripcion={inscrip[dataIndex].id}
+/>
           </>
 
         );
