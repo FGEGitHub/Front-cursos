@@ -40,6 +40,13 @@ const Estracto = () => {
         setDats(datos)
         setLoading(false);
     }
+    
+    const cargarcantidades = async (id) => {
+        console.log(fecha)
+      const datos = await servicioFisca.cargarcantidades(fecha)
+      alert(datos)
+      
+    }
     const cargar = async (id) => {
         console.log(fecha)
       const datos = await servicioFisca.cargarinscripcionesescuelas(fecha)
@@ -138,6 +145,9 @@ console.log(fecha)
                             <Button
                                 onClick={() => cargar(fecha.id)}
                             >   Cargar inscripciones</Button>
+                            <Button
+                                onClick={() => cargarcantidades(fecha.id)}
+                            >   Cargar Cantidades</Button>
                             <MUIDataTable
 
                                 title={"Tabla de estracto"}
