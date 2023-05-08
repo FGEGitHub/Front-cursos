@@ -95,10 +95,10 @@ const TablaNotificaciones = (props) => {
                     </div>
 
                 </> : <>
-                    <div onClick={() => navigate('/coodinadores/clase/' + clases[dataIndex]['id'])}>
+                    <div onClick={() => navigate('/coordinadores/clase/' + clases[dataIndex]['id'])}>
 
                         < Tooltip title="ASISTENCIA">
-                            <AccountBoxIcon onClick={() => navigate('/coodinadores/clase/' + clases[dataIndex]['id'])} />
+                            <AccountBoxIcon onClick={() => navigate('/coordinadores/clase/' + clases[dataIndex]['id'])} />
                         </Tooltip>
 
 
