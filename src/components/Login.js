@@ -93,7 +93,7 @@ const Login = () => {
 
 
   const handleChange = (e) =>{
- 
+ console.log(usuario)
     setUsuario({ ...usuario, [e.target.name]: e.target.value })}
 
 

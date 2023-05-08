@@ -144,10 +144,32 @@ setActivo(true)
          <b> Agregar detalles en caso q este inscripto de donde</b> 
             <br/>
      
-          
+            <h2>Elegir en que escuela vota </h2>
+                 
+                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                    Escuela
+                 </InputLabel>
+                 <NativeSelect
+                     defaultValue={30}
+                     onChange={handleChange}
+                     inputProps={{
+                         name: 'id_donde_vota',
+                         id: 'uncontrolled-native',
+
+                     }}
+                 
+                 >  
+                  <option value={'1'}> Elegir</option>
+                  {turnos.map((row) => (
+                            
+                   <option value={row.id}> {row.nombre}</option>
+
+         ))}
+
+                 </NativeSelect>
 
    
-   
+                 <h2>Elegir prioridades </h2>
                  <br />
                  <label>Escuela prioridad 1</label>
                  
@@ -298,7 +320,7 @@ setActivo(true)
                
 
                  <DialogActions>
-                 {inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
+                 {  inscripcion.id_donde_vota &&   inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
 
 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>

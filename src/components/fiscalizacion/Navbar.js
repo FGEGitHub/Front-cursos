@@ -17,8 +17,6 @@ import DrawerNav from "./DrawerNav";
 
 const Navbar = (props) => {
   
-
-  
   const [user, setUser] = useState(null)
   const [cargado, setCargado] = useState(false)
 
@@ -40,17 +38,12 @@ const Navbar = (props) => {
   
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
- 
-  
-  
+
     /* if (notificaciones>0) {
       document.title= 'Santa Catalina ('+notificaciones+')'
    
     }   */
   }
-  
-
-
   const handleClick = () => {
     navigate("/login");
   };
