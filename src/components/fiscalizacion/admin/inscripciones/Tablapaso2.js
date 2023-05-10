@@ -41,12 +41,14 @@ export default function Ingresos() {
           <Vernscripto
           dni= {inscrip[dataIndex].dni}
           nombre= {inscrip[dataIndex].nombre}
+          apellido= {inscrip[dataIndex].apellido}
           telefono={inscrip[dataIndex].telefono}
           escuela1={inscrip[dataIndex].nombreescuela}
           escuela2={inscrip[dataIndex].nombreescuela2}
           id_inscripcion={inscrip[dataIndex].id}
           id_escuela={inscrip[dataIndex].id_escuela}
           id_escuela2={inscrip[dataIndex].id_escuela2}
+          donde_vota={inscrip[dataIndex].donde_vota}
           getClients = { async () => {
 
             const ins = await servicioFidei.todasincripciones()
@@ -93,8 +95,8 @@ export default function Ingresos() {
 
         },
         {
-            name: "estado",
-            label: "estado",
+            name: "donde_vota",
+            label: "donde_vota",
 
         },
 

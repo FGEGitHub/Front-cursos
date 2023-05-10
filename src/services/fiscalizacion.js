@@ -33,6 +33,14 @@ if (loggedUserJSON) {
 
 
 
+const estadisticas1 = async () => {
+
+
+  const { data } = await axios.get(baseUrl + 'estadisticas1', config)
+  console.log(data)
+  return data
+}
+
 const listaExtractos = async () => {
 
 
@@ -350,4 +358,4 @@ const volverapaso1 = async (formdata) => {
 
 
 
-export default { listaExtractos,cargarcantidades,volverapaso1,modificarmesa,enviarinscripcionadmin,traerincripcionesdealiadoadmin,modificarescuela,traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default { listaExtractos,estadisticas1,cargarcantidades,volverapaso1,modificarmesa,enviarinscripcionadmin,traerincripcionesdealiadoadmin,modificarescuela,traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

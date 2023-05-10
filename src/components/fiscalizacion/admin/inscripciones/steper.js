@@ -2,6 +2,7 @@ import { StepButton, Stepper, Step, Stack, Button, Box } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
 import { useState, useEffect } from "react";
+import VerEstadisticas from './estadisticas1'
 import Tablaincrip from './Tablainscrip'
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
@@ -91,7 +92,7 @@ const SubirLegajo = () => {
                         <Widget type="Cantidad confirmadas"
                       cantidad={'Sin determ'}
                     />
-                     <Widget type="Cantidad mesas que nadie se inscribio"
+                     <Widget type="Cantidad mesas sin asignar"
                       cantidad={datos[2]}
                     />
 
@@ -106,6 +107,7 @@ const SubirLegajo = () => {
           '&:hover': { border: '1px solid #ccc' },
         }}
       >
+               <VerEstadisticas/>
         <Container sx={{ my: 4 }}>
 
           {listo ?  <div>
@@ -149,7 +151,7 @@ const SubirLegajo = () => {
          
                 </div>: <div></div> }
 
-
+         
 
             <Box>
                 {{

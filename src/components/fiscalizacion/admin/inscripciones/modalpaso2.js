@@ -7,14 +7,14 @@ import DialogContent from '@mui/material/DialogContent';
 import servicioFide from '../../../../services/fiscalizacion'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Rating from './rating'
-
+import LooksOneIcon from '@mui/icons-material/LooksOne';
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-
+import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
 const currencies = [
@@ -169,7 +169,8 @@ const handleChange2 = (e) => {
 
 
  
-             <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
+             <h3>Asignaciona escuela {props.nombre} {props.apellido} </h3>
+             <h4><HowToVoteIcon/>Vota en  {props.donde_vota}</h4>
              { datos ? <>
               Cantidad de mesas  en escuela 1: {datos.cantidad_escuela1}<br/>
               <Rating    
@@ -190,8 +191,8 @@ const handleChange2 = (e) => {
            <br/>
           
          <b> 
-            Prioridad 1:  { props.escuela1}<br/>
-            Prioridad 2:  { props.escuela2}</b> 
+           <LooksOneIcon/> Prioridad 1:  { props.escuela1}<br/>
+           <LooksTwoIcon/>  Prioridad 2:  { props.escuela2}</b> 
             <br/>
      
           

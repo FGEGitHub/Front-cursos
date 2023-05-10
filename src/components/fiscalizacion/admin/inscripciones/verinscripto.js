@@ -9,14 +9,14 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-
+import LooksOneIcon from '@mui/icons-material/LooksOne';
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
-
+import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
@@ -109,7 +109,7 @@ setActivo(true)
 
 
     
-    
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
     <Box
 
       sx={{
@@ -144,7 +144,7 @@ setActivo(true)
          <b> Agregar detalles en caso q este inscripto de donde</b> 
             <br/>
      
-            <h2>Elegir en que escuela vota </h2>
+            <h2> <HowToVoteIcon/> Elegir en que escuela vota </h2>
                  
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     Escuela
@@ -171,7 +171,7 @@ setActivo(true)
    
                  <h2>Elegir prioridades </h2>
                  <br />
-                 <label>Escuela prioridad 1</label>
+               <LooksOneIcon/>   <label>Escuela prioridad 1</label>
                  
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                                Escuela
@@ -193,8 +193,8 @@ setActivo(true)
 
                     ))}
 
-                            </NativeSelect>
-                            <label>Escuela prioridad 2</label>
+                            </NativeSelect><br/>
+                            <LooksTwoIcon/>    <label>Escuela prioridad 2</label>
                  
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     Escuela
@@ -333,6 +333,6 @@ setActivo(true)
       </Dialog>
     </Box >
 
-   
+   </div>
   );
 }
