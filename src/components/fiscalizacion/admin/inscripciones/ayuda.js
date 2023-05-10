@@ -11,7 +11,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import React, { useEffect, useState, Fragment } from "react";
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import HelpIcon from '@mui/icons-material/Help';
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
@@ -86,21 +86,25 @@ setActivo(true)
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Ver inscripcion">
-      <Button variant="contained" onClick={handleClickOpen}>Ver estadisticas<LeaderboardIcon/></Button>
+       < Tooltip title="Ver info ayuda">
+      <Button variant="outlined" onClick={handleClickOpen}>Ayuda <HelpIcon/></Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
 
       {activo ? <>
         <DialogContent>
-        Cantidad de inscripciones: {datos.cantidad }<br/>
-        <b>Se enteraron mediante</b><br/>
-        Pagina web: {datos.pagina} <br/>
-        Flyer: {datos.Fly} <br/>
-        Menciono un amigo: {datos.Amigo} <br/>
-        <b>Carga de aliados</b><br/>
-        Autoinscripcion: {datos.Autoinscripcion} <br/>
-         Aliados:: {datos.aliado} <br/>
+          <h3>Referencia de cada paso </h3>
+        <label>
+        <b>Paso 1: Inscripciones cargadas por link o por aliados.</b> Se Requiere llamar y completar datos(Donde vota, elegir que escuela desea fiscalizar, segunda opcion alternatva de escuela, si es vegano, si tiene mobilidad, etc)<br/>
+    
+      
+ 
+        <b>Paso 2: Fiscales  contactados.</b> Asignar la escuela y la mesa en la que va a fiscalizar, al seleccionar al iscripto/a se da una informacion y valoracion de las escuelas que eligio <br/>
+
+
+        <b> Paso 3: Fiscales ya confirmados, asignados a una mesa.</b> El administrador debe confirmar cuando realicen las capacitaciones<br/>
+        <b> Paso 4: Fiscales que ya pasaron por la capacitacion</b> <br/>
+      </label>
 
 
 

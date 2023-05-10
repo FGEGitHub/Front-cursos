@@ -130,7 +130,7 @@ setActivo(true)
        { props.id_inscripcion}
              <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
              <br/>
-             {props.fecha_carga}<br/>
+            Inscripto el dia: {props.fecha_carga}<br/>
           DNI:  { props.dni}<br/>
      
           
@@ -141,7 +141,7 @@ setActivo(true)
            <br/>
             <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
             <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
-         <b> Agregar detalles en caso q este inscripto de donde</b> 
+   
             <br/>
      
             <h2> <HowToVoteIcon/> Elegir en que escuela vota </h2>

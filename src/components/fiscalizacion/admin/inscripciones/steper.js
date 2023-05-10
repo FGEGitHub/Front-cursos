@@ -3,6 +3,7 @@ import { Container } from "@mui/system";
 import React from "react";
 import { useState, useEffect } from "react";
 import VerEstadisticas from './estadisticas1'
+import Ayuda from './ayuda'
 import Tablaincrip from './Tablainscrip'
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
@@ -13,8 +14,9 @@ import '../../../estadisticas/Home.scss'
 import Widget from '../../Widget/Widget'
 import servicioFisca from '../../../../services/fiscalizacion'
 import StackK from '../../infoskack'
-import Alert from '@mui/material/Alert';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import { useNavigate, useParams } from "react-router-dom";
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 const SubirLegajo = () => {
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = useState(0);
@@ -62,22 +64,21 @@ const SubirLegajo = () => {
     }
    
 
-
+ 
 
     return (
         <>
         <StackK/>
-        <Alert variant="filled" severity="info">
-        Paso 1: Inscripciones cargadas por link o por aliados. Llamar y completar datos
-      </Alert>
-      
-      <Alert variant="outlined" severity="info">
-   Paso 2: Fiscales  contactados. Asignar la escuela y la mesa
-</Alert>
-<Alert variant="filled" severity="info">
-        Paso 3: Fiscales ya confirmados, asignados a una mesa, confirmar cuando realicen las capacitaciones
-      </Alert>
-      <Button variant="contained" color="success" onClick={volver}>Volver</Button><br/>
+        <ButtonGroup
+      disableElevation
+      variant="contained"
+      aria-label="Disabled elevation buttons"
+    >
+<Button variant="contained" color="success" onClick={volver}>Volver<KeyboardReturnIcon/></Button>
+      <VerEstadisticas/>
+      <Ayuda/>
+    </ButtonGroup>
+      <br/>
         {datos ? <>
         <div className="home">
         <Widget type="Escuelas"
@@ -107,7 +108,7 @@ const SubirLegajo = () => {
           '&:hover': { border: '1px solid #ccc' },
         }}
       >
-               <VerEstadisticas/>
+          
         <Container sx={{ my: 4 }}>
 
           {listo ?  <div>

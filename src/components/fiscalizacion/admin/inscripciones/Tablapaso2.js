@@ -17,9 +17,7 @@ export default function Ingresos() {
 
 
     const [inscrip, setInscrip] = useState([]);
-    const [turnos, setTurnos] = useState([]);
-    const [personas, setpersonas] = useState([]);
-    const [cursos, setCursos] = useState([]);
+  
 
 
     useEffect(() => {
