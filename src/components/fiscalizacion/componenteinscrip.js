@@ -23,7 +23,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 const Estracto = () => {
     //configuracion de Hooks
-    const [dats, setDats] = useState([]);
+    const [cargando, setCargando] = useState(false);
     const [loading, setLoading] = useState(true);
     const [escuelas, setEscuelas] = useState([''])
     const [fecha, setFecha] = useState([''])
@@ -56,21 +56,22 @@ const Estracto = () => {
 
     //
 
-    
+
     const Inscribir = async (event) => {
-     
-    
-        const rta=  await servicioFisca.enviarinscripcion(
+
+        setCargando(true)
+        const rta = await servicioFisca.enviarinscripcion(
             fecha
-         )
+        )
         alert(rta)
-        if (rta ==="inscripto correctamente"){
+     
+        if (rta === "inscripto correctamente, muchas gracias por completar, por favor aguarda en unos dias nos comunicaremos al numero de telefono registrado") {
             window.location.reload();
         }
-        
-      };
+   setCargando(false)
+    };
 
-
+ 
 
 
     // renderiza la data table
@@ -89,12 +90,12 @@ const Estracto = () => {
                     margin: "20px auto"
                 }}
             >
-            <Card sx={{  textAlign: 'center'  }}>
-            <AccountBalanceTwoToneIcon/>
-                  <h2>INSCRIPCION A  FISCALIZACION  </h2>
-                 </Card>
-                
-               
+                <Card sx={{ textAlign: 'center' }}>
+                    <AccountBalanceTwoToneIcon />
+                    <h2>INSCRIPCION A  FISCALIZACION  </h2>
+                </Card>
+
+
                 <TextField
                     autoFocus
                     margin="dense"
@@ -105,8 +106,8 @@ const Estracto = () => {
                     fullWidth
                     variant="standard"
                 />
-              
-              <TextField
+
+                <TextField
                     autoFocus
                     margin="dense"
                     id="name"
@@ -116,7 +117,7 @@ const Estracto = () => {
                     fullWidth
                     variant="standard"
                 />
-                 <TextField
+                <TextField
                     autoFocus
                     margin="dense"
                     id="name"
@@ -127,7 +128,7 @@ const Estracto = () => {
                     type="number"
                     variant="standard"
                 />
-                     <TextField
+                <TextField
                     autoFocus
                     margin="dense"
                     id="name"
@@ -138,7 +139,7 @@ const Estracto = () => {
                     type="number"
                     variant="standard"
                 />
-                    <TextField
+                <TextField
                     autoFocus
                     margin="dense"
                     id="name"
@@ -149,9 +150,9 @@ const Estracto = () => {
                     type="number"
                     variant="standard"
                 />
-                <br/>      <br/>
+                <br />      <br />
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                  <b> ¿Como te enteraste?</b>
+                    <b> ¿Como te enteraste?</b>
                 </InputLabel>
                 <NativeSelect
                     defaultValue={30}
@@ -167,49 +168,49 @@ const Estracto = () => {
                     <option value={'Amigo'}>Me comento un amigo</option>
                     <option value={'Otra'}>Otra</option>
                 </NativeSelect>
-                <br/>
-                {fecha.como_se_entero  ==="Amigo" ? <>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Como se llama ese amigo ?
-                </InputLabel>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Apellido amigo"
-                    name="apellido_referido"
-                    onChange={handleChange}
-                    fullWidth
-                   
-                    variant="standard"
-                />
-                   <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Nombre amigo"
-                    name="nombre_referido"
-                    onChange={handleChange}
-                    fullWidth
-                   
-                    variant="standard"
-                />
-                </>:<></> }
-                {fecha.como_se_entero  !="Amigo" &&fecha.como_se_entero  !="Sin determinar" && fecha.como_se_entero  !="Flyer" && fecha.como_se_entero  !="Pagina web"&& fecha.como_se_entero  !=null  ? <> 
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="De que otra manera?"
-                    name="como_se_entero"
-                    onChange={handleChange}
-                    fullWidth
-                   
-                    variant="standard"
-                />
-                </>:<></> }
+                <br />
+                {fecha.como_se_entero === "Amigo" ? <>
+                    <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                        ¿ Como se llama ese amigo ?
+                    </InputLabel>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Apellido amigo"
+                        name="apellido_referido"
+                        onChange={handleChange}
+                        fullWidth
 
-               {/* 
+                        variant="standard"
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Nombre amigo"
+                        name="nombre_referido"
+                        onChange={handleChange}
+                        fullWidth
+
+                        variant="standard"
+                    />
+                </> : <></>}
+                {fecha.como_se_entero != "Amigo" && fecha.como_se_entero != "Sin determinar" && fecha.como_se_entero != "Flyer" && fecha.como_se_entero != "Pagina web" && fecha.como_se_entero != null ? <>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="De que otra manera?"
+                        name="como_se_entero"
+                        onChange={handleChange}
+                        fullWidth
+
+                        variant="standard"
+                    />
+                </> : <></>}
+
+                {/* 
                   <TextField
                     autoFocus
                     margin="dense"
@@ -338,16 +339,24 @@ const Estracto = () => {
 
                     ))}
                 </NativeSelect> */}
-                        <br/>
+                <br />
                 <CardActions>
-                {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? <>     <Button variant="outlined"
-                          onClick={() => Inscribir()}
-                      >  Enviar inscripcion</Button> </>: <>     <Button variant="outlined" disabled
-                      onClick={() => Inscribir()}
-                  >  Enviar inscripcion</Button> </>}
-                       </CardActions>
-                
-          
+                    {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? <>
+                        {!cargando ? <>
+                            <Button variant="outlined"
+
+                                onClick={() => Inscribir()}
+                            >  Enviar inscripcion</Button>
+                        </> : <>       
+                        <Button variant="outlined">  <CircularProgress color="success" /></Button>
+                          </>}
+
+                    </> : <>     <Button variant="outlined" disabled
+                        onClick={() => Inscribir()}
+                    >  Enviar inscripcion</Button> </>}
+                </CardActions>
+
+
             </Paper>
 
 

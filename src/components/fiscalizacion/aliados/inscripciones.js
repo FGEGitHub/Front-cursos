@@ -49,6 +49,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 const Estracto = () => {
     //configuracion de Hooks
+    const [cargando, setCargando] = useState(false);
     const [usuario, setUsuario] = useState([''])
     const [loading, setLoading] = useState(true);
     const [escuelas, setEscuelas] = useState([''])
@@ -100,17 +101,16 @@ console.log(fecha)
     
     const Inscribir = async (event) => {
      
-    
+        setCargando(true)
         const rta=  await servicioFisca.enviarinscripcion(
             fecha
          )
      
         alert(rta)
-           if (rta ==="inscripto correctamente"){
+           if (rta ==="inscripto correctamente, muchas gracias por completar, por favor aguarda en unos dias nos comunicaremos al numero de telefono registrado"){
             window.location.reload();
         }
-     
-        
+        setCargando(false)
       };
 
 
@@ -196,9 +196,21 @@ console.log(fecha)
              
                         <br/>
                 <CardActions>
-                    {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? <>     <Button variant="outlined"
+                    {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? <>   
+                    
+                        {!cargando ? <>
+                      <Button variant="outlined"
                           onClick={() => Inscribir()}
-                      >  Enviar inscripcion</Button> </>: <>     <Button variant="outlined" disabled
+                      >  Enviar inscripcion</Button>
+                       </> : <>       
+                        <Button variant="outlined">  <CircularProgress color="success" /></Button>
+                          </>}
+                      
+                      
+                       </>: 
+                      
+                      
+                      <>     <Button variant="outlined" disabled
                       onClick={() => Inscribir()}
                   >  Enviar inscripcion</Button> </>}
           
