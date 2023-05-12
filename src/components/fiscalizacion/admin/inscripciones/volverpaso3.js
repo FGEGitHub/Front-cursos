@@ -27,13 +27,13 @@ export default function Clasenueva(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
-        setForm({id:props.id_inscripcion})
+        setForm({id:props.id})
     };
     const handleDeterminar = async (event) => {
   
    
 
-         const respuesta=  await servicioInscripciones.volverapaso1(form)
+         const respuesta=  await servicioInscripciones.volverapaso3(form)
          alert(respuesta)
 
 
@@ -52,8 +52,8 @@ export default function Clasenueva(props) {
         <div>
 
 
-< Tooltip title="Mover a paso 1">
-              < KeyboardReturnIcon  onClick={handleClickOpen}/>
+< Tooltip title="Mover a paso 2">
+            <Button  onClick={handleClickOpen}  > Desasignar < KeyboardReturnIcon /></Button> 
         </Tooltip>
             <Dialog open={open} onClose={handleClose}>
 
@@ -68,13 +68,15 @@ export default function Clasenueva(props) {
                     }}
                 >
                     <DialogContent>
+                    {props.id}
                         <DialogContentText>
-                          ¿Seguro que quieres moverlo al paso 1? 
+
+                          ¿Seguro que quieres moverlo al paso 2? 
                         </DialogContentText>
                         {props.id_inscripcion}
 
                             <DialogActions>
-                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Desinscribir</Button>
+                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Si</Button>
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                             </DialogActions>

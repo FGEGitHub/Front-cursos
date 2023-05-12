@@ -87,16 +87,11 @@ setActivo(true)
   }
 
   const handleClickOpen = async () => {
-    await traer()
-   
+    await traer()  
     setOpen(true);
     setInscripcion(({
-
       dni: props.dni,
-
       id_inscripcion:props.id_inscripcion,
-     
-  
   
     }))
      traerestadistica()
@@ -125,12 +120,13 @@ const handleChange2 = (e) => {
 
     try {
 
-      await servicioFide.inscribir(
+    const respuesta =  await servicioFide.asignarmesaafiscal(
         inscripcion
 
 
       )
-      props.getClients()
+      alert(respuesta)
+      props.traer()
 
     } catch (error) {
       console.error(error);
@@ -260,7 +256,7 @@ const handleChange2 = (e) => {
                
 
                  <DialogActions>
-                 {inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS(Momentaneamente desactivado)</p></>  }
+                 {inscripcion.id_escuela && inscripcion.mesa ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS(Momentaneamente desactivado)</p></>  }
 
 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>

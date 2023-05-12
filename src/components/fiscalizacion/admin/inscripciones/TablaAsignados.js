@@ -7,8 +7,8 @@ import servicioFidei from '../../../../services/fiscalizacion'
 
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import Vernscripto from "./modallamado";
-
+import ConfirmarCapa from "./confirmarcapacitacion";
+import Volver from "./volverpaso3";
 
 
 
@@ -38,12 +38,9 @@ export default function Ingresos() {
         return (
           <>
       
-          <Vernscripto
-          dni= {inscrip[dataIndex].dni}
-          nombre= {inscrip[dataIndex].nombre}
-          telefono={inscrip[dataIndex].telefono}
-
-          id_inscripcion={inscrip[dataIndex].id}
+          <ConfirmarCapa
+          id= {inscrip[dataIndex].id}
+        
           getClients = { async () => {
 
             const ins = await servicioFidei.todasincripciones()
@@ -51,6 +48,17 @@ export default function Ingresos() {
             // 
     
           }}/>
+  <Volver
+          id= {inscrip[dataIndex].id}
+        
+          traer = {async () => {
+
+            const ins = await servicioFidei.todaslasasignaciones()
+            setInscrip(ins[0])
+            // 
+    
+        }}/>
+
           </>
 
         );

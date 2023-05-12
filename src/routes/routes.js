@@ -72,6 +72,7 @@ import Usersfisca from '../pages/fiscalizacion/Admin/Usuarios'
 import Aliadoscarga from '../pages/fiscalizacion/Aliados/aliadoscarga'
 import EscuelasAdmin from '../pages/fiscalizacion/Admin/escuelas'
 import Inscripciondearmin from '../pages/fiscalizacion/inscripcionadmin'
+import Personas_fisca from '../pages/fiscalizacion/Admin/personas'
 
 
 
@@ -153,7 +154,8 @@ const Rutas = [
 		{ path: '/fiscalizacion/alia', element: <Aliadoscarga /> },
 		{ path: '/fiscalizacion/administracion/escuelas', element: <EscuelasAdmin /> },
 		{ path: '/fiscalizacion/inscripcionadmin', element: <Inscripciondearmin /> },
-		
+		{ path: '/fiscalizacion/administracion/personas', element: <Personas_fisca /> },
+	
 
 ];
 

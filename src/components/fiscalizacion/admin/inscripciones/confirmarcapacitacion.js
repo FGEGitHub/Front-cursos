@@ -10,7 +10,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from "react";
 import servicioInscripciones from '../../../../services/fiscalizacion'
 import Tooltip from '@material-ui/core/Tooltip';
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone';
+
 import { Paper } from '@mui/material';
 
 import Box from '@mui/material/Box';
@@ -33,7 +34,7 @@ export default function Clasenueva(props) {
   
    
 
-         const respuesta=  await servicioInscripciones.volverapaso1(form)
+         const respuesta=  await servicioInscripciones.Confirmarcapa(form)
          alert(respuesta)
 
 
@@ -52,12 +53,12 @@ export default function Clasenueva(props) {
         <div>
 
 
-< Tooltip title="Mover a paso 1">
-              < KeyboardReturnIcon  onClick={handleClickOpen}/>
+< Tooltip title="Confirmar Capacitacion">
+             <Button   onClick={handleClickOpen }>Confirmar Capa< SchoolTwoToneIcon/></Button> 
         </Tooltip>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>Volver inscripcion al paso anterior</DialogTitle>
+                <DialogTitle>Confirmar Capacitado</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
@@ -69,12 +70,12 @@ export default function Clasenueva(props) {
                 >
                     <DialogContent>
                         <DialogContentText>
-                          ¿Seguro que quieres moverlo al paso 1? 
+                          ¿El fiscal realizo la capacitacion con exito? 
                         </DialogContentText>
                         {props.id_inscripcion}
 
                             <DialogActions>
-                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Desinscribir</Button>
+                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Si</Button>
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                             </DialogActions>

@@ -47,17 +47,24 @@ export default function Ingresos() {
           id_escuela={inscrip[dataIndex].id_escuela}
           id_escuela2={inscrip[dataIndex].id_escuela2}
           donde_vota={inscrip[dataIndex].donde_vota}
-          getClients = { async () => {
+          traer = {async () => {
 
-            const ins = await servicioFidei.todasincripciones()
-            setInscrip(ins[0])
+            const ins = await servicioFidei.traerpaso2inscrip()
+            setInscrip(ins)
             // 
-    
-          }}/>
+        
+        }}/>
 
 <Volver
  dni= {inscrip[dataIndex].dni}
  id_inscripcion={inscrip[dataIndex].id}
+ traer = {async () => {
+
+    const ins = await servicioFidei.traerpaso2inscrip()
+    setInscrip(ins)
+    // 
+
+}}
 />
           </>
 
