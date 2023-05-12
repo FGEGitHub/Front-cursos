@@ -41,6 +41,7 @@ export default function SelectTextFields(props) {
   const [turnos, setTurnos] = useState()
   const [mesas, setMesas] = useState()
   const [datos, setDatos] = useState()
+  const [promedio, setPromedio] = useState(0)
   const [activo, setActivo] = useState(false)
 
 
@@ -79,7 +80,7 @@ setActivo(true)
    
   const dat = await servicioFide.traerestadisticasdeescuelas({id1:props.id_escuela, id2:props.id_escuela2})
    setDatos(dat)
-
+   setPromedio(dat.prom)
    console.log('dps')
   
 
@@ -172,15 +173,16 @@ const handleChange2 = (e) => {
              <h3>Asignaciona escuela {props.nombre} {props.apellido} </h3>
              <h4><HowToVoteIcon/>Vota en  {props.donde_vota}</h4>
              { datos ? <>
+             Promedio votantes por escuela: {promedio}<br/>
               Cantidad de mesas  en escuela 1: {datos.cantidad_escuela1}<br/>
               <Rating    
-              valor={datos.cantidad_escuela1}
+              valor={datos.cantidad_escuela1/(promedio/2)}
               texto={"Rating cantidad de mesas"}
               />
       
               Cantidad de mesas en escuela 2: {datos.cantidad_escuela2}<br/>
               <Rating    
-              valor={datos.cantidad_escuela2}
+              valor={datos.cantidad_escuela2/(promedio/2)}
               texto={"Rating cantidad de mesas"}
               />
              </>:<></>}

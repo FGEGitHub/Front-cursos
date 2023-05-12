@@ -17,6 +17,9 @@ import LooksOneIcon from '@mui/icons-material/LooksOne';
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
+import Rating from './rating'
+
+
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
@@ -24,9 +27,9 @@ export default function SelectTextFields(props) {
   let params = useParams()
   let id_curso = params.id
   const [usuarioo, setUsuarioo] = useState()
-
+  const [prom, setProm] = useState({})
   const [turnos, setTurnos] = useState()
-
+  const [escuela, setEscuela] = useState({})
   const [activo, setActivo] = useState(false)
 
 
@@ -34,8 +37,6 @@ export default function SelectTextFields(props) {
 
   const traer = async () => {
     setUsuarioo()
-  
-   
    const turnos = await servicioFide.traerescuelas()
    setTurnos(turnos)
 setActivo(true)
@@ -43,10 +44,7 @@ setActivo(true)
 
   }
 
-  const [inscripcion, setInscripcion] = useState({
-
-
-})
+  const [inscripcion, setInscripcion] = useState({})
 
 
 
@@ -75,10 +73,24 @@ setActivo(true)
     console.log(inscripcion)
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 }
+///// funcion para traer rating
+const traer2 = async (e) => {
+ const dat = await servicioFide.traerestadisticasdeescuelas({id1:e.target.value})
+ console.log(dat)
+ setEscuela({ ...escuela, [e.target.name]:  dat.cantidad_escuela1 }  )
+ setProm({ 'promedio':  dat.prom }  )
+console.log(escuela)
+console.log(prom)
+}
+const handleChange2 = (e) => {
+  console.log(inscripcion)
+  setInscripcion({ ...inscripcion, [e.target.name]: e.target.value } )
+  
+  traer2(e)
+  
 
+}
 
-
-  ////
   const handleDeterminar = async (event) => {
 
     try {
@@ -142,7 +154,7 @@ setActivo(true)
             <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
             <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
    
-            <br/>
+            {prom.promedio ? <>Promedio de votantes por escuela: {prom.promedio}</>: <></>}
      
             <h2> <HowToVoteIcon/> Elegir en que escuela vota </h2>
                  
@@ -151,7 +163,7 @@ setActivo(true)
                  </InputLabel>
                  <NativeSelect
                      defaultValue={30}
-                     onChange={handleChange}
+                     onChange={handleChange2}
                      inputProps={{
                          name: 'id_donde_vota',
                          id: 'uncontrolled-native',
@@ -167,7 +179,12 @@ setActivo(true)
          ))}
 
                  </NativeSelect>
-
+                 {escuela.id_donde_vota ? <>Cantidad de votantes en la escuela: {escuela.id_donde_vota}<br/>
+                            <Rating    
+              valor={(escuela.id_donde_vota/(prom.promedio/2))}
+              texto={"Rating votantes"}
+              />
+                 </>: <></>}<br/>
    
                  <h2>Elegir prioridades </h2>
                  <br />
@@ -178,7 +195,7 @@ setActivo(true)
                             </InputLabel>
                             <NativeSelect
                                 defaultValue={30}
-                                onChange={handleChange}
+                                onChange={handleChange2}
                                 inputProps={{
                                     name: 'id_escuela',
                                     id: 'uncontrolled-native',
@@ -193,7 +210,14 @@ setActivo(true)
 
                     ))}
 
-                            </NativeSelect><br/>
+                            </NativeSelect>
+                            {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br/>
+                            <Rating    
+              valor={(escuela.id_escuela/(prom.promedio/2))}
+              texto={"Rating votantes"}
+              />
+                        
+                 </>: <></>}<br/>
                             <LooksTwoIcon/>    <label>Escuela prioridad 2</label>
                  
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -201,7 +225,7 @@ setActivo(true)
                  </InputLabel>
                  <NativeSelect
                      defaultValue={30}
-                     onChange={handleChange}
+                     onChange={handleChange2}
                      inputProps={{
                          name: 'id_escuela2',
                          id: 'uncontrolled-native',
@@ -217,7 +241,11 @@ setActivo(true)
          ))}
 
                  </NativeSelect>
-                 
+                 {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br/>
+                            <Rating    
+              valor={(escuela.id_escuela2/(prom.promedio/2))}
+              texto={"Rating votantes"}
+              /></>: <></>}<br/>
                  <h3> MODIFICAR DATOS PERSONALES <ContactEmergencyIcon/></h3>
                
                  <TextField

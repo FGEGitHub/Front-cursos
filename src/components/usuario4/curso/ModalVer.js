@@ -109,7 +109,7 @@ export default function SelectTextFields(props) {
            <h3>
               <b> Contactar a {datos[0].nombre}</b></h3>
              
-               
+               {props.id}
    
    
                  <br />

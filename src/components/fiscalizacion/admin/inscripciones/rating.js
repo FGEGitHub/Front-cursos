@@ -23,7 +23,7 @@ export default function BasicRating(props) {
 
    
       <Typography component="legend">{props.texto} </Typography>
-      <Rating name="read-only" value={Math.floor(props.valor/2)} readOnly />
+      <Rating name="read-only" value={props.valor+1} readOnly />
             
     </Box>
      
