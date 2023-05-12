@@ -8,7 +8,7 @@ import ModalBorrar from './borrarinscripcion'
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import Vernscripto from "./verinscripto";
-import AsignarEnc from './asignarencargado'
+
 
 
 
@@ -27,9 +27,16 @@ export default function Ingresos() {
         traer()
     }, [])
     const traer = async () => {
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+        if (loggedUserJSON) {
+            const usuario = JSON.parse(loggedUserJSON)
 
-        const ins = await servicioFidei.todasincripciones()
-        setInscrip(ins[0])
+       
+
+            const ins = await servicioFidei.todasincripciones2(usuario.id)
+            setInscrip(ins[0])
+        }
+    
         // 
 
     };
@@ -51,33 +58,39 @@ export default function Ingresos() {
                     apellido_referido={inscrip[dataIndex].apellido_referido}
                     nombre_referido={inscrip[dataIndex].nombre_referido}
                     id_inscripcion={inscrip[dataIndex].id}
-                    getClients={async () => {
-
-                        const ins = await servicioFidei.todasincripciones()
-                        setInscrip(ins[0])
+                    getClients={ async () => {
+                        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                        if (loggedUserJSON) {
+                            const usuario = JSON.parse(loggedUserJSON)
+                
+                       
+                
+                            const ins = await servicioFidei.todasincripciones2(usuario.id)
+                            setInscrip(ins[0])
+                        }
+                    
                         // 
-
+                
                     }} />
                 <ModalBorrar
                     id={inscrip[dataIndex].id}
-                    getClients={async () => {
-
-                        const ins = await servicioFidei.todasincripciones()
-                        setInscrip(ins[0])
+                    getClients={ async () => {
+                        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                        if (loggedUserJSON) {
+                            const usuario = JSON.parse(loggedUserJSON)
+                
+                       
+                
+                            const ins = await servicioFidei.todasincripciones2(usuario.id)
+                            setInscrip(ins[0])
+                        }
+                    
                         // 
-
+                
                     }}
                 />
 
-                <AsignarEnc
-                    id_inscripcion={inscrip[dataIndex].id}
-                    getClients={async () => {
-
-                        const ins = await servicioFidei.todasincripciones()
-                        setInscrip(ins[0])
-                        // 
-
-                    }} />
+            
 
 
             </>
@@ -137,10 +150,6 @@ export default function Ingresos() {
                     )
             }
 
-        },
-        {
-            name: "encargado",
-            label: "encargado",
         },
 
 

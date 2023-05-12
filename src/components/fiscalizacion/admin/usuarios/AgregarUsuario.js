@@ -104,6 +104,7 @@ export default function Ingresos() {
                              
                                     <MenuItem value={'7'}>Aliado</MenuItem>
                                     <MenuItem value={'8'}>Admin de carga</MenuItem>
+                                    <MenuItem value={'9'}>Encargado llamado</MenuItem>
                                     
                                 </Select>
                             </FormControl>

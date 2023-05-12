@@ -59,6 +59,14 @@ const listaExtractosescuelas = async () => {
 }
 
 
+const todasincripciones2 = async (id) => {
+
+
+  const { data } = await axios.get(baseUrl + 'todasincripciones2/'+id, config)
+  console.log(data)
+  return data
+}
+
 const todasincripciones = async () => {
 
 
@@ -330,10 +338,30 @@ const borrarinscripcion = async (id) => {
 }
 
 
+const traerencargados = async () => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'traerencargados/', config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
+const traerpaso2inscrip2 = async (id) => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'traerpaso2inscrip2/'+id, config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
 
 const traerpaso2inscrip = async () => {
   // const data = await axios.post('http://localhost:4000/signupp', datos)
-  const { data } = await axios.get(baseUrl + 'traerpaso2inscrip/' , config)
+  const { data } = await axios.get(baseUrl + 'traerpaso2inscrip/', config)
   if (data === 'error login') {
 
     window.localStorage.removeItem('loggedNoteAppUser')
@@ -368,6 +396,11 @@ const volverapaso3 = async (formdata) => {
 
 }
 
+const asignarencargado = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'asignarencargado', formdata, config)
+  return data
 
+}
 
-export default {volverapaso3, listaExtractos,asignarmesaafiscal,estadisticas1,cargarcantidades,volverapaso1,modificarmesa,enviarinscripcionadmin,traerincripcionesdealiadoadmin,modificarescuela,traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default { volverapaso3,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
