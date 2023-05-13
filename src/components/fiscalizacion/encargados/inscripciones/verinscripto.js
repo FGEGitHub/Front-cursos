@@ -329,6 +329,22 @@ const handleChange2 = (e) => {
 
                 </NativeSelect>
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                   ¿ Sos celiaco ?
+                </InputLabel>
+                <NativeSelect
+                    defaultValue={30}
+                    onChange={handleChange}
+                    inputProps={{
+                        name: 'celiaco',
+                        id: 'uncontrolled-native',
+
+                    }}
+                >   <option value={'Sin determinar'}>Sin determinar</option>
+                    <option value={'Si'}>Si</option>
+                    <option value={'No'}>No</option>
+
+                </NativeSelect>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
                    ¿ Sos Vegano?
                 </InputLabel>
                 <NativeSelect
@@ -348,7 +364,7 @@ const handleChange2 = (e) => {
                
 
                  <DialogActions>
-                 {  inscripcion.id_donde_vota &&   inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Enviar</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
+                 {  inscripcion.id_donde_vota && inscripcion.celiaco  &&  inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Enviar</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
 
 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
