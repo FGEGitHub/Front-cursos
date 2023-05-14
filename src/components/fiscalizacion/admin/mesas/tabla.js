@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import servicioFisca from '../../../../services/fiscalizacion'
 import MUIDataTable from "mui-datatables";
 import Nuevo from './nueva'
+import Cambiarvotantes from './cambiarvotantes'
 import Modificar from './modificar'
 import CargaDeTabla from "../../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
@@ -66,8 +67,21 @@ const Lotes = () => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-            <Modificar
+            <Cambiarvotantes
             id_mesa={clients[dataIndex].id}
+            traer ={async () => {
+        
+                const clients = await servicioFisca.listademesas({
+        
+                })
+                console.log(clients)
+                setClients(clients)
+                setLoading(false);
+            }}
+            />
+              <Modificar
+            id_mesa={clients[dataIndex].id}
+            numero={clients[dataIndex].numero}
             traer ={async () => {
         
                 const clients = await servicioFisca.listademesas({

@@ -151,6 +151,16 @@ const traerescuelasymesas = async (id) => {
   }
   return data
 }
+const traerinscripcionesenc = async (usuario) => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'traerinscripcionesenc/'+usuario, config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
 const traerescuelas = async (usuario) => {
   // const data = await axios.post('http://localhost:4000/signupp', datos)
   const { data } = await axios.get(baseUrl + 'traerescuelas/', config)
@@ -221,6 +231,15 @@ const asignarmesaafiscal = async (datos) => {
 
   return data
 }
+
+const modificardatosdemesa = async (datos) => {
+  console.log(datos)
+  const { data } = await axios.post(baseUrl + 'modificardatosdemesa', datos, config)
+
+  return data
+}
+
+
 const borrarescuela = async (datos) => {
   console.log(datos)
   const { data } = await axios.post(baseUrl + 'borrarescuela', datos, config)
@@ -268,6 +287,19 @@ const crearescuela = async (datos) => {
 
 
   const { data } = await axios.post(baseUrl + 'crearescuela', datos, config)
+
+  return data
+
+
+
+}
+
+
+const asignarinscripciones = async (datos) => {
+  console.log(datos)
+
+
+  const { data } = await axios.post(baseUrl + 'asignarinscripciones', datos, config)
 
   return data
 
@@ -359,6 +391,16 @@ const traerpaso2inscrip2 = async (id) => {
   return data
 }
 
+const todoslosencargados = async () => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'todoslosencargados/', config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
 const traerpaso2inscrip = async () => {
   // const data = await axios.post('http://localhost:4000/signupp', datos)
   const { data } = await axios.get(baseUrl + 'traerpaso2inscrip/', config)
@@ -403,4 +445,4 @@ const asignarencargado = async (formdata) => {
 
 }
 
-export default { volverapaso3,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default { volverapaso3,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

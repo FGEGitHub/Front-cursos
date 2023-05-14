@@ -29,6 +29,7 @@ export default function SelectTextFields(props) {
   const [usuarioo, setUsuarioo] = useState()
   const [prom, setProm] = useState({})
   const [turnos, setTurnos] = useState()
+  const [dato, setDato] = useState({})
   const [escuela, setEscuela] = useState({})
   const [activo, setActivo] = useState(false)
 
@@ -76,11 +77,11 @@ setActivo(true)
 ///// funcion para traer rating
 const traer2 = async (e) => {
  const dat = await servicioFide.traerestadisticasdeescuelas({id1:e.target.value})
- console.log(dat)
+ setDato(dat)
  setEscuela({ ...escuela, [e.target.name]:  dat.cantidad_escuela1 }  )
+ setDato({ ...dato, [e.target.name]:  dat }  )
  setProm({ 'promedio':  dat.prom }  )
-console.log(escuela)
-console.log(prom)
+
 }
 const handleChange2 = (e) => {
   console.log(inscripcion)
@@ -154,7 +155,9 @@ const handleChange2 = (e) => {
             <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
             <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
    
-            {prom.promedio ? <>Promedio de votantes por escuela: {prom.promedio}</>: <></>}
+            {prom.promedio ? <>Promedio de votantes por escuela: {prom.promedio}<br/>
+          
+            </>: <></>}
      
             <h2> <HowToVoteIcon/> Elegir en que escuela vota </h2>
                  
@@ -212,6 +215,9 @@ const handleChange2 = (e) => {
 
                             </NativeSelect>
                             {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br/>
+                            Cantidad de mesas: {  dato.id_escuela  ? <>   {dato.id_escuela.mesas} </>: <>Cargando</> }<br/>
+                            {  dato.id_escuela  ? <>  {dato.id_escuela.libres==0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </>: <>Mesas Libres: {dato.id_escuela.libres} </>   } </>: <>Cargando</> }
+                          
                             <Rating    
               valor={(escuela.id_escuela/(prom.promedio/2))}
               texto={"Rating votantes"}
@@ -242,6 +248,8 @@ const handleChange2 = (e) => {
 
                  </NativeSelect>
                  {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br/>
+                 Cantidad de mesas: {  dato.id_escuela2  ? <>   {dato.id_escuela2.mesas} </>: <>Cargando</> }<br/>
+                            {  dato.id_escuela2  ? <>  {dato.id_escuela2.libres==0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </>: <>Mesas Libres: {dato.id_escuela2.libres} </>   } </>: <>Cargando</> }
                             <Rating    
               valor={(escuela.id_escuela2/(prom.promedio/2))}
               texto={"Rating votantes"}
@@ -361,7 +369,17 @@ const handleChange2 = (e) => {
 
                 </NativeSelect>
     
-               
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Observaciones "
+                    name="observaciones"
+                    onChange={handleChange}
+                    fullWidth
+                    variant="standard"
+                    
+                />
 
                  <DialogActions>
                  {  inscripcion.id_donde_vota  && inscripcion.celiaco &&   inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Enviar</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }

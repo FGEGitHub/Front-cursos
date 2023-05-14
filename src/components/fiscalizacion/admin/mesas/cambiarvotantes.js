@@ -18,19 +18,18 @@ import TableRestaurantTwoToneIcon from '@mui/icons-material/TableRestaurantTwoTo
 export default function ClienteNuevo(props) {
   let params = useParams()
   const [activo, setActivo] = useState(false)
-    const [escuelas, setEscuelas] = useState()
+    const [turnos, setTurnos] = useState()
   const [open, setOpen] = React.useState(false);
   const [form, setForm] = useState({})
   const handleChange = (e) =>{
     setForm({  ...form, [e.target.name]: e.target.value }) 
-    console.log(form)
  }
 
 
  const traer = async () => {
-  const turnos = await servicioFisca.traerescuelas()
-  setEscuelas(turnos)
-   setForm({id:props.id_mesa, numero:props.numero})
+
+
+   setForm({id:props.id_mesa})
    setActivo(true)
   
 
@@ -50,7 +49,7 @@ export default function ClienteNuevo(props) {
     event.preventDefault();
     try {
 
-      await servicioFisca.modificardatosdemesa(form)
+      await servicioFisca.modificarmesa(form)
  
      
      } catch (error) {
@@ -74,12 +73,12 @@ export default function ClienteNuevo(props) {
 
 
       <Button variant="outlined" onClick={handleClickOpen}>
-        Modificar
+        Cantidad Votantes
       <TableRestaurantTwoToneIcon/>
       </Button>
       <Dialog open={open} onClose={handleClose}>
      
-        <DialogTitle>Modificar mesas </DialogTitle>
+        <DialogTitle>Mesa Nueva </DialogTitle>
         <Paper
         sx={{
           cursor: 'pointer',
@@ -96,42 +95,23 @@ export default function ClienteNuevo(props) {
           <form  onSubmit={handleDeterminar}> 
       
          
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Escuela
-                 </InputLabel>
-                 <NativeSelect
-                     defaultValue={30}
-                     onChange={handleChange}
-                     inputProps={{
-                         name: 'id_escuela',
-                         id: 'uncontrolled-native',
-
-                     }}
-                 
-                 >  
-                  <option value={'1'}> Elegir</option>
-                  {escuelas ? <>
-                    {escuelas.map((row) => (
-                            
-                            <option value={row.id}> {row.nombre}</option>
-         
-                  ))}</>:<></>}
-           
-
-                 </NativeSelect>
-                 <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Numero "
-                    name="numero"
-                    onChange={handleChange}
-                    fullWidth
-                    variant="standard"
-                    defaultValue={props.numero}
-                />
+                    <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="cantidad de votantes"
+                                name="cantidad"
+                                onChange={handleChange}
+                                fullWidth
+                                variant="standard"
+                                type='number'
+                            />
+                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                               Numero de referencia
+                            </InputLabel>
+      
           <DialogActions>
-          {form.numero && form.id_escuela  ? <><Button variant="contained" color="primary"  type="submit">Enviar</Button></> : <><h6  style={{color: "red"}} >Completar todos los campos</h6></> } 
+          {form.cantidad ? <><Button variant="contained" color="primary"  type="submit">Enviar</Button></> : <><h6  style={{color: "red"}} >Completar todos los campos</h6></> } 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>
