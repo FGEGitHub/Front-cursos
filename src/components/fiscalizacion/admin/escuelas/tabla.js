@@ -77,7 +77,16 @@ const Lotes = () => {
              id = {clients[dataIndex].id}
              nombre = {clients[dataIndex].nombre}
              circuito = {clients[dataIndex].circuito}
-            />
+           
+            getClients = {async () => {
+        
+        const clients = await servicioFisca.listadeescuelas({
+
+        })
+        console.log(clients)
+        setClients(clients)
+        setLoading(false);
+    }} />
           </>
         );
       }
@@ -96,6 +105,16 @@ const Lotes = () => {
         {
             name: "circuito",
             label: "Circuito",
+
+        },
+        {
+            name: "dato1",
+            label: "Encargado",
+
+        },
+        {
+            name: "dato2",
+            label: "telefono encargado",
 
         },
        

@@ -165,7 +165,30 @@ export default function SelectTextFields(props) {
                               
                             />
                
-
+               <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="Nombre Encargado"
+                                name="dato1"
+                                onChange={handleChange}
+                                fullWidth
+                                variant="standard"
+                        
+                              
+                            />
+                               <TextField
+                                autoFocus
+                                margin="dense"
+                                id="name"
+                                label="telefono encargado"
+                                name="dato2"
+                                onChange={handleChange}
+                                fullWidth
+                                variant="standard"
+                               
+                              
+                            />
                 
                            
                          
