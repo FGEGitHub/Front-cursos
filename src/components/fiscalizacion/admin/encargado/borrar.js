@@ -74,7 +74,7 @@ export default function Clasenueva(props) {
                  
 
                             <DialogActions>
-                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Desinscribir</Button>
+                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Desasignar</Button>
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                             </DialogActions>

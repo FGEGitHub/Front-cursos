@@ -18,7 +18,7 @@ import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Rating from './rating'
-
+import Autocomplete from '@mui/material/Autocomplete';
 
 
 export default function SelectTextFields(props) {
@@ -92,6 +92,57 @@ const handleChange2 = (e) => {
 
 }
 
+const traerdondevota = async (e) => {
+
+  console.log(e.id)
+  const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
+  setDato({ ...dato, ['id_donde_vota']: dat })
+  setEscuela({ ...escuela, 'id_donde_vota': dat.cantidad_escuela1 })
+
+  setProm({ 'promedio': dat.prom })
+
+}
+const handleChangedondevota = (e, option) => {
+  console.log(e)
+  console.log(option)
+  setInscripcion({ ...inscripcion, 'id_donde_vota': option.id })
+  traerdondevota(option)
+
+}
+
+const traerid_escuela = async (e) => {
+
+  
+  const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
+  setDato({ ...dato, ['id_escuela']: dat })
+  setEscuela({ ...escuela, 'id_escuela': dat.cantidad_escuela1 })
+  console.log(escuela)
+  setProm({ 'promedio': dat.prom })
+
+}
+const handleChangeid_escuela = (e, option) => {
+ 
+  setInscripcion({ ...inscripcion, 'id_escuela': option.id  })
+  traerid_escuela(option)
+
+}
+
+const traerid_escuela2 = async (e) => {
+
+  
+  const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
+  setDato({ ...dato, ['id_escuela2']: dat })
+  setEscuela({ ...escuela, 'id_escuela2': dat.cantidad_escuela1 })
+  console.log(escuela)
+  setProm({ 'promedio': dat.prom })
+
+}
+const handleChangeid_escuela2 = (e, option) => {
+ 
+  setInscripcion({ ...inscripcion, 'id_escuela2':  option.id   })
+  traerid_escuela2(option)
+
+}
   const handleDeterminar = async (event) => {
 
     try {
@@ -161,99 +212,99 @@ const handleChange2 = (e) => {
      
             <h2> <HowToVoteIcon/> Elegir en que escuela vota </h2>
                  
-                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Escuela
-                 </InputLabel>
-                 <NativeSelect
-                     defaultValue={30}
-                     onChange={handleChange2}
-                     inputProps={{
-                         name: 'id_donde_vota',
-                         id: 'uncontrolled-native',
+            <Autocomplete
+                options={turnos}
+                getOptionLabel={(optiond) => optiond.nombre}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Elegir en que escuela vota"
+                   name="id_donde_vota"
+                    variant="outlined"
+                   
+                  />
+                )}
+                autoHighlight
+                autoSelect
+            
 
-                     }}
-                 
-                 >  
-                  <option value={'1'}> Elegir</option>
-                  {turnos.map((row) => (
-                            
-                   <option value={row.id}> {row.nombre}</option>
-
-         ))}
-
-                 </NativeSelect>
-                 {escuela.id_donde_vota ? <>Cantidad de votantes en la escuela: {escuela.id_donde_vota}<br/>
-                            <Rating    
-              valor={(escuela.id_donde_vota/(prom.promedio/2))}
-              texto={"Rating votantes"}
+                onChange ={handleChangedondevota}
+              
+                native // Habilita la selección nativa
               />
-                 </>: <></>}<br/>
-   
-                 <h2>Elegir prioridades </h2>
-                 <br />
-               <LooksOneIcon/>   <label>Escuela prioridad 1</label>
-                 
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Escuela
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange2}
-                                inputProps={{
-                                    name: 'id_escuela',
-                                    id: 'uncontrolled-native',
+              
+              {escuela.id_donde_vota ? <>Cantidad de votantes en la escuela: {escuela.id_donde_vota}<br />
+                <Rating
+                  valor={(escuela.id_donde_vota / (prom.promedio / 2))}
+                  texto={"Rating votantes"}
+                />
+              </> : <></>}<br />
 
-                                }}
-                            
-                            >  
-                             <option value={'1'}> Elegir</option>
-                             {turnos.map((row) => (
-                                       
-                              <option value={row.id}> {row.nombre}</option>
+              <h2>Elegir prioridades </h2>
+              <br />
+              <LooksOneIcon />   <label>Escuela prioridad 1</label>
+              <Autocomplete
+                options={turnos}
+                getOptionLabel={(option1) => option1.nombre}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Elegir en que escuela vota"
+                   name="id_donde_vota"
+                    variant="outlined"
+                   
+                  />
+                )}
+                autoHighlight
+                autoSelect
+            
 
-                    ))}
-
-                            </NativeSelect>
-                            {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br/>
-                            Cantidad de mesas: {  dato.id_escuela  ? <>   {dato.id_escuela.mesas} </>: <>Cargando</> }<br/>
-                            {  dato.id_escuela  ? <>  {dato.id_escuela.libres==0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </>: <>Mesas Libres: {dato.id_escuela.libres} </>   } </>: <>Cargando</> }
-                          
-                            <Rating    
-              valor={(escuela.id_escuela/(prom.promedio/2))}
-              texto={"Rating votantes"}
+                onChange ={handleChangeid_escuela}
+              
+                native // Habilita la selección nativa
               />
-                        
-                 </>: <></>}<br/>
-                            <LooksTwoIcon/>    <label>Escuela prioridad 2</label>
-                 
-                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Escuela
-                 </InputLabel>
-                 <NativeSelect
-                     defaultValue={30}
-                     onChange={handleChange2}
-                     inputProps={{
-                         name: 'id_escuela2',
-                         id: 'uncontrolled-native',
+              
+              {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br />
+                Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} </> : <>Cargando</>}<br />
+                {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres} </>} </> : <>Cargando</>}
+                <Rating
+                  valor={(escuela.id_escuela / (prom.promedio / 2))}
+                  texto={"Rating votantes"}
+                />
 
-                     }}
-                 
-                 >  
-                  <option value={'1'}> Elegir</option>
-                  {turnos.map((row) => (
-                            
-                   <option value={row.id}> {row.nombre}</option>
+              </> : <></>}<br />
+              <LooksTwoIcon />    <label>Escuela prioridad 2</label>
 
-         ))}
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                Escuela 2
+              </InputLabel>
+              <Autocomplete
+                options={turnos}
+                getOptionLabel={(option2) => option2.nombre}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Elegir en que escuela vota"
+                   name="id_donde_vota"
+                    variant="outlined"
+                   
+                  />
+                )}
+                autoHighlight
+                autoSelect
+            
 
-                 </NativeSelect>
-                 {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br/>
-                 Cantidad de mesas: {  dato.id_escuela2  ? <>   {dato.id_escuela2.mesas} </>: <>Cargando</> }<br/>
-                            {  dato.id_escuela2  ? <>  {dato.id_escuela2.libres==0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </>: <>Mesas Libres: {dato.id_escuela2.libres} </>   } </>: <>Cargando</> }
-                            <Rating    
-              valor={(escuela.id_escuela2/(prom.promedio/2))}
-              texto={"Rating votantes"}
-              /></>: <></>}<br/>
+                onChange ={handleChangeid_escuela2}
+              
+                native // Habilita la selección nativa
+              />
+              {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br />
+                Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} </> : <>Cargando</>}<br />
+                {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres} </>} </> : <>Cargando</>}
+                <Rating
+                  valor={(escuela.id_escuela2 / (prom.promedio / 2))}
+                  texto={"Rating votantes"}
+                /></> : <></>}<br />
                  <h3> MODIFICAR DATOS PERSONALES <ContactEmergencyIcon/></h3>
                
                  <TextField
