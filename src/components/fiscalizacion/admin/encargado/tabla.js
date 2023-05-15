@@ -57,23 +57,23 @@ getClients= { async () => {
 
     
     const columns = [
+        {
+            name: "dni",
+            label: "dni",
 
+        },
+        {
+            name: "apellido",
+            label: "apellido",
+
+        },
    
         {
             name: "nombre",
             label: "nombre",
         },
-        {
-            name: "asignados",
-            label: "asignadas",
-
-        },
-        {
-            name: "sinc",
-            label: "Sin Contactar",
-
-        },
-  
+     
+ 
 
         {
             name: "Ver detalles",
