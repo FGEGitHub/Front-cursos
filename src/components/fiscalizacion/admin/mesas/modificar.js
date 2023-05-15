@@ -11,7 +11,7 @@ import {  useState } from "react";
 import servicioFisca from '../../../../services/fiscalizacion'
 import NativeSelect from '@mui/material/NativeSelect';
 import InputLabel from '@mui/material/InputLabel';
-import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
+import Autocomplete from '@mui/material/Autocomplete';
 import { Paper } from '@mui/material';
 import TableRestaurantTwoToneIcon from '@mui/icons-material/TableRestaurantTwoTone';
 
@@ -32,11 +32,14 @@ export default function ClienteNuevo(props) {
   setEscuelas(turnos)
    setForm({id:props.id_mesa, numero:props.numero})
    setActivo(true)
-  
 
   }
 
-  
+
+  const handleChangedondevota = (e, option) => {
+    setForm({  ...form, 'id_escuela':  option.id})
+   
+  }
 
   
   const handleClickOpen = () => {
@@ -99,6 +102,30 @@ export default function ClienteNuevo(props) {
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     Escuela
                  </InputLabel>
+
+                 <Autocomplete
+                options={escuelas}
+                getOptionLabel={(option) => option.nombre}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Elegir en que escuela vota"
+                   name="id_donde_vota"
+                    variant="outlined"
+                   
+                  />
+                )}
+                autoHighlight
+                autoSelect
+            
+
+                onChange ={handleChangedondevota}
+              
+                native // Habilita la selección nativa
+              />
+
+
+
                  <NativeSelect
                      defaultValue={30}
                      onChange={handleChange}

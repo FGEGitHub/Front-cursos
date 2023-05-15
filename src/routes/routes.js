@@ -75,6 +75,7 @@ import Inscripciondearmin from '../pages/fiscalizacion/inscripcionadmin'
 import Personas_fisca from '../pages/fiscalizacion/Admin/personas'
 import EncargadosCarga from '../pages/fiscalizacion/Encargados/cargas'
 import AdminEncargados from '../pages/fiscalizacion/Admin/encargados'
+import AdminEncargado from '../pages/fiscalizacion/Admin/encargado'
 
 
 const Rutas = [
@@ -157,6 +158,10 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/personas', element: <Personas_fisca /> },
 		{ path: '/fiscalizacion/encargados/carga', element: <EncargadosCarga /> },
 		{ path: '/fiscalizacion/administracion/encargados', element: <AdminEncargados /> },
+		{ path: '/fiscalizacion/administracion/encargado/:id', element: <AdminEncargado /> },
+		
+
+
 ];
 
 export default Rutas;

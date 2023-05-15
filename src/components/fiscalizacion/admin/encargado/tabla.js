@@ -4,16 +4,15 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 import servicioFidei from '../../../../services/fiscalizacion'
-import Seleccionador from './modalseleccionar'
+import Seleccionador from './borrar'
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import { useNavigate } from "react-router-dom";
 
-
 export default function Ingresos() {
     let params = useParams()
-
+    let id = params.id
 
     const [inscrip, setInscrip] = useState([]);
     const [turnos, setTurnos] = useState([]);
@@ -26,8 +25,8 @@ export default function Ingresos() {
     }, [])
     const traer = async () => {
 
-        const ins = await servicioFidei.todoslosencargados()
-        setInscrip(ins[0])
+        const ins = await servicioFidei.traerinscripcionesdeunencargado(id)
+        setInscrip(ins)
         // 
 
     };
@@ -36,18 +35,20 @@ export default function Ingresos() {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-      <Seleccionador
-      id ={inscrip[dataIndex].id}
-      traer =  { async () => {
+   
 
-const ins = await servicioFidei.todoslosencargados()
-setInscrip(ins[0])
-// 
+<Seleccionador     
+id={inscrip[dataIndex].id} 
 
-}}/>
+getClients= { async () => {
 
-<PersonSearchIcon     onClick={() =>  navigate('/fiscalizacion/administracion/encargado/'+inscrip[dataIndex].id)} />
+    const ins = await servicioFidei.traerinscripcionesdeunencargado(id)
+    setInscrip(ins)
+    // 
 
+}}
+
+/>
           </>
 
         );

@@ -121,7 +121,7 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Borrar Mesa">
+       < Tooltip title="Mdificar">
       <BorderColorTwoToneIcon variant="outlined" onClick={handleClickOpen}/>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
