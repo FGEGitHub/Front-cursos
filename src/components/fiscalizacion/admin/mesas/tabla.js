@@ -4,6 +4,7 @@ import MUIDataTable from "mui-datatables";
 import Nuevo from './nueva'
 import Cambiarvotantes from './cambiarvotantes'
 import Modificar from './modificar'
+import Borrar from './borrar'
 import CargaDeTabla from "../../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
@@ -41,28 +42,7 @@ const Lotes = () => {
 
     ///
 //opcionde click en el nombre
-    function CutomButtonsRenderere(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-          
-       
-           <p  onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)} style={{ marginRight: "10px", cursor: "pointer" }}>{clients[dataIndex].Nombre}</p>
-          
-          </>
-        );
-      }
-      //
 
-      function CutomButtonsRendercuil(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-          
-       
-           <p  onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)} style={{ marginRight: "10px", cursor: "pointer" }}>{clients[dataIndex].cuil_cuit}</p>
-          
-          </>
-        );
-      }
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
@@ -92,6 +72,20 @@ const Lotes = () => {
                 setLoading(false);
             }}
             />
+                <Borrar
+            id_mesa={clients[dataIndex].id}
+            numero={clients[dataIndex].numero}
+            traer ={async () => {
+        
+                const clients = await servicioFisca.listademesas({
+        
+                })
+                console.log(clients)
+                setClients(clients)
+                setLoading(false);
+            }}
+            />
+            
         
            
           </>
