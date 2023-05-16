@@ -234,6 +234,8 @@ const handleChangeid_escuela2 = (e, option) => {
               />
               
               {escuela.id_donde_vota ? <>Cantidad de votantes en la escuela: {escuela.id_donde_vota}<br />
+              Encargado: {dato ?  <>    {dato.id_donde_vota ?  <>{dato['id_donde_vota'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
+              Tel:{dato ?  <>    {dato.id_donde_vota ?  <>{dato['id_donde_vota'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 <Rating
                   valor={(escuela.id_donde_vota / (prom.promedio / 2))}
                   texto={"Rating votantes"}
@@ -267,6 +269,9 @@ const handleChangeid_escuela2 = (e, option) => {
               {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br />
                 Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} </> : <>Cargando</>}<br />
                 {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres} </>} </> : <>Cargando</>}
+                Encargado: {dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
+              Tel:{dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
+              
                 <Rating
                   valor={(escuela.id_escuela / (prom.promedio / 2))}
                   texto={"Rating votantes"}
@@ -301,6 +306,9 @@ const handleChangeid_escuela2 = (e, option) => {
               {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br />
                 Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} </> : <>Cargando</>}<br />
                 {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres} </>} </> : <>Cargando</>}
+                Encargado: {dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
+              Tel:{dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
+             
                 <Rating
                   valor={(escuela.id_escuela2 / (prom.promedio / 2))}
                   texto={"Rating votantes"}

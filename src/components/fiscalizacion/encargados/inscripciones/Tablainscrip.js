@@ -72,23 +72,7 @@ export default function Ingresos() {
                         // 
                 
                     }} />
-                <ModalBorrar
-                    id={inscrip[dataIndex].id}
-                    getClients={ async () => {
-                        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                        if (loggedUserJSON) {
-                            const usuario = JSON.parse(loggedUserJSON)
-                
-                       
-                
-                            const ins = await servicioFidei.todasincripciones2(usuario.id)
-                            setInscrip(ins[0])
-                        }
-                    
-                        // 
-                
-                    }}
-                />
+               
 
             
 

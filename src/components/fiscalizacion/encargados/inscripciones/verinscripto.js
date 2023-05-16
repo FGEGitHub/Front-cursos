@@ -98,6 +98,7 @@ export default function SelectTextFields(props) {
     console.log(e.id)
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
     setDato({ ...dato, ['id_donde_vota']: dat })
+    console.log(dato['id_donde_vota'])
     setEscuela({ ...escuela, 'id_donde_vota': dat.cantidad_escuela1 })
 
     setProm({ 'promedio': dat.prom })
@@ -132,6 +133,7 @@ export default function SelectTextFields(props) {
 
     
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
+    console.log(dat)
     setDato({ ...dato, ['id_escuela2']: dat })
     setEscuela({ ...escuela, 'id_escuela2': dat.cantidad_escuela1 })
     console.log(escuela)
@@ -231,9 +233,12 @@ export default function SelectTextFields(props) {
               />
               
               {escuela.id_donde_vota ? <>Cantidad de votantes en la escuela: {escuela.id_donde_vota}<br />
+              Encargado: {dato ?  <>    {dato.id_donde_vota ?  <>{dato['id_donde_vota'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
+              Tel:{dato ?  <>    {dato.id_donde_vota ?  <>{dato['id_donde_vota'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 <Rating
                   valor={(escuela.id_donde_vota / (prom.promedio / 2))}
                   texto={"Rating votantes"}
+
                 />
               </> : <></>}<br />
 
@@ -264,6 +269,8 @@ export default function SelectTextFields(props) {
               {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br />
                 Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} </> : <>Cargando</>}<br />
                 {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres} </>} </> : <>Cargando</>}
+                Encargado: {dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
+              Tel:{dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 <Rating
                   valor={(escuela.id_escuela / (prom.promedio / 2))}
                   texto={"Rating votantes"}
@@ -298,6 +305,10 @@ export default function SelectTextFields(props) {
               {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br />
                 Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} </> : <>Cargando</>}<br />
                 {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres} </>} </> : <>Cargando</>}
+                
+                Encargado: {dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
+              Tel:{dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
+                
                 <Rating
                   valor={(escuela.id_escuela2 / (prom.promedio / 2))}
                   texto={"Rating votantes"}
