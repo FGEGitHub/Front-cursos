@@ -17,6 +17,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
+import Autocomplete from '@mui/material/Autocomplete';
 const currencies = [
   {
     value: 'CBU',
@@ -83,6 +84,15 @@ setActivo(true)
    setPromedio(dat.prom)
    console.log('dps')
   
+
+  }
+
+  const handleChangeid_escuela = (e, option) => {
+  
+
+    traermesas( option.id )
+    setInscripcion({ ...inscripcion, 'id_escuela': option.id  })
+ 
 
   }
 
@@ -199,28 +209,28 @@ const handleChange2 = (e) => {
    
                  <br />
                  <label>Elegir escuela</label>
-                 
-                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Escuela
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange2}
-                                inputProps={{
-                                    name: 'id_escuela',
-                                    id: 'uncontrolled-native',
+                 <Autocomplete
+                options={turnos}
+                getOptionLabel={(option1) => option1.nombre}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Elegir en que escuela vota"
+                   name="id_donde_vota"
+                    variant="outlined"
+                   
+                  />
+                )}
+                autoHighlight
+                autoSelect
+            
 
-                                }}
-                            
-                            >  
-                             <option value={'1'}> Elegir</option>
-                             {turnos.map((row) => (
-                                       
-                              <option value={row.id}> {row.nombre}</option>
-
-                    ))}
-
-                            </NativeSelect>
+                onChange ={handleChangeid_escuela}
+              
+                native // Habilita la selección nativa
+              />
+              
+                           
                            
                  
                 
