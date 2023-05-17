@@ -40,6 +40,7 @@ export default function SelectTextFields(props) {
   const [usuarioo, setUsuarioo] = useState()
   const [cargandomesas, setCargandomesas] = useState(false)
   const [turnos, setTurnos] = useState()
+const [disponibilidad, setDisponibilidad] = useState('libre')
   const [mesas, setMesas] = useState()
   const [datos, setDatos] = useState()
   const [promedio, setPromedio] = useState(0)
@@ -68,6 +69,7 @@ setActivo(true)
     setCargandomesas(false)
    
    const mes = await servicioFide.traermesas(e)
+   
    setMesas(mes)
 
    setCargandomesas(true)
@@ -105,8 +107,21 @@ setActivo(true)
 
   
   const handleChange = (e) => {
-    console.log(inscripcion)
+    console.log('handleChange')
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
+console.log( e.target.value)
+if (e.target.name =="mesa"){
+  for (let i = 0; i < mesas.length; i++) {
+   
+    
+    if (mesas[i].id == e.target.value ) {
+        
+      setDisponibilidad(mesas[i].disponibilidad)
+    }
+  }
+}
+
+   console.log(disponibilidad) 
 }
 
 const handleChangeid_escuela = (e, option) => {
@@ -114,6 +129,7 @@ const handleChangeid_escuela = (e, option) => {
 
   traermesas( option.id )
   setInscripcion({ ...inscripcion, 'id_escuela': option.id  })
+
 
 
 }
@@ -167,7 +183,7 @@ const handleChangeid_escuela = (e, option) => {
 
       {activo ? <>
         <DialogContent>
-
+        
 
  
              <h3>Asignaciona escuela {props.nombre} {props.apellido} </h3>
@@ -196,11 +212,7 @@ const handleChangeid_escuela = (e, option) => {
            <LooksOneIcon/> Prioridad 1:  { props.escuela1}<br/>
            <LooksTwoIcon/>  Prioridad 2:  { props.escuela2}</b> 
             <br/>
-     
-          
 
-   
-   
                  <br />
                  <label>Elegir escuela</label>
                  <Autocomplete
@@ -246,7 +258,7 @@ const handleChangeid_escuela = (e, option) => {
                           
                              {mesas.map((row) => (
                                        
-                                       <option value={row.id}> {row.numero}</option>
+                                       <option value={row.id}> {row.numero} - {row.disponibilidad}</option>
          
                              ))}
                                   </>:<>Cargando</>}
@@ -259,7 +271,7 @@ const handleChangeid_escuela = (e, option) => {
                
 
                  <DialogActions>
-                 {inscripcion.id_escuela && inscripcion.mesa ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS(Momentaneamente desactivado)</p></>  }
+                 {inscripcion.id_escuela && inscripcion.mesa  ? <>     {disponibilidad =="Libre" ? <><Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></> : <><p style={{ color: 'crimson' }} >Mesa no disponible</p></>}    </>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS(Momentaneamente desactivado)</p></>  }
 
 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
