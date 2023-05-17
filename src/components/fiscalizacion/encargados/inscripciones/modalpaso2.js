@@ -253,7 +253,7 @@ const handleChange2 = (e) => {
                           
                              {mesas.map((row) => (
                                        
-                                       <option value={row.id}> {row.numero}</option>
+                                       <option value={row.id}> {row.numero} - {row.disponibilidad}</option>
          
                              ))}
                                   </>:<>Cargando</>}
@@ -266,7 +266,7 @@ const handleChange2 = (e) => {
                
 
                  <DialogActions>
-                 {inscripcion.id_escuela && inscripcion.mesa ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS(Momentaneamente desactivado)</p></>  }
+                 {inscripcion.id_escuela && inscripcion.mesa ? <>         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>  }
 
 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
