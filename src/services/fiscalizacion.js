@@ -477,4 +477,10 @@ const asignarencargado = async (formdata) => {
 
 }
 
-export default { volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+const rechazarincrip = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'rechazarincrip', formdata, config)
+  return data
+
+}
+export default {rechazarincrip, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

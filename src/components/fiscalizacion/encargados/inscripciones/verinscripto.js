@@ -32,7 +32,7 @@ export default function SelectTextFields(props) {
   const [escuela, setEscuela] = useState({})
   const [activo, setActivo] = useState(false)
   const [dato, setDato] = useState({})
-
+  const [rechazo, setRechazo] = useState(false)
 
 
   const traer = async () => {
@@ -84,12 +84,12 @@ export default function SelectTextFields(props) {
     console.log(dato)
 
   }
-  const handleChange2 = (e, option) => {
+  const Cambiorechazo = () => {
 
   
-    setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
+    setRechazo(!rechazo)
 
-    traer2(option)
+   
 
 
   }
@@ -146,6 +146,23 @@ export default function SelectTextFields(props) {
     traerid_escuela2(option)
 
   }
+  
+
+  const handleRechazar = async (event) => {
+    try {
+
+     const Resp = await servicioFide.rechazarincrip(
+        inscripcion)
+      props.getClients()
+      alert(Resp)
+    } catch (error) {
+      console.error(error);
+      console.log('Error algo sucedio')
+
+    }
+    setActivo(false)
+    setOpen(false);
+  };/////
 
   const handleDeterminar = async (event) => {
     try {
@@ -241,7 +258,7 @@ export default function SelectTextFields(props) {
 
                 />
               </> : <></>}<br />
-
+              { !rechazo ? <>
               <h2>Elegir prioridades </h2>
               <br />
               <LooksOneIcon />   <label>Escuela prioridad 1</label>
@@ -427,7 +444,7 @@ export default function SelectTextFields(props) {
                 <option value={'No'}>No</option>
 
               </NativeSelect>
-
+              <br/>
               <TextField
                 autoFocus
                 margin="dense"
@@ -440,9 +457,32 @@ export default function SelectTextFields(props) {
 
               />
 
-              <DialogActions>
-                {inscripcion.id_donde_vota && inscripcion.observaciones && inscripcion.celiaco && inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary" onClick={handleDeterminar} >Enviar</Button></> : <><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>}
+<br/>
+ <Button  onClick={Cambiorechazo} >Rechazar inscripcion</Button>
+             
+</>: <>
 
+<TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Observaciones "
+                name="observaciones"
+                onChange={handleChange}
+                fullWidth
+                variant="standard"
+
+              />     
+
+<Button  onClick={Cambiorechazo} >Aceptar inscripcion</Button>
+</>}
+              <DialogActions>
+
+{!rechazo ? <>
+                {inscripcion.id_donde_vota && inscripcion.observaciones && inscripcion.celiaco && inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary" onClick={handleDeterminar} >Enviar</Button></> : <><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>}
+                </>: <>
+              {inscripcion.id_donde_vota && inscripcion.observaciones ? <> <Button variant="outlined"  onClick={handleRechazar} >Rechazar </Button></>:<>Completar datos</>}  
+                </>}
 
                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
