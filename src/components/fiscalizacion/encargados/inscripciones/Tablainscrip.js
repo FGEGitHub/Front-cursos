@@ -120,6 +120,10 @@ export default function Ingresos() {
             name: "telefono2",
             label: "TELEFONO 2",
         },
+        {
+            name: "estado",
+            label: "estado",
+        },
 
 
         {
