@@ -15,7 +15,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import AccountBalanceTwoToneIcon from '@mui/icons-material/AccountBalanceTwoTone';
+import './styles.css';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -60,20 +60,25 @@ const Estracto = () => {
     < >
        
       <Paper
-                sx={{
-                    cursor: 'pointer',
-                    background: '#white',
-                    color: '#bdbdbd',
-                    border: '1px dashed #ccc',
-                    '&:hover': { border: '1px solid #ccc' },
-                    padding: 10,
-                    width: '100%',
-                    maxWidth: 380,
-                    margin: '20px auto', // Ajustar el margen superior
-                    display: 'grid',
-                    gridTemplateRows: 'auto 1fr', // Ajustar filas según el contenido del logo y el resto del contenido
-                    alignItems: 'start', // Alinear el contenido al inicio
-                  }}
+            
+                 sx={{
+                   cursor: 'pointer',
+                   background: '#white',
+                   color: '#bdbdbd',
+                   border: '1px dashed #ccc',
+                   '&:hover': { border: '1px solid #ccc' },
+                   padding: 10,
+                   width: '100%',
+                   maxWidth: 380,
+                   margin: '20px auto', // Ajustar el margen superior
+                   display: 'grid',
+                   gridTemplateRows: 'auto 1fr', // Ajustar filas según el contenido del logo y el resto del contenido
+                   alignItems: 'start', // Alinear el contenido al inicio
+                   '@media (max-width: 600px)': { // Estilos para dispositivos móviles
+                     padding: 5,
+                     maxWidth: '100%',
+                   },
+                 }}
           
       >  
        <Box sx={{ textAlign: 'center', marginTop: '10px' }}>
@@ -81,7 +86,7 @@ const Estracto = () => {
         </Box>
         <Box sx={{ textAlign: 'center' }}>
        
-          <Typography variant="h5" component="div" color="black" fontFamily="Montserrat">
+          <Typography variant="h5" component="div" color="black" className="montserrat">
           Este 11 de junio vamos a fiscalizar para cuidar los votos de todos los correntinos y defender la democracia
 
 ¡Inscribite acá!
@@ -97,7 +102,7 @@ const Estracto = () => {
           onChange={handleChange}
           fullWidth
           variant="standard"
-          fontFamily="Montserrat"
+          fontFamily="Montserrat" 
 
         />
 
@@ -169,7 +174,7 @@ const Estracto = () => {
         >
           <option value={'Sin determinar'}>Elegir</option>
           <option value={'Flyer'}>
-            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat">
+            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" sans-serif>
               Lo vi en un Flyer
             </Typography>
           </option>
