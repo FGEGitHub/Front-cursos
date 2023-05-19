@@ -22,7 +22,7 @@ export default function Paginas() {
     return (
         <>
         <Navbar/>
-        <br/>     <br/>  <br/>     <br/>  
+        <br/>          <br/>      <br/>      <br/>  
         <Formulario/>
         </>
    

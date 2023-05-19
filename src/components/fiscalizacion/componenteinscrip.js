@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import servicioFisca from '../../services/fiscalizacion'
+import servicioFisca from '../../services/fiscalizacion';
 import { Paper } from '@mui/material';
 import NativeSelect from '@mui/material/NativeSelect';
 import { useNavigate } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import { Button, CircularProgress } from '@mui/material';
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
+import logo from "../../Assets/encabezadoform.png";
 import MuiAlert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -17,354 +17,237 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import AccountBalanceTwoToneIcon from '@mui/icons-material/AccountBalanceTwoTone';
 
-//import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
 const Estracto = () => {
-    //configuracion de Hooks
-    const [cargando, setCargando] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [escuelas, setEscuelas] = useState([''])
-    const [fecha, setFecha] = useState([''])
-    const [activo, setActivo] = useState(false);
-    const navigate = useNavigate();
+  const [cargando, setCargando] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [escuelas, setEscuelas] = useState(['']);
+  const [fecha, setFecha] = useState(['']);
+  const [activo, setActivo] = useState(false);
+  const navigate = useNavigate();
 
-    const getClients = async () => {
+  const getClients = async () => {
+    const clients = await servicioFisca.traerescuelas({});
+    setEscuelas(clients);
+    setLoading(false);
+  };
 
-        const clients = await servicioFisca.traerescuelas({
+  useEffect(() => {
+    getClients();
+  }, []);
 
-        })
-        setEscuelas(clients)
-        setLoading(false);
+  const handleChange = (e) => {
+    setFecha({ ...fecha, [e.target.name]: e.target.value });
+  };
+
+  const Inscribir = async (event) => {
+    setCargando(true);
+    const rta = await servicioFisca.enviarinscripcion(fecha);
+    alert(rta);
+    if (
+      rta ===
+      "inscripto correctamente, muchas gracias por completar, por favor aguarda en unos dias nos comunicaremos al numero de telefono registrado"
+    ) {
+      window.location.reload();
     }
+    setCargando(false);
+  };
 
-    useEffect(() => {
-        getClients()
-    }, [])
-    const handleChange = (e) => {
-
-
-        // setPago({ ...pago, ['id']: props.id })
-        setFecha({ ...fecha, [e.target.name]: e.target.value })
-
-
-    }
-
-    ///
-    //opcionde click en el nombre
-
-    //
-
-
-    const Inscribir = async (event) => {
-
-        setCargando(true)
-        const rta = await servicioFisca.enviarinscripcion(
-            fecha
-        )
-        alert(rta)
-     
-        if (rta === "inscripto correctamente, muchas gracias por completar, por favor aguarda en unos dias nos comunicaremos al numero de telefono registrado") {
-            window.location.reload();
-        }
-   setCargando(false)
-    };
-
- 
-
-
-    // renderiza la data table
-    return (
-        <>
-            <Paper
+  return (
+    < >
+       
+      <Paper
                 sx={{
                     cursor: 'pointer',
-                    background: '#fafafa',
+                    background: '#white',
                     color: '#bdbdbd',
                     border: '1px dashed #ccc',
                     '&:hover': { border: '1px solid #ccc' },
                     padding: 10,
-                    //  height: '70vh',
-                    width: 380,
-                    margin: "20px auto"
-                }}
-            >
-                <Card sx={{ textAlign: 'center' }}>
-                    <AccountBalanceTwoToneIcon />
-                    <h2>INSCRIPCION A  FISCALIZACION  </h2>
-                </Card>
+                    width: '100%',
+                    maxWidth: 380,
+                    margin: '20px auto', // Ajustar el margen superior
+                    display: 'grid',
+                    gridTemplateRows: 'auto 1fr', // Ajustar filas según el contenido del logo y el resto del contenido
+                    alignItems: 'start', // Alinear el contenido al inicio
+                  }}
+          
+      >  
+       <Box sx={{ textAlign: 'center', marginTop: '10px' }}>
+          <img style={{ width: '100%', maxWidth: '500px' }} src={logo} alt="logo" />
+        </Box>
+        <Box sx={{ textAlign: 'center' }}>
+       
+          <Typography variant="h5" component="div" color="black" fontFamily="Montserrat">
+          Este 11 de junio vamos a fiscalizar para cuidar los votos de todos los correntinos y defender la democracia
 
+¡Inscribite acá!
+          </Typography>
+          </Box>
 
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Nombre "
-                    name="nombre"
-                    onChange={handleChange}
-                    fullWidth
-                    variant="standard"
-                />
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Nombre"
+          name="nombre"
+          onChange={handleChange}
+          fullWidth
+          variant="standard"
+          fontFamily="Montserrat"
 
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Apellido"
-                    name="apellido"
-                    onChange={handleChange}
-                    fullWidth
-                    variant="standard"
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="DNI"
-                    name="dni"
-                    onChange={handleChange}
-                    fullWidth
-                    type="number"
-                    variant="standard"
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Telefono"
-                    name="telefono"
-                    onChange={handleChange}
-                    fullWidth
-                    type="number"
-                    variant="standard"
-                />
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Telefono alternativo"
-                    name="telefono2"
-                    onChange={handleChange}
-                    fullWidth
-                    type="number"
-                    variant="standard"
-                />
-                <br />      <br />
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    <b> ¿Como te enteraste?</b>
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'como_se_entero',
-                        id: 'uncontrolled-native',
+        />
 
-                    }}
-                >   <option value={'Sin determinar'}>Elegir</option>
-                    <option value={'Flyer'}>Lo vi en un Flyer</option>
-                    <option value={'Pagina web'}>Por una Pagina web</option>
-                    <option value={'Amigo'}>Me comento un amigo</option>
-                    <option value={'Otra'}>Otra</option>
-                </NativeSelect>
-                <br />
-                {fecha.como_se_entero === "Amigo" ? <>
-                    <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                        ¿ Como se llama ese amigo ?
-                    </InputLabel>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Apellido amigo"
-                        name="apellido_referido"
-                        onChange={handleChange}
-                        fullWidth
+        <TextField
+      
+          margin="dense"
+          id="name"
+          fontFamily="Montserrat"
 
-                        variant="standard"
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Nombre amigo"
-                        name="nombre_referido"
-                        onChange={handleChange}
-                        fullWidth
+          label="Apellido"
+          name="apellido"
+          onChange={handleChange}
+          fullWidth
+          variant="standard"
+        />
 
-                        variant="standard"
-                    />
-                </> : <></>}
-                {fecha.como_se_entero != "Amigo" && fecha.como_se_entero != "Sin determinar" && fecha.como_se_entero != "Flyer" && fecha.como_se_entero != "Pagina web" && fecha.como_se_entero != null ? <>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="De que otra manera?"
-                        name="como_se_entero"
-                        onChange={handleChange}
-                        fullWidth
+        <TextField
+         
+          margin="dense"
+          id="name"
+          label="DNI"
+          name="dni"
+          onChange={handleChange}
+          fullWidth
+          type="number"
+          variant="standard"
+          fontFamily="Montserrat"
+        />
 
-                        variant="standard"
-                    />
-                </> : <></>}
+        <TextField
+        
+          margin="dense"
+          id="name"
+          label="Telefono"
+          name="telefono"
+          onChange={handleChange}
+          fullWidth
+          type="number"
+          variant="standard"
+        />
 
-                {/* 
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Telefono"
-                    name="telefono"
-                    onChange={handleChange}
-                    fullWidth
-                    type="number"
-                    variant="standard"
-                />
-                 <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Domicilio"
-                    name="domicilio"
-                    onChange={handleChange}
-                    fullWidth
-                    variant="standard"
-                />
-                <br/>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Fuiste fiscal antes?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'movilidad',
-                        id: 'uncontrolled-native',
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Telefono alternativo"
+          name="telefono2"
+          onChange={handleChange}
+          fullWidth
+          type="number"
+          variant="standard"
+        />
 
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
+        <br /> <br />
 
-                </NativeSelect>
+        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+          <Typography variant="h5" component="div" color="black" fontFamily="Montserrat">
+            <b>¿Cómo te enteraste?</b>
+          </Typography>
+        </InputLabel>
 
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Dispones de movilidad ?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'movilidad',
-                        id: 'uncontrolled-native',
+        <NativeSelect
+          defaultValue={30}
+          onChange={handleChange}
+          inputProps={{
+            name: 'como_se_entero',
+            id: 'uncontrolled-native',
+          }}
+        >
+          <option value={'Sin determinar'}>Elegir</option>
+          <option value={'Flyer'}>
+            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat">
+              Lo vi en un Flyer
+            </Typography>
+          </option>
+          <option value={'Pagina web'}>Por una Pagina web</option>
+          <option value={'Amigo'}>Me comento un amigo</option>
+          <option value={'Otra'}>Otra</option>
+        </NativeSelect>
 
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
+        <br />
 
-                </NativeSelect>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Sos Vegano?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'vegano',
-                        id: 'uncontrolled-native',
+        {fecha.como_se_entero === 'Amigo' && (
+          <>
+            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+              ¿Cómo se llama ese amigo?
+            </InputLabel>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Apellido amigo"
+              name="apellido_referido"
+              onChange={handleChange}
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+            
+              margin="dense"
+              id="name"
+              label="Nombre amigo"
+              name="nombre_referido"
+              onChange={handleChange}
+              fullWidth
+              variant="standard"
+            />
+          </>
+        )}
 
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
+        {['Amigo', 'Sin determinar', 'Flyer', 'Pagina web', null].indexOf(fecha.como_se_entero) === -1 && (
+          <TextField
+           
+            margin="dense"
+            id="name"
+            label="De qué otra manera?"
+            name="como_se_entero"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
+        )}
 
-                </NativeSelect>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                   ¿ Fuiste fiscal antes ?
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'fiscal_antes',
-                        id: 'uncontrolled-native',
+        <br />
 
-                    }}
-                >   <option value={'Sin determinar'}>Sin determinar</option>
-                    <option value={'Si'}>Si</option>
-                    <option value={'No'}>No</option>
-
-                </NativeSelect>
-
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Elegir escuela prioridad 1
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'id_escuela',
-                        id: 'uncontrolled-native',
-
-                    }}
-
-                >
-                    <option value={'1'}> Elegir</option>
-                    {escuelas.map((row) => (
-
-                        <option value={row.id}> {row.nombre}</option>
-
-                    ))}
-                </NativeSelect>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Elegir escuela prioridad 2
-                </InputLabel>
-                <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange}
-                    inputProps={{
-                        name: 'id_escuela2',
-                        id: 'uncontrolled-native',
-
-                    }}
-
-                >
-                    <option value={'1'}> Elegir</option>
-                    {escuelas.map((row) => (
-
-                        <option value={row.id}> {row.nombre}</option>
-
-                    ))}
-                </NativeSelect> */}
-                <br />
-                <CardActions>
-                    {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? <>
-                        {!cargando ? <>
-                            <Button variant="outlined"
-
-                                onClick={() => Inscribir()}
-                            >  Enviar inscripcion</Button>
-                        </> : <>       
-                        <Button variant="outlined">  <CircularProgress color="success" /></Button>
-                          </>}
-
-                    </> : <>     <Button variant="outlined" disabled
-                        onClick={() => Inscribir()}
-                    >  Enviar inscripcion</Button> </>}
-                </CardActions>
-
-
-            </Paper>
-
-
-
-        </>
-
-
-    )
-}
+        <CardActions>
+          {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? (
+            <>
+              {!cargando ? (
+                <Button variant="outlined" onClick={() => Inscribir()}>
+                  Enviar inscripcion
+                </Button>
+              ) : (
+                <Button variant="outlined">
+                  <CircularProgress color="success" />
+                </Button>
+              )}
+            </>
+          ) : (
+            <>
+              <Button variant="outlined" disabled onClick={() => Inscribir()}>
+                Enviar inscripcion
+              </Button>
+            </>
+          )}
+        </CardActions>
+      </Paper>
+      
+    </>
+  );
+};
 
 export default Estracto;
