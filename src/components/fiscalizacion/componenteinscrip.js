@@ -16,10 +16,11 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import './styles.css';
+import styled from 'styled-components';
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+const StyledParagraph = styled.p`
+  font-family: 'Montserrat', sans-serif;
+`;
 
 const Estracto = () => {
   const [cargando, setCargando] = useState(false);
@@ -61,24 +62,25 @@ const Estracto = () => {
        
       <Paper
             
-                 sx={{
-                   cursor: 'pointer',
-                   background: '#white',
-                   color: '#bdbdbd',
-                   border: '1px dashed #ccc',
-                   '&:hover': { border: '1px solid #ccc' },
-                   padding: 10,
-                   width: '100%',
-                   maxWidth: 380,
-                   margin: '20px auto', // Ajustar el margen superior
-                   display: 'grid',
-                   gridTemplateRows: 'auto 1fr', // Ajustar filas según el contenido del logo y el resto del contenido
-                   alignItems: 'start', // Alinear el contenido al inicio
-                   '@media (max-width: 600px)': { // Estilos para dispositivos móviles
-                     padding: 5,
-                     maxWidth: '100%',
-                   },
-                 }}
+            sx={{
+              cursor: 'pointer',
+              background: '#white',
+              color: '#bdbdbd',
+              border: '1px dashed #ccc',
+              '&:hover': { border: '1px solid #ccc' },
+              padding: 10,
+              width: '100%',
+              maxWidth: 380,
+              margin: '20px auto', // Ajustar el margen superior
+              display: 'grid',
+              gridTemplateRows: 'auto 1fr', // Ajustar filas según el contenido del logo y el resto del contenido
+              alignItems: 'start', // Alinear el contenido al inicio
+              '@media (max-width: 600px)': { // Estilos para dispositivos móviles
+                padding: 5,
+                maxWidth: '100%',
+                margin: 0,
+              },
+            }}
           
       >  
        <Box sx={{ textAlign: 'center', marginTop: '10px' }}>
@@ -86,10 +88,11 @@ const Estracto = () => {
         </Box>
         <Box sx={{ textAlign: 'center' }}>
        
-          <Typography variant="h5" component="div" color="black" className="montserrat">
+          <Typography variant="h5" component="div" color="black" >
+            <StyledParagraph>
           Este 11 de junio vamos a fiscalizar para cuidar los votos de todos los correntinos y defender la democracia
 
-¡Inscribite acá!
+¡Inscribite acá!</StyledParagraph>
           </Typography>
           </Box>
 
@@ -156,11 +159,13 @@ const Estracto = () => {
           variant="standard"
         />
 
-        <br /> <br />
+        <br />
 
         <InputLabel variant="standard" htmlFor="uncontrolled-native">
-          <Typography variant="h5" component="div" color="black" fontFamily="Montserrat">
+          <Typography variant="h5" component="div" color="black">
+          <StyledParagraph>
             <b>¿Cómo te enteraste?</b>
+            </StyledParagraph>
           </Typography>
         </InputLabel>
 
