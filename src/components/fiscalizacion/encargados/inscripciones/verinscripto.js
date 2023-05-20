@@ -58,7 +58,8 @@ export default function SelectTextFields(props) {
       id_inscripcion: props.id_inscripcion,
       nombre: props.nombre,
       apellido: props.apellido,
-      dni: props.dni
+      telefono:  props.telefono,
+      telefono2:  props.telefono2
 
     }))
   }
