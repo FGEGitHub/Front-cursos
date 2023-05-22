@@ -61,7 +61,7 @@ export default function ClienteNuevo(props) {
     try {
 
     const rta = await servicioFisca.modificarpersonafisca(form)
- alert(rta)
+
      
      } catch (error) {
        console.error(error);
@@ -169,6 +169,30 @@ export default function ClienteNuevo(props) {
                     fullWidth
                     variant="standard"
                     defaultValue={props.dni}
+                />
+                   <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                 
+                    label="Telefono"
+                    name="telefono"
+                    onChange={handleChange}
+                    fullWidth
+                    variant="standard"
+                    defaultValue={props.telefono}
+                />
+                   <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                 
+                    label="Telefono 2 "
+                    name="telefono2"
+                    onChange={handleChange}
+                    fullWidth
+                    variant="standard"
+                    defaultValue={props.telefono2}
                 />
 
 

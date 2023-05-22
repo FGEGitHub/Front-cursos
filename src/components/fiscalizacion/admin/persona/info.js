@@ -73,6 +73,17 @@ const FichaAxios = (props) => {
             telefono = {client.telefono}
             telefono2= {client.telefono2}
             domicilio= {client.domicilio}
+            traer ={async() => {
+       
+   
+              const  cliente = await servicioFidei.traerdatosdepersona(id)
+              
+              setCliente(cliente)
+          
+             
+          
+              ;
+            }  }
 
             />
             </Box>

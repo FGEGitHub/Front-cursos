@@ -28,7 +28,6 @@ const SubirLegajo = () => {
 
     const [datos, setDatos] = useState()
    
-    const [completo, setCompleto] = useState()
     const [listo, setListo] = useState(false)
 
     useEffect(() => {
