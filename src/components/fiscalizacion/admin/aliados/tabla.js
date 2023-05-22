@@ -57,7 +57,12 @@ const Lotes = () => {
             label: "cantidad",
 
         },
-      
+        {
+            name: "cantidadasig",
+            label: "cantidad ya confirmadas",
+
+        },
+        
        
     
       /*   {
@@ -92,7 +97,7 @@ return (
     <div>
             <Stack spacing={2} sx={{ width: '100%' }}>
  
- <Alert severity="info">Cantidad de mesas : {clients.length}</Alert>
+ <Alert severity="info">Cantidad de Aliados: {clients.length}</Alert>
     </Stack>
     <br/>
    
