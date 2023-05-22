@@ -212,7 +212,8 @@ export default function SelectTextFields(props) {
 
 
               {props.id_inscripcion}
-              <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
+              <h3>Asignaciona escuela {props.nombre} {props.apellido} </h3>
+              <label> observaciones: {props.observaciones}</label>
               <br />
               Inscripto el dia: {props.fecha_carga}<br />
               DNI:  {props.dni}<br />

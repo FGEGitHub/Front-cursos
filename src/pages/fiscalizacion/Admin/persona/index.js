@@ -2,7 +2,7 @@
 
 import Navbar from '../../../../components/fiscalizacion/Navbar'
 import { useNavigate, useParams } from "react-router-dom";
-import Personas from '../../../../components/fiscalizacion/admin/personas/tabla'
+import Personas from '../../../../components/fiscalizacion/admin/persona/info'
 import React, { useEffect, useState } from "react";
 import {
     Button,

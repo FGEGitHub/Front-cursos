@@ -1,8 +1,9 @@
 
 
+
 import Navbar from '../../../../components/fiscalizacion/Navbar'
 import { useNavigate, useParams } from "react-router-dom";
-import Personas from '../../../../components/fiscalizacion/admin/personas/tabla'
+import Encarg from '../../../../components/fiscalizacion/admin/aliados/tabla'
 import React, { useEffect, useState } from "react";
 import {
     Button,
@@ -22,10 +23,9 @@ export default function Paginas() {
     return (
         <>
         <Navbar/>
-        <br/>     <br/>   <br/>     <br/>  
-        <Button onClick={volver}>Volver</Button><br/>     <br/>  
-        <Personas/>   
-      
+        <br/>     <br/>  <br/>     <br/>  
+        <Button onClick={volver}>Volver</Button> <br/>     <br/>         
+            <Encarg/>
         </>
    
     );

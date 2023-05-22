@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { useParams } from "react-router-dom"
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import { useState, useEffect } from "react";
 import servicioFidei from '../../../../services/fiscalizacion'
-import Volver from './volverpaso2'
+import { useNavigate } from "react-router-dom";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 
@@ -15,7 +14,7 @@ import MUIDataTable from "mui-datatables";
 export default function Ingresos() {
     let params = useParams()
 
-
+    const navigate = useNavigate();
     const [inscrip, setInscrip] = useState([]);
 
 
@@ -36,24 +35,23 @@ export default function Ingresos() {
         return (
             <>
 
-
-                <Volver
-                    dni={inscrip[dataIndex].dni}
-                    id_inscripcion={inscrip[dataIndex].id}
-                    traer={async () => {
-
-                        const ins = await servicioFidei.traerpaso2inscrip()
-                        setInscrip(ins)
-                        // 
-
-                    }}
-                />
+{inscrip[dataIndex].nombreescuela === null ? <> Sin completar</>:<>{inscrip[dataIndex].nombreescuela}</>}
+             
             </>
 
         );
     }
 
+    function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
+        return (
+            <>
 
+         <PersonSearchIcon  onClick={() => navigate('/fiscalizacion/persona/'+inscrip[dataIndex].id)}  />
+           
+            </>
+
+        );
+    }
 
     const columns = [
         {
@@ -66,32 +64,36 @@ export default function Ingresos() {
             label: "nombre",
         },
         {
-            name: "nombreescuela",
-            label: "escuela",
-
-        },
-        {
-            name: "nombreescuela2",
-            label: "escuela2",
-
-        },
-
-        {
             name: "telefono",
             label: "telefono",
 
         },
         {
-            name: "donde_vota",
-            label: "donde_vota",
+            name: "telefono2",
+            label: "telefono2",
 
         },
 
+       
+
         {
-            name: "Acciones/llamado",
+            name: "donde vota",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
+                        dataIndex,
+                        rowIndex,
+                        // overbookingData,
+                        // handleEditOpen
+                    )
+            }
+
+        },
+        {
+            name: "Ver",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer2(
                         dataIndex,
                         rowIndex,
                         // overbookingData,
@@ -119,7 +121,7 @@ export default function Ingresos() {
 
                 <MUIDataTable
 
-                    title={"Lista de Incripciones"}
+                    title={"Lista de Personas"}
                     data={inscrip}
                     columns={columns}
                     actions={[
