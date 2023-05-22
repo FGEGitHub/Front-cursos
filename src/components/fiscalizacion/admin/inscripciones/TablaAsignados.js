@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 import servicioFidei from '../../../../services/fiscalizacion'
-
+import { useNavigate } from "react-router-dom";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ConfirmarCapa from "./confirmarcapacitacion";
@@ -14,7 +14,7 @@ import Volver from "./volverpaso3";
 
 export default function Ingresos() {
     let params = useParams()
-
+    const navigate = useNavigate();
 
     const [inscrip, setInscrip] = useState([]);
     const [turnos, setTurnos] = useState([]);
@@ -33,7 +33,17 @@ export default function Ingresos() {
 
     };
   
+    
+    function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+        <Button  onClick={() => navigate('/fiscalizacion/persona/'+inscrip[dataIndex].idpersona)} >Ver persona</Button>
 
+          </>
+
+        );
+      }
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
@@ -71,7 +81,10 @@ export default function Ingresos() {
             name: "dni",
             label: "dni",
         },
-   
+        {
+            name: "apellido",
+            label: "apellido",
+        },
         {
             name: "nombre",
             label: "nombre",
@@ -81,17 +94,29 @@ export default function Ingresos() {
             label: "escuela",
 
         },
-       
+        {
+            name: "mesa",
+            label: "mesa",
+
+        },
         {
             name: "telefono",
             label: "telefono",
 
         },
         {
-            name: "estado",
-            label: "estado",
-
-        },
+            name: "VER PERSONA",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer2(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },   
 
         {
             name: "Acciones/llamado",
