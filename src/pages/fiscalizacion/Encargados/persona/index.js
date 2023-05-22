@@ -1,8 +1,7 @@
 
-
 import { useNavigate, useParams } from "react-router-dom";
-import Steper from '../../../../components/fiscalizacion/encargados/inscripciones/steper'
 import Menu from '../../../../components/fiscalizacion/encargados/inscripciones/menuizqenc'
+import Tabla from '../../../../components/fiscalizacion/admin/persona/info'
 import React, { useEffect, useState } from "react";
 import {
     Button,
@@ -42,11 +41,13 @@ export default function Paginas() {
 
     return (
         <>
-        <Menu>
+
+<Menu>
+        <Tabla/>
     
-        <br/>     <br/>  <br/>     <br/>  
-     <Steper/>
-     </Menu>
+   </Menu>
+
+
         </>
    
     );

@@ -14,6 +14,7 @@ import servicioFidei from '../../../../services/fiscalizacion'
 import { Box } from "@mui/system";
 import { useNavigate , useParams } from "react-router-dom";
 import "./profile.css";
+import Modificar from './modificar'
 
 
 const FichaAxios = (props) => {
@@ -61,7 +62,19 @@ const FichaAxios = (props) => {
             <h5>
             Datos Personales del Cliente
             </h5>
-                
+            <Modificar
+              id = {client.id}
+            dni = {client.dni}
+            nombre = {client.nombre}
+            apellido = {client.apellido}
+            vegano = {client.vegano}
+            movilidad = {client.movilidad}
+            celiaco = {client.celiaco}
+            telefono = {client.telefono}
+            telefono2= {client.telefono2}
+            domicilio= {client.domicilio}
+
+            />
             </Box>
        
               <Box>
@@ -69,7 +82,7 @@ const FichaAxios = (props) => {
                   label="DNI"
                   id="dni"
                  // defaultValue="CUIL"
-                 defaultValue= {client.dni}
+                 value= {client.dni}
                   name= "dni"
                   variant="filled"
                   sx={{ margin: "10px" }}
@@ -86,7 +99,7 @@ const FichaAxios = (props) => {
                 <TextField
                   label="Nombre"
                   id="Nombre"
-                  defaultValue={client.nombre}
+                  value={client.nombre}
                   name= "nombre"
                   variant="filled"
                   sx={{ margin: "10px" }}
@@ -108,7 +121,7 @@ const FichaAxios = (props) => {
                 <TextField
                   label="Apellido"
                   id="email"
-                  defaultValue={client.apellido}
+                  value={client.apellido}
                   name= "nombre"
                   variant="filled"
                   sx={{ margin: "10px" }}
@@ -123,9 +136,9 @@ const FichaAxios = (props) => {
                 />
 
                 <TextField
-                  label="Localidad"
+                  label="Domicilio"
                   id="Localidad"
-                  defaultValue={client.provincia}
+                  value={client.domicilio}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -143,7 +156,7 @@ const FichaAxios = (props) => {
                   label="Numero de Telefono"
                   id="numero de telefono"
                 
-                  defaultValue={client.telefono}
+                  value={client.telefono}
                   name="telefono"
                   variant="filled"
                   sx={{ margin: "10px" }}
@@ -161,12 +174,12 @@ const FichaAxios = (props) => {
                   label="Numero de Telefono"
                   id="numero de telefono"
                  
-                  defaultValue={client.telefono2}
+                  value={client.telefono2}
                   name="telefono2"
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
-                    readOnly: !editMode,
+                    readOnly: false,
                     startAdornment: (
                       <InputAdornment position="start">
                         <LocalPhoneIcon />
@@ -179,14 +192,14 @@ const FichaAxios = (props) => {
               </Box>
               <Box>
                 <TextField
-                  label="Razon"
+                  label="Vegano"
                   id="Razon"
                   defaultValue=""
-                  value={client.razon}
+                  value={client.vegano}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
-                    readOnly: !editMode,
+                    readOnly:false,
                     startAdornment: (
                       <InputAdornment position="start">
                         <LocalPhoneIcon />
@@ -196,14 +209,14 @@ const FichaAxios = (props) => {
                 />
 
                 <TextField
-                  label="Ingresos Declarados"
+                  label="Movilidad"
                   id="dirección"
                   defaultValue=""
-                  value={client.ingresos}
+                  value={client.movilidad}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
-                    readOnly: !editMode,
+                    readOnly: false,
                     startAdornment: (
                       <InputAdornment position="start">
                         <HomeIcon />
@@ -214,7 +227,43 @@ const FichaAxios = (props) => {
                   
                 </TextField>
               </Box>
-              
+              <Box>
+                <TextField
+                  label="Celiaco"
+                  id="Razon"
+                  defaultValue=""
+                  value={client.celiaco}
+                  variant="filled"
+                  sx={{ margin: "10px" }}
+                  InputProps={{
+                    readOnly:false,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LocalPhoneIcon />
+                      </InputAdornment>
+                    )
+                  }}
+                />
+
+                <TextField
+                  label="Donde vota"
+                  id="dirección"
+                  defaultValue=""
+                  value={client.nombreescuela}
+                  variant="filled"
+                  sx={{ margin: "10px" }}
+                  InputProps={{
+                    readOnly: false,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <HomeIcon />
+                      </InputAdornment>
+                    )
+                  }}
+                >
+                  
+                </TextField>
+              </Box>
 
               <Box>
                 <columns lg={8}>
@@ -242,7 +291,7 @@ const FichaAxios = (props) => {
 
         <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
          
-         
+    
         </Grid>
       </Grid>
     </div>

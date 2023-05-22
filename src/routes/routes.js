@@ -78,7 +78,8 @@ import AdminEncargados from '../pages/fiscalizacion/Admin/encargados'
 import AdminEncargado from '../pages/fiscalizacion/Admin/encargado'
 import Personafisca from '../pages/fiscalizacion/Admin/persona'
 import Aliadosfisca from '../pages/fiscalizacion/Admin/aliados'
-
+import PersonasEncargados from '../pages/fiscalizacion/Encargados/personas'
+import Personaenc from '../pages/fiscalizacion/Encargados//persona'
 
 
 
@@ -165,7 +166,8 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/encargado/:id', element: <AdminEncargado /> },
 		{ path: '/fiscalizacion/persona/:id', element: <Personafisca /> },
 		{ path: '/fiscalizacion/administracion/aliados', element: <Aliadosfisca /> },
-
+		{ path: '/fiscalizacion/encargados/personas', element: <PersonasEncargados /> },
+		{ path: '/fiscalizacion/encargados/persona/:id', element: <Personaenc/> },
 
 ];
 
