@@ -69,7 +69,7 @@ setActivo(true)
     setCargandomesas(false)
    
    const mes = await servicioFide.traermesas(e)
-   
+   console.log(mes)
    setMesas(mes)
 
    setCargandomesas(true)

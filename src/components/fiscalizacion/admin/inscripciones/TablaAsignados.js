@@ -94,9 +94,10 @@ export default function Ingresos() {
             label: "escuela",
 
         },
+    
         {
-            name: "mesa",
-            label: "mesa",
+            name: "numero",
+            label: "numero mesa",
 
         },
         {
