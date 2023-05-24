@@ -53,12 +53,12 @@ const Lotes = () => {
       }
       //
 
-      function CutomButtonsRendercuil(dataIndex, rowIndex, data, onClick) {
+      function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
         return (
           <>
           
        
-           <p  onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)} style={{ marginRight: "10px", cursor: "pointer" }}>{clients[dataIndex].cuil_cuit}</p>
+          {clients[dataIndex].cantidad_mesas - clients[dataIndex].cantidad_asig}
           
           </>
         );
@@ -117,7 +117,29 @@ const Lotes = () => {
             label: "telefono encargado",
 
         },
-       
+        {
+            name: "cantidad_mesas",
+            label: "Cantidad mesas",
+
+        },
+        {
+            name: "cantidad_asig",
+            label: "Mesas asignadas",
+
+        },
+        {
+            name: "Faltan",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer2(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },   
     
         {
             name: "Modificar/borrar",

@@ -113,7 +113,16 @@ const Lotes = () => {
             label: "cantidad",
 
         },
-      
+        {
+            name: "apellido",
+            label: "Apellido Fiscal",
+
+        },
+        {
+            name: "nombrepers",
+            label: "Nombre Fiscal",
+
+        },
        
     
         {

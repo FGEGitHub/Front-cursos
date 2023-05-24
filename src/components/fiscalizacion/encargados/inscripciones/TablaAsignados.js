@@ -102,8 +102,8 @@ export default function Ingresos() {
 
         },
         {
-            name: "mesa",
-            label: "mesa",
+            name: "numero",
+            label: "numero mesa",
 
         },
        
