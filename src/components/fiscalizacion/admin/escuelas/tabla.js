@@ -11,6 +11,8 @@ import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
 import Borrar from "./modaborrar"
 import Modificar from "./modificarescuela"
+import Info from "./modalverdetalles"
+
 
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -41,12 +43,14 @@ const Lotes = () => {
 
     ///
 //opcionde click en el nombre
-    function CutomButtonsRenderere(dataIndex, rowIndex, data, onClick) {
+    function CutomButtonsRenderer3(dataIndex, rowIndex, data, onClick) {
         return (
           <>
           
        
-           <p  onClick={() =>  navigate('/usuario2/detallecliente/'+clients[dataIndex].cuil_cuit)} style={{ marginRight: "10px", cursor: "pointer" }}>{clients[dataIndex].Nombre}</p>
+         <Info
+          id = {clients[dataIndex].id}
+         />
           
           </>
         );
@@ -140,6 +144,19 @@ const Lotes = () => {
             }
         
         },   
+        {
+            name: "Ver escuela",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer3(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },
     
         {
             name: "Modificar/borrar",
