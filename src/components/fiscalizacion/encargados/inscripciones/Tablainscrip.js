@@ -53,7 +53,7 @@ export default function Ingresos() {
                     escuela={inscrip[dataIndex].nombre_escuela}
                     fecha_carga={inscrip[dataIndex].fecha_carga}
                     telefono={inscrip[dataIndex].telefono}
-                    telefono2={inscrip[dataIndex].telefono}
+                    telefono2={inscrip[dataIndex].telefono2}
                     como_se_entero={inscrip[dataIndex].como_se_entero}
                     apellido_referido={inscrip[dataIndex].apellido_referido}
                     nombre_referido={inscrip[dataIndex].nombre_referido}

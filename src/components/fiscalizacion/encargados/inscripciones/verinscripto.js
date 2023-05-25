@@ -431,7 +431,7 @@ export default function SelectTextFields(props) {
 
               </NativeSelect>
               <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                ¿ Sos Vegano?
+                ¿ Sos Vegetariano?
               </InputLabel>
               <NativeSelect
                 defaultValue={30}
