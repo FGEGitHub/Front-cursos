@@ -224,10 +224,11 @@ export default function SelectTextFields(props) {
         {props.estado=== "No contestado" ? <> <Button variant="contained" color="success" onClick={handlenocontestado} >Volver al estado pendiente</Button></>:<>
         <Button variant="outlined" color="warning" onClick={handlenocontestado} >Marcar como no contestado </Button></>}
           {activo ? <>
+            {props.observaciones ? <><h4 style={{ color: 'crimson' }} >Observaciones: {props.observaciones}</h4></>:<>Sin observaciones</>} 
             <DialogContent>
 
 
-              {props.id_inscripcion}
+              
               <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
               <br />
               Inscripto el dia: {props.fecha_carga}<br />
