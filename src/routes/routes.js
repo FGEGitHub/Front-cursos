@@ -81,6 +81,8 @@ import Aliadosfisca from '../pages/fiscalizacion/Admin/aliados'
 import PersonasEncargados from '../pages/fiscalizacion/Encargados/personas'
 import Personaenc from '../pages/fiscalizacion/Encargados//persona'
 import UsuarioescTabla from '../pages/fiscalizacion/usuariosescuelas/asignados'
+import Escuelapersona from '../pages/fiscalizacion/usuariosescuelas/persona'
+
 
 
 const Rutas = [
@@ -169,6 +171,9 @@ const Rutas = [
 		{ path: '/fiscalizacion/encargados/personas', element: <PersonasEncargados /> },
 		{ path: '/fiscalizacion/encargados/persona/:id', element: <Personaenc/> },
 		{ path: '/fiscalizacion/usuarioescuela/personas', element: <UsuarioescTabla/> },
+		{ path: '/fiscalizacion/usuarioescuela/persona/:id', element: <Escuelapersona/> },
+
+		
 
 ];
 
