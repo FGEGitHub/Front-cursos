@@ -12,7 +12,7 @@ import MuiAlert from '@mui/material/Alert';
 import Borrar from "./modaborrar"
 import Modificar from "./modificarescuela"
 import Info from "./modalverdetalles"
-
+import Asig from "./modalencargado"
 
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -49,6 +49,10 @@ const Lotes = () => {
           
        
          <Info
+          id = {clients[dataIndex].id}
+         />
+         
+         <Asig
           id = {clients[dataIndex].id}
          />
           

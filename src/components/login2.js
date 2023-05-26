@@ -82,6 +82,9 @@ const Login = () => {
           case 9:navigate('/fiscalizacion/encargados/carga')
         
           break;
+          case 10:navigate('/fiscalizacion/usuarioescuela/personas')
+        
+          break;
             default:hanleLogout();
           break;
 

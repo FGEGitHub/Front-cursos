@@ -280,6 +280,21 @@ const enviarinscripcionadmin = async (datos) => {
   return (data)
 }
 
+
+
+const traerescparasig = async (usuario) => {
+  ////////usaurios 
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'traerescparasig/', config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+
+}
+
 const todos = async (usuario) => {
   ////////usaurios 
   // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -557,4 +572,17 @@ const rechazarincrip = async (formdata) => {
   return data
 
 }
-export default {rechazarincrip,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+const asignarencardadodeesc = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'asignarencardadodeesc', formdata, config)
+  return data
+
+}
+const marcarnocontestado = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'marcarnocontestado', formdata, config)
+  return data
+
+}
+
+export default {marcarnocontestado,rechazarincrip,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

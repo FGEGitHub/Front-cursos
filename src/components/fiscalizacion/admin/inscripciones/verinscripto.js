@@ -163,7 +163,23 @@ export default function SelectTextFields(props) {
     setActivo(false)
     setOpen(false);
   };/////
+  const handlenocontestado = async (event) => {
+    try {
 
+      await servicioFide.marcarnocontestado(
+        inscripcion
+
+      )
+      props.getClients()
+
+    } catch (error) {
+      console.error(error);
+      console.log('Error algo sucedio')
+
+    }
+    setActivo(false)
+    setOpen(false);
+  };/////
   const handleDeterminar = async (event) => {
     try {
 
@@ -205,7 +221,8 @@ export default function SelectTextFields(props) {
           <BorderColorIcon variant="outlined" onClick={handleClickOpen} />
         </Tooltip>
         <Dialog open={open} onClose={handleClose}>
-
+        {props.estado=== "No contestado" ? <> <Button variant="contained" color="success" onClick={handlenocontestado} >Volver al estado pendiente</Button></>:<>
+        <Button variant="outlined" color="warning" onClick={handlenocontestado} >Marcar como no contestado </Button></>}
           {activo ? <>
             <DialogContent>
 

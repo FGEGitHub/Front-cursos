@@ -71,7 +71,7 @@ export default function Clasenueva(props) {
         <div>
 
 
-            < Tooltip title="Mover a paso 1">
+            < Tooltip title="Asignar mas llamados">
                 < RuleTwoToneIcon onClick={handleClickOpen} />
             </Tooltip>
             <Dialog open={open} onClose={handleClose}>

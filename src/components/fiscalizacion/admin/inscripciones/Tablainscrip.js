@@ -52,6 +52,7 @@ export default function Ingresos() {
                     nombre_referido={inscrip[dataIndex].nombre_referido}
                     id_inscripcion={inscrip[dataIndex].id}
                     observaciones={inscrip[dataIndex].observaciones}
+                    estado={inscrip[dataIndex].estado}
                     getClients={async () => {
 
                         const ins = await servicioFidei.todasincripciones()

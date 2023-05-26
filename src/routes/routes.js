@@ -80,7 +80,7 @@ import Personafisca from '../pages/fiscalizacion/Admin/persona'
 import Aliadosfisca from '../pages/fiscalizacion/Admin/aliados'
 import PersonasEncargados from '../pages/fiscalizacion/Encargados/personas'
 import Personaenc from '../pages/fiscalizacion/Encargados//persona'
-
+import UsuarioescTabla from '../pages/fiscalizacion/usuariosescuelas/asignados'
 
 
 const Rutas = [
@@ -168,6 +168,7 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/aliados', element: <Aliadosfisca /> },
 		{ path: '/fiscalizacion/encargados/personas', element: <PersonasEncargados /> },
 		{ path: '/fiscalizacion/encargados/persona/:id', element: <Personaenc/> },
+		{ path: '/fiscalizacion/usuarioescuela/personas', element: <UsuarioescTabla/> },
 
 ];
 
