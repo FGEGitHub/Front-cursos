@@ -47,6 +47,7 @@ export default function Ingresos() {
           id_escuela={inscrip[dataIndex].id_escuela}
           id_escuela2={inscrip[dataIndex].id_escuela2}
           donde_vota={inscrip[dataIndex].donde_vota}
+          observaciones={inscrip[dataIndex].observaciones}
           traer = {async () => {
 
             const ins = await servicioFidei.traerpaso2inscrip()
