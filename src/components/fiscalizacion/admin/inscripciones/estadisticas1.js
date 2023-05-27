@@ -98,7 +98,10 @@ setActivo(true)
         Cantidad de confirmados: {datos.asigna }<br/>
         Cantidad de rechazados: {datos.recha }<br/>
         Cantidad de no contestaron aun: {datos.nocont }<br/>
-        
+
+        Celiacos: {datos.celiaco} <br/>
+        Veganos: {datos.vegano} <br/>
+
         <b>Se enteraron mediante</b><br/>
         Pagina web: {datos.pagina} <br/>
         Flyer: {datos.Fly} <br/>
