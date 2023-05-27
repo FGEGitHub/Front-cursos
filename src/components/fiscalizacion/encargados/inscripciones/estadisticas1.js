@@ -94,6 +94,10 @@ setActivo(true)
       {activo ? <>
         <DialogContent>
         Cantidad de inscripciones: {datos.cantidad }<br/>
+        Cantidad de contactados: {datos.contactado }<br/>
+        Cantidad de confirmados: {datos.asigna }<br/>
+        Cantidad de rechazados: {datos.recha }<br/>
+        Cantidad de no contestaron aun: {datos.nocont }<br/>
         <b>Se enteraron mediante</b><br/>
         Pagina web: {datos.pagina} <br/>
         Flyer: {datos.Fly} <br/>
