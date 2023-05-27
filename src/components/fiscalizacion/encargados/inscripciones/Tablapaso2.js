@@ -103,6 +103,10 @@ export default function Ingresos() {
             name: "dni",
             label: "dni",
         },
+        {
+            name: "apellido",
+            label: "apellido",
+        },
    
         {
             name: "nombre",
