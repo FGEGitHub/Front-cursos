@@ -501,6 +501,16 @@ const traerdatosdepersona = async (id) => {
 }
 
 
+const estadisticasescuelas = async (id) => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'estadisticasescuelas/', config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
 const traerdetallesdeunaescuela = async (id) => {
   // const data = await axios.post('http://localhost:4000/signupp', datos)
   const { data } = await axios.get(baseUrl + 'traerdetallesdeunaescuela/'+id, config)
@@ -600,4 +610,4 @@ const marcarnocontestado = async (formdata) => {
 
 }
 
-export default {marcarnocontestado,rechazarincrip,todaslasasignacionesdeunaescuela,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default {marcarnocontestado,estadisticasescuelas,rechazarincrip,todaslasasignacionesdeunaescuela,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

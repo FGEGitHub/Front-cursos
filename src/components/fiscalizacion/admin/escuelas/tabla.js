@@ -13,6 +13,7 @@ import Borrar from "./modaborrar"
 import Modificar from "./modificarescuela"
 import Info from "./modalverdetalles"
 import Asig from "./modalencargado"
+import Estadisticas from "./estadisticas"
 
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -189,6 +190,7 @@ const options = {
 // renderiza la data table
 return (
     <>
+
     {loading ? (<CargaDeTabla/>)
         :(
     <div>
@@ -196,6 +198,8 @@ return (
  
  <Alert severity="info">Cantidad de Escuelas : {clients.length}</Alert>
     </Stack>
+    
+    <Estadisticas/>
     <br/>
     <Nuevo
     getClients =  { async () => {
