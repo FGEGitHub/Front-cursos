@@ -249,6 +249,7 @@ export default function SelectTextFields(props) {
               {prom.promedio ? <>Promedio de votantes por escuela: {prom.promedio}</> : <></>}
 
               <h2> <HowToVoteIcon /> Elegir en que escuela vota </h2><br/>
+              { !rechazo ? <>
               <Autocomplete
                 options={turnos}
                 getOptionLabel={(optiond) => optiond.nombre}
@@ -279,7 +280,7 @@ export default function SelectTextFields(props) {
 
                 />
               </> : <></>}<br />
-              { !rechazo ? <>
+            
               <h2>Elegir prioridades </h2>
               <br />
               <LooksOneIcon />   <label>Escuela prioridad 1</label>
@@ -502,7 +503,7 @@ export default function SelectTextFields(props) {
 {!rechazo ? <>
                 {inscripcion.id_donde_vota && inscripcion.observaciones && inscripcion.celiaco && inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary" onClick={handleDeterminar} >Enviar</Button></> : <><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>}
                 </>: <>
-              {inscripcion.id_donde_vota && inscripcion.observaciones ? <> <Button variant="outlined"  onClick={handleRechazar} >Rechazar </Button></>:<>Completar datos</>}  
+              { inscripcion.observaciones ? <> <Button variant="outlined"  onClick={handleRechazar} >Rechazar </Button></>:<>Completar datos</>}  
                 </>}
 
                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>

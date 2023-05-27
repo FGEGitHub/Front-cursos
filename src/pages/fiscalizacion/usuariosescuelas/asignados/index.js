@@ -45,7 +45,7 @@ export default function Paginas() {
      <NAv/>
         <br/>     <br/>  <br/>     <br/>  
      <Steper/>
-  ljlljbj
+ 
         </>
    
     );
