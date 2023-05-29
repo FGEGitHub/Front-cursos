@@ -41,21 +41,27 @@ const ResponsiveTable = styled(Table)(({ theme }) => ({
   overflowX: 'auto',
   '& .MuiTableCell-root': {
     whiteSpace: 'nowrap',
+    padding: '8px 16px',
+    textAlign: 'left',
+  },
+  '& .MuiTableBody-root .MuiTableCell-root': {
+    borderBottom: 'none',
   },
   [theme.breakpoints.down('sm')]: {
     '& .MuiTableCell-root': {
       display: 'block',
-      borderBottom: 'none',
       position: 'relative',
-      paddingLeft: '50%',
+      paddingLeft: '40%',
       '&::before': {
         content: 'attr(data-label)',
         position: 'absolute',
+        top: 0,
         left: 0,
-        width: '50%',
-        padding: '4px 0',
+        width: '40%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
         fontWeight: 'bold',
-        textAlign: 'left',
       },
     },
     '& .MuiTableHead-root': {
@@ -63,6 +69,7 @@ const ResponsiveTable = styled(Table)(({ theme }) => ({
     },
   },
 }));
+
 
 
 export default function Ingresos() {
@@ -206,10 +213,8 @@ export default function Ingresos() {
                   <StyledTableCell align="left" data-label="Nombre">
                     {row.nombre}
                   </StyledTableCell>
-                  <StyledTableCell align="left" data-label="Escuela">
-                    {row.nombreescuela}
-                  </StyledTableCell>
-                  <StyledTableCell align="left" data-label="Numero de mesa">
+               
+                  <StyledTableCell align="left" data-label="Nro de mesa">
                     {row.numero}
                   </StyledTableCell>
                   <StyledTableCell align="left" data-label="Ver persona">
@@ -236,8 +241,11 @@ export default function Ingresos() {
     
     return (
         <div>
+          {inscrip[0] ? <>  
+                   <h3>{inscrip[0]['nombreescuela']}</h3> 
+                 </>:<></>}
+{vista? <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a Vista de pc</Button></>:<><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a vista de dispositivo movil</Button></> }
 
-<Button variant='contained' onClick={cambiarvista} color='success'>Cambiar Vista</Button>
 { vista ? <>
   <CustomTable inscrip={inscrip} />  
     </>:<>
