@@ -15,26 +15,51 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import {Box} from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
+const ResponsiveTable = styled(Table)(({ theme }) => ({
+  overflowX: 'auto',
+  '& .MuiTableCell-root': {
+    whiteSpace: 'nowrap',
+  },
+  [theme.breakpoints.down('sm')]: {
+    '& .MuiTableCell-root': {
+      display: 'block',
+      borderBottom: 'none',
+      position: 'relative',
+      paddingLeft: '50%',
+      '&::before': {
+        content: 'attr(data-label)',
+        position: 'absolute',
+        left: 0,
+        width: '50%',
+        padding: '4px 0',
+        fontWeight: 'bold',
+        textAlign: 'left',
+      },
     },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-  
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 0,
-    },
-  }));
+  },
+}));
 
 export default function Ingresos() {
    
@@ -161,54 +186,66 @@ export default function Ingresos() {
     ];
 
 
+    const CustomTable = ({ inscrip }) => {
+      return (
+        <Box sx={{ overflowX: 'auto' }}>
+          <ResponsiveTable aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>DNI</StyledTableCell>
+                <StyledTableCell align="right">Apellido</StyledTableCell>
+                <StyledTableCell align="right">Nombre</StyledTableCell>
+                <StyledTableCell align="right">Escuela</StyledTableCell>
+                <StyledTableCell align="right">Numero de mesa</StyledTableCell>
+                <StyledTableCell align="right">Ver persona</StyledTableCell>
+                <StyledTableCell align="right">Capacitacion</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {inscrip.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row" data-label="DNI">
+                    {row.dni}
+                  </StyledTableCell>
+                  <StyledTableCell align="right" data-label="Apellido">
+                    {row.apellido}
+                  </StyledTableCell>
+                  <StyledTableCell align="right" data-label="Nombre">
+                    {row.nombre}
+                  </StyledTableCell>
+                  <StyledTableCell align="right" data-label="Escuela">
+                    {row.nombreescuela}
+                  </StyledTableCell>
+                  <StyledTableCell align="right" data-label="Numero de mesa">
+                    {row.numero}
+                  </StyledTableCell>
+                  <StyledTableCell align="right" data-label="Ver persona">
+                    <Button onClick={() => navigate('/fiscalizacion/usuarioescuela/persona/' + row.idpersona)}>
+                      Ver persona
+                    </Button>
+                  </StyledTableCell>
+                  <StyledTableCell align="right" data-label="Capacitacion">
+                    <ConfirmarCapa
+                      id={row.id}
+                      getClients={async () => {
+                        const ins = await servicioFidei.todasincripciones();
+                        setInscrip(ins);
+                      }}
+                    />
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </ResponsiveTable>
+        </Box>
+      );
+    };
     return (
         <div>
 
 <Button variant='contained' onClick={cambiarvista} color='success'>Cambiar Vista</Button>
 { vista ? <>
-               <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>DNI</StyledTableCell>
-            <StyledTableCell align="right">Apellido</StyledTableCell>
-            <StyledTableCell align="right">Nombre</StyledTableCell>
-            <StyledTableCell align="right">Escuela</StyledTableCell>
-            <StyledTableCell align="right">Numero de mesa</StyledTableCell>
-            <StyledTableCell align="right">Ver persona</StyledTableCell>
-            <StyledTableCell align="right">Capacitacion</StyledTableCell>
- 
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {inscrip.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.dni}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.apellido}</StyledTableCell>
-              <StyledTableCell align="right">{row.nombre}</StyledTableCell>
-              <StyledTableCell align="right">{row.nombreescuela}</StyledTableCell>
-              <StyledTableCell align="right">{row.numero}</StyledTableCell>
-              <StyledTableCell align="right"> <Button  onClick={() => navigate('/fiscalizacion/usuarioescuela/persona/'+row.idpersona)} >Ver persona</Button></StyledTableCell>
-              <StyledTableCell align="right">
-          <ConfirmarCapa
-          id= {row.id}
-        
-          getClients = { async () => {
-
-            const ins = await servicioFidei.todasincripciones()
-            setInscrip(ins)
-            // 
-    
-          }}/></StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-
-  
-    </TableContainer>    
+  <CustomTable inscrip={inscrip} />  
     </>:<>
              <Paper
         sx={{
