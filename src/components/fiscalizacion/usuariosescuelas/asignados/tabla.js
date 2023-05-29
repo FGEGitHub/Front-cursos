@@ -58,8 +58,12 @@ const ResponsiveTable = styled(Table)(({ theme }) => ({
         textAlign: 'left',
       },
     },
+    '& .MuiTableHead-root': {
+      display: 'none',
+    },
   },
 }));
+
 
 export default function Ingresos() {
    
@@ -190,41 +194,30 @@ export default function Ingresos() {
       return (
         <Box sx={{ overflowX: 'auto' }}>
           <ResponsiveTable aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>DNI</StyledTableCell>
-                <StyledTableCell align="right">Apellido</StyledTableCell>
-                <StyledTableCell align="right">Nombre</StyledTableCell>
-                <StyledTableCell align="right">Escuela</StyledTableCell>
-                <StyledTableCell align="right">Numero de mesa</StyledTableCell>
-                <StyledTableCell align="right">Ver persona</StyledTableCell>
-                <StyledTableCell align="right">Capacitacion</StyledTableCell>
-              </TableRow>
-            </TableHead>
             <TableBody>
               {inscrip.map((row) => (
                 <StyledTableRow key={row.name}>
                   <StyledTableCell component="th" scope="row" data-label="DNI">
                     {row.dni}
                   </StyledTableCell>
-                  <StyledTableCell align="right" data-label="Apellido">
+                  <StyledTableCell align="left" data-label="Apellido">
                     {row.apellido}
                   </StyledTableCell>
-                  <StyledTableCell align="right" data-label="Nombre">
+                  <StyledTableCell align="left" data-label="Nombre">
                     {row.nombre}
                   </StyledTableCell>
-                  <StyledTableCell align="right" data-label="Escuela">
+                  <StyledTableCell align="left" data-label="Escuela">
                     {row.nombreescuela}
                   </StyledTableCell>
-                  <StyledTableCell align="right" data-label="Numero de mesa">
+                  <StyledTableCell align="left" data-label="Numero de mesa">
                     {row.numero}
                   </StyledTableCell>
-                  <StyledTableCell align="right" data-label="Ver persona">
+                  <StyledTableCell align="left" data-label="Ver persona">
                     <Button onClick={() => navigate('/fiscalizacion/usuarioescuela/persona/' + row.idpersona)}>
                       Ver persona
                     </Button>
                   </StyledTableCell>
-                  <StyledTableCell align="right" data-label="Capacitacion">
+                  <StyledTableCell align="left" data-label="Capacitacion">
                     <ConfirmarCapa
                       id={row.id}
                       getClients={async () => {
@@ -240,6 +233,7 @@ export default function Ingresos() {
         </Box>
       );
     };
+    
     return (
         <div>
 
