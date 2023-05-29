@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from "react-router-dom"
+import ComputerTwoToneIcon from '@mui/icons-material/ComputerTwoTone';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
@@ -11,8 +11,7 @@ import ConfirmarCapa from "./confirmarcapacitacion";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import { styled } from '@mui/material/styles'
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
+import MobileScreenShareTwoToneIcon from '@mui/icons-material/MobileScreenShareTwoTone';
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import {Box} from '@mui/material';
@@ -244,7 +243,7 @@ export default function Ingresos() {
           {inscrip[0] ? <>  
                    <h3>{inscrip[0]['nombreescuela']}</h3> 
                  </>:<></>}
-{vista? <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a Vista de pc</Button></>:<><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a vista de dispositivo movil</Button></> }
+{vista? <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a Vista de pc <ComputerTwoToneIcon/></Button></>:<><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a vista de dispositivo movil <MobileScreenShareTwoToneIcon/></Button></> }
 
 { vista ? <>
   <CustomTable inscrip={inscrip} />  

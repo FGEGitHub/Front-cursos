@@ -159,6 +159,10 @@ export default function Ingresos() {
             }
 
         },
+        {
+            name: "observaciones",
+            label: "observaciones",
+        },
 
 
     ];
