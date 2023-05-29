@@ -100,7 +100,7 @@ setActivo(true)
         Cantidad de no contestaron aun: {datos.nocont }<br/>
 
         Celiacos: {datos.celiaco} <br/>
-        Veganos: {datos.vegano} <br/>
+        Vegetarianos: {datos.vegano} <br/>
 
         <b>Se enteraron mediante</b><br/>
         Pagina web: {datos.pagina} <br/>

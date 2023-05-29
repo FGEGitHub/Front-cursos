@@ -279,7 +279,7 @@ const FichaAxios = (props) => {
   </Grid>
 
   <Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
-   contenido adicional si es necesario
+   contenido adicional
   </Grid>
 </Grid>
 
