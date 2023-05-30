@@ -38,7 +38,7 @@ export default function ClienteNuevo(props) {
     nombre:props.nombre,
     apellido:props.apellido,
     dni:props.dni,
-    movilidad:props.movildad,
+    movilidad:props.movilidad,
     celiaco:props.celiaco,
     vegano:props.vegano,
     direccion:props.direccion

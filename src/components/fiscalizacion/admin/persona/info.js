@@ -71,12 +71,13 @@ const FichaAxios = (props) => {
           celiaco={client.celiaco}
           telefono={client.telefono}
           telefono2={client.telefono2}
-          domicilio={client.domicilio}
+          direccion={client.domicilio}
           traer={async () => {
             const cliente = await servicioFidei.traerdatosdepersona(id);
             setCliente(cliente);
           }}
         />
+     
       </Box>
       <Box>
         <TextField

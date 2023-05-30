@@ -53,9 +53,7 @@ const Lotes = () => {
           id = {clients[dataIndex].id}
          />
          
-         <Asig
-          id = {clients[dataIndex].id}
-         />
+     
           
           </>
         );
