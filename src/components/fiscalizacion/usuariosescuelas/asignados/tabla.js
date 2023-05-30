@@ -222,7 +222,12 @@ export default function Ingresos() {
                 <StyledTableCell align="left" data-label="Nombre">
                   {row.nombre}
                 </StyledTableCell>
-
+                <StyledTableCell align="left" data-label="telefono">
+                  {row.telefono}
+                </StyledTableCell>
+                <StyledTableCell align="left" data-label="telefono alternativo">
+                  {row.telefono2}
+                </StyledTableCell>
                 <StyledTableCell align="left" data-label="Nro de mesa">
                   {row.numero}
                 </StyledTableCell>
