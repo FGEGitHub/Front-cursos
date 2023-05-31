@@ -34,7 +34,7 @@ export default function Clasenueva(props) {
   
    
 
-         const respuesta=  await servicioInscripciones.Confirmarcapa(form)
+         const respuesta=  await servicioInscripciones.Confirmarcapa(props.id)
          alert(respuesta)
 
 

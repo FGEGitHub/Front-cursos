@@ -236,6 +236,9 @@ export default function Ingresos() {
                     Ver persona
                   </Button>
                 </StyledTableCell>
+                <StyledTableCell align="left" data-label="Capacitado ">
+                {row.capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado</p></>}
+                </StyledTableCell>
                 <StyledTableCell align="left" data-label="Capacitacion">
                   <ConfirmarCapa
                     id={row.id}

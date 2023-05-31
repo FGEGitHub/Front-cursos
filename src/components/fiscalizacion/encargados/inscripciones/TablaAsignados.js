@@ -38,7 +38,19 @@ export default function Ingresos() {
         // 
 
     };
-  
+    
+
+    function CutomButtonsRendererCapacitado(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+      {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado</p></>}
+
+          </>
+
+        );
+      }
+
     function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
         return (
           <>
@@ -112,7 +124,24 @@ export default function Ingresos() {
             label: "telefono",
 
         },
-    
+        {
+            name: "capacitado",
+            label: "capacitado",
+
+        },
+        {
+            name: "Capacitado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRendererCapacitado(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },  
         {
             name: "VER PERSONA",
             options: {

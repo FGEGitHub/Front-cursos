@@ -76,6 +76,17 @@ export default function Ingresos() {
 
 
     
+      function CutomButtonsRendererCapacitado(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+      {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado</p></>}
+
+          </>
+
+        );
+      }
+
     const columns = [
         {
             name: "dni",
@@ -105,6 +116,19 @@ export default function Ingresos() {
             label: "telefono",
 
         },
+        {
+            name: "Capacitado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRendererCapacitado(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },  
         {
             name: "VER PERSONA",
             options: {

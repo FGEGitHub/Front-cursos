@@ -27,14 +27,16 @@ export default function Clasenueva(props) {
     }
 
     const handleClickOpen = () => {
+        console.log(props.id)
         setOpen(true);
-        setForm({id:props.id_inscripcion})
+        setForm({id:props.id})
     };
     const handleDeterminar = async (event) => {
   
-   
+        console.log('props.id')
+         console.log(props.id)
 
-         const respuesta=  await servicioInscripciones.Confirmarcapa(form)
+         const respuesta=  await servicioInscripciones.Confirmarcapa(props.id)
          alert(respuesta)
 
 
