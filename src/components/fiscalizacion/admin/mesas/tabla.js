@@ -109,8 +109,13 @@ const Lotes = () => {
 
         },
         {
-            name: "cantidad",
-            label: "cantidad",
+            name: "nombre",
+            label: "Escuela",
+
+        },
+        {
+            name: "nombredondevota",
+            label: "donde vota",
 
         },
         {
