@@ -9,7 +9,8 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import Vernscripto from "./verinscripto";
 import AsignarEnc from './asignarencargado'
-
+import Coment from './editarobservaciones'
+import CambiarEst from './cambiarestado'
 
 
 
@@ -60,6 +61,7 @@ export default function Ingresos() {
                         // 
 
                     }} />
+
                 <ModalBorrar
                     id={inscrip[dataIndex].id}
                     getClients={async () => {
@@ -70,7 +72,29 @@ export default function Ingresos() {
 
                     }}
                 />
+      <Coment
+                    id={inscrip[dataIndex].id}
+                    observaciones={inscrip[dataIndex].observaciones}
+                    getClients={async () => {
 
+                        const ins = await servicioFidei.todasincripciones()
+                        setInscrip(ins[0])
+                        // 
+
+                    }}
+                />
+                 <CambiarEst
+                    id={inscrip[dataIndex].id}
+                    estado={inscrip[dataIndex].estado}
+                    getClients={async () => {
+
+                        const ins = await servicioFidei.todasincripciones()
+                        setInscrip(ins[0])
+                        // 
+
+                    }}
+                />
+                
                 <AsignarEnc
                     id_inscripcion={inscrip[dataIndex].id}
                     getClients={async () => {

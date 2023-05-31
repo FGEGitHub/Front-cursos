@@ -8,7 +8,7 @@ import ModalBorrar from './borrarinscripcion'
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import Vernscripto from "./verinscripto";
-
+import Coment from './editarobservaciones'
 
 
 
@@ -75,8 +75,18 @@ export default function Ingresos() {
                 
                     }} />
                
+               <Coment
+                    id={inscrip[dataIndex].id}
+                    observaciones={inscrip[dataIndex].observaciones}
+                    getClients={async () => {
 
-            
+                        const ins = await servicioFidei.todasincripciones()
+                        setInscrip(ins[0])
+                        // 
+
+                    }}
+                />
+                
 
 
             </>
