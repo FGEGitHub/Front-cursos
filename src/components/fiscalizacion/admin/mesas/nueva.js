@@ -129,7 +129,7 @@ export default function ClienteNuevo(props) {
                                 onChange={handleChange}
                                 fullWidth
                                 variant="standard"
-                                type='number'
+                               
                             />
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                                Numero de referencia

@@ -306,8 +306,9 @@ export default function SelectTextFields(props) {
               />
               
               {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br />
-                Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} </> : <>Cargando</>}<br />
+                Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} de las cuales <b> {dato.id_escuela.suplentes} son suplentes</b></> : <>Cargando</>}<br />
                 {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres} </>} </> : <>Cargando</>}
+                
                 Encargado: {dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
               Tel:{dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 <Rating
@@ -342,9 +343,9 @@ export default function SelectTextFields(props) {
                 native // Habilita la selección nativa
               />
               {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br />
-                Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} </> : <>Cargando</>}<br />
+                Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} de las cuales <b> {dato.id_escuela2.suplentes} son suplentes</b></> : <>Cargando</>}<br />
                 {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres} </>} </> : <>Cargando</>}
-                
+                <br/>  de las cuales {dato.suplentes} son suplentes: <br/>
                 Encargado: {dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
               Tel:{dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 

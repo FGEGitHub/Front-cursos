@@ -97,6 +97,7 @@ export default function SelectTextFields(props) {
 
     console.log(e.id)
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
+    console.log(dat)
     setDato({ ...dato, ['id_donde_vota']: dat })
     console.log(dato['id_donde_vota'])
     setEscuela({ ...escuela, 'id_donde_vota': dat.cantidad_escuela1 })
@@ -135,6 +136,7 @@ export default function SelectTextFields(props) {
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
     console.log(dat)
     setDato({ ...dato, ['id_escuela2']: dat })
+    
     setEscuela({ ...escuela, 'id_escuela2': dat.cantidad_escuela1 })
     console.log(escuela)
     setProm({ 'promedio': dat.prom })
@@ -301,9 +303,10 @@ export default function SelectTextFields(props) {
                 native // Habilita la selección nativa
               />
               
-              {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br />
-                Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} </> : <>Cargando</>}<br />
-                {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres} </>} </> : <>Cargando</>}
+              {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela} <br />
+                Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} de las cuales <b> {dato.id_escuela.suplentes} son suplentes</b> </> : <>Cargando</>}<br />
+                {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres} <br/> (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres} <br/> </>} </> : <>Cargando</>}
+                <br/>
                 Encargado: {dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
               Tel:{dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 <Rating
@@ -337,10 +340,10 @@ export default function SelectTextFields(props) {
               
                 native // Habilita la selección nativa
               />
-              {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br />
-                Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} </> : <>Cargando</>}<br />
+              {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2} <br />
+                Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} de las cuales <b> {dato.id_escuela2.suplentes} son suplentes</b> </> : <>Cargando</>}<br />
                 {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres} </>} </> : <>Cargando</>}
-                
+               <br/>
                 Encargado: {dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
               Tel:{dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 
