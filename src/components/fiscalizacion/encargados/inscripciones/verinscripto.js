@@ -307,7 +307,7 @@ export default function SelectTextFields(props) {
               
               {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br />
                 Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} de las cuales <b> {dato.id_escuela.suplentes} son suplentes</b></> : <>Cargando</>}<br />
-                {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres} </>} </> : <>Cargando</>}
+                {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres-dato.id_escuela.suplentes > 0 ? <> {dato.id_escuela.libres}(lugar disponible titular) </>:<><p style={{ color: 'crimson' }} >{dato.id_escuela.libres} pero es/son suplente/s</p></>} </>} </> : <>Cargando</>}
                 
                 Encargado: {dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
               Tel:{dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
