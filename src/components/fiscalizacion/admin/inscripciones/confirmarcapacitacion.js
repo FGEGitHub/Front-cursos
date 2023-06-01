@@ -35,11 +35,11 @@ export default function Clasenueva(props) {
    
 
          const respuesta=  await servicioInscripciones.Confirmarcapa(props.id)
-         alert(respuesta)
+        
 
 
     
-        props.traer()
+        props.getClients()
 
         setOpen(false);
     };
