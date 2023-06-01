@@ -124,8 +124,16 @@ const Lotes = () => {
             label: "Nombre Fiscal",
 
         },
-       
-    
+        {
+            name: "telefono",
+            label: "telefono",
+
+        },
+        {
+            name: "telefono2",
+            label: "telefono 2",
+
+        },
         {
             name: "Modificar",
             options: {
