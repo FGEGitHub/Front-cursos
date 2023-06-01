@@ -119,6 +119,7 @@ const Lotes = () => {
             label: "Encargado",
 
         },
+        
         {
             name: "dato2",
             label: "telefono encargado",
@@ -129,9 +130,15 @@ const Lotes = () => {
             label: "Cantidad mesas",
 
         },
+
         {
             name: "cantidad_asig",
             label: "Mesas asignadas",
+
+        },
+        {
+            name: "cantidad_movil",
+            label: "cantidad que necesitan movil",
 
         },
         {
