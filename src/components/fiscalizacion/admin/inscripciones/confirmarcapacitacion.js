@@ -39,7 +39,7 @@ export default function Clasenueva(props) {
 
 
     
-        props.getClients()
+       await props.getClients()
 
         setOpen(false);
     };

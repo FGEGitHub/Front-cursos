@@ -51,13 +51,13 @@ export default function Ingresos() {
           <ConfirmarCapa
           id= {inscrip[dataIndex].id}
         
-          getClients = { async () => {
+          getClients = {async () => {
 
-            const ins = await servicioFidei.todasincripciones()
+            const ins = await servicioFidei.todaslasasignaciones()
             setInscrip(ins[0])
             // 
     
-          }}/>
+        }}/>
   <Volver
           id= {inscrip[dataIndex].id}
         
@@ -162,15 +162,7 @@ export default function Ingresos() {
 
     return (
         <div>
-             <Paper
-        sx={{
-          cursor: 'pointer',
-          background: '#eeeeee',
-          color: '#eeeeee',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
-        }}
-      >
+         
 
  
                 <MUIDataTable
@@ -192,7 +184,7 @@ export default function Ingresos() {
                    
                 
                 
-                </Paper>
+       
           
         </div>
     );
