@@ -78,6 +78,7 @@ export default function SelectTextFields(props) {
   const traer = async () => {
   
     const datod = await servicioFide.traerdetallesdeunaescuela(props.id)
+    console.log(datod)
     setDatos(datod)
 
 
@@ -131,7 +132,9 @@ export default function SelectTextFields(props) {
         <TableHead>
           <TableRow>
             <TableCell>numero</TableCell>
-            <TableCell align="right">Encargado</TableCell>
+            <TableCell align="right">Vota en</TableCell>
+            <TableCell align="right">Fiscal</TableCell>
+   
      
           </TableRow>
         </TableHead>
@@ -144,7 +147,10 @@ export default function SelectTextFields(props) {
               <TableCell component="th" scope="row">
                 {row.numero}
               </TableCell>
-              <TableCell align="right">{row.encargado}</TableCell>
+              <TableCell align="left"> </TableCell>
+              <TableCell align="left"> {row.nombreesc}</TableCell>
+              <TableCell align="left">{row.apellido} {row.nombrepers}</TableCell>
+            
                          </TableRow>
           ))}
         </TableBody>
