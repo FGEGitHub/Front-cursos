@@ -10,6 +10,7 @@ import CardCuatro from './cards/CardCuatro';
 import CardCinco from './cards/cardCinco';
 import CardSeis from './cards/CardSiete';
 import CardOcho from './cards/CardOcho';
+import CardNueve from './cards/CardNueve';
 import CardSiete
 from './cards/cardSeis';
 const Item = styled(Paper)(({ theme }) => ({
@@ -65,6 +66,12 @@ export default function Cards() {
             <CardOcho />
           </Item>
         </Grid>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Item>
+            <CardNueve />
+          </Item>
+        </Grid>
+        
       </Grid>
     </Box>
   </>

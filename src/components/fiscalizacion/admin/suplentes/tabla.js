@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import servicioFisca from '../../../../services/fiscalizacion'
 import MUIDataTable from "mui-datatables";
-import Nuevo from './nueva'
-import Cambiarvotantes from './cambiarvotantes'
-import Modificar from './modificar'
-import Borrar from './borrar'
+
+
 import CargaDeTabla from "../../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
@@ -28,7 +26,7 @@ const Lotes = () => {
 
     const getClients = async () => {
         
-        const clients = await servicioFisca.listademesas({
+        const clients = await servicioFisca.listademesassuplentes({
 
         })
         console.log(clients)
@@ -40,50 +38,14 @@ const Lotes = () => {
         getClients()
     }, [])
 
-
+    ///
+//opcionde click en el nombre
 
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-            <Cambiarvotantes
-            id_mesa={clients[dataIndex].id}
-            traer ={async () => {
-        
-                const clients = await servicioFisca.listademesas({
-        
-                })
-                console.log(clients)
-                setClients(clients)
-                setLoading(false);
-            }}
-            />
-              <Modificar
-            id_mesa={clients[dataIndex].id}
-            numero={clients[dataIndex].numero}
-            traer ={async () => {
-        
-                const clients = await servicioFisca.listademesas({
-        
-                })
-                console.log(clients)
-                setClients(clients)
-                setLoading(false);
-            }}
-            />
-                <Borrar
-            id_mesa={clients[dataIndex].id}
-            numero={clients[dataIndex].numero}
-            traer ={async () => {
-        
-                const clients = await servicioFisca.listademesas({
-        
-                })
-                console.log(clients)
-                setClients(clients)
-                setLoading(false);
-            }}
-            />
+           
             
         
            
@@ -168,13 +130,7 @@ return (
  <Alert severity="info">Cantidad de mesas : {clients.length}</Alert>
     </Stack>
     <br/>
-    <Nuevo
-    getClients =  { async () => {
-        const clients = await servicioFisca.listademesas({
-        })
-        setClients(clients)
-    }}
-    />
+    
         <MUIDataTable
         
             title={"Lista de Mesas"}
