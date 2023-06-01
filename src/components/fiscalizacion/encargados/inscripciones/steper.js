@@ -90,8 +90,8 @@ const SubirLegajo = () => {
                      <Widget type="Mesas asignadas"
                       cantidad={datos[1]}
                     />
-                        <Widget type="Cantidad confirmadas"
-                      cantidad={'Sin determ'}
+                   <Widget type="Capacitados"
+                      cantidad={datos[4]}
                     />
                      <Widget type="Cantidad mesas sin asignar"
                       cantidad={datos[2]}
