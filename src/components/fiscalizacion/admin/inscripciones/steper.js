@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import VerEstadisticas from './estadisticas1'
 import Ayuda from './ayuda'
 import Tablaincrip from './Tablainscrip'
+import Estadisticas2 from './verfaltante'
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
 import { Paper } from '@mui/material';
@@ -76,6 +77,7 @@ const SubirLegajo = () => {
 <Button variant="contained" color="success" onClick={volver}>Volver<KeyboardReturnIcon/></Button>
       <VerEstadisticas/>
       <Ayuda/>
+      <Estadisticas2/>
     </ButtonGroup>
       <br/>
         {datos ? <>

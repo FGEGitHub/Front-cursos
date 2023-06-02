@@ -161,6 +161,20 @@ const traerinscripcionesenc = async (usuario) => {
   }
   return data
 }
+
+
+
+const traerescuelasfalt = async (usuario) => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'traerescuelasfalt/', config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
+
 const traerescuelas = async (usuario) => {
   // const data = await axios.post('http://localhost:4000/signupp', datos)
   const { data } = await axios.get(baseUrl + 'traerescuelas/', config)
@@ -559,6 +573,9 @@ const Confirmarcapa = async (id) => {
   return data
 }
 
+
+
+
 const contactada = async (id) => {
   // const data = await axios.post('http://localhost:4000/signupp', datos)
   const { data } = await axios.get(baseUrl + 'contactada/'+id, config)
@@ -595,7 +612,12 @@ const borrarmesa = async (formdata) => {
 
 }
 
+const verfaltantesescuelas = async (formdata) => {
+ 
+  const { data } = await axios.post(baseUrl + 'verfaltantesescuelas', formdata, config)
+  return data
 
+}
 const traerestadisticasdeescuelas = async (formdata) => {
  
   const { data } = await axios.post(baseUrl + 'traerestadisticasdeescuelas', formdata, config)
@@ -667,4 +689,4 @@ const listademesassuplentes = async  () => {
   return data
  } 
 
-export default {marcarnocontestado,rechazarcapacitacion,modificarestadodeinscrip,modificarobservaciones,Confirmarcapa,listademesassuplentes,contactada,estadisticasescuelas,rechazarincrip,todaslasasignacionesdeunaescuela,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default {marcarnocontestado,traerescuelasfalt,rechazarcapacitacion,verfaltantesescuelas,modificarestadodeinscrip,modificarobservaciones,Confirmarcapa,listademesassuplentes,contactada,estadisticasescuelas,rechazarincrip,todaslasasignacionesdeunaescuela,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

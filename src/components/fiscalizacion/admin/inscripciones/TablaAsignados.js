@@ -85,6 +85,17 @@ export default function Ingresos() {
       }
 
 
+      function CutomButtonombre(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+     <p> {inscrip[dataIndex].apellido}  {inscrip[dataIndex].nombre}</p>
+
+          </>
+
+        );
+      }
+
     
       function CutomButtonsRendererCapacitado(dataIndex, rowIndex, data, onClick) {
         return (
@@ -105,11 +116,13 @@ export default function Ingresos() {
         {
             name: "apellido",
             label: "apellido",
-        },
+        
+        },  
         {
             name: "nombre",
-            label: "nombre",
-        },
+            label: "Nombre",
+        
+        },  
         {
             name: "nombreescuela",
             label: "escuela",
@@ -126,6 +139,8 @@ export default function Ingresos() {
             label: "telefono",
 
         },
+        
+     
         {
             name: "Capacitado",
             options: {
@@ -168,29 +183,27 @@ export default function Ingresos() {
         },   
 
     ];
-
+    const options = {
+        selectableRows: false, // Desactivar la selección de filas
+    };
 
     return (
-        <div>
+        <div >
          
 
- 
-                <MUIDataTable
-
-                    title={"Lista de Incripciones"}
-                    data={inscrip}
-                    columns={columns}
-                    actions={[
-                        {
-                            icon: 'save',
-                            tooltip: 'Save User',
-                            onClick: (event, rowData) => alert("You saved " + rowData.name)
-                        }
-                    ]}
-
-
-
-                /> 
+         <MUIDataTable
+                title={"Lista de Incripciones"}
+                data={inscrip}
+                columns={columns}
+                options={options}
+                actions={[
+                    {
+                        icon: 'save',
+                        tooltip: 'Save User',
+                        onClick: (event, rowData) => alert("You saved " + rowData.name)
+                    }
+                ]}
+            />
                    
                 
                 

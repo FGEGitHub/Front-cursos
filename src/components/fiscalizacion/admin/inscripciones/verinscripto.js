@@ -29,6 +29,7 @@ export default function SelectTextFields(props) {
   const [usuarioo, setUsuarioo] = useState()
   const [prom, setProm] = useState({})
   const [turnos, setTurnos] = useState()
+  const [turnos2, setTurnos2] = useState()
   const [escuela, setEscuela] = useState({})
   const [activo, setActivo] = useState(false)
   const [dato, setDato] = useState({})
@@ -38,7 +39,9 @@ export default function SelectTextFields(props) {
   const traer = async () => {
     setUsuarioo()
     const turnos = await servicioFide.traerescuelas()
-    setTurnos(turnos)
+    const falt = await servicioFide.traerescuelasfalt()
+    setTurnos2(turnos)
+    setTurnos(falt)
     setActivo(true)
 
 
@@ -249,7 +252,7 @@ export default function SelectTextFields(props) {
 
               <h2> <HowToVoteIcon /> Elegir en que escuela vota </h2><br/>
               <Autocomplete
-                options={turnos}
+                options={turnos2}
                 getOptionLabel={(optiond) => optiond.nombre}
                 renderInput={(params) => (
                   <TextField
