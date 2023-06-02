@@ -93,16 +93,11 @@ setActivo(true)
 
       {activo ? <>
         <DialogContent>
-        Cantidad de inscripciones: {datos.cantidad }<br/>
-       
-
-        <b>Se enteraron mediante</b><br/>
-        Pagina web: {datos.pagina} <br/>
-        Flyer: {datos.Fly} <br/>
-        Menciono un amigo: {datos.Amigo} <br/>
-        <b>Carga de aliados</b><br/>
-        Autoinscripcion: {datos.Autoinscripcion} <br/>
-         Aliados:: {datos.aliado} <br/>
+        {datos.map((row) => (
+                            <>
+                            <p>{row.numero}</p> <p>{row.nombre_escuela}</p> <br/>
+         </>
+                  ))}
 
 
 

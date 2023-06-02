@@ -614,7 +614,8 @@ const borrarmesa = async (formdata) => {
 
 const verfaltantesescuelas = async (formdata) => {
  
-  const { data } = await axios.post(baseUrl + 'verfaltantesescuelas', formdata, config)
+  const { data } = await axios.get(baseUrl + 'verfaltantesescuelas', formdata, config)
+  console.log(data)
   return data
 
 }
