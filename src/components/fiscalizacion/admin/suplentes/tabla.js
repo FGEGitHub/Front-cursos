@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import servicioFisca from '../../../../services/fiscalizacion'
 import MUIDataTable from "mui-datatables";
-
+import Checkbox from '@mui/material/Checkbox';
 
 import CargaDeTabla from "../../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ const Lotes = () => {
     const navigate = useNavigate();
 
 
-    
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
     const getClients = async () => {
         
@@ -40,14 +40,18 @@ const Lotes = () => {
 
     ///
 //opcionde click en el nombre
-
-
+const checkede = async (id) => {
+    console.log(id)
+     await servicioFisca.checksuplente(id)
+     getClients()
+  };
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
            
             
-        
+           {clients[dataIndex].checkk == null  || clients[dataIndex].checkk == 'No'? <><p style={{ color: 'crimson' }} > No sumado al wasap </p><Checkbox   onClick={() => checkede(clients[dataIndex].id)}  {...label} /> </>:<> <p style={{ color: 'green' }} >sumado al wasap</p> <Checkbox onClick={() => checkede(clients[dataIndex].id)}  {...label} defaultChecked /></>}
+
            
           </>
         );
