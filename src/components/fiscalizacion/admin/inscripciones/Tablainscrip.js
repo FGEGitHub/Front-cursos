@@ -125,6 +125,10 @@ export default function Ingresos() {
 
     const columns = [
         {
+            name: "fecha_carga",
+            label: "fecha inscrip",
+        },
+        {
             name: "dni",
             label: "dni",
         },
