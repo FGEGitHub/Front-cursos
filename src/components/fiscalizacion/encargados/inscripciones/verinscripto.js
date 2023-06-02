@@ -29,6 +29,7 @@ export default function SelectTextFields(props) {
   const [usuarioo, setUsuarioo] = useState()
   const [prom, setProm] = useState({})
   const [turnos, setTurnos] = useState()
+  const [turnos2, setTurnos2] = useState()
   const [escuela, setEscuela] = useState({})
   const [activo, setActivo] = useState(false)
   const [dato, setDato] = useState({})
@@ -38,7 +39,9 @@ export default function SelectTextFields(props) {
   const traer = async () => {
     setUsuarioo()
     const turnos = await servicioFide.traerescuelas()
-    setTurnos(turnos)
+    const falt = await servicioFide.traerescuelasfalt()
+    setTurnos2(turnos)
+    setTurnos(falt)
     setActivo(true)
 
 
@@ -58,8 +61,7 @@ export default function SelectTextFields(props) {
       id_inscripcion: props.id_inscripcion,
       nombre: props.nombre,
       apellido: props.apellido,
-      telefono:  props.telefono,
-      telefono2:  props.telefono2
+      dni: props.dni
 
     }))
   }
@@ -98,6 +100,7 @@ export default function SelectTextFields(props) {
 
     console.log(e.id)
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
+    console.log(dat)
     setDato({ ...dato, ['id_donde_vota']: dat })
     console.log(dato['id_donde_vota'])
     setEscuela({ ...escuela, 'id_donde_vota': dat.cantidad_escuela1 })
@@ -136,6 +139,7 @@ export default function SelectTextFields(props) {
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
     console.log(dat)
     setDato({ ...dato, ['id_escuela2']: dat })
+    
     setEscuela({ ...escuela, 'id_escuela2': dat.cantidad_escuela1 })
     console.log(escuela)
     setProm({ 'promedio': dat.prom })
@@ -164,7 +168,6 @@ export default function SelectTextFields(props) {
     setActivo(false)
     setOpen(false);
   };/////
-  
   const handlenocontestado = async (event) => {
     try {
 
@@ -182,7 +185,6 @@ export default function SelectTextFields(props) {
     setActivo(false)
     setOpen(false);
   };/////
-
   const handleDeterminar = async (event) => {
     try {
 
@@ -224,15 +226,15 @@ export default function SelectTextFields(props) {
           <BorderColorIcon variant="outlined" onClick={handleClickOpen} />
         </Tooltip>
         <Dialog open={open} onClose={handleClose}>
-          {props.estado=== "No contestado" ? <> <Button variant="contained" color="success" onClick={handlenocontestado} >Volver al estado pendiente</Button></>:<>
+        {props.estado=== "No contestado" ? <> <Button variant="contained" color="success" onClick={handlenocontestado} >Volver al estado pendiente</Button></>:<>
         <Button variant="outlined" color="warning" onClick={handlenocontestado} >Marcar como no contestado </Button></>}
           {activo ? <>
+            {props.observaciones ? <><h4 style={{ color: 'crimson' }} >Observaciones: {props.observaciones}</h4></>:<>Sin observaciones</>} 
             <DialogContent>
 
 
-              {props.id_inscripcion}
-              <h3>Asignaciona escuela {props.nombre} {props.apellido} </h3>
-              <label> observaciones: {props.observaciones}</label>
+              
+              <h3>Asignaciona escuela {props.nombre}{props.apellido} </h3>
               <br />
               Inscripto el dia: {props.fecha_carga}<br />
               DNI:  {props.dni}<br />
@@ -243,15 +245,14 @@ export default function SelectTextFields(props) {
                 <br /> Apellido Amigo: {props.apellido_referido}  <br />
                 Nombre Amigo:{props.nombre_referido}  <br /></> : <></>}
               <br />
-              <p onClick={() => window.open('https://wa.me/' + props.telefono)}   > <b>Telefono: {props.telefono}</b> <br />Click aca para enviar whatsap<WhatsAppIcon /> </p> <br />
-              <p onClick={() => window.open('https://wa.me/' + props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br />Click aca para enviar whatsap<WhatsAppIcon /> </p> <br />
+              <p onClick={() => window.open('https://wa.me/' + props.telefono)}   > <b>Telefono: {props.telefono}</b> <br />Click aca apra enviar whatsap<WhatsAppIcon /> </p> <br />
+              <p onClick={() => window.open('https://wa.me/' + props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br />Click aca apra enviar whatsap<WhatsAppIcon /> </p> <br />
 
               {prom.promedio ? <>Promedio de votantes por escuela: {prom.promedio}</> : <></>}
 
               <h2> <HowToVoteIcon /> Elegir en que escuela vota </h2><br/>
-              { !rechazo ? <>
               <Autocomplete
-                options={turnos}
+                options={turnos2}
                 getOptionLabel={(optiond) => optiond.nombre}
                 renderInput={(params) => (
                   <TextField
@@ -280,7 +281,7 @@ export default function SelectTextFields(props) {
 
                 />
               </> : <></>}<br />
-            
+              { !rechazo ? <>
               <h2>Elegir prioridades </h2>
               <br />
               <LooksOneIcon />   <label>Escuela prioridad 1</label>
@@ -305,10 +306,10 @@ export default function SelectTextFields(props) {
                 native // Habilita la selección nativa
               />
               
-              {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela}<br />
-                Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} de las cuales <b> {dato.id_escuela.suplentes} son suplentes</b></> : <>Cargando</>}<br />
+              {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela} <br />
+                Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} de las cuales <b> {dato.id_escuela.suplentes} son suplentes</b> </> : <>Cargando</>}<br />
                 {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres-dato.id_escuela.suplentes > 0 ? <> {dato.id_escuela.libres}(lugar disponible titular) </>:<><p style={{ color: 'crimson' }} >{dato.id_escuela.libres} pero es/son suplente/s</p></>} </>} </> : <>Cargando</>}
-                
+                <br/>
                 Encargado: {dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
               Tel:{dato ?  <>    {dato.id_escuela ?  <>{dato['id_escuela'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 <Rating
@@ -342,10 +343,12 @@ export default function SelectTextFields(props) {
               
                 native // Habilita la selección nativa
               />
-              {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2}<br />
-                Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} de las cuales <b> {dato.id_escuela2.suplentes} son suplentes</b></> : <>Cargando</>}<br />
+              {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2} <br />
+                Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} de las cuales <b> {dato.id_escuela2.suplentes} son suplentes</b> </> : <>Cargando</>}<br />
                 {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres} </>} </> : <>Cargando</>}
-                <br/>  de las cuales {dato.suplentes} son suplentes: <br/>
+                {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres-dato.id_escuela2.suplentes > 0 ? <> {dato.id_escuela2.libres}(lugar disponible titular) </>:<><p style={{ color: 'crimson' }} >{dato.id_escuela2.libres} pero es/son suplente/s</p></>} </>} </> : <>Cargando</>}
+
+               <br/>
                 Encargado: {dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].Encargado} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br/>
               Tel:{dato ?  <>    {dato.id_escuela2 ?  <>{dato['id_escuela2'].tel} </>:<>sin encargado</>}   </>            :<>sin datos</>}<br />
                 
@@ -504,7 +507,7 @@ export default function SelectTextFields(props) {
 {!rechazo ? <>
                 {inscripcion.id_donde_vota && inscripcion.observaciones && inscripcion.celiaco && inscripcion.fiscal_antes && inscripcion.movilidad && inscripcion.vegano && inscripcion.domicilio && inscripcion.id_escuela && inscripcion.id_escuela2 ? <>         <Button variant="contained" color="primary" onClick={handleDeterminar} >Enviar</Button></> : <><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS</p></>}
                 </>: <>
-              { inscripcion.observaciones ? <> <Button variant="outlined"  onClick={handleRechazar} >Rechazar </Button></>:<>Completar datos</>}  
+              {inscripcion.id_donde_vota && inscripcion.observaciones ? <> <Button variant="outlined"  onClick={handleRechazar} >Rechazar </Button></>:<>Completar datos</>}  
                 </>}
 
                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>

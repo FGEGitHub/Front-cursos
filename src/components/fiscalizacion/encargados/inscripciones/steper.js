@@ -7,6 +7,7 @@ import Ayuda from './ayuda'
 import Tablaincrip from './Tablainscrip'
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
+import Faltan from '../../admin/inscripciones/verfaltante'
 import { Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -77,6 +78,7 @@ const SubirLegajo = () => {
 <Button variant="contained" color="success" onClick={volver}>Volver<KeyboardReturnIcon/></Button>
       <VerEstadisticas/>
       <Ayuda/>
+      <Faltan/>
     </ButtonGroup>
       <br/>
         {datos ? <>
