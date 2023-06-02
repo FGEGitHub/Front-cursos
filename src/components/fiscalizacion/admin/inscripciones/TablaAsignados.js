@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ConfirmarCapa from "./confirmarcapacitacion";
+import RechazarCapa from "./sacarcapacitacion";
 import Volver from "./volverpaso3";
 
 
@@ -68,7 +69,16 @@ export default function Ingresos() {
             // 
     
         }}/>
+  <RechazarCapa
+          id= {inscrip[dataIndex].id}
+        
+          getClients = {async () => {
 
+            const ins = await servicioFidei.todaslasasignaciones()
+            setInscrip(ins[0])
+            // 
+    
+        }}/>
           </>
 
         );

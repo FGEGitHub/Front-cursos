@@ -201,7 +201,7 @@ return (
     <div>
             <Stack spacing={2} sx={{ width: '100%' }}>
  
- <Alert severity="info">Cantidad de Escuelas : {clients.length}</Alert>
+ <Alert severity="info">Cantidad de Escuelas : {clients.length} (No estan contemplados los suplentes)</Alert>
     </Stack>
     
     <Estadisticas/>

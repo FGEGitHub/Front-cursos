@@ -15,7 +15,7 @@ import MobileScreenShareTwoToneIcon from '@mui/icons-material/MobileScreenShareT
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { Box } from '@mui/material';
-
+import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -237,26 +237,9 @@ export default function Ingresos() {
                   </Button>
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="Capacitado ">
-                {row.capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado</p></>}
+                {row.capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
                 </StyledTableCell>
-                <StyledTableCell align="left" data-label="Capacitacion">
-                  <ConfirmarCapa
-                    id={row.id}
-                    getClients={async () => {
-                      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                      if (loggedUserJSON) {
-                        const usuario = JSON.parse(loggedUserJSON)
-                  
-                        const ins = await servicioFidei.todaslasasignacionesdeunaescuela(usuario.id)
-                        setInscrip(ins)
-                      }
-                  
-                  
-                      // 
-                  
-                    }} 
-                  />
-                </StyledTableCell>
+                
                 <StyledTableCell align="left" data-label="Contactado">
                 {row.dato1 == null  || row.dato1 == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Contactado <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
             

@@ -127,7 +127,7 @@ return (
     <div>
             <Stack spacing={2} sx={{ width: '100%' }}>
  
- <Alert severity="info">Cantidad de mesas : {clients.length}</Alert>
+ <Alert severity="info">Cantidad de suplentes : {clients.length}</Alert>
     </Stack>
     <br/>
     
