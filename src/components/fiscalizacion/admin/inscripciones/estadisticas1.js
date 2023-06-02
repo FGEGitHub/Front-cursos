@@ -95,7 +95,8 @@ setActivo(true)
         <DialogContent>
         Cantidad de inscripciones: {datos.cantidad }<br/>
         Cantidad de contactados: {datos.contactado }<br/>
-        Cantidad de confirmados: {datos.asigna }<br/>
+        Cantidad de confirmados: {datos.asigna } (sin suplentes)<br/>
+        Cantidad de suplentes: {datos.asigna2 }<br/>
         Cantidad de rechazados: {datos.recha }<br/>
         Cantidad de no contestaron aun: {datos.nocont }<br/>
 
