@@ -121,6 +121,7 @@ export default function SelectTextFields(props) {
     
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
     setDato({ ...dato, ['id_escuela']: dat })
+    
     setEscuela({ ...escuela, 'id_escuela': dat.cantidad_escuela1 })
     console.log(escuela)
     setProm({ 'promedio': dat.prom })
@@ -152,7 +153,11 @@ export default function SelectTextFields(props) {
 
   }
   
+  const verubi = (e) => {
+   
+    window.location.reload(e);
 
+  }
   const handleRechazar = async (event) => {
     try {
 
@@ -306,7 +311,9 @@ export default function SelectTextFields(props) {
                 native // Habilita la selección nativa
               />
               
-              {escuela.id_escuela ? <>Cantidad de votantes en la escuela: {escuela.id_escuela} <br />
+              {escuela.id_escuela ? <>
+              <Button variant="contained" onClick={() => window.open(dato.id_escuela.ubicacion)} >Ver ubicacion</Button>
+              Cantidad de votantes en la escuela: {escuela.id_escuela} <br />
                 Cantidad de mesas: {dato.id_escuela ? <>   {dato.id_escuela.mesas} de las cuales <b> {dato.id_escuela.suplentes} son suplentes</b> </> : <>Cargando</>}<br />
                 {dato.id_escuela ? <>  {dato.id_escuela.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela.libres-dato.id_escuela.suplentes > 0 ? <> {dato.id_escuela.libres}(lugar disponible titular) </>:<><p style={{ color: 'crimson' }} >{dato.id_escuela.libres} pero es/son suplente/s</p></>} </>} </> : <>Cargando</>}
                 <br/>
@@ -343,7 +350,9 @@ export default function SelectTextFields(props) {
               
                 native // Habilita la selección nativa
               />
-              {escuela.id_escuela2 ? <>Cantidad de votantes en la escuela: {escuela.id_escuela2} <br />
+              {escuela.id_escuela2 ? <>
+                <Button variant="contained" onClick={() => window.open(dato.id_escuela2.ubicacion)} >Ver ubicacion</Button>
+              Cantidad de votantes en la escuela: {escuela.id_escuela2} <br />
                 Cantidad de mesas: {dato.id_escuela2 ? <>   {dato.id_escuela2.mesas} de las cuales <b> {dato.id_escuela2.suplentes} son suplentes</b> </> : <>Cargando</>}<br />
                 {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres} </>} </> : <>Cargando</>}
                 {dato.id_escuela2 ? <>  {dato.id_escuela2.libres == 0 ? <><p style={{ color: 'crimson' }} > Mesas Libres: {dato.id_escuela2.libres}  (Escuela llena)</p> </> : <>Mesas Libres: {dato.id_escuela2.libres-dato.id_escuela2.suplentes > 0 ? <> {dato.id_escuela2.libres}(lugar disponible titular) </>:<><p style={{ color: 'crimson' }} >{dato.id_escuela2.libres} pero es/son suplente/s</p></>} </>} </> : <>Cargando</>}

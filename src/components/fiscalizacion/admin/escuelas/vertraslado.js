@@ -149,7 +149,7 @@ export default function SelectTextFields(props) {
                 {row.numero}
               </TableCell>
               <TableCell align="left"> </TableCell>
-              <TableCell align="left"> {row.nombreesc}</TableCell>
+              <TableCell align="left"> {row.nombreesc} <Button variant="contained" onClick={() => window.open(row.nombreesc)} >ubicacion</Button></TableCell>
               <TableCell align="left">{row.apellido} {row.nombrepers}</TableCell>
               <TableCell align="left">{row.dni}</TableCell>
               <TableCell align="left">{row.telefono}</TableCell>
