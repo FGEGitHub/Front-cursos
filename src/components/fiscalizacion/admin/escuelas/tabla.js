@@ -10,7 +10,7 @@ import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
 import Borrar from "./modaborrar"
 import Traslados from "./vertraslado"
-
+import Ubicacion from "./modalubi"
 import Modificar from "./modificarescuela"
 import Info from "./modalverdetalles"
 import Asig from "./modalencargado"
@@ -19,7 +19,7 @@ import Estadisticas from "./estadisticas"
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
+});
 const Lotes = () => {
     //configuracion de Hooks
     const [clients, setClients] = useState([]);
@@ -27,10 +27,10 @@ const Lotes = () => {
     const navigate = useNavigate();
 
 
-    
+
 
     const getClients = async () => {
-        
+
         const clients = await servicioFisca.listadeescuelas({
 
         })
@@ -44,73 +44,90 @@ const Lotes = () => {
     }, [])
 
     ///
-//opcionde click en el nombre
+    //opcionde click en el nombre
     function CutomButtonsRenderer3(dataIndex, rowIndex, data, onClick) {
         return (
-          <>
-          
-       
-         <Info
-          id = {clients[dataIndex].id}
-         />
-         
-     
-          
-          </>
-        );
-      }
-      //
+            <>
 
-      function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-          
-       
-          {clients[dataIndex].cantidad_mesas - clients[dataIndex].cantidad_asig}
-          
-          </>
+
+                <Info
+                    id={clients[dataIndex].id}
+                />
+
+
+
+            </>
         );
-      }
-      
-      function traslados(dataIndex, rowIndex, data, onClick) {
+    }
+    //
+
+    function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
         return (
-          <>
-       
-             <Traslados
-             id = {clients[dataIndex].id}
-             nombre = {clients[dataIndex].nombre}
-            />
-            
-           
-          </>
+            <>
+
+
+                {clients[dataIndex].cantidad_mesas - clients[dataIndex].cantidad_asig}
+
+            </>
         );
-      }
+    }
+
+    function traslados(dataIndex, rowIndex, data, onClick) {
+        return (
+            <>
+
+                <Traslados
+                    id={clients[dataIndex].id}
+                    nombre={clients[dataIndex].nombre}
+                />
+
+
+            </>
+        );
+    }
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
-          <>
-       
-             <Borrar
-             id = {clients[dataIndex].id}
-             nombre = {clients[dataIndex].nombre}
-            />
-            
-            <Modificar
-             id = {clients[dataIndex].id}
-             nombre = {clients[dataIndex].nombre}
-             circuito = {clients[dataIndex].circuito}
-           
-            getClients = {async () => {
-        
-        const clients = await servicioFisca.listadeescuelas({
+            <>
 
-        })
-        console.log(clients)
-        setClients(clients)
-        setLoading(false);
-    }} />
-          </>
+                <Borrar
+                    id={clients[dataIndex].id}
+                    nombre={clients[dataIndex].nombre}
+                />
+
+                <Modificar
+                    id={clients[dataIndex].id}
+                    nombre={clients[dataIndex].nombre}
+                    circuito={clients[dataIndex].circuito}
+
+                    getClients={async () => {
+
+                        const clients = await servicioFisca.listadeescuelas({
+
+                        })
+                        console.log(clients)
+                        setClients(clients)
+                        setLoading(false);
+                    }} />
+                <Ubicacion
+                    id={clients[dataIndex].id}
+                    nombre={clients[dataIndex].nombre}
+                    circuito={clients[dataIndex].circuito}
+
+                    getClients={async () => {
+
+                        const clients = await servicioFisca.listadeescuelas({
+
+                        })
+                        console.log(clients)
+                        setClients(clients)
+                        setLoading(false);
+                    }} />
+
+
+
+            </>
         );
-      }
+    }
     // definimos las columnas
     const columns = [
         {
@@ -133,7 +150,7 @@ const Lotes = () => {
             label: "Encargado",
 
         },
-        
+
         {
             name: "dato2",
             label: "telefono encargado",
@@ -162,12 +179,12 @@ const Lotes = () => {
                     traslados(
                         dataIndex,
                         rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
+                        // overbookingData,
+                        // handleEditOpen
                     )
             }
-        
-        },  
+
+        },
         {
             name: "Faltan",
             options: {
@@ -175,12 +192,12 @@ const Lotes = () => {
                     CutomButtonsRenderer2(
                         dataIndex,
                         rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
+                        // overbookingData,
+                        // handleEditOpen
                     )
             }
-        
-        },   
+
+        },
         {
             name: "Ver escuela",
             options: {
@@ -188,13 +205,13 @@ const Lotes = () => {
                     CutomButtonsRenderer3(
                         dataIndex,
                         rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
+                        // overbookingData,
+                        // handleEditOpen
                     )
             }
-        
+
         },
-    
+
         {
             name: "Modificar/borrar",
             options: {
@@ -202,66 +219,66 @@ const Lotes = () => {
                     CutomButtonsRenderer(
                         dataIndex,
                         rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
+                        // overbookingData,
+                        // handleEditOpen
                     )
             }
-        
-        },   
- 
+
+        },
+
 
     ];
 
-const options = {
+    const options = {
 
-    /*    rowsPerPage: 10,
-       download: false, // hide csv download option
-       onTableInit: this.handleTableInit,
-       onTableChange: this.handleTableChange, */
-};
-// renderiza la data table
-return (
-    <>
+        /*    rowsPerPage: 10,
+           download: false, // hide csv download option
+           onTableInit: this.handleTableInit,
+           onTableChange: this.handleTableChange, */
+    };
+    // renderiza la data table
+    return (
+        <>
 
-    {loading ? (<CargaDeTabla/>)
-        :(
-    <div>
-            <Stack spacing={2} sx={{ width: '100%' }}>
- 
- <Alert severity="info">Cantidad de Escuelas : {clients.length} (No estan contemplados los suplentes)</Alert>
-    </Stack>
-    
-    <Estadisticas/>
-    <br/>
-    <Nuevo
-    getClients =  { async () => {
-        const clients = await servicioFisca.listadeescuelas({
-        })
-        setClients(clients)
-    }}
-    />
-        <MUIDataTable
-        
-            title={"Lista de Mesas"}
-            data={clients}
-            columns={columns}
-            actions={[
-                {
-                    icon: 'save',
-                    tooltip: 'Save User',
-                    onClick: (event, rowData) => alert("You saved " + rowData.name)
-                }
-            ]}
-            options={options}
+            {loading ? (<CargaDeTabla />)
+                : (
+                    <div>
+                        <Stack spacing={2} sx={{ width: '100%' }}>
 
+                            <Alert severity="info">Cantidad de Escuelas : {clients.length} (No estan contemplados los suplentes)</Alert>
+                        </Stack>
 
-        />
-    </div>
-    )}
-    </>
+                        <Estadisticas />
+                        <br />
+                        <Nuevo
+                            getClients={async () => {
+                                const clients = await servicioFisca.listadeescuelas({
+                                })
+                                setClients(clients)
+                            }}
+                        />
+                        <MUIDataTable
+
+                            title={"Lista de Mesas"}
+                            data={clients}
+                            columns={columns}
+                            actions={[
+                                {
+                                    icon: 'save',
+                                    tooltip: 'Save User',
+                                    onClick: (event, rowData) => alert("You saved " + rowData.name)
+                                }
+                            ]}
+                            options={options}
 
 
-)
+                        />
+                    </div>
+                )}
+        </>
+
+
+    )
 }
 
 export default Lotes;
