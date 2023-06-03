@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import servicioFisca from '../../../../services/fiscalizacion'
 import MUIDataTable from "mui-datatables";
 import Checkbox from '@mui/material/Checkbox';
-
+import ConfirmarCapa from "./confirmarcapacitacion";
+import RechazarCapa from "./sacarcapacitacion";
 import CargaDeTabla from "../../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import SearchIcon from '@mui/icons-material/Search';
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
@@ -45,7 +44,7 @@ const checkede = async (id) => {
      await servicioFisca.checksuplente(id)
      getClients()
   };
-    function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
+    function CutomButtonsRendererr(dataIndex, rowIndex, data, onClick) {
         return (
           <>
            
@@ -56,11 +55,56 @@ const checkede = async (id) => {
           </>
         );
       }
+
+
+      function CutomButtonsRendererCapacitado(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+      {clients[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado</p></>}
+
+          </>
+
+        );
+      }
+      function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+          <ConfirmarCapa
+          id= {clients[dataIndex].id}
+        
+          getClients = {async () => {
+        
+            const clients = await servicioFisca.listademesassuplentes({
+    
+            })
+            console.log(clients)
+            setClients(clients)
+            setLoading(false);
+        }}/>
+
+  <RechazarCapa
+          id= {clients[dataIndex].id}
+        
+          getClients = {async () => {
+        
+            const clients = await servicioFisca.listademesassuplentes({
+    
+            })
+            console.log(clients)
+            setClients(clients)
+            setLoading(false);
+        }}/>
+          </>
+
+        );
+      }
     // definimos las columnas
     const columns = [
         {
-            name: "circuito",
-            label: "circuito",
+            name: "dni",
+            label: "dni",
 
         }, 
          {
@@ -100,10 +144,37 @@ const checkede = async (id) => {
 
         },
         {
-            name: "Modificar",
+            name: "Acciones/llamado",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },   
+
+        {
+            name: "Capacitado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRendererCapacitado(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },  
+        {
+            name: "Modificar",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRendererr(
                         dataIndex,
                         rowIndex,
                        // overbookingData,
