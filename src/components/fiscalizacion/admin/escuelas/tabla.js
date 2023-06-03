@@ -4,12 +4,13 @@ import MUIDataTable from "mui-datatables";
 import Nuevo from './nueva'
 import CargaDeTabla from "../../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import SearchIcon from '@mui/icons-material/Search';
+
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
 import Borrar from "./modaborrar"
+import Traslados from "./vertraslado"
+
 import Modificar from "./modificarescuela"
 import Info from "./modalverdetalles"
 import Asig from "./modalencargado"
@@ -70,7 +71,20 @@ const Lotes = () => {
           </>
         );
       }
-
+      
+      function traslados(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+       
+             <Traslados
+             id = {clients[dataIndex].id}
+             nombre = {clients[dataIndex].nombre}
+            />
+            
+           
+          </>
+        );
+      }
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
@@ -141,6 +155,19 @@ const Lotes = () => {
             label: "cantidad que necesitan movil",
 
         },
+        {
+            name: "Traslado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    traslados(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },  
         {
             name: "Faltan",
             options: {
