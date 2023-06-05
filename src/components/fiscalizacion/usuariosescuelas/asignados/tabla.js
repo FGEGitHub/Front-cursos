@@ -102,6 +102,37 @@ export default function Ingresos() {
      await servicioFidei.contactada(id)
     traer()
   };
+
+  
+  function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
+    return (
+      <>
+   {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
+
+      </>
+
+    );
+  }
+  function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
+    return (
+      <>
+   {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
+
+      </>
+
+    );
+  }
+  function CutomButtonsRenderer2contactado(dataIndex, rowIndex, data, onClick) {
+    return (
+      <>
+
+{inscrip[dataIndex].dato1 == null  || inscrip[dataIndex].dato1 == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Contactado <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
+
+      </>
+
+    );
+  }
+  
   function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
     return (
       <>
@@ -188,7 +219,33 @@ export default function Ingresos() {
       }
 
     },
+        {
+      name: "Capacitado",
+      options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+          CutomButtonsRenderercapa(
+            dataIndex,
+            rowIndex,
+            // overbookingData,
+            // handleEditOpen
+          )
+      }
 
+    },
+    
+    {
+      name: "Contactado",
+      options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+        CutomButtonsRenderer2contactado(
+            dataIndex,
+            rowIndex,
+            // overbookingData,
+            // handleEditOpen
+          )
+      }
+
+    },
     {
       name: "Acciones/llamado",
       options: {
