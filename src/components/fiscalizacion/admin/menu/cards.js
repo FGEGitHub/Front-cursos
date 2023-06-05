@@ -11,8 +11,9 @@ import CardCinco from './cards/cardCinco';
 import CardSeis from './cards/CardSiete';
 import CardOcho from './cards/CardOcho';
 import CardNueve from './cards/CardNueve';
-import CardSiete
-from './cards/cardSeis';
+import CardSiete from './cards/cardSeis';
+import { useState, useEffect } from "react";
+import servicioInscripciones from '../../../../services/fiscalizacion'
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -22,6 +23,17 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Cards() {
+  const getClients = async () => {
+        
+ /*    const clients = await servicioInscripciones.verlogueo({
+
+    }) */
+
+}
+
+useEffect(() => {
+    getClients()
+}, [])
   return (
   <>
     <Box sx={{ flexGrow: 1 }}>

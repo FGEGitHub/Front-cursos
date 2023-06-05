@@ -66,7 +66,7 @@ const Login = () => {
       console.log(user.nivel)
       switch(user.nivel){
        
-          case 5:navigate('/fiscalizacion/administracion/menu')
+          case 50:navigate('/fiscalizacion/administracion/menu')
 
          
           break;
