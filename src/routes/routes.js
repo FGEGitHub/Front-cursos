@@ -83,6 +83,7 @@ import Personaenc from '../pages/fiscalizacion/Encargados//persona'
 import UsuarioescTabla from '../pages/fiscalizacion/usuariosescuelas/asignados'
 import Escuelapersona from '../pages/fiscalizacion/usuariosescuelas/persona'
 import Suplentes from '../pages/fiscalizacion/Admin/suplentes'
+import SuplentesPAgona from '../pages/fiscalizacion/suplentes/asignados'
 
 
 const Rutas = [
@@ -173,6 +174,9 @@ const Rutas = [
 		{ path: '/fiscalizacion/usuarioescuela/personas', element: <UsuarioescTabla/> },
 		{ path: '/fiscalizacion/usuarioescuela/persona/:id', element: <Escuelapersona/> },
 		{ path: '/fiscalizacion/administracion/suplentes', element: <Suplentes/> },
+		{ path: '/fiscalizacion/suplentes/asignados', element: <SuplentesPAgona/> },
+
+		
 		
 
 ];

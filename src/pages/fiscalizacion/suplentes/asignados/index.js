@@ -1,7 +1,7 @@
 
 import { useNavigate, useParams } from "react-router-dom";
-import Steper from '../../../../components/fiscalizacion/usuariosescuelas/asignados/tabla'
-import NAv from '../../../../components/fiscalizacion/admin/persona/info'
+import Steper from '../../../../components/fiscalizacion/suplentes/tabla'
+import NAv from '../../../../components/fiscalizacion/Navbar'
 import React, { useEffect, useState } from "react";
 import {
     Button,
@@ -20,7 +20,7 @@ export default function Paginas() {
           const user = JSON.parse(loggedUserJSON)
           console.log(user)
           console.log(user.nivel)
-          if (user.nivel != 10 && user.nivel != 11 ){
+          if (user.nivel != 11 ){
             window.localStorage.removeItem('loggedNoteAppUser')
             navigate('/fiscalizacion/login')
       
@@ -44,8 +44,8 @@ export default function Paginas() {
      
      <NAv/>
         <br/>     <br/>  <br/>     <br/>  
-
-  
+     <Steper/>
+ 
         </>
    
     );
