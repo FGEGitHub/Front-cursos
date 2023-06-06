@@ -261,7 +261,7 @@ export default function Ingresos() {
     },
 
   ];
-
+  
 
   const CustomTable = ({ inscrip }) => {
     return (
@@ -270,6 +270,9 @@ export default function Ingresos() {
           <TableBody>
             {inscrip.map((row) => (
               <StyledTableRow key={row.name}>
+                 <StyledTableCell component="th" scope="row" data-label="escuela">
+                  {row.nombreescuela}
+                </StyledTableCell>
                 <StyledTableCell component="th" scope="row" data-label="DNI">
                   {row.dni}
                 </StyledTableCell>
