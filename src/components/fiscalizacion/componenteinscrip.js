@@ -79,9 +79,9 @@ const Estracto = () => {
       <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h5" component="div" color="black">
           <StyledParagraph>
-          ¡Gracias por interesarte en fiscalizar con nosotros! Ya completemos el cupo en esta oportunidad. 
-Por dudas o consultas podés comunicarte al 3795083694. 
-#Lista47 #VamosConValdes
+          ¡Gracias por interesarte en fiscalizar con nosotros! <b>Ya completemos el cupo</b> en esta oportunidad. 
+Por dudas o consultas podés comunicarte al 3795083694. <br/>
+<b>#Lista47 #VamosConValdes</b>
           </StyledParagraph>
         </Typography>
       </Box>
