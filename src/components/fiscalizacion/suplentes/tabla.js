@@ -89,7 +89,7 @@ export default function Ingresos() {
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON)
 
-      const ins = await servicioFidei.todoslossuplentes()
+      const ins = await servicioFidei.listademesassuplentes()
       setInscrip(ins)
     }
    
@@ -103,16 +103,13 @@ export default function Ingresos() {
     traer()
   };
 
-  
-  function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-   {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
+  const checkedes = async (id) => {
+    console.log(id)
+     await servicioFidei.checksuplente(id)
+     traer()
+  };
 
-      </>
 
-    );
-  }
   function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
     return (
       <>
@@ -126,7 +123,7 @@ export default function Ingresos() {
     return (
       <>
 
-{inscrip[dataIndex].dato1 == null  || inscrip[dataIndex].dato1 == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Contactado <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
+{inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Contactado <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
 
       </>
 
@@ -155,7 +152,7 @@ export default function Ingresos() {
             if (loggedUserJSON) {
               const usuario = JSON.parse(loggedUserJSON)
         
-              const ins = await servicioFidei.todoslossuplentes(usuario.id)
+              const ins = await servicioFidei.listademesassuplentes(usuario.id)
               setInscrip(ins)
             }
         
@@ -174,7 +171,7 @@ export default function Ingresos() {
       <>
        
         
-       {inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <><p style={{ color: 'crimson' }} > No sumado al wasap </p><Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> <p style={{ color: 'green' }} >sumado al wasap</p> <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
+       {inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <><p style={{ color: 'crimson' }} > No sumado al wasap </p><Checkbox   onClick={() => checkedes(inscrip[dataIndex].id)}  {...label} /> </>:<> <p style={{ color: 'green' }} >sumado al wasap</p> <Checkbox onClick={() => checkedes(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
 
        
       </>
@@ -243,19 +240,7 @@ export default function Ingresos() {
 
     },
     
-    {
-      name: "Contactado",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-        CutomButtonsRenderer2contactado(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
 
-    },
     {
       name: "Acciones/llamado",
       options: {
