@@ -78,12 +78,13 @@ const Estracto = () => {
       <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h5" component="div" color="black">
           <StyledParagraph>
-            Este 11 de junio vamos a fiscalizar para cuidar los votos de todos los correntinos y defender la democracia
-            ¡Inscribite acá!
+          Gracias por interesarte en fiscalizar con nosotros, ya completemos el cupo ! Para dudas o consultas podes comunicarte al 3795083694. 
+
+#Lista47 #VamosConValdes
           </StyledParagraph>
         </Typography>
       </Box>
-
+{/* 
       <TextField
         autoFocus
         margin="dense"
@@ -212,7 +213,7 @@ const Estracto = () => {
         />
       )}
 
-      <br />
+      <br />*/}
 
       <CardActions>
         {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? (
@@ -233,7 +234,7 @@ const Estracto = () => {
               Enviar inscripcion
             </Button>
           </>
-        )}
+        )} 
       </CardActions>
     </Paper>
   );
