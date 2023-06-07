@@ -179,6 +179,16 @@ const Lotes = () => {
 
         },
         {
+            name: "cantidad_veg",
+            label: "cantidad veg",
+
+        },
+        {
+            name: "cantidad_cel",
+            label: "cantidad celiaco",
+
+        },
+        {
             name: "Traslado",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
