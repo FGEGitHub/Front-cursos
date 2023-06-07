@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import * as React from 'react';
 import logo from "../../Assets/encabezadoform.png";
+import folleto from "../../Assets/folleto.jpg.jpeg";
 import MuiAlert from '@mui/material/Alert';
 import './styles.css';
 import styled from 'styled-components';
@@ -78,8 +79,8 @@ const Estracto = () => {
       <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h5" component="div" color="black">
           <StyledParagraph>
-          Gracias por interesarte en fiscalizar con nosotros, ya completemos el cupo ! Para dudas o consultas podes comunicarte al 3795083694. 
-
+          ¡Gracias por interesarte en fiscalizar con nosotros! Ya completemos el cupo en esta oportunidad. 
+Por dudas o consultas podés comunicarte al 3795083694. 
 #Lista47 #VamosConValdes
           </StyledParagraph>
         </Typography>
@@ -216,25 +217,7 @@ const Estracto = () => {
       <br />*/}
 
       <CardActions>
-        {fecha.nombre && fecha.apellido && fecha.dni && fecha.telefono ? (
-          <>
-            {!cargando ? (
-              <Button variant="outlined" onClick={() => Inscribir()}>
-                Enviar inscripcion
-              </Button>
-            ) : (
-              <Button variant="outlined">
-                <CircularProgress color="success" />
-              </Button>
-            )}
-          </>
-        ) : (
-          <>
-            <Button variant="outlined" disabled onClick={() => Inscribir()}>
-              Enviar inscripcion
-            </Button>
-          </>
-        )} 
+      <img style={{ width: '100%', maxWidth: '500px' }} src={folleto} alt="logo" />
       </CardActions>
     </Paper>
   );
