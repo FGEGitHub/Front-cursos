@@ -169,7 +169,17 @@ export default function Ingresos() {
 
     );
   }
+  function CutomButtonsRendererr(dataIndex, rowIndex, data, onClick) {
+    return (
+      <>
+       
+        
+       {inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <><p style={{ color: 'crimson' }} > No sumado al wasap </p><Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> <p style={{ color: 'green' }} >sumado al wasap</p> <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
 
+       
+      </>
+    );
+  }
   const cambiarvista = () => {
     setVista(!vista);
   };
@@ -259,6 +269,20 @@ export default function Ingresos() {
       }
 
     },
+    {
+      name: "Modificar",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+              CutomButtonsRendererr(
+                  dataIndex,
+                  rowIndex,
+                 // overbookingData,
+                 // handleEditOpen
+              )
+      }
+  
+  },   
+
 
   ];
   
