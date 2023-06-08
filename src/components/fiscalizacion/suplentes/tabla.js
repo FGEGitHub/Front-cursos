@@ -1,373 +1,233 @@
-import * as React from 'react';
-import ComputerTwoToneIcon from '@mui/icons-material/ComputerTwoTone';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import { useState, useEffect } from "react";
-import servicioFidei from '../../../services/fiscalizacion'
-import { useNavigate } from "react-router-dom";
-import { Paper } from '@mui/material';
+import servicioFisca from '../../../services/fiscalizacion'
 import MUIDataTable from "mui-datatables";
+import Checkbox from '@mui/material/Checkbox';
 import ConfirmarCapa from "./confirmarcapacitacion";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import { styled } from '@mui/material/styles'
-import MobileScreenShareTwoToneIcon from '@mui/icons-material/MobileScreenShareTwoTone';
-import TableRow from '@mui/material/TableRow';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { Box } from '@mui/material';
-import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone';
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+import RechazarCapa from "./sacarcapacitacion";
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+import { useNavigate } from "react-router-dom";
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import MuiAlert from '@mui/material/Alert';
 
-const ResponsiveTable = styled(Table)(({ theme }) => ({
-  overflowX: 'auto',
-  '& .MuiTableCell-root': {
-    whiteSpace: 'nowrap',
-    padding: '8px 16px',
-    textAlign: 'left',
-  },
-  '& .MuiTableBody-root .MuiTableCell-root': {
-    borderBottom: 'none',
-  },
-  [theme.breakpoints.down('sm')]: {
-    '& .MuiTableCell-root': {
-      display: 'block',
-      position: 'relative',
-      paddingLeft: '40%',
-      '&::before': {
-        content: 'attr(data-label)',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '40%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        fontWeight: 'bold',
-      },
-    },
-    '& .MuiTableHead-root': {
-      display: 'none',
-    },
-  },
-}));
+//import overbookingData from "./overbooking";
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+const Lotes = () => {
+    //configuracion de Hooks
+    const [clients, setClients] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
 
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-export default function Ingresos() {
-
-  const navigate = useNavigate();
-
-  const [inscrip, setInscrip] = useState([]);
-  const [vista, setVista] = useState(true);
-  const [personas, setpersonas] = useState([]);
-  const [cursos, setCursos] = useState([]);
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-  useEffect(() => {
-    traer()
-  }, [])
-  const traer = async () => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-    if (loggedUserJSON) {
-      const usuario = JSON.parse(loggedUserJSON)
-
-      const ins = await servicioFidei.listademesassuplentes()
-      setInscrip(ins)
-    }
-   
-
-    // 
-
-  };
-  const checkede = async (id) => {
-    console.log(id)
-     await servicioFidei.contactada(id)
-    traer()
-  };
-
-  const checkedes = async (id) => {
-    console.log(id)
-     await servicioFidei.checksuplente(id)
-     traer()
-  };
-
-
-  function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-   {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
-
-      </>
-
-    );
-  }
-  function CutomButtonsRenderer2contactado(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-
-{inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Contactado <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
-
-      </>
-
-    );
-  }
-  
-  function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-
-        <Button onClick={() => navigate('/fiscalizacion/usuarioescuela/persona/' + inscrip[dataIndex].idpersona)} >Ver persona</Button>
-
-      </>
-
-    );
-  }
-  function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-
-        <ConfirmarCapa
-          id={inscrip[dataIndex].id}
-
-          getClients={async () => {
-            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-            if (loggedUserJSON) {
-              const usuario = JSON.parse(loggedUserJSON)
+    const getClients = async () => {
         
-              const ins = await servicioFidei.listademesassuplentes(usuario.id)
-              setInscrip(ins)
+        const clients = await servicioFisca.listademesassuplentes({
+
+        })
+        console.log(clients)
+        setClients(clients)
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getClients()
+    }, [])
+
+    ///
+//opcionde click en el nombre
+const checkede = async (id) => {
+    console.log(id)
+     await servicioFisca.checksuplente(id)
+     getClients()
+  };
+    function CutomButtonsRendererr(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+           
+            
+           {clients[dataIndex].checkk == null  || clients[dataIndex].checkk == 'No'? <><p style={{ color: 'crimson' }} > No sumado al wasap </p><Checkbox   onClick={() => checkede(clients[dataIndex].id)}  {...label} /> </>:<> <p style={{ color: 'green' }} >sumado al wasap</p> <Checkbox onClick={() => checkede(clients[dataIndex].id)}  {...label} defaultChecked /></>}
+
+           
+          </>
+        );
+      }
+
+
+      function CutomButtonsRendererCapacitado(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+      {clients[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado</p></>}
+
+          </>
+
+        );
+      }
+      function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+          <ConfirmarCapa
+          id= {clients[dataIndex].id}
+        
+          getClients = {async () => {
+        
+            const clients = await servicioFisca.listademesassuplentes({
+    
+            })
+            console.log(clients)
+            setClients(clients)
+            setLoading(false);
+        }}/>
+
+  <RechazarCapa
+          id= {clients[dataIndex].id}
+        
+          getClients = {async () => {
+        
+            const clients = await servicioFisca.listademesassuplentes({
+    
+            })
+            console.log(clients)
+            setClients(clients)
+            setLoading(false);
+        }}/>
+          </>
+
+        );
+      }
+    // definimos las columnas
+    const columns = [
+        {
+            name: "dni",
+            label: "dni",
+
+        }, 
+         {
+            name: "numero",
+            label: "numero",
+
+        },
+   
+        {
+            name: "nombre",
+            label: "Escuela",
+
+        },
+        {
+            name: "nombredondevota",
+            label: "donde vota",
+
+        },
+        {
+            name: "apellido",
+            label: "Apellido Fiscal",
+
+        },
+        {
+            name: "nombrepers",
+            label: "Nombre Fiscal",
+
+        },
+        {
+            name: "telefono",
+            label: "telefono",
+
+        },
+        {
+            name: "telefono2",
+            label: "telefono 2",
+
+        },
+        {
+            name: "Acciones/llamado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
             }
         
-        
-            // 
-        
-          }} />
+        },   
 
-
-      </>
-
-    );
-  }
-  function CutomButtonsRendererr(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-       
-        
-       {inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <><p style={{ color: 'crimson' }} > No sumado al wasap </p><Checkbox   onClick={() => checkedes(inscrip[dataIndex].id)}  {...label} /> </>:<> <p style={{ color: 'green' }} >sumado al wasap</p> <Checkbox onClick={() => checkedes(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
-
-       
-      </>
-    );
-  }
-  const cambiarvista = () => {
-    setVista(!vista);
-  };
-
-  const columns = [
-    {
-      name: "dni",
-      label: "dni",
-    },
-    {
-      name: "apellido",
-      label: "apellido",
-
-    },
-
-    {
-      name: "nombre",
-      label: "nombre",
-    },
-    {
-      name: "nombreescuela",
-      label: "escuela",
-
-    },
-    {
-      name: "numero",
-      label: "numero mesa",
-
-    },
-
-    {
-      name: "telefono",
-      label: "telefono",
-
-    },
-
-    {
-      name: "VER PERSONA",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          CutomButtonsRenderer2(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    },
         {
-      name: "Capacitado",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          CutomButtonsRenderercapa(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
+            name: "Capacitado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRendererCapacitado(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },  
+        {
+            name: "Modificar",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRendererr(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },   
+ 
 
-    },
-    
+    ];
 
-    {
-      name: "Acciones/llamado",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          CutomButtonsRenderer(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
+const options = {
 
-    },
-    {
-      name: "Modificar",
-      options: {
-          customBodyRenderLite: (dataIndex, rowIndex) =>
-              CutomButtonsRendererr(
-                  dataIndex,
-                  rowIndex,
-                 // overbookingData,
-                 // handleEditOpen
-              )
-      }
-  
-  },   
-
-
-  ];
-  
-
-  const CustomTable = ({ inscrip }) => {
-    return (
-      <Box sx={{ overflowX: 'auto' }}>
-        <ResponsiveTable aria-label="customized table">
-          <TableBody>
-            {inscrip.map((row) => (
-              <StyledTableRow key={row.name}>
-                 <StyledTableCell component="th" scope="row" data-label="escuela">
-                  {row.nombreescuela}
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row" data-label="DNI">
-                  {row.dni}
-                </StyledTableCell>
-                <StyledTableCell align="left" data-label="Apellido">
-                  {row.apellido}
-                </StyledTableCell>
-                <StyledTableCell align="left" data-label="Nombre">
-                  {row.nombre}
-                </StyledTableCell>
-                <StyledTableCell align="left" data-label="telefono">
-                  {row.telefono}
-                </StyledTableCell>
-                <StyledTableCell align="left" data-label="telefono alternativo">
-                  {row.telefono2}
-                </StyledTableCell>
-                <StyledTableCell align="left" data-label="Nro de mesa">
-                  {row.numero}
-                </StyledTableCell>
-                <StyledTableCell align="left" data-label="Ver persona">
-                  <Button onClick={() => navigate('/fiscalizacion/usuarioescuela/persona/' + row.idpersona)}>
-                    Ver persona
-                  </Button>
-                </StyledTableCell>
-                <StyledTableCell align="left" data-label="Capacitado ">
-                {row.capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
-                </StyledTableCell>
-                
-                <StyledTableCell align="left" data-label="Contactado">
-                {row.dato1 == null  || row.dato1 == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Contactado <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
-            
-               
-
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </ResponsiveTable>
-      </Box>
-    );
-  };
-
-  return (
+    /*    rowsPerPage: 10,
+       download: false, // hide csv download option
+       onTableInit: this.handleTableInit,
+       onTableChange: this.handleTableChange, */
+};
+// renderiza la data table
+return (
+    <>
+    {loading ? ("dsa")
+        :(
     <div>
-      {inscrip[0] ? <>
-        <h3>{inscrip[0]['nombreescuela']}</h3>
-      </> : <></>}
-      {vista ? <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a Vista de pc <ComputerTwoToneIcon /></Button></> : <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a vista de dispositivo movil <MobileScreenShareTwoToneIcon /></Button></>}
-
-      {vista ? <>
-        {inscrip.length > 0 ? <>
-          <CustomTable inscrip={inscrip} />  </> : <><br /> <h3>No hay asignados</h3></>}
-      </> : <>
-
-        <Paper
-          sx={{
-            cursor: 'pointer',
-            background: '#eeeeee',
-            color: '#eeeeee',
-            border: '1px dashed #ccc',
-            '&:hover': { border: '1px solid #ccc' },
-          }}
-        >
-
-
-          <MUIDataTable
-
-            title={"Lista de Incripciones"}
-            data={inscrip}
+            <Stack spacing={2} sx={{ width: '100%' }}>
+ 
+ <Alert severity="info">Cantidad de suplentes : {clients.length}</Alert>
+    </Stack>
+    <br/>
+    
+        <MUIDataTable
+        
+            title={"Lista de Mesas"}
+            data={clients}
             columns={columns}
             actions={[
-              {
-                icon: 'save',
-                tooltip: 'Save User',
-                onClick: (event, rowData) => alert("You saved " + rowData.name)
-              }
+                {
+                    icon: 'save',
+                    tooltip: 'Save User',
+                    onClick: (event, rowData) => alert("You saved " + rowData.name)
+                }
             ]}
+            options={options}
 
 
-
-          />
-
-
-
-        </Paper>
-      </>}
-
+        />
     </div>
-  );
+    )}
+    </>
+
+
+)
 }
+
+export default Lotes;
