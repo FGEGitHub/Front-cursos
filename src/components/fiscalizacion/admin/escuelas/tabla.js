@@ -174,6 +174,11 @@ const Lotes = () => {
         },
         
         {
+            name: "suplentes_falt",
+            label: "suplentes libres",
+
+        },
+        {
             name: "cantidad_movil",
             label: "cantidad que necesitan movil",
 
