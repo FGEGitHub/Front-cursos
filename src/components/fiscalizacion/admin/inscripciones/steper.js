@@ -6,6 +6,7 @@ import VerEstadisticas from './estadisticas1'
 import Ayuda from './ayuda'
 import Tablaincrip from './Tablainscrip'
 import Estadisticas2 from './verfaltante'
+import Estadisticas3 from './verfaltantesuplentes'
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
 import { Paper } from '@mui/material';
@@ -78,6 +79,7 @@ const SubirLegajo = () => {
       <VerEstadisticas/>
       <Ayuda/>
       <Estadisticas2/>
+      <Estadisticas3/>
     </ButtonGroup>
       <br/>
         {datos ? <>
@@ -100,16 +102,7 @@ const SubirLegajo = () => {
 
                     </div>
                     </>:<></>}
-        <Paper
-        sx={{
-          cursor: 'pointer',
-          background: '#fafafa',
-          color: '#bdbdbd',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
-        }}
-      >
-          
+ 
         <Container sx={{ my: 4 }}>
 
           {listo ?  <div>
@@ -192,7 +185,7 @@ const SubirLegajo = () => {
 
             </Stack>
         </Container>
-        </Paper>
+      
         </>
     );
 };
