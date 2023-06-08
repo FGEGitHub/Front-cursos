@@ -21,8 +21,11 @@ export default function ClienteNuevo(props) {
     const [turnos, setTurnos] = useState()
   const [open, setOpen] = React.useState(false);
   const [form, setForm] = useState({})
+  const [cargandomesas, setCargandomesas] = useState(false)
+  const [mesas, setMesas] = useState()
   const handleChange = (e) =>{
     setForm({  ...form, [e.target.name]: e.target.value }) 
+    traermesas(e.target.value)
  }
 
 
@@ -38,7 +41,19 @@ export default function ClienteNuevo(props) {
   }
 
   
+  const traermesas = async (e) => {
 
+    setCargandomesas(false)
+   
+   const mes = await servicioFisca.traermesas(e)
+   
+   setMesas(mes)
+
+   setCargandomesas(true)
+
+  
+
+  }
   
   const handleClickOpen = () => {
     setOpen(true);
@@ -120,6 +135,15 @@ export default function ClienteNuevo(props) {
                      </>: <>Cargando</>}
                
                     </NativeSelect>
+                    {cargandomesas ? <>
+                             <option value={'1'}> Elegir</option>
+                          
+                             {mesas.map((row) => (
+                                       
+                                       <option value={row.id}> {row.numero} - {row.disponibilidad}</option>
+         
+                             ))}
+                                  </>:<>Cargando</>}
                     <TextField
                                 autoFocus
                                 margin="dense"
