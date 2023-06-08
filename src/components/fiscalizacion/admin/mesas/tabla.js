@@ -108,11 +108,7 @@ const Lotes = () => {
             label: "Escuela",
 
         },
-        {
-            name: "nombredondevota",
-            label: "donde vota",
-
-        },
+    
         {
             name: "apellido",
             label: "Apellido Fiscal",
