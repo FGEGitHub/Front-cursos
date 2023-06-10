@@ -88,6 +88,10 @@ const Login = () => {
           case 11:navigate('/fiscalizacion/suplentes/asignados')
         
           break;
+          case 12:navigate('/fiscalizacion/movilidad/escuelas')
+        
+          break;
+          
             default:hanleLogout();
           break;
 

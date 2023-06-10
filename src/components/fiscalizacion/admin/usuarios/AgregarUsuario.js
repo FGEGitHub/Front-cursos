@@ -107,7 +107,7 @@ export default function Ingresos() {
                                     <MenuItem value={'9'}>Encargado llamado</MenuItem>
                                     <MenuItem value={'10'}>Escuela</MenuItem>
                                     <MenuItem value={'11'}>Suplentes</MenuItem>
-                                    
+                                    <MenuItem value={'12'}>Movilidad</MenuItem>
                                 </Select>
                             </FormControl>
                             <TextField

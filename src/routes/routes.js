@@ -84,6 +84,8 @@ import UsuarioescTabla from '../pages/fiscalizacion/usuariosescuelas/asignados'
 import Escuelapersona from '../pages/fiscalizacion/usuariosescuelas/persona'
 import Suplentes from '../pages/fiscalizacion/Admin/suplentes'
 import SuplentesPAgona from '../pages/fiscalizacion/suplentes/asignados'
+import Movilidad from '../pages/fiscalizacion/usuariomovilidad/escuelas'
+
 
 
 const Rutas = [
@@ -176,7 +178,7 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/suplentes', element: <Suplentes/> },
 		{ path: '/fiscalizacion/suplentes/asignados', element: <SuplentesPAgona/> },
 
-		
+		{ path: '/fiscalizacion/movilidad/escuelas', element: <Movilidad/> },
 		
 
 ];
