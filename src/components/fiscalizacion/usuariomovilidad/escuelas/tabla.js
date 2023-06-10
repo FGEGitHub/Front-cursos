@@ -1,31 +1,92 @@
 import { useState, useEffect } from "react";
 import servicioFisca from '../../../../services/fiscalizacion'
 import MUIDataTable from "mui-datatables";
-
+import TableBody from '@mui/material/TableBody';
+import { styled } from '@mui/material/styles'
+import MobileScreenShareTwoToneIcon from '@mui/icons-material/MobileScreenShareTwoTone';
+import TableRow from '@mui/material/TableRow';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { useNavigate } from "react-router-dom";
-
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
-
+import Table from '@mui/material/Table';
 import Traslados from "./vertraslado"
 import Ubicacion from "./modalubi"
-
+import { Box } from '@mui/material';
 import Info from "./modalverdetalles"
-
+import Button from '@mui/material/Button';
 
 
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+  
+  const ResponsiveTable = styled(Table)(({ theme }) => ({
+    overflowX: 'auto',
+    '& .MuiTableCell-root': {
+      whiteSpace: 'nowrap',
+      padding: '8px 16px',
+      textAlign: 'left',
+    },
+    '& .MuiTableBody-root .MuiTableCell-root': {
+      borderBottom: 'none',
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& .MuiTableCell-root': {
+        display: 'block',
+        position: 'relative',
+        paddingLeft: '40%',
+        '&::before': {
+          content: 'attr(data-label)',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '40%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          fontWeight: 'bold',
+        },
+      },
+      '& .MuiTableHead-root': {
+        display: 'none',
+      },
+    },
+  }));
+  
 const Lotes = () => {
     //configuracion de Hooks
     const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [vista, setVista] = useState(true);
     const navigate = useNavigate();
 
-
+    const cambiarvista = () => {
+      setVista(!vista);
+    };
+  
 
 
     const getClients = async () => {
@@ -220,9 +281,62 @@ const Lotes = () => {
            onTableChange: this.handleTableChange, */
     };
     // renderiza la data table
+    const CustomTable = ({ inscrip }) => {
+        return (
+          <Box sx={{ overflowX: 'auto' }}>
+            <ResponsiveTable aria-label="customized table">
+              <TableBody>
+                {inscrip.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell component="th" scope="row" data-label="Escuela">
+                      {row.nombre}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" data-label="Circuito">
+                      {row.circuito}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" data-label="Encargado">
+                      {row.dato1}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" data-label="telefono Encargado">
+                      {row.dato2}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" data-label="Cant. Necesitan movil">
+                      {row.cantidad_movil}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" data-label="Veganos">
+                      {row.cantidad_veg}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" data-label="Celiacos">
+                      {row.cantidad_cel}
+                    </StyledTableCell>
+                    <StyledTableCell align="left" data-label="traslados">
+                    <Traslados
+                    id={row.id}
+                    nombre={row.nombre}
+                />
+                      
+                    </StyledTableCell>
+                    <StyledTableCell align="left" data-label="Info escuela">
+                    <Info
+                    id={row.id}
+                />
+
+                    </StyledTableCell>
+      
+                    
+                   
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </ResponsiveTable>
+          </Box>
+        );
+      };
+    
     return (
         <>
-
+        <Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a Vista  </Button>
+   {vista ? <>
             {loading ? ("<CargaDeTabla />")
                 : (
                     <div>
@@ -251,6 +365,8 @@ const Lotes = () => {
                         />
                     </div>
                 )}
+                </>:<> {clients.length > 0 ? <>
+          <CustomTable inscrip={clients} />  </> : <><br /> <h3>No hay asignados</h3></>}</>}
         </>
 
 
