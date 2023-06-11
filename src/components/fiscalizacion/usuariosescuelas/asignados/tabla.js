@@ -298,7 +298,7 @@ export default function Ingresos() {
                 </StyledTableCell>
                 
                 <StyledTableCell align="left" data-label="Contactado">
-                {row.dato1 == null  || row.dato1 == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Contactado <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
+                {row.dato1 == null  || row.dato1 == 'No'? <>  Ausente/Sin determinar <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
             
                
 
