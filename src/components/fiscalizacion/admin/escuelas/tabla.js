@@ -131,18 +131,25 @@ const Lotes = () => {
     // definimos las columnas
     const columns = [
         {
-            name: "id",
-            label: "ID",
+            name: "circuito",
+            label: "Circuito",
 
         },
+ 
         {
             name: "nombre",
             label: "Escuela",
 
         },
+     
         {
-            name: "circuito",
-            label: "Circuito",
+            name: "cantidad_pres",
+            label: "cantidad_pres",
+
+        },
+        {
+            name: "cantidad_aus",
+            label: "cantidad_aus",
 
         },
         {
