@@ -4,7 +4,7 @@ import MUIDataTable from "mui-datatables";
 import Nuevo from './nueva'
 import CargaDeTabla from "../../../CargaDeTabla"
 import { useNavigate } from "react-router-dom";
-
+import ButtonGroup from '@mui/material/ButtonGroup';
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
@@ -13,7 +13,7 @@ import Traslados from "./vertraslado"
 import Ubicacion from "./modalubi"
 import Modificar from "./modificarescuela"
 import Info from "./modalverdetalles"
-import Asig from "./modalencargado"
+import Asis from "./asistencias"
 import Estadisticas from "./estadisticas"
 
 //import overbookingData from "./overbooking";
@@ -275,9 +275,9 @@ const Lotes = () => {
 
                             <Alert severity="info">Cantidad de Escuelas : {clients.length} (No estan contemplados los suplentes)</Alert>
                         </Stack>
-
-                        <Estadisticas />
-                        <br />
+                        <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                       
+                     
                         <Nuevo
                             getClients={async () => {
                                 const clients = await servicioFisca.listadeescuelas({
@@ -285,6 +285,15 @@ const Lotes = () => {
                                 setClients(clients)
                             }}
                         />
+                         <Estadisticas />
+                        <Asis
+                            getClients={async () => {
+                                const clients = await servicioFisca.listadeescuelas({
+                                })
+                                setClients(clients)
+                            }}
+                        />
+</ButtonGroup>
                         <MUIDataTable
 
                             title={"Lista de Mesas"}
