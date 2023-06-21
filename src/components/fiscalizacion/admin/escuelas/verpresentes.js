@@ -22,7 +22,7 @@ export default function ClienteNuevo(props) {
   const [open, setOpen] = React.useState(false);
   const [form, setForm] = useState({})
   const [cargandomesas, setCargandomesas] = useState(false)
-  const [mesas, setMesas] = useState()
+  const [noreg, setNoreg] = useState()
   const handleChange = (e) =>{
     setForm({  ...form, [e.target.name]: e.target.value }) 
     traermesas(e.target.value)
@@ -33,8 +33,8 @@ export default function ClienteNuevo(props) {
    
 
     const datos = await servicioFisca.cargarpresentes()
-    setTurnos(datos)
-    
+    setTurnos(datos[0])
+    setNoreg(datos[1])
    setActivo(true)
   
 
@@ -120,10 +120,20 @@ export default function ClienteNuevo(props) {
                      { turnos ? <>
                     {turnos.map((row) => (
                                        
-                              <p> {row.dni} {row.misma}</p>
+                              <p> {row.dni}  {row.nombre} {row.misma}</p>
 
                     ))}
                      </>: <>Cargando</>}
+                     
+                     { noreg ? <>
+                     No Registrados
+                    {noreg.map((row) => (
+                                       
+                              <p> {row.dni} </p>
+
+                    ))}
+                     </>: <>Cargando</>}
+                     
                
                     
       
