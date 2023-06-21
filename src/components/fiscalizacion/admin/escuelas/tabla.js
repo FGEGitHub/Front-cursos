@@ -15,6 +15,7 @@ import Modificar from "./modificarescuela"
 import Info from "./modalverdetalles"
 import Asis from "./asistencias"
 import Estadisticas from "./estadisticas"
+import Verpresentes from "./verpresentes"
 
 //import overbookingData from "./overbooking";
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -293,6 +294,7 @@ const Lotes = () => {
                                 setClients(clients)
                             }}
                         />
+                        <Verpresentes/>
 </ButtonGroup>
                         <MUIDataTable
 
