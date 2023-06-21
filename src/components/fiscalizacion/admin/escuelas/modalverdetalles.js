@@ -132,9 +132,10 @@ export default function SelectTextFields(props) {
         <TableHead>
           <TableRow>
             <TableCell>numero</TableCell>
-            <TableCell align="right">Vota en</TableCell>
+            
             <TableCell align="right">Fiscal</TableCell>
             <TableCell align="right">dni</TableCell>
+            <TableCell align="right">Presente</TableCell>
             <TableCell align="right">Tel</TableCell>
      
           </TableRow>
@@ -148,10 +149,11 @@ export default function SelectTextFields(props) {
               <TableCell component="th" scope="row">
                 {row.numero}
               </TableCell>
-              <TableCell align="left"> </TableCell>
-              <TableCell align="left"> {row.nombreesc}</TableCell>
+             
+             
               <TableCell align="left">{row.apellido} {row.nombrepers}</TableCell>
               <TableCell align="left">{row.dni}</TableCell>
+              <TableCell align="left">{row.dato1}</TableCell>
               <TableCell align="left">{row.telefono}</TableCell>
                          </TableRow>
           ))}
