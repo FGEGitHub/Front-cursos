@@ -6,6 +6,7 @@ import VerEstadisticas from './estadisticas1'
 import Ayuda from './ayuda'
 import Tablaincrip from './Tablainscrip'
 import Estadisticas2 from './verfaltante'
+import Veramigo from './veramigo'
 import Estadisticas3 from './verfaltantesuplentes'
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
@@ -80,6 +81,7 @@ const SubirLegajo = () => {
       <Ayuda/>
       <Estadisticas2/>
       <Estadisticas3/>
+      <Veramigo/>
     </ButtonGroup>
       <br/>
         {datos ? <>
