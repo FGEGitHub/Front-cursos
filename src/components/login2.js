@@ -70,7 +70,28 @@ const Login = () => {
 
          
           break;
-          case 6:navigate('/fiscalizacion/fiscal')
+          case 6:alert('Error, solo acceso administradores')
+        
+          break;
+          case 7:alert('Error, solo acceso administradores')
+        
+          break;
+          case 8:alert('Error, solo acceso administradores')
+        
+          break;
+          case 9:alert('Error, solo acceso administradores')
+        
+          break;
+          case 10:alert('Error, solo acceso administradores')
+        
+          break;
+          case 11:alert('Error, solo acceso administradores')
+        
+          break;
+          case 12:alert('/fiscalizacion/movilidad/escuelas')
+        
+          break;
+        /*   case 6:navigate('/fiscalizacion/fiscal')
         
           break;
           case 7:navigate('/fiscalizacion/alia')
@@ -90,7 +111,7 @@ const Login = () => {
           break;
           case 12:navigate('/fiscalizacion/movilidad/escuelas')
         
-          break;
+          break; */
           
             default:hanleLogout();
           break;
