@@ -20,7 +20,7 @@ const Estracto = () => {
   const [cargando, setCargando] = useState(false);
   const [loading, setLoading] = useState(true);
   const [escuelas, setEscuelas] = useState(['']);
-  const [fecha, setFecha] = useState(['']);
+  const [inscrip, setInscrip] = useState(['']);
   const [activo, setActivo] = useState(false);
   const navigate = useNavigate();
 
@@ -35,12 +35,12 @@ const Estracto = () => {
   }, []);
 
   const handleChange = (e) => {
-    setFecha({ ...fecha, [e.target.name]: e.target.value });
+    setInscrip({ ...inscrip, [e.target.name]: e.target.value });
   };
 
   const Inscribir = async (event) => {
     setCargando(true);
-    const rta = await servicioFisca.enviarinscripcion(fecha);
+    const rta = await servicioFisca.enviarinscripcion(inscrip);
     alert(rta);
     if (
       rta ===
@@ -74,9 +74,9 @@ const Estracto = () => {
       }}
     >
       <Box sx={{ textAlign: 'center', marginTop: '10px' }}>
-        <img style={{ width: '100%', maxWidth: '500px' }} src={logo} alt="logo" />
+        <img style={{ width: '110%', maxWidth: '1000px' }} src={logo} alt="logo" />
       </Box>
-      <Box sx={{ textAlign: 'center' }}>
+{/*       <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h5" component="div" color="black">
           <StyledParagraph>
           ¡Gracias por interesarte en fiscalizar con nosotros! <b>Ya completemos el cupo</b> en esta oportunidad. 
@@ -84,8 +84,8 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
 <b>#Lista47 #VamosConValdes</b>
           </StyledParagraph>
         </Typography>
-      </Box>
-{/* 
+      </Box> */}
+
       <TextField
         autoFocus
         margin="dense"
@@ -112,7 +112,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
       <TextField
         margin="dense"
         id="name"
-        label="DNI"
+        label="DNI (SIN PUNTOS)"
         name="dni"
         onChange={handleChange}
         fullWidth
@@ -175,7 +175,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
 
       <br />
 
-      {fecha.como_se_entero === 'Amigo' && (
+      {inscrip.como_se_entero === 'Amigo' && (
         <>
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
             ¿Cómo se llama ese amigo?
@@ -202,7 +202,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
         </>
       )}
 
-      {['Amigo', 'Sin determinar', 'Flyer', 'Pagina web', null].indexOf(fecha.como_se_entero) === -1 && (
+      {['Amigo', 'Sin determinar', 'Flyer', 'Pagina web', null].indexOf(inscrip.como_se_entero) === -1 && (
         <TextField
           margin="dense"
           id="name"
@@ -214,10 +214,43 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
         />
       )}
 
-      <br />*/}
-
-      <CardActions>
+      <br /> 
       <img style={{ width: '100%', maxWidth: '500px' }} src={folleto} alt="logo" />
+      <InputLabel variant="standard" htmlFor="uncontrolled-native">
+        <Typography variant="p" component="div" color="black">
+          <StyledParagraph>
+            <b>¿Fuiste fiscal en las elecciones del  11/06/2023?</b>
+          </StyledParagraph>
+        </Typography>
+      </InputLabel> 
+      
+      <NativeSelect
+        defaultValue={30}
+        onChange={handleChange}
+        inputProps={{
+          name: 'asignado_ant',
+          id: 'uncontrolled-native',
+        }}
+      >
+        <option value={'Sin determinar'}>Elegir</option>
+      
+        <option value={'Si'}>Si</option>
+        <option value={'No'}>No</option>
+       
+      </NativeSelect>
+    <br/>
+    
+      <CardActions>
+      {/* Acciones: */}
+        {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.telefono && inscrip.como_se_entero && inscrip.asignado_ant ? 
+
+        <>  {inscrip.como_se_entero === "Amigo" ? <>  
+        
+        {inscrip.nombre_referido && inscrip.nombre_referido ? <> {/*Obligacion nobre ref */}<Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> </>:<><Button variant='contained' disabled>Enviar Inscripcion</Button></> }
+         </>:<> {/*Se entero por otro medio */}<Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> </>} 
+        
+        </>:<><Button variant='contained' disabled>Enviar Inscripcion</Button></>}
+      
       </CardActions>
     </Paper>
   );
