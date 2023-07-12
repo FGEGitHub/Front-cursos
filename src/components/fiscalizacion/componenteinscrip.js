@@ -101,7 +101,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
       </Box> */}
 
       <TextField
-        autoFocus
+        
         margin="dense"
         id="name"
         label="Nombre"
@@ -147,7 +147,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
       />
 
       <TextField
-        autoFocus
+        
         margin="dense"
         id="name"
         label="Telefono alternativo"
@@ -195,7 +195,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
             ¿Cómo se llama ese amigo?
           </InputLabel>
           <TextField
-            autoFocus
+            
             margin="dense"
             id="name"
             label="Apellido amigo"
