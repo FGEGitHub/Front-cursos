@@ -52,7 +52,7 @@ const Estracto = () => {
   };
 
   return (
-   
+
     <Paper
       sx={{
         cursor: 'pointer',

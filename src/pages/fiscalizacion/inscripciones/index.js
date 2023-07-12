@@ -21,9 +21,11 @@ export default function Paginas() {
 
     return (
         <>
-   
-        <br/>          <br/>      <br/>      <br/>  
+      <div className="background-container">
+<br/>
         <Formulario/>
+        
+        </div>
         </>
    
     );

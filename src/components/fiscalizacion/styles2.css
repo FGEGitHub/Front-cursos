@@ -1,4 +1,6 @@
-body {
+.background-container {
+
+
     background-image: linear-gradient(
       to right,
       yellow,
@@ -18,8 +20,8 @@ body {
     );
     background-repeat: repeat-x;
     background-size: 8% 100%;
-  }
   
+}
   .paper {
     cursor: pointer;
     background: transparent;
@@ -76,4 +78,3 @@ body {
     justify-content: center;
     margin-top: 10px;
   }
-  
