@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import * as React from 'react';
-import logo from "../../Assets/boletah.jpeg";
+import logo from "../../Assets/boletah2.jpeg";
 import folleto from "../../Assets/folleto.jpg.jpeg";
 import MuiAlert from '@mui/material/Alert';
 import './styles.css';
