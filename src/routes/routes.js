@@ -160,7 +160,7 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/inscripciones', element: <Fiscainscripc /> },
 		{ path: '/fiscalizacion/administracion/mesas', element: <Mesasfisc /> },
 		{ path: '/fiscalizacion/administracion/subirescuelas', element: <Subiresc /> },
-		{ path: '/fiscalizacion/inscripcion', element: <InscripcionFisca /> },
+		{ path: '/fiscalizacion/inscripcionprueba', element: <InscripcionFisca /> },
 		{ path: '/fiscalizacion/usuarios', element: <Usersfisca /> },
 		{ path: '/fiscalizacion/alia', element: <Aliadoscarga /> },
 		{ path: '/fiscalizacion/administracion/escuelas', element: <EscuelasAdmin /> },
