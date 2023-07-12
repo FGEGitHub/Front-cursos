@@ -22,6 +22,11 @@
     background-size: 8% 100%;
   
 }
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
   .paper {
     cursor: pointer;
     background: transparent;
