@@ -124,10 +124,10 @@ export default function Ingresos() {
 
 
     const columns = [
-     /*    {
-            name: "fecha_carga",
-            label: "fecha inscrip",
-        }, */
+        {
+            name: "fiscalizo",
+            label: "Fiscalizo el 11/06",
+        }, 
         {
             name: "dni",
             label: "dni",
@@ -195,7 +195,9 @@ export default function Ingresos() {
 
     ];
 
-
+    const options = {
+        selectableRows: false, // Deshabilita los checkboxes
+      };
     return (
         <div>
             <Paper
@@ -214,6 +216,7 @@ export default function Ingresos() {
                     title={"Lista de Incripciones"}
                     data={inscrip}
                     columns={columns}
+                    options={options}
                     actions={[
                         {
                             icon: 'save',

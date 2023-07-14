@@ -34,12 +34,14 @@ export default function SelectTextFields(props) {
   const [activo, setActivo] = useState(false)
   const [dato, setDato] = useState({})
   const [rechazo, setRechazo] = useState(false)
-
+  const [observaciones, setObservaciones] = useState()
 
   const traer = async () => {
     setUsuarioo()
     const turnos = await servicioFide.traerescuelas()
     const falt = await servicioFide.traerescuelasfalt()
+    const ob = await servicioFide.traerobservaciones(props.dni)
+    setObservaciones(ob)
     setTurnos2(turnos)
     setTurnos(falt)
     setActivo(true)
@@ -229,7 +231,12 @@ export default function SelectTextFields(props) {
         {props.estado=== "No contestado" ? <> <Button variant="contained" color="success" onClick={handlenocontestado} >Volver al estado pendiente</Button></>:<>
         <Button variant="outlined" color="warning" onClick={handlenocontestado} >Marcar como no contestado </Button></>}
           {activo ? <>
-            {props.observaciones ? <><h4 style={{ color: 'crimson' }} >Observaciones: {props.observaciones}</h4></>:<>Sin observaciones</>} 
+            {observaciones ? <><h4 style={{ color: 'crimson' }} >Observaciones: <br/>
+            {observaciones.map((ob)=>
+              ob.detalle
+            )}
+            
+            </h4></>:<>Sin observaciones</>} 
             <DialogContent>
 
 
@@ -359,7 +366,7 @@ export default function SelectTextFields(props) {
               <h3> MODIFICAR DATOS PERSONALES <ContactEmergencyIcon /></h3>
 
               <TextField
-                autoFocus
+                
                 margin="dense"
                 id="name"
                 label="Nombre "
@@ -371,7 +378,7 @@ export default function SelectTextFields(props) {
               />
 
               <TextField
-                autoFocus
+                
                 margin="dense"
                 id="name"
                 label="Apellido"
@@ -382,7 +389,7 @@ export default function SelectTextFields(props) {
                 defaultValue={props.apellido}
               />
               <TextField
-                autoFocus
+                
                 margin="dense"
                 id="name"
                 label="DNI"
@@ -395,7 +402,7 @@ export default function SelectTextFields(props) {
               />
 
               <TextField
-                autoFocus
+                
                 margin="dense"
                 id="name"
                 label="Domicilio"
@@ -472,7 +479,7 @@ export default function SelectTextFields(props) {
               </NativeSelect>
               <br/>
               <TextField
-                autoFocus
+                
                 margin="dense"
                 id="name"
                 label="Observaciones "
@@ -489,7 +496,7 @@ export default function SelectTextFields(props) {
 </>: <>
 
 <TextField
-                autoFocus
+                
                 margin="dense"
                 id="name"
                 label="Observaciones "
