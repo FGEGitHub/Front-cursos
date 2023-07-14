@@ -1,69 +1,201 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid, Container } from '@mui/material';
 import MUIDataTable from 'mui-datatables';
+import servicioFisca from '../../../services/fiscalizacion'
+import { Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
 
 const SimplePage = () => {
-  const [searchText1, setSearchText1] = useState('');
-  const [searchText2, setSearchText2] = useState('');
+  const [form, setForm] = useState({edicion:"junio"});
+  const [resultados, setResultados] = useState('');
 
-  const handleSearch1 = () => {
-    // Lógica para buscar utilizando searchText1
-    console.log('Buscar 1:', searchText1);
+  const handleChange = (e) =>
+  setForm({ ...form, [e.target.name]: e.target.value });
+
+
+  const columns = [
+
+    {
+        name: "dni",
+        label: "dni",
+    },
+
+    {
+        name: "nombre",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                CutomButtonsRenderercargado(
+                    dataIndex,
+                    rowIndex,
+                    // overbookingData,
+                    // handleEditOpen
+                )
+        }
+
+    },
+    {
+        name: "Asignado a escuela",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                fiscalizofuncion(
+                    dataIndex,
+                    rowIndex,
+                    // overbookingData,
+                    // handleEditOpen
+                )
+        }
+
+    },
+    {
+        name: "Id de mesa",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                mesafuncion(
+                    dataIndex,
+                    rowIndex,
+                    // overbookingData,
+                    // handleEditOpen
+                )
+        }
+
+    },
+
+
+
+
+    
+  
+
+
+];
+function CutomButtonsRenderercargado(dataIndex, rowIndex, data, onClick) {
+    return (
+        <>
+            {resultados[dataIndex].apellido +' '+ resultados[dataIndex].nombre  }
+
+
+        </>
+
+    );
+}
+
+
+
+
+
+function fiscalizofuncion(dataIndex, rowIndex, data, onClick) {
+    return (
+        <>
+            {resultados[dataIndex].dniasig  !=null ?  <>Si</>: <>No</> }
+
+
+        </>
+
+    );
+}
+
+
+
+function mesafuncion(dataIndex, rowIndex, data, onClick) {
+    return (
+        <>
+            {resultados[dataIndex].mesa !=null ?  <>{resultados[dataIndex].mesa}</>: <>Sin definir</> }
+
+
+        </>
+
+    );
+}
+
+  const handleDeterminarpordni = async (event) => {
+    event.preventDefault();
+    try {
+
+     const rta = await servicioFisca.buscarestadopordni(form)
+     console.log(rta)
+     setResultados(rta)
+     
+     } catch (error) {
+       console.error(error);
+       console.log('Error algo sucedio')
+   
+     
+     }
+
   };
+  
+  const handleDeterminarpornombre = async (event) => {
+    event.preventDefault();
+    try {
 
-  const handleSearch2 = () => {
-    // Lógica para buscar utilizando searchText2
-    console.log('Buscar 2:', searchText2);
+      await servicioFisca.crearmesa(form)
+ 
+     
+     } catch (error) {
+       console.error(error);
+       console.log('Error algo sucedio')
+   
+     
+     }
+
   };
-
-  const columns = ['Columna 1', 'Columna 2', 'Columna 3'];
-  const data = [
-    ['Dato 1', 'Dato 2', 'Dato 3'],
-    ['Dato 4', 'Dato 5', 'Dato 6'],
-    ['Dato 7', 'Dato 8', 'Dato 9'],
-  ];
-
+  
   return (
     <Container maxWidth="sm">
+              <FormControl component="fieldset">
+        <FormLabel component="legend">Edición</FormLabel>
+        <RadioGroup name="edicion" value={form.edicion} onChange={handleChange}>
+          <FormControlLabel value="junio" control={<Radio />} label="junio" />
+          <FormControlLabel value="agosto" control={<Radio />} label="agosto" />
+ 
+        </RadioGroup>
+      </FormControl>
       <Grid container spacing={2} alignItems="center" justifyContent="center" marginTop={2}>
         <Grid item xs={12}>
           <TextField
-            label="Buscar 1"
+            label="Buscar por dni"
             variant="outlined"
             fullWidth
-            value={searchText1}
-            onChange={(e) => setSearchText1(e.target.value)}
+            name="dni"
+         
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" fullWidth onClick={handleSearch1}>
-            Buscar 1
+          <Button variant="contained" color="primary" fullWidth onClick={handleDeterminarpordni}>
+            Buscar por DNI
           </Button>
         </Grid>
         <Grid item xs={12}>
           <TextField
-            label="Buscar 2"
+            label="Buscar por Nombre o Apellido"
             variant="outlined"
             fullWidth
-            value={searchText2}
-            onChange={(e) => setSearchText2(e.target.value)}
+         
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" fullWidth onClick={handleSearch2}>
-            Buscar 2
+          <Button variant="contained" color="primary" fullWidth onClick={handleDeterminarpornombre}>
+            Buscar por nombre o apellido
           </Button>
         </Grid>
       </Grid>
-
+{resultados &&
       <MUIDataTable
-        title="Datos"
-        data={data}
+        title="Resultados"
+        data={resultados}
         columns={columns}
         options={{
-          responsive: 'vertical',
+          responsive: 'simple',
+          selectableRows: 'none',
+          search: false,
+          print: false,
+          download: false,
+          filter: false,
+          viewColumns: false,
+          pagination: false,
         }}
-      />
+      />}
     </Container>
   );
 };
