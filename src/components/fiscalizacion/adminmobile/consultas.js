@@ -186,6 +186,7 @@ function mesafuncion(dataIndex, rowIndex, data, onClick) {
         </Grid>
       </Grid>
 {resultados &&
+<div className="mobile-table-container">
       <MUIDataTable
         title="Resultados"
         data={resultados}
@@ -200,7 +201,9 @@ function mesafuncion(dataIndex, rowIndex, data, onClick) {
           viewColumns: false,
           pagination: false,
         }}
-      />}
+      />
+      </div>
+      }
     </Container>
   );
 };
