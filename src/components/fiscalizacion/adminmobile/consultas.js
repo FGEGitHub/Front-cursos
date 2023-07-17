@@ -127,8 +127,8 @@ function mesafuncion(dataIndex, rowIndex, data, onClick) {
     event.preventDefault();
     try {
 
-      await servicioFisca.crearmesa(form)
- 
+      const rta = await servicioFisca.buscarestadopornombre(form)
+      setResultados(rta)
      
      } catch (error) {
        console.error(error);
@@ -161,23 +161,28 @@ function mesafuncion(dataIndex, rowIndex, data, onClick) {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" fullWidth onClick={handleDeterminarpordni}>
+        {form.dni ? <> <Button variant="contained" color="primary" fullWidth onClick={handleDeterminarpordni}>
             Buscar por DNI
-          </Button>
+          </Button></> : <><Button variant="contained" color="primary" fullWidth disabled>
+            Buscar porDNI
+          </Button></> }
         </Grid>
         <Grid item xs={12}>
           <TextField
             label="Buscar por Nombre o Apellido"
             variant="outlined"
             fullWidth
-         
+            name="nombre"
             onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" fullWidth onClick={handleDeterminarpornombre}>
+          {form.nombre ? <> <Button variant="contained" color="primary" fullWidth onClick={handleDeterminarpornombre}>
             Buscar por nombre o apellido
-          </Button>
+          </Button></> : <><Button variant="contained" color="primary" fullWidth disabled>
+            Buscar por nombre o apellido
+          </Button></> }
+        
         </Grid>
       </Grid>
 {resultados &&
