@@ -58,6 +58,10 @@ const SimplePage = () => {
         }
 
     },
+    {
+      name: "presente",
+      label: "presente",
+  },
 
 
 
