@@ -46,7 +46,7 @@ const SimplePage = () => {
 
     },
     {
-        name: "Id de mesa",
+        name: "mesa",
         options: {
             customBodyRenderLite: (dataIndex, rowIndex) =>
                 mesafuncion(
@@ -89,7 +89,7 @@ function CutomButtonsRenderercargado(dataIndex, rowIndex, data, onClick) {
 function fiscalizofuncion(dataIndex, rowIndex, data, onClick) {
     return (
         <>
-            {resultados[dataIndex].dniasig  !=null ?  <>Si</>: <>No</> }
+            {resultados[dataIndex].nombreesc  !=null ?  <>{resultados[dataIndex].nombreesc} </>: <>No</> }
 
 
         </>
@@ -102,7 +102,7 @@ function fiscalizofuncion(dataIndex, rowIndex, data, onClick) {
 function mesafuncion(dataIndex, rowIndex, data, onClick) {
     return (
         <>
-            {resultados[dataIndex].mesa !=null ?  <>{resultados[dataIndex].mesa}</>: <>Sin definir</> }
+            {resultados[dataIndex].numero !=null ?  <>{resultados[dataIndex].numero}</>: <>Sin definir</> }
 
 
         </>

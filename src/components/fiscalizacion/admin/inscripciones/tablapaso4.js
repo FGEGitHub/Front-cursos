@@ -28,7 +28,7 @@ export default function Ingresos() {
     }, [])
     const traer = async () => {
 
-        const ins = await servicioFidei.todaslasasignaciones()
+        const ins = await servicioFidei.todaspaso4()
         setInscrip(ins[0])
         // 
 
@@ -47,7 +47,7 @@ export default function Ingresos() {
       }
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
-          const ins = await servicioFidei.todaslasasignaciones();
+          const ins = await servicioFidei.todaspaso4();
           setInscrip(ins[0]);
         };
       

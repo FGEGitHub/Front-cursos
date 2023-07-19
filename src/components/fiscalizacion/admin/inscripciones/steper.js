@@ -10,6 +10,7 @@ import Veramigo from './veramigo'
 import Estadisticas3 from './verfaltantesuplentes'
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
+import Tablapaso4 from './tablapaso4'
 import { Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -53,6 +54,8 @@ const SubirLegajo = () => {
             { label: 'PAso 1: Lista Inscriptos', completed: false },
             { label: 'Paso 2: Contactados', completed: false },
             { label: 'Paso 3: Asignados', completed:false },
+            { label: 'Paso 4: ', completed:false },
+            { label: 'Paso 3: ', completed:false },
             
 
         ])
@@ -158,8 +161,8 @@ const SubirLegajo = () => {
                     1: <Tablapaso2/>,
                         2:  <Tablaasig/>,
 
-                  
-
+                        3:  <Tablapaso4/>,
+                        
 
 
 
