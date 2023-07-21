@@ -119,16 +119,7 @@ export default function Ingresos() {
 
         },
         
-        {
-            name: "numero",
-            label: "numero mesa",
-
-        },
-        {
-            name: "dato1",
-            label: "Presente",
-
-        },
+    
         {
             name: "telefono",
             label: "telefono",
@@ -162,20 +153,12 @@ export default function Ingresos() {
             }
         
         },   
-
         {
-            name: "Acciones/llamado",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    CutomButtonsRenderer(
-                        dataIndex,
-                        rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
-                    )
-            }
-        
-        },   
+            name: "detalle",
+            label: "detalle",
+
+        },
+  
 
     ];
     const options = {
