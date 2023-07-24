@@ -114,8 +114,8 @@ export default function Ingresos() {
 
         },
         {
-            name: "nombredondevota",
-            label: "Vota",
+            name: "dondevoto",
+            label: "donde fiscalizo",
 
         },
         

@@ -10,7 +10,7 @@ import MUIDataTable from "mui-datatables";
 import ConfirmarCapa from "./confirmarcapacitacion";
 import RechazarCapa from "./sacarcapacitacion";
 import Volver from "./volverpaso3";
-
+import Checkbox from '@mui/material/Checkbox';
 
 
 export default function Ingresos() {
@@ -18,9 +18,7 @@ export default function Ingresos() {
     const navigate = useNavigate();
 
     const [inscrip, setInscrip] = useState([]);
-    const [turnos, setTurnos] = useState([]);
-    const [personas, setpersonas] = useState([]);
-    const [cursos, setCursos] = useState([]);
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
     useEffect(() => {
@@ -175,13 +173,40 @@ export default function Ingresos() {
                     )
             }
         
-        },   
+        }, 
+        {
+            name: "Presente",
+            options: {
+              customBodyRenderLite: (dataIndex, rowIndex) =>
+              CutomButtonsRenderer2contactado(
+                  dataIndex,
+                  rowIndex,
+                  // overbookingData,
+                  // handleEditOpen
+                )
+            }
+      
+          }, 
 
     ];
     const options = {
         selectableRows: false, // Desactivar la selección de filas
     };
-
+    function CutomButtonsRenderer2contactado(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+    
+    {inscrip[dataIndex].dato1 == null  || inscrip[dataIndex].dato1 == 'No'? <>  Ausente <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
+    
+          </>
+    
+        );
+      }
+      const checkede = async (id) => {
+        console.log(id)
+         await servicioFidei.contactada(id)
+        traer()
+      };
     return (
         <div >
          
