@@ -10,7 +10,7 @@ import MUIDataTable from "mui-datatables";
 import ConfirmarCapa from "./confirmarcapacitacion";
 import RechazarCapa from "./sacarcapacitacion";
 import Volver from "./volverpaso3";
-
+import Vernscripto from "./modalpaso2";
 
 
 export default function Ingresos() {
@@ -70,12 +70,42 @@ export default function Ingresos() {
       
       
 
-      function CutomButtonombre(dataIndex, rowIndex, data, onClick) {
+      function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
       
-     <p> {inscrip[dataIndex].apellido}  {inscrip[dataIndex].nombre}</p>
+          <Vernscripto
+          dni= {inscrip[dataIndex].dni}
+          nombre= {inscrip[dataIndex].nombre}
+          apellido= {inscrip[dataIndex].apellido}
+          telefono={inscrip[dataIndex].telefono}
+          escuela1={inscrip[dataIndex].nombreescuela}
+          escuela2={inscrip[dataIndex].nombreescuela2}
+          id_inscripcion={inscrip[dataIndex].id}
+          id_escuela={inscrip[dataIndex].id_escuela}
+          id_escuela2={inscrip[dataIndex].id_escuela2}
+          donde_vota={inscrip[dataIndex].donde_vota}
+          observaciones={inscrip[dataIndex].observaciones}
+          traer = { async () => {
 
+            const ins = await servicioFidei.todaspaso4()
+            setInscrip(ins[0])
+            // 
+    
+        
+        }}/>
+
+<Volver
+ dni= {inscrip[dataIndex].dni}
+ id_inscripcion={inscrip[dataIndex].id}
+ traer = { async () => {
+
+  const ins = await servicioFidei.todaspaso4()
+  setInscrip(ins[0])
+  // 
+
+}}
+/>
           </>
 
         );
@@ -158,6 +188,19 @@ export default function Ingresos() {
             label: "detalle",
 
         },
+        {
+          name: "Acciones/llamado",
+          options: {
+              customBodyRenderLite: (dataIndex, rowIndex) =>
+                  CutomButtonsRenderer(
+                      dataIndex,
+                      rowIndex,
+                     // overbookingData,
+                     // handleEditOpen
+                  )
+          }
+      
+      },   
   
 
     ];

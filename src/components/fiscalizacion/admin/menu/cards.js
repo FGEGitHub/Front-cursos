@@ -12,6 +12,7 @@ import CardSeis from './cards/CardSiete';
 import CardOcho from './cards/CardOcho';
 import CardNueve from './cards/CardNueve';
 import CardSiete from './cards/cardSeis';
+import CardDiez from './cards/CardDiez';
 import { useState, useEffect } from "react";
 import servicioInscripciones from '../../../../services/fiscalizacion'
 const Item = styled(Paper)(({ theme }) => ({
@@ -81,6 +82,11 @@ useEffect(() => {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <Item>
             <CardNueve />
+          </Item>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <Item>
+            <CardDiez />
           </Item>
         </Grid>
         

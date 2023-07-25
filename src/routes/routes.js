@@ -87,7 +87,7 @@ import SuplentesPAgona from '../pages/fiscalizacion/suplentes/asignados'
 import Movilidad from '../pages/fiscalizacion/usuariomovilidad/escuelas'
 import Escru from '../pages/fiscalizacion/escrutinio/index'
 import Consultas from '../pages/fiscalizacion/Adminmobile/menu'
-
+import Circuitos from '../pages/fiscalizacion/Admin/circuitos'
 const Rutas = [
 	 <Navbar/> ,
 
@@ -180,6 +180,8 @@ const Rutas = [
 		{ path: '/fiscalizacion/consultas', element: <Consultas/> },
 		{ path: '/fiscalizacion/movilidad/escuelas', element: <Movilidad/> },
 		{ path: '/fiscalizacion/escrutinio', element: <Escru/> },
+		{ path: '/fiscalizacion/administracion/circuitos', element: <Circuitos/> },
+
 		
 
 ];
