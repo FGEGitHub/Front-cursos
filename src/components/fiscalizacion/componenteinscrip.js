@@ -229,7 +229,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
       )}
 
       <br /> 
-      <img style={{ width: '100%', maxWidth: '500px' }} src={folleto} alt="logo" />
+     
       <InputLabel variant="standard" htmlFor="uncontrolled-native">
         <Typography variant="p" component="div" color="black">
           <StyledParagraph>

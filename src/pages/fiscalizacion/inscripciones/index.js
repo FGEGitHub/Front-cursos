@@ -21,7 +21,7 @@ export default function Paginas() {
 
     return (
         <>
-      <div className="background-container">
+      <div >
 <br/>
         <Formulario/>
         

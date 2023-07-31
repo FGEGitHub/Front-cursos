@@ -95,7 +95,7 @@ export default function Ingresos() {
         
         }}/>
 
-<Volver
+{/* <Volver
  dni= {inscrip[dataIndex].dni}
  id_inscripcion={inscrip[dataIndex].id}
  traer = { async () => {
@@ -105,7 +105,7 @@ export default function Ingresos() {
   // 
 
 }}
-/>
+/> */}
           </>
 
         );
