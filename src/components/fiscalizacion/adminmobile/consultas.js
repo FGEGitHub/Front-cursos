@@ -13,7 +13,19 @@ const SimplePage = () => {
 
 
   const columns = [
-
+    {
+      name: "Inscripto",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+              inscripto(
+                  dataIndex,
+                  rowIndex,
+                  // overbookingData,
+                  // handleEditOpen
+              )
+      }
+  
+  },
     {
         name: "dni",
         label: "dni",
@@ -66,6 +78,7 @@ const SimplePage = () => {
 
 
 
+
     
   
 
@@ -109,7 +122,16 @@ function mesafuncion(dataIndex, rowIndex, data, onClick) {
 
     );
 }
+function inscripto(dataIndex, rowIndex, data, onClick) {
+  return (
+      <>
+          <>Si</>
 
+
+      </>
+
+  );
+}
   const handleDeterminarpordni = async (event) => {
     event.preventDefault();
     try {
