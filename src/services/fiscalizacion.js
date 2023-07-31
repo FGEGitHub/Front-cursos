@@ -372,6 +372,17 @@ const crearescuela = async (datos) => {
 }
 
 
+const asignarcircuitos = async (datos) => {
+  console.log(datos)
+
+
+  const { data } = await axios.post(baseUrl + 'asignarcircuitos', datos, config)
+
+  return data
+
+
+
+}
 const asignarinscripciones = async (datos) => {
   console.log(datos)
 
@@ -837,4 +848,19 @@ const listademesassuplentes = async  () => {
   return data
  }
  
-export default {marcarnocontestado,listadecircuitos,todaspaso4,buscarestadopornombre,buscarestadopordni,traerobservaciones,veramigos,cargarpresentes,traerasistenciasporescuela,verfaltantesescuelassuplentes,todoslossuplentes,verlogueo,modificarescuelaubicacion,rechazarcapacitacionmesa,Confirmarcapasupl,traerdetallesdeunaescuelatraslado,checksuplente,traerescuelasfalt,rechazarcapacitacion,verfaltantesescuelas,modificarestadodeinscrip,modificarobservaciones,Confirmarcapa,listademesassuplentes,contactada,estadisticasescuelas,rechazarincrip,todaslasasignacionesdeunaescuela,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+ 
+
+ const traercircuitos = async  () => {
+  const {data } = await axios.get(baseUrl+'traercircuitos',config)
+    console.log(data)
+  return data
+ }
+ 
+ const traerescuelas2 = async  () => {
+  const {data } = await axios.get(baseUrl+'traerescuelas2',config)
+    console.log(data)
+  return data
+ }
+ 
+
+export default {traercircuitos,traerescuelas2,asignarcircuitos,marcarnocontestado,listadecircuitos,todaspaso4,buscarestadopornombre,buscarestadopordni,traerobservaciones,veramigos,cargarpresentes,traerasistenciasporescuela,verfaltantesescuelassuplentes,todoslossuplentes,verlogueo,modificarescuelaubicacion,rechazarcapacitacionmesa,Confirmarcapasupl,traerdetallesdeunaescuelatraslado,checksuplente,traerescuelasfalt,rechazarcapacitacion,verfaltantesescuelas,modificarestadodeinscrip,modificarobservaciones,Confirmarcapa,listademesassuplentes,contactada,estadisticasescuelas,rechazarincrip,todaslasasignacionesdeunaescuela,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

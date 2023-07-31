@@ -40,6 +40,7 @@ export default function SelectTextFields(props) {
   const [usuarioo, setUsuarioo] = useState()
   const [cargandomesas, setCargandomesas] = useState(false)
   const [turnos, setTurnos] = useState()
+  const [escuelaporcubrir, setEscuelaporcubrir] = useState()
 const [disponibilidad, setDisponibilidad] = useState('libre')
   const [mesas, setMesas] = useState()
   const [datos, setDatos] = useState()
@@ -53,8 +54,9 @@ const [disponibilidad, setDisponibilidad] = useState('libre')
     setUsuarioo()
   
    
-   const turnos = await servicioFide.traerescuelas()
-   setTurnos(turnos)
+   const turnos = await servicioFide.traerescuelas2()
+   setTurnos(turnos[0])
+   setEscuelaporcubrir(turnos[1])
 setActivo(true)
   
 
@@ -97,7 +99,7 @@ setActivo(true)
       id_inscripcion:props.id_inscripcion,
   
     }))
-     traerestadistica()
+    // traerestadistica()
   }
 
   const handleClose = () => {
@@ -133,7 +135,15 @@ const handleChangeid_escuela = (e, option) => {
 
 
 }
+const handleChangedondevota = (e, option) => {
+  
 
+ 
+  setInscripcion({ ...inscripcion, 'id_donde_vota': option.id  })
+
+
+
+}
 
   ////
   const handleDeterminar = async (event) => {
@@ -207,14 +217,7 @@ const handleChangeid_escuela = (e, option) => {
           DNI:  { props.dni}<br/>
    
            <br/>
-          
-         <b> 
-           <LooksOneIcon/> Prioridad 1:  { props.escuela1}<br/>
-           <LooksTwoIcon/>  Prioridad 2:  { props.escuela2}</b> 
-            <br/>
-
-                 <br />
-                 <label>Elegir escuela</label>
+           <label>Elegir Donde vota</label>
                  <Autocomplete
                 options={turnos}
                 getOptionLabel={(option1) => option1.nombre}
@@ -222,6 +225,33 @@ const handleChangeid_escuela = (e, option) => {
                   <TextField
                     {...params}
                     label="Elegir en que escuela vota"
+                   name="id_donde_vota"
+                    variant="outlined"
+                   
+                  />
+                )}
+                autoHighlight
+                autoSelect
+            
+
+                onChange ={handleChangedondevota}
+              
+                native // Habilita la selección nativa
+              />
+              
+     
+
+            <br/>
+
+                 <br />
+                 <label>Elegir escuela</label>
+                 <Autocomplete
+                options={escuelaporcubrir}
+                getOptionLabel={(option1) => option1.nombre}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Elegir en que escuela fiscaliza"
                    name="id_donde_vota"
                     variant="outlined"
                    

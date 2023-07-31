@@ -81,8 +81,8 @@ const Estracto = () => {
         <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h5" component="div" color="black">
           <StyledParagraph>
-          ¡Súmate como fiscal de mesa el 13 de agosto y hagamos el cambio de nuestras vidas! Tu compromiso es esencial para garantizar un proceso electoral transparente y justo. <br/>
- ¡Inscribite acá!
+          Vos también podes ser protagonista de la transformacion que se viene en Argentina, este 13 de agosto sumate como fiscal y juntos hagamos el cambio de nuestras vidas! <br/>
+
 
             </StyledParagraph>
         </Typography>
