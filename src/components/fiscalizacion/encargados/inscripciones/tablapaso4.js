@@ -148,7 +148,7 @@ export default function Ingresos() {
         },  
         {
             name: "donde_vota",
-            label: "Donde vota segun padron anterior",
+            label: "Donde vota padron anterior",
 
         },
         {
@@ -156,7 +156,11 @@ export default function Ingresos() {
             label: "donde fiscalizo",
 
         },
-        
+        {
+          name: "estado",
+          label: "estado",
+      
+      },  
     
         {
             name: "telefono",

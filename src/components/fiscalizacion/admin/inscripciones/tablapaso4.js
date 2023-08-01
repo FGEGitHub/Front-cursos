@@ -139,6 +139,11 @@ export default function Ingresos() {
         
         },  
         {
+          name: "estado",
+          label: "estado",
+      
+      },  
+        {
           name: "donde_vota",
           label: "Donde vota segun padron anterior",
 
