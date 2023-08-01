@@ -5,9 +5,13 @@ import { useState, useEffect } from "react";
 import VerEstadisticas from './estadisticas1'
 import Ayuda from './ayuda'
 import Tablaincrip from './Tablainscrip'
+
+
+
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
-import Faltan from '../../admin/inscripciones/verfaltante'
+import Tablapaso4 from './tablapaso4'
+import Tablapaso5 from './tablapaso5'
 import { Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -29,7 +33,6 @@ const SubirLegajo = () => {
 
     const [datos, setDatos] = useState()
    
-    const [completo, setCompleto] = useState()
     const [listo, setListo] = useState(false)
 
     useEffect(() => {
@@ -49,9 +52,11 @@ const SubirLegajo = () => {
         const dat = await servicioFisca.datosdemesas()
         setDatos(dat)
         setSteps([
-            { label: 'PAso 1: Lista Inscriptos', completed: false },
+            { label: 'Paso 1: Lista Inscriptos', completed: false },
             { label: 'Paso 2: Contactados', completed: false },
             { label: 'Paso 3: Asignados', completed:false },
+            { label: 'Paso 4: Inscripciones agosto', completed:false },
+            { label: 'Paso 5: Asignaciones agosto', completed:false },
             
 
         ])
@@ -78,7 +83,7 @@ const SubirLegajo = () => {
 <Button variant="contained" color="success" onClick={volver}>Volver<KeyboardReturnIcon/></Button>
       <VerEstadisticas/>
       <Ayuda/>
-      <Faltan/>
+    
     </ButtonGroup>
       <br/>
         {datos ? <>
@@ -92,25 +97,16 @@ const SubirLegajo = () => {
                      <Widget type="Mesas asignadas"
                       cantidad={datos[1]}
                     />
-                   <Widget type="Capacitados"
+                        <Widget type="Capacitados"
                       cantidad={datos[4]}
                     />
-                     <Widget type="Cantidad mesas sin asignar"
+                     <Widget type="Cantidad faltante"
                       cantidad={datos[2]}
                     />
 
                     </div>
                     </>:<></>}
-        <Paper
-        sx={{
-          cursor: 'pointer',
-          background: '#fafafa',
-          color: '#bdbdbd',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
-        }}
-      >
-          
+ 
         <Container sx={{ my: 4 }}>
 
           {listo ?  <div>
@@ -164,9 +160,9 @@ const SubirLegajo = () => {
                     1: <Tablapaso2/>,
                         2:  <Tablaasig/>,
 
-                  
-
-
+                        3:  <Tablapaso4/>,
+                        
+                       4:  <Tablapaso5/>,
 
 
                 }[activeStep]}
@@ -193,7 +189,7 @@ const SubirLegajo = () => {
 
             </Stack>
         </Container>
-        </Paper>
+      
         </>
     );
 };

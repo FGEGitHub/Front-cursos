@@ -79,7 +79,7 @@ const Login = () => {
           case 8:alert('Error, solo acceso administradores')
         
           break;
-          case 9:alert('Error, solo acceso administradores')
+          case 9:navigate('/fiscalizacion/encargados/carga')
         
           break;
           case 10:alert('Error, solo acceso administradores')

@@ -40,6 +40,7 @@ export default function SelectTextFields(props) {
   const [usuarioo, setUsuarioo] = useState()
   const [cargandomesas, setCargandomesas] = useState(false)
   const [turnos, setTurnos] = useState()
+  const [escuelaporcubrir, setEscuelaporcubrir] = useState()
 const [disponibilidad, setDisponibilidad] = useState('libre')
   const [mesas, setMesas] = useState()
   const [datos, setDatos] = useState()
@@ -53,8 +54,9 @@ const [disponibilidad, setDisponibilidad] = useState('libre')
     setUsuarioo()
   
    
-   const turnos = await servicioFide.traerescuelas()
-   setTurnos(turnos)
+   const turnos = await servicioFide.traerescuelas2()
+   setTurnos(turnos[0])
+   setEscuelaporcubrir(turnos[1])
 setActivo(true)
   
 
@@ -69,7 +71,7 @@ setActivo(true)
     setCargandomesas(false)
    
    const mes = await servicioFide.traermesas(e)
-   
+   console.log(mes)
    setMesas(mes)
 
    setCargandomesas(true)
@@ -97,7 +99,7 @@ setActivo(true)
       id_inscripcion:props.id_inscripcion,
   
     }))
-     traerestadistica()
+    // traerestadistica()
   }
 
   const handleClose = () => {
@@ -109,7 +111,7 @@ setActivo(true)
   const handleChange = (e) => {
     console.log('handleChange')
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
-console.log( e.target.value)
+
 if (e.target.name =="mesa"){
   for (let i = 0; i < mesas.length; i++) {
    
@@ -121,7 +123,7 @@ if (e.target.name =="mesa"){
   }
 }
 
-   console.log(disponibilidad) 
+   console.log(inscripcion) 
 }
 
 const handleChangeid_escuela = (e, option) => {
@@ -133,7 +135,15 @@ const handleChangeid_escuela = (e, option) => {
 
 
 }
+const handleChangedondevota = (e, option) => {
+  
 
+ 
+  setInscripcion({ ...inscripcion, 'id_donde_vota': option.id  })
+
+
+
+}
 
   ////
   const handleDeterminar = async (event) => {
@@ -207,14 +217,7 @@ const handleChangeid_escuela = (e, option) => {
           DNI:  { props.dni}<br/>
    
            <br/>
-          
-         <b> 
-           <LooksOneIcon/> Prioridad 1:  { props.escuela1}<br/>
-           <LooksTwoIcon/>  Prioridad 2:  { props.escuela2}</b> 
-            <br/>
-
-                 <br />
-                 <label>Elegir escuela</label>
+           <label>Elegir Donde vota</label>
                  <Autocomplete
                 options={turnos}
                 getOptionLabel={(option1) => option1.nombre}
@@ -222,6 +225,33 @@ const handleChangeid_escuela = (e, option) => {
                   <TextField
                     {...params}
                     label="Elegir en que escuela vota"
+                   name="id_donde_vota"
+                    variant="outlined"
+                   
+                  />
+                )}
+                autoHighlight
+                autoSelect
+            
+
+                onChange ={handleChangedondevota}
+              
+                native // Habilita la selección nativa
+              />
+              
+     
+
+            <br/>
+
+                 <br />
+                 <label>Elegir escuela</label>
+                 <Autocomplete
+                options={escuelaporcubrir}
+                getOptionLabel={(option1) => option1.nombre}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Elegir en que escuela fiscaliza"
                    name="id_donde_vota"
                     variant="outlined"
                    
@@ -268,7 +298,94 @@ const handleChangeid_escuela = (e, option) => {
          
                             <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> 
             <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
-               
+            <TextField
+                
+                margin="dense"
+                id="name"
+                label="Domicilio"
+                name="domicilio"
+                onChange={handleChange}
+                fullWidth
+                variant="standard"
+              />
+              <br />
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                ¿ Fuiste fiscal antes?
+              </InputLabel>
+              <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                  name: 'fiscal_antes',
+                  id: 'uncontrolled-native',
+
+                }}
+              >   <option value={'Sin determinar'}>Sin determinar</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
+
+              </NativeSelect>
+
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                ¿ Dispones de movilidad ?
+              </InputLabel>
+              <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                  name: 'movilidad',
+                  id: 'uncontrolled-native',
+
+                }}
+              >   <option value={'Sin determinar'}>Sin determinar</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
+
+              </NativeSelect>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                ¿ Sos celiaco ?
+              </InputLabel>
+              <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                  name: 'celiaco',
+                  id: 'uncontrolled-native',
+
+                }}
+              >   <option value={'Sin determinar'}>Sin determinar</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
+
+              </NativeSelect>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                ¿ Sos Vegetariano?
+              </InputLabel>
+              <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                  name: 'vegano',
+                  id: 'uncontrolled-native',
+
+                }}
+              >   <option value={'Sin determinar'}>Sin determinar</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
+
+              </NativeSelect>
+              <br/>
+              <TextField
+                
+                margin="dense"
+                id="name"
+                label="Observaciones "
+                name="observaciones"
+                onChange={handleChange}
+                fullWidth
+                variant="standard"
+
+              />
 
                  <DialogActions>
                  {inscripcion.id_escuela && inscripcion.mesa  ? <>     {disponibilidad =="Libre" ? <><Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></> : <><p style={{ color: 'crimson' }} >Mesa no disponible</p></>}    </>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS(Momentaneamente desactivado)</p></>  }

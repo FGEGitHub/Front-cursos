@@ -202,6 +202,16 @@ const todaslasasignaciones = async () => {
   }
   return data
 }
+const todaslasasignaciones2 = async () => {
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+  const { data } = await axios.get(baseUrl + 'todaslasasignaciones2/', config)
+  if (data === 'error login') {
+
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }
+  return data
+}
 
 
 
@@ -833,6 +843,19 @@ const listademesassuplentes = async  () => {
     console.log(data)
   return data
  } 
+
+
+
+ 
+
+ const todaspaso42 = async  (id) => {
+
+
+  const {data } = await axios.get(baseUrl+'todaspaso42/'+id,config)
+    console.log(data)
+  return data
+ } 
+ 
  const todaspaso4 = async  () => {
 
 
@@ -863,4 +886,4 @@ const listademesassuplentes = async  () => {
  }
  
 
-export default {traercircuitos,traerescuelas2,asignarcircuitos,marcarnocontestado,listadecircuitos,todaspaso4,buscarestadopornombre,buscarestadopordni,traerobservaciones,veramigos,cargarpresentes,traerasistenciasporescuela,verfaltantesescuelassuplentes,todoslossuplentes,verlogueo,modificarescuelaubicacion,rechazarcapacitacionmesa,Confirmarcapasupl,traerdetallesdeunaescuelatraslado,checksuplente,traerescuelasfalt,rechazarcapacitacion,verfaltantesescuelas,modificarestadodeinscrip,modificarobservaciones,Confirmarcapa,listademesassuplentes,contactada,estadisticasescuelas,rechazarincrip,todaslasasignacionesdeunaescuela,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }
+export default {traercircuitos,todaspaso42,todaslasasignaciones2,traerescuelas2,asignarcircuitos,marcarnocontestado,listadecircuitos,todaspaso4,buscarestadopornombre,buscarestadopordni,traerobservaciones,veramigos,cargarpresentes,traerasistenciasporescuela,verfaltantesescuelassuplentes,todoslossuplentes,verlogueo,modificarescuelaubicacion,rechazarcapacitacionmesa,Confirmarcapasupl,traerdetallesdeunaescuelatraslado,checksuplente,traerescuelasfalt,rechazarcapacitacion,verfaltantesescuelas,modificarestadodeinscrip,modificarobservaciones,Confirmarcapa,listademesassuplentes,contactada,estadisticasescuelas,rechazarincrip,todaslasasignacionesdeunaescuela,traerescparasig,asignarencardadodeesc,traerpersonasdeunenc,traerdetallesdeunaescuela,modificarpersonafisca,listadealiados,traerpersonas,traerdatosdepersona,todaslasasignacionesdeun, volverapaso3,borrarmesa,desasignarencargado,traerinscripcionesdeunencargado,asignarinscripciones,traerinscripcionesenc,modificardatosdemesa,todoslosencargados,traerpaso2inscrip2,todasincripciones2, traerencargados, asignarencargado, listaExtractos, asignarmesaafiscal, estadisticas1, cargarcantidades, volverapaso1, modificarmesa, enviarinscripcionadmin, traerincripcionesdealiadoadmin, modificarescuela, traerestadisticasdeescuelas, traerpaso2inscrip, crearescuela, traerincripcionesdealiado, borrarinscripcion, traerescuelasymesas, borrarescuela, registronivel3, todos, listadeescuelas, traermesas, datosdemesas, crearmesa, enviarinscripcion, subirpruebaescuelas, cargarinscripcionesescuelas, listademesas, listaExtractosescuelas, VerExtractoescuelas, inscribir, todaslasasignaciones, traerescuelas, datosusuarioporid, todasincripciones, VerExtracto, cargarinscripciones, subirprueba }

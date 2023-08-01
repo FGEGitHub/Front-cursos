@@ -11,6 +11,7 @@ import Estadisticas3 from './verfaltantesuplentes'
 import Tablaasig from './TablaAsignados'
 import Tablapaso2 from './Tablapaso2'
 import Tablapaso4 from './tablapaso4'
+import Tablapaso5 from './tablapaso5'
 import { Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -51,11 +52,11 @@ const SubirLegajo = () => {
         const dat = await servicioFisca.datosdemesas()
         setDatos(dat)
         setSteps([
-            { label: 'PAso 1: Lista Inscriptos', completed: false },
+            { label: 'Paso 1: Lista Inscriptos', completed: false },
             { label: 'Paso 2: Contactados', completed: false },
             { label: 'Paso 3: Asignados', completed:false },
-            { label: 'Paso 4: ', completed:false },
-            { label: 'Paso 3: ', completed:false },
+            { label: 'Paso 4: Inscripciones agosto', completed:false },
+            { label: 'Paso 5: Asignaciones agosto', completed:false },
             
 
         ])
@@ -163,7 +164,7 @@ const SubirLegajo = () => {
 
                         3:  <Tablapaso4/>,
                         
-
+                       4:  <Tablapaso5/>,
 
 
                 }[activeStep]}

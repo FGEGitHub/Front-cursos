@@ -111,7 +111,7 @@ setActivo(true)
   const handleChange = (e) => {
     console.log('handleChange')
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
-console.log( e.target.value)
+
 if (e.target.name =="mesa"){
   for (let i = 0; i < mesas.length; i++) {
    
@@ -123,7 +123,7 @@ if (e.target.name =="mesa"){
   }
 }
 
-   console.log(disponibilidad) 
+   console.log(inscripcion) 
 }
 
 const handleChangeid_escuela = (e, option) => {
@@ -298,7 +298,94 @@ const handleChangedondevota = (e, option) => {
          
                             <p   onClick={() => window.open('https://wa.me/'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> 
             <p   onClick={() => window.open('https://wa.me/'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>
-               
+            <TextField
+                
+                margin="dense"
+                id="name"
+                label="Domicilio"
+                name="domicilio"
+                onChange={handleChange}
+                fullWidth
+                variant="standard"
+              />
+              <br />
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                ¿ Fuiste fiscal antes?
+              </InputLabel>
+              <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                  name: 'fiscal_antes',
+                  id: 'uncontrolled-native',
+
+                }}
+              >   <option value={'Sin determinar'}>Sin determinar</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
+
+              </NativeSelect>
+
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                ¿ Dispones de movilidad ?
+              </InputLabel>
+              <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                  name: 'movilidad',
+                  id: 'uncontrolled-native',
+
+                }}
+              >   <option value={'Sin determinar'}>Sin determinar</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
+
+              </NativeSelect>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                ¿ Sos celiaco ?
+              </InputLabel>
+              <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                  name: 'celiaco',
+                  id: 'uncontrolled-native',
+
+                }}
+              >   <option value={'Sin determinar'}>Sin determinar</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
+
+              </NativeSelect>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                ¿ Sos Vegetariano?
+              </InputLabel>
+              <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                  name: 'vegano',
+                  id: 'uncontrolled-native',
+
+                }}
+              >   <option value={'Sin determinar'}>Sin determinar</option>
+                <option value={'Si'}>Si</option>
+                <option value={'No'}>No</option>
+
+              </NativeSelect>
+              <br/>
+              <TextField
+                
+                margin="dense"
+                id="name"
+                label="Observaciones "
+                name="observaciones"
+                onChange={handleChange}
+                fullWidth
+                variant="standard"
+
+              />
 
                  <DialogActions>
                  {inscripcion.id_escuela && inscripcion.mesa  ? <>     {disponibilidad =="Libre" ? <><Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button></> : <><p style={{ color: 'crimson' }} >Mesa no disponible</p></>}    </>:<><p style={{ color: 'crimson' }} >COMPLETAR TODOS LOS DATOS(Momentaneamente desactivado)</p></>  }

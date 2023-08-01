@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ConfirmarCapa from "./confirmarcapacitacion";
-import RechazarCapa from "./sacarcapacitacion";
+
 import Volver from "./volverpaso3";
 import Vernscripto from "./modalpaso2";
 
@@ -27,9 +27,17 @@ export default function Ingresos() {
         traer()
     }, [])
     const traer = async () => {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON)
 
-        const ins = await servicioFidei.todaspaso4()
-        setInscrip(ins[0])
+     
+
+          const ins = await servicioFidei.todaspaso42(usuario.id)
+          setInscrip(ins[0])
+      }
+ 
+     
         // 
 
     };
@@ -47,7 +55,7 @@ export default function Ingresos() {
       }
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
-          const ins = await servicioFidei.todaspaso4();
+          const ins = await servicioFidei.todaspaso42();
           setInscrip(ins[0]);
         };
       
@@ -63,7 +71,7 @@ export default function Ingresos() {
           <>
             <ConfirmarCapa id={inscrip[dataIndex].id} getClients={handleButtonClick} style={buttonStyle} />
             <Volver id={inscrip[dataIndex].id} traer={handleButtonClick} style={buttonStyle} />
-            <RechazarCapa id={inscrip[dataIndex].id} getClients={handleButtonClick} style={buttonStyle} />
+           
           </>
         );
       }
@@ -88,7 +96,7 @@ export default function Ingresos() {
           observaciones={inscrip[dataIndex].observaciones}
           traer = { async () => {
 
-            const ins = await servicioFidei.todaspaso4()
+            const ins = await servicioFidei.todaspaso42()
             setInscrip(ins[0])
             // 
     
@@ -100,7 +108,7 @@ export default function Ingresos() {
  id_inscripcion={inscrip[dataIndex].id}
  traer = { async () => {
 
-  const ins = await servicioFidei.todaspaso4()
+  const ins = await servicioFidei.todaspaso42()
   setInscrip(ins[0])
   // 
 
@@ -157,7 +165,7 @@ export default function Ingresos() {
         },
         
      
-     
+      
         {
             name: "VER PERSONA",
             options: {

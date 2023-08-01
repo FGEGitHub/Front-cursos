@@ -10,7 +10,7 @@ import MUIDataTable from "mui-datatables";
 import ConfirmarCapa from "./confirmarcapacitacion";
 import RechazarCapa from "./sacarcapacitacion";
 import Volver from "./volverpaso3";
-import Vernscripto from "./modalpaso2";
+import Checkbox from '@mui/material/Checkbox';
 
 
 export default function Ingresos() {
@@ -18,9 +18,7 @@ export default function Ingresos() {
     const navigate = useNavigate();
 
     const [inscrip, setInscrip] = useState([]);
-    const [turnos, setTurnos] = useState([]);
-    const [personas, setpersonas] = useState([]);
-    const [cursos, setCursos] = useState([]);
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
     useEffect(() => {
@@ -28,7 +26,7 @@ export default function Ingresos() {
     }, [])
     const traer = async () => {
 
-        const ins = await servicioFidei.todaspaso4()
+        const ins = await servicioFidei.todaslasasignaciones2()
         setInscrip(ins[0])
         // 
 
@@ -47,7 +45,7 @@ export default function Ingresos() {
       }
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
-          const ins = await servicioFidei.todaspaso4();
+          const ins = await servicioFidei.todaslasasignaciones();
           setInscrip(ins[0]);
         };
       
@@ -70,42 +68,12 @@ export default function Ingresos() {
       
       
 
-      function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
+      function CutomButtonombre(dataIndex, rowIndex, data, onClick) {
         return (
           <>
       
-          <Vernscripto
-          dni= {inscrip[dataIndex].dni}
-          nombre= {inscrip[dataIndex].nombre}
-          apellido= {inscrip[dataIndex].apellido}
-          telefono={inscrip[dataIndex].telefono}
-          escuela1={inscrip[dataIndex].nombreescuela}
-          escuela2={inscrip[dataIndex].nombreescuela2}
-          id_inscripcion={inscrip[dataIndex].id}
-          id_escuela={inscrip[dataIndex].id_escuela}
-          id_escuela2={inscrip[dataIndex].id_escuela2}
-          donde_vota={inscrip[dataIndex].donde_vota}
-          observaciones={inscrip[dataIndex].observaciones}
-          traer = { async () => {
+     <p> {inscrip[dataIndex].apellido}  {inscrip[dataIndex].nombre}</p>
 
-            const ins = await servicioFidei.todaspaso4()
-            setInscrip(ins[0])
-            // 
-    
-        
-        }}/>
-
-{/* <Volver
- dni= {inscrip[dataIndex].dni}
- id_inscripcion={inscrip[dataIndex].id}
- traer = { async () => {
-
-  const ins = await servicioFidei.todaspaso4()
-  setInscrip(ins[0])
-  // 
-
-}}
-/> */}
           </>
 
         );
@@ -144,12 +112,21 @@ export default function Ingresos() {
 
         },
         {
-            name: "dondevoto",
-            label: "donde fiscalizo",
+            name: "nombredondevota",
+            label: "Vota",
 
         },
         
-    
+        {
+            name: "numero",
+            label: "numero mesa",
+
+        },
+        {
+            name: "dato1",
+            label: "Presente",
+
+        },
         {
             name: "telefono",
             label: "telefono",
@@ -157,7 +134,19 @@ export default function Ingresos() {
         },
         
      
-     
+        {
+            name: "Capacitado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRendererCapacitado(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },  
         {
             name: "VER PERSONA",
             options: {
@@ -171,31 +160,53 @@ export default function Ingresos() {
             }
         
         },   
-        {
-            name: "detalle",
-            label: "detalle",
 
-        },
         {
-          name: "Acciones/llamado",
-          options: {
+            name: "Acciones/llamado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        }, 
+        {
+            name: "Presente",
+            options: {
               customBodyRenderLite: (dataIndex, rowIndex) =>
-                  CutomButtonsRenderer(
-                      dataIndex,
-                      rowIndex,
-                     // overbookingData,
-                     // handleEditOpen
-                  )
-          }
+              CutomButtonsRenderer2contactado(
+                  dataIndex,
+                  rowIndex,
+                  // overbookingData,
+                  // handleEditOpen
+                )
+            }
       
-      },   
-  
+          }, 
 
     ];
     const options = {
         selectableRows: false, // Desactivar la selección de filas
     };
-
+    function CutomButtonsRenderer2contactado(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+    
+    {inscrip[dataIndex].dato1 == null  || inscrip[dataIndex].dato1 == 'No'? <>  Ausente <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
+    
+          </>
+    
+        );
+      }
+      const checkede = async (id) => {
+        console.log(id)
+         await servicioFidei.contactada(id)
+        traer()
+      };
     return (
         <div >
          
