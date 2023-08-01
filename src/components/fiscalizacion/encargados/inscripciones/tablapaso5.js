@@ -25,9 +25,21 @@ export default function Ingresos() {
         traer()
     }, [])
     const traer = async () => {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON)
 
-        const ins = await servicioFidei.todaslasasignaciones2()
-        setInscrip(ins[0])
+     
+
+          const ins = await servicioFidei.todaslasasignaciones22(usuario.id)
+          setInscrip(ins[0])
+ 
+     
+        // 
+
+    };
+  
+     
         // 
 
     };
@@ -45,7 +57,7 @@ export default function Ingresos() {
       }
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
-          const ins = await servicioFidei.todaslasasignaciones();
+          const ins = await servicioFidei.todaslasasignaciones22();
           setInscrip(ins[0]);
         };
       

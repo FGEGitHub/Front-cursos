@@ -147,12 +147,12 @@ export default function Ingresos() {
         
         },  
         {
-            name: "nombreescuela",
-            label: "Fiscaliza",
+            name: "donde_vota",
+            label: "Donde vota segun padron anterior",
 
         },
         {
-            name: "dondevoto",
+            name: "dondefiscal",
             label: "donde fiscalizo",
 
         },
