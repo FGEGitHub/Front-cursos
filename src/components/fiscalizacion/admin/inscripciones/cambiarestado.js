@@ -153,7 +153,7 @@ export default function SelectTextFields(props) {
                  <option value={''}> sin definir </option>
                  <option value={'Pendiente'}> Pendiente </option>
                  <option value={'Rechazado'}> Rechazado </option>
-                 <option value={'Contactado'}> contactado(paso 2)</option>
+                 <option value={'No contestado'}> No contestado</option>
             
                 
 

@@ -11,7 +11,8 @@ import ConfirmarCapa from "./confirmarcapacitacion";
 import RechazarCapa from "./sacarcapacitacion";
 import Volver from "./volverpaso3";
 import Vernscripto from "./modalpaso2";
-
+import CambiarEst from './cambiarestado'
+import AsignarEnc from './asignarencargado'
 
 export default function Ingresos() {
     let params = useParams()
@@ -94,7 +95,29 @@ export default function Ingresos() {
     
         
         }}/>
+ <CambiarEst
+                    id={inscrip[dataIndex].id}
+                    estado={inscrip[dataIndex].estado}
+                    getClients={ async () => {
 
+                      const ins = await servicioFidei.todaspaso4()
+                      setInscrip(ins[0])
+                      // 
+              
+                  
+                  }}
+                />
+
+<AsignarEnc
+                    id_inscripcion={inscrip[dataIndex].id}
+                    getClients={ async () => {
+
+                      const ins = await servicioFidei.todaspaso4()
+                      setInscrip(ins[0])
+                      // 
+              
+                  
+                  }}/>
 {/* <Volver
  dni= {inscrip[dataIndex].dni}
  id_inscripcion={inscrip[dataIndex].id}
@@ -148,11 +171,7 @@ export default function Ingresos() {
           label: "Donde vota segun padron anterior",
 
       },
-      {
-        name: "dondefiscal",
-        label: "donde fiscalizo",
-
-    },
+    
         
     
         {
@@ -163,7 +182,7 @@ export default function Ingresos() {
         
      
      
-        {
+       /*  {
             name: "VER PERSONA",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
@@ -175,7 +194,7 @@ export default function Ingresos() {
                     )
             }
         
-        },   
+        },    */
         {
             name: "detalle",
             label: "detalle",
