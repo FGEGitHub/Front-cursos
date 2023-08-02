@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ConfirmarCapa from "./confirmarcapacitacion";
-
+import ObserModal from "./modalobservaciones"
 import Volver from "./volverpaso3";
 import Vernscripto from "./modalpaso2";
 
@@ -120,11 +120,14 @@ export default function Ingresos() {
       }
 
     
-      function CutomButtonsRendererCapacitado(dataIndex, rowIndex, data, onClick) {
+      function Obser(dataIndex, rowIndex, data, onClick) {
         return (
           <>
       
-      {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado</p></>}
+      <ObserModal
+      id={inscrip[dataIndex].dni}
+      
+      />
 
           </>
 
@@ -180,10 +183,18 @@ export default function Ingresos() {
         
         },   
         {
-            name: "detalle",
-            label: "detalle",
-
-        },
+          name: "Observaciones",
+          options: {
+              customBodyRenderLite: (dataIndex, rowIndex) =>
+                  Obser(
+                      dataIndex,
+                      rowIndex,
+                     // overbookingData,
+                     // handleEditOpen
+                  )
+          }
+      
+      },   
         {
           name: "Acciones/llamado",
           options: {
