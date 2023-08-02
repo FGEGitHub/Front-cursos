@@ -45,7 +45,7 @@ export default function Ingresos() {
       }
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
-          const ins = await servicioFidei.todaslasasignaciones();
+          const ins = await servicioFidei.todaslasasignaciones2();
           setInscrip(ins[0]);
         };
       
