@@ -37,6 +37,7 @@ export default function SelectTextFields(props) {
    const dat = await servicioFide.verobservaciones(props.id)
    console.log(dat)
    setDatos(dat)
+   setInscripcion({id:props.id})
 setActivo(true)
   
 
@@ -73,7 +74,23 @@ setActivo(true)
       setCurrency(event.target.value);
     }; */
 
-
+    const handleDeterminar = async (event) => {
+      try {
+  
+       const rt = await servicioFide.enviarobservacionnueva(
+          inscripcion
+  
+        )
+      
+        alert(rt)
+      } catch (error) {
+        console.error(error);
+        console.log('Error algo sucedio')
+  
+      }
+      setActivo(false)
+      setOpen(false);
+    };/////
   return (
 
 
@@ -96,29 +113,33 @@ setActivo(true)
         <DialogContent>
             {datos.length > 0 ? <>
         {datos.map((ob)=>
-              ob.detalle
+         <p>    ob.detalle <br/></p>
             )}
 </>:<>No hay observaciones</>}
 
 
 </DialogContent>
         </>: <>Cargando</>}
-Agregar Observacion:
+        <br/>
+        <h>Agregar Observacion nueva:</h>
+(no se borrara las anteriores)
         <TextField
         
         margin="dense"
         id="name"
-        label="Nombre"
-        name="nombre"
+        label="Detalle"
+        name="detalle"
         onChange={handleChange}
         fullWidth
         variant="standard"
         fontFamily="Montserrat"
       />
+            <Button variant="outlined"   onClick={handleDeterminar}>Agregar</Button>
+      <Button variant="outlined" color="error" onClick={handleClose}>Cancelar</Button>
       </Dialog>
 
 
-      <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
+      
 
 
     </Box >

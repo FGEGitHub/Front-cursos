@@ -11,7 +11,7 @@ import ConfirmarCapa from "./confirmarcapacitacion";
 import ObserModal from "./modalobservaciones"
 import Volver from "./volverpaso3";
 import Vernscripto from "./modalpaso2";
-
+import CambiarEst from '../../admin/inscripciones/cambiarestado'
 
 export default function Ingresos() {
     let params = useParams()
@@ -53,9 +53,9 @@ export default function Ingresos() {
 
         );
       }
-      function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
+      /* function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
-          const ins = await servicioFidei.todaspaso42();
+          const ins = await servicioFidei.todaspaso42(usuario.id);
           setInscrip(ins[0]);
         };
       
@@ -75,7 +75,7 @@ export default function Ingresos() {
           </>
         );
       }
-      
+       */
       
 
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
@@ -94,15 +94,30 @@ export default function Ingresos() {
           id_escuela2={inscrip[dataIndex].id_escuela2}
           donde_vota={inscrip[dataIndex].donde_vota}
           observaciones={inscrip[dataIndex].observaciones}
-          traer = { async () => {
-
-            const ins = await servicioFidei.todaspaso42()
-            setInscrip(ins[0])
-            // 
-    
-        
-        }}/>
-
+          traer = {  async () => {
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
+      
+           
+      
+                const ins = await servicioFidei.todaspaso42(usuario.id)
+                setInscrip(ins[0])
+            }}}/>
+<CambiarEst
+                    id={inscrip[dataIndex].id}
+                    estado={inscrip[dataIndex].estado}
+                    getClients={  async () => {
+                      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                      if (loggedUserJSON) {
+                          const usuario = JSON.parse(loggedUserJSON)
+                
+                     
+                
+                          const ins = await servicioFidei.todaspaso42(usuario.id)
+                          setInscrip(ins[0])
+                      }}}
+                />
 {/* <Volver
  dni= {inscrip[dataIndex].dni}
  id_inscripcion={inscrip[dataIndex].id}

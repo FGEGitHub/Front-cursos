@@ -25,11 +25,7 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 const SubirLegajo = () => {
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = useState(0);
-    let [steps, setSteps] = useState([
-    
-
-
-    ]);
+    let [steps, setSteps] = useState([3]);
 
     const [datos, setDatos] = useState()
    
@@ -52,9 +48,7 @@ const SubirLegajo = () => {
         const dat = await servicioFisca.datosdemesas()
         setDatos(dat)
         setSteps([
-            { label: 'Paso 1: Lista Inscriptos', completed: false },
-            { label: 'Paso 2: Contactados', completed: false },
-            { label: 'Paso 3: Asignados', completed:false },
+
             { label: 'Paso 4: Inscripciones agosto', completed:false },
             { label: 'Paso 5: Asignaciones agosto', completed:false },
             
@@ -154,15 +148,11 @@ const SubirLegajo = () => {
 
             <Box>
                 {{
-                    0: <Tablaincrip
-                  
-                        />,
-                    1: <Tablapaso2/>,
-                        2:  <Tablaasig/>,
+                
 
-                        3:  <Tablapaso4/>,
+                       0:  <Tablapaso4/>,
                         
-                       4:  <Tablapaso5/>,
+                       1:  <Tablapaso5/>,
 
 
                 }[activeStep]}
