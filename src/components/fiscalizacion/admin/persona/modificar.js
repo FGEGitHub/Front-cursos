@@ -41,7 +41,7 @@ export default function ClienteNuevo(props) {
     movilidad:props.movilidad,
     celiaco:props.celiaco,
     vegano:props.vegano,
-    direccion:props.direccion
+    domicilio:props.direccion
 
 })
    setActivo(true)
