@@ -96,8 +96,8 @@ export default function Clasenueva(props) {
 
                                         <>
                                             <label>
-                                                <input type="checkbox" checked={selectedOptions.includes( row.id )} onChange={() => handleOptionChange( row.id )} />
-                                                {row.apellido}  {row.nombre}  --- {row.nombreesc} 
+                                                 <p>  <input type="checkbox" checked={selectedOptions.includes( row.id )} onChange={() => handleOptionChange( row.id )} />
+                                             {row.apellido}  {row.nombre}  --- {row.etapa2 =="Si" ? <> <p style={{ color: 'green' }}>{row.nombreesc}</p></>:<>{row.nombreesc}</>}</p>  
                                             </label>
                                             <br />
                                         </>
