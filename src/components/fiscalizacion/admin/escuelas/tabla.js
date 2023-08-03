@@ -176,6 +176,20 @@ const Lotes = () => {
 
         },
         {
+            name: "Ver escuela",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer3(
+                        dataIndex,
+                        rowIndex,
+                        // overbookingData,
+                        // handleEditOpen
+                    )
+            }
+
+        },
+
+      /*   {
             name: "cantidad_suplentes",
             label: "Cantidad de suplentes",
 
@@ -200,7 +214,7 @@ const Lotes = () => {
             name: "cantidad_cel",
             label: "cantidad celiaco",
 
-        },
+        }, */
         {
             name: "Traslado",
             options: {
@@ -227,20 +241,7 @@ const Lotes = () => {
             }
 
         },
-        {
-            name: "Ver escuela",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    CutomButtonsRenderer3(
-                        dataIndex,
-                        rowIndex,
-                        // overbookingData,
-                        // handleEditOpen
-                    )
-            }
-
-        },
-
+   
         {
             name: "Modificar/borrar",
             options: {

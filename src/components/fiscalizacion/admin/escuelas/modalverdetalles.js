@@ -121,9 +121,7 @@ export default function SelectTextFields(props) {
              <h3  style={{ color: 'crimson' }} >Datos de escuela {props.nombre} </h3>
             
             
-             <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                  Modificar Nombre 
-                </InputLabel>
+             
               
   {datos ? <>
 
