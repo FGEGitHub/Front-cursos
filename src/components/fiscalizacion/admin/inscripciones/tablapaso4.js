@@ -134,8 +134,20 @@ export default function Ingresos() {
         );
       }
 
-    
+      
   
+      function dondevot(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+
+      {inscrip[dataIndex].etapa2 =="Si" ? <> <p style={{ color: 'green' }} >{inscrip[dataIndex].etapa2} {inscrip[dataIndex].donde_vota} </p> </> : <>{inscrip[dataIndex].donde_vota}</> }
+    
+
+          </>
+
+        );
+      }
+
       function Obser(dataIndex, rowIndex, data, onClick) {
         return (
           <>
@@ -170,11 +182,6 @@ export default function Ingresos() {
           label: "estado",
       
       },  
-        {
-          name: "donde_vota",
-          label: "Donde vota segun padron anterior",
-
-      },
     
         
     
@@ -183,7 +190,19 @@ export default function Ingresos() {
             label: "telefono",
 
         },
-        
+        {
+          name: "Donde vota",
+          options: {
+              customBodyRenderLite: (dataIndex, rowIndex) =>
+                  dondevot(
+                      dataIndex,
+                      rowIndex,
+                     // overbookingData,
+                     // handleEditOpen
+                  )
+          }
+      
+      }, 
      
      
        /*  {
