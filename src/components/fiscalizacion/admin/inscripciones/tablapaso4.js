@@ -118,17 +118,7 @@ export default function Ingresos() {
               
                   
                   }}/>
-{/* <Volver
- dni= {inscrip[dataIndex].dni}
- id_inscripcion={inscrip[dataIndex].id}
- traer = { async () => {
 
-  const ins = await servicioFidei.todaspaso4()
-  setInscrip(ins[0])
-  // 
-
-}}
-/> */}
           </>
 
         );
@@ -184,7 +174,7 @@ export default function Ingresos() {
       },  
     
         
-    
+      
         {
             name: "telefono",
             label: "telefono",
@@ -203,8 +193,13 @@ export default function Ingresos() {
           }
       
       }, 
-     
-     
+      {
+        name: "nombrequienllama",
+        label: "encargado",
+
+    },
+    
+  
        /*  {
             name: "VER PERSONA",
             options: {
@@ -244,6 +239,11 @@ export default function Ingresos() {
           }
       
       },   
+      {
+        name: "donde_vota",
+        label: "escuela",
+  
+    },
   
 
     ];
