@@ -165,6 +165,10 @@ export default function Ingresos() {
       }
 
     const columns = [
+      {
+        name: "circuito",
+        label: "Circ",
+    },
         {
             name: "dni",
             label: "dni",
