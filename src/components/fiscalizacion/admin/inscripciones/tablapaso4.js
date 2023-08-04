@@ -14,6 +14,9 @@ import Vernscripto from "./modalpaso2";
 import CambiarEst from './cambiarestado'
 import AsignarEnc from './asignarencargado'
 import ObserModal from "../../encargados/inscripciones/modalobservaciones"
+import Cambirdodne from '../persona/dondevota'
+
+
 export default function Ingresos() {
     let params = useParams()
     const navigate = useNavigate();
@@ -132,7 +135,16 @@ export default function Ingresos() {
 
       {inscrip[dataIndex].etapa2 =="Si" ? <> <p style={{ color: 'green' }} >{inscrip[dataIndex].etapa2} {inscrip[dataIndex].donde_vota} </p> </> : <>{inscrip[dataIndex].donde_vota}</> }
     
+      {inscrip[dataIndex].id_donde_vota ==undefined ? <>  <Cambirdodne id={inscrip[dataIndex].idpers} 
+       traer={ async () => {
 
+        const ins = await servicioFidei.todaspaso4()
+        setInscrip(ins[0])
+        // 
+
+    
+    }}
+     />   </>:<></>}
           </>
 
         );
@@ -249,6 +261,7 @@ export default function Ingresos() {
     ];
     const options = {
         selectableRows: false, // Desactivar la selección de filas
+        stickyHeader: true,
     };
 
     return (
