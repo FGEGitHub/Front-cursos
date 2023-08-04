@@ -113,7 +113,7 @@ setActivo(true)
         <DialogContent>
             {datos.length > 0 ? <>
         {datos.map((ob)=>
-         <p>    ob.detalle <br/></p>
+         <p>    {ob.detalle} <br/></p>
             )}
 </>:<>No hay observaciones</>}
 
