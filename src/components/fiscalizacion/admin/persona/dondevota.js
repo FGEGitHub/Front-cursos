@@ -14,6 +14,12 @@ import InputLabel from '@mui/material/InputLabel';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Paper } from '@mui/material';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import servicioFide from '../../../../services/fiscalizacion'
+import LooksOneIcon from '@mui/icons-material/LooksOne';
+
+
+
+
 
 export default function ClienteNuevo(props) {
   let params = useParams()
@@ -22,6 +28,11 @@ export default function ClienteNuevo(props) {
     const [escuelas, setEscuelas] = useState()
   const [open, setOpen] = React.useState(false);
   const [form, setForm] = useState({})
+  const [dato, setDato] = useState({})
+  const [escuela, setEscuela] = useState({})
+  const [prom, setProm] = useState({})
+  const [inscripcion, setInscripcion] = useState({})
+  const [turnos, setTurnos] = useState()
 
 
   const traerdondevota = async (e) => {
@@ -29,27 +40,24 @@ export default function ClienteNuevo(props) {
     console.log(e.id)
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
     setDato({ ...dato, ['id_donde_vota']: dat })
-    console.log(dato['id_donde_vota'])
+    
     setEscuela({ ...escuela, 'id_donde_vota': dat.cantidad_escuela1 })
 
     setProm({ 'promedio': dat.prom })
 
   }
   const handleChangedondevota = (e, option) => {
-    console.log(e)
-    console.log(option)
+  
     setInscripcion({ ...inscripcion, 'id_donde_vota': option.id })
     traerdondevota(option)
-
+    
   }
 
  const traer = async () => {
   const turnos = await servicioFisca.traerescuelas()
+  setInscripcion({ ...inscripcion, 'id': props.id })
   setEscuelas(turnos)
-   setForm({id:id, 
-   
 
-})
    setActivo(true)
 
   }
@@ -66,7 +74,7 @@ export default function ClienteNuevo(props) {
     event.preventDefault();
     try {
 
-    const rta = await servicioFisca.modificarpersonafisca(form)
+    const rta = await servicioFisca.modificardondevota(inscripcion)
 
      
      } catch (error) {
@@ -107,13 +115,13 @@ export default function ClienteNuevo(props) {
       >
         <DialogContent>
           <DialogContentText>
-          <LooksTwoIcon />    <label>Escuela prioridad 2</label>
+          <label>Escuela prioridad 2</label>
 
 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-  Escuela 2
+  Escuela 
 </InputLabel>
 <Autocomplete
-  options={turnos}
+  options={escuelas}
   getOptionLabel={(option2) => option2.nombre}
   renderInput={(params) => (
     <TextField
@@ -133,7 +141,7 @@ export default function ClienteNuevo(props) {
   native // Habilita la selección nativa
 />   </DialogContentText>
           <DialogActions>
-          <><Button variant="contained" color="primary"  type="submit">Enviar</Button></>
+          <><Button variant="contained" color="primary" onClick={handleDeterminar} type="submit">Enviar</Button></>
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>

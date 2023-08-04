@@ -15,7 +15,7 @@ import { Box } from "@mui/system";
 import { useNavigate , useParams } from "react-router-dom";
 import "./profile.css";
 import Modificar from './modificar'
-
+import DondeVota from './dondevota'
 
 const FichaAxios = (props) => {
   const navigate = useNavigate();
@@ -77,6 +77,13 @@ const FichaAxios = (props) => {
             setCliente(cliente);
           }}
         />
+       <DondeVota
+          id={client.id}
+          traer={async () => {
+            const cliente = await servicioFidei.traerdatosdepersona(id);
+            setCliente(cliente);
+          }}
+        /> 
      
       </Box>
       <Box>
