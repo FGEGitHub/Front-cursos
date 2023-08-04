@@ -93,6 +93,11 @@ const Lotes = () => {
     // definimos las columnas
     const columns = [
         {
+            name: "etapa2",
+            label: "etapa 2",
+
+        },
+        {
             name: "circuito",
             label: "circuito",
 
