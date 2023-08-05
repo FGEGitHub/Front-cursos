@@ -216,7 +216,19 @@ export default function Ingresos() {
         label: "Fiscaliza",
 
     },
-    
+    {
+      name: "Acciones/llamado",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+              CutomButtonsRenderer(
+                  dataIndex,
+                  rowIndex,
+                 // overbookingData,
+                 // handleEditOpen
+              )
+      }
+  
+  }, 
 
       {
         name: "nombrequienllama",
@@ -251,19 +263,7 @@ export default function Ingresos() {
           }
       
       }, 
-        {
-          name: "Acciones/llamado",
-          options: {
-              customBodyRenderLite: (dataIndex, rowIndex) =>
-                  CutomButtonsRenderer(
-                      dataIndex,
-                      rowIndex,
-                     // overbookingData,
-                     // handleEditOpen
-                  )
-          }
-      
-      },   
+        
       {
         name: "donde_vota",
         label: "escuela",

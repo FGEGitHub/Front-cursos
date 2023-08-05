@@ -71,7 +71,7 @@ export default function Clasenueva(props) {
                     {props.id}
                         <DialogContentText>
 
-                          ¿Seguro que quieres moverlo al paso 2? 
+                          ¿Seguro que quieres moverlo al paso anterior? 
                         </DialogContentText>
                         {props.id_inscripcion}
 

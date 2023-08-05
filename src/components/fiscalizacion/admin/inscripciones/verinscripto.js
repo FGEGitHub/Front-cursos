@@ -124,7 +124,6 @@ export default function SelectTextFields(props) {
     const dat = await servicioFide.traerestadisticasdeescuelas({ id1: e.id})
     setDato({ ...dato, ['id_escuela']: dat })
     setEscuela({ ...escuela, 'id_escuela': dat.cantidad_escuela1 })
-    console.log(escuela)
     setProm({ 'promedio': dat.prom })
 
   }
