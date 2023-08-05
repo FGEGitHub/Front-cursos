@@ -111,7 +111,7 @@ const SubirLegajo = () => {
                     </div>
                     </>:<></>}
  
-        <Container sx={{ my: 4 }}>
+      
 
           {listo ?  <div>
             <Stack
@@ -192,7 +192,7 @@ const SubirLegajo = () => {
 
 
             </Stack>
-        </Container>
+        
       
         </>
     );
