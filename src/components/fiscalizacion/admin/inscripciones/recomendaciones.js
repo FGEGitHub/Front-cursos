@@ -5,9 +5,7 @@ import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioFide from '../../../../services/fiscalizacion'
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import NativeSelect from '@mui/material/NativeSelect';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import Tooltip from '@material-ui/core/Tooltip';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import React, { useEffect, useState, Fragment } from "react";
@@ -87,7 +85,7 @@ setActivo(true)
       autoComplete="off"
     >
        < Tooltip title="Ver inscripcion">
-      <Button variant="contained" color='success' onClick={handleClickOpen}>Recomendaicones<LeaderboardIcon/></Button>
+      <Button variant="contained" color='success' onClick={handleClickOpen}>Recomendaicones<AutoFixHighIcon/></Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
 
