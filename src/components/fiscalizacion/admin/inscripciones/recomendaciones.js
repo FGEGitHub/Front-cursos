@@ -85,7 +85,7 @@ setActivo(true)
       autoComplete="off"
     >
        < Tooltip title="Ver inscripcion">
-      <Button variant="contained" color='success' onClick={handleClickOpen}>Recomendaicones<AutoFixHighIcon/></Button>
+      <Button variant="contained" color='success' onClick={handleClickOpen}>Recomendaciones<AutoFixHighIcon/></Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
 
@@ -94,8 +94,12 @@ setActivo(true)
 
         {datos.map((ob)=><>
             <p>Escuela: {ob.escuela} </p> 
+            
+            <p>  Mesas : {ob.mesascant}</p> 
            <p>  Mesas faltantes: {ob.mesas}</p> 
-            <p> Personas que votan alli: {ob.personas} </p> <br/>
+            <p> Personas que votan alli: {ob.personas} </p>
+            <p> Personas que votan alli y no fueron anotadas aun: {ob.personasno} </p> <br/>
+            
              </>
             )}
        
