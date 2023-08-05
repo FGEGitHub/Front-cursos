@@ -217,7 +217,7 @@ export default function Ingresos() {
 
     },
     {
-      name: "Acciones/llamado",
+      name: "Acciones",
       options: {
           customBodyRenderLite: (dataIndex, rowIndex) =>
               CutomButtonsRenderer(
