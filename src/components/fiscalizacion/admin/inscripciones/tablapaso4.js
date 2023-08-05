@@ -209,6 +209,15 @@ export default function Ingresos() {
           }
       
       }, 
+      
+
+      {
+        name: "nombrevota",
+        label: "Fiscaliza",
+
+    },
+    
+
       {
         name: "nombrequienllama",
         label: "encargado",
