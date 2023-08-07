@@ -81,8 +81,16 @@ const Estracto = () => {
         <Box sx={{ textAlign: 'center' }}>
         <Typography variant="h5" component="div" color="black">
           <StyledParagraph>
-          Vos también podes ser protagonista de la transformacion que se viene en Argentina, este 13 de agosto sumate como fiscal y juntos hagamos el cambio de nuestras vidas! <br/>
-
+          ¡Muchas gracias por tu interés en fiscalizar con nosotros! 
+Lamentablemente ya cerramos el período de inscripción para estas elecciones. ¡Estate atento/a a nuestras redes para la próxima y fiscalizamos juntos!
+<br/>
+Este domingo acompañanos con tu voto
+¡Vamos con Horacio Rodríguez Larreta Presidente!
+¡Vamos con Valdés!
+<br/>
+#HagamosElCambioDeNuestrasVidas
+<br/>
+Equipo CC ARI Corrientes
 
             </StyledParagraph>
         </Typography>
@@ -97,7 +105,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
         </Typography>
       </Box> */}
 
-      <TextField
+     {/*  <TextField
         
         margin="dense"
         id="name"
@@ -249,7 +257,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
         <option value={'No'}>No</option>
        
       </NativeSelect>
-    <br/>
+    <br/> */}
     
       <CardActions>
       {/* Acciones: */}
@@ -257,10 +265,10 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
 
         <>  {inscrip.como_se_entero === "Amigo" ? <>  
         
-        {inscrip.nombre_referido && inscrip.nombre_referido ? <> {/*Obligacion nobre ref */}<Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> </>:<><Button variant='contained' disabled>Enviar Inscripcion</Button></> }
-         </>:<> {/*Se entero por otro medio */}<Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> </>} 
+        {inscrip.nombre_referido && inscrip.nombre_referido ? <> {/*Obligacion nobre ref */}{/* <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> */} </>:<>{/* <Button variant='contained' disabled>Enviar Inscripcion</Button> */}</> }
+         </>:<>{/*  <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> */} </>} 
         
-        </>:<><Button variant='contained' disabled>Enviar Inscripcion</Button></>}
+        </>:<>{/* <Button variant='contained' disabled>Enviar Inscripcion</Button> */}</>}
       
       </CardActions>
     </Paper>
