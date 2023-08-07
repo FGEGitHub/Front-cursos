@@ -90,6 +90,7 @@ export default function Ingresos() {
           id_escuela2={inscrip[dataIndex].id_escuela2}
           donde_vota={inscrip[dataIndex].donde_vota}
           observaciones={inscrip[dataIndex].observaciones}
+          fecha_carga={inscrip[dataIndex].fecha_carga}
           traer = { async () => {
 
             const ins = await servicioFidei.todaspaso4()

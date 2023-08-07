@@ -197,6 +197,7 @@ const handleChangedondevota = (e, option) => {
 
  
              <h3>Asignaciona escuela {props.nombre} {props.apellido} </h3>
+             <h4>Fecha inscripcion: {props.fecha_carga} </h4>
              <h4><HowToVoteIcon/>Vota en  {props.donde_vota}</h4>
              { datos ? <>
              Promedio votantes por escuela: {promedio}<br/>
