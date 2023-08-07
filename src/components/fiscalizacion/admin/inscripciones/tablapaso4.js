@@ -236,20 +236,6 @@ export default function Ingresos() {
 
     },
     
-  
-       /*  {
-            name: "VER PERSONA",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    CutomButtonsRenderer2(
-                        dataIndex,
-                        rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
-                    )
-            }
-        
-        },    */
         {
           name: "Observaciones",
           options: {
@@ -279,7 +265,7 @@ export default function Ingresos() {
 
     return (
         <div >
-         
+        <Button   onClick={traer }>Refrescar</Button> 
 
          <MUIDataTable
                 title={"Lista de Incripciones"}

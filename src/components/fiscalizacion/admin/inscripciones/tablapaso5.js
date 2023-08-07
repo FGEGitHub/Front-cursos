@@ -84,7 +84,7 @@ export default function Ingresos() {
         return (
           <>
       
-      {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado</p></>}
+      {inscrip[dataIndex].capacitado === 'Si' ? <><p style={{ color: 'green' }} >Capacitado</p> </>:<><p style={{ color: 'warning' }} >No Capacitado</p></>}
 
           </>
 
@@ -122,11 +122,11 @@ export default function Ingresos() {
             label: "numero mesa",
 
         },
-        {
+     /*    {
             name: "dato1",
             label: "Presente",
 
-        },
+        }, */
         {
             name: "telefono",
             label: "telefono",
@@ -174,7 +174,7 @@ export default function Ingresos() {
             }
         
         }, 
-        {
+      /*   {
             name: "Presente",
             options: {
               customBodyRenderLite: (dataIndex, rowIndex) =>
@@ -186,7 +186,7 @@ export default function Ingresos() {
                 )
             }
       
-          }, 
+          },  */
 
     ];
     const options = {
