@@ -175,7 +175,7 @@ export default function Ingresos() {
         
         }, 
         {
-            name: "Presente",
+            name: "Contactado",
             options: {
               customBodyRenderLite: (dataIndex, rowIndex) =>
               CutomButtonsRenderer2contactado(
@@ -196,7 +196,7 @@ export default function Ingresos() {
         return (
           <>
     
-    {inscrip[dataIndex].dato1 == null  || inscrip[dataIndex].dato1 == 'No'? <>  Ausente <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
+    {inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Ya contactado <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
     
           </>
     
@@ -204,7 +204,7 @@ export default function Ingresos() {
       }
       const checkede = async (id) => {
         console.log(id)
-         await servicioFidei.contactada(id)
+         await servicioFidei.contactada2(id)
         traer()
       };
     return (
