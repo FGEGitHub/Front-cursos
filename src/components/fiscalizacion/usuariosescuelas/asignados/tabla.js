@@ -233,7 +233,7 @@ export default function Ingresos() {
 
     },
     
-    {
+  /*   {
       name: "Contactado",
       options: {
         customBodyRenderLite: (dataIndex, rowIndex) =>
@@ -258,7 +258,7 @@ export default function Ingresos() {
           )
       }
 
-    },
+    }, */
 
   ];
 
@@ -297,12 +297,12 @@ export default function Ingresos() {
                 {row.capacitado === 'Si' ? <><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>:<> <p style={{ color: 'warning' }} >No Capacitado</p></>}
                 </StyledTableCell>
                 
-                <StyledTableCell align="left" data-label="Contactado">
+                {/* <StyledTableCell align="left" data-label="Contactado">
                 {row.dato1 == null  || row.dato1 == 'No'? <>  Ausente/Sin determinar <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
             
                
 
-                </StyledTableCell>
+                </StyledTableCell> */}
               </StyledTableRow>
             ))}
           </TableBody>
