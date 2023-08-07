@@ -91,9 +91,9 @@ setActivo(true)
 
       {datos ? <>
         <DialogContent>
-
+<h3>No se contemplan los suplentes</h3>
         {datos.map((ob)=><>
-            <p>Escuela: {ob.nombre} -{ob.cantidad_asig}/{ob.cantidad_mesas} completa</p> 
+            <p>Escuela: {ob.nombre} - <b>{ob.cantidad_asig}/{ob.cantidad_mesas} </b>completa</p> 
             
              </>
             )}
