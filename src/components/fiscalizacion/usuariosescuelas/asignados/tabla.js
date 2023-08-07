@@ -116,7 +116,7 @@ export default function Ingresos() {
   function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
     return (
       <>
-   {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
+   {inscrip[dataIndex].capacitado === 'Si'  ? <><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p> </>:<><p style={{ color: 'warning' }} >No Capacitado</p></>}
 
       </>
 
@@ -294,7 +294,7 @@ export default function Ingresos() {
                   </Button>
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="Capacitado ">
-                {row.capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
+                {row.capacitado === 'Si' ? <><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>:<> <p style={{ color: 'warning' }} >No Capacitado</p></>}
                 </StyledTableCell>
                 
                 <StyledTableCell align="left" data-label="Contactado">
