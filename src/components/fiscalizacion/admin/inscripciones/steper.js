@@ -22,7 +22,7 @@ import StackK from '../../infoskack'
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useNavigate, useParams } from "react-router-dom";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import Recomendaciones from './recomendaciones'
+import Recomendaciones from './cualescuelas'
 const SubirLegajo = () => {
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = useState(0);
@@ -87,7 +87,7 @@ const SubirLegajo = () => {
       <Estadisticas2/>
       <Estadisticas3/>
       <Veramigo/>
-    {/*   <Recomendaciones/> */}
+    <Recomendaciones/> 
     </ButtonGroup>
       <br/>
         {datos ? <>
