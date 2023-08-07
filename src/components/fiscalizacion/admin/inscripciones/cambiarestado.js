@@ -154,14 +154,24 @@ export default function SelectTextFields(props) {
                  <option value={'Pendiente'}> Pendiente </option>
                  <option value={'Rechazado'}> Rechazado </option>
                  <option value={'No contestado'}> No contestado</option>
-            
+                 <option value={'Dado de baja'}> Baja</option>
                 
 
                  </NativeSelect>
-                           
+                 {inscripcion.estado ? <>      
                          
-
-                         
+                 <TextField
+                
+                margin="dense"
+                id="name"
+                label="Detalla motivo, (opcional)"
+                name="observaciones"
+                onChange={handleChange}
+                fullWidth
+                variant="standard"
+               
+              />
+                         </>:<></>}   
                
 
                  <DialogActions>
