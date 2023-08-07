@@ -94,7 +94,7 @@ setActivo(true)
       {activo ? <>
         <DialogContent>
         Cantidad de inscripciones: {datos.cantidad }<br/>
-        Cantidad de pendientes: {datos.pend }<br/>
+        Cantidad de pendientes: {datos.pend }<br/> 
         Cantidad de contactados: {datos.contactado }<br/>
         Cantidad de confirmados: {datos.asigna } (sin suplentes)<br/>
         Cantidad de suplentes: {datos.asigna2 }<br/>
