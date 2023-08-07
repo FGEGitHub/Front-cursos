@@ -87,7 +87,7 @@ const SubirLegajo = () => {
       <Estadisticas2/>
       <Estadisticas3/>
       <Veramigo/>
-      <Recomendaciones/>
+    {/*   <Recomendaciones/> */}
     </ButtonGroup>
       <br/>
         {datos ? <>
