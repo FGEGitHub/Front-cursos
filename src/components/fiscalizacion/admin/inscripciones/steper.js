@@ -25,7 +25,7 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import Recomendaciones from './cualescuelas'
 const SubirLegajo = () => {
     const navigate = useNavigate();
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(2);
     let [steps, setSteps] = useState([
     
 
