@@ -188,8 +188,7 @@ const Lotes = () => {
             }
 
         },
-
-      /*   {
+        {
             name: "cantidad_suplentes",
             label: "Cantidad de suplentes",
 
@@ -200,6 +199,8 @@ const Lotes = () => {
             label: "suplentes libres",
 
         },
+
+      /*  
         {
             name: "cantidad_movil",
             label: "cantidad que necesitan movil",
