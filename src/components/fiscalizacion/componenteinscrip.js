@@ -105,7 +105,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
         </Typography>
       </Box> */}
 
-     {/*  <TextField
+   <TextField
         
         margin="dense"
         id="name"
@@ -257,7 +257,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
         <option value={'No'}>No</option>
        
       </NativeSelect>
-    <br/> */}
+    <br/> 
     
       <CardActions>
       {/* Acciones: */}
@@ -269,6 +269,7 @@ Por dudas o consultas podés comunicarte al 3795083694. <br/>
          </>:<>{/*  <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> */} </>} 
         
         </>:<>{/* <Button variant='contained' disabled>Enviar Inscripcion</Button> */}</>}
+        <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button>
       
       </CardActions>
     </Paper>
