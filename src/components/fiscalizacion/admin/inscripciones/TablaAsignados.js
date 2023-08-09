@@ -78,7 +78,16 @@ export default function Ingresos() {
 
         );
       }
+      function fiscaliza(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+      
+      {inscrip[dataIndex].dni2 == undefined ? <><p style={{ color: 'red ' }} >{inscrip[dataIndex].nombreescuela} </p></>:<><p style={{ color: 'green' }} >{inscrip[dataIndex].nombreescuela}</p></>}
 
+          </>
+
+        );
+      }
     
       function CutomButtonsRendererCapacitado(dataIndex, rowIndex, data, onClick) {
         return (
@@ -107,15 +116,24 @@ export default function Ingresos() {
         
         },  
         {
-            name: "nombreescuela",
-            label: "Fiscaliza",
+          name: "Fiscaliza",
+          options: {
+              customBodyRenderLite: (dataIndex, rowIndex) =>
+                  fiscaliza(
+                      dataIndex,
+                      rowIndex,
+                     // overbookingData,
+                     // handleEditOpen
+                  )
+          }
+      
+      }, 
+      {
+        name: "nombredondevota",
+        label: "Vota",
 
-        },
-        {
-            name: "nombredondevota",
-            label: "Vota",
-
-        },
+    },
+      
         
         {
             name: "numero",
@@ -187,6 +205,13 @@ export default function Ingresos() {
             }
       
           }, 
+      
+        {
+          name: "nombreescuela",
+          label: "Fiscaliza",
+
+      },
+    
 
     ];
     const options = {
