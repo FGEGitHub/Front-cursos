@@ -77,7 +77,7 @@ export default function Ingresos() {
 
   const [inscrip, setInscrip] = useState([]);
   const [vista, setVista] = useState(true);
-  const [personas, setpersonas] = useState([]);
+  const [cantidad, setCantidad] = useState([]);
   const [cursos, setCursos] = useState([]);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -90,7 +90,9 @@ export default function Ingresos() {
       const usuario = JSON.parse(loggedUserJSON)
 
       const ins = await servicioFidei.todaslasasignacionesdeunaescuela(usuario.id)
-      setInscrip(ins)
+      setInscrip(ins[0])
+      setCantidad(ins[1])
+      
     }
    
 
@@ -156,7 +158,8 @@ export default function Ingresos() {
               const usuario = JSON.parse(loggedUserJSON)
         
               const ins = await servicioFidei.todaslasasignacionesdeunaescuela(usuario.id)
-              setInscrip(ins)
+              setInscrip(ins[0])
+              setCantidad(ins[1])
             }
         
         
@@ -315,7 +318,9 @@ export default function Ingresos() {
     <div>
       {inscrip[0] ? <>
         <h3>{inscrip[0]['nombreescuela']}</h3>
+        <h4>Cantidad de mesas {cantidad}</h4>
       </> : <></>}
+
       {vista ? <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a Vista de pc <ComputerTwoToneIcon /></Button></> : <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a vista de dispositivo movil <MobileScreenShareTwoToneIcon /></Button></>}
 
       {vista ? <>
