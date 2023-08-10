@@ -298,7 +298,7 @@ export default function Ingresos() {
             {inscrip.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row" data-label="DNI">
-               {row.nuevo ="Si" ? <><p style={{ color: currentColor }}><b>Nuevo</b></p>   </>:<> </>}    {row.dni}  
+               {row.nuevo =="Si" ? <><p style={{ color: currentColor }}><b>Nuevo</b></p>   </>:<> </>}  {row.nuevo}  {row.dni}  
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="Apellido">
                   {row.apellido}
