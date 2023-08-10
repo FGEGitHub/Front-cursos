@@ -180,7 +180,7 @@ export default function Ingresos() {
         
         },  
         {
-            name: "nombre",
+            name: "nombree",
             label: "Nombre",
         
         },  
