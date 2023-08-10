@@ -16,6 +16,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { Box } from '@mui/material';
 import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone';
+import Alert from '@mui/material/Alert';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -76,25 +77,36 @@ export default function Ingresos() {
   const navigate = useNavigate();
 
   const [inscrip, setInscrip] = useState([]);
+  const[usu, setUsu] = useState();
   const [vista, setVista] = useState(true);
   const [cantidad, setCantidad] = useState([]);
   const [supl, setPubl] = useState([]);
-  const [cursos, setCursos] = useState([]);
+  const [nuevos, setNuevos] = useState([]);
+  const [currentColor, setCurrentColor] = useState('blue');
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   useEffect(() => {
     traer()
+    const colors = ['blue', 'green', 'red'];
+    let currentIndex = 0;
+
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % colors.length;
+      setCurrentColor(colors[currentIndex]);
+    }, 1000); // Cambia de color cada 2 segundos
+
+    return () => clearInterval(interval)
   }, [])
   const traer = async () => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON)
-
+      setUsu(usuario)
       const ins = await servicioFidei.todaslasasignacionesdeunaescuela(usuario.id)
       setInscrip(ins[0])
       setCantidad(ins[1])
       setPubl(ins[2])
-      
+      setNuevos(ins[3])
     }
    
 
@@ -107,7 +119,15 @@ export default function Ingresos() {
     traer()
   };
 
-  
+  const revisto = async (id) => {
+    console.log(id)
+    const rta=  await servicioFidei.revisto(usu.id)
+     alert(rta)
+    traer()
+ 
+  };
+ 
+
   function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
     return (
       <>
@@ -163,6 +183,7 @@ export default function Ingresos() {
               setInscrip(ins[0])
               setCantidad(ins[1])
               setPubl(ins[2])
+              setNuevos(ins[3])
             }
         
         
@@ -277,7 +298,7 @@ export default function Ingresos() {
             {inscrip.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row" data-label="DNI">
-                  {row.dni}
+               {row.nuevo ="Si" ? <><p style={{ color: currentColor }}><b>Nuevo</b></p>   </>:<> </>}    {row.dni}  
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="Apellido">
                   {row.apellido}
@@ -319,6 +340,13 @@ export default function Ingresos() {
 
   return (
     <div>
+      {nuevos>0 ? <>    <Alert variant="filled" severity="success">
+      
+        Tenes {nuevos} fiscales nuevos!
+
+<Button  onClick={revisto}  variant='contained'>Ya revisè</Button>
+      </Alert></>:<></>}
+   
       {inscrip[0] ? <>
         <h3>{inscrip[0]['nombreescuela']}</h3>
         <h4>Cantidad de mesas {cantidad}</h4>

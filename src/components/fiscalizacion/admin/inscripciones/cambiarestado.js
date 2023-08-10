@@ -155,6 +155,7 @@ export default function SelectTextFields(props) {
                  <option value={'Rechazado'}> Rechazado </option>
                  <option value={'No contestado'}> No contestado</option>
                  <option value={'Dado de baja'}> Baja</option>
+                 <option value={'Esperando respuesta'}> Esperando respuesta</option>
                 
 
                  </NativeSelect>
