@@ -201,6 +201,18 @@ export default function Ingresos() {
     setVista(!vista);
   };
 
+
+  function CutomButtonsRenderer2contactado(dataIndex, rowIndex, data, onClick) {
+    return (
+      <>
+
+{inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Ya contactado <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label} defaultChecked /></>}
+
+      </>
+
+    );
+  }
+
   const columns = [
     {
       name: "dni",
@@ -216,6 +228,8 @@ export default function Ingresos() {
       name: "nombre",
       label: "nombre",
     },
+
+
     {
       name: "nombreescuela",
       label: "escuela",
@@ -306,24 +320,28 @@ export default function Ingresos() {
                 <StyledTableCell align="left" data-label="Nombre">
                   {row.nombre}
                 </StyledTableCell>
+                <StyledTableCell align="left" data-label="Presente">
+
+                  {row.dato1 ===null? <>Si<Checkbox onClick={() => checkede(row.id)}  {...label}  /> No<Checkbox   onClick={() => checkede(row.id)}  {...label} /></> :<>  { row.dato1 === "Si" ? <> Si<Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /> No<Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Si<Checkbox onClick={() => checkede(row.id)}  {...label}  /> No<Checkbox   onClick={() => checkede(row.id)}  {...label} defaultChecked/> </>} </>}
+                </StyledTableCell>
                 <StyledTableCell align="left" data-label="telefono">
                   {row.telefono}
                 </StyledTableCell>
-                <StyledTableCell align="left" data-label="telefono alternativo">
+           {/*      <StyledTableCell align="left" data-label="telefono alternativo">
                   {row.telefono2}
-                </StyledTableCell>
+                </StyledTableCell> */}
                 <StyledTableCell align="left" data-label="Nro de mesa">
                   {row.numero}
                 </StyledTableCell>
-                <StyledTableCell align="left" data-label="Ver persona">
+              
+                <StyledTableCell align="left" data-label="Capacitado ">
+                {row.capacitado === 'Si' ? <><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>:<> <p style={{ color: 'warning' }} >No Capacitado</p></>}
+                </StyledTableCell>
+                  <StyledTableCell align="left" data-label="Ver persona">
                   <Button onClick={() => navigate('/fiscalizacion/usuarioescuela/persona/' + row.idpersona)}>
                     Ver persona
                   </Button>
                 </StyledTableCell>
-                <StyledTableCell align="left" data-label="Capacitado ">
-                {row.capacitado === 'Si' ? <><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>:<> <p style={{ color: 'warning' }} >No Capacitado</p></>}
-                </StyledTableCell>
-                
                 {/* <StyledTableCell align="left" data-label="Contactado">
                 {row.dato1 == null  || row.dato1 == 'No'? <>  Ausente/Sin determinar <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
             

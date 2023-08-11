@@ -173,11 +173,7 @@ const Lotes = () => {
     }
     // definimos las columnas
     const columns = [
-        {
-            name: "id",
-            label: "ID",
-
-        },
+ 
         {
             name: "nombre",
             label: "Escuela",
@@ -206,16 +202,7 @@ const Lotes = () => {
             label: "cantidad que necesitan movil",
 
         },
-        {
-            name: "cantidad_veg",
-            label: "cantidad veg",
-
-        },
-        {
-            name: "cantidad_cel",
-            label: "cantidad celiaco",
-
-        },
+   
         {
             name: "Traslado",
             options: {
