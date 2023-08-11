@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import logo from "../../../../Assets/flork.png";
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -46,7 +45,9 @@ setActivo(true)
 
 })
 
-
+const islogo = {
+  width: "130px",                  
+  };
 
   const handleClickOpen = async () => {
     await traer()
@@ -77,7 +78,7 @@ setActivo(true)
 
 
     
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+    <div >
     <Box
 
       sx={{
@@ -90,15 +91,17 @@ setActivo(true)
       <Button variant="contained" onClick={handleClickOpen}>Ver escuelas faltantes<LeaderboardIcon/></Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
-
+      {datos.length>0 ? <></>:<><h2>Escuelas Completas</h2></>}
       {activo ? <>
         <DialogContent>
+        {datos.length>0 ? <>
+        
         {datos.map((row) => (
                             <>
                             <p>{row.numero}</p> <p>{row.nombre_escuela}</p> <br/>
          </>
                   ))}
-
+</>:<><img style={islogo} src={logo} alt="logo" />  </>}
 
 
 </DialogContent>
