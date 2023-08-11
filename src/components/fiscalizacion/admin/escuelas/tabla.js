@@ -200,7 +200,7 @@ const Lotes = () => {
 
         },
 
-      /*  
+      
         {
             name: "cantidad_movil",
             label: "cantidad que necesitan movil",
@@ -215,7 +215,7 @@ const Lotes = () => {
             name: "cantidad_cel",
             label: "cantidad celiaco",
 
-        }, */
+        }, 
         {
             name: "Traslado",
             options: {
