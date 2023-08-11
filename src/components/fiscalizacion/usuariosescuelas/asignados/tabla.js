@@ -322,7 +322,7 @@ export default function Ingresos() {
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="Presente">
 
-                  {row.dato1 ===null? <>Si<Checkbox onClick={() => checkede(row.id)}  {...label}  /> No<Checkbox   onClick={() => checkede(row.id)}  {...label} /></> :<>  { row.dato1 === "Si" ? <> Si<Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /> No<Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Si<Checkbox onClick={() => checkede(row.id)}  {...label}  /> No<Checkbox   onClick={() => checkede(row.id)}  {...label} defaultChecked/> </>} </>}
+                  {row.dato1 ===null? <>Si<Checkbox onClick={() => checkede(row.id)}  {...label}  /> No<Checkbox   onClick={() => checkede(row.id)}  {...label} /></> :<>  { row.dato1 === "Si" ? <> Si<Checkbox   {...label} defaultChecked disabled /> No<Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Si<Checkbox onClick={() => checkede(row.id)}  {...label}  /> No<Checkbox    {...label} defaultChecked disabled /> </>} </>}
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="telefono">
                   {row.telefono}
