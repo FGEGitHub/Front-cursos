@@ -91,7 +91,8 @@ const islogo = {
       <Button variant="contained" onClick={handleClickOpen}>Ver escuelas faltantes<LeaderboardIcon/></Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
-      {datos.length>0 ? <></>:<><h2>Escuelas Completas</h2></>}
+        {datos ? <>
+      {datos.length>0 ? <></>:<><h2>Escuelas Completas</h2></>}</>:<></>}
       {activo ? <>
         <DialogContent>
         {datos.length>0 ? <>
