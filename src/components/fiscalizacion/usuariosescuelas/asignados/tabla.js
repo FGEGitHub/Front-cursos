@@ -29,11 +29,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: "#1de9b6",
   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
+    
   },
 }));
 
@@ -215,6 +216,11 @@ export default function Ingresos() {
 
   const columns = [
     {
+      name: "numero",
+      label: "numero mesa",
+
+    },
+    {
       name: "dni",
       label: "dni",
     },
@@ -235,11 +241,7 @@ export default function Ingresos() {
       label: "escuela",
 
     },
-    {
-      name: "numero",
-      label: "numero mesa",
-
-    },
+ 
 
     {
       name: "telefono",
