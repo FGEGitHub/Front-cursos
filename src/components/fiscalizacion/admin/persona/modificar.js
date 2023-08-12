@@ -218,7 +218,7 @@ export default function ClienteNuevo(props) {
                      defaultValue={30}
                      onChange={handleChange}
                      inputProps={{
-                         name: 'Vegano',
+                         name: 'vegano',
                          id: 'uncontrolled-native',
 
                      }}
