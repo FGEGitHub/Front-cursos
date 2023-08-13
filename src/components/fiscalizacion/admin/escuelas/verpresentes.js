@@ -33,7 +33,8 @@ export default function ClienteNuevo(props) {
    
 
     const datos = await servicioFisca.cargarpresentes()
-    setTurnos(datos[0])
+    console.log(datos)
+    setTurnos(datos)
     setNoreg(datos[1])
    setActivo(true)
   
@@ -95,44 +96,22 @@ export default function ClienteNuevo(props) {
       <Dialog open={open} onClose={handleClose}>
      
         <DialogTitle>Resumen final </DialogTitle>
-        <Paper
-        sx={{
-          cursor: 'pointer',
-          background: '#fafafa',
-          color: '#bdbdbd',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
-        }}
-      >
+       
         <DialogContent>
           <DialogContentText>
         Datos de la mesa
           </DialogContentText>
-          <form  onSubmit={handleDeterminar}> 
+    
       
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Escuela
-                            </InputLabel>
-                           
-                             <option value={'1'}> Elegir</option>
+           
+          { turnos ? <>
+                 Cantidad de presentes: {turnos[0]} <br/>
+                 Cantidad de ausentes: {turnos[1]}<br/>
+                 Cantidad de sin marcar: {turnos[2]}<br/>
+                     </>: <>Cargando</>}
+       
                  
-                    
-                     { turnos ? <>
-                    {turnos.map((row) => (
-                                       
-                              <p> {row.dni}  {row.nombre} {row.misma}</p>
-
-                    ))}
-                     </>: <>Cargando</>}
-                     
-                     { noreg ? <>
-                     No Registrados
-                    {noreg.map((row) => (
-                                       
-                              <p> {row.dni} </p>
-
-                    ))}
-                     </>: <>Cargando</>}
+               
                      
                
                     
@@ -142,12 +121,12 @@ export default function ClienteNuevo(props) {
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>
-           </form>
+          
          
 
         </DialogContent>
       
-        </Paper>
+        
         
       </Dialog>
       

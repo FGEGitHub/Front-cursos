@@ -100,10 +100,10 @@ const cargarinscripciones = async (id) => {
   return data
 }
 
-const cargarpresentes = async (id) => {
+const cargarpresentes = async () => {
   ////
-  console.log(id)
-  const { data } = await axios.post(baseUrl + 'cargarpresentes', id, config)
+
+  const { data } = await axios.get(baseUrl + 'cargarpresentes',  config)
   console.log(data)
   return data
 }
