@@ -128,8 +128,8 @@ export default function ClienteNuevo(props) {
                    
                    
                    {ver1? <>
-                    {turnos[0].map((ob)=><>{ob.dni}<br/></>
               
+                    {turnos[0].map((ob)=><>{ob.dni}  -  {ob.nombre}<br/></>
             )}
                    </>:<></>}
                    
