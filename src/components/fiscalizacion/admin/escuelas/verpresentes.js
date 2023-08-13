@@ -13,7 +13,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 import InputLabel from '@mui/material/InputLabel';
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import { Paper } from '@mui/material';
-
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 export default function ClienteNuevo(props) {
   let params = useParams()
@@ -23,6 +23,9 @@ export default function ClienteNuevo(props) {
   const [form, setForm] = useState({})
   const [cargandomesas, setCargandomesas] = useState(false)
   const [noreg, setNoreg] = useState()
+  const [ver1, setVer1] = useState(false)
+  const [ver2, setVer2] = useState(false)
+  const [ver3, setVer3] = useState(false)
   const handleChange = (e) =>{
     setForm({  ...form, [e.target.name]: e.target.value }) 
     traermesas(e.target.value)
@@ -85,6 +88,20 @@ export default function ClienteNuevo(props) {
     setOpen(false);
    
   };
+  const ver11 = () => {
+    setVer1(!ver1);
+   
+  };
+
+  const ver22 = () => {
+    setVer2(!ver2);
+   
+  };
+
+  const ver33 = () => {
+    setVer3(!ver3);
+   
+  };
 
   return (
     <div>
@@ -105,9 +122,30 @@ export default function ClienteNuevo(props) {
       
            
           { turnos ? <>
-                 Cantidad de presentes: {turnos[0]} <br/>
-                 Cantidad de ausentes: {turnos[1]}<br/>
-                 Cantidad de sin marcar: {turnos[2]}<br/>
+                 Cantidad de presentes: {turnos[0].length} <Button onClick={ver11}>Ver/ocultar <RemoveRedEyeIcon  variant="outlined" color="success" style={{ marginLeft: "auto" }} /></Button> <br/>
+                 Cantidad de ausentes: {turnos[1].length} <Button onClick={ver22}>Ver/ocultar<RemoveRedEyeIcon  variant="outlined" color="success" style={{ marginLeft: "auto" }} /></Button><br/>
+                 Cantidad de sin marcar: {turnos[2].length} <Button onClick={ver33}>Ver/ocultar <RemoveRedEyeIcon  variant="outlined" color="success" style={{ marginLeft: "auto" }} /> </Button><br/>
+                   
+                   
+                   {ver1? <>
+                    {turnos[0].map((ob)=><>{ob.dni}<br/></>
+              
+            )}
+                   </>:<></>}
+                   
+                   
+                   {ver2? <>
+                    {turnos[1].map((ob)=>
+              <>{ob.dni}<br/></>
+            )}
+                   </>:<></>}
+                   
+                   {ver3? <>
+                    {turnos[2].map((ob)=>
+             <>{ob.dni}<br/></>
+            )}
+                   </>:<></>}
+                   
                      </>: <>Cargando</>}
        
                  
