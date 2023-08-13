@@ -136,13 +136,13 @@ export default function ClienteNuevo(props) {
                    
                    {ver2? <>
                     {turnos[1].map((ob)=>
-              <>{ob.dni}<br/></>
+              <>{ob.dni} -  {ob.nombre}<br/></>
             )}
                    </>:<></>}
                    
                    {ver3? <>
                     {turnos[2].map((ob)=>
-             <>{ob.dni}<br/></>
+             <>{ob.dni} -  {ob.nombre}<br/></>
             )}
                    </>:<></>}
                    
