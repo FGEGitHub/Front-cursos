@@ -30,9 +30,7 @@ export default function SkeletonTypography() {
       <Grid item xs>
         <TypographyDemo loading />
       </Grid>
-      <Grid item xs>
-        <TypographyDemo />
-      </Grid>
+   
     </Grid>
   );
 }

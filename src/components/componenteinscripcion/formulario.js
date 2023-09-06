@@ -8,7 +8,9 @@ import { Button } from '@mui/material';
 import * as React from 'react';
 import Carga from './carga'
 import MuiAlert from '@mui/material/Alert';
-
+import Logoesme from '../../Assets/logoesme.webp';
+import Logocuqui from '../../Assets/logocuqui.webp';
+import Logoccari from '../../Assets/logoccari.webp';
 import styled from 'styled-components';
 
 const StyledParagraph = styled.p`
@@ -38,7 +40,22 @@ const Estracto = () => {
         window.scrollTo(0, 0);
         // getClients();
     }, []);
-
+    const islogo = {
+        width: "70%",   
+        margin: 0,
+        padding: 0,
+        display: "flex",
+                
+        };
+        const islogoc = {
+            width: "70%",  
+            height: "70%",   
+            margin: 0,
+            padding: 25,
+            display: "flex",
+                    
+            };
+     
     const handleChange = (e) => {
         setInscrip({ ...inscrip, [e.target.name]: e.target.value });
     };
@@ -84,12 +101,16 @@ const Estracto = () => {
             }}
         >
             <Box className="logo-container">
-                {/*   <img className="logo" src={logo} alt="logo" /> */}
+            <img style={islogoc} src={Logocuqui} alt="logo" /> 
+            <img style={islogo} src={Logoccari} alt="logo" /> 
+            </Box>
+            <Box className="logo-container">
+            <img style={islogo} src={Logoesme} alt="logo" /> 
             </Box>
             <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" component="div" color="black">
                     <StyledParagraph>
-                        Buenvenidas, etc
+                    Sumate a las Ferias de la Escuela de Mujeres
                         <br />
 
                         Equipo CC ARI Corrientes
@@ -172,7 +193,7 @@ const Estracto = () => {
                     </>:<>
                 <TextField
 
-                    defaultValue={8}
+                 
                     margin="dense"
                     id="name"
                     label="Nombre"
