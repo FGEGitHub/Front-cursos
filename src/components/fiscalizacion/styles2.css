@@ -13,17 +13,15 @@
   animation: aparecerDesdeAbajo 0.5s ease-out;
 }
 
-@media (max-width: 600px) {
-  .aparecer-desde-abajo {
-    background: 'red';
-  }
-}
+
 
 .backgroundinscr {
   background-image: url("../../Assets/dondodegradado.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  width: 100%; /* Asegura que el elemento ocupe todo el ancho de la ventana */
+  height: 100%; /* Asegura que el elemento ocupe toda la altura de la ventana */
   /* Puedes agregar más estilos aquí según tus necesidades */
 }
 
@@ -93,6 +91,12 @@ body {
       width: 100%;
       max-width: 100%;
     }
+    .aparecer-desde-abajo {
+      background: 'red';
+    }
+    .mobile-table-container table tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
   }
   
   .headerText {
@@ -111,9 +115,4 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 10px;
-  }
-  @media (max-width: 600px) {
-    .mobile-table-container table tbody tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
   }

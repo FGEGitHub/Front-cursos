@@ -13,7 +13,7 @@ import Logocuqui from '../../Assets/logocuqui.webp';
 import Logoccari from '../../Assets/logoccari.webp';
 import styled from 'styled-components';
 const styles = {
-    paper: {
+    paperr: {
       cursor: 'pointer',
       background: '#ffffff',
       color: '#bdbdbd',
@@ -27,7 +27,7 @@ const styles = {
       alignItems: 'start',
     },
     '@media (maxWidth: 600px)': {
-      paper: { // Debes anidar los estilos bajo una clave específica
+        paperr: { // Debes anidar los estilos bajo una clave específica
         padding: 5,
         maxWidth: '100%',
        
@@ -66,21 +66,21 @@ const Estracto = () => {
         // getClients();
     }, []);
     const islogo = {
-        width: "70%",  
-        height: "70%",  
+        width: "40%",  
+        height: "40%",  
         margin: 0,
         padding: 0,
         display: "flex",
                 
         };
         const islogoc = {
-            width: "70%",  
-            height: "70%",   
+            width: "50%",  
+            height: "50%",   
             margin: 0,
-            padding: 25,
+            padding: 20,
             display: "flex",
-                    
-            };
+        }
+      
      
     const handleChange = (e) => {
         setInscrip({ ...inscrip, [e.target.name]: e.target.value });
@@ -107,10 +107,10 @@ const Estracto = () => {
 
         <Paper
         className="aparecer-desde-abajo"
-        style={styles.paper}
+        style={styles.paperr}
         >
             <Box className="logo-container">
-            <img style={islogoc} src={Logocuqui} alt="logo" /> 
+            <img style={islogoc}   className="islogoc"   src={Logocuqui} alt="logo" /> 
             <img style={islogo} src={Logoccari} alt="logo" /> 
             </Box>
             <Box className="logo-container">
@@ -127,13 +127,7 @@ const Estracto = () => {
                     </StyledParagraph>
                 </Typography>
             </Box>
-            <Box sx={{ textAlign: 'center' }}>
-                <Typography variant="h5" component="div" color="black">
-                    <StyledParagraph>
-                        Parrafo
-                    </StyledParagraph>
-                </Typography>
-            </Box>
+     
       
       <Box sx={{ textAlign: 'center',marginLeft: "2em",marginRight: "2em", }}>
             <TextField
@@ -304,18 +298,80 @@ const Estracto = () => {
             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                 <Typography variant="h5" component="div" color="black">
                     <StyledParagraph>
-                        <b>¿Cómo te enteraste?</b>
+                        <b>Datos adicionales</b>
                     </StyledParagraph>
                 </Typography>
             </InputLabel>
-
+          
+        
+            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                <Typography variant="h5" component="div" color="black">
+                    <StyledParagraph>
+                        Nivel educativo
+                    </StyledParagraph>
+                </Typography>
+            </InputLabel>
+            </Box>
+            <Box sx={{ textAlign: 'center',marginLeft: "2em",marginRight: "2em", }}>
             <NativeSelect
                 defaultValue={30}
                 onChange={handleChange}
                 inputProps={{
-                    name: 'como_se_entero',
+                    name: 'nivel_secundario',
+                    
+                }}
+                sx={ 'width:200px' }
+            >
+                <option value={'Sin determinar'}>Elegir</option>
+                <option value={'Secundario'}>
+                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
+                        Secundario
+                    </Typography>
+                </option>
+                <option value={'Amigo'}>Universitario incompleto</option>
+                <option value={'Amigo'}>Universitario completo</option>
+                
+            </NativeSelect>
+            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                <Typography variant="h5" component="div" color="black">
+                    <StyledParagraph>
+                       Trabajas?
+                    </StyledParagraph>
+                </Typography>
+            </InputLabel>
+            <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                    name: 'trabajo',
                     id: 'uncontrolled-native',
                 }}
+                sx={ 'width:200px' }
+            >
+                <option value={'Sin determinar'} >Elegir</option>
+                <option value={'si'}>
+                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
+                       Si
+                    </Typography>
+                </option>
+                <option value={'No'}>No</option>
+             
+            </NativeSelect>
+            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                <Typography variant="h5" component="div" color="black">
+                    <StyledParagraph>
+                      Tipo de trabajo
+                    </StyledParagraph>
+                </Typography>
+            </InputLabel>
+            <NativeSelect
+                defaultValue={30}
+                onChange={handleChange}
+                inputProps={{
+                    name: 'tipo_trabajo',
+                    id: 'uncontrolled-native',
+                }}
+                sx={ 'width:200px' }
             >
                 <option value={'Sin determinar'}>Elegir</option>
                 <option value={'Flyer'}>
@@ -323,58 +379,24 @@ const Estracto = () => {
                         Lo vi en un Flyer
                     </Typography>
                 </option>
-                <option value={'Pagina web'}>Por una Pagina web</option>
-                <option value={'Amigo'}>Me comento un amigo</option>
-                <option value={'Otra'}>Otra</option>
+                <option value={'Pagina web'}>Formal</option>
+                <option value={'Amigo'}>Informal</option>
+               
             </NativeSelect>
+
 
             <br />
 
-            {inscrip.como_se_entero === 'Amigo' && (
-                <>
-                    <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                        ¿Cómo se llama ese amigo?
-                    </InputLabel>
-                    <TextField
+           
 
-                        margin="dense"
-                        id="name"
-                        label="Apellido amigo"
-                        name="apellido_referido"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-                        margin="dense"
-                        id="name"
-                        label="Nombre amigo"
-                        name="nombre_referido"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                </>
-            )}
-
-            {['Amigo', 'Sin determinar', 'Flyer', 'Pagina web', null].indexOf(inscrip.como_se_entero) === -1 && (
-                <TextField
-                    margin="dense"
-                    id="name"
-                    label="De qué otra manera?"
-                    name="como_se_entero"
-                    onChange={handleChange}
-                    fullWidth
-                    variant="standard"
-                />
-            )}
+       
 
             <br />
 
             <InputLabel variant="standard" htmlFor="uncontrolled-native">
                 <Typography variant="p" component="div" color="black">
                     <StyledParagraph>
-                        <b>¿Fuiste fiscal en las elecciones del  11/06/2023?</b>
+                       Tenes hijos
                     </StyledParagraph>
                 </Typography>
             </InputLabel>
@@ -386,6 +408,7 @@ const Estracto = () => {
                     name: 'asignado_ant',
                     id: 'uncontrolled-native',
                 }}
+                sx={ 'width:200px' }
             >
                 <option value={'Sin determinar'}>Elegir</option>
 
@@ -393,6 +416,7 @@ const Estracto = () => {
                 <option value={'No'}>No</option>
 
             </NativeSelect>
+          
             <br />
             </Box>
             <CardActions>
