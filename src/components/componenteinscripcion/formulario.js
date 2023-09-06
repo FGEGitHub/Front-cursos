@@ -12,7 +12,32 @@ import Logoesme from '../../Assets/logoesme.webp';
 import Logocuqui from '../../Assets/logocuqui.webp';
 import Logoccari from '../../Assets/logoccari.webp';
 import styled from 'styled-components';
-
+const styles = {
+    paper: {
+      cursor: 'pointer',
+      background: '#ffffff',
+      color: '#bdbdbd',
+      border: '1px dashed #ccc',
+      padding: 10,
+      width: '100%',
+      maxWidth: 600,
+      margin: '20px auto', // Margen superior e inferior de 20px, centrado horizontalmente
+      display: 'grid',
+      gridTemplateRows: 'auto 1fr',
+      alignItems: 'start',
+    },
+    '@media (maxWidth: 600px)': {
+      paper: { // Debes anidar los estilos bajo una clave específica
+        padding: 5,
+        maxWidth: '100%',
+       
+        margin: 0,
+      }
+    }
+  };
+  
+  
+  
 const StyledParagraph = styled.p`
   font-family: 'Montserrat', sans-serif;
 `;
@@ -41,7 +66,8 @@ const Estracto = () => {
         // getClients();
     }, []);
     const islogo = {
-        width: "70%",   
+        width: "70%",  
+        height: "70%",  
         margin: 0,
         padding: 0,
         display: "flex",
@@ -76,29 +102,12 @@ const Estracto = () => {
         }
         setCargando(false);
     };
-
+   
     return (
 
         <Paper
-            sx={{
-                cursor: 'pointer',
-                background: '#ffffff',
-                color: '#bdbdbd',
-                border: '1px dashed #ccc',
-                '&:hover': { border: '1px solid #ccc' },
-                padding: 10,
-                width: '100%',
-                maxWidth: 380,
-                margin: '20px auto',
-                display: 'grid',
-                gridTemplateRows: 'auto 1fr',
-                alignItems: 'start',
-                '@media (max-width: 600px)': {
-                    padding: 5,
-                    maxWidth: '100%',
-                    margin: 0,
-                },
-            }}
+        className="aparecer-desde-abajo"
+        style={styles.paper}
         >
             <Box className="logo-container">
             <img style={islogoc} src={Logocuqui} alt="logo" /> 
@@ -125,6 +134,8 @@ const Estracto = () => {
                     </StyledParagraph>
                 </Typography>
             </Box>
+      
+      <Box sx={{ textAlign: 'center',marginLeft: "2em",marginRight: "2em", }}>
             <TextField
                 margin="dense"
                 id="name"
@@ -185,7 +196,31 @@ const Estracto = () => {
                     fullWidth
                     type="number"
                     variant="standard"
-                /></>}
+                />
+                       <TextField
+                    defaultValue={existe[0].mail}
+                    margin="dense"
+                    id="name"
+                    label="Correo Electronico"
+                    name="mail"
+                    onChange={handleChange}
+                    fullWidth
+                    
+                    variant="standard"
+                />
+                       <TextField
+                    defaultValue={existe[0].barrio}
+                    margin="dense"
+                    id="name"
+                    label="Barrio"
+                    name="barrio"
+                    onChange={handleChange}
+                    fullWidth
+                   
+                    variant="standard"
+                />
+                
+                </>}
             </> : <>
 
             {loading ? <>
@@ -226,7 +261,30 @@ const Estracto = () => {
                     fullWidth
                     type="number"
                     variant="standard"
-                /></>}
+                />
+                       <TextField
+                 
+                    margin="dense"
+                    id="name"
+                    label="Correo Electronico"
+                    name="mail"
+                    onChange={handleChange}
+                    fullWidth
+                    
+                    variant="standard"
+                />
+                       <TextField
+                    
+                    margin="dense"
+                    id="name"
+                    label="Barrio"
+                    name="barrio"
+                    onChange={handleChange}
+                    fullWidth
+                   
+                    variant="standard"
+                />
+                </>}
             </>}
 
             <TextField
@@ -261,7 +319,7 @@ const Estracto = () => {
             >
                 <option value={'Sin determinar'}>Elegir</option>
                 <option value={'Flyer'}>
-                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" sans-serif>
+                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
                         Lo vi en un Flyer
                     </Typography>
                 </option>
@@ -336,7 +394,7 @@ const Estracto = () => {
 
             </NativeSelect>
             <br />
-
+            </Box>
             <CardActions>
                 {/* Acciones: */}
                 {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.telefono && inscrip.como_se_entero && inscrip.asignado_ant ?

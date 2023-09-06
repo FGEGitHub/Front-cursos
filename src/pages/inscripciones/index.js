@@ -20,7 +20,7 @@ export default function Paginas() {
 
     return (
         <>
-      <div >
+      <div className="backgroundinscr" >
 <br/>
         <Formulario/>
         
