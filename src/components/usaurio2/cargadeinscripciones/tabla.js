@@ -42,7 +42,7 @@ const Estracto = () => {
     }
     const cargar = async (id) => {
       
-      const datos = await servicioInscripciones.cargarinscripciones(fecha)
+      const datos = await servicioInscripciones.cargarexcelpersonas(fecha)
       alert(datos)
       
     }
@@ -147,7 +147,7 @@ const Estracto = () => {
 
                             <Button
                                 onClick={() => cargar(fecha.id)}
-                            >   Cargar inscripciones</Button>
+                            >   Cargar personas</Button>
                             <MUIDataTable
 
                                 title={"Tabla de estracto"}

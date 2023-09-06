@@ -148,7 +148,15 @@ const listaExtractos= async  () => {
     console.log(data)
    return data
    } 
-
+   
+   
+   const cargarexcelpersonas= async  (id) => {
+    ////
+    console.log(id)
+    const {data } = await axios.post(baseUrl+'cargarexcelpersonas',id,config)
+      console.log(data)
+     return data
+     } 
    
    const cargarinscripciones= async  (id) => {
     ////
@@ -176,4 +184,4 @@ const listaExtractos= async  () => {
      } 
 
      
-export default {lista,incriptoss,actualizarcursado,borrarturnos,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+export default {lista,incriptoss,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

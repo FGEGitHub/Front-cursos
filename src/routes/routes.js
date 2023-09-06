@@ -88,6 +88,11 @@ import Movilidad from '../pages/fiscalizacion/usuariomovilidad/escuelas'
 import Escru from '../pages/fiscalizacion/escrutinio/index'
 import Consultas from '../pages/fiscalizacion/Adminmobile/menu'
 import Circuitos from '../pages/fiscalizacion/Admin/circuitos'
+
+
+import Inscripcionesesme from '../pages/inscripciones'
+
+
 const Rutas = [
 	 <Navbar/> ,
 
@@ -151,7 +156,7 @@ const Rutas = [
 		{ path: '/encargados/clase/:id', element: <Clase4 /> },
 		{ path: '/encargados/estadoalumnas/:id', element: <Estadoalumnas /> },
 
-
+		{ path: '/inscripciones', element: <Inscripcionesesme /> },
 
 
 		{ path: '/fiscalizacion/login', element: <Loginfis /> },
