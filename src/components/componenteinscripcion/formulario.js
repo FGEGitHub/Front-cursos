@@ -57,7 +57,7 @@ const Estracto = () => {
         await setExiste(clients);
         //traerpersona
        
-        console.log(existe.apellido)
+     
      
     };
 
