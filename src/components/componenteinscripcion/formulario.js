@@ -106,7 +106,7 @@ const Estracto = () => {
     return (
 
         <Paper
-        className="aparecer-desde-abajo"
+       
         style={styles.paperr}
         >
             <Box className="logo-container">
