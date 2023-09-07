@@ -711,6 +711,27 @@ style={{ width: '250px'}}
                     
                     variant="outlined"
                 />
+                {inscrip.direccion ? <></>:<>  <Typography variant="body2" color="textSecondary">
+    Por favor, ingresa tu Direccion de Email
+  </Typography>
+    </>}
+                  <TextField
+
+
+margin="dense"
+id="name"
+label="Domicilio"
+name="direccion"
+onChange={handleChange}
+fullWidth
+variant="outlined"
+fontFamily="Montserrat"
+style={{ width: '250px'}}
+/>
+{inscrip.direccion ? <></>:<>  <Typography variant="body2" color="textSecondary">
+    Por favor, ingresa tu Direccion
+  </Typography>
+    </>}
                        <TextField
                     
                     margin="dense"
@@ -722,6 +743,10 @@ style={{ width: '250px'}}
                    
                     variant="outlined"
                 />
+                {inscrip.barrio ? <></>:<>  <Typography variant="body2" color="textSecondary">
+    Por favor, ingresa tu Barrio
+  </Typography>
+    </>}
                 </>}
             </>}
 
