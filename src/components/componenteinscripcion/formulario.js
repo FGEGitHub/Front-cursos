@@ -618,6 +618,7 @@ const Estracto = () => {
                     </Paper>
                 </>
             ) : (
+                
                 <>
                     <Paper
                         className="aparecer-desde-abajo"
