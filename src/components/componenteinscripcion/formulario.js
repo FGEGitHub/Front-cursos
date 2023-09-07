@@ -255,6 +255,19 @@ const Estracto = () => {
                     style={{ width: '250px'}}
                     variant="outlined"
                 />
+                     <TextField
+
+defaultValue={existe[0].direccion}
+margin="dense"
+id="name"
+label="Nombre"
+name="nombre"
+onChange={handleChange}
+fullWidth
+variant="outlined"
+fontFamily="Montserrat"
+style={{ width: '250px'}}
+/>
                        <TextField
                     defaultValue={existe[0].barrio}
                     margin="dense"
@@ -332,7 +345,27 @@ const Estracto = () => {
                 />
                 {inscrip.mail ? <></>:<>  <Typography variant="body2" color="textSecondary">
     Por favor, ingresa tu Correo electronico
-  </Typography></>}
+  </Typography>
+    </>}
+  <TextField
+
+
+margin="dense"
+id="name"
+label="Domicilio"
+name="direccion"
+onChange={handleChange}
+fullWidth
+variant="outlined"
+fontFamily="Montserrat"
+style={{ width: '250px'}}
+/>
+{inscrip.direccion ? <></>:<>  <Typography variant="body2" color="textSecondary">
+    Por favor, ingresa tu Direccion
+  </Typography>
+    </>}
+  
+
                        <TextField
                      style={{ width: '250px'}}
                     margin="dense"
