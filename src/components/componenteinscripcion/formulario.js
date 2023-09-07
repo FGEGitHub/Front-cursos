@@ -588,6 +588,9 @@ const Estracto = () => {
                                 }}
                                 sx={'width:250px'}
                             >
+
+
+                                
                                 <option value={'Sin determinar'}>Elegir</option>
 
                                 <option value={'Si'}>Para iniciar mi propio emprendimiento o negocio</option>
