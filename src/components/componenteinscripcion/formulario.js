@@ -109,16 +109,16 @@ const Estracto = () => {
             display: "flex",
         }
         const islogo2 = {
-            width: "40%",  
-            height: "40%",  
+            width: "50%",  
+            height: "50%",  
             margin: 0,
             padding: 0,
             display: "flex",
                     
             };
             const islogoc2 = {
-                width: "40%",  
-                height: "40%",   
+                width: "60%",  
+                height: "60%",   
                 margin: 0,
                 padding: 20,
                 display: "flex",
@@ -188,7 +188,7 @@ const Estracto = () => {
             
                 type="number"
                 variant="outlined"
-                style={{ width: '200px'}}
+                style={{ width: '250px'}}
               
             />
 
@@ -214,7 +214,7 @@ const Estracto = () => {
                     fullWidth
                     variant="outlined"
                     fontFamily="Montserrat"
-                    style={{ width: '200px'}}
+                    style={{ width: '250px'}}
                 />
            
                 <TextField
@@ -227,7 +227,7 @@ const Estracto = () => {
                     fullWidth
                     variant="outlined"
                     fontFamily="Montserrat"
-                    style={{ width: '200px'}}
+                    style={{ width: '250px'}}
                 />
 
 
@@ -242,7 +242,7 @@ const Estracto = () => {
                     fullWidth
                     type="number"
                     variant="outlined"
-                    style={{ width: '200px'}}
+                    style={{ width: '250px'}}
                 />
                        <TextField
                     defaultValue={existe[0].mail}
@@ -252,7 +252,7 @@ const Estracto = () => {
                     name="mail"
                     onChange={handleChange}
                     fullWidth
-                    style={{ width: '200px'}}
+                    style={{ width: '250px'}}
                     variant="outlined"
                 />
                        <TextField
@@ -263,7 +263,7 @@ const Estracto = () => {
                     name="barrio"
                     onChange={handleChange}
                     fullWidth
-                    style={{ width: '200px'}}
+                    style={{ width: '250px'}}
                     variant="outlined"
                 />
                 
@@ -275,7 +275,7 @@ const Estracto = () => {
                     </>:<>
  
                 <TextField
- style={{ width: '200px'}}
+ style={{ width: '250px'}}
                  
                     margin="dense"
                     id="name"
@@ -298,7 +298,7 @@ const Estracto = () => {
                     fullWidth
                     variant="outlined"
                     fontFamily="Montserrat"
-                    style={{ width: '200px'}}
+                    style={{ width: '250px'}}
                 />
 {inscrip.apellido ? <></>:<>  <Typography variant="body2" color="textSecondary">
     Por favor, ingresa tu Apellido
@@ -314,7 +314,7 @@ const Estracto = () => {
                     fullWidth
                     type="number"
                     variant="outlined"
-                    style={{ width: '200px'}}
+                    style={{ width: '250px'}}
                 />
                 {inscrip.apellido ? <></>:<>  <Typography variant="body2" color="textSecondary">
     Por favor, ingresa tu telefono
@@ -327,14 +327,14 @@ const Estracto = () => {
                     name="mail"
                     onChange={handleChange}
                     fullWidth
-                    
+                    style={{ width: '250px'}}
                     variant="outlined"
                 />
                 {inscrip.mail ? <></>:<>  <Typography variant="body2" color="textSecondary">
     Por favor, ingresa tu Correo electronico
   </Typography></>}
                        <TextField
-                     style={{ width: '200px'}}
+                     style={{ width: '250px'}}
                     margin="dense"
                     id="name"
                     label="Barrio"
@@ -348,7 +348,7 @@ const Estracto = () => {
             </>}
 
             <TextField
- style={{ width: '200px'}}
+ style={{ width: '250px'}}
                 margin="dense"
                 id="name"
                 label="Telefono alternativo"
@@ -364,7 +364,8 @@ const Estracto = () => {
             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                 <Typography variant="p" component="div" color="black">
                     <StyledParagraph>
-                        <b>Datos adicionales </b>
+                        <b>Datos adicionales que nos <br/>
+                            interesaria saber de vos  </b>
                     </StyledParagraph>
                 </Typography>
             </InputLabel>
@@ -386,7 +387,7 @@ const Estracto = () => {
                     name: 'nivel_secundario',
                     
                 }}
-                sx={ 'width:200px' }
+                sx={ 'width:250px' }
             >
                 <option value={'Sin determinar'}>Elegir</option>
                 <option value={'Secundario'}>
@@ -412,7 +413,7 @@ const Estracto = () => {
                     name: 'trabajo',
                     id: 'uncontrolled-native',
                 }}
-                sx={ 'width:200px' }
+                sx={ 'width:250px' }
             >
                 <option value={'Sin determinar'} >Elegir</option>
                 <option value={'si'}>
@@ -437,7 +438,7 @@ const Estracto = () => {
                     name: 'tipo_trabajo',
                     id: 'uncontrolled-native',
                 }}
-                sx={ 'width:200px' }
+                sx={ 'width:250px' }
             >
                 <option value={'Sin determinar'}>Elegir</option>
                 <option value={'Flyer'}>
@@ -474,7 +475,7 @@ const Estracto = () => {
                     name: 'asignado_ant',
                     id: 'uncontrolled-native',
                 }}
-                sx={ 'width:200px' }
+                sx={ 'width:250px' }
             >
                 <option value={'Sin determinar'}>Elegir</option>
 
@@ -708,7 +709,7 @@ const Estracto = () => {
             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                 <Typography variant="p" component="div" color="black">
                     <StyledParagraph>
-                        <b>Datos adicionales</b>
+                        <b>Datos adicionales que nos interesaria saber de vos</b>
                     </StyledParagraph>
                 </Typography>
             </InputLabel>
@@ -730,7 +731,7 @@ const Estracto = () => {
                     name: 'nivel_secundario',
                     
                 }}
-                sx={ 'width:200px' }
+                sx={ 'width:250px' }
             >
                 <option value={'Sin determinar'}>Elegir</option>
                 <option value={'Secundario'}>
@@ -756,7 +757,7 @@ const Estracto = () => {
                     name: 'trabajo',
                     id: 'uncontrolled-native',
                 }}
-                sx={ 'width:200px' }
+                sx={ 'width:250px' }
             >
                 <option value={'Sin determinar'} >Elegir</option>
                 <option value={'si'}>
@@ -781,7 +782,7 @@ const Estracto = () => {
                     name: 'tipo_trabajo',
                     id: 'uncontrolled-native',
                 }}
-                sx={ 'width:200px' }
+                sx={ 'width:250px' }
             >
                 <option value={'Sin determinar'}>Elegir</option>
                 <option value={'Flyer'}>
@@ -818,7 +819,7 @@ const Estracto = () => {
                     name: 'asignado_ant',
                     id: 'uncontrolled-native',
                 }}
-                sx={ 'width:200px' }
+                sx={ 'width:250px' }
             >
                 <option value={'Sin determinar'}>Elegir</option>
 
