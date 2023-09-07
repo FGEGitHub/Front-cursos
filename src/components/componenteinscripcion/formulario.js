@@ -117,8 +117,8 @@ const Estracto = () => {
                     
             };
             const islogoc2 = {
-                width: "60%",  
-                height: "60%",   
+                width: "50%",  
+                height: "50%",   
                 margin: 0,
                 padding: 20,
                 display: "flex",
