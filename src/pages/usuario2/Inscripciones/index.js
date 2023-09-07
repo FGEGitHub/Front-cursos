@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Listaaclaracioncriterios from '../../../components/usaurio2/TablaClasificacion'
 import ListaCursos from '../../../components/usaurio2/inscripciones/listacursos'
-
+import Mantenimiento from '../../../Assets/mantenimiento.jpeg';
 import TabladeCriterios from '../../../components/usaurio2/inscripciones/TablaPrioridades'
 import { Paper } from '@mui/material';
  
@@ -43,6 +43,13 @@ export default function Paginas() {
     
     
     
+    const islogo = {
+      width: "70%",   
+      margin: 0,
+      padding: 0,
+      display: "flex",
+              
+      };
 
 
     return (
@@ -50,7 +57,8 @@ export default function Paginas() {
 < >
 { logueado ? <div  > 
     <MenuUsuario4>
-    <Paper
+    <img style={islogo} src={Mantenimiento} alt="logo" /> 
+   {/*  <Paper
         sx={{
           cursor: 'pointer',
           background: '#2c387e',
@@ -63,7 +71,7 @@ export default function Paginas() {
   <br/>  <br/>
   <Listaaclaracioncriterios/>
   <TabladeCriterios/>
-  </Paper>
+  </Paper> */}
  </MenuUsuario4> 
 
  </div>   :<div></div>  }

@@ -2,7 +2,7 @@ import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cursado from '../../../components/usaurio2/cursado/todos'
-
+import Mantenimiento from '../../../Assets/mantenimiento.jpeg';
  
 export default function Paginas() {
 
@@ -35,7 +35,14 @@ export default function Paginas() {
     }, []) 
     
     
-    
+       
+    const islogo = {
+      width: "70%",   
+      margin: 0,
+      padding: 0,
+      display: "flex",
+              
+      };
 
 
     return (
@@ -44,8 +51,8 @@ export default function Paginas() {
 { logueado ? <div> 
     <MenuUsuario4>
 
-    <Cursado/>
-
+  {/*   <Cursado/> */}
+    <img style={islogo} src={Mantenimiento} alt="logo" /> 
  </MenuUsuario4> 
 
  </div>   :<div></div>  }
