@@ -51,13 +51,13 @@ const Estracto = () => {
     const navigate = useNavigate();
 
     const getClients = async (e) => {
-       
+        setLoading(true)
         const clients = await servicioPersonas.traerpersona(e);
         console.log(clients)
         await setExiste(clients);
         //traerpersona
-       
-     
+        setLoading(false)
+        console.log(existe.apellido)
      
     };
 
@@ -106,7 +106,7 @@ const Estracto = () => {
     return (
 
         <Paper
-       
+        className="aparecer-desde-abajo"
         style={styles.paperr}
         >
             <Box className="logo-container">
