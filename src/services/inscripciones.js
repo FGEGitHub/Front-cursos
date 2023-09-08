@@ -182,6 +182,12 @@ const listaExtractos= async  () => {
         console.log(data)
       return data
      } 
+     const incriptas2da= async  () => {
 
+
+      const {data } = await axios.get(baseUrl+'incriptas2da',config)
+        console.log(data)
+      return data
+     } 
      
-export default {lista,incriptoss,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+export default {lista,incriptoss,incriptas2da,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

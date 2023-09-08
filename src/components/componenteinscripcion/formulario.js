@@ -533,10 +533,6 @@ const Estracto = () => {
 
                             </> : <></>}
 
-                            Tipo de empleo
-                            Monotributista/cuenta propista
-                            En relación de dependencia
-                            Ambos
 
                             <br />
 
@@ -1044,9 +1040,9 @@ const Estracto = () => {
 
                                 </NativeSelect>
                                 <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="p" component="div" color="black">
+                                    <Typography variant="h5" component="div" color="black">
                                         <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
+                                            Tipo de empleo
                                         </StyledParagraph>
                                     </Typography>
                                 </InputLabel>
@@ -1078,7 +1074,7 @@ const Estracto = () => {
 
                             <br />
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
+                                <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
                                         Tenes hijos
                                     </StyledParagraph>
@@ -1107,7 +1103,7 @@ const Estracto = () => {
                                
                             {inscrip.hijos == "Si" ? <>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
+                                <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
                                         Cuantos hijos?
                                     </StyledParagraph>
@@ -1129,7 +1125,7 @@ const Estracto = () => {
 
 
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
+                                <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
                                         Participaste de algún curso de la <br />
                                         Escuela de Mujeres Emprendedoras<br />
@@ -1157,7 +1153,7 @@ const Estracto = () => {
 
                             <br />
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
+                                <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
                                         Por qué elegiste tomar este curso?
                                     </StyledParagraph>
@@ -1183,7 +1179,7 @@ const Estracto = () => {
 
                             </NativeSelect>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
+                                <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
                                         Seleccionar prioridad 1
                                     </StyledParagraph>
@@ -1209,7 +1205,7 @@ const Estracto = () => {
 
                             </NativeSelect>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
+                                <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
                                         Seleccionar prioridad 2
                                     </StyledParagraph>

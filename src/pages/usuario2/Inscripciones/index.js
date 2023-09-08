@@ -5,8 +5,8 @@
 import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Listaaclaracioncriterios from '../../../components/usaurio2/TablaClasificacion'
-import ListaCursos from '../../../components/usaurio2/inscripciones/listacursos'
+
+import Lista from '../../../components/usaurio2/inscripciones/inscriptas'
 import Mantenimiento from '../../../Assets/mantenimiento.jpeg';
 import TabladeCriterios from '../../../components/usaurio2/inscripciones/TablaPrioridades'
 import { Paper } from '@mui/material';
@@ -57,21 +57,9 @@ export default function Paginas() {
 < >
 { logueado ? <div  > 
     <MenuUsuario4>
-    <img style={islogo} src={Mantenimiento} alt="logo" /> 
-   {/*  <Paper
-        sx={{
-          cursor: 'pointer',
-          background: '#2c387e',
-          color: '#bdbdbd',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
-        }}
-      >
-  <ListaCursos/>
-  <br/>  <br/>
-  <Listaaclaracioncriterios/>
-  <TabladeCriterios/>
-  </Paper> */}
+ {/*    <img style={islogo} src={Mantenimiento} alt="logo" />  */}
+      <Lista/>
+
  </MenuUsuario4> 
 
  </div>   :<div></div>  }
