@@ -7,26 +7,36 @@ import {
     Button,
  
   } from "@mui/material";
+  import {
+    useMediaQuery,
+    useTheme,
+} from "@mui/material";
 
 export default function Paginas() {
     const navigate = useNavigate();
-
+const theme = useTheme();
 
     const volver = (e) => {
         navigate('/fiscalizacion/administracion/menu')
         
         
             }
-
-    return (
-        <>
-      <div className="backgroundinscr" >
-<br/>
-        <Formulario/>
+            const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+            return (
+                <>
+                     {isMatch ? <>
+              <div className="backgroundinscrmobile" >
+        <br/>
+                <Formulario/>
+                
+                </div>
+                </>:<> <div className="backgroundinscr" >
+        <br/>
+                <Formulario/>
+                
+                </div></>}
+                </>
+           
+            );
         
-        </div>
-        </>
-   
-    );
-
-}
+        }

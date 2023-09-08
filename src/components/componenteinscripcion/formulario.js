@@ -160,9 +160,9 @@ const Estracto = () => {
     return (
         <>
             {isMatch ? (
-                < >
+                <div >
                     <Paper
-                        zoomLevel={zoomLevel}
+                        
                         className="aparecer-desde-abajo"
                         style={styles2.paperr}
                     >
@@ -718,10 +718,10 @@ const Estracto = () => {
 
                         </CardActions>
                     </Paper>
-                </>
+                </div>
             ) : (
 
-                <>
+                <div >
                     <Paper
                         className="aparecer-desde-abajo"
                         style={styles.paperr}
@@ -1270,7 +1270,7 @@ const Estracto = () => {
 
                         </CardActions>
                     </Paper>
-                </>)
+                </div>)
             }
         </>
     );
