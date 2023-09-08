@@ -184,7 +184,7 @@ const TablaNotificaciones = (props) => {
                     <>
                         <MUIDataTable
 
-                            title={"Inscritas"}
+                            title={"Inscriptas"}
                             data={inscriptos}
                             columns={columns}
                             actions={[

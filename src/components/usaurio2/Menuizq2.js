@@ -20,7 +20,7 @@ import PermPhoneMsgIcon from '@mui/icons-material/PermPhoneMsg';
 import BadgeIcon from '@mui/icons-material/Badge';
 import SchoolIcon from '@mui/icons-material/School';
 import { useState, useEffect } from "react";
-
+import logo from "../../Assets/logoesme.webp";
 import Navbar from '../Navbar'
 
 
@@ -91,7 +91,9 @@ export default function MenuIzq2 ({children}) {
         },
      
       ];
-
+      const islogo = {
+        width: "100%",                  
+        };
 
     return(
       <>
@@ -115,7 +117,7 @@ export default function MenuIzq2 ({children}) {
         <Navbar
       logout = {{hanleLogout}}/>
         <Toolbar />
-          Menu administracion
+        <img style={islogo} src={logo} alt="logo" /> 
         
         <Toolbar />
         <Divider />

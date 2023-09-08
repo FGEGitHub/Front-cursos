@@ -21,18 +21,24 @@ export default function Paginas() {
           console.log(user)
           switch (user.nivel) {
             case 1:
-              navigate('/')
+              alert('usuario no autorizado')
+              window.localStorage.removeItem('loggedNoteAppUser')
+           //   navigate('/')
               break;
             case 2:
-              navigate('/administracion/cursos')
+              navigate('/administracion/inscripciones')
               break;
           
             case 3:
-              navigate('/coordinadores/novedades')
+              alert('usuario no autorizado')
+              window.localStorage.removeItem('loggedNoteAppUser')
+            //  navigate('/coordinadores/novedades')
               break;
 
               case 4:
-                navigate('/encargados/cursos')
+                alert('usuario no autorizado')
+                window.localStorage.removeItem('loggedNoteAppUser')
+              //  navigate('/encargados/cursos')
                 break;
            
             default:
