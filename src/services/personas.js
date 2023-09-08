@@ -217,5 +217,11 @@ const desinscribir = async (formdata) => {
 
 }
 
+const enviarinscripcion = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'enviarinscripcion', formdata,config)
+  
+  return data
 
-export default {subirprueba,desinscribir,traerpersona,traerusuario,cambiarestadocursado,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
+}
+export default {subirprueba,desinscribir,enviarinscripcion,traerpersona,traerusuario,cambiarestadocursado,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}

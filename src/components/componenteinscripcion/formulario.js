@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import servicioPersonas from '../../services/personas';
+
 import { Paper, CircularProgress, Typography, Box, TextField, InputLabel, Card, CardActions } from '@mui/material';
 import {
     useMediaQuery,
@@ -55,6 +56,8 @@ const styles2 = {
         gridTemplateRows: 'auto 1fr',
         alignItems: 'start',
         padding: 5,
+        transform: 'scale(0.9)', /* Esto escalará el contenido al 50% del tamaño original */
+       // transform-origin: top left; 
 
     },
 
@@ -143,14 +146,14 @@ const Estracto = () => {
 
     const Inscribir = async (event) => {
         setCargando(true);
-        // const rta = await servicioPersonas.enviarinscripcion(inscrip);
-        // alert(rta);
-        //   if (
-        //       rta ===
-        //         "inscripto correctamente, muchas gracias por completar, por favor aguarda en unos dias nos comunicaremos al numero de telefono registrado"
-        //    ) {
-        //           window.location.reload();
-        //      }
+       const rta = await servicioPersonas.enviarinscripcion(inscrip);
+      alert(rta);
+          if (
+           rta ===
+               "inscripto correctamente, muchas gracias por completar, por favor aguarda en unos dias nos comunicaremos al numero de telefono registrado"
+          ) {
+                window.location.reload();
+            }
         setCargando(false);
     };
 
@@ -245,7 +248,7 @@ const Estracto = () => {
                                         margin="dense"
                                         id="name"
                                         label="Telefono."
-                                        name="telefono"
+                                        name="tel"
                                         onChange={handleChange}
                                         fullWidth
                                         type="number"
@@ -268,8 +271,8 @@ const Estracto = () => {
                                         defaultValue={existe[0].direccion}
                                         margin="dense"
                                         id="name"
-                                        label="Nombre"
-                                        name="nombre"
+                                        label="Domicilio"
+                                        name="direccion"
                                         onChange={handleChange}
                                         fullWidth
                                         variant="outlined"
@@ -393,7 +396,7 @@ const Estracto = () => {
                                 margin="dense"
                                 id="name"
                                 label="Telefono alternativo"
-                                name="telefono2"
+                                name="tel2"
                                 onChange={handleChange}
                                 fullWidth
                                 type="number"
@@ -431,7 +434,7 @@ const Estracto = () => {
                                 sx={'width:250px'}
                             >
 
-
+<option value={'Sin determinar'} >Elegir</option>
                                 <option value={'Universitario incompleto'}>Primario incompleto</option>
                                 <option value={'Secundario completo'}>Secundario completo</option>
                                 <option value={'Secundario incompleto'}>Secundario incompleto</option>
@@ -500,11 +503,40 @@ const Estracto = () => {
                                 </NativeSelect>
 
                                 <br />
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            ¿Qué tipo de empleo posee?
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
 
+                                <NativeSelect
+                                    defaultValue={30}
+                                    onChange={handleChange}
+                                    inputProps={{
+                                        name: 'tipo_empleo',
+                                        id: 'uncontrolled-native',
+                                    }}
+                                    sx={'width:250px'}
+                                >
+                                    <option value={'Sin determinar'}>Elegir</option>
+
+
+
+                                    <option value={'Monotributista/cuenta propista'}>Monotributista/cuenta propista</option>
+                                    <option value={'En relación de dependencia'}>En relación de dependencia</option>
+                                    <option value={'Ambos'}>Ambos</option>
+                                </NativeSelect>
+
+                                <br />
 
                             </> : <></>}
 
-
+                            Tipo de empleo
+                            Monotributista/cuenta propista
+                            En relación de dependencia
+                            Ambos
 
                             <br />
 
@@ -549,9 +581,9 @@ const Estracto = () => {
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
-                                    Participaste de algún curso de la <br/>
-                                    Escuela de Mujeres Emprendedoras<br/>
-                                    anteriormente?
+                                        Participaste de algún curso de la <br />
+                                        Escuela de Mujeres Emprendedoras<br />
+                                        anteriormente?
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
@@ -574,7 +606,7 @@ const Estracto = () => {
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
-                                    Por qué elegiste tomar este curso?
+                                        Por qué elegiste tomar este curso?
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
@@ -588,37 +620,107 @@ const Estracto = () => {
                                 }}
                                 sx={'width:250px'}
                             >
+                                 <option value={'Sin determinar'} >Elegir</option>
 
-
-                                
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={'Si'}>Para iniciar mi propio emprendimiento o negocio</option>
-                                <option value={'No'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
-                                <option value={'No'}>Para continuar mi formación personal y agregar mas conocimientos</option>
-                                <option value={'No'}>Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral</option>
-                                <option value={'No'}>Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó</option>
+                                <option value={'Para iniciar mi propio emprendimiento o negocio'}>Para iniciar mi propio emprendimiento o negocio</option>
+                                <option value={'Para potenciar mi idea de negocio o emprendimiento en curso'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
+                                <option value={'Para continuar mi formación personal y agregar mas conocimientos'}>Para continuar mi formación personal y agregar mas conocimientos</option>
+                                <option value={'Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral'}>Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral</option>
+                                <option value={'Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó'}>Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó</option>
 
                             </NativeSelect>
 
                             <br />
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        Seleccionar prioridad 1
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
+
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'prioridad1',
+                                    id: 'uncontrolled-native',
+                                }}
+                                sx={'width:250px'}
+                            >
+                                <option value={'Sin determinar'}>Elegir</option>
+
+                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
+                                <option value={133}>Maquillaje y peinado para eventos</option>
+                                <option value={134}>Diseño de lenceria femenina</option>
+                                <option value={135}>Textiles y accesorios para el verano</option>
+                                <option value={136}>Refacción integral para el hogar</option>
+
+                            </NativeSelect>
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        Seleccionar prioridad 2
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
+
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'prioridad2',
+                                    id: 'uncontrolled-native',
+                                }}
+                                sx={'width:250px'}
+                            >
+                                <option value={'Sin determinar'}>Elegir</option>
+
+                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
+                                <option value={133}>Maquillaje y peinado para eventos</option>
+                                <option value={134}>Diseño de lenceria femenina</option>
+                                <option value={135}>Textiles y accesorios para el verano</option>
+                                <option value={136}>Refacción integral para el hogar</option>
+
+                            </NativeSelect>
+
                         </Box>
-                        <CardActions>
-                            {/* Acciones: */}
-                            {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.telefono && inscrip.como_se_entero && inscrip.asignado_ant ?
+                        <CardActions sx={{ justifyContent: 'center' }}>
+                            {cargando ? <> <Progreso /> </> : <>
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.tipo_empleo && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                    <>
+                                        {inscrip.trabajo === 'Si' ? <>
 
-                                <>  {inscrip.como_se_entero === "Amigo" ? <>
+                                            {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
+                                                {/*  Caso que sea trabajo si  y completo le tipo  */}
 
-                                    {inscrip.nombre_referido && inscrip.nombre_referido ? <> {/*Obligacion nobre ref */}{/* <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> */} </> : <>{/* <Button variant='contained' disabled>Enviar Inscripcion</Button> */}</>}
-                                </> : <>{/*  <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button> */} </>}
+                                                {inscrip.hijos === 'Si' ? <>
 
-                                </> : <>{/* <Button variant='contained' disabled>Enviar Inscripcion</Button> */}</>}
+                                                    {inscrip.cantidad_hijos ? <>
+                                                        {/*  Caso que sea hijos si y selecciono cuantos  */}
+
+
+                                                        <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button>
+
+                                                    </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                                </> : <>
+                                                    {/*  Caso que sea hijos no */}
+                                                    <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button>  </>}
+                                              
+
+                                            </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                        </> : <>
+                                            {/*  Caso que sea trabajo no */}
+                                            <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button>  </>}
+                                    </>
+                                    : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
+                            </>}
 
                         </CardActions>
                     </Paper>
                 </>
             ) : (
-                
+
                 <>
                     <Paper
                         className="aparecer-desde-abajo"
@@ -703,7 +805,7 @@ const Estracto = () => {
                                         margin="dense"
                                         id="name"
                                         label="Telefono."
-                                        name="telefono"
+                                        name="tel"
                                         onChange={handleChange}
                                         fullWidth
                                         type="number"
@@ -776,7 +878,7 @@ const Estracto = () => {
                                         margin="dense"
                                         id="name"
                                         label="Telefono"
-                                        name="telefono"
+                                        name="tel"
                                         onChange={handleChange}
                                         fullWidth
                                         type="number"
@@ -840,7 +942,7 @@ const Estracto = () => {
                                 margin="dense"
                                 id="name"
                                 label="Telefono alternativo"
-                                name="telefono2"
+                                name="tel2"
                                 onChange={handleChange}
                                 fullWidth
                                 type="number"
@@ -877,6 +979,7 @@ const Estracto = () => {
                                 }}
                                 sx={'width:250px'}
                             >
+                                <option value={'Sin determinar'}>Elegir</option>
                                 <option value={'Universitario incompleto'}>Primario incompleto</option>
                                 <option value={'Secundario completo'}>Secundario completo</option>
                                 <option value={'Secundario incompleto'}>Secundario incompleto</option>
@@ -940,6 +1043,31 @@ const Estracto = () => {
                                     <option value={'Informal'}>Informal</option>
 
                                 </NativeSelect>
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            ¿Qué tipo de empleo posee?
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
+
+                                <NativeSelect
+                                    defaultValue={30}
+                                    onChange={handleChange}
+                                    inputProps={{
+                                        name: 'tipo_empleo',
+                                        id: 'uncontrolled-native',
+                                    }}
+                                    sx={'width:250px'}
+                                >
+                                    <option value={'Sin determinar'}>Elegir</option>
+
+
+
+                                    <option value={'Monotributista/cuenta propista'}>Monotributista/cuenta propista</option>
+                                    <option value={'En relación de dependencia'}>En relación de dependencia</option>
+                                    <option value={'Ambos'}>Ambos</option>
+                                </NativeSelect>
                             </> : <></>}
 
                             <br />
@@ -949,7 +1077,6 @@ const Estracto = () => {
 
 
                             <br />
-
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
@@ -957,28 +1084,56 @@ const Estracto = () => {
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
-
+                          
                             <NativeSelect
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'asignado_ant',
+                                    name: 'hijos',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
                             >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={'Si'}>Si</option>
+                                <option value={'Sin determinar'} >Elegir</option>
+                                <option value={'Si'}>
+                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
+                                        Si
+                                    </Typography>
+                                </option>
                                 <option value={'No'}>No</option>
 
                             </NativeSelect>
+
+                               
+                            {inscrip.hijos == "Si" ? <>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
-                                    Participaste de algún curso de la <br/>
-                                    Escuela de Mujeres Emprendedoras<br/>
-                                    anteriormente?
+                                        Cuantos hijos?
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
+                        
+                                <TextField
+                                    style={{ width: '250px' }}
+                                    margin="dense"
+                                    id="name"
+                                    label="Cantidad de hijos"
+                                    name="cantidad_hijos"
+                                    onChange={handleChange}
+                                    fullWidth
+                                    type="number"
+                                    variant="outlined"
+                                />
+                            </> : <></>}
+
+
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        Participaste de algún curso de la <br />
+                                        Escuela de Mujeres Emprendedoras<br />
+                                        anteriormente?
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
@@ -999,12 +1154,12 @@ const Estracto = () => {
 
                             </NativeSelect>
                             <br />
-                    
-                        <br />
-                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+
+                            <br />
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
-                                    Por qué elegiste tomar este curso?
+                                        Por qué elegiste tomar este curso?
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
@@ -1020,20 +1175,97 @@ const Estracto = () => {
                             >
                                 <option value={'Sin determinar'}>Elegir</option>
 
-                                <option value={'Si'}>Para iniciar mi propio emprendimiento o negocio</option>
-                                <option value={'No'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
-                                <option value={'No'}>Para continuar mi formación personal y agregar mas conocimientos</option>
-                                <option value={'No'}>Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral</option>
-                                <option value={'No'}>Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó</option>
+                                <option value={'Para iniciar mi propio emprendimiento o negocio'}>Para iniciar mi propio emprendimiento o negocio</option>
+                                <option value={'Para potenciar mi idea de negocio o emprendimiento en curso'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
+                                <option value={'Para continuar mi formación personal y agregar mas conocimientos'}>Para continuar mi formación personal y agregar mas conocimientos</option>
+                                <option value={'Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral'}>Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral</option>
+                                <option value={'Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó'}>Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó</option>
 
                             </NativeSelect>
-    </Box>
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        Seleccionar prioridad 1
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
+
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'prioridad1',
+                                    id: 'uncontrolled-native',
+                                }}
+                                sx={'width:250px'}
+                            >
+                                <option value={'Sin determinar'}>Elegir</option>
+
+                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
+                                <option value={133}>Maquillaje y peinado para eventos</option>
+                                <option value={134}>Diseño de lenceria femenina</option>
+                                <option value={135}>Textiles y accesorios para el verano</option>
+                                <option value={136}>Refacción integral para el hogar</option>
+
+                            </NativeSelect>
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        Seleccionar prioridad 2
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
+
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'prioridad2',
+                                    id: 'uncontrolled-native',
+                                }}
+                                sx={'width:250px'}
+                            >
+                                <option value={'Sin determinar'}>Elegir</option>
+
+                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
+                                <option value={133}>Maquillaje y peinado para eventos</option>
+                                <option value={134}>Diseño de lenceria femenina</option>
+                                <option value={135}>Textiles y accesorios para el verano</option>
+                                <option value={136}>Refacción integral para el hogar</option>
+
+                            </NativeSelect>
+
+                        </Box>
                         <br />
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.tel && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario ?
-                                    <>   <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button>        </>
-                                    : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.tipo_empleo && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                    <>
+                                        {inscrip.trabajo === 'Si' ? <>
+
+                                            {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
+                                                {/*  Caso que sea trabajo si  y completo le tipo  */}
+
+                                                {inscrip.hijos === 'Si' ? <>
+
+                                                    {inscrip.cantidad_hijos ? <>
+                                                        {/*  Caso que sea hijos si y selecciono cuantos  */}
+
+
+                                                        <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button>
+
+                                                    </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                                </> : <>
+                                                    {/*  Caso que sea hijos no */}
+                                                    <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button>  </>}
+                                                
+
+                                            </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                        </> : <>
+                                            {/*  Caso que sea trabajo no */}
+                                            <Button variant='contained' onClick={Inscribir}>Enviar Inscripcion</Button>  </>}
+                                    </>
+                                    : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
                             </>}
 
                         </CardActions>
