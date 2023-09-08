@@ -56,7 +56,7 @@ const styles2 = {
         gridTemplateRows: 'auto 1fr',
         alignItems: 'start',
         padding: 5,
-        transform: 'scale(0.9)', /* Esto escalará el contenido al 50% del tamaño original */
+        transform: 'scale(0.95)', /* Esto escalará el contenido al 50% del tamaño original */
        // transform-origin: top left; 
 
     },
