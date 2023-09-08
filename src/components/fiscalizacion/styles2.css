@@ -17,10 +17,10 @@
 
 .backgroundinscr {
   background-image: url("../../Assets/dondodegradado.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  width: 100%; /* Asegura que el elemento ocupe todo el ancho de la ventana */
+  width: 110%; /* Asegura que el elemento ocupe todo el ancho de la ventana */
   height: 100%; /* Asegura que el elemento ocupe toda la altura de la ventana */
   /* Puedes agregar más estilos aquí según tus necesidades */
 }
