@@ -8,7 +8,7 @@ export default function Paginas() {
 
     const [logueado, setLogueado] = useState(false) 
     const navigate = useNavigate();
-    useEffect(() => {
+   /*  useEffect(() => {
       
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
         
@@ -32,7 +32,7 @@ export default function Paginas() {
        
       }
      
-    }, []) 
+    }, [])  */
     
     
        
@@ -48,14 +48,14 @@ export default function Paginas() {
     return (
  
 <>
-{ logueado ? <div> 
-    <MenuUsuario4>
+ <div> 
+
 
     <Cursado/>
     {/* <img style={islogo} src={Mantenimiento} alt="logo" />  */}
- </MenuUsuario4> 
+ 
 
- </div>   :<div></div>  }
+ </div>   
 
 
    </> );
