@@ -67,13 +67,13 @@ const Login = () => {
 
       console.log(user.nivel)
       switch(user.nivel){
-        case 1: navigate('/usuario/novedades')
+    /*     case 1: navigate('/usuario/novedades')
         window.location.reload(true);
-          break;
-          case 2:navigate('/administracion/cursos')
+          break; */
+          case 2:navigate('/administracion/inscripciones')
                 window.location.reload(true);
           break;
-          case 3:navigate('/coordinadores/novedades')
+   /*        case 3:navigate('/coordinadores/novedades')
           window.location.reload(true);
           break;
           case 4:navigate('/encargados/cursos')
@@ -81,7 +81,7 @@ const Login = () => {
           break;
           case 10:navigate('/admin/usuarios')
           window.location.reload(true);
-          break;
+          break; */
           default:
             window.localStorage.removeItem('loggedNoteAppUser')
             navigate('/login')
