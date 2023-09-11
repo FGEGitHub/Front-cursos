@@ -91,7 +91,7 @@ import Circuitos from '../pages/fiscalizacion/Admin/circuitos'
 
 
 import Inscripcionesesme from '../pages/inscripciones'
-
+import Consultasinsc from '../pages/usuario2/consultasmobile'
 
 const Rutas = [
 	 <Navbar/> ,
@@ -134,8 +134,8 @@ const Rutas = [
 		{ path: '/administracion/avancedelcurso/:id', element: <Avancedelcurso /> },
 		{ path: '/administracion/contacto', element: <Contacto /> },
 		{ path: '/administracion/egresadxs', element: <Egresadas /> },
+		{ path: '/administracion/consultasmobile', element: <Consultasinsc /> },
 		
-
 		{ path: '/coordinadores/novedades', element: <Novedades3 /> },
 		{ path: '/coordinadores/cursos', element: <Clases3 /> },
 		{ path: '/coordinadores/tareas', element: <Tareas3 /> },

@@ -189,5 +189,17 @@ const listaExtractos= async  () => {
         console.log(data)
       return data
      } 
-     
-export default {lista,incriptoss,incriptas2da,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+     const buscarestadopordni = async (formdata) => {
+      console.log(formdata)
+      const { data } = await axios.post(baseUrl + 'buscarestadopordni', formdata, config)
+      return data
+    
+    } 
+    const buscarestadopornombre = async (formdata) => {
+      console.log(formdata)
+      const { data } = await axios.post(baseUrl + 'buscarestadopornombre', formdata, config)
+      return data
+    
+    }
+    
+export default {lista,incriptoss,incriptas2da,buscarestadopornombre,buscarestadopordni,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
