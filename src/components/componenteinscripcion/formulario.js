@@ -176,7 +176,7 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="h7" component="div" color="black">
                                 <StyledParagraph>
-                                    Sumate a las Ferias de la Escuela de Mujeres
+                                    Sumate a la Escuela de Mujeres
                                     <br />
 
                                     Equipo CC ARI Corrientes
@@ -752,7 +752,7 @@ InputLabelProps={{
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="p" component="div" color="black">
                                 <StyledParagraph>
-                                    Sumate a las Ferias de la Escuela de Mujeres
+                                    Sumate a la Escuela de Mujeres
                                     <br />
 
                                     Equipo CC ARI Corrientes

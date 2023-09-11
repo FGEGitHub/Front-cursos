@@ -26,6 +26,19 @@ const SimplePage = () => {
       }
   
   },
+  {
+    name: "Nombre",
+    options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+            inscriptonombre(
+                dataIndex,
+                rowIndex,
+                // overbookingData,
+                // handleEditOpen
+            )
+    }
+
+},
     {
         name: "dni",
         label: "dni",
@@ -93,6 +106,21 @@ function mesafuncion(dataIndex, rowIndex, data, onClick) {
 
     );
 }
+
+
+
+
+function inscriptonombre(dataIndex, rowIndex, data, onClick) {
+  return (
+      <>
+         <>{resultados[dataIndex].nombre} {resultados[dataIndex].apellido}</>
+
+
+      </>
+
+  );
+}
+
 function inscripto(dataIndex, rowIndex, data, onClick) {
   return (
       <>
