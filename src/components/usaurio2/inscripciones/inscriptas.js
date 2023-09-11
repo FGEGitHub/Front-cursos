@@ -13,7 +13,10 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -43,6 +46,7 @@ const TablaNotificaciones = (props) => {
     const [usuario, setUsuario] = useState([''])
     const [inscriptos, setinscriptos] = useState([''])
     const [noinscriptos, setnoinscriptos] = useState([''])
+    const [deudaExigible, setDeudaExigible] = useState([''])
     const navigate = useNavigate();
 
     let params = useParams()
@@ -64,7 +68,7 @@ const TablaNotificaciones = (props) => {
                 const novedades_aux = await servicioInscripciones.incriptas2da()
                 console.log(novedades_aux)
                 setinscriptos(novedades_aux[0])
-                setnoinscriptos(novedades_aux[1])
+                setDeudaExigible(novedades_aux[1])
                 setClases(novedades_aux)
        
 
@@ -178,6 +182,47 @@ const TablaNotificaciones = (props) => {
     return (
         <div>
             {clases ? <>
+            
+                <Paper
+                                                sx={{
+                                                    cursor: 'pointer',
+                                                    background: '#eeeeee',
+                                                    color: '#bdbdbd',
+                                                    border: '1px dashed #ccc',
+                                                    width: "80%",
+                                                    '&:hover': { border: '1px solid #ccc' },
+                                                    border: "1px solid black",
+                                                    margin: '75px',
+                                                    display: 'flex'
+
+                                                }}
+                                            >
+
+                                                <TableContainer >
+                                                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                                        <TableHead>
+                                                            <TableRow>
+                                                                <TableCell>Detalles segun prioridad 1 </TableCell>
+
+
+                                                            </TableRow>
+                                                        </TableHead>
+                                                        <TableBody>
+                                                            {deudaExigible.map((row) => (
+                                                                <TableRow
+                                                                    key={row.name}
+                                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                                >
+
+                                                                    <TableCell align="left">{row.datoa}</TableCell>
+                                                                    <TableCell align="left">{new Intl.NumberFormat('de-DE').format(row.datob)}</TableCell>
+
+                                                                </TableRow>
+                                                            ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableContainer>
+                                            </Paper>
                 <div>
 
 
