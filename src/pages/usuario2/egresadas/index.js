@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Perfil from '../../../components/usuario1/Perfil/Info'
 import BuildIcon from '@mui/icons-material/Build';
+import Mantenimiento from '../../../Assets/mantenimiento2.jpeg';
 export default function Paginas() {
 
     const [logueado, setLogueado] = useState(false) 
@@ -36,6 +37,14 @@ export default function Paginas() {
     
     
     
+    const islogo = {
+      width: "60%",   
+      margin: 0,
+      padding: 0,
+      display: "flex",
+              
+      };
+   
 
 
     return (
@@ -44,8 +53,7 @@ export default function Paginas() {
 { logueado ? <div> 
     <MenuUsuario4>
   
-  <h1>Pagina en preparacion <BuildIcon/></h1>
-  <p>Disculpe las molestias</p>
+    <img style={islogo} src={Mantenimiento} alt="logo" /> 
  </MenuUsuario4> 
 
  </div>   :<div></div>  }

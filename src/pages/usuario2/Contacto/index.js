@@ -3,7 +3,7 @@
 import MenuUsuario2 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Mantenimiento from '../../../Assets/mantenimiento.jpeg';
+import Mantenimiento from '../../../Assets/mantenimiento2.jpeg';
 import Clase from '../../../components/contacto/detallecontactos'
  
 export default function Paginas() {
@@ -40,7 +40,7 @@ export default function Paginas() {
     
 
     const islogo = {
-      width: "70%",   
+      width: "60%",   
       margin: 0,
       padding: 0,
       display: "flex",
