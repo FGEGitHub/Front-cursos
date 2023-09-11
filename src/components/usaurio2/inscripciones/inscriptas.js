@@ -203,6 +203,8 @@ const TablaNotificaciones = (props) => {
                                                         <TableHead>
                                                             <TableRow>
                                                                 <TableCell>Detalles segun prioridad 1 </TableCell>
+                                                                <TableCell>Detalles cantidad </TableCell>
+                                                                <TableCell>porcentaje </TableCell>
 
 
                                                             </TableRow>
@@ -215,7 +217,8 @@ const TablaNotificaciones = (props) => {
                                                                 >
 
                                                                     <TableCell align="left">{row.datoa}</TableCell>
-                                                                    <TableCell align="left">{new Intl.NumberFormat('de-DE').format(row.datob)}</TableCell>
+                                                                    <TableCell align="left">{(row.datob)}</TableCell>
+                                                                    <TableCell align="left">{(row.datoc)}%</TableCell>
 
                                                                 </TableRow>
                                                             ))}
