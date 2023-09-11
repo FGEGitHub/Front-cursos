@@ -57,7 +57,7 @@ const styles2 = {
         alignItems: 'start',
         padding: 5,
         transform: 'scale(0.95)', /* Esto escalará el contenido al 50% del tamaño original */
-       // transform-origin: top left; 
+        // transform-origin: top left; 
 
     },
 
@@ -146,14 +146,14 @@ const Estracto = () => {
 
     const Inscribir = async (event) => {
         setCargando(true);
-       const rta = await servicioPersonas.enviarinscripcion(inscrip);
-      alert(rta);
-          if (
-           rta ===
-               "inscripto correctamente, muchas gracias por completar, por favor aguarda en unos dias nos comunicaremos al numero de telefono registrado"
-          ) {
-                window.location.reload();
-            }
+        const rta = await servicioPersonas.enviarinscripcion(inscrip);
+        alert(rta);
+        if (
+            rta ===
+            "inscripto correctamente, muchas gracias por completar, por favor aguarda en unos dias nos comunicaremos al numero de telefono registrado"
+        ) {
+            window.location.reload();
+        }
         setCargando(false);
     };
 
@@ -162,7 +162,7 @@ const Estracto = () => {
             {isMatch ? (
                 <div >
                     <Paper
-                        
+
                         className="aparecer-desde-abajo"
                         style={styles2.paperr}
                     >
@@ -404,7 +404,20 @@ const Estracto = () => {
                             />
 
                             <br />
+                            <br />
+                            <TextField
 
+onChange={handleChange}
+name="fecha_nac"
+id="date"
+label="Fecha de Nacimiento"
+type="date"
+defaultValue="2020-01-01"
+sx={{ width: 220 }}
+InputLabelProps={{
+    shrink: true,
+}}
+/>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
@@ -434,7 +447,7 @@ const Estracto = () => {
                                 sx={'width:250px'}
                             >
 
-<option value={'Sin determinar'} >Elegir</option>
+                                <option value={'Sin determinar'} >Elegir</option>
                                 <option value={'Universitario incompleto'}>Primario incompleto</option>
                                 <option value={'Secundario completo'}>Secundario completo</option>
                                 <option value={'Secundario incompleto'}>Secundario incompleto</option>
@@ -616,7 +629,7 @@ const Estracto = () => {
                                 }}
                                 sx={'width:250px'}
                             >
-                                 <option value={'Sin determinar'} >Elegir</option>
+                                <option value={'Sin determinar'} >Elegir</option>
 
                                 <option value={'Para iniciar mi propio emprendimiento o negocio'}>Para iniciar mi propio emprendimiento o negocio</option>
                                 <option value={'Para potenciar mi idea de negocio o emprendimiento en curso'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
@@ -683,7 +696,7 @@ const Estracto = () => {
                         </Box>
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni  && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
                                     <>
                                         {inscrip.trabajo === 'Si' ? <>
 
@@ -696,25 +709,25 @@ const Estracto = () => {
                                                         {/*  Caso que sea hijos si y selecciono cuantos  */}
 
 
-                                                       {inscrip.tel.length >9 && inscrip.tel2.length>9 ? <>  
-                                                        <Dialogo formulario={inscrip}/>
-                                                            </>:<>Telefono no valido</>}
+                                                        {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                            <Dialogo formulario={inscrip} />
+                                                        </> : <>Telefono no valido</>}
                                                     </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
                                                 </> : <>
                                                     {/*  Caso que sea hijos no */}
-                                                 
-                                                    {inscrip.tel.length >9 && inscrip.tel2.length>9 ? <>  
-                                                        <Dialogo formulario={inscrip}/>
-                                                            </>:<>Telefono no valido</>}
-                                                     </>}
-                                              
+
+                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                        <Dialogo formulario={inscrip} />
+                                                    </> : <>Telefono no valido</>}
+                                                </>}
+
 
                                             </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
                                         </> : <>
                                             {/*  Caso que sea trabajo no */}
-                                            {inscrip.tel.length >9 && inscrip.tel2.length>9 ? <>  
-                                                        <Dialogo formulario={inscrip}/>
-                                                            </>:<>Telefono no valido</>}</>}
+                                            {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                <Dialogo formulario={inscrip} />
+                                            </> : <>Telefono no valido</>}</>}
                                     </>
                                     : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
                             </>}
@@ -953,7 +966,20 @@ const Estracto = () => {
                             />
 
                             <br />
+                            <br />
+                            <TextField
 
+                                onChange={handleChange}
+                                name="fecha_nac"
+                                id="date"
+                                label="Fecha de nacimiento"
+                                type="date"
+                                defaultValue="2000-01-01"
+                                sx={{ width: 220 }}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
@@ -1087,7 +1113,7 @@ const Estracto = () => {
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
-                          
+
                             <NativeSelect
                                 defaultValue={30}
                                 onChange={handleChange}
@@ -1107,16 +1133,16 @@ const Estracto = () => {
 
                             </NativeSelect>
 
-                               
+
                             {inscrip.hijos == "Si" ? <>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Cuantos hijos?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                        
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="h5" component="div" color="black">
+                                        <StyledParagraph>
+                                            Cuantos hijos?
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
+
                                 <TextField
                                     style={{ width: '250px' }}
                                     margin="dense"
@@ -1242,7 +1268,7 @@ const Estracto = () => {
                         <br />
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni  && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
                                     <>
                                         {inscrip.trabajo === 'Si' ? <>
 
@@ -1255,25 +1281,25 @@ const Estracto = () => {
                                                         {/*  Caso que sea hijos si y selecciono cuantos  */}
 
 
-                                                        {inscrip.tel.length >9 && inscrip.tel2.length>9 ? <>  
-                                                        <Dialogo formulario={inscrip}/>
-                                                            </>:<>Telefono no valido</>}
+                                                        {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                            <Dialogo formulario={inscrip} />
+                                                        </> : <>Telefono no valido</>}
                                                     </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
                                                 </> : <>
                                                     {/*  Caso que sea hijos no */}
-                                                    
-                                                    {inscrip.tel.length >9 && inscrip.tel2.length>9 ? <>  
-                                                        <Dialogo formulario={inscrip}/>
-                                                            </>:<>Telefono no valido</>} </>}
-                                                
+
+                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                        <Dialogo formulario={inscrip} />
+                                                    </> : <>Telefono no valido</>} </>}
+
 
                                             </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
                                         </> : <>
                                             {/*  Caso que sea trabajo no */}
-                                           
-                                            {inscrip.tel.length >9 && inscrip.tel2.length>9 ? <>  
-                                                        <Dialogo formulario={inscrip}/>
-                                                            </>:<>Telefono no valido</>}</>}
+
+                                            {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                <Dialogo formulario={inscrip} />
+                                            </> : <>Telefono no valido</>}</>}
                                     </>
                                     : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
                             </>}
