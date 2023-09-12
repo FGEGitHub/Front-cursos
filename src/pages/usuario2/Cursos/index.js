@@ -57,8 +57,9 @@ export default function Paginas() {
 <>
 { logueado ? <div> 
     <MenuUsuario4>
-    <img style={islogo} src={Mantenimiento} alt="logo" /> 
-  {/*   <Cursos/>
+  <img style={islogo} src={Mantenimiento} alt="logo" /> 
+   
+  {/*     <Cursos/> 
     <Turnos/> */}
  </MenuUsuario4> 
 

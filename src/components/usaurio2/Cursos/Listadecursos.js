@@ -72,6 +72,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const Lotes = () => {
     //configuracion de Hooks
     const [clients, setClients] = useState([]);
+    const [turnos, setTurnos] = useState();
     const [loading, setLoading] = useState(true);
     const [vista, setVista] = useState(true);
     const navigate = useNavigate();
@@ -96,7 +97,12 @@ const Lotes = () => {
 
     ///
 //opcionde click en el nombre
-
+const getturnos = async (id) => {
+        
+  const clients = await servicioCursos.getturnos(id)
+  setTurnos(clients)
+  setLoading(false);
+}
 const getClients = async () => {
         
   const clients = await servicioCursos.lista({
@@ -115,27 +121,10 @@ useEffect(() => {
         return (
           <>
           < Tooltip title="Avance del curso">
-          <SearchIcon   onClick={() =>  navigate('/administracion/avancedelcurso/'+clients[dataIndex].id)}  />
+          <SearchIcon   onClick={() =>  getturnos(clients[dataIndex].id)}  />
           </Tooltip>
-          <>
-          < Tooltip title="Distribucion de alumnas">
-          <SocialDistanceSharpIcon   onClick={() =>  navigate('/administracion/detallecurso/'+clients[dataIndex].id)}  />
-          </Tooltip>
-          <br/>
-          </>
-          <>
-          <ModificarCurso
-          id= {clients[dataIndex].id}
-          nombre= {clients[dataIndex].nombre}
-          getClients = {async () => {
+         
         
-        const clients = await servicioCursos.lista({
-
-        })
-        setClients(clients)
-        setLoading(false);
-    }}/>
-          </>
           </>
         );
       }
@@ -205,6 +194,27 @@ const options = {
        onTableInit: this.handleTableInit,
        onTableChange: this.handleTableChange, */
 };
+
+const columns2 = [
+    
+  
+    
+    {
+      name: "numero",
+     label: 'numero',
+    } ,
+    {
+      name: "descripcion",
+     label: 'descripcion',
+    } ,
+
+
+
+    
+
+
+];
+
 // renderiza la data table
 return (
     <>
@@ -216,17 +226,9 @@ return (
  <Alert severity="info">Cantidad de cursos: {clients.length}</Alert>
     </Stack>
     <br/>
-    <Nuevo
-    getClients =  { async () => {
-        const clients = await servicioCursos.lista({
-        })
-        setClients(clients)
-    }}
-    />
-    <Button
-                          onClick={() => actualizarcursado()}
-                      >   Corregir estados/ ver repetidos</Button> 
-    <Button  variant='contained' onClick={actualizarcursado} > Cambiar vista <RemoveRedEyeIcon/></Button>
+ 
+
+   {/*  <Button  variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon/></Button> */}
 
 {vista   ? <>
         <MUIDataTable
@@ -332,6 +334,25 @@ return (
 
 
     </>}
+
+    {turnos ? <>si turnos
+      <MUIDataTable
+        
+            title={"Lista de turnos"}
+            data={turnos}
+            columns={columns2}
+            actions={[
+                {
+                    icon: 'save',
+                    tooltip: 'Save User',
+                    onClick: (event, rowData) => alert("You saved " + rowData.name)
+                }
+            ]}
+            options={options}
+
+
+        />
+        </>:<>no turnos</>}
     </div>
     )}
 
