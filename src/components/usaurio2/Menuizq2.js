@@ -22,7 +22,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import { useState, useEffect } from "react";
 import logo from "../../Assets/logoesme.webp";
 import Navbar from '../Navbar'
-
+import GradeIcon from '@mui/icons-material/Grade';
 
 const drawerWidth = 240;
 export default function MenuIzq2 ({children}) {
@@ -50,9 +50,9 @@ export default function MenuIzq2 ({children}) {
           path: '/administracion/cursos' 
         },
         { 
-          text: 'ContentPasteGoIcon', 
-          icon: <ContentPasteGoIcon color="primary" />, 
-          path: '/administracion/turnos' 
+          text: 'Preinscriptas', 
+          icon: <GradeIcon color="error" />, 
+          path: '/administracion/preinscriptas' 
         },
         { 
           text: 'Personas', 

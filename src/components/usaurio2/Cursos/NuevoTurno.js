@@ -21,13 +21,14 @@ export default function Clasenueva(props) {
     let id = params.id
 
     const [open, setOpen] = React.useState(false);
-    const [form, setForm] = useState({ id_curso: id })
+    const [form, setForm] = useState({})
     const handleChange = (e) => {
         console.log(form)
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
     const handleClickOpen = () => {
+        setForm({ id_curso: props.id })
         setOpen(true);
     };
     const handleDeterminar = async (event) => {
@@ -43,7 +44,7 @@ export default function Clasenueva(props) {
 
 
         }
-        props.getClients()
+        props.getturnos(props.id)
 
         setOpen(false);
     };

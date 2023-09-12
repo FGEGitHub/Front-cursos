@@ -1,14 +1,11 @@
 
 
-
-
-import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
+import MenuUsuario2 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cursos from '../../../components/usaurio2/Cursos/Listadecursos'
-import Turnos from '../../../components/usaurio2/turnos/lista'
-import Mantenimiento from '../../../Assets/mantenimiento2.jpeg';
- 
+import Turno from '../../../components/usaurio2/preinscriptas/tabla'
+
+
 export default function Paginas() {
 
     const [logueado, setLogueado] = useState(false) 
@@ -43,25 +40,14 @@ export default function Paginas() {
     
 
 
-    const islogo = {
-      width: "60%",   
-      margin: 0,
-      padding: 0,
-      display: "flex",
-              
-      };
-   
-
     return (
  
 <>
 { logueado ? <div> 
-    <MenuUsuario4><Cursos/> 
+    <MenuUsuario2>
+    <Turno/>
 
-   
-  {/*       <img style={islogo} src={Mantenimiento} alt="logo" /> 
-    <Turnos/> */}
- </MenuUsuario4> 
+ </MenuUsuario2> 
 
  </div>   :<div></div>  }
 

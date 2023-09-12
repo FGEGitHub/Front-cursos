@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 import servicioCursos from '../../../services/Cursos'
 import MUIDataTable from "mui-datatables";
-import Nuevo from './NuevoTurno'
-import ModificarCurso from './ModalModificarCurso'
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
 import SearchIcon from '@mui/icons-material/Search';
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
+
 //import overbookingData from "./overbooking";
 import Button from "@mui/material/Button";
 import Tooltip from '@mui/material/Tooltip';
@@ -81,18 +78,6 @@ const Lotes = () => {
 
     
     
-    const cambiarVista =  () => {
-        
-      setVista(!vista)
-  }
-    const actualizarcursado = async () => {
-        
-        const clients = await ServicioInscripciones.actualizarcursado({
-
-        })
-        setClients(clients)
-        setLoading(false);
-    }
 
 
 
@@ -108,7 +93,7 @@ const getturnos = async (id) => {
 }
 const getClients = async () => {
         
-  const clients = await servicioCursos.lista({
+  const clients = await servicioCursos.preinscriptas({
 
   })
   setClients(clients)
@@ -258,7 +243,7 @@ return (
 
    {/*  <Button  variant='contained' onClick={cambiarVista} > Cambiar vista <RemoveRedEyeIcon/></Button> */}
 
-{vista   ? <>
+
         <MUIDataTable
         
             title={"Lista de Cursos"}
@@ -274,38 +259,10 @@ return (
             options={options}
 
 
-        />
-        </> : <>
-
-<TableContainer component={Paper}>
-      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>FECHA</StyledTableCell>
-            <StyledTableCell align="right">NOMBRE</StyledTableCell>
-            <StyledTableCell align="right">ENCARGADO</StyledTableCell>
-            <StyledTableCell align="right">ACCIONES</StyledTableCell>
-          
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {clients.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.fecha}
-              </StyledTableCell>
-          
-              <StyledTableCell align="right">{row.nombre}</StyledTableCell>
-              <StyledTableCell align="right">{row.encargado}</StyledTableCell>
-              <StyledTableCell align="center">  
-              <IconButton    onClick={() =>  navigate('/administracion/detallecurso/'+row.id)} >
-                Ver mas </IconButton></StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-
+        />   
+         </div>
+ 
+)}
 
 <>
 <br/><br/><br/>
@@ -320,85 +277,11 @@ return (
       }}
     >
 
-{clients.map((row) => (
-   <Grid container spacing={2}>
-   <Grid item>
-     <ButtonBase sx={{ width: 128, height: 128 }}>
-       <Img alt="complex" src={imagen} />
-     </ButtonBase>
-   </Grid>
-   <Grid item xs={12} sm container>
-     <Grid item xs container direction="column" spacing={2}>
-       <Grid item xs>
-         <Typography gutterBottom variant="subtitle1" component="div">
-         {row.nombre}
-         </Typography>
-         <Typography variant="body2" gutterBottom>
-         {row.encargado}
-         </Typography>
-         <Typography variant="body2" color="text.secondary">
-           curso
-         </Typography>
-       </Grid>
-       <Grid item>
-         <Typography sx={{ cursor: 'pointer' }} variant="body2">
-          Borrar
-         </Typography>
-       </Grid>
-     </Grid>
-     <Grid item>
-       <Typography variant="subtitle1" component="div">
-       {row.fecha}
-       </Typography>
-     </Grid>
-   </Grid>
- </Grid>
-))}
-     
     </Paper>
-
 
 </>
 
-
-    </>}
-
-    {turnos ? <>si turnos
-    
-      <Nuevo  
-          id={ida}
-          getturnos ={ async (ida) => {
-            setIda(ida)
-            const clients = await servicioCursos.getturnos(ida)
-            setTurnos(clients)
-            setLoading(false);
-          } }/>
-      <MUIDataTable
-        
-            title={"Lista de turnos"}
-            data={turnos}
-            columns={columns2}
-            actions={[
-                {
-                    icon: 'save',
-                    tooltip: 'Save User',
-                    onClick: (event, rowData) => alert("You saved " + rowData.name)
-                }
-            ]}
-            options={options}
-
-
-        />
-        </>:<>no turnos</>}
-    </div>
-    )}
-
-
-
-
-
     </>
-
 
 )
 }

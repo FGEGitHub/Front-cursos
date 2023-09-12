@@ -140,12 +140,12 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "descripcion",
-            label: "detalle turno",
+            name: "categoria",
+            label: "categoria",
 
         },
         
-
+    
 
     ];
     const columns2 = [

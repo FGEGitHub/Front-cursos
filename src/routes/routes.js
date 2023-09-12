@@ -37,7 +37,7 @@ import Estadoalumnas4 from '../pages/usuario2/cambiarestado';
 import Avancedelcurso from '../pages/usuario2/avancedelcurso';
 import Contacto from '../pages/usuario2/Contacto';
 import Egresadas from '../pages/usuario2/egresadas';
-
+import Preinscriptas from '../pages/usuario2/preinscriptas';
 
 /// 3
 
@@ -135,7 +135,12 @@ const Rutas = [
 		{ path: '/administracion/contacto', element: <Contacto /> },
 		{ path: '/administracion/egresadxs', element: <Egresadas /> },
 		{ path: '/administracion/consultasmobile', element: <Consultasinsc /> },
+		{ path: '/administracion/preinscriptas', element: <Preinscriptas /> },
 		
+
+
+
+
 		{ path: '/coordinadores/novedades', element: <Novedades3 /> },
 		{ path: '/coordinadores/cursos', element: <Clases3 /> },
 		{ path: '/coordinadores/tareas', element: <Tareas3 /> },
