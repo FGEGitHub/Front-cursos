@@ -17,7 +17,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-
+import Button from '@mui/material/Button';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -79,6 +79,19 @@ const TablaNotificaciones = (props) => {
 
     }
 
+    const crearcursos = async () => {
+              
+       
+
+       alert('Boton sin funcionar aun')
+      // const novedades_aux = await servicioInscripciones.crearcursos2daetapa()
+
+
+
+
+
+}
+    
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
@@ -182,7 +195,9 @@ const TablaNotificaciones = (props) => {
     return (
         <div>
             {clases ? <>
-            
+                <Button variant="outlined" onClick={crearcursos}>
+       Crear Cursos 
+      </Button>
                 <Paper
                                                 sx={{
                                                     cursor: 'pointer',
@@ -205,6 +220,8 @@ const TablaNotificaciones = (props) => {
                                                                 <TableCell>Detalles segun prioridad 1 </TableCell>
                                                                 <TableCell>Detalles cantidad </TableCell>
                                                                 <TableCell>porcentaje </TableCell>
+                                                                <TableCell>Cantidad de cursos a crear </TableCell>
+
 
 
                                                             </TableRow>
@@ -219,6 +236,7 @@ const TablaNotificaciones = (props) => {
                                                                     <TableCell align="left">{row.datoa}</TableCell>
                                                                     <TableCell align="left">{(row.datob)}</TableCell>
                                                                     <TableCell align="left">{(row.datoc)}%</TableCell>
+                                                                    <TableCell align="left">{row.datod} - {Math.round(row.datod)} cursos</TableCell>
 
                                                                 </TableRow>
                                                             ))}

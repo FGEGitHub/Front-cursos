@@ -56,6 +56,18 @@ return data
       
 
   }
+  const crearcursos2daetapa = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'crearcursos2daetapa/', config)
+    
+
+return data
+      
+
+  }
+
+  
   const desinscribirtodos = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -202,4 +214,4 @@ const listaExtractos= async  () => {
     
     }
     
-export default {lista,incriptoss,incriptas2da,buscarestadopornombre,buscarestadopordni,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+export default {lista,crearcursos2daetapa,incriptoss,incriptas2da,buscarestadopornombre,buscarestadopordni,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
