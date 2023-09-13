@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import servicioCursos from '../../../services/Cursos'
+
+
 import MUIDataTable from "mui-datatables";
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
@@ -87,16 +88,16 @@ const getturnos = async (id) => {
   setIda(id)
   console.log(ida)
 
-  const clients = await servicioCursos.getturnos(id)
+  const clients = await ServicioInscripciones.getturnos(id)
   setTurnos(clients)
   setLoading(false);
 }
 const getClients = async () => {
         
-  const clients = await servicioCursos.preinscriptas({
+  const clients = await ServicioInscripciones.preinscriptas({
 
   })
-  setClients(clients)
+  setClients(clients[0])
   setLoading(false);
 }
 
@@ -142,29 +143,51 @@ function Borrarturno(dataIndex, rowIndex, data, onClick) {
       }
     // definimos las columnas
     const columns = [
-    
-  
-       
       {
-            name: "Nombre",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    Nombre(
-                        dataIndex,
-                        rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
-                    )
-            }
-        
-        },   
+        name: "dni",
+        label:"dni",
+       
+    },
+      
+      {
+        name: "nombre",
+        label: "Apellido",
+       
+    }, 
         
         {
-          name: "cantidad_turnos",
-         label: 'cantidad turnos',
-        } ,
+            name: "apellido",
+            label: "Apellido",
+           
+        },
+        {
+          name: "participante_anterior",
+          label:"participante_anterior",
+         
+      },
+      {
+        name: "trabajo",
+        label:"trabajo",
+       
+    },
+    {
+      name: "hijos",
+      label:"hijos",
+     
+  },
+  {
+    name: "dni",
+    label:"dni",
+   
+},
+       
+        {
+          name: "categoria",
+          label:"categoria",
+         
+      },
 
-    
+  
 
 
         
@@ -224,7 +247,7 @@ const options = {
 };
 const borrarturno = async (id) => {
   console.log(id)
- await servicioCursos.borrarturno(id)
+ await ServicioInscripciones.borrarturno(id)
 
 getturnos(ida)
 }

@@ -93,6 +93,9 @@ import Circuitos from '../pages/fiscalizacion/Admin/circuitos'
 import Inscripcionesesme from '../pages/inscripciones'
 import Consultasinsc from '../pages/usuario2/consultasmobile'
 
+
+
+import Llamadas from '../pages/usuario6/llamados';
 const Rutas = [
 	 <Navbar/> ,
 
@@ -192,6 +195,9 @@ const Rutas = [
 		{ path: '/fiscalizacion/escrutinio', element: <Escru/> },
 		{ path: '/fiscalizacion/administracion/circuitos', element: <Circuitos/> },
 
+
+
+		{ path: '/llamados/todos', element: <Llamadas/> },
 		
 
 ];

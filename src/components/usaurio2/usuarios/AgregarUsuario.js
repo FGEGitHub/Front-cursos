@@ -103,6 +103,7 @@ export default function Ingresos() {
                                     <MenuItem value={'2'}>2-Administracion</MenuItem>
                                     <MenuItem value={'3'}>3-Coordinador</MenuItem>
                                     <MenuItem value={'4'}>4-Encargado</MenuItem>
+                                    <MenuItem value={'6'}>6-Llamados</MenuItem>
                                     
                                 </Select>
                             </FormControl>

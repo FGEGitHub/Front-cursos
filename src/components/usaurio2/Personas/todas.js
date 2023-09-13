@@ -113,8 +113,8 @@ const Lotes = () => {
     const columns = [
        
       {
-        name: "id",
-        label:"id",
+        name: "dni",
+        label:"dni",
        
     },
       
@@ -130,10 +130,26 @@ const Lotes = () => {
            
         },
         {
-            name: "dni",
-            label:"dni",
-           
-        },
+          name: "participante_anterior",
+          label:"participante_anterior",
+         
+      },
+      {
+        name: "trabajo",
+        label:"trabajo",
+       
+    },
+    {
+      name: "hijos",
+      label:"hijos",
+     
+  },
+  {
+    name: "dni",
+    label:"dni",
+   
+},
+       
         {
           name: "categoria",
           label:"categoria",
