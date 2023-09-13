@@ -145,7 +145,11 @@ const TablaNotificaciones = (props) => {
 
         },
         
-    
+        {
+            name: "estado",
+            label: "estado",
+
+        },
 
     ];
     const columns2 = [

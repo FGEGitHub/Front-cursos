@@ -5,7 +5,7 @@
 import MenuUsuario4 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Categorias from '../../../components/usaurio2/TablaClasificacion'
 import Lista from '../../../components/usaurio2/inscripciones/inscriptas'
 import Mantenimiento from '../../../Assets/mantenimiento2.jpeg';
 import TabladeCriterios from '../../../components/usaurio2/inscripciones/TablaPrioridades'
@@ -59,7 +59,7 @@ export default function Paginas() {
     <MenuUsuario4>
  {/*    <img style={islogo} src={Mantenimiento} alt="logo" />  */}
       <Lista/>
-
+      <Categorias/>
  </MenuUsuario4> 
 
  </div>   :<div></div>  }
