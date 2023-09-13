@@ -26,7 +26,7 @@ import Paper from '@mui/material/Paper';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ServicioInscripciones from '../../../services/inscripciones'
 ////
-import SocialDistanceSharpIcon from '@mui/icons-material/SocialDistanceSharp';
+import Modificarturno from './ModalModificarclasesdelcurso';
 import Grid from '@mui/material/Grid';
 import GroupIcon from '@mui/icons-material/Group';
 import Typography from '@mui/material/Typography';
@@ -123,10 +123,21 @@ useEffect(() => {
 function Borrarturno(dataIndex, rowIndex, data, onClick) {
   return (
     <>
-    < Tooltip title="Avance del curso">
-    <Button   onClick={() => borrarturno(turnos[dataIndex].id)} >Boton para algo</Button>
+    < Tooltip title="Borrar">
+    <Button   onClick={() => borrarturno(turnos[dataIndex].id)} >Borrar</Button>
     </Tooltip>
-  
+    <Modificarturno
+          id={turnos[dataIndex].id}
+          getClients= { async (id) => {
+            setIda(id)
+            console.log(ida)
+          
+            const clients = await servicioCursos.getturnos(id)
+            setTurnos(clients)
+            setLoading(false);
+          }}/>
+    
+
     </>
   );
 }
@@ -138,7 +149,7 @@ function Borrarturno(dataIndex, rowIndex, data, onClick) {
           <SearchIcon   onClick={() =>  getturnos(clients[dataIndex].id)}  />
           </Tooltip>
          
-        
+     
           </>
         );
       }

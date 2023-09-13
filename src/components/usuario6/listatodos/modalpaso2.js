@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioFide from '../../../services/fiscalizacion'
+import servicioCursos from '../../../services/Cursos'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import NativeSelect from '@mui/material/NativeSelect';
@@ -16,7 +16,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
-import Autocomplete from '@mui/material/Autocomplete';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 const currencies = [
   {
     value: 'CBU',
@@ -47,57 +47,28 @@ const [disponibilidad, setDisponibilidad] = useState('libre')
   const [activo, setActivo] = useState(false)
 
 
-
-
-  const traer = async () => {
-    setUsuarioo()
   
-   
-   const turnos = await servicioFide.traerescuelas2()
-   setTurnos(turnos[0])
-   setEscuelaporcubrir(turnos[1])
-setActivo(true)
+  const traer = async (e) => {
   
-
-  }
+    const mes = await servicioCursos.traerturnos(e)
+    setTurnos(mes)
+  } 
 
   const [inscripcion, setInscripcion] = useState({
 
 
 })
-  const traermesas = async (e) => {
 
-    setCargandomesas(false)
-   
-   const mes = await servicioFide.traermesas(e)
-   console.log(mes)
-   setMesas(mes)
-
-   setCargandomesas(true)
-
-  
-
-  }
-  const traerestadistica = async (e) => {
-
-
-   
-  const dat = await servicioFide.traerestadisticasdeescuelas({id1:props.id_escuela, id2:props.id_escuela2})
-   setDatos(dat)
-   setPromedio(dat.prom)
-   console.log('dps')
-  
-
-  }
 
   const handleClickOpen = async () => {
-    await traer()  
+    
     setOpen(true);
     setInscripcion(({
       dni: props.dni,
       id_inscripcion:props.id_inscripcion,
   
     }))
+    setActivo(true)
     // traerestadistica()
   }
 
@@ -107,11 +78,11 @@ setActivo(true)
   };
 
   
-  const handleChange = (e) => {
-    console.log('handleChange')
+  const handleChange =  (e) => {
+    
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
-
-if (e.target.name =="mesa"){
+    traer(e.target.value)
+/* if (e.target.name =="mesa"){
   for (let i = 0; i < mesas.length; i++) {
    
     
@@ -121,19 +92,11 @@ if (e.target.name =="mesa"){
     }
   }
 }
-
+ */
    console.log(inscripcion) 
 }
 
-const handleChangeid_escuela = (e, option) => {
-  
 
-  traermesas( option.id )
-  setInscripcion({ ...inscripcion, 'id_escuela': option.id  })
-
-
-
-}
 const handleChangedondevota = (e, option) => {
   
 
@@ -149,7 +112,7 @@ const handleChangedondevota = (e, option) => {
 
     try {
 
-    const respuesta =  await servicioFide.asignarmesaafiscal(
+    const respuesta =  await servicioCursos.asignarmesaafiscal(
         inscripcion
 
 
@@ -186,7 +149,7 @@ const handleChangedondevota = (e, option) => {
       autoComplete="off"
     >
        < Tooltip title="Contactar">
-      <ContactPhoneIcon color='success' variant="outlined" onClick={handleClickOpen}/>
+     <Button variant='contained' onClick={handleClickOpen} color='success'  > Llamar <ContactPhoneIcon  /></Button> 
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
       {props.observaciones ? <><h4 style={{ color: 'crimson' }} >Observaciones: {props.observaciones}</h4></>:<>Sin observaciones</>} 
@@ -197,17 +160,14 @@ const handleChangedondevota = (e, option) => {
  
              <h3>Asignacion a curso a {props.nombre} {props.apellido} </h3>
              DNI:  { props.dni}<br/>
-             <h4>Fecha inscripcion: {props.fecha} </h4>
-             <h4><HowToVoteIcon/>Ha seleccionado como prioridad 1  {props.nombrecurso1}</h4>
            
-             <h4><HowToVoteIcon/>Ha seleccionado como prioridad 2  {props.nombrecurso2}</h4>
+             <h5><CheckCircleOutlineIcon/>Ha seleccionado como prioridad 1: <h3 style={{ color: 'green' }}>{props.nombrecurso1}</h3></h5>
+           
+             <h5><CheckCircleOutlineIcon/>Ha seleccionado como prioridad 2: <h4 style={{ color: 'green' }}>{props.nombrecurso2}</h4></h5>
 
 
    
         
-     
-
-            <br/>
 
                  <br />
                  <label>Elegir  Curso</label>
@@ -225,7 +185,7 @@ const handleChangedondevota = (e, option) => {
                                 }}
                             
                             >  
-
+<option value={0}>Elegir</option>
 <option value={132}>Elaboración de mesa de dulces para eventos</option>
                                 <option value={133}>Maquillaje y peinado para eventos</option>
                                 <option value={134}>Diseño de lenceria femenina</option>
@@ -240,34 +200,34 @@ const handleChangedondevota = (e, option) => {
                             </NativeSelect>
               
                            
-                 
+                 {turnos ? <>
                 
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                               Mesa
+                              Turno
                             </InputLabel>
                             <NativeSelect
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'mesa',
+                                    name: 'id_turno',
                                     id: 'uncontrolled-native',
 
                                 }}
                             
                             >  
 
-                            {cargandomesas ? <>
+                         
                              <option value={'1'}> Elegir</option>
                           
-                             {mesas.map((row) => (
+                             {turnos.map((row) => (
                                        
-                                       <option value={row.id}> {row.numero} - {row.disponibilidad}</option>
+                                       <option value={row.id}> {row.descripcion} - {row.cupo}</option>
          
                              ))}
-                                  </>:<>Cargando</>}
+                                
                             </NativeSelect>
 
-             
+                            </>:<></>}
          
                             <p   onClick={() => window.open('https://wa.me/+549'+props.telefono)}   > <b>Telefono: {props.telefono}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> 
             <p   onClick={() => window.open('https://wa.me/+549'+props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br/>Click aca apra enviar whatsap<WhatsAppIcon/> </p> <br/>

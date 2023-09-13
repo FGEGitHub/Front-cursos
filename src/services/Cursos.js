@@ -261,7 +261,16 @@ const listadetodoslosturnos= async  (datos) => {
   }
    return data
 } 
+const traerturnos= async  (datos) => {
 
+  const {data } = await axios.get(baseUrl+'traerturnos/'+datos,config)
+  if(data=== 'error login'){
+      
+   window.localStorage.removeItem('loggedNoteAppUser')
+ //  window.location.reload();
+ }
+  return data
+} 
 
 
 
@@ -296,4 +305,4 @@ return data
 }
 
 
-export default {borrarturno,getturnos,avancedelcurso,traercursos,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,getturnos,traerturnos,avancedelcurso,traercursos,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
