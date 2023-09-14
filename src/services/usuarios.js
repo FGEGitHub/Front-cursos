@@ -54,4 +54,13 @@ return data
        
   }
 
-export default { usuarios, setToken,registro, datosusuario}
+  
+  const todoslosencargadosllamados = async (cuil_cuit) => {
+  
+ 
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'todoslosencargadosllamados/')
+return data
+       
+  }
+export default { usuarios, setToken,registro, datosusuario,todoslosencargadosllamados}

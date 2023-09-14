@@ -38,6 +38,10 @@ import Avancedelcurso from '../pages/usuario2/avancedelcurso';
 import Contacto from '../pages/usuario2/Contacto';
 import Egresadas from '../pages/usuario2/egresadas';
 import Preinscriptas from '../pages/usuario2/preinscriptas';
+import Callcenter from '../pages/usuario2/callcenter';
+
+
+
 
 /// 3
 
@@ -139,7 +143,7 @@ const Rutas = [
 		{ path: '/administracion/egresadxs', element: <Egresadas /> },
 		{ path: '/administracion/consultasmobile', element: <Consultasinsc /> },
 		{ path: '/administracion/preinscriptas', element: <Preinscriptas /> },
-		
+		{ path: '/administracion/callcenter', element: <Callcenter /> },
 
 
 

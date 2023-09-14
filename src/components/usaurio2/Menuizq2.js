@@ -11,7 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import GroupIcon from '@mui/icons-material/Group';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
+import PhoneForwardedIcon from '@mui/icons-material/PhoneForwarded';
 import Face3Icon from '@mui/icons-material/Face3';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
@@ -73,6 +73,11 @@ export default function MenuIzq2 ({children}) {
           text: 'Carga de inscripciones', 
           icon: <GetAppIcon color="primary" />, 
           path: '/administracion/cargarinscripciones' 
+        },
+        { 
+          text: 'Call center', 
+          icon: <PhoneForwardedIcon color="green" />, 
+          path: '/administracion/callcenter' 
         },
         { 
           text: 'Cursado completos', 
