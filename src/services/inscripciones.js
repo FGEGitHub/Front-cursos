@@ -216,6 +216,17 @@ const listaExtractos= async  () => {
       return data
     
     } 
+
+
+
+    
+    const modificarestadodeinscrip = async (formdata) => {
+      console.log(formdata)
+      const { data } = await axios.post(baseUrl + 'modificarestadodeinscrip', formdata, config)
+      return data
+    
+    } 
+
     const buscarestadopornombre = async (formdata) => {
       console.log(formdata)
       const { data } = await axios.post(baseUrl + 'buscarestadopornombre', formdata, config)
@@ -223,4 +234,4 @@ const listaExtractos= async  () => {
     
     }
     
-export default {lista,crearcursos2daetapa,incriptoss,preinscriptas,incriptas2da,buscarestadopornombre,buscarestadopordni,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+export default {lista,crearcursos2daetapa,modificarestadodeinscrip,incriptoss,preinscriptas,incriptas2da,buscarestadopornombre,buscarestadopordni,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

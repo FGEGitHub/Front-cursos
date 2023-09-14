@@ -4,9 +4,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioFide from '../../../services/fiscalizacion'
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import DeleteIcon from '@mui/icons-material/Delete';
+import servicioInscripciones from '../../../services/inscripciones'
+import Logoesme from '../../../Assets/anuncio.webp';
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
@@ -15,6 +14,8 @@ import DialogActions from '@mui/material/DialogActions';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 const currencies = [
   {
     value: 'CBU',
@@ -31,11 +32,11 @@ const currencies = [
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
-  //const usuario  = useUser().userContext
+  const [mostrarDialogo, setMostrarDialogo] = useState(false);
   let params = useParams()
   let id_curso = params.id
 
-  const [turnos, setTurnos] = useState()
+  const [rta, setRta] = useState()
   const [mesas, setMesas] = useState()
   const [activo, setActivo] = useState(false)
 
@@ -57,8 +58,7 @@ export default function SelectTextFields(props) {
   
 
       id:props.id,
-      nombre:props.nombre,
-      circuito:props.circuito,
+   
      
   
   
@@ -67,6 +67,7 @@ export default function SelectTextFields(props) {
   }
 
   const handleClose = () => {
+    setMostrarDialogo(false)
     setActivo(false)
     setOpen(false);
   };
@@ -84,12 +85,13 @@ export default function SelectTextFields(props) {
 
     try {
 
-      const rta = await servicioFide.modificarestadodeinscrip(
+      const rta = await servicioInscripciones.modificarestadodeinscrip(
         inscripcion
 
 
       )
-      alert(rta)
+      setRta(rta)
+      setMostrarDialogo(true)
       props.getClients()
 
     } catch (error) {
@@ -98,17 +100,25 @@ export default function SelectTextFields(props) {
 
     }
     setActivo(false)
-    setOpen(false);
+   
   };/////
   const [currency, setCurrency] = React.useState('EUR');
 
-  /*   const handleChange = (event) => {
-      setCurrency(event.target.value);
-    }; */
+  const islogo = {
+    width: "20%",
+    height: "20%",
+    margin: 0,
+    padding: 0,
+    display: "flex",
 
+};
 
   return (
 
+<>       < Tooltip title="Cambiar">
+      <ChangeCircleIcon onClick={handleClickOpen} />
+      </Tooltip>
+{!mostrarDialogo ? <>
 
     
     
@@ -120,9 +130,7 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Cambiar">
-      <ChangeCircleIcon onClick={handleClickOpen} />
-      </Tooltip>
+
       <Dialog open={open} onClose={handleClose}>
 
       {activo ? <>
@@ -137,7 +145,7 @@ export default function SelectTextFields(props) {
                   Agregar encargado
                 </InputLabel>
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                 Vegano
+          Cambiar estado
                  </InputLabel>
 
 <NativeSelect
@@ -150,33 +158,16 @@ export default function SelectTextFields(props) {
                      }}
                  
                  >  
-                 <option value={''}> sin definir </option>
-                 <option value={'Pendiente'}> Pendiente </option>
-                 <option value={'Rechazado'}> Rechazado </option>
-                 <option value={'No contestado'}> No contestado</option>
-                 <option value={'Dado de baja'}> Baja</option>
-                 <option value={'Esperando respuesta'}> Esperando respuesta</option>
+                 <option value={'Inscripta'}> sin definir </option>
+                 <option value={'Inscripta'}> Inscripta </option>
+                 <option value={'Preasignada'}> Preasignada </option>
+                 <option value={'Cursando'}> No Cursando</option>
                 
-
                  </NativeSelect>
-                 {inscripcion.estado ? <>      
-                         
-                 <TextField
-                
-                margin="dense"
-                id="name"
-                label="Detalla motivo, (opcional)"
-                name="observaciones"
-                onChange={handleChange}
-                fullWidth
-                variant="standard"
-               
-              />
-                         </>:<></>}   
                
 
                  <DialogActions>
-                     <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button>
+                     <Button variant="contained" color="primary"   onClick={handleDeterminar} >Cambiar</Button>
 
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
@@ -187,7 +178,34 @@ export default function SelectTextFields(props) {
         </>: <>Cargando</>}
       </Dialog>
     </Box >
-
+    </>:<>
+    <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+      <DialogTitle id="alert-dialog-title" style={{ display: 'flex', alignItems: 'center' }}>
+  <div>
+    {"Escuela de mujeres emprendedoras"}
+  </div>
+  <img style={islogo} src={Logoesme} alt="logo" />
+</DialogTitle>
+        <DialogContent>
+      
+          <DialogContentText id="alert-dialog-description">
+{rta ? <>{rta}</>:<></> }         
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Entendido</Button>
+          
+           
+          
+        </DialogActions>
+      </Dialog>
+      </>}
+</>
    
   );
 }

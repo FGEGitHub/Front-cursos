@@ -14,6 +14,11 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import Featured from '../../estadisticas/featured/Featured'
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
+import Logoesme from '../../../Assets/anuncio.webp';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+
 const currencies = [
   {
     value: 'CBU',
@@ -33,10 +38,9 @@ export default function SelectTextFields(props) {
   //const usuario  = useUser().userContext
   let params = useParams()
   let id_curso = params.id
-  const [profesores, setProfesores] = useState()
-  const [porcent, setPorcent] = useState()
-  const [categoria, setCategoria] = useState()
+  const [mostrarDialogo, setMostrarDialogo] = useState(false);
   const [activo, setActivo] = useState(false)
+  const [rta, setRta] = useState()
 
 
 
@@ -55,6 +59,7 @@ export default function SelectTextFields(props) {
   };
 
   const handleClose = () => {
+    setMostrarDialogo(false)
     setActivo(false)
     setOpen(false);
   };
@@ -71,37 +76,42 @@ export default function SelectTextFields(props) {
 
   ////
   const handleDeterminar = async (event) => {
-    // event.preventDefault();
 
-
-    try {
+   
 
       await servicioTurnos.modificarTurno(
         inscripcion
 
 
       )
+      setRta('Realizado')
+      setMostrarDialogo(true)
       props.getClients()
 
-    } catch (error) {
-      console.error(error);
-      console.log('Error algo sucedio')
-
-    }
-    setActivo(false)
-    setOpen(false);
+   
+    
   };/////
   const [currency, setCurrency] = React.useState('EUR');
 
   /*   const handleChange = (event) => {
       setCurrency(event.target.value);
     }; */
-
+    const islogo = {
+      width: "20%",
+      height: "20%",
+      margin: 0,
+      padding: 0,
+      display: "flex",
+  
+  };
 
   return (
-
-
+<>
+ < Tooltip title="Ver inscripcion">
+       <Button variant="contained" onClick={handleClickOpen} >  Modificar clase <BorderColorIcon/>    </Button>
     
+      </Tooltip>
+      {!mostrarDialogo ? <>
     
     <Box
 
@@ -111,10 +121,7 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Ver inscripcion">
-       <Button variant="contained" onClick={handleClickOpen} >  Modificar clase <BorderColorIcon/>    </Button>
-    
-      </Tooltip>
+      
       <Dialog open={open} onClose={handleClose}>
 
    
@@ -123,12 +130,8 @@ export default function SelectTextFields(props) {
         <h2>Modificar el horario de la clase</h2>
   
          
-            
-
-      
-   
                  <br />
-                 <label>Definir el horario </label>
+                 <label>Definir la descripcion </label>
                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
                              
                             </InputLabel>
@@ -147,7 +150,7 @@ export default function SelectTextFields(props) {
    
 
                  <DialogActions>
-         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Inscribir</Button>
+         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Modificar</Button>
           <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
          
         </DialogActions>
@@ -157,7 +160,33 @@ export default function SelectTextFields(props) {
       
       </Dialog>
     </Box >
-
-   
+    </>:<>
+    <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+      <DialogTitle id="alert-dialog-title" style={{ display: 'flex', alignItems: 'center' }}>
+  <div>
+    {"Escuela de mujeres emprendedoras"}
+  </div>
+  <img style={islogo} src={Logoesme} alt="logo" />
+</DialogTitle>
+        <DialogContent>
+      
+          <DialogContentText id="alert-dialog-description">
+{rta ? <>{rta}</>:<></> }         
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Entendido</Button>
+          
+           
+          
+        </DialogActions>
+      </Dialog>
+      </>}
+   </>
   );
 }

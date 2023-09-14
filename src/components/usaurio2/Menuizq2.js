@@ -50,7 +50,7 @@ export default function MenuIzq2 ({children}) {
           path: '/administracion/cursos' 
         },
         { 
-          text: 'Preinscriptas', 
+          text: 'Preasignadas', 
           icon: <GradeIcon color="error" />, 
           path: '/administracion/preinscriptas' 
         },

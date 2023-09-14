@@ -130,7 +130,7 @@ function Borrarturno(dataIndex, rowIndex, data, onClick) {
           id={turnos[dataIndex].id}
           getClients= { async (id) => {
             setIda(id)
-            console.log(ida)
+            
           
             const clients = await servicioCursos.getturnos(id)
             setTurnos(clients)

@@ -59,10 +59,9 @@ return data
  
 
  const modificarTurno= async  (datos) => {
-    console.log(datos)
      const {data } = await axios.post(baseUrl+'modificarturno',datos,config)
      
-     alert(data)  
+     
  } 
 
 

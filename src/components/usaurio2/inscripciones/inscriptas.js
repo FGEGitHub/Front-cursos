@@ -18,6 +18,7 @@ import TableHead from '@mui/material/TableHead';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import Button from '@mui/material/Button';
+import CambiarEstado from '../../usuario6/listatodos/cambiarestado'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -99,7 +100,27 @@ const TablaNotificaciones = (props) => {
 
 
 
+                <CambiarEstado
+                id = {inscriptos[dataIndex].id}
+                getClients={async () => {
+              
+       
 
+                    setUsuario(usuario)
+                    console.log(123)
+                    const novedades_aux = await servicioInscripciones.incriptas2da()
+                    console.log(novedades_aux)
+                    setinscriptos(novedades_aux[0])
+                    setDeudaExigible(novedades_aux[1])
+                    setClases(novedades_aux)
+           
+    
+    
+    
+    
+    
+    
+        }}/>
 
 
 
@@ -150,44 +171,22 @@ const TablaNotificaciones = (props) => {
             label: "estado",
 
         },
-
-    ];
-    const columns2 = [
         {
-            name: "dni",
-            label: "dni",
-
-        },
-        {
-            name: "apellido",
-            label: "apellido",
-
-        },
-        {
-            name: "nombre",
-            label: "nombre",
-
-        },
-
-        {
-            name: "nombrecurso",
-            label: "curso",
-
-        },
-        {
-            name: "nombrecurso",
-            label: "Curso 1",
-
-        },
-        {
-            name: "nombrecurso2",
-            label: "prioridad 2",
-
-        },
+            name: "Cambiar Estado",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
         
-
+        }, 
 
     ];
+   
     const options = {
 
         /*    rowsPerPage: 10,
