@@ -73,19 +73,15 @@ setInscrip(ins[0])
             label: "Sin Contactar",
 
         },
+      
         {
-            name: "conf",
-            label: "confirmados",
+            name: "asig",
+            label: "Asignadas a curso",
 
         },
         {
             name: "rech",
-            label: "Clasificados rechazados",
-
-        },
-        {
-            name: "cont",
-            label: "Contactado sin asignar",
+            label: "Rechazados",
 
         },
         

@@ -9,7 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import MuiAlert from '@mui/material/Alert';
-
+import AsignarEnc from './asignarencargado'
 //import overbookingData from "./overbooking";
 import Button from "@mui/material/Button";
 import Tooltip from '@mui/material/Tooltip';
@@ -104,7 +104,27 @@ const getClients = async () => {
 useEffect(() => {
   getClients()
 }, [])
+function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
+  return (
+      <>
 
+      
+          <AsignarEnc
+              id_inscripcion={clients[dataIndex].id}
+              getClients={ async () => {
+        
+                const clients = await ServicioInscripciones.preinscriptas({
+              
+                })
+                setClients(clients[0])
+                setLoading(false);
+              }} />
+
+
+      </>
+
+  );
+}
 
 function Borrarturno(dataIndex, rowIndex, data, onClick) {
   return (
@@ -186,8 +206,26 @@ function Borrarturno(dataIndex, rowIndex, data, onClick) {
           label:"categoria",
          
       },
+      {
+        name: "encargado",
+        label:"encargado",
+       
+    },
 
-  
+      {
+        name: "Designar call center",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                CutomButtonsRenderer2(
+                    dataIndex,
+                    rowIndex,
+                   // overbookingData,
+                   // handleEditOpen
+                )
+        }
+    
+    },   
+
 
 
         

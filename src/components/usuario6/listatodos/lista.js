@@ -40,24 +40,17 @@ export default function Ingresos() {
         traer()
     }, [])
     const traer = async () => {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON)
 
-        const ins = await servicioInscripciones.preinscriptas()
-        setInscrip(ins[0])
-        // 
-
+          const ins = await servicioInscripciones.preinscriptascall(usuario.id)
+          setInscrip(ins[0])
+      }
+   
     };
   
     
-    function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-      
-        <Button  onClick={() => navigate('/fiscalizacion/persona/'+inscrip[dataIndex].idpersona)} >Ver persona</Button>
-
-          </>
-
-        );
-      }
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
           const ins = await servicioInscripciones.todaspaso4();

@@ -46,6 +46,15 @@ return data
 }
  
 
+const traerinscripcionesenc = async () => {
+  
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'traerinscripcionesenc/', config)
+  
+
+return data
+}
+
 const lista = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -209,7 +218,13 @@ const listaExtractos= async  () => {
       return data
      } 
      
-     
+     const preinscriptascall= async  (id) => {
+
+
+      const {data } = await axios.get(baseUrl+'preinscriptascall/'+id,config)
+        console.log(data)
+      return data
+     } 
      const buscarestadopordni = async (formdata) => {
       console.log(formdata)
       const { data } = await axios.post(baseUrl + 'buscarestadopordni', formdata, config)
@@ -233,5 +248,13 @@ const listaExtractos= async  () => {
       return data
     
     }
+    const asignarencargado = async (formdata) => {
+      console.log(formdata)
+      const { data } = await axios.post(baseUrl + 'asignarencargado', formdata, config)
+      return data
     
-export default {lista,crearcursos2daetapa,modificarestadodeinscrip,incriptoss,preinscriptas,incriptas2da,buscarestadopornombre,buscarestadopordni,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
+    }
+
+    
+    
+export default {lista,preinscriptascall,traerinscripcionesenc,crearcursos2daetapa,asignarencargado,modificarestadodeinscrip,incriptoss,preinscriptas,incriptas2da,buscarestadopornombre,buscarestadopordni,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}
