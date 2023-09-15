@@ -9,7 +9,7 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 
 import Vernscripto from "./modalpaso2";
-import CambiarEst from './cambiarestado'
+import Desasignar from './desasignar'
 
 import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
@@ -101,7 +101,7 @@ export default function Ingresos() {
             }
          
           }}/>
-          </>:<><Button>Desasignar</Button></>}
+          </>:<><Desasignar/></>}
           
           {/* 
  <CambiarEst
