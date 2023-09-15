@@ -228,7 +228,7 @@ const TablaNotificaciones = (props) => {
                                                             </TableRow>
                                                         </TableHead>
                                                         <TableBody>
-                                                            {deuda_exigible ? <>
+                                                            {deudaExigible ? <>
                                                             {deudaExigible.map((row) => (
                                                                 <TableRow
                                                                     key={row.name}
