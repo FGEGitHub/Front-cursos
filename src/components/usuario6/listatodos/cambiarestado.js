@@ -8,7 +8,7 @@ import servicioInscripciones from '../../../services/inscripciones'
 import Logoesme from '../../../Assets/anuncio.webp';
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import IconButton from '@mui/material/IconButton';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
@@ -116,7 +116,8 @@ export default function SelectTextFields(props) {
   return (
 
 <>       < Tooltip title="Cambiar">
-      <ChangeCircleIcon onClick={handleClickOpen} />
+<IconButton>
+      <ChangeCircleIcon onClick={handleClickOpen} /></IconButton>
       </Tooltip>
 {!mostrarDialogo ? <>
 
