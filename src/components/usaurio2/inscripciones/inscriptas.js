@@ -1,5 +1,5 @@
 import servicioInscripciones from '../../../services/inscripciones'
-import ModalVer from './ModalVer'
+import Carga from '../../CargaDeTabla'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
@@ -67,7 +67,7 @@ const TablaNotificaciones = (props) => {
                 setUsuario(usuario)
                 console.log(123)
                 const novedades_aux = await servicioInscripciones.incriptas2da()
-                console.log(novedades_aux)
+               
                 setinscriptos(novedades_aux[0])
                 setDeudaExigible(novedades_aux[1])
                 setClases(novedades_aux)
@@ -197,7 +197,7 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            {clases ? <>
+            {inscriptos ? <>
                 <Button variant="outlined" onClick={crearcursos}>
        Crear Cursos 
       </Button>
@@ -271,7 +271,7 @@ const TablaNotificaciones = (props) => {
                     </>
                 
                 </div>
-            </> : <></>}
+            </> : <><Carga/></>}
         </div>
     )
 }

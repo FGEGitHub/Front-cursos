@@ -77,7 +77,7 @@ export default function Ingresos() {
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-      
+      {inscrip[dataIndex].estado != 'Asignada a curso' ? <>
           <Vernscripto
           dni= {inscrip[dataIndex].dni}
           nombre= {inscrip[dataIndex].nombre}
@@ -100,7 +100,10 @@ export default function Ingresos() {
                 setInscrip(ins[0])
             }
          
-          }}/>{/* 
+          }}/>
+          </>:<><Button>Desasignar</Button></>}
+          
+          {/* 
  <CambiarEst
                     id={inscrip[dataIndex].id}
                     estado={inscrip[dataIndex].estado}
