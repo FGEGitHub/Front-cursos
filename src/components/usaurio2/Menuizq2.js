@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import GroupIcon from '@mui/icons-material/Group';
+import Footer from '../footer'
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import PhoneForwardedIcon from '@mui/icons-material/PhoneForwarded';
 import Face3Icon from '@mui/icons-material/Face3';
@@ -156,7 +156,7 @@ export default function MenuIzq2 ({children}) {
    { children}
       </Box>
     </Box>
-    
+    <Footer/>
    
     </>
   );

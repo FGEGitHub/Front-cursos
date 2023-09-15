@@ -27,7 +27,7 @@ const theme = createTheme({
   
 
 export default function Ingresos() {
-    let params = useParams()
+
     const navigate = useNavigate();
 
     const [inscrip, setInscrip] = useState([]);
@@ -92,13 +92,15 @@ export default function Ingresos() {
           observaciones={inscrip[dataIndex].observaciones}
           fecha_carga={inscrip[dataIndex].fecha}
           traer = { async () => {
-
-            const ins = await servicioInscripciones.todaspaso4()
-            setInscrip(ins[0])
-            // 
-    
-        
-        }}/>
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
+      
+                const ins = await servicioInscripciones.preinscriptascall(usuario.id)
+                setInscrip(ins[0])
+            }
+         
+          }}/>{/* 
  <CambiarEst
                     id={inscrip[dataIndex].id}
                     estado={inscrip[dataIndex].estado}
@@ -110,7 +112,7 @@ export default function Ingresos() {
               
                   
                   }}
-                />
+                /> */}
 
           </>
 

@@ -47,7 +47,7 @@ export default function MenuIzq2 ({children}) {
         { 
           text: 'Cursos', 
           icon: <ApartmentIcon color="primary" />, 
-          path: '/administracion/cursos' 
+          path: '/llamados/todos' 
         },
        
      
