@@ -19,26 +19,7 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import Button from '@mui/material/Button';
 import CambiarEstado from '../../usuario6/listatodos/cambiarestado'
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
-
+import Widget from '../../fiscalizacion/Widget/Widget'
 
 
 
@@ -46,7 +27,7 @@ const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const [inscriptos, setinscriptos] = useState([''])
-    const [noinscriptos, setnoinscriptos] = useState([''])
+    const [datos, setDatos] = useState([''])
     const [deudaExigible, setDeudaExigible] = useState([''])
     const navigate = useNavigate();
 
@@ -65,17 +46,14 @@ const TablaNotificaciones = (props) => {
        
 
                 setUsuario(usuario)
-                console.log(123)
+                
                 const novedades_aux = await servicioInscripciones.incriptas2da()
-               
+               console.log(novedades_aux)
                 setinscriptos(novedades_aux[0])
                 setDeudaExigible(novedades_aux[1])
+                setDatos(novedades_aux[2])
                 setClases(novedades_aux)
        
-
-
-
-
 
 
     }
@@ -84,7 +62,7 @@ const TablaNotificaciones = (props) => {
               
        
 
-       alert('Boton sin funcionar aun')
+       alert('Boton sin funcionar aun... probablemente tampoco vaya a funcionar')
       // const novedades_aux = await servicioInscripciones.crearcursos2daetapa()
 
 
@@ -112,6 +90,7 @@ const TablaNotificaciones = (props) => {
                     console.log(novedades_aux)
                     setinscriptos(novedades_aux[0])
                     setDeudaExigible(novedades_aux[1])
+                    setDatos(novedades_aux[2])
                     setClases(novedades_aux)
            
     
@@ -197,7 +176,25 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            {inscriptos ? <>
+
+            {inscriptos ? <>       
+                {datos ? <>
+             <div className="home">
+                <Widget  type="Cupos totales "
+                      cantidad={datos.cantidadturnos}
+                    />
+                          <Widget  type="Cantidad preinscriptas"
+                      cantidad={datos.cant_preasig}
+                    />
+                          <Widget  type="Cantidad confirmadas"
+                      cantidad={datos.cant_conf}
+                    />
+                          <Widget  type="Cupos disponibles"
+                      cantidad={3}
+                    />
+                    
+                    </div>
+                    </>:<></>}
                 <Button variant="outlined" onClick={crearcursos}>
        Crear Cursos 
       </Button>

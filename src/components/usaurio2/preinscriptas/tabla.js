@@ -297,7 +297,7 @@ return (
     <div>
             <Stack spacing={2} sx={{ width: '100%' }}>
  
- <Alert severity="info">Cantidad de cursos: {clients.length}</Alert>
+ <Alert severity="info">Cantidad de preinscriptas: {clients.length}</Alert>
     </Stack>
     <br/>
  
@@ -307,7 +307,7 @@ return (
 
         <MUIDataTable
         
-            title={"Lista de Cursos"}
+            title={"Lista de Preinscriptas"}
             data={clients}
             columns={columns}
             actions={[

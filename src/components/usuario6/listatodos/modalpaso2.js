@@ -250,7 +250,7 @@ setRta(respuesta)
 
                     {turnos.map((row) => (
 
-                      <option value={row.id}> {row.descripcion} - {row.cupo} cupos disponibles</option>
+                      <option value={row.id}> {row.descripcion} - {row.disponibles} cupos disponibles</option>
 
                     ))}
 

@@ -37,7 +37,7 @@ const Widget = (props) => {
       data = {
         title: "Presentes",
         isMoney: false,
-        link: "Ver Detalles",
+   //     link: "Ver Detalles",
         icon: (
           <PersonOutlineIcon
             className="icon"

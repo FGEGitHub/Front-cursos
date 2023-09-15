@@ -27,13 +27,13 @@ const SubirLegajo = () => {
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = useState(3);
     let [steps, setSteps] = useState([
-    
+
 
 
     ]);
 
     const [datos, setDatos] = useState()
-   
+
     const [listo, setListo] = useState(false)
 
     useEffect(() => {
@@ -44,21 +44,21 @@ const SubirLegajo = () => {
     }, [])
     const volver = (e) => {
         navigate('/fiscalizacion/administracion/menu')
-        
-        
-            }
+
+
+    }
 
     const traer = async () => {
-       
+
         const dat = await servicioFisca.datosdemesas()
         setDatos(dat)
         setSteps([
             { label: 'Paso 1: Lista Inscriptos', completed: false },
             { label: 'Paso 2: Contactados', completed: false },
-            { label: 'Paso 3: Asignados', completed:false },
-            { label: 'Paso 4: Inscripciones agosto', completed:false },
-            { label: 'Paso 5: Asignaciones agosto', completed:false },
-            
+            { label: 'Paso 3: Asignados', completed: false },
+            { label: 'Paso 4: Inscripciones agosto', completed: false },
+            { label: 'Paso 5: Asignaciones agosto', completed: false },
+
 
         ])
         setListo(true)
@@ -69,72 +69,72 @@ const SubirLegajo = () => {
         if (activeStep < steps.leght - 1) return false
 
     }
-   
 
- 
+
+
 
     return (
         <>
-        <StackK/>
-        <ButtonGroup
-      disableElevation
-      variant="contained"
-      aria-label="Disabled elevation buttons"
-    >
-<Button variant="contained" color="success" onClick={volver}>Volver<KeyboardReturnIcon/></Button>
-      <VerEstadisticas/>
-      <Ayuda/>
-      <Estadisticas2/>
-      <Estadisticas3/>
-      <Veramigo/>
-    <Recomendaciones/> 
-    </ButtonGroup>
-      <br/>
-        {datos ? <>
-        <div className="home">
-        <Widget type="Escuelas"
-                      cantidad={datos[3]}
-                    />
-        <Widget type="Cantidad de mesas "
-                      cantidad={datos[0]}
-                    />
-                     <Widget type="Mesas asignadas"
-                      cantidad={datos[1]}
-                    />
-                        <Widget type="Capacitados"
-                      cantidad={datos[4]}
-                    />
-                     <Widget type="Cantidad faltante"
-                      cantidad={datos[2]}
-                    />
-
-                    </div>
-                    </>:<></>}
- 
-      
-
-          {listo ?  <div>
-            <Stack
-                direction="row"
-                sx={{ pt: 2, pb: 7, justifyContent: "space-around" }}
+            <StackK />
+            <ButtonGroup
+                disableElevation
+                variant="contained"
+                aria-label="Disabled elevation buttons"
             >
-                <Button
+                <Button variant="contained" color="success" onClick={volver}>Volver<KeyboardReturnIcon /></Button>
+                <VerEstadisticas />
+                <Ayuda />
+                <Estadisticas2 />
+                <Estadisticas3 />
+                <Veramigo />
+                <Recomendaciones />
+            </ButtonGroup>
+            <br />
+            {datos ? <>
+                <div className="home">
+                    <Widget type="Escuelas"
+                        cantidad={datos[3]}
+                    />
+                    <Widget type="Cantidad de mesas "
+                        cantidad={datos[0]}
+                    />
+                    <Widget type="Mesas asignadas"
+                        cantidad={datos[1]}
+                    />
+                    <Widget type="Capacitados"
+                        cantidad={datos[4]}
+                    />
+                    <Widget type="Cantidad faltante"
+                        cantidad={datos[2]}
+                    />
 
-                    disabled={!activeStep}
-                    onClick={() => setActiveStep(activeStep => activeStep - 1)}
+                </div>
+            </> : <></>}
+
+
+
+            {listo ? <div>
+                <Stack
+                    direction="row"
+                    sx={{ pt: 2, pb: 7, justifyContent: "space-around" }}
                 >
-                 <ArrowBackIcon/>  Izquierda
-                </Button>
-                <Button
-                    disabled={checkDisabled()}
-                    onClick={() => setActiveStep(activeStep => activeStep + 1)}
-                >
-                    Derecha <ArrowForwardIcon/>
-                </Button>
+                    <Button
+
+                        disabled={!activeStep}
+                        onClick={() => setActiveStep(activeStep => activeStep - 1)}
+                    >
+                        <ArrowBackIcon />  Izquierda
+                    </Button>
+                    <Button
+                        disabled={checkDisabled()}
+                        onClick={() => setActiveStep(activeStep => activeStep + 1)}
+                    >
+                        Derecha <ArrowForwardIcon />
+                    </Button>
 
 
 
-            </Stack>
+                </Stack>
                 <Stepper
                     alternativeLabel
                     nonLinear
@@ -151,22 +151,22 @@ const SubirLegajo = () => {
 
 
                 </Stepper>
-         
-                </div>: <div></div> }
 
-         
+            </div> : <div></div>}
+
+
 
             <Box>
                 {{
                     0: <Tablaincrip
-                  
-                        />,
-                    1: <Tablapaso2/>,
-                        2:  <Tablaasig/>,
 
-                        3:  <Tablapaso4/>,
-                        
-                       4:  <Tablapaso5/>,
+                    />,
+                    1: <Tablapaso2 />,
+                    2: <Tablaasig />,
+
+                    3: <Tablapaso4 />,
+
+                    4: <Tablapaso5 />,
 
 
                 }[activeStep]}
@@ -192,8 +192,8 @@ const SubirLegajo = () => {
 
 
             </Stack>
-        
-      
+
+
         </>
     );
 };
