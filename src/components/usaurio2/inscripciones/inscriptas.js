@@ -20,6 +20,7 @@ import TableBody from '@mui/material/TableBody';
 import Button from '@mui/material/Button';
 import CambiarEstado from '../../usuario6/listatodos/cambiarestado'
 import Widget from '../../fiscalizacion/Widget/Widget'
+import CargaDeTabla from '../../CargaDeTabla';
 
 
 
@@ -227,6 +228,7 @@ const TablaNotificaciones = (props) => {
                                                             </TableRow>
                                                         </TableHead>
                                                         <TableBody>
+                                                            {deuda_exigible ? <>
                                                             {deudaExigible.map((row) => (
                                                                 <TableRow
                                                                     key={row.name}
@@ -239,7 +241,7 @@ const TablaNotificaciones = (props) => {
                                                                     <TableCell align="left">{row.datod} - {Math.round(row.datod)} cursos</TableCell>
 
                                                                 </TableRow>
-                                                            ))}
+                                                            ))}</>:<><CargaDeTabla/></>}
                                                         </TableBody>
                                                     </Table>
                                                 </TableContainer>
