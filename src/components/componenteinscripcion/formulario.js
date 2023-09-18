@@ -57,7 +57,7 @@ const styles2 = {
         gridTemplateRows: 'auto 1fr',
         alignItems: 'start',
         padding: 5,
-        transform: 'scale(0.95)', /* Esto escalará el contenido al 50% del tamaño original */
+        transform: 'scale(0.90)', /* Esto escalará el contenido al 50% del tamaño original */
         // transform-origin: top left; 
 
     },
@@ -165,7 +165,7 @@ const Estracto = () => {
                     <Paper
 
                         className="aparecer-desde-abajo"
-                    
+                        style={styles2.paperr}
                     >
                         <Box className="logo-container">
                             <img style={islogoc2} className="islogoc" src={Logocuqui} alt="logo" />
