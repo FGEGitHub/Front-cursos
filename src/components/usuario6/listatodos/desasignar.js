@@ -54,8 +54,6 @@ export default function SelectTextFields(props) {
 
 
   const [inscripcion, setInscripcion] = useState({
-
-
   })
 
 
