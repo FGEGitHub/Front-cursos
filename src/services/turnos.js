@@ -63,8 +63,12 @@ return data
      
      
  } 
-
-
+ 
+ const desasignar= async  (datos) => {
+  const {data } = await axios.post(baseUrl+'desasignar',datos,config)
+  
+  
+} 
  const modificarclase= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'modificarclase',datos,config)
@@ -82,4 +86,4 @@ const borrarclase= async  (datos) => {
 
 
 
-export default {lista,nuevaclase,modificarTurno,modificarclase,borrarclase}
+export default {lista,desasignar,nuevaclase,modificarTurno,modificarclase,borrarclase}

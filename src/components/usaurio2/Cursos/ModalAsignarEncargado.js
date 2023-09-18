@@ -31,11 +31,9 @@ const currencies = [
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
   //const usuario  = useUser().userContext
-  let params = useParams()
-  let id_curso = params.id
+
   const [profesores, setProfesores] = useState()
-  const [porcent, setPorcent] = useState()
-  const [categoria, setCategoria] = useState()
+
   const [activo, setActivo] = useState(false)
 
 
@@ -51,8 +49,9 @@ export default function SelectTextFields(props) {
 
 
   const handleClickOpen = () => {
-    traer()
+  
     setOpen(true);
+    traer()
   };
 
   const handleClose = () => {
@@ -71,7 +70,7 @@ export default function SelectTextFields(props) {
 
 
 const traer = async () => {
-
+console.log('asd')
  const not = await servicioPersonas.traerencargados()
 
  setProfesores(not)
@@ -121,10 +120,9 @@ const traer = async () => {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Ver inscripcion">
+   
        <Button variant="contained" onClick={handleClickOpen} >  Asignar Encargado <BorderColorIcon/>    </Button>
     
-      </Tooltip>
       <Dialog open={open} onClose={handleClose}>
 
    

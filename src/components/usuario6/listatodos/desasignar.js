@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioCursos from '../../../services/Cursos'
+import servicioTurnos from '../../../services/turnos'
 import Tooltip from '@material-ui/core/Tooltip';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import React, { useEffect, useState, Fragment } from "react";
@@ -51,11 +51,7 @@ export default function SelectTextFields(props) {
 
   };
 
-  const traer = async (e) => {
 
-    const mes = await servicioCursos.traerturnos(e)
-    setTurnos(mes)
-  }
 
   const [inscripcion, setInscripcion] = useState({
 
@@ -85,7 +81,7 @@ export default function SelectTextFields(props) {
   const handleChange = (e) => {
 
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
-    traer(e.target.value)
+
     /* if (e.target.name =="mesa"){
       for (let i = 0; i < mesas.length; i++) {
        
@@ -97,51 +93,16 @@ export default function SelectTextFields(props) {
       }
     }
      */
-    console.log(inscripcion)
+ 
   }
 
-  const handleChange2 = (e) => {
-
-    setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
-
-    /* if (e.target.name =="mesa"){
-    for (let i = 0; i < mesas.length; i++) {
-     
-      
-      if (mesas[i].id == e.target.value ) {
-          
-        setDisponibilidad(mesas[i].disponibilidad)
-      }
-    }
-    }
-    */
-    console.log(inscripcion)
-  }
-
-
-  
-  const handleCancelar = async (event) => {
-
-
-
-    const respuesta = await servicioCursos.rechazarinscrip(
-      inscripcion
-
-    )
-    console.log(respuesta)
-setRta(respuesta)
-    props.traer()
-    setMostrarDialogo(true)
-    setActivo(false)
-
-  };/////
   ////
   const handleDeterminar = async (event) => {
 
 
 
-    const respuesta = await servicioCursos.asignarcurso(
-      inscripcion
+    const respuesta = await servicioTurnos.desasignar(
+      
 
 
     )

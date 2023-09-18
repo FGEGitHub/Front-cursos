@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioTurnos from '../../../services/turnos'
+import servicioPersonas from '../../../services/personas'
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
@@ -36,8 +37,8 @@ const currencies = [
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
   //const usuario  = useUser().userContext
-  let params = useParams()
-  let id_curso = params.id
+  const [profesores, setProfesores] = useState()
+ 
   const [mostrarDialogo, setMostrarDialogo] = useState(false);
   const [activo, setActivo] = useState(false)
   const [rta, setRta] = useState()
@@ -54,10 +55,19 @@ export default function SelectTextFields(props) {
 
 
   const handleClickOpen = () => {
-
+    traer()
     setOpen(true);
   };
-
+  const traer = async () => {
+  
+     const not = await servicioPersonas.traerencargados()
+    
+     setProfesores(not)
+    
+     setActivo(true)
+    
+    }
+      //
   const handleClose = () => {
     setMostrarDialogo(false)
     setActivo(false)
@@ -145,7 +155,33 @@ export default function SelectTextFields(props) {
             fullWidth
             variant="standard"
           />
-   
+     <label>Asignar encargado </label>
+                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                             
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'id_encargado',
+                                    id: 'uncontrolled-native',
+
+                                }}
+                            >  
+                             <option value={'Pendiente'}>Asignar</option>
+                            {activo ? <>
+                            
+                              {profesores.map((row) => (
+                                       
+                                        <option value={row.id}> {row.nombre}</option>
+
+                              ))}
+                            
+                            </> : <>
+                             <option value={'Pendiente'}>Asignar</option></>}
+                           
+
+                            </NativeSelect>
    
    
 

@@ -6,7 +6,7 @@ import ModificarCurso from './ModalModificarCurso'
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
+
 import SearchIcon from '@mui/icons-material/Search';
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
@@ -23,9 +23,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+
 import ServicioInscripciones from '../../../services/inscripciones'
 ////
+import Asignarencargado from './ModalModificarclasesdelcurso';
 import Modificarturno from './ModalModificarclasesdelcurso';
 import Grid from '@mui/material/Grid';
 import GroupIcon from '@mui/icons-material/Group';
@@ -85,22 +86,13 @@ const Lotes = () => {
         
       setVista(!vista)
   }
-    const actualizarcursado = async () => {
-        
-        const clients = await ServicioInscripciones.actualizarcursado({
-
-        })
-        setClients(clients)
-        setLoading(false);
-    }
-
+   
 
 
     ///
 //opcionde click en el nombre
 const getturnos = async (id) => {
   setIda(id)
-  console.log(ida)
 
   const clients = await servicioCursos.getturnos(id)
   setTurnos(clients)
@@ -129,13 +121,14 @@ function Borrarturno(dataIndex, rowIndex, data, onClick) {
     <Modificarturno
           id={turnos[dataIndex].id}
           getClients= { async (id) => {
-            setIda(id)
-            
-          
-            const clients = await servicioCursos.getturnos(id)
+         
+   
+            const clients = await servicioCursos.getturnos(ida)
             setTurnos(clients)
             setLoading(false);
           }}/>
+       
+    
     
 
     </>
@@ -226,6 +219,10 @@ const columns2 = [
       name: "descripcion",
      label: 'descripcion',
     } ,
+    {
+      name: "id_encargado",
+     label: 'Encargado',
+    } ,
 
     {
       name: "Ir/Modificar",
@@ -241,7 +238,6 @@ const columns2 = [
   
   },   
 
-    
 
 
 ];
