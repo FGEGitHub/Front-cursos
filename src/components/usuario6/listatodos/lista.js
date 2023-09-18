@@ -101,7 +101,10 @@ export default function Ingresos() {
             }
          
           }}/>
-          </>:<><Desasignar/></>}
+          </>:<>
+          
+          
+          <Desasignar/></>}
           
           {/* 
  <CambiarEst
