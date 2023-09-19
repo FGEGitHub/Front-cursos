@@ -122,7 +122,7 @@ const FichaAxios = (props) => {
                 />
 
                 <TextField
-                  label="Cupo"
+                  label="Cantidad de alumnas"
                   id="Nombre"
                   value= {turno[1].cantidad}
                   variant="filled"
@@ -171,10 +171,11 @@ const FichaAxios = (props) => {
                   }}
                 />
               </Box>
+              <button  onClick={() => navigate('/administracion/alumnosdelturno/'+id)}  >Ver alumnes</button>
               </>:<></>}  
 
             </Container>
-          
+         
         </Grid>
 
         <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>

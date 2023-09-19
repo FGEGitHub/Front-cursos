@@ -134,6 +134,41 @@ function Borrarturno(dataIndex, rowIndex, data, onClick) {
     </>
   );
 }
+function Borrarturno(dataIndex, rowIndex, data, onClick) {
+  return (
+    <>
+    < Tooltip title="Borrar">
+    <Button   onClick={() => borrarturno(turnos[dataIndex].id)} >Borrar</Button>
+    </Tooltip>
+    <Modificarturno
+          id={turnos[dataIndex].id}
+          getClients= { async (id) => {
+         
+   
+            const clients = await servicioCursos.getturnos(ida)
+            setTurnos(clients)
+            setLoading(false);
+          }}/>
+       
+    
+    
+
+    </>
+  );
+}
+
+
+
+
+function ir(dataIndex, rowIndex, data, onClick) {
+  return (
+    <>
+  < Tooltip title="Borrar">
+<Button   onClick={() => navigate('/administracion/turno/'+turnos[dataIndex].id)} >Ir al curso</Button>
+</Tooltip>
+    </>
+  );
+}
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
@@ -237,7 +272,19 @@ const columns2 = [
       }
   
   },   
+  {
+    name: "Ir",
+    options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+        ir(
+                dataIndex,
+                rowIndex,
+               // overbookingData,
+               // handleEditOpen
+            )
+    }
 
+}, 
 
 
 ];

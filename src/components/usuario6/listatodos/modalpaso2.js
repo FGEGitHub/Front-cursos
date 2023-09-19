@@ -180,7 +180,6 @@ setRta(respuesta)
         >
 
           <Dialog open={open} onClose={handleClose}>
-            {props.observaciones ? <><h4 style={{ color: 'crimson' }} >Observaciones: {props.observaciones}</h4></> : <>Sin observaciones</>}
             {activo ? <>
               <DialogContent>
 

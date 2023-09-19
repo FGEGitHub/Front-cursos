@@ -76,12 +76,13 @@ const Login = () => {
           case 6:navigate('/llamados/todos')
           window.location.reload(true);
     break;
+    case 4:navigate('/encargados/cursos')
+    window.location.reload(true);
+    break;
    /*        case 3:navigate('/coordinadores/novedades')
           window.location.reload(true);
           break;
-          case 4:navigate('/encargados/cursos')
-          window.location.reload(true);
-          break;
+        
           case 10:navigate('/admin/usuarios')
           window.location.reload(true);
           break; */

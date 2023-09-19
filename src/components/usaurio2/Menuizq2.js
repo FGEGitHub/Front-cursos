@@ -156,7 +156,7 @@ export default function MenuIzq2 ({children}) {
    { children}
       </Box>
     </Box>
-    <Footer/>
+
    
     </>
   );

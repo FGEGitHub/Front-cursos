@@ -2,9 +2,9 @@ import servicioEncargados from '../../../services/encargados'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
+import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
+import Grid from '@mui/material/Grid';
 import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
 import Tooltip from '@material-ui/core/Tooltip';
 import Face3Icon from '@mui/icons-material/Face3';
@@ -20,7 +20,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-
+import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: "#4caf50",
@@ -41,6 +41,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 
 
@@ -74,37 +82,37 @@ const TablaNotificaciones = (props) => {
 
 
     }
-    const cambiarvista =  () => {
+    const cambiarvista = () => {
         setvista(!vista)
 
 
     }
-    
+
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
 
-            
-                 <>
-                 < Tooltip title="contactar">
-                <PhoneForwardedSharpIcon  onClick={() => navigate('/encargados/curso/'+clases[dataIndex]['turnoid'])}  />
-                </Tooltip>
-                </>
-                    <br/>      
+
                 <>
-                < Tooltip title="ir a la clase">
-                <ContentPasteGoIcon   onClick={() => navigate('/encargados/turno/'+clases[dataIndex]['turnoid'])} />
-                </Tooltip>
+                    < Tooltip title="contactar">
+                        <PhoneForwardedSharpIcon onClick={() => navigate('/encargados/curso/' + clases[dataIndex]['turnoid'])} />
+                    </Tooltip>
                 </>
-                <br/>  
+                <br />
                 <>
-                < Tooltip title="Estadisticas">
-                <Face3Icon   onClick={() => navigate('/encargados/alumnosdelturno/'+clases[dataIndex]['turnoid'])} />
-                </Tooltip>
+                    < Tooltip title="ir a la clase">
+                        <ContentPasteGoIcon onClick={() => navigate('/encargados/turno/' + clases[dataIndex]['turnoid'])} />
+                    </Tooltip>
                 </>
-                
+                <br />
+                <>
+                    < Tooltip title="Estadisticas">
+                        <Face3Icon onClick={() => navigate('/encargados/alumnosdelturno/' + clases[dataIndex]['turnoid'])} />
+                    </Tooltip>
+                </>
+
             </>
-            
+
         );
     }
 
@@ -153,59 +161,59 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            {clases ? <>
+           {/*  {clases ? <>
                 <div>
-                <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>
-                {vista ? <>
+                    <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon /></Button>
+                    {vista ? <>
 
-                <TableContainer component={Paper}>
-      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-          <StyledTableCell>IR AL CURSO</StyledTableCell>
-            <StyledTableCell>NOMBRE</StyledTableCell>
-            <StyledTableCell >DESCRIPCION</StyledTableCell>
-            <StyledTableCell >PENDIENTES POR CONTESTAR</StyledTableCell>
-            <StyledTableCell align="left">CONTACTAR  / IR A CLASES/ </StyledTableCell>
-            <StyledTableCell >ESTADO / CAMBIAR ESTADO</StyledTableCell>
-          
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {clases.map((row) => (
-            <StyledTableRow key={row.name}>  
-             <StyledTableCell > <Button variant="contained"  onClick={() => navigate('/encargados/turno/'+row.turnoid)}>iR</Button>  </StyledTableCell>     
-              <StyledTableCell >{row.nombre}</StyledTableCell>
-              <StyledTableCell >{row.descripcion}</StyledTableCell>
-              <StyledTableCell >{row.cantsinresp}/{row.total}</StyledTableCell>
-              <StyledTableCell >   < Tooltip title="contactar">
-                <PhoneForwardedSharpIcon  onClick={() => navigate('/encargados/curso/'+row.turnoid)}  />
-                </Tooltip> 
-                  
-                < Tooltip title="ir a la clase">
-                <ContentPasteGoIcon   onClick={() => navigate('/encargados/turno/'+row.turnoid)} />
-                </Tooltip>
-                </StyledTableCell>
+                        <TableContainer component={Paper}>
+                            <Table sx={{ minWidth: "20%", maxWidth: "1000%" }} aria-label="customized table">
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>IR AL CURSO</StyledTableCell>
+                                        <StyledTableCell>NOMBRE</StyledTableCell>
+                                        <StyledTableCell >DESCRIPCION</StyledTableCell>
+                                        <StyledTableCell >PENDIENTES POR CONTESTAR</StyledTableCell>
+                                        <StyledTableCell align="left">CONTACTAR  / IR A CLASES/ </StyledTableCell>
+                                        <StyledTableCell >ESTADO / CAMBIAR ESTADO</StyledTableCell>
 
-                <StyledTableCell >
-                < Tooltip title="Estado alumnas">
-                <Face3Icon   onClick={() => navigate('/encargados/alumnosdelturno/'+row.turnoid)} />
-                </Tooltip>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {clases.map((row) => (
+                                        <StyledTableRow key={row.name}>
+                                            <StyledTableCell > <Button variant="contained" onClick={() => navigate('/encargados/turno/' + row.turnoid)}>iR</Button>  </StyledTableCell>
+                                            <StyledTableCell >{row.nombre}</StyledTableCell>
+                                            <StyledTableCell >{row.descripcion}</StyledTableCell>
+                                            <StyledTableCell >{row.cantsinresp}/{row.total}</StyledTableCell>
+                                            <StyledTableCell >   < Tooltip title="contactar">
+                                                <PhoneForwardedSharpIcon onClick={() => navigate('/encargados/curso/' + row.turnoid)} />
+                                            </Tooltip>
 
-                < Tooltip title="cambiar estado ">
-                <ManageAccountsIcon   onClick={() => navigate('/encargados/estadoalumnas/'+row.turnoid)} />
-                </Tooltip>
-                
-               
-              
-                    
-                     </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </>:<>
+                                                < Tooltip title="ir a la clase">
+                                                    <ContentPasteGoIcon onClick={() => navigate('/encargados/turno/' + row.turnoid)} />
+                                                </Tooltip>
+                                            </StyledTableCell>
+
+                                            <StyledTableCell >
+                                                < Tooltip title="Estado alumnas">
+                                                    <Face3Icon onClick={() => navigate('/encargados/alumnosdelturno/' + row.turnoid)} />
+                                                </Tooltip>
+
+                                                < Tooltip title="cambiar estado ">
+                                                    <ManageAccountsIcon onClick={() => navigate('/encargados/estadoalumnas/' + row.turnoid)} />
+                                                </Tooltip>
+
+
+
+
+                                            </StyledTableCell>
+                                        </StyledTableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </> : <>
                         <>
                             <MUIDataTable
 
@@ -224,13 +232,39 @@ const TablaNotificaciones = (props) => {
 
                             />
                         </></>}
-                 
 
-                 
+
+
                 </div>
-            </> : <></>}
+            </> : <></>} */}
 
-     
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={1}>
+             
+           
+               {clases.map((row) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Item>
+                            <div className="body__Page">
+                                <div className="container__article">
+
+                                    <div className="box__article">
+                                        <i > < TableRestaurantIcon fontSize="large" /></i>
+                                        <h5 >{row.nombre}</h5>
+                                        <p>Ver lista de Mesas y escuelas</p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </Item>
+                    </Grid>
+                    ))}
+
+                </Grid>
+            </Box>
+
+
         </div>
     )
 }

@@ -79,7 +79,7 @@ export default function SelectTextFields(props) {
   const handleChange = (e) => {
 
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
-
+console.log(inscripcion)
     /* if (e.target.name =="mesa"){
       for (let i = 0; i < mesas.length; i++) {
        
@@ -100,10 +100,7 @@ export default function SelectTextFields(props) {
 
 
     const respuesta = await servicioTurnos.desasignar(
-      
-
-
-    )
+      inscripcion)
 setRta(respuesta)
     props.traer()
     setMostrarDialogo(true)
@@ -134,7 +131,6 @@ setRta(respuesta)
         >
 
           <Dialog open={open} onClose={handleClose}>
-            {props.observaciones ? <><h4 style={{ color: 'crimson' }} >Observaciones: {props.observaciones}</h4></> : <>Sin observaciones</>}
             {activo ? <>
               <DialogContent>
 

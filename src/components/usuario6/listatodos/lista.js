@@ -104,7 +104,20 @@ export default function Ingresos() {
           </>:<>
           
           
-          <Desasignar/></>}
+          <Desasignar
+           id_inscripcion={inscrip[dataIndex].id}
+           traer = { async () => {
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
+      
+                const ins = await servicioInscripciones.preinscriptascall(usuario.id)
+                setInscrip(ins[0])
+            }
+         
+          }}
+          dni= {inscrip[dataIndex].dni}
+          /></>}
           
           {/* 
  <CambiarEst
