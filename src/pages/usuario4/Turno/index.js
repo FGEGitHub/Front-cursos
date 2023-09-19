@@ -1,5 +1,5 @@
 
-import MenuUsuario4 from '../../../components/usuario4/Menuizq4'
+import MenuUsuario4 from '../../../components/usuario4/navbar'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Clases from '../../../components/usuario4/Clasesdelcurso/todas'
@@ -35,19 +35,16 @@ export default function Paginas() {
      
     }, []) 
     
-    
-    
-
 
     return (
  
 <>
 { logueado ? <div> 
-    <MenuUsuario4>
-    <Ficha/>
+    <MenuUsuario4/>
+
   <Clases/>
 
- </MenuUsuario4> 
+
 
  </div>   :<div></div>  }
 

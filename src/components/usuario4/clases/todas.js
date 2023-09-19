@@ -11,8 +11,12 @@ import Face3Icon from '@mui/icons-material/Face3';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
-import Skeleton from '@mui/material/Skeleton';
 import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
+import Uno from "../../../Assets/uno.webp";
+import Dos from "../../../Assets/dos.webp";
+import Tres from "../../../Assets/tres.webp";
+import Cuatro from "../../../Assets/cuatro.webp";
+import Cinco from "../../../Assets/cinco.webp";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import Button from "@mui/material/Button";
@@ -64,7 +68,9 @@ const TablaNotificaciones = (props) => {
 
     }, [])
 
-
+    const islogo = {
+        width: "90px",                  
+        };
     const traer = async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -73,6 +79,7 @@ const TablaNotificaciones = (props) => {
 
                 setUsuario(usuario)
                 const novedades_aux = await servicioEncargados.clases(usuario.id)
+                console.log(novedades_aux)
                 setClases(novedades_aux)
             }
 
@@ -150,14 +157,9 @@ const TablaNotificaciones = (props) => {
 
 
     ];
-
-    const options = {
-
-        /*    rowsPerPage: 10,
-           download: false, // hide csv download option
-           onTableInit: this.handleTableInit,
-           onTableChange: this.handleTableChange, */
-    };
+    const ir = (id) => {
+        navigate('/encargados/turno/'+id)
+    }
     // renderiza la data table
     return (
         <div>
@@ -245,13 +247,52 @@ const TablaNotificaciones = (props) => {
                {clases.map((row) => (
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                         <Item>
-                            <div className="body__Page">
-                                <div className="container__article">
+                            <div  onClick={() => ir(row.id)} className="body__Page">
+                                <div  onClick={() => ir(row.id)}  className="container__article">
 
-                                    <div className="box__article">
-                                        <i > < TableRestaurantIcon fontSize="large" /></i>
-                                        <h5 >{row.nombre}</h5>
-                                        <p>Ver lista de Mesas y escuelas</p>
+                                    <div  onClick={() => ir(row.id)} className="box__article">
+
+
+
+                                  
+                                    <div>
+      {row.id_curso === '132' ? (
+        <div>
+          {/* Código para el caso 1 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Uno} alt="logo" /> 
+        </div>
+      ) : row.id_curso  === '133' ? (
+        <div>
+          {/* Código para el caso 2 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Dos} alt="logo" /> 
+        </div>
+      ) : row.id_curso  === '134' ? (
+        <div>
+          {/* Código para el caso 3 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Tres} alt="logo" /> 
+        </div>
+      ) : row.id_curso  === '135' ? (
+        <div>
+          {/* Código para el caso 4 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Cuatro} alt="logo" /> 
+        </div>
+      ) : row.id_curso  === '136' ? (
+        <div>
+          {/* Código para el caso 5 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Cinco} alt="logo" /> 
+        </div>
+      )  : (
+        <div>
+           <img  onClick={() => ir(row.id)}  style={islogo} src={Cinco} alt="logo" /> 
+        </div>
+      )}
+    </div>
+
+
+                                        <h5  onClick={() => ir(row.id)}  >{row.nombre}</h5>
+                                        
+                                        <label onClick={() => ir(row.id)} >{row.descripcion}</label>
+                                        <p  onClick={() => ir(row.id)} >IR AL CURSO</p>
                                     </div>
 
 

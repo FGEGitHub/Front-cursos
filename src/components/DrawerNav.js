@@ -57,10 +57,10 @@ const DrawerNav = () => {
     //
   }
   const handleClick = () => {
-    navigate("/");
+    navigate("/encargados/cursos");
   };
   const iraMenu = () => {
-    navigate("/");
+    navigate("/encargados/cursos");
   };
   const irNosotros = () => {
     navigate("/usuario/nosotros");

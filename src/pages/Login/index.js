@@ -13,7 +13,7 @@ export default function Paginas() {
     const [loginVisible, setLoginvisible] = useState(false)
 
     useEffect(() => {
-      console.log('htgdj') 
+      
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
         console.log(loggedUserJSON) 
         if (loggedUserJSON) {
@@ -36,7 +36,7 @@ export default function Paginas() {
               break;
 
               case 4:
-                alert('usuario no autorizado')
+                navigate('encargados/cursos')
                 window.localStorage.removeItem('loggedNoteAppUser')
               //  navigate('/encargados/cursos')
                 break;

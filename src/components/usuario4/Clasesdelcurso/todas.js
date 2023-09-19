@@ -4,10 +4,9 @@ import ModaNueva from './ModalNuevaclase'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import TouchAppTwoToneIcon from '@mui/icons-material/TouchAppTwoTone';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -17,6 +16,9 @@ import Skeleton from '@mui/material/Skeleton';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ModificarClase from './ModalModificarClase'
 import BorrarClase from './Modalborrar'
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import WysiwygTwoToneIcon from '@mui/icons-material/WysiwygTwoTone'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -38,7 +40,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
@@ -223,6 +231,9 @@ const TablaNotificaciones = (props) => {
            onTableChange: this.handleTableChange, */
     };
     // renderiza la data table
+    const ir = (id) => {
+        navigate('/encargados/turno/'+id)
+    }
     return (
         <div>
             <h2>CLASES DEL CURSO</h2>
@@ -230,7 +241,46 @@ const TablaNotificaciones = (props) => {
                 <div>
 
 
-                    <ModaNueva
+                    
+                 
+
+                 <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={1}>
+             
+           
+               {clases.map((row) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3}>
+                        <Item>
+                            <div  onClick={() => ir(row.id)} className="body__Page">
+                                <div  onClick={() => ir(row.id)}  className="container__article">
+
+                                    <div  onClick={() => ir(row.id)} className="box__article">
+
+                                    
+                                    <i  onClick={() => ir(row.id)} > < WysiwygTwoToneIcon fontSize="large"/></i>
+                                  
+
+
+                                        <h5  onClick={() => ir(row.id)}  >{row.observacion}</h5>
+                                        
+                                        <label onClick={() => ir(row.id)} >{row.fecha}</label>
+                                        <p  onClick={() => ir(row.id)} >TOMAR ASISTENCIA</p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </Item>
+                    </Grid>
+                    ))}
+
+                </Grid>
+            </Box>
+
+
+                </div>
+            </> : <></>}
+            <ModaNueva
                         id_turno={id}
                         traer={async () => {
                             try {
@@ -257,30 +307,6 @@ const TablaNotificaciones = (props) => {
 
                         }
                     />
-                    {clases.length > 0 ? <>
-                        <>
-                            <MUIDataTable
-
-                                title={"Clases del curso"}
-                                data={clases}
-                                columns={columns}
-                                actions={[
-                                    {
-                                        icon: 'save',
-                                        tooltip: 'Save User',
-                                        onClick: (event, rowData) => alert("You saved " + rowData.name)
-                                    }
-                                ]}
-                                options={options}
-
-
-                            />
-                        </></> : <> <h2>El curso aun no tiene clases</h2></>}
-
-
-
-                </div>
-            </> : <></>}
         </div>
     )
 }

@@ -12,8 +12,8 @@ import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import InputLabel from '@mui/material/InputLabel';
-
-
+import EventNoteTwoToneIcon from '@mui/icons-material/EventNoteTwoTone';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
   //const usuario  = useUser().userContext
@@ -85,10 +85,30 @@ export default function SelectTextFields(props) {
       noValidate
       autoComplete="off"
     >
-      < Tooltip title="Nueva Clase">
+
+
+<div className="body__Page">
+            <div className="container__article">
+    
+                <div  onClick={handleClickOpen}className="box__article">
+                   <i  onClick={handleClickOpen}> < LibraryAddIcon   sx={{ color: 'green', }} fontSize="large"/></i>
+                    <h5  onClick={handleClickOpen}>NUEVA CLASE</h5>
+                    <p  onClick={handleClickOpen}> Seleccionar para agregar una clase nueva </p>
+                </div>
+               
+                
+            </div>
+        </div>
+
+
+
+
+
+
+     {/* <  Tooltip title="Nueva Clase">
         <Button variant="outlined" onClick={handleClickOpen}> Nueva Clase  </Button>
 
-      </Tooltip>
+      </Tooltip> */}
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
 

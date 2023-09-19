@@ -35,12 +35,12 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 const clases = async (usuario) => {
 
     // const data = await axios.post('http://localhost:4000/signupp', datos)
-      const {data} = await axios.get(baseUrl+'clases/'+usuario, config)
-      if(data=== 'error login'){
+      const {data} = await axios.get(baseUrl+'clases/'+usuario)
+     /*  if(data=== 'error login'){
        
         window.localStorage.removeItem('loggedNoteAppUser')
         window.location.reload();
-      }
+      } */
     
 
 return data
