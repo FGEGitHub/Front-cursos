@@ -155,7 +155,7 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            {datos ? <>
+    {/*         {datos ? <>
 
                 <Featured
                 titulo1={'Porcentaje presentes/clases'}
@@ -166,7 +166,7 @@ const TablaNotificaciones = (props) => {
                 />
                
             
-            </>:<></>}
+            </>:<></>} */}
             {clases ? <>
                 <div>
                 <Button variant="contained" onClick={cambiarvista} >Vista<RemoveRedEyeIcon/></Button>

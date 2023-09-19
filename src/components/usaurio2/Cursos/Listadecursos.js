@@ -259,19 +259,7 @@ const columns2 = [
      label: 'Encargado',
     } ,
 
-    {
-      name: "Ir/Modificar",
-      options: {
-          customBodyRenderLite: (dataIndex, rowIndex) =>
-          Borrarturno(
-                  dataIndex,
-                  rowIndex,
-                 // overbookingData,
-                 // handleEditOpen
-              )
-      }
-  
-  },   
+    
   {
     name: "Ir",
     options: {
@@ -285,7 +273,19 @@ const columns2 = [
     }
 
 }, 
+{
+  name: "Ir/Modificar",
+  options: {
+      customBodyRenderLite: (dataIndex, rowIndex) =>
+      Borrarturno(
+              dataIndex,
+              rowIndex,
+             // overbookingData,
+             // handleEditOpen
+          )
+  }
 
+},   
 
 ];
 const options = {
