@@ -164,6 +164,17 @@ const TablaNotificaciones = (props) => {
             }
         
         }, 
+        
+        {
+            name: "nombrecurso",
+            label: "nombrecurso",
+
+        },
+        {
+            name: "descripcion",
+            label: "Turno",
+
+        },
 
     ];
    

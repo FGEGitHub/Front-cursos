@@ -60,7 +60,7 @@ export default function Paginas() {
     <MenuUsuario4>
  {/*    <img style={islogo} src={Mantenimiento} alt="logo" />  */}
       <Lista/>
-      <Categorias/>
+   
  </MenuUsuario4> 
 
 

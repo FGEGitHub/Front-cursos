@@ -77,7 +77,7 @@ export default function SelectTextFields(props) {
   
   const handleChange = (e) => {
     console.log(inscripcion)
-    console.log(props.id)
+  
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 }
   
@@ -97,7 +97,7 @@ export default function SelectTextFields(props) {
       setRta('Realizado')
       setMostrarDialogo(true)
       props.getClients()
-
+     
    
     
   };/////

@@ -162,7 +162,7 @@ export default function SelectTextFields(props) {
                  <option value={'Inscripta'}> sin definir </option>
                  <option value={'Inscripta'}> Inscripta </option>
                  <option value={'Preasignada'}> Preasignada </option>
-                 <option value={'Cursando'}> No Cursando</option>
+           
                 
                  </NativeSelect>
                
