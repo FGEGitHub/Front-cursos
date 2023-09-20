@@ -30,6 +30,7 @@ const TablaNotificaciones = (props) => {
     const [inscriptos, setinscriptos] = useState([''])
     const [datos, setDatos] = useState([''])
     const [deudaExigible, setDeudaExigible] = useState([''])
+    const [vista, setVista] = useState(false)
     const navigate = useNavigate();
 
     let params = useParams()
@@ -179,12 +180,8 @@ const TablaNotificaciones = (props) => {
     ];
    
     const options = {
-
-        /*    rowsPerPage: 10,
-           download: false, // hide csv download option
-           onTableInit: this.handleTableInit,
-           onTableChange: this.handleTableChange, */
-    };
+        selectableRows: false, // Deshabilita los checkboxes
+      };
     // renderiza la data table
     return (
         <div>
@@ -225,7 +222,9 @@ const TablaNotificaciones = (props) => {
 
                                                 }}
                                             >
-
+                                              
+                            {vista ? <>
+                                <Button  onClick={() =>setVista(!vista)}> Ocultar resumen</Button>
                                                 <TableContainer >
                                                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                                         <TableHead>
@@ -257,6 +256,7 @@ const TablaNotificaciones = (props) => {
                                                         </TableBody>
                                                     </Table>
                                                 </TableContainer>
+                                                </>:<>  <Button onClick={() =>setVista(!vista)}> Ver resumen inscripciones</Button></> }
                                             </Paper>
                 <div>
 

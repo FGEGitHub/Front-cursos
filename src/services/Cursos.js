@@ -227,6 +227,19 @@ const presente= async  (datos) => {
   }
 
 } 
+
+const ausente= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'ausente',datos,config)
+  if(data=== 'error login'){
+      
+   window.localStorage.removeItem('loggedNoteAppUser')
+   window.location.reload();
+ }
+
+} 
+
+
 const modificarcurso= async  (datos) => {
  
   const {data } = await axios.post(baseUrl+'modificarcurso',datos,config)
@@ -325,4 +338,4 @@ return data
 }
 
 
-export default {borrarturno,rechazarinscrip,asignarcurso,getturnos,traerturnos,avancedelcurso,traercursos,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,ausente,rechazarinscrip,asignarcurso,getturnos,traerturnos,avancedelcurso,traercursos,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
