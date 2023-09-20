@@ -232,7 +232,7 @@ const TablaNotificaciones = (props) => {
     };
     // renderiza la data table
     const ir = (id) => {
-        navigate('/encargados/turno/'+id)
+        navigate('/encargados/clase/'+id)
     }
     return (
         <div>
