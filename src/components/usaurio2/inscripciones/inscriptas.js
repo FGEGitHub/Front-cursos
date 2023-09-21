@@ -27,8 +27,8 @@ import CargaDeTabla from '../../CargaDeTabla';
 const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
     const [usuario, setUsuario] = useState([''])
-    const [inscriptos, setinscriptos] = useState([''])
-    const [datos, setDatos] = useState([''])
+    const [inscriptos, setinscriptos] = useState()
+    const [datos, setDatos] = useState([])
     const [deudaExigible, setDeudaExigible] = useState([''])
     const [vista, setVista] = useState(false)
     const navigate = useNavigate();
@@ -230,7 +230,7 @@ const TablaNotificaciones = (props) => {
     return (
         <div>
 
-            {inscriptos ? <>       
+            {inscriptos && datos ? <>       
                 {datos ? <>
              <div className="home">
                 
