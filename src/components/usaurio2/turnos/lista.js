@@ -189,7 +189,7 @@ Borrarturno
   
 
               <StyledTableCell >  < Tooltip title="ir al turno">
-              <AssignmentIndIcon  onClick={() => navigate('/administracion/turno/'+row.id)} />
+              <Button variant='contained' onClick={() => navigate('/administracion/turno/'+row.id)} >Ver</Button>
                 </Tooltip>
                 <Modificarturno
                 id={row.id}
