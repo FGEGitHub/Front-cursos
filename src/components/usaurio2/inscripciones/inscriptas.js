@@ -3,7 +3,7 @@ import Carga from '../../CargaDeTabla'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
+import Observaciones from '../Personas/observaciones'
 import { useNavigate } from "react-router-dom";
 
 
@@ -109,9 +109,45 @@ const TablaNotificaciones = (props) => {
             </>
         );
     }
+   
+    function Observacioness(dataIndex, rowIndex, data, onClick) {
+        return (
+            <>
+                <div >
 
 
 
+                <Observaciones
+                id = {inscriptos[dataIndex].idp}
+                traer={async () => {
+              
+       
+
+                    setUsuario(usuario)
+                    console.log(123)
+                    const novedades_aux = await servicioInscripciones.incriptas2da()
+                    console.log(novedades_aux)
+                    setinscriptos(novedades_aux[0])
+                    setDeudaExigible(novedades_aux[1])
+                    setDatos(novedades_aux[2])
+                    setClases(novedades_aux)
+           
+    
+    
+    
+    
+    
+    
+        }}/>
+
+
+
+                </div>
+            </>
+        );
+    }
+
+    
 
     // definimos las columnas
     const columns = [
@@ -141,11 +177,7 @@ const TablaNotificaciones = (props) => {
             label: "Prioridad 2",
 
         },
-        {
-            name: "categoria",
-            label: "categoria",
-
-        },
+   
         
         {
             name: "estado",
@@ -176,7 +208,19 @@ const TablaNotificaciones = (props) => {
             label: "Turno",
 
         },
-
+        {
+            name: "Observaciones",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    Observacioness(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        }, 
     ];
    
     const options = {
