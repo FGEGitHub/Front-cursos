@@ -1,5 +1,5 @@
 import servicioCursos from '../../../services/Cursos'
-//import ModalVer from './ModalVer'
+import Modificarturno from '../Cursos/ModalModificarclasesdelcurso'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import Face3Icon from '@mui/icons-material/Face3';
@@ -83,6 +83,30 @@ const TablaNotificaciones = (props) => {
 
 
 
+    function Borrarturno(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+     
+          <Modificarturno
+                id={clases[dataIndex].id}
+                getClients= { async () => {
+
+
+                    const tur = await servicioCursos.listadetodoslosturnos()
+                    console.log(tur)
+                    setClases(tur)
+            
+            
+            
+            
+                }}/>
+             
+          
+          
+      
+          </>
+        );
+      }
 
     // definimos las columnas
     const columns = [
@@ -108,7 +132,7 @@ const TablaNotificaciones = (props) => {
             name: "Ver detalles",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
-                    CutomButtonsRenderer(
+                Borrarturno(
                         dataIndex,
                         rowIndex,
                         // overbookingData,
@@ -118,7 +142,7 @@ const TablaNotificaciones = (props) => {
 
         },
 
-
+Borrarturno
     ];
 
     const options = {
@@ -145,8 +169,8 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell  >Horario</StyledTableCell>
             <StyledTableCell  >Coordinador</StyledTableCell>
             <StyledTableCell  >Encargado</StyledTableCell>
-            <StyledTableCell align="left">Asignadas / Confirmadas / Rechazadas</StyledTableCell>
-            <StyledTableCell align="left">Faltan responder a llamado</StyledTableCell>
+            <StyledTableCell align="left">Confirmadas/cupo</StyledTableCell>
+          
             <StyledTableCell align="left">Ir a Turno</StyledTableCell>
           
           </TableRow>
@@ -160,23 +184,26 @@ const TablaNotificaciones = (props) => {
                <StyledTableCell >{row.numero}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.coor}</StyledTableCell>
-              <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.enc}</StyledTableCell>
-              <StyledTableCell >{row.cant} / {row.cant-row.rechazados-row.faltanporresp} / {row.rechazados}  </StyledTableCell>
-              <StyledTableCell >{row.faltanporresp}</StyledTableCell>
+              <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.encargado}</StyledTableCell>
+              <StyledTableCell > {row.cupo-row.disponibles}/{row.cupo}  </StyledTableCell>
+  
 
               <StyledTableCell >  < Tooltip title="ir al turno">
               <AssignmentIndIcon  onClick={() => navigate('/administracion/turno/'+row.id)} />
                 </Tooltip>
-                < Tooltip title="contacto">
-                <PhoneForwardedSharpIcon  onClick={() => navigate('/administracion/curso/'+row.id)}  />
-                </Tooltip>     
-                < Tooltip title="Estado alumnas">
-                <Face3Icon   onClick={() => navigate('/administracion/alumnosdelturno/'+row.id)} />
-                </Tooltip>
+                <Modificarturno
+                id={row.id}
+                getClients= { async () => {
 
-                < Tooltip title="cambiar estado ">
-                <ManageAccountsIcon   onClick={() => navigate('/administracion/estadoalumnas/'+row.id)} />
-                </Tooltip>       
+
+                    const tur = await servicioCursos.listadetodoslosturnos()
+                    console.log(tur)
+                    setClases(tur)
+            
+            
+            
+            
+                }}/>
               </StyledTableCell>
 
               

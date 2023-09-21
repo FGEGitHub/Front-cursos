@@ -118,7 +118,7 @@ export default function SelectTextFields(props) {
   return (
 <>
  < Tooltip title="Ver inscripcion">
-       <Button variant="contained" onClick={handleClickOpen} >  Modificar clase <BorderColorIcon/>    </Button>
+       <Button variant="contained" onClick={handleClickOpen} >  Modificar  <BorderColorIcon/>    </Button>
     
       </Tooltip>
       {!mostrarDialogo ? <>

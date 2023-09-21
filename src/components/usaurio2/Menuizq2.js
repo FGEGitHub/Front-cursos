@@ -23,7 +23,7 @@ import { useState, useEffect } from "react";
 import logo from "../../Assets/logoesme.webp";
 import Navbar from '../Navbar'
 import GradeIcon from '@mui/icons-material/Grade';
-
+import AppsIcon from '@mui/icons-material/Apps';
 const drawerWidth = 240;
 export default function MenuIzq2 ({children}) {
     const navigate = useNavigate();
@@ -48,6 +48,11 @@ export default function MenuIzq2 ({children}) {
           text: 'Cursos', 
           icon: <ApartmentIcon color="primary" />, 
           path: '/administracion/cursos' 
+        },
+        { 
+          text: 'Turnos', 
+          icon: <AppsIcon color="primary" />, 
+          path: '/administracion/turnos' 
         },
         { 
           text: 'Preasignadas', 
