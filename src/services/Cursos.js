@@ -218,7 +218,7 @@ return data
 
 
 const presente= async  (datos) => {
- 
+ console.log(datos)
    const {data } = await axios.post(baseUrl+'presente',datos,config)
    if(data=== 'error login'){
        

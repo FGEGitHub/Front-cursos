@@ -119,7 +119,7 @@ const TablaNotificaciones = (props) => {
 
             setUsuario(usuario)
             const alumn = await servicioCursos.asistencia(id)
-            console.log(alumn[1][0])
+            console.log(alumn[1])
             setClase(alumn[0][0])
             setAlumnos(alumn[1])
             setEstadisticas(alumn[2])
@@ -249,7 +249,7 @@ const TablaNotificaciones = (props) => {
                     </StyledTableCell>
                     <StyledTableCell align="left" data-label="Asistencia">
     
-                      {row.asistencia ==="No Tomada"? <>Si<Checkbox onClick={() => checkede(row.id_alumno)}  {...label}  /> No<Checkbox   onClick={() => checkedeno(row.id_alumno)}  {...label} /></> :<>  { row.asistencia === "Si" ? <> Si<Checkbox   {...label} defaultChecked disabled /> No<Checkbox   onClick={() => checkedeno(row.id_alumno)}  {...label} /> </>:<> Si<Checkbox onClick={() => checkede(row.id_alumno)}  {...label}  /> No<Checkbox   onClick={() => checkedeno(row.id_alumno)}  {...label}  /> </>} </>}
+                      {row.asistencia ==="No Tomada"? <>Si<Checkbox onClick={() => checkede(row.id_alumno)}   /> No<Checkbox   onClick={() => checkedeno(row.id_alumno)} /></> :<>  { row.asistencia == "Presente" ? <> Si<Checkbox  defaultChecked disabled /> No<Checkbox   onClick={() => checkedeno(row.id_alumno)}  /> </>:<> Si<Checkbox onClick={() => checkede(row.id_alumno)}  {...label}  /> No<Checkbox defaultChecked  onClick={() => checkedeno(row.id_alumno)} disabled /> </>} </>}
                     </StyledTableCell>
                     <StyledTableCell align="left" data-label="telefono">
                       {row.telefono}
