@@ -22,6 +22,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import Observaciones from './observaciones';
+
 ////
 
 
@@ -92,15 +94,37 @@ const Lotes = () => {
 
     ///
 //opcionde click en el nombre
-   
+
+    
+function Observacioness(dataIndex, rowIndex, data, onClick) {
+  return (
+    <>
+
+  
+    <PersonSearchIcon
+       onClick={() =>  navigate('/administracion/detallepersona/'+clients[dataIndex].id)}
+      
+      />   
      
+    </>
+  );
+}
+
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
     
         
-          <PersonSearchIcon
-             onClick={() =>  navigate('/administracion/detallepersona/'+clients[dataIndex].id)}
+          <Observaciones
+           id={clients[dataIndex].id}
+           traer ={ async () => {
+       
+        
+            const clients = await servicioPersnas.lista()
+            console.log(clients)
+            setClients(clients)
+            setLoading(false);
+        }}
             
             />   
            
@@ -150,14 +174,27 @@ const Lotes = () => {
    
 },
        
-        {
-          name: "categoria",
-          label:"categoria",
-         
-      },
 
-    
-      
+      {
+        name: "categoria",
+        label:"categoria",
+       
+    },
+
+    {
+      name: "Actions",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+          Observacioness(
+                  dataIndex,
+                  rowIndex,
+                 // overbookingData,
+                 // handleEditOpen
+              )
+      }
+  
+  },   
+       
         {
             name: "Actions",
             options: {
