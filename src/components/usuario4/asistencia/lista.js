@@ -262,7 +262,7 @@ const TablaNotificaciones = (props) => {
                     </StyledTableCell>
                 
                       <StyledTableCell align="left" data-label="Ver persona">
-                      <Button onClick={() => navigate('/fiscalizacion/usuarioescuela/persona/' + row.idpersona)}>
+                      <Button onClick={() => navigate('/encargados/persona/' + row.id_alumno)}>
                         Ver persona
                       </Button>
                     </StyledTableCell>

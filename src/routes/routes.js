@@ -167,7 +167,7 @@ const Rutas = [
 		{ path: '/encargados/alumnosdelturno/:id', element: <Alumnosdelturno /> },
 		{ path: '/encargados/clase/:id', element: <Clase4 /> },
 		{ path: '/encargados/estadoalumnas/:id', element: <Estadoalumnas /> },
-
+		{ path: '/encargados/persona/:id', element: <DetallePersonas /> },
 		{ path: '/inscripciones', element: <Inscripcionesesme /> },
 
 

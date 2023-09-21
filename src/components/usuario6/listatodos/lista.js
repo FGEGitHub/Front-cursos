@@ -103,7 +103,7 @@ export default function Ingresos() {
           }}/>
           </>:<>
           
-          
+          <p> <b>{inscrip[dataIndex].nombrecurso}{inscrip[dataIndex].descripcion}</b></p>
           <Desasignar
            id_inscripcion={inscrip[dataIndex].id}
            traer = { async () => {

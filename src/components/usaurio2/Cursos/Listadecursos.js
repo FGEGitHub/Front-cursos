@@ -222,7 +222,7 @@ function ir(dataIndex, rowIndex, data, onClick) {
 
 
         
-      
+      /* 
        {
             name: "Ir/Modificar",
             options: {
@@ -236,7 +236,7 @@ function ir(dataIndex, rowIndex, data, onClick) {
             }
         
         },   
- 
+  */
 
     ];
 
