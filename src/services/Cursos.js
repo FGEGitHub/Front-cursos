@@ -336,6 +336,11 @@ return data
     
 
 }
+const nocontesta = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'nocontesta', formdata, config)
+  return data
 
+}
 
-export default {borrarturno,ausente,rechazarinscrip,asignarcurso,getturnos,traerturnos,avancedelcurso,traercursos,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,ausente,nocontesta,rechazarinscrip,asignarcurso,getturnos,traerturnos,avancedelcurso,traercursos,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}

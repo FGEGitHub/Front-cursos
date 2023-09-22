@@ -260,6 +260,6 @@ const listaExtractos= async  () => {
       return data
     
     }
-    
+  
     
 export default {lista,asignarinscripciones,preinscriptascall,traerinscripcionesenc,crearcursos2daetapa,asignarencargado,modificarestadodeinscrip,incriptoss,preinscriptas,incriptas2da,buscarestadopornombre,buscarestadopordni,actualizarcursado,borrarturnos,cargarexcelpersonas,borrarincripciones,cargarinscripciones,VerExtracto, listaExtractos,confirmaciondellamado,designarturnos,desinscribirtodos,actualizarprioridades,listaaclaracioncriterios,inscribirauto,listacriterios}

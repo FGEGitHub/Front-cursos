@@ -123,7 +123,21 @@ export default function SelectTextFields(props) {
     console.log(inscripcion)
   }
 
+  const handleNocontesta = async (event) => {
 
+
+
+    const respuesta = await servicioCursos.nocontesta(
+      inscripcion
+
+    )
+    console.log(respuesta)
+setRta(respuesta)
+    props.traer()
+    setMostrarDialogo(true)
+    setActivo(false)
+
+  };/////
   
   const handleCancelar = async (event) => {
 
@@ -274,7 +288,9 @@ setRta(respuesta)
                 <DialogActions>
                   <Button variant="contained" color="primary" onClick={handleDeterminar} >Inscribir</Button>
 
-                  <Button variant="contained" color="error" onClick={handleCancelar} >Rechazar inscripcion</Button>
+                  <Button variant="contained" color="error" onClick={handleCancelar} >Rechazar</Button>
+                  <Button variant="contained" color="warning" onClick={handleNocontesta} >No contesta</Button>
+
                   <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                 </DialogActions>

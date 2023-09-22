@@ -246,6 +246,9 @@ const TablaNotificaciones = (props) => {
                           <Widget  type="Cupos disponibles"
                       cantidad={datos.cantidaddis}
                     />
+                           <Widget  type="No contestada"
+                      cantidad={datos.cant_nc}
+                    />
                     
                     </div>
                     </>:<></>}
