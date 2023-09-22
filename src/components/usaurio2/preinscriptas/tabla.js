@@ -208,10 +208,14 @@ function Borrarturno(dataIndex, rowIndex, data, onClick) {
       },
       {
         name: "encargado",
-        label:"encargado",
+        label:"encargado asistencia",
        
     },
-
+    {
+      name: "nombrecall",
+      label:"encargado llamado",
+     
+  },
       {
         name: "Designar call center",
         options: {
