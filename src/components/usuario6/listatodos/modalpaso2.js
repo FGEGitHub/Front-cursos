@@ -253,7 +253,7 @@ setRta(respuesta)
 
                     {turnos.map((row) => (
 
-                      <option value={row.id}> {row.descripcion} - {row.disponibles} cupos disponibles</option>
+                      <option value={row.id}> {row.descripcion} -( {parseInt(row.disponibles) < 1 ? <>Lleno</>:<>{row.disponibles} cupos disponibles</>} )</option>
 
                     ))}
 
