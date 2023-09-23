@@ -237,7 +237,7 @@ const TablaNotificaciones = (props) => {
                 <Widget  type="Cupos totales "
                       cantidad={datos.cantidadturnos}
                     />
-                          <Widget  type="Cantidad preinscriptas"
+                          <Widget  type="Cantidad Preasignadas"
                       cantidad={datos.cant_preasig}
                     />
                           <Widget  type="Cantidad confirmadas"

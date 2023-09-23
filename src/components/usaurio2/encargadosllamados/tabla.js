@@ -47,7 +47,7 @@ setInscrip(ins[0])
 
 }}/>
 
-<PersonSearchIcon     onClick={() =>  navigate('/fiscalizacion/administracion/encargado/'+inscrip[dataIndex].id)} />
+{/* <PersonSearchIcon     onClick={() =>  navigate('/fiscalizacion/administracion/encargado/'+inscrip[dataIndex].id)} /> */}
 
           </>
 
