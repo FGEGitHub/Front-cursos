@@ -42,7 +42,7 @@ export default function SelectTextFields(props) {
   const [rta, setRta] = useState()
   const [turnos, setTurnos] = useState()
  
-  const [disponibilidad, setDisponibilidad] = useState('libre')
+  const [disponibilidad, setDisponibilidad] = useState(0)
   const [mostrarDialogo, setMostrarDialogo] = useState(false);
   const [activo, setActivo] = useState(false)
 
@@ -91,17 +91,8 @@ export default function SelectTextFields(props) {
 
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
     traer(e.target.value)
-    /* if (e.target.name =="mesa"){
-      for (let i = 0; i < mesas.length; i++) {
-       
-        
-        if (mesas[i].id == e.target.value ) {
-            
-          setDisponibilidad(mesas[i].disponibilidad)
-        }
-      }
-    }
-     */
+    
+     
     console.log(inscripcion)
   }
 
@@ -109,18 +100,17 @@ export default function SelectTextFields(props) {
 
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
 
-    /* if (e.target.name =="mesa"){
-    for (let i = 0; i < mesas.length; i++) {
-     
-      
-      if (mesas[i].id == e.target.value ) {
-          
-        setDisponibilidad(mesas[i].disponibilidad)
+    if (e.target.name =="id_turno"){
+      console.log('si')
+      for (let i = 0; i < turnos.length; i++) {
+       
+       
+        if (turnos[i].id == e.target.value ) {
+            
+          setDisponibilidad(turnos[i].disponibles)
+        }
       }
     }
-    }
-    */
-    console.log(inscripcion)
   }
 
   const handleNocontesta = async (event) => {
@@ -286,8 +276,10 @@ setRta(respuesta)
 
                 />
                 <DialogActions>
-                  <Button variant="contained" color="primary" onClick={handleDeterminar} >Inscribir</Button>
 
+                {disponibilidad > 0 ? <>
+                  <Button variant="contained" color="primary" onClick={handleDeterminar} >Inscribir</Button>
+</>:<>  <Button variant="contained" color="primary" disabled>Inscribir</Button></>}
                   <Button variant="contained" color="error" onClick={handleCancelar} >Rechazar</Button>
                   <Button variant="contained" color="warning" onClick={handleNocontesta} >No contesta</Button>
 

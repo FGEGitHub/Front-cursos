@@ -111,6 +111,11 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
+            name: "dni",
+            label: "dni",
+
+        },
+        {
             name: "apellido",
             label: "apellido",
 
@@ -121,7 +126,16 @@ const TablaNotificaciones = (props) => {
 
         },
 
+        {
+            name: "tel",
+            label: "telefono",
 
+        },
+        {
+            name: "tel2",
+            label: "Telefono alternativo",
+
+        },
 
         {
             name: "inscripcion",
@@ -175,19 +189,23 @@ const TablaNotificaciones = (props) => {
       <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
         <TableHead>
           <TableRow>
+          <StyledTableCell>DNI</StyledTableCell>
             <StyledTableCell>APELLDO</StyledTableCell>
             <StyledTableCell >NOMBRE</StyledTableCell>
-            <StyledTableCell  >ESTADO</StyledTableCell>
+            <StyledTableCell  >TELEFONO</StyledTableCell>
+            <StyledTableCell  >TELEFONO 2</StyledTableCell>
             <StyledTableCell align="left">Presente/Ausente/Sin tomar</StyledTableCell>
           
           </TableRow>
         </TableHead>
         <TableBody>
           {clases.map((row) => (
-            <StyledTableRow  key={row.id}>       
+            <StyledTableRow  key={row.id}>      
+             <StyledTableCell >{row.dni}</StyledTableCell> 
               <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
-              <StyledTableCell >{row.inscripcion}</StyledTableCell>
+              <StyledTableCell >{row.tel}</StyledTableCell>
+              <StyledTableCell >{row.tel2}</StyledTableCell>
               <StyledTableCell >{row.presente}/{row.ausente}/{row.sintomar}</StyledTableCell>
              
             </StyledTableRow>
