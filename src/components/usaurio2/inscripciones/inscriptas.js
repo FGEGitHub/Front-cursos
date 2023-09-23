@@ -249,7 +249,9 @@ const TablaNotificaciones = (props) => {
                            <Widget  type="No contestada"
                       cantidad={datos.cant_nc}
                     />
-                    
+                             <Widget  type="Rechazadas"
+                      cantidad={datos.cant_rech}
+                    />
                     </div>
                     </>:<></>}
                 <Button variant="outlined" onClick={crearcursos}>

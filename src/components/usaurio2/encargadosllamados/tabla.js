@@ -84,7 +84,11 @@ setInscrip(ins[0])
             label: "Rechazados",
 
         },
-        
+        {
+            name: "nocont",
+            label: "No contestado",
+
+        },
         
         
         {
