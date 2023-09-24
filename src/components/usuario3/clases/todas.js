@@ -85,20 +85,14 @@ const TablaNotificaciones = (props) => {
             <>
 
             
-                 <>
-                 < Tooltip title="contactar">
-                <PhoneForwardedSharpIcon  onClick={() => navigate('/coordinadores/curso/'+clases[dataIndex]['turnoid'])}  />
-                </Tooltip>
-                </>
+          
                     <br/>      
                 <>
                 < Tooltip title="ir a la clase">
                 <ContentPasteGoIcon   onClick={() => navigate('/coordinadores/turno/'+clases[dataIndex]['turnoid'])} />
                 </Tooltip>
                 </>
-                < Tooltip title="Estado alumnas">
-                <Face3Icon   onClick={() => navigate('/encargados/alumnosdelturno/'+clases[dataIndex]['turnoid'])} />
-                </Tooltip>
+            
             </>
             
         );
@@ -160,7 +154,7 @@ const TablaNotificaciones = (props) => {
           <TableRow>
             <StyledTableCell>NOMBRE</StyledTableCell>
             <StyledTableCell >DESCRIPCION</StyledTableCell>
-            <StyledTableCell >PENDIENTES POR CONTESTAR</StyledTableCell>
+            <StyledTableCell >CANTIDAD DE ALUMNAS</StyledTableCell>
             <StyledTableCell align="left">ACCIONES</StyledTableCell>
           
           </TableRow>
@@ -170,23 +164,14 @@ const TablaNotificaciones = (props) => {
             <StyledTableRow key={row.name}>       
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.descripcion}</StyledTableCell>
-              <StyledTableCell >{row.cantsinresp}/{row.total}</StyledTableCell>
+              <StyledTableCell >{row.total}</StyledTableCell>
               <StyledTableCell >  
                 
-              < Tooltip title="contactar">
-                <PhoneForwardedSharpIcon  onClick={() => navigate('/coordinadores/curso/'+row.turnoid)}  />
-                </Tooltip>
+             
                 < Tooltip title="ir a la clase">
                 <ContentPasteGoIcon   onClick={() => navigate('/coordinadores/turno/'+row.turnoid)} />
                 </Tooltip>
-                < Tooltip title="Estado alumnas">
-                <Face3Icon   onClick={() => navigate('/coordinadores/alumnosdelturno/'+row.turnoid)} />
-                </Tooltip>
-                
-            
-                < Tooltip title="cambiar estado ">
-                <ManageAccountsIcon   onClick={() => navigate('/coordinadores/estadoalumnas/'+row.turnoid)} />
-                </Tooltip>
+     
                 
                 
                 

@@ -73,6 +73,9 @@ const Login = () => {
           case 2:navigate('/administracion/inscripciones')
                 window.location.reload(true);
           break;
+          case 3:navigate('/coordinadores/cursos')
+          window.location.reload(true);
+    break;
           case 6:navigate('/llamados/todos')
           window.location.reload(true);
     break;

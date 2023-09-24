@@ -300,50 +300,17 @@ const TablaNotificaciones = (props) => {
         
       {alumnos[0] ? <>
         <h3>{alumnos[0]['nombreescuela']}</h3>
-        <h4>Cantidad de mesas </h4>
+        <h4>Asistencia </h4>
 
       </> : <></>}
   
-{isMatch ? (
+
   <div >
       {alumnos.length > 0 ? <>
         <CustomTable alumnos={alumnos} />  </> : <><br /> <h3>No hay asignados</h3></>}
-        </div>):( 
+        </div>
         
-        
-        <div >
 
-          Vista desde PC
-          <TableContainer component={Paper}>
-      <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>DNI</StyledTableCell>
-            <StyledTableCell>NOMBRE</StyledTableCell>
-            <StyledTableCell >PRESENTE</StyledTableCell>
-            <StyledTableCell align="right">ACCIONES</StyledTableCell>
-          
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {alumnos.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.dni}
-              </StyledTableCell>
-          
-              <StyledTableCell >{row.apellido} {row.nombre}</StyledTableCell>
-              <StyledTableCell > {row.asistencia === "No Tomada" ? <>Si<Checkbox onClick={() => checkede(row.id_alumno)} /> No<Checkbox onClick={() => checkedeno(row.id_alumno)} /></> : <>  {row.asistencia == "Presente" ? <> Si<Checkbox defaultChecked disabled /> No<Checkbox onClick={() => checkedeno(row.id_alumno)} /> </> : <> Si<Checkbox onClick={() => checkede(row.id_alumno)}  {...label} /> No<Checkbox defaultChecked onClick={() => checkedeno(row.id_alumno)} disabled /> </>} </>}</StyledTableCell>
-              <StyledTableCell align="center">  
-             
-                Ver mas </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-
-</div>)}
 
 
 

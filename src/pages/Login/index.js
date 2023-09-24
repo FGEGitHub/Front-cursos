@@ -30,14 +30,12 @@ export default function Paginas() {
               break;
           
             case 3:
-              alert('usuario no autorizado')
-              window.localStorage.removeItem('loggedNoteAppUser')
+              navigate('encargados/cursos')
             //  navigate('/coordinadores/novedades')
               break;
 
               case 4:
                 navigate('encargados/cursos')
-                window.localStorage.removeItem('loggedNoteAppUser')
               //  navigate('/encargados/cursos')
                 break;
            
