@@ -1,5 +1,6 @@
 import servicioCursos from '../../../services/Cursos'
 import Modificarturno from '../Cursos/ModalModificarclasesdelcurso'
+import ModalCoordina from '../Cursos/ModalAsignarcoordinador'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import Face3Icon from '@mui/icons-material/Face3';
@@ -183,7 +184,7 @@ Borrarturno
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.nombrecurso}</StyledTableCell>
                <StyledTableCell >{row.numero}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>
-              <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.coor}</StyledTableCell>
+              <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.coordinador}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.encargado}</StyledTableCell>
               <StyledTableCell > {row.cupo-row.disponibles}/{row.cupo}  </StyledTableCell>
   
@@ -204,6 +205,20 @@ Borrarturno
             
             
                 }}/>
+                 <ModalCoordina
+                id={row.id}
+                getClients= { async () => {
+
+
+                    const tur = await servicioCursos.listadetodoslosturnos()
+                    console.log(tur)
+                    setClases(tur)
+            
+            
+            
+            
+                }}/>
+                
               </StyledTableCell>
 
               
