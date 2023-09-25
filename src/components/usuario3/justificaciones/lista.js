@@ -4,9 +4,7 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
-import Tooltip from '@material-ui/core/Tooltip';
+import Justificacion from './justificacion'
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
@@ -194,8 +192,9 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell >NOMBRE</StyledTableCell>
             <StyledTableCell  >TELEFONO</StyledTableCell>
             <StyledTableCell  >TELEFONO 2</StyledTableCell>
+            <StyledTableCell  >Justificado</StyledTableCell>
             <StyledTableCell align="left">FECHA CLASE</StyledTableCell>
-          
+            <StyledTableCell align="left">JUSTIFICAR</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -206,8 +205,26 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.tel}</StyledTableCell>
               <StyledTableCell >{row.tel2}</StyledTableCell>
+              <StyledTableCell >{row.justificacion == "ninguna" ? <>No</>:<>Si</>}</StyledTableCell>
               <StyledTableCell >{row.fechaclase}</StyledTableCell>
-             
+              <StyledTableCell >
+              <Justificacion
+              id = {row.id}
+              getClients={async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                    console.log(loggedUserJSON)
+                    if (loggedUserJSON) {
+                        const usuario = JSON.parse(loggedUserJSON)
+                        setUsuario(usuario)
+                        const novedades_aux = await serviciocoordinadores.listadeausentes(usuario.id)
+                        console.log(novedades_aux)
+                        setClases(novedades_aux[0])
+                    }  
+            }
+        }
+              />
+               </StyledTableCell>
+              
             </StyledTableRow>
           ))}
         </TableBody>

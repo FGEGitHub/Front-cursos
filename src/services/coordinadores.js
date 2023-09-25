@@ -87,6 +87,16 @@ return data
      alert(data)  
   } 
   
+
+  const justificar= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'justificar',datos,config)
+     
+    return data
+  } 
+  
+  
+
   const contactos = async (id) => {
    console.log(id)
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -100,4 +110,4 @@ return data
   return data
   
   }
-  export default {clases,contactos,curso,confirmaciondellamado,listadeausentes}
+  export default {clases,justificar,contactos,curso,confirmaciondellamado,listadeausentes}
