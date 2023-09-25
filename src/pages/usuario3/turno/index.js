@@ -1,5 +1,5 @@
 
-import MenuUsuario4 from '../../../components/usuario4/Menuizq4'
+import MenuUsuario4 from '../../../components/usuario3/Menuizq3'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Clases from '../../../components/usuario3/Clasesdelcurso/todas'

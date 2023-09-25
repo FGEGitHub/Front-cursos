@@ -1,11 +1,9 @@
 
 
-
-
-import MenuUsuario4 from '../../../components/usuario3/Menuizq3'
+import MenuUsuario3 from '../../../components/usuario3/Menuizq3'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Novedades from '../../../components/usuario3/novedades/Tabla'
+import Clases from '../../../components/usuario3/justificaciones/lista'
 import Mantenimiento from '../../../Assets/mantenimiento2.jpeg';
 export default function Paginas() {
 
@@ -18,7 +16,7 @@ export default function Paginas() {
       if (loggedUserJSON) {
         
         const user = JSON.parse(loggedUserJSON)
-        if (user.nivel != 2 && user.nivel != 3    ){
+        if ( user.nivel != 3    ){
           window.localStorage.removeItem('loggedNoteAppUser')
      
     
@@ -37,27 +35,26 @@ export default function Paginas() {
      
     }, []) 
     
-        
-    const islogo = {
-      width: "60%",   
-      margin: 0,
-      padding: 0,
-      display: "flex",
-              
-      };
-   
     
+    const islogo = {
+        width: "60%",   
+        margin: 0,
+        padding: 0,
+        display: "flex",
+                
+        };
+     
 
 
     return (
  
 <>
 { logueado ? <div> 
-    <MenuUsuario4>
+    <MenuUsuario3>
   
     <img style={islogo} src={Mantenimiento} alt="logo" /> 
 
- </MenuUsuario4> 
+ </MenuUsuario3> 
 
  </div>   :<div></div>  }
 

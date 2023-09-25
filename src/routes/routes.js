@@ -55,6 +55,7 @@ import Alumnosdelturno3 from '../pages/usuario3/alumnos';
 import Estadoalumnas3 from '../pages/usuario3/cambiarestado';
 import Contacto3 from '../pages/usuario3/contacto';
 import Clase3 from '../pages/usuario3/clase';
+import Justificacion from '../pages/usuario3/justificaciones';
 ///usuario4
 
 import Clases4 from '../pages/usuario4/cursos';
@@ -157,8 +158,9 @@ const Rutas = [
 		{ path: '/coordinadores/estadoalumnas/:id', element: <Estadoalumnas3 /> },
 		{ path: '/coordinadores/contacto', element: <Contacto3 /> },
 		{ path: '/coordinadores/clase/:id', element: <Clase3 /> },
+		{ path: '/coordinadores/justificaciones', element: <Justificacion /> },
 
-
+		
 
 
 		{ path: '/encargados/cursos', element: <Clases4 /> },

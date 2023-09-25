@@ -47,9 +47,9 @@ export default function MenuIzq2 ({children}) {
           path: '/coordinadores/cursos' 
         },
         { 
-          text: 'Contacto', 
+          text: 'Justificaciones', 
           icon: <GroupIcon color="primary" />, 
-          path: '/coordinadores/contacto' 
+          path: '/coordinadores/justificaciones' 
         },
       
         
