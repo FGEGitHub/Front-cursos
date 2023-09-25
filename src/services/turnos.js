@@ -32,8 +32,21 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
 
 
-
  
+   //////
+   const detalledelcurso = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'detalledelcurso/'+ usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+return data
+       
+  }
+
 
   //////desde el id usaurio coordinador
   const lista = async (usuario) => {
@@ -86,4 +99,4 @@ const borrarclase= async  (datos) => {
 
 
 
-export default {lista,desasignar,nuevaclase,modificarTurno,modificarclase,borrarclase}
+export default {lista,desasignar,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}

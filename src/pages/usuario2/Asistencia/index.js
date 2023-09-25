@@ -18,7 +18,7 @@ export default function Paginas() {
       if (loggedUserJSON) {
         
         const user = JSON.parse(loggedUserJSON)
-        if (user.nivel != 2 && user.nivel != 3    ){
+        if (user.nivel != 2   ){
           window.localStorage.removeItem('loggedNoteAppUser')
      
     

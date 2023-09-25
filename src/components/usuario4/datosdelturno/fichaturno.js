@@ -3,14 +3,12 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import EmailIcon from "@mui/icons-material/Email";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import HomeIcon from "@mui/icons-material/Home";
-import InputAdornment from "@mui/material/InputAdornment";
 import { useParams } from "react-router-dom"
+import InputAdornment from "@mui/material/InputAdornment";
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import Avatar from "@mui/material/Avatar";
 import Container from '@mui/material/Container';
-import servicioCursos from '../../../services/Cursos';
+import servicioTurnos from '../../../services/turnos';
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import "../../usaurio2/Cursos/profile.css";
@@ -18,11 +16,10 @@ import "../../usaurio2/Cursos/profile.css";
 
 const FichaAxios = (props) => {
   const navigate = useNavigate();
-    const [turno, setTurno] = useState([])
-    const [carga, setCarga] = useState(false)
+    const [turno, setTurno] = useState()
   const apiKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
   let params = useParams()
-    let id = params.id
+  let id = params.id
   const [editMode, setEditMode] = useState(false);
   function submitFormHandler(event) {
     event.preventDefault();
@@ -36,11 +33,9 @@ const FichaAxios = (props) => {
   const traer = async() => {
        
    
-      const  tur = await servicioCursos.datosdelturno(id)
-      console.log(tur)
-      setTurno(tur)
-      setCarga(true)
-   //   setCliente(cliente)
+     const  datosturno = await servicioTurnos.detalledelcurso(id)
+      console.log(datosturno)
+     setTurno(datosturno[0])
   
      
   
@@ -52,14 +47,14 @@ const FichaAxios = (props) => {
 
   return (<>    
     
-    { carga ? <>
+   
     <div className="profile">
       <Grid Container style={{ direction: "column", alignItems:"center", justifyContent: "center", display: "flex"}}>
         <Grid item xs={8} style={{ direction: "column", justifyContent: "center", display: "flex" }}>
         <Avatar sx={{ width: 170, height: 140 }}> <AccountCircle fontSize="large"/> </Avatar>
         </Grid>
         <Grid item xs={8}style={{ }}>
-  
+        { turno ? <>
             <Container>
             <Box>
             <h5>
@@ -67,14 +62,13 @@ const FichaAxios = (props) => {
             </h5>
                 
             </Box>
-        {turno ? <>
+       
               <Box>
-               
               <TextField
-                  label="Curso"
+                  label="Nombre"
                   id="cuil"
-                
-                  value= {turno[0].nombrecurso}
+                 // defaultValue="CUIL"
+                  value= {turno[0].descripcion}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -90,7 +84,7 @@ const FichaAxios = (props) => {
                 <TextField
                   label="Encargado"
                   id="Nombre"
-                  value= {turno[2].encargado}
+                  value= {turno[0].encargado}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -108,7 +102,7 @@ const FichaAxios = (props) => {
                   label="Coordinador"
                   id="cuil"
                  // defaultValue="CUIL"
-                 value= {turno[3].coordinador}
+                  value= {turno[0].coordinador}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -122,9 +116,9 @@ const FichaAxios = (props) => {
                 />
 
                 <TextField
-                  label="Cantidad de alumnas"
+                  label="Cupo"
                   id="Nombre"
-                  value= {turno[1].cantidad}
+                  value= {turno[0].nombrecurso}
                   variant="filled"
                   sx={{ margin: "10px" }}
                   InputProps={{
@@ -137,45 +131,10 @@ const FichaAxios = (props) => {
                   }}
                 />
               </Box>
-              <Box>
-              <TextField
-                  label="Presentes"
-                  id="cuil"
-                 // defaultValue="CUIL"
-                 value= {turno[4].presentes}
-                  variant="filled"
-                  sx={{ margin: "10px" }}
-                  InputProps={{
-                    readOnly: !editMode,
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    )
-                  }}
-                />
-
-                <TextField
-                  label="Ausentes"
-                  id="Nombre"
-                  value= {turno[4].ausentes}
-                  variant="filled"
-                  sx={{ margin: "10px" }}
-                  InputProps={{
-                    readOnly: true,
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <AccountCircle />
-                      </InputAdornment>
-                    )
-                  }}
-                />
-              </Box>
-              <button  onClick={() => navigate('/administracion/alumnosdelturno/'+id)}  >Ver alumnes</button>
-              </>:<></>}  
+                   
 
             </Container>
-         
+            </>:<></>}
         </Grid>
 
         <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
@@ -184,11 +143,6 @@ const FichaAxios = (props) => {
         </Grid>
       </Grid>
     </div>
-
-    </>:<></>}
-
-
-
   </>);
 }
 

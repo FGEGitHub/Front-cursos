@@ -2,187 +2,276 @@ import servicioCursos from '../../../services/Cursos'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
-import Tooltip from '@material-ui/core/Tooltip';
+import Checkbox from '@mui/material/Checkbox';
 
 import { useParams } from "react-router-dom"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
+import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
-import Skeleton from '@mui/material/Skeleton';
-
-
+import { Alert, AlertTitle } from '@mui/material';
+import { Box } from '@mui/material';
+import {
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
+  '&:nth-of-type(odd)': {
+    backgroundColor: "#35baf6",
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+
+  },
 }));
 
+const ResponsiveTable = styled(Table)(({ theme }) => ({
+  overflowX: 'auto',
+  '& .MuiTableCell-root': {
+    whiteSpace: 'nowrap',
+    padding: '8px 16px',
+    textAlign: 'left',
+  },
+  '& .MuiTableBody-root .MuiTableCell-root': {
+    borderBottom: 'none',
+  },
+  [theme.breakpoints.down('sm')]: {
+    '& .MuiTableCell-root': {
+      display: 'block',
+      position: 'relative',
+      paddingLeft: '40%',
+      '&::before': {
+        content: 'attr(data-label)',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '40%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        fontWeight: 'bold',
+      },
+    },
+    '& .MuiTableHead-root': {
+      display: 'none',
+    },
+  },
+}));
+
+
+
+/////////  
 
 
 
 const TablaNotificaciones = (props) => {
-    const [alumnos, setAlumnos] = useState([''])
-    const [clase, setClase] = useState([''])
-    const [usuario, setUsuario] = useState([''])
-    const navigate = useNavigate();
-    let params = useParams()
-    let id = params.id
-    useEffect(() => {
-        traer()
+  const [alumnos, setAlumnos] = useState([''])
+  const [clase, setClase] = useState([''])
+  const [usuario, setUsuario] = useState([''])
+  const [estadisticas, setEstadisticas] = useState([''])
+  const [vista, setVista] = useState(true)
+  const [currentColor, setCurrentColor] = useState('blue');
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const [showAlert, setShowAlert] = useState(true);
+  const theme = useTheme();
+  const navigate = useNavigate();
+  let params = useParams()
+  let id = params.id
+  useEffect(() => {
+    traer()
 
 
 
-    }, [])
+  }, [])
+
+  const checkede = async (ida) => {
+    console.log(ida)
+
+    await servicioCursos.presente({
+      id_alumno: ida,
+      id_clase: id
+    })
+    traer()
+  };
+  const checkedeno = async (ida) => {
+    console.log(ida)
+
+    await servicioCursos.ausente({
+      id_alumno: ida,
+      id_clase: id
+    })
+    traer()
+  };
 
 
-    const traer = async () => {
-        try {
+
+  const traer = async () => {
+    try {
 
 
 
-            setUsuario(usuario)
-            const alumn = await servicioCursos.asistencia(id)
-            console.log(alumn)
-            setClase(alumn[0][0])
-            setAlumnos(alumn[1])
-
-        } catch (error) {
-
-        }
-
+      setUsuario(usuario)
+      const alumn = await servicioCursos.asistencia(id)
+      console.log(alumn[1])
+      setClase(alumn[0][0])
+      setAlumnos(alumn[1])
+      setEstadisticas(alumn[2])
 
 
 
 
+
+    } catch (error) {
+
+    }
+
+
+  }
+
+  const timer = setTimeout(() => {
+    setShowAlert(false);
+  }, 5000)
+
+
+  const determinarausente = async (id_usuario) => {
+    try {
+
+      const alumn = await servicioCursos.ausente({ id, id_usuario })
+
+    } catch (error) {
 
     }
 
 
-    const determinarpresente = async (id_usuario) => {
-        try {
-
-
-
-          
-            const alumn = await servicioCursos.presente({id,id_usuario})
-          
-        } catch (error) {
-
-        }
 
 
 
 
+  }
+  
 
 
-    }
+  // definimos las columnas
+  const columns = [
+    {
+      name: "dni",
+      label: "dni",
+
+    },
+    {
+      name: "apellido",
+      label: "apellido",
+
+    },
 
 
-    const determinarausente = async (id_usuario) => {
-        try {
 
-            const alumn = await servicioCursos.ausente({id,id_usuario})
-          
-        } catch (error) {
 
-        }
+    {
+      name: "asistencia",
+      label: "asistencia",
 
+    },
 
 
 
 
 
-    }
+  ];
 
-    // definimos las columnas
-
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const CustomTable = ({ inscrip }) => {
     return (
-        <div>
 
 
-            <>
-                <Paper
-                    sx={{
-                        cursor: 'pointer',
-                        background: '#eeeeee',
-                        color: '#bdbdbd',
-                        border: '1px dashed #ccc',
-                        width: "90%",
-                        '&:hover': { border: '1px solid #ccc' },
-                        border: "1px solid black",
-                        margin: '75px',
+      <Box sx={{ overflowX: 'auto' }}>
+        {showAlert && (
+          <Alert severity="info" onClose={() => setShowAlert(false)}>
+            <AlertTitle>Encargadas!</AlertTitle>
+            Las alumnas estan ordenadas por apellido
+          </Alert>
+        )}
+        <ResponsiveTable aria-label="customized table">
+          <TableBody>
+            {alumnos.map((row) => (
+              <StyledTableRow key={row.name}>
+                <StyledTableCell align="left" data-label="Alumna">
+                  {row.apellido}    {row.nombre}
+                </StyledTableCell>
+                <StyledTableCell component="th" scope="row" data-label="DNI">
+                  {row.nuevo == "Si" ? <><p style={{ color: currentColor }}><b>Nuevo</b></p>   </> : <> </>}  {row.nuevo}  {row.dni}
+                </StyledTableCell>
+           
 
-                    }}
-                >   {!clase ? <Skeleton /> : <>
-                    <h2>Fecha {clase.fecha}</h2>
-                    <TableContainer>
+                <StyledTableCell align="left" data-label="Presente">
 
-                        <Table >
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>FECHA </b> <b /></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>NOMBRE</b></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>USUARIO</b></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>ASISTENCIA</b></TableCell>
-                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>DETERMINAR</b></TableCell>
-                                 
-
-
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-
-
-                                {alumnos ? <>
-                                {alumnos.map((row) => (
-                                    <StyledTableRow key={row.name}>
-                                        <StyledTableCell component="th" scope="row">{clase.fecha}</StyledTableCell>
-                                        <StyledTableCell component="th" scope="row"><b>{row.nombre}</b></StyledTableCell>
-                                        <StyledTableCell component="th" scope="row">{row.usuario}</StyledTableCell>
-                                       {/*  <StyledTableCell component="th" scope="row">{row.presente === null ? <>Sin registrar</> : <> {row.row.presente === 'presente' ? <>PRESENTE</> : <>AUSENTE</>} </>}</StyledTableCell> */}
-                                        <StyledTableCell component="th" scope="row"> <b onClick={() => determinarpresente(row.id_usuario)}>PRESENTE</b>    <b  onClick={() => determinarausente(row.id_usuario)}>AUSENTE</b></StyledTableCell>
-
-                                    </StyledTableRow>
-                                ))}
-
-</>  :<> <StyledTableCell component="th" scope="row">No hay alumnos cursando</StyledTableCell></>}
+                  {row.asistencia === "No Tomada" ? <>Si<Checkbox onClick={() => checkede(row.id_alumno)} /> No<Checkbox onClick={() => checkedeno(row.id_alumno)} /></> : <>  {row.asistencia == "Presente" ? <> Si<Checkbox defaultChecked disabled /> No<Checkbox onClick={() => checkedeno(row.id_alumno)} /> </> : <> Si<Checkbox onClick={() => checkede(row.id_alumno)}  {...label} /> No<Checkbox defaultChecked onClick={() => checkedeno(row.id_alumno)} disabled /> </>} </>}
+                </StyledTableCell>
+                <StyledTableCell align="left" data-label="telefono">
+                  {row.telefono}
+                </StyledTableCell>
+                {/*      <StyledTableCell align="left" data-label="telefono alternativo">
+                      {row.telefono2}
+                    </StyledTableCell> */}
+                <StyledTableCell align="left" data-label="Primer clase">
+                  {row.primera}
+                </StyledTableCell>
 
 
-                            </TableBody>
-                        </Table>
+                {/* <StyledTableCell align="left" data-label="Contactado">
+                    {row.dato1 == null  || row.dato1 == 'No'? <>  Ausente/Sin determinar <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
+                
+                   
+    
+                    </StyledTableCell> */}
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </ResponsiveTable>
+      </Box>
+    );
+  };
+  return (
+    <div>
+        
+      {alumnos[0] ? <>
+        <h3>{alumnos[0]['nombreescuela']}</h3>
+        <h4>Asistencia </h4>
 
+      </> : <></>}
+  
 
-                    </TableContainer>
-                </>}
-                </Paper>
-            </>
-            <div>
-
-            </div>
-
+  <div >
+      {alumnos.length > 0 ? <>
+        <CustomTable alumnos={alumnos} />  </> : <><br /> <h3>No hay asignados</h3></>}
         </div>
-    )
+        
+
+
+
+
+
+
+
+    </div>
+
+
+  )
 }
 export default TablaNotificaciones
