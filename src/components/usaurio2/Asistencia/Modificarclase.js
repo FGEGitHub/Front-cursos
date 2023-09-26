@@ -33,8 +33,9 @@ export default function SelectTextFields(props) {
      console.log(not)
      setForm({
         id:id,
-        descripcion:not[0][0]['observacion'],
+        observacion:not[0][0]['observacion'],
         fecha:not[0][0]['fecha'],
+        numero_clase:not[0][0]['numero_clase'],
      
      })
     
@@ -66,8 +67,8 @@ traer()
     try {
       event.preventDefault();
 
-      const nov = await servicioTurnos.nuevaclase(form)
-
+      const nov = await servicioTurnos.modificarunaclase(form)
+      alert(nov)
     } catch (error) {
       console.error(error);
       console.log('Error algo sucedio')
@@ -75,7 +76,6 @@ traer()
 
     }
 
-    props.traer()
 
     setOpen(false);
   };
@@ -125,7 +125,8 @@ traer()
         
             <h3>
               <b> Modificar</b></h3>
-
+          <label>**Los datos q no agregues no se modificaran</label>
+          <br/>
               {datos ? <>
             <TextField
 
@@ -147,14 +148,14 @@ traer()
               margin="dense"
               id="name"
               label="Observaciones"
-              name="observaciones"
+              name="observacion"
               onChange={handleChange}
               fullWidth
               variant="standard"
             />
 
 <TextField
-              defaultValue={datos.numero}
+              defaultValue={datos.numero_clase}
               margin="dense"
               id="name"
               type="number"
@@ -171,7 +172,7 @@ traer()
 
 
               <>
-              {form.fecha &&form.numero_clase &&form.observaciones ? <> <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></> :  <>Completar los datos</>}
+           <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button>
              </>
               <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
             </DialogActions>

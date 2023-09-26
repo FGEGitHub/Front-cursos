@@ -109,6 +109,12 @@ const borrarclase= async  (datos) => {
    
    alert(data)  
 } 
+const modificarunaclase= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'modificarunaclase',datos,config)
+   
+   return data
+} 
 
 
 const traerclase = async (usuario) => {
@@ -123,4 +129,4 @@ const traerclase = async (usuario) => {
 return data
      
 }
-export default {lista,desasignar,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
+export default {lista,desasignar,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}

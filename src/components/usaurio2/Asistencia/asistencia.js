@@ -4,7 +4,7 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import { useNavigate } from "react-router-dom";
 import Checkbox from '@mui/material/Checkbox';
-//import ModificarClase from './Modificarclase'
+import ModificarClase from './Modificarclase'
 import { useParams } from "react-router-dom"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -167,34 +167,6 @@ const TablaNotificaciones = (props) => {
   
 
 
-  // definimos las columnas
-  const columns = [
-    {
-      name: "dni",
-      label: "dni",
-
-    },
-    {
-      name: "apellido",
-      label: "apellido",
-
-    },
-
-
-
-
-    {
-      name: "asistencia",
-      label: "asistencia",
-
-    },
-
-
-
-
-
-  ];
-
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const CustomTable = ({ inscrip }) => {
     return (
@@ -207,7 +179,7 @@ const TablaNotificaciones = (props) => {
             Las alumnas estan ordenadas por apellido
           </Alert>
         )}
-    
+    <ModificarClase/>
         <ResponsiveTable aria-label="customized table">
           <TableBody>
             {alumnos.map((row) => (

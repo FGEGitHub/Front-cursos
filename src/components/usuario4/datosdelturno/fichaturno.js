@@ -138,7 +138,8 @@ const FichaAxios = (props) => {
         </Grid>
 
         <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
-         
+
+
         </Grid>
       </Grid>
     </div>

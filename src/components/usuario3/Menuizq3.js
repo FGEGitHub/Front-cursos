@@ -51,6 +51,11 @@ export default function MenuIzq2 ({children}) {
           icon: <GroupIcon color="primary" />, 
           path: '/coordinadores/justificaciones' 
         },
+        { 
+          text: 'Alertas', 
+          icon: <GroupIcon color="primary" />, 
+          path: '/coordinadores/alertas' 
+        },
       
         
      
