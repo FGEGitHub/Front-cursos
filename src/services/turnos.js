@@ -48,6 +48,19 @@ return data
   }
 
 
+  const lista2 = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'clasesdelturno2/'+ usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+return data
+       
+  }
+
   //////desde el id usaurio coordinador
   const lista = async (usuario) => {
   
@@ -98,5 +111,16 @@ const borrarclase= async  (datos) => {
 } 
 
 
-
-export default {lista,desasignar,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
+const traerclase = async (usuario) => {
+  
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'traerclase/'+ usuario, config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+     
+}
+export default {lista,desasignar,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}

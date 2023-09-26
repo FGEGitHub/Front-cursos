@@ -4,7 +4,7 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import { useNavigate } from "react-router-dom";
 import Checkbox from '@mui/material/Checkbox';
-
+//import ModificarClase from './Modificarclase'
 import { useParams } from "react-router-dom"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -207,6 +207,7 @@ const TablaNotificaciones = (props) => {
             Las alumnas estan ordenadas por apellido
           </Alert>
         )}
+    
         <ResponsiveTable aria-label="customized table">
           <TableBody>
             {alumnos.map((row) => (
@@ -249,13 +250,15 @@ const TablaNotificaciones = (props) => {
   };
   return (
     <div>
-        
+           
       {alumnos[0] ? <>
         <h3>{alumnos[0]['nombreescuela']}</h3>
         <h4>Asistencia </h4>
 
       </> : <></>}
-  
+ {/*   <ModificarClase 
+   
+   /> */}
 
   <div >
       {alumnos.length > 0 ? <>

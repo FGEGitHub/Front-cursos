@@ -141,7 +141,7 @@ const TablaNotificaciones = (props) => {
                     
                                     setUsuario(usuario)
                     
-                                    const novedades_aux = await servicioturnos.lista(id)
+                                    const novedades_aux = await servicioturnos.lista2(id)
                                     setClases(novedades_aux)
                                 }
                     
@@ -236,7 +236,7 @@ const TablaNotificaciones = (props) => {
     }
     return (
         <div>
-            <h2>CLASES DEL CURSO</h2>
+            <h2>CLASES DEL CURSO ADMIN</h2>
             {clases ? <>
                 <div>
 
@@ -264,6 +264,9 @@ const TablaNotificaciones = (props) => {
                                         <h5  onClick={() => ir(row.id)}  >{row.observacion}</h5>
                                         
                                         <label onClick={() => ir(row.id)} >{row.fecha}</label>
+                                        <label onClick={() => ir(row.id)} >Presentes:{row.presentes}</label>
+                                        <label onClick={() => ir(row.id)} >Ausentes:{row.ausentes}</label>
+                                        <label onClick={() => ir(row.id)} >Sin tomar:{row.notomados}</label>
                                         <p  onClick={() => ir(row.id)} >TOMAR ASISTENCIA</p>
                                     </div>
 
