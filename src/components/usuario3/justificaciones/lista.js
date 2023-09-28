@@ -17,6 +17,7 @@ import Button from "@mui/material/Button";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import Ver from './ver'
 
 import Featured from '../../estadisticas/featured/Featured'
 
@@ -223,6 +224,8 @@ const TablaNotificaciones = (props) => {
             }
         }
               />
+              <Ver
+              justificacion={row.justificacion}/>
                </StyledTableCell>
               
             </StyledTableRow>
