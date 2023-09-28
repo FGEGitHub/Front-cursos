@@ -205,7 +205,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.tel}</StyledTableCell>
               <StyledTableCell >{row.tel2}</StyledTableCell>
-              <StyledTableCell >{row.justificacion == "ninguna" ? <>No</>:<>Si</>}</StyledTableCell>
+              <StyledTableCell >{row.justificacion == "Ninguna" ? <>No</>:<>Si</>}</StyledTableCell>
               <StyledTableCell >{row.fechaclase}</StyledTableCell>
               <StyledTableCell >
               <Justificacion
