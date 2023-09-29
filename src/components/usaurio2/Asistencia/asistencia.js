@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import { Alert, AlertTitle } from '@mui/material';
 import { Box } from '@mui/material';
+import { Button } from '@mui/material';
 import {
   useMediaQuery,
   useTheme,
@@ -173,12 +174,7 @@ const TablaNotificaciones = (props) => {
 
 
       <Box sx={{ overflowX: 'auto' }}>
-        {showAlert && (
-          <Alert severity="info" onClose={() => setShowAlert(false)}>
-            <AlertTitle>Encargadas!</AlertTitle>
-            Las alumnas estan ordenadas por apellido
-          </Alert>
-        )}
+    
     <ModificarClase/>
         <ResponsiveTable aria-label="customized table">
           <TableBody>
@@ -220,9 +216,87 @@ const TablaNotificaciones = (props) => {
       </Box>
     );
   };
+
+
+  const columns = [
+    
+  
+       
+    {
+          name: "apellido",
+          label: 'apellido',   
+        } ,
+      
+      {
+        name: "nombre",
+       label: 'nombre',
+      } ,
+
+      {
+        name: "primera",
+       label: 'Primera clase',
+      } ,
+      {
+        name: "asistencia",
+       label: 'asistencia',
+      } ,
+
+      {
+        name: "justificacion",
+       label: 'justificacion',
+      } ,
+    /* 
+     {
+          name: "Ir/Modificar",
+          options: {
+              customBodyRenderLite: (dataIndex, rowIndex) =>
+                  CutomButtonsRenderer(
+                      dataIndex,
+                      rowIndex,
+                     // overbookingData,
+                     // handleEditOpen
+                  )
+          }
+      
+      },   
+*/
+
+  ];
+
+
+  const options = {
+    selectableRows: false, // Deshabilita los checkboxes
+  };
+
   return (
     <div>
-           
+           { vista ? <>
+           Vista de  Administrador
+<Button
+                          onClick={() => setVista(!vista)}
+                      >   Cambiar a vista de encargada</Button>
+           {alumnos[0] ? <>
+           <MUIDataTable
+        
+        title={"Asistencia de esta clase"}
+        data={alumnos}
+        columns={columns}
+        actions={[
+            {
+                icon: 'save',
+                tooltip: 'Save User',
+                onClick: (event, rowData) => alert("You saved " + rowData.name)
+            }
+        ]}
+        options={options}
+
+
+    />
+      </> : <></>}
+           </>:<>
+           Vista de encargada<Button
+                          onClick={() => setVista(!vista)}
+                      >   Cambiar a vista de admin</Button>
       {alumnos[0] ? <>
         <h3>{alumnos[0]['nombreescuela']}</h3>
         <h4>Asistencia </h4>
@@ -236,7 +310,7 @@ const TablaNotificaciones = (props) => {
       {alumnos.length > 0 ? <>
         <CustomTable alumnos={alumnos} />  </> : <><br /> <h3>No hay asignados</h3></>}
         </div>
-        
+        </>}
 
 
 
