@@ -108,11 +108,11 @@ export default function SelectTextFields(props) {
 
   return (
 <>
- < Tooltip title="Justificar la inasistencia">
-       <Button variant="contained" onClick={handleClickOpen} style={{minWidth: '150px'}}>  Justificar  <BorderColorIcon/>    </Button>
+ < Tooltip title="ver">
+       <Button variant="outlined" onClick={handleClickOpen} style={{minWidth: '150px'}}> Ver  <BorderColorIcon/>    </Button>
     
       </Tooltip>
-      {!mostrarDialogo ? <>
+  
     
     <Box
 
@@ -128,41 +128,16 @@ export default function SelectTextFields(props) {
    
         <DialogContent>
     
-        <h2>Jusrificar la inasistencia</h2>
-  
-         
-                 <br />
-                 <label>Definir la descripcion (195 caracteres maximo
-                    ) </label>
-                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                             
-                            </InputLabel>
-                            <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Horario del curso"
-            name="descripcion"
-            onChange={handleChange}
-            fullWidth
-            variant="standard"
-          />
-  { inscripcion.descripcion ? <>{inscripcion.descripcion.length}/195 </>:<> 0/195 </>}
-   
+     
    
 
-                 <DialogActions>
-         <Button variant="contained" color="primary"   onClick={handleDeterminar} >Justificar</Button>
-          <Button  variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
-         
-        </DialogActions>
            
          
         </DialogContent>
       
       </Dialog>
     </Box >
-    </>:<>
+  
     <Dialog
         open={open}
         onClose={handleClose}
@@ -178,7 +153,7 @@ export default function SelectTextFields(props) {
         <DialogContent>
       
           <DialogContentText id="alert-dialog-description">
-{rta ? <>{rta}</>:<></> }         
+          <h2>{props.justificacion}</h2>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -188,7 +163,7 @@ export default function SelectTextFields(props) {
           
         </DialogActions>
       </Dialog>
-      </>}
+  
    </>
   );
 }

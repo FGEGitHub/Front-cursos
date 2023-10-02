@@ -121,8 +121,8 @@ const traer = async () => {
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Ver inscripcion">
-       <Button variant="contained" onClick={handleClickOpen} > Asignar Coordinador <BorderColorIcon/>    </Button>
+       < Tooltip title="Cambiar coordinador">
+       <Button variant="outlined" onClick={handleClickOpen} style={{minWidth: '150px'}}> Coordinador    </Button>
     
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>

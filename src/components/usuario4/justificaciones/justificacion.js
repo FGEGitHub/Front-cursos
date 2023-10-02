@@ -109,7 +109,7 @@ export default function SelectTextFields(props) {
   return (
 <>
  < Tooltip title="Justificar la inasistencia">
-       <Button variant="contained" onClick={handleClickOpen} style={{minWidth: '150px'}}>  Justificar  <BorderColorIcon/>    </Button>
+       <Button variant="outlined" onClick={handleClickOpen} style={{minWidth: '150px'}}>  Justificar  <BorderColorIcon/>    </Button>
     
       </Tooltip>
       {!mostrarDialogo ? <>

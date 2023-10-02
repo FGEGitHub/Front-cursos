@@ -109,7 +109,7 @@ export default function SelectTextFields(props) {
   return (
 <>
  < Tooltip title="ver">
-       <Button variant="contained" onClick={handleClickOpen} > Ver justificacion  <BorderColorIcon/>    </Button>
+       <Button variant="contained" onClick={handleClickOpen} style={{minWidth: '150px'}}> Ver  <BorderColorIcon/>    </Button>
     
       </Tooltip>
   

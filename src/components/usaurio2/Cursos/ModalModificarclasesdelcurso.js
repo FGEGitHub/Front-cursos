@@ -117,8 +117,8 @@ export default function SelectTextFields(props) {
 
   return (
 <>
- < Tooltip title="Ver inscripcion">
-       <Button variant="contained" onClick={handleClickOpen} >  Modificar  <BorderColorIcon/>    </Button>
+ < Tooltip title="Modificaciones">
+       <Button variant="contained" onClick={handleClickOpen} style={{minWidth: '150px'}}>  Modificar     </Button>
     
       </Tooltip>
       {!mostrarDialogo ? <>

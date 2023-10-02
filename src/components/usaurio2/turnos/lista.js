@@ -172,7 +172,7 @@ Borrarturno
             <StyledTableCell  >Encargado</StyledTableCell>
             <StyledTableCell align="left">Confirmadas/cupo</StyledTableCell>
           
-            <StyledTableCell align="left">Ir a Turno</StyledTableCell>
+            <StyledTableCell align="left">Opciones</StyledTableCell>
           
           </TableRow>
         </TableHead>
@@ -189,8 +189,8 @@ Borrarturno
               <StyledTableCell > {row.cupo-row.disponibles}/{row.cupo}  </StyledTableCell>
   
 
-              <StyledTableCell >  < Tooltip title="ir al turno">
-              <Button variant='contained' onClick={() => navigate('/administracion/turno/'+row.id)} >Ver</Button>
+              <StyledTableCell style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >  < Tooltip title="ir al turno">
+              <Button variant='outlined' onClick={() => navigate('/administracion/turno/'+row.id)} style={{minWidth: '150px'}}>Ver</Button>
                 </Tooltip>
                 <Modificarturno
                 id={row.id}

@@ -20,6 +20,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 const pages = [
   "Inicio",
+  "Justificaciones",
   ,
   "Cerrar Sesión"];
 const pagesdeslogueado = [
@@ -62,8 +63,8 @@ const DrawerNav = () => {
   const iraMenu = () => {
     navigate("/");
   };
-  const irNosotros = () => {
-    navigate("/usuario/nosotros");
+  const justificaciones = () => {
+    navigate("/encargados/justificaciones");
   }
   const irContacto = () => {
     navigate("/usuario/contacto");
@@ -101,7 +102,7 @@ const DrawerNav = () => {
         break;
 
       case 1:
-        hanleLogout()
+        justificaciones()
         break;
       case 2:
         hanleLogout()

@@ -48,7 +48,20 @@ return data
   }
 
   
+  const listadeausentes = async (usuario) => {
 
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'listadeausentes/'+usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+    
+
+return data
+       
+  }
 
   
   const alumnasdelcurso = async (usuario) => {
@@ -99,4 +112,4 @@ return data
 
   
   
-  export default {clases,curso,confirmaciondellamado,cambiarestadocurado,alumnasdelcurso}
+  export default {clases,curso,listadeausentes,confirmaciondellamado,cambiarestadocurado,alumnasdelcurso}

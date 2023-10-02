@@ -65,6 +65,8 @@ import Turno4 from '../pages/usuario4/Turno';
 import Clase4 from '../pages/usuario4/clase';
 import Alumnosdelturno from '../pages/usuario4/alumnos';
 import Estadoalumnas from '../pages/usuario4/cambiarestado';
+import JustificacionEncargados from '../pages/usuario4/justificaciones'
+
 
 
 import Loginfis from '../pages/fiscalizacion/login';
@@ -171,6 +173,7 @@ const Rutas = [
 		{ path: '/encargados/clase/:id', element: <Clase4 /> },
 		{ path: '/encargados/estadoalumnas/:id', element: <Estadoalumnas /> },
 		{ path: '/encargados/persona/:id', element: <DetallePersonas /> },
+		{ path: '/encargados/justificaciones', element: <JustificacionEncargados /> },
 		{ path: '/inscripciones', element: <Inscripcionesesme /> },
 
 

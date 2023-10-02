@@ -236,7 +236,7 @@ const TablaNotificaciones = (props) => {
     }
     return (
         <div>
-            <h2>CLASES DEL CURSO ADMIN</h2>
+            <h2>CLASES DEL CURSO </h2>
             {clases ? <>
                 <div>
 
