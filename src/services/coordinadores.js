@@ -110,4 +110,18 @@ return data
   return data
   
   }
-  export default {clases,justificar,contactos,curso,confirmaciondellamado,listadeausentes}
+
+  
+  const alertas = async (id) => {
+     // const data = await axios.post('http://localhost:4000/signupp', datos)
+       const {data} = await axios.get(baseUrl+'alertas/'+id, config)
+       console.log(data)
+       if(data=== 'error login'){
+        
+         window.localStorage.removeItem('loggedNoteAppUser')
+         window.location.reload();
+       }
+   return data
+   
+   }
+  export default {clases,alertas,justificar,contactos,curso,confirmaciondellamado,listadeausentes}

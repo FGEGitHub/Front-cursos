@@ -73,8 +73,8 @@ const TablaNotificaciones = (props) => {
 
                 setUsuario(usuario)
 
-                const novedades_aux = await serviciocoordinadores.listadeausentes(usuario.id)
-                console.log(novedades_aux)
+                const novedades_aux = await serviciocoordinadores.alertas(usuario.id)
+
                 setClases(novedades_aux[0])
                
             }
@@ -124,16 +124,11 @@ const TablaNotificaciones = (props) => {
         },
 
         {
-            name: "tel",
-            label: "telefono",
+            name: "descripcion",
+            label: "descripcion",
 
         },
-        {
-            name: "tel2",
-            label: "Telefono alternativo",
-
-        },
-
+       
         {
             name: "FECHA CLASE",
             label: "Fechade clase",
@@ -190,9 +185,8 @@ const TablaNotificaciones = (props) => {
           <StyledTableCell>DNI</StyledTableCell>
             <StyledTableCell>APELLDO</StyledTableCell>
             <StyledTableCell >NOMBRE</StyledTableCell>
-            <StyledTableCell  >TELEFONO</StyledTableCell>
-            <StyledTableCell  >TELEFONO 2</StyledTableCell>
-            <StyledTableCell  >Justificado</StyledTableCell>
+          
+            <StyledTableCell  >Descripcion</StyledTableCell>
             <StyledTableCell align="left">FECHA CLASE</StyledTableCell>
             <StyledTableCell align="left">JUSTIFICAR</StyledTableCell>
           </TableRow>
@@ -203,9 +197,7 @@ const TablaNotificaciones = (props) => {
              <StyledTableCell >{row.dni}</StyledTableCell> 
               <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
-              <StyledTableCell >{row.tel}</StyledTableCell>
-              <StyledTableCell >{row.tel2}</StyledTableCell>
-              <StyledTableCell >{row.justificacion == "ninguna" ? <>No</>:<>Si</>}</StyledTableCell>
+              <StyledTableCell >{row.descripcion}</StyledTableCell>
               <StyledTableCell >{row.fechaclase}</StyledTableCell>
               <StyledTableCell >
            {/*    <Justificacion

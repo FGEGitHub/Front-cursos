@@ -98,7 +98,7 @@ const TablaNotificaciones = (props) => {
             <>
                 <div >
                   
-                {clases[dataIndex]['presente']}/{clases[dataIndex]['ausente']}/{clases[dataIndex]['sintomar']}
+                {clases[dataIndex]['presentes']}/{clases[dataIndex]['ausente']}/{clases[dataIndex]['sintomar']}
 
                 </div>
             </>
@@ -206,7 +206,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.tel}</StyledTableCell>
               <StyledTableCell >{row.tel2}</StyledTableCell>
-              <StyledTableCell >{row.presente}/{row.ausente}/{row.sintomar}</StyledTableCell>
+              <StyledTableCell >{row.presentes}/{row.ausentes}/{row.sintomar}</StyledTableCell>
              
             </StyledTableRow>
           ))}
