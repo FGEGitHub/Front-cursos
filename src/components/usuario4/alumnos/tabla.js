@@ -98,7 +98,7 @@ const TablaNotificaciones = (props) => {
             <>
                 <div >
                   
-                {clases[dataIndex]['presentes']}/{clases[dataIndex]['ausente']}/{clases[dataIndex]['sintomar']}
+                {clases[dataIndex]['presentes']}/{clases[dataIndex]['ausentes']}/{clases[dataIndex]['sintomar']}
 
                 </div>
             </>
