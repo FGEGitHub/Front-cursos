@@ -197,8 +197,8 @@ const TablaNotificaciones = (props) => {
              <StyledTableCell >{row.dni}</StyledTableCell> 
               <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
-              <StyledTableCell >{row.descripcion}</StyledTableCell>
-              <StyledTableCell >{row.fechaclase}</StyledTableCell>
+              <StyledTableCell >{row.presentes}</StyledTableCell>
+              <StyledTableCell >{row.ausentes}</StyledTableCell>
               <StyledTableCell >
            {/*    <Justificacion
               id = {row.id}
