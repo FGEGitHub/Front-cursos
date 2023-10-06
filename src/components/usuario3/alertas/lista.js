@@ -95,7 +95,7 @@ const TablaNotificaciones = (props) => {
             <>
                 <div >
                   
-                {clases[dataIndex]['presente']}/{clases[dataIndex]['ausente']}/{clases[dataIndex]['sintomar']}
+                {clases[dataIndex]['porcentaje']}%
 
                 </div>
             </>
@@ -124,18 +124,18 @@ const TablaNotificaciones = (props) => {
         },
 
         {
-            name: "descripcion",
-            label: "descripcion",
+            name: "presentes",
+            label: "presentes",
 
         },
        
         {
-            name: "FECHA CLASE",
-            label: "Fechade clase",
+            name: "clases",
+            label: "clases",
 
         },
         {
-            name: "Presente/ausente/Sin tomar",
+            name: "porcentaje",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -186,9 +186,9 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell>APELLDO</StyledTableCell>
             <StyledTableCell >NOMBRE</StyledTableCell>
           
-            <StyledTableCell  >Descripcion</StyledTableCell>
-            <StyledTableCell align="left">FECHA CLASE</StyledTableCell>
-            <StyledTableCell align="left">JUSTIFICAR</StyledTableCell>
+            <StyledTableCell  >Presentes</StyledTableCell>
+            <StyledTableCell align="left">Clases</StyledTableCell>
+            <StyledTableCell align="left">porcentaje</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -198,8 +198,12 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.presentes}</StyledTableCell>
-              <StyledTableCell >{row.ausentes}</StyledTableCell>
+            
+              
+
               <StyledTableCell >
+              
+              {row.clases}
            {/*    <Justificacion
               id = {row.id}
               getClients={async () => {
@@ -216,7 +220,7 @@ const TablaNotificaciones = (props) => {
         }
               /> */}
                </StyledTableCell>
-              
+               <StyledTableCell >{row.porcentaje}% de asistencia</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -246,7 +250,7 @@ const TablaNotificaciones = (props) => {
                   
                      </> }
                 </div>
-            </> : <></>}
+            </> : <>Cargando</>}
         </div>
     )
 }

@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import GroupIcon from '@mui/icons-material/Group';
 import NfcIcon from '@mui/icons-material/Nfc';
 import { useState, useEffect } from "react";
-
+import FiberNewIcon from '@mui/icons-material/FiberNew';
 import Navbar from '../Navbar'
 
 
@@ -53,7 +53,7 @@ export default function MenuIzq2 ({children}) {
         },
         { 
           text: 'Alertas', 
-          icon: <GroupIcon color="primary" />, 
+          icon: <FiberNewIcon color="success" />, 
           path: '/coordinadores/alertas' 
         },
       
