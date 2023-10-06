@@ -195,6 +195,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell  >TELEFONO</StyledTableCell>
             <StyledTableCell  >TELEFONO 2</StyledTableCell>
             <StyledTableCell align="left">Presente/Ausente/Sin tomar</StyledTableCell>
+            <StyledTableCell  >Porcentaje</StyledTableCell>
           
           </TableRow>
         </TableHead>
@@ -207,6 +208,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.tel}</StyledTableCell>
               <StyledTableCell >{row.tel2}</StyledTableCell>
               <StyledTableCell >{row.presentes}/{row.ausentes}/{row.sintomar}</StyledTableCell>
+              <StyledTableCell >{row.presentes*100 / (row.presentes+row.ausentes +row.sintomar)}%</StyledTableCell>
              
             </StyledTableRow>
           ))}
