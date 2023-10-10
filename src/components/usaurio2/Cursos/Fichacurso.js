@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import servicioTurnos from '../../../services/turnos';
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import BotonMagico from './ponerausentes'
 import "../../usaurio2/Cursos/profile.css";
 
 
@@ -139,9 +140,12 @@ const FichaAxios = (props) => {
 
         <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
         <Button onClick={() => navigate('/administracion/alumnosdelturno/'+id) }>Ver alumnes</Button>
+ 
 
         </Grid>
       </Grid>
+      <BotonMagico
+        id={id}/>
     </div>
   </>);
 }

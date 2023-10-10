@@ -115,7 +115,12 @@ const modificarunaclase= async  (datos) => {
    
    return data
 } 
-
+const ponerausentes= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'ponerausentes',datos,config)
+   
+   return data
+}
 
 const traerclase = async (usuario) => {
   
@@ -129,4 +134,4 @@ const traerclase = async (usuario) => {
 return data
      
 }
-export default {lista,desasignar,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
+export default {lista,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
