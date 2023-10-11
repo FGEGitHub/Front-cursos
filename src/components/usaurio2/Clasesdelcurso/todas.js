@@ -1,5 +1,5 @@
 import servicioturnos from '../../../services/turnos'
-import ModalVer from './ModalVer'
+import ModalBorrar from './Modalborrar'
 import ModaNueva from './ModalNuevaclase'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
@@ -273,8 +273,12 @@ const TablaNotificaciones = (props) => {
 
                                 </div>
                             </div>
-                        </Item>
+                        </Item> <ModalBorrar
+                        id={row.id}
+                        descripcion={row.observacion}
+                        numero={row.numero}/>
                     </Grid>
+                   
                     ))}
 
                 </Grid>

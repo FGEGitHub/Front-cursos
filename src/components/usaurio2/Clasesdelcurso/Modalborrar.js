@@ -119,7 +119,7 @@ export default function SelectTextFields(props) {
       autoComplete="off"
     >
        < Tooltip title="Borrar clase">
-       <DeleteIcon onClick={handleClickOpen}/> 
+       <Button onClick={handleClickOpen} color='error'>Borrar<DeleteIcon/></Button> 
      
     
       </Tooltip>
@@ -128,8 +128,9 @@ export default function SelectTextFields(props) {
    
         <DialogContent>
 
-        <h2>Seguro que quiere borrar clase? {props.descripcion}</h2>
-  
+        <h2>Seguro que quiere borrar clase? </h2>
+        {props.descripcion}<br/>
+        Clase numero:  {props.numero}
       
       
    

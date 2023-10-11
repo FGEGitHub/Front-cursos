@@ -141,7 +141,7 @@ const Rutas = [
 		{ path: '/administracion/cursadocompleto', element: <Cursadocompleto /> },
 		{ path: '/administracion/alumnosdelturno/:id', element: <Alumnosdelturno2 /> },
 		{ path: '/administracion/curso/:id', element: <Curso2 /> },
-		{ path: '/administracion/estadoalumnas/:id', element: <Estadoalumnas4 /> },
+		{ path: '/administracion/estadoalumnas/:id', element: <Alumnosdelturno2 /> },
 		{ path: '/administracion/avancedelcurso/:id', element: <Avancedelcurso /> },
 		{ path: '/administracion/contacto', element: <Contacto /> },
 		{ path: '/administracion/egresadxs', element: <Egresadas /> },
