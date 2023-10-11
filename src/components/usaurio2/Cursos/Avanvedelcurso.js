@@ -114,26 +114,26 @@ const Lotes = () => {
 
   function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
     return (
-      <>
+      <div  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
         < Tooltip title="Ir a la clase">
-          <Button onClick={() => navigate('/administracion/clase/' + clients[dataIndex].id_clase)}>Ir a clase
+          <Button style={{minWidth: '200px'}} variant="outlined" onClick={() => navigate('/administracion/clase/' + clients[dataIndex].id_clase)}>Ir a clase     
             <SearchIcon /></Button>
         </Tooltip>
-        <>
+  
           < Tooltip title="Ir al turno">
-            <Button onClick={() => navigate('/administracion/turno/' + clients[dataIndex].id_turno)}>Ir a Turno
+            <Button style={{minWidth: '200px'}} variant="outlined" onClick={() => navigate('/administracion/turno/' + clients[dataIndex].id_turno)}>Ir a Turno    
               <SearchIcon /></Button>
           </Tooltip>
-          <br />
-        </>
+       
+      
         <>
           < Tooltip title="Estado Alumnas del turno">
-            <Button onClick={() => navigate('/administracion/estadoalumnas/' + clients[dataIndex].id_turno)}>Estado Alumnas
+            <Button style={{minWidth: '200px'}} variant="outlined" onClick={() => navigate('/administracion/estadoalumnas/' + clients[dataIndex].id_turno)}> Alumnas 
               <SearchIcon /></Button>
           </Tooltip>
           <br />
         </>
-      </>
+      </div>
     );
   }
 
