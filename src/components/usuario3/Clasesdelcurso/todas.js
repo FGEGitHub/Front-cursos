@@ -126,7 +126,7 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "numero_clase",
+            name: "numero",
             label: "Numero",
 
         },
@@ -137,7 +137,7 @@ const TablaNotificaciones = (props) => {
         },
           {
             name: "ausentes",
-            label: "No tomados",
+            label: "ausentes",
             
         },
         {
