@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import SchoolTwoToneIcon from '@mui/icons-material/SchoolTwoTone';
+import Justificar from '../../usuario3/justificaciones/justificacion'
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import { Alert, AlertTitle } from '@mui/material';
@@ -252,7 +252,7 @@ const TablaNotificaciones = (props) => {
         {showAlert && (
           <Alert severity="info" onClose={() => setShowAlert(false)}>
             <AlertTitle>Encargadas!</AlertTitle>
-            Las alumnas estan ordenadas por apellido
+           Ahora pueden justificar las asitencias
           </Alert>
         )}
         <ResponsiveTable aria-label="customized table">
@@ -265,7 +265,7 @@ const TablaNotificaciones = (props) => {
                 <StyledTableCell component="th" scope="row" data-label="DNI">
                   {row.nuevo == "Si" ? <><p style={{ color: currentColor }}><b>Nuevo</b></p>   </> : <> </>}  {row.nuevo}  {row.dni}
                 </StyledTableCell>
-           
+
 
                 <StyledTableCell align="left" data-label="Presente">
 
@@ -280,7 +280,29 @@ const TablaNotificaciones = (props) => {
                 <StyledTableCell align="left" data-label="Primer clase">
                   {row.primera}
                 </StyledTableCell>
+                {row.asistencia === "No" || row.asistencia === "Ausente" ? <>
 
+                  <StyledTableCell align="left" data-label="Justificar">
+                    <Justificar
+                      id={row.id_asistencia}
+                      getClients={async () => {
+                        try {                   
+          
+                          setUsuario(usuario)
+                          const alumn = await servicioCursos.asistencia(id)
+                          console.log(alumn[1][0])
+                          setClase(alumn[0][0])
+                          setAlumnos(alumn[1])
+                          setEstadisticas(alumn[2])
+          
+                        } catch (error) {
+          
+                        }      
+          
+                      }}
+                    />
+                  </StyledTableCell>
+                </> : <></>}
 
                 {/* <StyledTableCell align="left" data-label="Contactado">
                     {row.dato1 == null  || row.dato1 == 'No'? <>  Ausente/Sin determinar <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
@@ -297,19 +319,19 @@ const TablaNotificaciones = (props) => {
   };
   return (
     <div>
-        
+
       {alumnos[0] ? <>
-        <h3>{alumnos[0]['nombreescuela']}</h3>
+       
         <h4>Asistencia </h4>
 
       </> : <></>}
-  
 
-  <div >
-      {alumnos.length > 0 ? <>
-        <CustomTable alumnos={alumnos} />  </> : <><br /> <h3>No hay asignados</h3></>}
-        </div>
-        
+
+      <div >
+        {alumnos.length > 0 ? <>
+          <CustomTable alumnos={alumnos} />  </> : <><br /> <h3>No hay asignados</h3></>}
+      </div>
+
 
 
 
