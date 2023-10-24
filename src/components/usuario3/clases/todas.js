@@ -155,6 +155,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell>NOMBRE</StyledTableCell>
             <StyledTableCell >DESCRIPCION</StyledTableCell>
             <StyledTableCell >CANTIDAD DE ALUMNAS</StyledTableCell>
+            <StyledTableCell align="left">CALIFICAR COMO FINALZADA</StyledTableCell>
             <StyledTableCell align="left">ACCIONES</StyledTableCell>
           
           </TableRow>
@@ -165,6 +166,17 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.descripcion}</StyledTableCell>
               <StyledTableCell >{row.total}</StyledTableCell>
+              <StyledTableCell >  
+                
+             
+                < Tooltip title="Clasificar las aprobadas">
+                    <Button  onClick={() => navigate('/coordinadores/estadoalumnas/'+row.turnoid)} > Finalizar</Button>
+             
+                </Tooltip>
+     
+             
+             
+                </StyledTableCell>
               <StyledTableCell >  
                 
              
