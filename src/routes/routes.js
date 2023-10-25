@@ -2,7 +2,7 @@
 import Navbar from "../components/Navbar";
 //////////esme
 import Login from '../pages/Login';
-import Login2 from '../pages/login2';
+import Prueba from '../pages/prueba';
 
 
 
@@ -177,7 +177,7 @@ const Rutas = [
 		{ path: '/encargados/justificaciones', element: <JustificacionEncargados /> },
 		{ path: '/inscripciones', element: <Inscripcionesesme /> },
 		{ path: '/inscripcionescarnavales', element: <Inscripcionescarnaval /> },
-
+		{ path: '/prueba', element: <Prueba /> },
 
 		
 		{ path: '/fiscalizacion/login', element: <Loginfis /> },
