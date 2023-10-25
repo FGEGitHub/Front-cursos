@@ -13,7 +13,8 @@ import { Button } from '@mui/material';
 import * as React from 'react';
 import Carga from './carga'
 import MuiAlert from '@mui/material/Alert';
-import Logoesme from '../../Assets/carnaval.png';
+//import Logoesme from '../../Assets/carnaval.png';
+import Logoesme from '../../Assets/logocuqui.webp';
 import Logocuqui from '../../Assets/logocuqui.webp';
 import Logoccari from '../../Assets/logoccari.webp';
 import styled from 'styled-components';
