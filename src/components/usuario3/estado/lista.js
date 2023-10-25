@@ -164,7 +164,7 @@ const TablaNotificaciones = (props) => {
       <Table sx={{ minWidth: "20%",maxWidth: "1000%"}} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>APELLDO</StyledTableCell>
+            <StyledTableCell>APELLD0</StyledTableCell>
             <StyledTableCell >NOMBRE</StyledTableCell>
             <StyledTableCell  >INSCRIPCION</StyledTableCell>
             <StyledTableCell align="left">Presente/Ausente/Sin tomar</StyledTableCell>
@@ -180,7 +180,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.inscripcion}</StyledTableCell>
-              <StyledTableCell >{row.presente}/{row.ausente}/{row.sintomar}</StyledTableCell>
+              <StyledTableCell >{row.presentes}/{row.ausentes}/{row.sintomar}</StyledTableCell>
               <StyledTableCell >{row.observaciones=== null ? <>Cursando</>:<>{row.observaciones} </>}</StyledTableCell>
               <StyledTableCell >{row.primerclase}</StyledTableCell>
               <StyledTableCell >
@@ -189,7 +189,7 @@ const TablaNotificaciones = (props) => {
         
                 nombre_curso={'s'}
                 id_turno= {id}
-                id_cursado= {row.idcursado}
+                id_cursado= {row.id_cursado}
 
                  traer= {async () => {
                     try {

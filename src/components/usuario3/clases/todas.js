@@ -170,7 +170,7 @@ const TablaNotificaciones = (props) => {
                 
              
                 < Tooltip title="Clasificar las aprobadas">
-                    <Button  onClick={() => navigate('/coordinadores/estadoalumnas/'+row.turnoid)} > Finalizar</Button>
+                    <Button  onClick={() => navigate('/coordinadores/estadoalumnas/'+row.turnoid)} > Ir a la finalizacion</Button>
              
                 </Tooltip>
      

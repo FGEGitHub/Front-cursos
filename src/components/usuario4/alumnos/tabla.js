@@ -5,8 +5,7 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import CambiarEstado from '../../usuario3/estado/modalestado'
 import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -196,6 +195,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell  >TELEFONO 2</StyledTableCell>
             <StyledTableCell align="left">Presente/Ausente/Sin tomar</StyledTableCell>
             <StyledTableCell  >Porcentaje</StyledTableCell>
+            <StyledTableCell  >Finalizacion</StyledTableCell>
           
           </TableRow>
         </TableHead>
@@ -209,8 +209,42 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.tel2}</StyledTableCell>
               <StyledTableCell >{row.presentes}/{row.ausentes}/{row.sintomar}</StyledTableCell>
               <StyledTableCell >{row.presentes*100 / (row.presentes+row.ausentes +row.sintomar)}%</StyledTableCell>
+             <StyledTableCell ><CambiarEstado
              
+             
+             nombre_curso={'s'}
+             id_turno= {id}
+             id_cursado= {row.id_cursado}
+
+              traer= {async () => {
+                try {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                    if (loggedUserJSON) {
+                        const usuario = JSON.parse(loggedUserJSON)
+        
+                        setUsuario(usuario)
+        
+                        const novedades_aux = await servicioEncargados.alumnasdelcurso(id)
+                        console.log(novedades_aux)
+                        setClases(novedades_aux[0])
+                        console.log(novedades_aux[1])
+                        setDatos(novedades_aux[1])
+                    }
+        
+                } catch (error) {
+        
+                }
+         
+            }
+        
+         
+             }
+             /></StyledTableCell>
             </StyledTableRow>
+
+
+
+
           ))}
         </TableBody>
       </Table>

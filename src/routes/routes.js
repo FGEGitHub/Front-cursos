@@ -99,6 +99,7 @@ import Circuitos from '../pages/fiscalizacion/Admin/circuitos'
 
 
 import Inscripcionesesme from '../pages/inscripciones'
+import Inscripcionescarnaval from '../pages/inscripcioncarnaval'
 import Consultasinsc from '../pages/usuario2/consultasmobile'
 
 
@@ -175,8 +176,10 @@ const Rutas = [
 		{ path: '/encargados/persona/:id', element: <DetallePersonas /> },
 		{ path: '/encargados/justificaciones', element: <JustificacionEncargados /> },
 		{ path: '/inscripciones', element: <Inscripcionesesme /> },
+		{ path: '/inscripcionescarnavales', element: <Inscripcionescarnaval /> },
 
 
+		
 		{ path: '/fiscalizacion/login', element: <Loginfis /> },
 		{ path: '/fiscalizacion/administracion/menu', element: <Menuadmin /> },
 		{ path: '/fiscalizacion/administracion/cargar', element: <CargarFisca /> },
