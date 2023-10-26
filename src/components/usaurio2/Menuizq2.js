@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Footer from '../footer'
+import CelebrationIcon from '@mui/icons-material/Celebration';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import PhoneForwardedIcon from '@mui/icons-material/PhoneForwarded';
 import Face3Icon from '@mui/icons-material/Face3';
@@ -44,6 +44,11 @@ export default function MenuIzq2 ({children}) {
         window.location.reload(true);
       } 
     const menuItems = [
+      { 
+        text: 'Carnavales', 
+        icon: <CelebrationIcon color="error" />, 
+        path: '/administracion/inscripcionescarnavales' 
+      },
         { 
           text: 'Cursos', 
           icon: <ApartmentIcon color="primary" />, 
@@ -56,7 +61,7 @@ export default function MenuIzq2 ({children}) {
         },
         { 
           text: 'Preasignadas', 
-          icon: <GradeIcon color="error" />, 
+          icon: <GradeIcon color="primary" />, 
           path: '/administracion/preinscriptas' 
         },
         { 

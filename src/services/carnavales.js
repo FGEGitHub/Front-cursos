@@ -1,0 +1,60 @@
+import axios from "axios"
+const url =require ('./url')
+
+
+const baseUrl = url.database+'carnavales/'
+
+//const baseUrl = 'http://esme.cuquicalvano.com:4000/cursos/'
+//const  baseUrl ='http://localhost:4000/cursos/'
+
+
+
+const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+/////loggedUserJSON Recupera lasesion el tokeny lo envia mediante la constante config. el back lo filtra 
+ let config = ''
+
+ if (loggedUserJSON) {
+
+  try {
+      const userContext = JSON.parse(loggedUserJSON)
+      config = {
+         headers:{
+             Authorization:`Bearer ${userContext.token}`
+         }
+     }
+  } catch (error) {
+        window.localStorage.removeItem('loggedNoteAppUser')
+   
+  }
+ 
+
+  
+}else{
+   config = {
+      headers:{
+          Authorization:`Bearer `
+      }
+  }
+}
+
+
+
+
+
+/////////////ver ruta al back
+ const traerinscripciones = async () => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerinscripciones/', config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+return data
+       
+  }
+
+  
+
+export default {traerinscripciones}

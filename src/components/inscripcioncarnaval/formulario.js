@@ -14,11 +14,13 @@ import * as React from 'react';
 import Carga from './carga'
 import MuiAlert from '@mui/material/Alert';
 //import Logoesme from '../../Assets/carnaval.png';
-import Logoesme from '../../Assets/logocuqui.webp';
+import Logoesme from '../../Assets/carnaval.png';
 import Logocuqui from '../../Assets/logocuqui.webp';
 import Logoccari from '../../Assets/logoccari.webp';
 import styled from 'styled-components';
 import Progreso from './progress'
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { height } from "@mui/system";
 const styles = {
     paperr: {
@@ -82,7 +84,16 @@ const Estracto = () => {
     const theme = useTheme();
     const [zoomLevel, setZoomLevel] = useState(0.5);
     const navigate = useNavigate();
+    const [options, setOptions] = useState({
+        option1: false,
+        option2: false,
+        option3: false,
+        option4: false,
+    });
 
+    const handleCheckboxChange = (option) => (event) => {
+        setOptions({ ...options, [option]: event.target.checked });
+    };
     const getClients = async (e) => {
         if (e != '') {
             setLoading(true)
@@ -147,7 +158,7 @@ const Estracto = () => {
 
     const Inscribir = async (event) => {
         setCargando(true);
-        const rta = await servicioPersonas.enviarinscripcion(inscrip);
+        const rta = await servicioPersonas.enviarinscripcioncarnaval(inscrip);
         alert(rta);
         if (
             rta ===
@@ -177,7 +188,7 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="h7" component="div" color="black">
                                 <StyledParagraph>
-                                    Sumate a la Escuela de Mujeres
+                                    Sumate a los Talleres de Carnaval
                                     <br />
 
                                     Equipo CC ARI Corrientes
@@ -408,17 +419,17 @@ const Estracto = () => {
                             <br />
                             <TextField
 
-onChange={handleChange}
-name="fecha_nac"
-id="date"
-label="Fecha de Nacimiento"
-type="date"
-defaultValue="2020-01-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-    shrink: true,
-}}
-/>
+                                onChange={handleChange}
+                                name="fecha_nac"
+                                id="date"
+                                label="Fecha de Nacimiento"
+                                type="date"
+                                defaultValue="2020-01-01"
+                                sx={{ width: 220 }}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
@@ -428,7 +439,45 @@ InputLabelProps={{
                                 </Typography>
                             </InputLabel>
 
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        ¿Perteneces a una comparsa<br /> o agrupación musical?
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'comparsa',
+                                    id: 'uncontrolled-native',
+                                }}
+                                sx={'width:250px'}
+                            >
+                                <option value={'Sin determinar'} >Elegir</option>
+                                <option value={'Si'}>
+                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
+                                        Si
+                                    </Typography>
+                                </option>
+                                <option value={'No'}>No</option>
 
+                            </NativeSelect>
+                            {inscrip.comparsa == "Si" ? <>
+                                <TextField
+                                    style={{ width: '250px' }}
+                                    margin="dense"
+                                    id="name"
+                                    label="Contanos a cual"
+                                    name="comparsa_cual"
+                                    onChange={handleChange}
+                                    fullWidth
+                                    type="number"
+                                    variant="outlined"
+                                />
+
+                            </> : <></>}
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
@@ -553,172 +602,55 @@ InputLabelProps={{
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
-                                        Tenes hijos
+                                        ¿A que curso te queres inscribir?
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'hijos',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={'Si'}>Si</option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-
-                            {inscrip.hijos == "Si" ? <>
-                                <TextField
-                                    style={{ width: '250px' }}
-                                    margin="dense"
-                                    id="name"
-                                    label="Cantidad de hijos"
-                                    name="cantidad_hijos"
-                                    onChange={handleChange}
-                                    fullWidth
-                                    type="number"
-                                    variant="outlined"
-                                />
-                            </> : <></>}
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Participaste de algún curso de la <br />
-                                        Escuela de Mujeres Emprendedoras<br />
-                                        anteriormente?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'participante_anterior',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={'Si'}>Si</option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Por qué elegiste tomar este curso?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'motivacion',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-
-                                <option value={'Para iniciar mi propio emprendimiento o negocio'}>Para iniciar mi propio emprendimiento o negocio</option>
-                                <option value={'Para potenciar mi idea de negocio o emprendimiento en curso'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
-                                <option value={'Para continuar mi formación personal y agregar mas conocimientos'}>Para continuar mi formación personal y agregar mas conocimientos</option>
-                                <option value={'Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral'}>Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral</option>
-                                <option value={'Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó'}>Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó</option>
-
-                            </NativeSelect>
-
-                            <br />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 1
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad1',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
-                                <option value={133}>Maquillaje y peinado para eventos</option>
-                                <option value={134}>Diseño de lenceria femenina</option>
-                                <option value={135}>Textiles y accesorios para el verano</option>
-                                <option value={136}>Refacción integral para el hogar</option>
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 2
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad2',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
-                                <option value={133}>Maquillaje y peinado para eventos</option>
-                                <option value={134}>Diseño de lenceria femenina</option>
-                                <option value={135}>Textiles y accesorios para el verano</option>
-                                <option value={136}>Refacción integral para el hogar</option>
-
-                            </NativeSelect>
 
                         </Box>
+
+                        <FormControlLabel
+                            control={<Checkbox checked={options.option1} onChange={handleCheckboxChange('option1')} />}
+                            label="Maquillaje"
+                        /><br />
+                        <FormControlLabel
+                            control={<Checkbox checked={options.option2} onChange={handleCheckboxChange('option2')} />}
+                            label="Peinado "
+                        /><br />
+                        <FormControlLabel
+                            control={<Checkbox checked={options.option3} onChange={handleCheckboxChange('option3')} />}
+                            label="Confección de trajes "
+                        /><br />
+                        <FormControlLabel
+                            control={<Checkbox checked={options.option4} onChange={handleCheckboxChange('option4')} />}
+                            label="Baile"
+                        /><br />
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario ?
                                     <>
                                         {inscrip.trabajo === 'Si' ? <>
 
                                             {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
                                                 {/*  Caso que sea trabajo si  y completo le tipo  */}
 
-                                                {inscrip.hijos === 'Si' ? <>
+                                                {inscrip.comparsa === 'Si' ? <>
 
-                                                    {inscrip.cantidad_hijos ? <>
+                                                    {inscrip.comparsa_cual ? <>
                                                         {/*  Caso que sea hijos si y selecciono cuantos  */}
 
 
                                                         {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                            <Dialogo formulario={inscrip} />
+                                                            <Dialogo formulario={inscrip} 
+                                                            opciones= {options}/>
                                                         </> : <>Telefono no valido</>}
                                                     </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
                                                 </> : <>
                                                     {/*  Caso que sea hijos no */}
 
                                                     {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                        <Dialogo formulario={inscrip} />
+                                                        <Dialogo formulario={inscrip}
+                                                         opciones= {options} />
                                                     </> : <>Telefono no valido</>}
                                                 </>}
 
@@ -726,9 +658,25 @@ InputLabelProps={{
                                             </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
                                         </> : <>
                                             {/*  Caso que sea trabajo no */}
-                                            {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                <Dialogo formulario={inscrip} />
-                                            </> : <>Telefono no valido</>}</>}
+                                            {inscrip.comparsa == 'Si' ? <>
+
+                                                {inscrip.comparsa_cual ? <>
+                                                    {/*  Caso que sea hijos si y selecciono cuantos  */}
+
+
+                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                        <Dialogo formulario={inscrip} 
+                                                         opciones= {options}/>
+                                                    </> : <>Telefono no valido</>}
+                                                </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                            </> : <>
+                                                {/*  Caso que sea hijos no */}
+
+                                                {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                    <Dialogo formulario={inscrip}
+                                                     opciones= {options} />
+                                                </> : <>Telefono no valido</>}
+                                            </>}</>}
                                     </>
                                     : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
                             </>}
@@ -753,7 +701,7 @@ InputLabelProps={{
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="p" component="div" color="black">
                                 <StyledParagraph>
-                                    Sumate a la Escuela de Mujeres
+                                    Sumate a los Talleres de Carnaval
                                     <br />
 
                                     Equipo CC ARI Corrientes
@@ -989,12 +937,12 @@ InputLabelProps={{
                                 </Typography>
                             </InputLabel>
                         </Box>
-                        
+
                         <Box sx={{ textAlign: 'center', marginLeft: "1em", marginRight: "1em", }}>
-                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
-                                        ¿De que comparsa sos?
+                                        ¿Perteneces a una comparsa<br /> o agrupación musical?
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
@@ -1002,22 +950,34 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'nivel_secundario',
+                                    name: 'comparsa',
 
                                 }}
                                 sx={'width:250px'}
                             >
                                 <option value={'Sin determinar'}>Elegir</option>
-                                <option value={'Ara Bera'}>Ara Bera</option>
-                                <option value={'Sapucay'}>Sapucay</option>
-                                <option value={'Copacabana'}>Copacabana</option>
-                                <option value={'Arandu Belleza'}>Arandu Belleza</option>
-                                <option value={'otra'}>otra</option>
-                                
+                                <option value={'Si'}>Si</option>
+                                <option value={'No'}>No</option>
+
+
 
                             </NativeSelect>
-                          
-                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                            {inscrip.comparsa == "Si" ? <>
+                                <br />
+                                <TextField
+                                    style={{ width: '250px' }}
+                                    margin="dense"
+                                    id="name"
+                                    label="Contanos a cual"
+                                    name="comparsa_cual"
+                                    onChange={handleChange}
+                                    fullWidth
+
+                                    variant="outlined"
+                                />
+
+                            </> : <></>}
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
                                         Nivel educativo alcanzado
@@ -1130,88 +1090,10 @@ InputLabelProps={{
 
 
 
-                            <br />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Tenes hijos
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'hijos',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
 
 
-                            {inscrip.hijos == "Si" ? <>
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="h5" component="div" color="black">
-                                        <StyledParagraph>
-                                            Cuantos hijos?
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
 
-                                <TextField
-                                    style={{ width: '250px' }}
-                                    margin="dense"
-                                    id="name"
-                                    label="Cantidad de hijos"
-                                    name="cantidad_hijos"
-                                    onChange={handleChange}
-                                    fullWidth
-                                    type="number"
-                                    variant="outlined"
-                                />
-                            </> : <></>}
-
-
-                          
-
-                            <br />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Por qué elegiste tomar este curso?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'motivacion',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={'Para iniciar mi propio emprendimiento o negocio'}>Para iniciar mi propio emprendimiento o negocio</option>
-                                <option value={'Para potenciar mi idea de negocio o emprendimiento en curso'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
-                                <option value={'Para continuar mi formación personal y agregar mas conocimientos'}>Para continuar mi formación personal y agregar mas conocimientos</option>
-                                <option value={'Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral'}>Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral</option>
-                                <option value={'Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó'}>Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó</option>
-
-                            </NativeSelect>
-                         {/*    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                            {/*    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
                                         Seleccionar prioridad 1
@@ -1263,9 +1145,89 @@ InputLabelProps={{
                                 <option value={136}>Refacción integral para el hogar</option>
 
                             </NativeSelect> */}
-
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        ¿A que curso te queres inscribir?
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
+                            <Box sx={{ textAlign: 'left', marginLeft: "1em", marginRight: "1em", }}>
+                                <FormControlLabel
+                                    control={<Checkbox checked={options.option1} onChange={handleCheckboxChange('option1')} />}
+                                    label="Maquillaje"
+                                /><br />
+                                <FormControlLabel
+                                    control={<Checkbox checked={options.option2} onChange={handleCheckboxChange('option2')} />}
+                                    label="Peinado "
+                                /><br />
+                                <FormControlLabel
+                                    control={<Checkbox checked={options.option3} onChange={handleCheckboxChange('option3')} />}
+                                    label="Confección de trajes "
+                                /><br />
+                                <FormControlLabel
+                                    control={<Checkbox checked={options.option4} onChange={handleCheckboxChange('option4')} />}
+                                    label="Baile"
+                                /></Box><br />
                         </Box>
-                       
+
+                        <CardActions sx={{ justifyContent: 'center' }}>
+                            {cargando ? <> <Progreso /> </> : <>
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario ?
+                                    <>
+                                        {inscrip.trabajo === 'Si' ? <>
+
+                                            {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
+                                                {/*  Caso que sea trabajo si  y completo le tipo  */}
+
+                                                {inscrip.comparsa === 'Si' ? <>
+
+                                                    {inscrip.comparsa_cual ? <>
+                                                        {/*  Caso que sea hijos si y selecciono cuantos  */}
+
+
+                                                        {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                            <Dialogo formulario={inscrip}
+                                                             opciones= {options} />
+                                                        </> : <>Telefono no valido</>}
+                                                    </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                                </> : <>
+                                                    {/*  Caso que sea hijos no */}
+
+                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                        <Dialogo formulario={inscrip} 
+                                                         opciones= {options}/>
+                                                    </> : <>Telefono no valido</>}
+                                                </>}
+
+
+                                            </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                        </> : <>
+                                            {/*  Caso que sea trabajo no */}
+                                            {inscrip.comparsa === 'Si' ? <>
+
+                                                {inscrip.comparsa_cual ? <>
+                                                    {/*  Caso que sea hijos si y selecciono cuantos  */}
+
+
+                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                        <Dialogo formulario={inscrip} 
+                                                         opciones= {options}/>
+                                                    </> : <>Telefono no valido</>}
+                                                </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                            </> : <>
+                                                {/*  Caso que sea hijos no */}
+
+                                                {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                    <Dialogo formulario={inscrip} 
+                                                     opciones= {options}/>
+                                                </> : <>Telefono no valido</>}
+                                            </>}</>}
+                                    </>
+                                    : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
+                            </>}
+
+                        </CardActions>
                     </Paper>
                 </div>)
             }
