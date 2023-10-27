@@ -182,9 +182,11 @@ const Estracto = () => {
                             <img style={islogoc2} className="islogoc" src={Logocuqui} alt="logo" />
                             <img style={islogo2} src={Logoccari} alt="logo" />
                         </Box>
+                        <div className="jello-horizontal" >
                         <Box className="logo-container">
                             <img style={islogo} src={Logoesme} alt="logo" />
                         </Box>
+                        </div>
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="h7" component="div" color="black">
                                 <StyledParagraph>

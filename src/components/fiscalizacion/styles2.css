@@ -124,3 +124,15 @@ body {
     justify-content: center;
     margin-top: 10px;
   }
+
+  
+.jello-horizontal {
+  animation: jello-horizontal .9s linear both;
+}
+
+@keyframes jello-horizontal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  /* Resto del código de animación... */
+}

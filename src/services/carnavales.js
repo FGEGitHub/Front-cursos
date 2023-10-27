@@ -55,6 +55,16 @@ return data
        
   }
 
-  
+  const desinscribir= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'desinscribir',datos,config)
+     
+     if(data=== 'error login'){
+       
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    } 
+    return data
+ } 
 
-export default {traerinscripciones}
+export default {traerinscripciones,desinscribir}

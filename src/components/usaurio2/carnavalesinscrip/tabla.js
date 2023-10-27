@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import serviciocarnaval from '../../../services/carnavales'
 import MUIDataTable from "mui-datatables";
-
+import Modalborrar from './modalborrar'
 import CargaDeTabla from "../../CargaDeTabla"
 import imagen from "../../../Assets/imagencurso.jpg"
 import { useNavigate } from "react-router-dom";
@@ -121,11 +121,19 @@ function ir(dataIndex, rowIndex, data, onClick) {
       function Nombre(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-           <b> 
-             <p 
-            onClick={() =>  navigate('/administracion/avancedelcurso/'+clients[dataIndex].id)} 
-             style={{ color: '#blue' }}
-            > {clients[dataIndex].nombre} </p>   </b> 
+          <Modalborrar
+          id={clients[dataIndex].id}
+          nombre={clients[dataIndex].nombre}
+          apellido={clients[dataIndex].apellido}
+          getClients={async () => {
+        
+            const clients = await serviciocarnaval.traerinscripciones({
+          
+            })
+            setClients(clients)
+            setLoading(false);
+          }}/>
+     
            
           </>
         );
