@@ -182,18 +182,12 @@ const Estracto = () => {
                             <img style={islogoc2} className="islogoc" src={Logocuqui} alt="logo" />
                             <img style={islogo2} src={Logoccari} alt="logo" />
                         </Box>
-                        <div className="jello-horizontal" >
-                        <Box className="logo-container">
-                            <img style={islogo} src={Logoesme} alt="logo" />
-                        </Box>
-                        </div>
+                   
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="h7" component="div" color="black">
                                 <StyledParagraph>
-                                    Sumate a los Talleres de Carnaval
-                                    <br />
-
-                                    Equipo CC ARI Corrientes
+                                Desde la Coalición Cívica ARI te invitamos a participar de los talleres abiertos y gratuitos de baile, peinado, maquillaje y armado de trajes de carnaval. Inscrribite acá hasta el 1 de noviembre de 2023
+                              
 
                                 </StyledParagraph>
                             </Typography>
@@ -697,17 +691,11 @@ const Estracto = () => {
                             <img style={islogoc} className="islogoc" src={Logocuqui} alt="logo" />
                             <img style={islogo} src={Logoccari} alt="logo" />
                         </Box>
-                        <Box className="logo-container">
-                            <img style={islogo} src={Logoesme} alt="logo" />
-                        </Box>
+                   
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="p" component="div" color="black">
                                 <StyledParagraph>
-                                    Sumate a los Talleres de Carnaval
-                                    <br />
-
-                                    Equipo CC ARI Corrientes
-
+                                Desde la Coalición Cívica ARI te invitamos a participar de los talleres abiertos y gratuitos de baile, peinado, maquillaje y armado de trajes de carnaval. Inscrribite acá hasta el 1 de noviembre de 2023
                                 </StyledParagraph>
                             </Typography>
                         </Box>
