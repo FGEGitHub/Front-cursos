@@ -59,8 +59,20 @@ return data
   
  
     // const data = await axios.post('http://localhost:4000/signupp', datos)
-      const {data} = await axios.get(baseUrl+'todoslosencargadosllamados/')
+      const {data} = await axios.get(baseUrl+'tllamadoscarnaval/')
 return data
        
   }
-export default { usuarios, setToken,registro, datosusuario,todoslosencargadosllamados}
+  
+  const tllamadoscarnaval = async (cuil_cuit) => {
+  
+ 
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'tllamadoscarnaval/')
+return data
+       
+  }
+
+  
+
+export default { usuarios, setToken,registro, datosusuario,todoslosencargadosllamados,tllamadoscarnaval}

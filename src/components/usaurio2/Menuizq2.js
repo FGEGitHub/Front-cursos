@@ -49,6 +49,11 @@ export default function MenuIzq2 ({children}) {
         icon: <CelebrationIcon color="error" />, 
         path: '/administracion/inscripcionescarnavales' 
       },
+      { 
+        text: 'Llamados carnavales', 
+        icon: <PhoneForwardedIcon color="error" />, 
+        path: '/administracion/llamadoscarnaval' 
+      },
         { 
           text: 'Cursos', 
           icon: <ApartmentIcon color="primary" />, 

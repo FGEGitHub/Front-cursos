@@ -39,6 +39,14 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
 
 
+const traerinscripcionesenc = async () => {
+  
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'traerinscripcionesenc/', config)
+  
+
+return data
+}
 
 
 /////////////ver ruta al back
@@ -67,4 +75,18 @@ return data
     return data
  } 
 
-export default {traerinscripciones,desinscribir}
+ const asignarinscripciones = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'asignarinscripciones', formdata, config)
+  return data
+
+}
+
+const preinscriptascall= async  (id) => {
+
+
+  const {data } = await axios.get(baseUrl+'preinscriptascall/'+id,config)
+    console.log(data)
+  return data
+ } 
+export default {traerinscripciones,preinscriptascall, desinscribir,asignarinscripciones,traerinscripcionesenc}

@@ -41,6 +41,9 @@ import Preinscriptas from '../pages/usuario2/preinscriptas';
 import Callcenter from '../pages/usuario2/callcenter';
 import Call2 from '../pages/usuario2/call';
 import Inscripcionescarna from '../pages/usuario2/carnavalinscrip';
+import Llamadoscarnaval from '../pages/usuario2/callcentercarnaval.js';
+import Callcarnaval from '../pages/usuario2/carnavalcall';
+
 
 
 /// 3
@@ -151,7 +154,9 @@ const Rutas = [
 		{ path: '/administracion/callcenter', element: <Callcenter /> },
 		{ path: '/administracion/call/:id', element: <Call2 /> },
 		{ path: '/administracion/inscripcionescarnavales', element: <Inscripcionescarna /> },
-		
+		{ path: '/administracion/llamadoscarnaval', element: <Llamadoscarnaval /> },
+		{ path: '/administracion/carnavalcall/:id', element: <Callcarnaval /> },
+
 
 		{ path: '/coordinadores/novedades', element: <Novedades3 /> },
 		{ path: '/coordinadores/cursos', element: <Clases3 /> },
