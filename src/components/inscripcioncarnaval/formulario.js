@@ -469,7 +469,7 @@ const Estracto = () => {
                                     name="comparsa_cual"
                                     onChange={handleChange}
                                     fullWidth
-                                    type="number"
+                                   
                                     variant="outlined"
                                 />
 
