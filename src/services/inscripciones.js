@@ -225,6 +225,7 @@ const listaExtractos= async  () => {
         console.log(data)
       return data
      } 
+     
      const buscarestadopordni = async (formdata) => {
       console.log(formdata)
       const { data } = await axios.post(baseUrl + 'buscarestadopordni', formdata, config)

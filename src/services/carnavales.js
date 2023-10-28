@@ -89,4 +89,35 @@ const preinscriptascall= async  (id) => {
     console.log(data)
   return data
  } 
-export default {traerinscripciones,preinscriptascall, desinscribir,asignarinscripciones,traerinscripcionesenc}
+
+ const nocontesta = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'nocontesta', formdata, config)
+  return data
+
+}
+
+
+
+const rechazarinscrip= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'rechazarinscrip',datos,config)
+  if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }  
+  return data
+} 
+
+const asignarcurso= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'asignarcurso',datos,config)
+  if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }  
+  return data
+} 
+export default {traerinscripciones,asignarcurso,rechazarinscrip,preinscriptascall,nocontesta, desinscribir,asignarinscripciones,traerinscripcionesenc}

@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
-import servicioInscripciones from '../../../services/inscripciones'
+import servicioCarnaval from '../../../services/carnavales'
 import { useNavigate } from "react-router-dom";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 import Vernscripto from "./modalpaso2";
 import Desasignar from './desasignar'
 
@@ -31,7 +32,7 @@ export default function Ingresos() {
     const navigate = useNavigate();
 
     const [inscrip, setInscrip] = useState([]);
-    const [turnos, setTurnos] = useState([]);
+    const [vista, setVista] = useState(true);
     const [personas, setpersonas] = useState([]);
     const [cursos, setCursos] = useState([]);
 
@@ -44,7 +45,7 @@ export default function Ingresos() {
       if (loggedUserJSON) {
           const usuario = JSON.parse(loggedUserJSON)
 
-          const ins = await servicioInscripciones.preinscriptascall(usuario.id)
+          const ins = await servicioCarnaval.preinscriptascall(usuario.id)
           setInscrip(ins[0])
       }
    
@@ -53,7 +54,7 @@ export default function Ingresos() {
     
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
-          const ins = await servicioInscripciones.todaspaso4();
+          const ins = await servicioCarnaval.todaspaso4();
           setInscrip(ins[0]);
         };
       
@@ -84,8 +85,10 @@ export default function Ingresos() {
           apellido= {inscrip[dataIndex].apellido}
           telefono={inscrip[dataIndex].tel}
           telefono2={inscrip[dataIndex].tel2}
-          nombrecurso1={inscrip[dataIndex].nombrecurso1}
-          nombrecurso2={inscrip[dataIndex].nombrecurso2}
+          maquillaje={inscrip[dataIndex].maquillaje}
+          peinado={inscrip[dataIndex].peinado}
+          confeccion={inscrip[dataIndex].confeccion}
+          baile={inscrip[dataIndex].baile}
           id_inscripcion={inscrip[dataIndex].id}
        
     
@@ -96,7 +99,7 @@ export default function Ingresos() {
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
       
-                const ins = await servicioInscripciones.preinscriptascall(usuario.id)
+                const ins = await servicioCarnaval.preinscriptascall(usuario.id)
                 setInscrip(ins[0])
             }
          
@@ -111,7 +114,7 @@ export default function Ingresos() {
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
       
-                const ins = await servicioInscripciones.preinscriptascall(usuario.id)
+                const ins = await servicioCarnaval.preinscriptascall(usuario.id)
                 setInscrip(ins[0])
             }
          
@@ -125,7 +128,7 @@ export default function Ingresos() {
                     estado={inscrip[dataIndex].estado}
                     getClients={ async () => {
 
-                      const ins = await servicioInscripciones.todaspaso4()
+                      const ins = await servicioCarnaval.todaspaso4()
                       setInscrip(ins[0])
                       // 
               
@@ -139,28 +142,7 @@ export default function Ingresos() {
       }
 
       
-  
-      function dondevot(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
 
-      {inscrip[dataIndex].etapa2 =="Si" ? <> <p style={{ color: 'green' }} >{inscrip[dataIndex].etapa2} {inscrip[dataIndex].donde_vota} </p> </> : <>{inscrip[dataIndex].donde_vota}</> }
-    
-          </>
-
-        );
-      }
-
-      function Obser(dataIndex, rowIndex, data, onClick) {
-        return (
-          <>
-      
-    
-
-          </>
-
-        );
-      }
 
     const columns = [
     
@@ -197,18 +179,27 @@ export default function Ingresos() {
 
         },
    
+        {
+          name: "maquillaje",
+          label: "maquillaje",
 
+      },
       {
-        name: "nombrecurso1",
-        label: "nombrecurso1",
+        name: "peinado",
+        label: "peinado",
 
     },
-    
     {
-        name: "nombrecurso2",
-        label: "nombrecurso2",
+      name: "confeccion",
+      label: "confeccion",
 
-    },
+  },
+  {
+    name: "baile",
+    label: "baile",
+
+},
+     
     {
       name: "Acciones",
       options: {
@@ -225,6 +216,59 @@ export default function Ingresos() {
 
 
     ];
+    const columns2 = [
+    
+      {
+          name: "dni",
+          label: "dni",
+      },
+      {
+          name: "apellido",
+          label: "apellido",
+      
+      },  
+      {
+          name: "nombre",
+          label: "Nombre",
+      
+      },  
+      {
+        name: "estado",
+        label: "estado",
+    
+    },  
+  
+      
+    
+      {
+          name: "tel",
+          label: "telefono",
+
+      },
+      {
+          name: "tel2",
+          label: "Alternativo",
+
+      },
+ 
+    
+   
+  {
+    name: "Acciones",
+    options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+            CutomButtonsRenderer(
+                dataIndex,
+                rowIndex,
+               // overbookingData,
+               // handleEditOpen
+            )
+    }
+
+}, 
+
+
+  ];
     const options = {
         selectableRows: false, // Desactivar la selección de filas
         stickyHeader: true,   
@@ -237,7 +281,11 @@ export default function Ingresos() {
 
     return (
         <div >
-
+{vista ?  <>
+  <Alert variant="filled" severity="success">
+        Nota: en esta vista hay una barra de desplazamiento en la parte inferior para ver el boton del llamado, podes cambiar la vista en el boton de "ocultar cursos seleccionados"
+      </Alert>
+  <Button variant='contained' onClick={()=>(setVista(!vista))}>Ocultar cursos seleccionados</Button>
     <MUIDataTable
       title={"Lista de Inscripciones"}
       data={inscrip}
@@ -251,7 +299,21 @@ export default function Ingresos() {
         }
       ]}
     />
-
+</>:<>
+<Button variant='contained'  onClick={()=>(setVista(!vista))}>Mostrar tabla con cursos elegidos</Button>
+<MUIDataTable
+      title={"Lista de Inscripciones"}
+      data={inscrip}
+      columns={columns2}
+      options={options}
+      actions={[
+        {
+          icon: "save",
+          tooltip: "Save User",
+          onClick: (event, rowData) => alert("You saved " + rowData.name),
+        }
+      ]}
+    /></>}
                 
        
           

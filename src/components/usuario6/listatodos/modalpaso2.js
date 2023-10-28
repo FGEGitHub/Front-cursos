@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioCursos from '../../../services/Cursos'
+import servicioCarnaval from '../../../services/carnavales'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import NativeSelect from '@mui/material/NativeSelect';
@@ -20,6 +20,8 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Logoesme from '../../../Assets/anuncio.webp';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 const currencies = [
   {
     value: 'CBU',
@@ -41,7 +43,12 @@ export default function SelectTextFields(props) {
   let id_curso = params.id
   const [rta, setRta] = useState()
   const [turnos, setTurnos] = useState()
- 
+  const [options, setOptions] = useState({
+    option1: false,
+    option2: false,
+    option3: false,
+    option4: false,
+});
   const [disponibilidad, setDisponibilidad] = useState(0)
   const [mostrarDialogo, setMostrarDialogo] = useState(false);
   const [activo, setActivo] = useState(false)
@@ -56,11 +63,7 @@ export default function SelectTextFields(props) {
 
   };
 
-  const traer = async (e) => {
-
-    const mes = await servicioCursos.traerturnos(e)
-    setTurnos(mes)
-  }
+  
 
   const [inscripcion, setInscripcion] = useState({
 
@@ -90,10 +93,8 @@ export default function SelectTextFields(props) {
   const handleChange = (e) => {
 
     setInscripcion({ ...inscripcion, [e.target.name]: e.target.value })
-    traer(e.target.value)
-    
-     
-    console.log(inscripcion)
+   
+  
   }
 
   const handleChange2 = (e) => {
@@ -117,7 +118,7 @@ export default function SelectTextFields(props) {
 
 
 
-    const respuesta = await servicioCursos.nocontesta(
+    const respuesta = await servicioCarnaval.nocontesta(
       inscripcion
 
     )
@@ -133,7 +134,7 @@ setRta(respuesta)
 
 
 
-    const respuesta = await servicioCursos.rechazarinscrip(
+    const respuesta = await servicioCarnaval.rechazarinscrip(
       inscripcion
 
     )
@@ -145,12 +146,15 @@ setRta(respuesta)
 
   };/////
   ////
+  const handleCheckboxChange = (option) => (event) => {
+    setOptions({ ...options, [option]: event.target.checked });
+};
   const handleDeterminar = async (event) => {
 
+    const enviar = { ...inscripcion,...options };
 
-
-    const respuesta = await servicioCursos.asignarcurso(
-      inscripcion
+    const respuesta = await servicioCarnaval.asignarcurso(
+      enviar
 
 
     )
@@ -192,74 +196,58 @@ setRta(respuesta)
                 <h3>Asignacion a curso a {props.nombre} {props.apellido} </h3>
                 DNI:  {props.dni}<br />
 
-                <h5><CheckCircleOutlineIcon />Ha seleccionado como prioridad 1: <h3 style={{ color: 'green' }}>{props.nombrecurso1}</h3></h5>
+                <h5><CheckCircleOutlineIcon />Ha seleccionado los cursos: </h5>
+                <ol>
+    {props.maquillaje === "Si" && (
+        <li style={{ color: 'green' }}>
+            ✓ Maquillaje
+        </li>
+    )}
+    {props.peinado === "Si" && (
+        <li style={{ color: 'green' }}>
+            ✓ Peinado
+        </li>
+    )}
+    {props.confeccion === "Si" && (
+        <li style={{ color: 'green' }}>
+            ✓ Confección
+        </li>
+    )}
+    {props.baile === "Si" && (
+        <li style={{ color: 'green' }}>
+            ✓ Baile
+        </li>
+    )}
+</ol>
 
-                <h5><CheckCircleOutlineIcon />Ha seleccionado como prioridad 2: <h4 style={{ color: 'green' }}>{props.nombrecurso2}</h4></h5>
 
+                
 
 
 
 
                 <br />
-                <label>Elegir  Curso</label>
+                <label><b>Elegir  Curso/s</b></label>
                 <br />
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                  Curso
-                </InputLabel>
-                <NativeSelect
-                  defaultValue={30}
-                  onChange={handleChange}
-                  inputProps={{
-                    name: 'mesa',
-                    id: 'uncontrolled-native',
-
-                  }}
-
-                >
-                  <option value={0}>Elegir</option>
-                  <option value={132}>Elaboración de mesa de dulces para eventos</option>
-                  <option value={133}>Maquillaje y peinado para eventos</option>
-                  <option value={134}>Diseño de lenceria femenina</option>
-                  <option value={135}>Textiles y accesorios para el verano</option>
-                  <option value={136}>Refacción integral para el hogar</option>
+                <FormControlLabel
+                            control={<Checkbox checked={options.option1} onChange={handleCheckboxChange('option1')} />}
+                            label="Maquillaje💅🏻"
+                        /><br />
+                        <FormControlLabel
+                            control={<Checkbox checked={options.option2} onChange={handleCheckboxChange('option2')} />}
+                            label="Peinado 💆🏽‍♀️ "
+                        /><br />
+                        <FormControlLabel
+                            control={<Checkbox checked={options.option3} onChange={handleCheckboxChange('option3')} />}
+                            label="Confección de trajes 🦹🏼‍♂️"
+                        /><br />
+                        <FormControlLabel
+                            control={<Checkbox checked={options.option4} onChange={handleCheckboxChange('option4')} />}
+                            label="Baile💃"
+                        /><br />
 
 
 
-
-
-
-                </NativeSelect>
-
-
-                {turnos ? <>
-
-                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                    Turno
-                  </InputLabel>
-                  <NativeSelect
-                    defaultValue={30}
-                    onChange={handleChange2}
-
-                    inputProps={{
-                      name: 'id_turno',
-                      id: 'uncontrolled-native',
-
-                    }}
-
-                  >
-
-
-                    <option value={'1'}> Elegir</option>
-
-                    {turnos.map((row) => (
-
-                      <option value={row.id}> {row.descripcion} -( {parseInt(row.disponibles) < 1 ? <>Lleno</>:<>{row.disponibles} cupos disponibles</>} )</option>
-
-                    ))}
-
-                  </NativeSelect>
-
-                </> : <></>}
 
                 <p onClick={() => window.open('https://wa.me/+549' + props.telefono)}   > <b>Telefono: {props.telefono}</b> <br />Click aca apra enviar whatsap<WhatsAppIcon /> </p>
                 <p onClick={() => window.open('https://wa.me/+549' + props.telefono2)}   > <b>Telefono 2: {props.telefono2}</b> <br />Click aca apra enviar whatsap<WhatsAppIcon /> </p> <br />
@@ -277,9 +265,9 @@ setRta(respuesta)
                 />
                 <DialogActions>
 
-                {disponibilidad > 0 ? <>
+                {options.option1 ||options.option2 ||options.option3 ||options.option4  ? <>
                   <Button variant="contained" color="primary" onClick={handleDeterminar} >Inscribir</Button>
-</>:<>  <Button variant="contained" color="primary" disabled>Inscribir</Button></>}
+</>:<> Debes seleccionar por lo menos un curso  <Button variant="contained" color="primary" disabled>Inscribir</Button></>}
                   <Button variant="contained" color="error" onClick={handleCancelar} >Rechazar</Button>
                   <Button variant="contained" color="warning" onClick={handleNocontesta} >No contesta</Button>
 

@@ -12,15 +12,9 @@ import ListItemText from '@mui/material/ListItemText';
 import GroupIcon from '@mui/icons-material/Group';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
-import Face3Icon from '@mui/icons-material/Face3';
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import GetAppIcon from '@mui/icons-material/GetApp';
-import PermPhoneMsgIcon from '@mui/icons-material/PermPhoneMsg';
-import BadgeIcon from '@mui/icons-material/Badge';
-import SchoolIcon from '@mui/icons-material/School';
+
 import { useState, useEffect } from "react";
-import logo from "../../Assets/logoesme.webp";
+import logo from "../../Assets/logocuqui.webp";
 import Navbar from '../Navbar'
 import GradeIcon from '@mui/icons-material/Grade';
 
@@ -45,7 +39,7 @@ export default function MenuIzq2 ({children}) {
       } 
     const menuItems = [
         { 
-          text: 'Cursos', 
+          text: 'Llamados', 
           icon: <ApartmentIcon color="primary" />, 
           path: '/llamados/todos' 
         },
