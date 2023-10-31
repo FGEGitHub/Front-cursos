@@ -12,8 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import LooksTwoIcon from '@mui/icons-material/LooksTwo';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import { useParams } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -130,6 +129,21 @@ setRta(respuesta)
 
   };/////
   
+  const mensajeenviado = async (event) => {
+
+
+
+    const respuesta = await servicioCarnaval.mensajeenviado(
+      inscripcion
+
+    )
+    console.log(respuesta)
+setRta(respuesta)
+    props.traer()
+    setMostrarDialogo(true)
+    setActivo(false)
+
+  };/////
   const handleCancelar = async (event) => {
 
 
@@ -264,15 +278,16 @@ setRta(respuesta)
 
                 />
                 <DialogActions>
-
+                <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                <Button variant="contained" color="success" onClick={mensajeenviado} >Mensaje enviado</Button>
                 {options.option1 ||options.option2 ||options.option3 ||options.option4  ? <>
                   <Button variant="contained" color="primary" onClick={handleDeterminar} >Inscribir</Button>
-</>:<> Debes seleccionar por lo menos un curso  <Button variant="contained" color="primary" disabled>Inscribir</Button></>}
+</>:<>  <Button variant="contained" color="primary" disabled>Inscribir</Button></>}
                   <Button variant="contained" color="error" onClick={handleCancelar} >Rechazar</Button>
                   <Button variant="contained" color="warning" onClick={handleNocontesta} >No contesta</Button>
-
+            
                   <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
-
+</ButtonGroup>
                 </DialogActions>
 
 

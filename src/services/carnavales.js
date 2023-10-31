@@ -120,4 +120,16 @@ const asignarcurso= async  (datos) => {
   }  
   return data
 } 
-export default {traerinscripciones,asignarcurso,rechazarinscrip,preinscriptascall,nocontesta, desinscribir,asignarinscripciones,traerinscripcionesenc}
+
+
+const mensajeenviado = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'nocontesta', formdata, config)
+  return data
+
+}
+
+
+
+
+export default {traerinscripciones,mensajeenviado,asignarcurso,rechazarinscrip,preinscriptascall,nocontesta, desinscribir,asignarinscripciones,traerinscripcionesenc}
