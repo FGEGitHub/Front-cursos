@@ -89,6 +89,16 @@ const preinscriptascall= async  (id) => {
     console.log(data)
   return data
  } 
+ 
+ const vercursosinscripta= async  (id) => {
+
+
+  const {data } = await axios.get(baseUrl+'vercursosinscripta/'+id,config)
+    console.log(data)
+  return data
+ } 
+
+
 
  const nocontesta = async (formdata) => {
   console.log(formdata)
@@ -124,12 +134,16 @@ const asignarcurso= async  (datos) => {
 
 const mensajeenviado = async (formdata) => {
   console.log(formdata)
-  const { data } = await axios.post(baseUrl + 'nocontesta', formdata, config)
+  const { data } = await axios.post(baseUrl + 'mensajeenviado', formdata, config)
   return data
 
 }
 
+const desasignar= async  (datos) => {
+  const {data } = await axios.post(baseUrl+'desasignar',datos,config)
+  
+  
+} 
 
 
-
-export default {traerinscripciones,mensajeenviado,asignarcurso,rechazarinscrip,preinscriptascall,nocontesta, desinscribir,asignarinscripciones,traerinscripcionesenc}
+export default {traerinscripciones,desasignar,mensajeenviado,vercursosinscripta,asignarcurso,rechazarinscrip,preinscriptascall,nocontesta, desinscribir,asignarinscripciones,traerinscripcionesenc}

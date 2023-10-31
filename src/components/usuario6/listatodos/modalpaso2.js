@@ -188,7 +188,7 @@ setRta(respuesta)
   return (
     <>
       < Tooltip title="Contactar">
-        <Button variant='contained' onClick={handleClickOpen} color='success'  > Llamar <ContactPhoneIcon /></Button>
+        <Button variant='outlined' onClick={handleClickOpen} color='success'  > Gestionar <ContactPhoneIcon /></Button>
       </Tooltip>
       {!mostrarDialogo ? <>
 

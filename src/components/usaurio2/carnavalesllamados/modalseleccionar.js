@@ -97,7 +97,7 @@ export default function Clasenueva(props) {
                                         <>
                                             <label>
                                                  <p>  <input type="checkbox" checked={selectedOptions.includes( row.id )} onChange={() => handleOptionChange( row.id )} />
-                                             {row.apellido}  {row.nombre} </p>  
+                                             {row.apellido}  {row.nombre} </p>   {row.fecha}
                                             </label>
                                             <br />
                                         </>

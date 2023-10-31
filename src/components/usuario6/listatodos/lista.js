@@ -11,7 +11,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Vernscripto from "./modalpaso2";
 import Desasignar from './desasignar'
-
+import Vercursos from './verinscripcionn'
 import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 const theme = createTheme({
@@ -78,7 +78,7 @@ export default function Ingresos() {
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-      {inscrip[dataIndex].estado != 'Asignada a curso' ? <>
+      {inscrip[dataIndex].estado != 'Asignadx a curso' ? <>
           <Vernscripto
           dni= {inscrip[dataIndex].dni}
           nombre= {inscrip[dataIndex].nombre}
@@ -106,9 +106,22 @@ export default function Ingresos() {
           }}/>
           </>:<>
           
-          <p> <b>{inscrip[dataIndex].nombrecurso}{inscrip[dataIndex].descripcion}</b></p>
+        
+          <Vercursos 
+           id={inscrip[dataIndex].id}
+           traer = { async () => {
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
+      
+                const ins = await servicioCarnaval.preinscriptascall(usuario.id)
+                setInscrip(ins[0])
+            }
+         
+          }}
+          dni= {inscrip[dataIndex].dni}  />
           <Desasignar
-           id_inscripcion={inscrip[dataIndex].id}
+           id={inscrip[dataIndex].id}
            traer = { async () => {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
             if (loggedUserJSON) {

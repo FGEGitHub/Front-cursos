@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioTurnos from '../../../services/turnos'
+import servicioCarnaval from '../../../services/carnavales'
 import Tooltip from '@material-ui/core/Tooltip';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import React, { useEffect, useState, Fragment } from "react";
@@ -62,7 +62,7 @@ export default function SelectTextFields(props) {
     setOpen(true);
     setInscripcion(({
       dni: props.dni,
-      id_inscripcion: props.id_inscripcion,
+      id_inscripcion: props.id,
 
     }))
     setActivo(true)
@@ -99,7 +99,7 @@ console.log(inscripcion)
 
 
 
-    const respuesta = await servicioTurnos.desasignar(
+    const respuesta = await servicioCarnaval.desasignar(
       inscripcion)
 setRta(respuesta)
     props.traer()
