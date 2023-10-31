@@ -59,7 +59,7 @@ const Login = () => {
         'loggedNoteAppUser', JSON.stringify(user)
       )
 
-      servicioUsuario.setToken(user.token)
+    await  servicioUsuario.setToken(user.token)
       console.log(user)
      await setUser(user)
 
@@ -71,10 +71,8 @@ const Login = () => {
         window.location.reload(true);
           break; */
           case 2:navigate('/administracion/inscripciones')
-                window.location.reload(true);
           break;
           case 3:navigate('/coordinadores/cursos')
-          window.location.reload(true);
     break;
           case 6:navigate('/llamados/todos')
           window.location.reload(true);
