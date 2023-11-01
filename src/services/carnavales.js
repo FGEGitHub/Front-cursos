@@ -139,6 +139,20 @@ const mensajeenviado = async (formdata) => {
 
 }
 
+const agregadoawasap = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.get(baseUrl + 'agregadoawasap/'+formdata, config)
+  return data
+
+}
+
+const noagregadoawasap = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.get(baseUrl + 'noagregadoawasap/'+formdata, config)
+  return data
+
+}
+
 const desasignar= async  (datos) => {
   const {data } = await axios.post(baseUrl+'desasignar',datos,config)
   
@@ -146,4 +160,4 @@ const desasignar= async  (datos) => {
 } 
 
 
-export default {traerinscripciones,desasignar,mensajeenviado,vercursosinscripta,asignarcurso,rechazarinscrip,preinscriptascall,nocontesta, desinscribir,asignarinscripciones,traerinscripcionesenc}
+export default {traerinscripciones,agregadoawasap,noagregadoawasap,desasignar,mensajeenviado,vercursosinscripta,asignarcurso,rechazarinscrip,preinscriptascall,nocontesta, desinscribir,asignarinscripciones,traerinscripcionesenc}

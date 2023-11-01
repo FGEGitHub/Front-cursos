@@ -51,7 +51,23 @@ export default function Ingresos() {
    
     };
   
+    const agregadoawasap = async (idd) => {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+  
+
+           await servicioCarnaval.agregadoawasap(inscrip[idd].id)
+         traer()
+ 
+   
+    };
+    const noagregadoawasap = async (idd) => {
+   
+
+          await servicioCarnaval.noagregadoawasap(inscrip[idd].id)
+          traer()
     
+   
+    };
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
           const ins = await servicioCarnaval.todaspaso4();
@@ -106,7 +122,7 @@ export default function Ingresos() {
           }}/>
           </>:<>
           
-        
+          {inscrip[dataIndex].agregadoagrupo == 'No' ? <><Button     onClick={() => agregadoawasap(dataIndex)} >Marcar Agregado a Whatsap</Button></>:<><Button  onClick={() => noagregadoawasap(dataIndex)} >Agregado a Whatsap</Button></>} 
           <Vercursos 
            id={inscrip[dataIndex].id}
            traer = { async () => {
@@ -135,26 +151,27 @@ export default function Ingresos() {
           dni= {inscrip[dataIndex].dni}
           /></>}
           
-          {/* 
- <CambiarEst
-                    id={inscrip[dataIndex].id}
-                    estado={inscrip[dataIndex].estado}
-                    getClients={ async () => {
-
-                      const ins = await servicioCarnaval.todaspaso4()
-                      setInscrip(ins[0])
-                      // 
-              
-                  
-                  }}
-                /> */}
+   
 
           </>
 
         );
       }
 
-      
+      function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+    
+          
+          {inscrip[dataIndex].agregadoagrupo == 'No' ? <><Button     onClick={() => agregadoawasap(dataIndex)} >Marcar Agregado a Whatsap</Button></>:<><Button  onClick={() => noagregadoawasap(dataIndex)} >Sacar grupo de Whatsap</Button></>} 
+         
+         
+
+          </>
+
+        );
+      }
+
 
 
     const columns = [
@@ -212,7 +229,24 @@ export default function Ingresos() {
     label: "baile",
 
 },
-     
+{
+  name: "agregadoagrupo",
+  label: "Agregado a grupo WASAP",
+
+},
+{
+  name: "Agregar a grupo",
+  options: {
+      customBodyRenderLite: (dataIndex, rowIndex) =>
+          CutomButtonsRenderer2(
+              dataIndex,
+              rowIndex,
+             // overbookingData,
+             // handleEditOpen
+          )
+  }
+
+},  
     {
       name: "Acciones",
       options: {
@@ -264,8 +298,24 @@ export default function Ingresos() {
 
       },
  
-    
-   
+      {
+        name: "agregadoagrupo",
+        label: "Agregado a grupo WASAP",
+      
+      },
+      {
+        name: "Agregar a grupo",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                CutomButtonsRenderer2(
+                    dataIndex,
+                    rowIndex,
+                   // overbookingData,
+                   // handleEditOpen
+                )
+        }
+      
+      }, 
   {
     name: "Acciones",
     options: {
