@@ -157,14 +157,15 @@ const theme = useTheme();
                             </Typography>
                         </Box>
                         <h5>
-                      Las inscripciones para el presente período han llegado a su fin.
+                      Las inscripciones para el presente período han llegado a su fin.    <br />
 
-Animamos a estar atentas a futuras convocatorias y eventos que puedan ofrecer oportunidades de participación.
+Animamos a estar atentas a futuras convocatorias y eventos que puedan ofrecer oportunidades de participación.    <br />
 
-Si tienen alguna consulta pueden ponerse en contacto con nuestro equipo a través la informacion proporcionada en www.cuquicalvano.com
 
 ¡Les enviamos un cordial saludo y las esperamos para las proximas ediciones!!
                                 </h5>    
+                               Cualquier consulta pueden ponerse en contacto con nuestro equipo a través la informacion proporcionada en www.cuquicalvano.com    <br />
+
                         </Paper>
                        
                 </div>
