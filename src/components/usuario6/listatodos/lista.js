@@ -122,7 +122,6 @@ export default function Ingresos() {
           }}/>
           </>:<>
           
-          {inscrip[dataIndex].agregadoagrupo == 'No' ? <><Button     onClick={() => agregadoawasap(dataIndex)} >Marcar Agregado a Whatsap</Button></>:<><Button  onClick={() => noagregadoawasap(dataIndex)} >Agregado a Whatsap</Button></>} 
           <Vercursos 
            id={inscrip[dataIndex].id}
            traer = { async () => {
