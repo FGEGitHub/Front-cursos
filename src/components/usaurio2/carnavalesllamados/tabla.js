@@ -80,6 +80,12 @@ setInscrip(ins[0])
 
         },
         {
+            name: "agregadoagrupo",
+            label: "agregado a grupo",
+
+        },
+        
+        {
             name: "rech",
             label: "Rechazados",
 
