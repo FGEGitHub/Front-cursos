@@ -111,7 +111,7 @@ const DrawerNav = () => {
         irContacto()
         break;
         case 3:
-          notif()
+          hanleLogout()
           break;
           case 4:
             hanleLogout()
