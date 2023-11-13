@@ -108,6 +108,12 @@ import Consultasinsc from '../pages/usuario2/consultasmobile'
 
 
 import Llamadas from '../pages/usuario6/llamados';
+
+
+
+import Deslogin from '../pages/deloging/index.js';
+
+
 const Rutas = [
 	 <Navbar/> ,
 
@@ -118,6 +124,8 @@ const Rutas = [
 		}, */
 		{ path: '/', element: <Login /> },
 		{ path: '/login', element: <Login /> },
+		{ path: '/deslogin', element: <Deslogin /> },
+		
 	
 		
 		{ path: '/usuario/novedades', element: <Novedades1 /> },
