@@ -17,6 +17,12 @@ import Dos from "../../../Assets/dos.webp";
 import Tres from "../../../Assets/tres.webp";
 import Cuatro from "../../../Assets/cuatro.webp";
 import Cinco from "../../../Assets/cinco.webp";
+import Baile from "../../../Assets/baile.jpg";
+import Confeccion from "../../../Assets/confeccion.jpg";
+import Peinados from "../../../Assets/peinados.jpg";
+import Maquillaje from "../../../Assets/maquillaje.jpg";
+
+import ContentCutIcon from '@mui/icons-material/ContentCut';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import Button from "@mui/material/Button";
@@ -281,9 +287,29 @@ const TablaNotificaciones = (props) => {
           {/* Código para el caso 5 */}
           <img  onClick={() => ir(row.id)}  style={islogo} src={Cinco} alt="logo" /> 
         </div>
-      )  : (
+      )  : row.id_curso  === '137' ? (
         <div>
-           <img  onClick={() => ir(row.id)}  style={islogo} src={Cinco} alt="logo" /> 
+          {/* Código para el caso 5 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Maquillaje} alt="logo" /> 
+        </div>
+      ) :  row.id_curso  === '138' ? (
+        <div>
+          {/* Código para el caso 5 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Peinados} alt="logo" /> 
+        </div>
+      ) : row.id_curso  === '139' ? (
+        <div>
+          {/* Código para el caso 5 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Confeccion} alt="logo" /> 
+        </div>
+      ) : row.id_curso  === '140' ? (
+        <div>
+          {/* Código para el caso 5 */}
+          <img  onClick={() => ir(row.id)}  style={islogo} src={Baile} alt="logo" /> 
+        </div>
+      ):(
+        <div>
+             <img  onClick={() => ir(row.id)}  style={islogo} src={Cinco} alt="logo" /> 
         </div>
       )}
     </div>
