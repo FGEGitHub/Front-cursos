@@ -272,7 +272,7 @@ const TablaNotificaciones = (props) => {
                   {row.asistencia === "No Tomada" ? <>Si<Checkbox onClick={() => checkede(row.id_alumno)} /> No<Checkbox onClick={() => checkedeno(row.id_alumno)} /></> : <>  {row.asistencia == "Presente" ? <> Si<Checkbox defaultChecked disabled /> No<Checkbox onClick={() => checkedeno(row.id_alumno)} /> </> : <> Si<Checkbox onClick={() => checkede(row.id_alumno)}  {...label} /> No<Checkbox defaultChecked onClick={() => checkedeno(row.id_alumno)} disabled /> </>} </>}
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="telefono">
-                  {row.telefono}
+                  {row.tel}
                 </StyledTableCell>
                 {/*      <StyledTableCell align="left" data-label="telefono alternativo">
                       {row.telefono2}
