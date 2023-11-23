@@ -140,6 +140,10 @@ function ir(dataIndex, rowIndex, data, onClick) {
       }
     // definimos las columnas
     const columns = [
+      {
+        name: "nombrecall",
+       label: 'llamdo',
+      } ,
         {
             name: "dni_persona",
            label: 'dni',
