@@ -133,8 +133,81 @@ const theme = useTheme();
                 </div></>} */}
 
 
+{isMatch ? (
+                <div >
+                    <Paper
 
-<Formulario/>
+                        className="aparecer-desde-abajo"
+                        style={styles2.paperr}
+                    >
+                        <Box className="logo-container">
+                            <img style={islogoc2} className="islogoc" src={Logocuqui} alt="logo" />
+                            <img style={islogo2} src={Logoccari} alt="logo" />
+                        </Box>
+                      
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Typography variant="h7" component="div" color="black">
+                                <StyledParagraph>
+                                  
+                                    <br />
+
+                                    Equipo CC ARI Corrientes
+
+                                </StyledParagraph>
+                            </Typography>
+                        </Box>
+                        <h5>
+                      Las inscripciones para el presente período han llegado a su fin.    <br />
+
+Animamos a estar atentas a futuras convocatorias y eventos que puedan ofrecer oportunidades de participación.    <br />
+
+
+¡Les enviamos un cordial saludo y las esperamos para las proximas ediciones!!
+                                </h5>    
+                               Cualquier consulta pueden ponerse en contacto con nuestro equipo a través la informacion proporcionada en www.cuquicalvano.com    <br />
+
+                        </Paper>
+                       
+                </div>
+            ) : (
+
+                <div >
+                    <Paper
+                        className="aparecer-desde-abajo"
+                        style={styles.paperr}
+                    >
+                        <Box className="logo-container">
+                            <img style={islogoc} className="islogoc" src={Logocuqui} alt="logo" />
+                            <img style={islogo} src={Logoccari} alt="logo" />
+                        </Box>
+                   
+                        <Box sx={{ textAlign: 'center' }}>
+                            <Typography variant="p" component="div" color="black">
+                                <StyledParagraph>
+                       
+                                    Equipo CC ARI Corrientes
+
+                                </StyledParagraph>
+                            </Typography>
+                            <h5>
+                            Las inscripciones para el presente período han llegado a su fin.
+
+Animamos a estar atentas a futuras convocatorias y eventos que puedan ofrecer oportunidades de participación.
+
+Si tienen alguna consulta pueden ponerse en contacto con nuestro equipo a través la informacion proporcionada en www.cuquicalvano.com
+
+¡Les enviamos un cordial saludo y las esperamos para las proximas ediciones!!
+
+                                </h5>    
+                        </Box>
+
+
+                    </Paper>
+                </div>)
+            }
+
+
+
 
 
                 </>

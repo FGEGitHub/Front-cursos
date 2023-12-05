@@ -228,7 +228,7 @@ return (
     <div>
             <Stack spacing={2} sx={{ width: '100%' }}>
  
- <Alert severity="info">Cantidad de cursos: {clients.length}</Alert>
+ <Alert severity="info">Cantidad de personas: {clients.length}</Alert>
     </Stack>
     <br/>
     <Nuevo
@@ -244,7 +244,7 @@ return (
 {vista   ? <>
         <MUIDataTable
         
-            title={"Lista de Cursos"}
+            title={"Lista de Personas"}
             data={clients}
             columns={columns}
             actions={[
