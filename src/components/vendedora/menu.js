@@ -143,7 +143,7 @@ const TablaNotificaciones = (props) => {
 
                                   
                                     <div>
-                                    <img src={`data:image/jpeg;base64,${row.imagenBase64}`} alt="Mi Imagen" />
+                                    <img src={`data:image/jpeg;base64,${row.imagenBase64}`} alt="Mi Imagen" height="140" />
     </div>
 
 
