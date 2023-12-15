@@ -104,6 +104,7 @@ export default function Ingresos() {
                                     <MenuItem value={'3'}>3-Coordinador</MenuItem>
                                     <MenuItem value={'4'}>4-Encargado</MenuItem>
                                     <MenuItem value={'6'}>6-Llamados</MenuItem>
+                                    <MenuItem value={'13'}>13-Vendedora</MenuItem>
                                     
                                 </Select>
                             </FormControl>

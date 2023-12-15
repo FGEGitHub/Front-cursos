@@ -109,7 +109,8 @@ import Consultasinsc from '../pages/usuario2/consultasmobile'
 
 import Llamadas from '../pages/usuario6/llamados';
 
-
+import Vendedoramenu from '../pages/usuario13ventas/menuprinc';
+import Menutodoslosprod from '../pages/ventas';
 
 import Deslogin from '../pages/deloging/index.js';
 
@@ -222,6 +223,10 @@ const Rutas = [
 		{ path: '/fiscalizacion/administracion/circuitos', element: <Circuitos/> },
 
 
+		{ path: '/vendedora/menu', element: <Vendedoramenu/> },
+		{ path: '/ventascarnaval', element: <Menutodoslosprod/> },
+		
+		
 
 		{ path: '/llamados/todos', element: <Llamadas/> },
 		

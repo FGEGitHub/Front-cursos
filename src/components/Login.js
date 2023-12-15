@@ -82,6 +82,9 @@ const Login = () => {
     case 4:navigate('/encargados/cursos')
     window.location.reload(true);
     break;
+    case 13:navigate('/vendedora/menu')
+    window.location.reload(true);
+break;
    /*        case 3:navigate('/coordinadores/novedades')
           window.location.reload(true);
           break;
