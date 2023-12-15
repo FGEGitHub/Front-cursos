@@ -146,6 +146,7 @@ const TablaNotificaciones = (props) => {
                                         descripcion={row.descripcion}
                                         precio={row.precio}
                                         cantidad={row.cantidad}
+                                        fecha={row.fecha}
                                         imagenBase64={row.imagenBase64}
                                         />
                                     </div>
