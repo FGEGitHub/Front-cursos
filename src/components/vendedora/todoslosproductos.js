@@ -48,6 +48,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const TablaNotificaciones = (props) => {
     const [negocio, setNegocio] = useState()
+    const [searchValue, setSearchValue] = useState("");
+
     const [usuario, setUsuario] = useState([''])
     const [vista, setvista] = useState(true)
     const [imagenBase64, setImagenBase64] = useState('');
@@ -57,20 +59,21 @@ const TablaNotificaciones = (props) => {
 
 
 
-    }, [])
+    },  [searchValue])
 
     const islogo = {
-        width: "90px",                  
-        };
+        width: "90px",
+    };
     const traer = async () => {
+        const novedades_aux = await servicioVendedoras.listadetodosproductos();
     
-                const novedades_aux = await servicioVendedoras.listadetodosproductos()
-                console.log(novedades_aux)
-                setNegocio(novedades_aux)
-   
-
-
-    }
+        // Filtrar productos por nombre
+        const productosFiltrados = novedades_aux.filter(producto =>
+            producto.nombre.toLowerCase().includes(searchValue.toLowerCase())
+        );
+    
+        setNegocio(productosFiltrados);
+    };
     const cambiarvista = () => {
         setvista(!vista)
 
@@ -109,57 +112,65 @@ const TablaNotificaciones = (props) => {
 
 
     // definimos las columnas
-   
+
     const ir = (id) => {
-        navigate('/encargados/turno/'+id)
+        navigate('/encargados/turno/' + id)
     }
     // renderiza la data table
     return (
         <div>
-        
+<div>
+    <input
+        type="text"
+        placeholder="Buscar por nombre"
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+    />
+</div>
 
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={1}>
-             
-           {negocio ? <>
-               {negocio.map((row) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3}>
-                        <Item>
-                            <div  className="body__Page">
-                                <div   className="container__article">
 
-                                    <div className="box__article">
+                    {negocio ? <>
+                        {negocio.map((row) => (
+                            <Grid item xs={12} sm={6} md={4} lg={3}>
+                                <Item>
+                                    <div className="body__Page">
+                                        <div className="container__article">
 
-
-
-                                  
-                                    <div>
-                                    <img src={`data:image/jpeg;base64,${row.imagenBase64}`} alt="Mi Imagen" height="140"/>
-    </div>
+                                            <div className="box__article">
 
 
-                                        <h5   >Cantidad: {row.cantidad}</h5>
-                                        
-                                        <label  >Precio:{row.precio}</label>
-                                        <Ver
-                                        nombre={row.nombre}
-                                        descripcion={row.descripcion}
-                                        precio={row.precio}
-                                        cantidad={row.cantidad}
-                                        fecha={row.fecha}
-                                        imagenBase64={row.imagenBase64}
-                                        />
+
+
+                                                <div>
+                                                    <img src={`data:image/jpeg;base64,${row.imagenBase64}`} alt="Mi Imagen" height="140" />
+                                                </div>
+
+
+                                                <h5   >Cantidad: {row.cantidad}</h5>
+
+                                                <label  >Precio:{row.precio}</label>
+                                                <Ver
+                                                    id_usuario={row.id_usuario}
+                                                    nombre={row.nombre}
+                                                    descripcion={row.descripcion}
+                                                    precio={row.precio}
+                                                    cantidad={row.cantidad}
+                                                    fecha={row.fecha}
+                                                    imagenBase64={row.imagenBase64}
+                                                />
+                                            </div>
+
+
+                                        </div>
                                     </div>
+                                </Item>
+                            </Grid>
+                        ))}
 
 
-                                </div>
-                            </div>
-                        </Item>
-                    </Grid>
-                    ))}
-
-
-</>:<>  </>}
+                    </> : <>  </>}
 
 
                 </Grid>

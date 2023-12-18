@@ -26,40 +26,28 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
+  const [ver, setVer] = React.useState(false);
   const [file, setFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-  const [form, setForm] = useState({
-    nombre: '',
-    categoria1: '',
-    descripcion: '',
-    precio: '',
-    stock: '',
-  });
+  const [form, setForm] = React.useState(false);
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-
-    if (selectedFile) {
-      setFile(selectedFile);
-
-      // Mostrar una vista previa de la imagen en el frontend
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(selectedFile);
-    }
-  };
+  const mostrar = (e) => {
+   setVer(true)
+  
+  }
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    console.log(form)
   };
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(true); 
+    setForm({id_usuario:props.id_usuario})
   };
 
   const handleClose = () => {
+    setVer(false)
     setOpen(false);
   };
 
@@ -145,47 +133,55 @@ export default function SelectTextFields(props) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-         {props.descripcion}
-         cantidad:{props.cantidad}
-         precio:{props.precio}
+         {props.descripcion} <br/>
+         cantidad:{props.cantidad} <br/>
+         precio:{props.precio} <br/>
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+      { ver ? <>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Nombre y apellido "
+            name="nombre"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          /><br/>
+           <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="consulta"
+            name="nombre"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          /><br/>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Telefono de contacto"
+            name="nombre"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
+        </>:<></>} 
      
-      
-      </CardActions>
-      <Collapse  timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir ver
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
-        </CardContent>
-      </Collapse>
+     
     </Card>
         
           <DialogActions>
 
 
             <>
-              <Button variant="contained" color="primary" onClick={enviar}> Contactar </Button>
+            {!ver &&
+              <Button variant="contained" color="primary" onClick={mostrar}> Contactar </Button>}
+            {ver &&
+              <Button variant="contained" color="primary" onClick={enviar}> Enviar </Button>}
             </>
             <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
           </DialogActions>

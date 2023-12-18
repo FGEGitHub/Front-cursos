@@ -5,16 +5,14 @@ import MUIDataTable from "mui-datatables";
 import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
-import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
-import Tooltip from '@material-ui/core/Tooltip';
-import Face3Icon from '@mui/icons-material/Face3';
+import ModalBorrar from '../helpers/modalborrar'
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
 import Uno from "../../Assets/uno.webp";
 import Nuevo from "./modalnuevonegocio";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: "#4caf50",
@@ -86,38 +84,9 @@ const TablaNotificaciones = (props) => {
 
     }
 
-    function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
-        return (
-            <>
-
-
-                <>
-                    < Tooltip title="contactar">
-                        <PhoneForwardedSharpIcon onClick={() => navigate('/encargados/curso/' + negocio[dataIndex]['turnoid'])} />
-                    </Tooltip>
-                </>
-                <br />
-                <>
-                    < Tooltip title="ir a la clase">
-                        <ContentPasteGoIcon onClick={() => navigate('/encargados/turno/' + negocio[dataIndex]['turnoid'])} />
-                    </Tooltip>
-                </>
-                <br />
-                <>
-                    < Tooltip title="Estadisticas">
-                        <Face3Icon onClick={() => navigate('/encargados/alumnosdelturno/' + negocio[dataIndex]['turnoid'])} />
-                    </Tooltip>
-                </>
-
-            </>
-
-        );
-    }
 
 
 
-
-    // definimos las columnas
    
     const ir = (id) => {
         navigate('/encargados/turno/'+id)
@@ -135,7 +104,7 @@ const TablaNotificaciones = (props) => {
                     <Grid item xs={12} sm={6} md={4} lg={3}>
                         <Item>
                             <div className="body__Page">
-                                <div  onClick={() => ir(row.id)}  className="container__article">
+                                <div   className="container__article">
 
                                     <div className="box__article">
 
@@ -143,6 +112,7 @@ const TablaNotificaciones = (props) => {
 
                                   
                                     <div>
+                                
                                     <img src={`data:image/jpeg;base64,${row.imagenBase64}`} alt="Mi Imagen" height="140" />
     </div>
 
@@ -151,6 +121,14 @@ const TablaNotificaciones = (props) => {
                                         
                                         <label  >Precio:{row.precio}</label>
                                         <p   >Ver producto</p>
+                                        <ModalBorrar
+                                        id={row.id}
+                                        servicio={servicioVendedoras.borrararticulo}
+                                    icono = {DeleteIcon}
+                                    titulo={'Borrar articulo?'}
+                                    texto={'Se borrara permanentemente '}
+                                    textoconfirmacion={'Borrar'}
+                                    />
                                     </div>
 
 
@@ -163,6 +141,7 @@ const TablaNotificaciones = (props) => {
 
 </>:<>  </>}
 <Nuevo
+
 id_usuario={usuario.id}
 traer={async () => {
     try {
