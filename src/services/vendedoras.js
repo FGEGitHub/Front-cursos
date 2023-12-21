@@ -56,5 +56,13 @@ return data
      
      return data
  } 
+ const borrararticulo= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'borrararticulo',datos,config)
+   
+   return data
+} 
  
-export default {listadeproductos,nuevoprpducto,listadetodosproductos}
+
+
+export default {listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
