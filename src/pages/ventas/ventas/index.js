@@ -1,8 +1,8 @@
 
-import MenuUsuario4 from '../../components/Navbarventas'
+import MenuUsuario4 from '../../../components/Navbarventas'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Menu from '../../components/vendedora/todoslosproductos'
+import Menu from '../../../components/vendedora/articulodetalles'
  
 export default function Paginas() {
 

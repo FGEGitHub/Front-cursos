@@ -1,0 +1,159 @@
+import React, { useState, useEffect } from 'react';
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Grid,
+  Typography,
+  Container,
+  makeStyles,
+} from '@material-ui/core';
+//import   Navbar from "../navbar"
+
+import Logo from "../../../Assets/flork.png";
+//import Registro from "./registro"
+import servicioLogin from "../../../services/login"
+//import servicioUsuario from "../../services/usuario"
+import { useNavigate } from "react-router-dom";
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: '#607d8b', // Cambiar el color de fondo aquí
+    padding: theme.spacing(2),
+    backgroundImage:Logo,
+    borderRadius: theme.spacing(2),
+    color: 'white'
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: 'white', // Cambiar el color de fondo del avatar aquí
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+const LoginForm = () => {
+  const classes = useStyles();
+  const [form, setForm] = useState({})
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      
+      switch (user.nivel) {
+        case 20:
+          navigate('/dtc/usuario1/menu')
+          break;
+
+        
+          default:
+            window.localStorage.removeItem('loggedNoteAppUser')
+            navigate('/dtc/login')
+          break;
+      }
+    }
+  }, [])
+
+  const handleChange = (e) => {
+
+    setForm({...form,[e.target.name]: e.target.value});
+  };
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const user= await servicioLogin.login(form)
+    window.localStorage.setItem(
+      'loggedNoteAppUser', JSON.stringify(user)
+    )
+
+   // servicioUsuario.setToken(user.token)
+    console.log(user)
+   
+
+    console.log(user.nivel)
+    switch(user.nivel){
+      case 20: navigate('/dtc/usuario1/menu')
+      window.location.reload(true);
+        break;
+      
+        default: alert("error")
+        break;
+  
+  };
+}
+
+  const isLogo = {
+    width: "80%",
+  };
+
+  return (<>
+
+    <Container component="main" maxWidth="xs">
+    {/* <Navbar/> */}
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <img src={Logo} style={isLogo} alt="logo" /> 
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Ingresar
+        </Typography>
+        <form className={classes.form} onSubmit={handleSubmit}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Usuario"
+            name="usuario"
+            autoComplete="email"
+       
+            onChange={handleChange}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Contraseña"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+           
+            onChange={handleChange}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Ingresar
+          </Button>
+        
+        </form>
+     
+        {/* <Registro/> */}
+      </div>
+    </Container>
+    </>
+  );
+};
+
+export default LoginForm;

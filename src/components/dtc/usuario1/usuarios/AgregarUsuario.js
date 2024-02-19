@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
-import servicioAdministracion from '../../../services/administracion'
+import servicioAdministracion from '../../../../services/administracion'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -99,13 +99,9 @@ export default function Ingresos() {
                                     <MenuItem value="2">
                                         <em>None</em>
                                     </MenuItem>
-                                    <MenuItem value={'1'}>1-Alumna***</MenuItem>
-                                    <MenuItem value={'2'}>2-Administracion</MenuItem>
-                                    <MenuItem value={'3'}>3-Coordinador</MenuItem>
-                                    <MenuItem value={'4'}>4-Encargado</MenuItem>
-                                    <MenuItem value={'6'}>6-Llamados</MenuItem>
-                                    <MenuItem value={'13'}>13-Vendedora</MenuItem>
-                                    <MenuItem value={'20'}>20-Vendedora</MenuItem>
+                                    
+                                   
+                                    <MenuItem value={'20'}>1-DTC 1</MenuItem>
                                     
                                 </Select>
                             </FormControl>

@@ -88,6 +88,24 @@ return data
        
   }
 
+
+  
+  const todosdtc = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'todosdtc/', config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+return data
+       
+  }
+
+
+
+
   const registronivel3 = async (datos) => {
     console.log(datos)
   
@@ -123,4 +141,4 @@ return data
  
        
   }
- export default {todos,registronivel3,traertodoelcursado,sistemas,modificarusuario,borrarusuario,contactos }
+ export default {todos,registronivel3,traertodoelcursado,sistemas,modificarusuario,borrarusuario,contactos,todosdtc }

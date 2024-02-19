@@ -110,9 +110,18 @@ import Consultasinsc from '../pages/usuario2/consultasmobile'
 import Llamadas from '../pages/usuario6/llamados';
 
 import Vendedoramenu from '../pages/usuario13ventas/menuprinc';
-import Menutodoslosprod from '../pages/ventas';
+import Menutodoslosprod from '../pages/ventas/ventas';
+import Ventasproducto from '../pages/ventas/ventas';
+
 
 import Deslogin from '../pages/deloging/index.js';
+
+
+
+import Logindtc from '../pages/dtc/login';
+import DtcMenu from '../pages/dtc/nivel1/menu';
+import DetUsuarios from '../pages/dtc/nivel1/usuarios';
+import DtcMedtchiques from '../pages/dtc/nivel1/chiques';
 
 
 const Rutas = [
@@ -225,11 +234,21 @@ const Rutas = [
 
 		{ path: '/vendedora/menu', element: <Vendedoramenu/> },
 		{ path: '/ventascarnaval', element: <Menutodoslosprod/> },
-		
+		{ path: '/producto/:id', element: <Ventasproducto/> },
 		
 
 		{ path: '/llamados/todos', element: <Llamadas/> },
 		
+
+
+
+
+		{ path: '/dtc/login', element: <Logindtc/> },
+		{ path: '/dtc/usuario1/menu', element: <DtcMenu/> },
+		{ path: '/dtc/usuario1/usuarios', element: <DetUsuarios/> },
+		{ path: '/dtc/usuario1/chiques', element: <DtcMedtchiques/> },
+		
+
 
 ];
 
