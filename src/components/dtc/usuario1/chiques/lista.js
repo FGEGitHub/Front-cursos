@@ -6,17 +6,23 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
+import TableHead from '@mui/material/TableHead';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import {
 
-
+    makeStyles,
+    useMediaQuery,
+    useTheme,
+  } from '@material-ui/core';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -38,12 +44,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-
-
 const TablaNotificaciones = (props) => {
+    const theme = useTheme();
     const [chicos, setchicos] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
+    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+ 
 
     let params = useParams()
     let id = params.id
@@ -196,7 +203,45 @@ const TablaNotificaciones = (props) => {
                         }
                     />
                     {chicos.length > 0 ? <>
-                        <>
+
+
+                        {isMatch ? 
+     <>
+     
+<TableContainer>
+                                        {!chicos ? <Skeleton /> : <>
+                                            <h1>Chiques</h1>
+                                            <Table >
+                                                <TableHead>
+                                                    <TableRow>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Apellido</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fecha de nacimiento</b></TableCell>
+                                                       
+                                                    </TableRow>
+                                                </TableHead>
+                                                <TableBody>
+
+
+
+                                                    {chicos.map((row) => (
+                                                        <StyledTableRow key={row.name}>
+                                                            <StyledTableCell component="th" scope="row">{row.apellido} </StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.nombre} </b> </StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.fecha_nacimiento}</b></StyledTableCell>
+                                                           
+                                                        </StyledTableRow>
+                                                    ))}
+
+
+
+
+                                                </TableBody>
+                                            </Table>
+                                        </>}
+
+                                    </TableContainer>
+                                    </>:<><>
                             <MUIDataTable
 
                                 title={"Lista de chicos"}
@@ -213,7 +258,10 @@ const TablaNotificaciones = (props) => {
 
 
                             />
-                        </></> : <> <h2>El curso aun no tiene chicos</h2></>}
+
+                        </></>}
+
+                        </> : <> <h2>El curso aun no tiene chicos</h2></>}
 
 
 
