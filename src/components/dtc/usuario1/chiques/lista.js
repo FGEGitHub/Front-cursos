@@ -275,7 +275,7 @@ const TablaNotificaciones = (props) => {
      
 <TableContainer>
                                         {!chicos ? <Skeleton /> : <>
-                                            <h1>Chiques</h1>
+                                            <h1>Lista </h1>
                                             <Table >
                                                 <TableHead>
                                                     <TableRow>
