@@ -11,13 +11,13 @@ import {
 } from '@material-ui/core';
 import CardInformacionDia from './tarjetahoy';
 import CardSeleccionFecha from './tarjetaselecionar';
+import  Acordeon   from '../acordeon';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    
     [theme.breakpoints.up('md')]: {
-      maxWidth: '600px', // Define el ancho máximo en pantallas más grandes
-      margin: '0 auto', // Centra el contenido en pantallas más grandes
+      maxWidth: '600px',
+      margin: '0 auto',
     },
   },
 }));
@@ -33,18 +33,18 @@ const LoginForm = () => {
 
   const fechaActual = new Date();
 
-  return (
-    <Container component="main"  className={classes.container}>
+  return (<>
+    <Container component="main" className={classes.container}>
       <CssBaseline />
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
               <CardInformacionDia fecha={fechaActual} />
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
               <CardSeleccionFecha onFechaSeleccionada={handleFechaSeleccionada} />
@@ -53,7 +53,10 @@ const LoginForm = () => {
         </Grid>
       </Grid>
     </Container>
+<Acordeon/>
+    </>
   );
 };
 
 export default LoginForm;
+
