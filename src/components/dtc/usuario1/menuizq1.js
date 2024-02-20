@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
-import ApartmentIcon from '@mui/icons-material/Apartment';
+
 import WcTwoToneIcon from '@mui/icons-material/WcTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
@@ -32,7 +32,6 @@ const darkTheme = createTheme({
 });
 export default function MenuIzq2 ({children}) {
     const navigate = useNavigate();
-  
 
 
     const handleClick = (path) => {
@@ -73,10 +72,10 @@ export default function MenuIzq2 ({children}) {
       const islogo = {
         width: "100%",                  
         };
-
     return(
       <>
-         <ThemeProvider theme={darkTheme}>
+        
+    
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       
@@ -132,7 +131,7 @@ export default function MenuIzq2 ({children}) {
    { children}
       </Box>
     </Box>
-    </ThemeProvider>
+    
    
     </>
   );

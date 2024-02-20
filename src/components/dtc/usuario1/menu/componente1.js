@@ -1,70 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  Grid,
-  Typography,
+  Card,
+  CardContent,
   Container,
+  CssBaseline,
+  Grid,
   makeStyles,
+  useMediaQuery,
+  useTheme,
 } from '@material-ui/core';
 import CardInformacionDia from './tarjetahoy';
 import CardSeleccionFecha from './tarjetaselecionar';
 
-//import   Navbar from "../navbar"
-
-//import Registro from "./registro"
-
-//import servicioUsuario from "../../services/usuario"
-import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#607d8b', // Cambiar el color de fondo aquí
-    padding: theme.spacing(2),
-
-    borderRadius: theme.spacing(2),
-    color: 'white'
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: 'white', // Cambiar el color de fondo del avatar aquí
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
+  container: {
+    
+    [theme.breakpoints.up('md')]: {
+      maxWidth: '600px', // Define el ancho máximo en pantallas más grandes
+      margin: '0 auto', // Centra el contenido en pantallas más grandes
+    },
   },
 }));
+
 const handleFechaSeleccionada = (fecha) => {
-  // Manejar la fecha seleccionada, por ejemplo, navegar a actividades con la fecha
   console.log('Fecha seleccionada:', fecha);
 };
+
 const LoginForm = () => {
   const classes = useStyles();
-  const [form, setForm] = useState({})
-  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const fechaActual = new Date(); 
+  const fechaActual = new Date();
 
-
-
-
-  const isLogo = {
-    width: "80%",
-  };
-
-  return (<>
-
-<CardInformacionDia fecha={fechaActual} />
-<CardSeleccionFecha onFechaSeleccionada={handleFechaSeleccionada} />
-    </>
+  return (
+    <Container component="main"  className={classes.container}>
+      <CssBaseline />
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Card>
+            <CardContent>
+              <CardInformacionDia fecha={fechaActual} />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12}>
+          <Card>
+            <CardContent>
+              <CardSeleccionFecha onFechaSeleccionada={handleFechaSeleccionada} />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 

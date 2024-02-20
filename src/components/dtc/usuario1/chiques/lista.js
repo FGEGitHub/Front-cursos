@@ -163,7 +163,7 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            <h2>CLASES DEL CURSO</h2>
+            <h2>Lista de chicos</h2>
             {chicos ? <>
                 <div>
 
@@ -179,7 +179,7 @@ const TablaNotificaciones = (props) => {
                                     setUsuario(usuario)
 
                                     const novedades_aux = await servicioDtc.lista(id)
-                                    setchicos(novedades_aux)
+                                    setchicos(novedades_aux[0])
                                 }
 
                             } catch (error) {

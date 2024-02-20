@@ -18,8 +18,13 @@ const CardSeleccionFecha = ({ onFechaSeleccionada }) => {
   };
 
   return (
-    <Card style={{ width: 'calc(33.33% - 16px)', margin: '8px' }}>
-      <CardContent>
+    <Card  sx={{
+        cursor: 'pointer',
+        background: '#eceff1',
+      
+    
+      }}>
+      <CardContent >
         <Typography variant="h5" component="div" gutterBottom>
           Seleccionar Fecha
         </Typography>
