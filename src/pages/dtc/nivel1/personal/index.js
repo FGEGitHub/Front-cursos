@@ -44,7 +44,7 @@ export default function Paginas() {
     return (
         <>
         <Menuizq>
-      <Menu/>
+      <img src={Login}/>
       </Menuizq>
         </>
    

@@ -1,0 +1,43 @@
+import React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
+const CardInformacionDia = ({ fecha }) => {
+  // Puedes personalizar este avatar o icono según tus necesidades
+  const icono = <Avatar>A</Avatar>;
+
+  const handleIrActividades = () => {
+    // Lógica para navegar a la página de actividades
+    console.log('Ir a actividades');
+  };
+
+  return (
+    <Card style={{ width: 'calc(33.33% - 16px)', margin: '8px' }}>
+      <CardContent>
+        <Typography variant="h5" component="div" gutterBottom>
+          Información del Día
+        </Typography>
+        <Typography variant="subtitle1" color="textSecondary">
+          {fecha.toLocaleDateString('es-ES', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </Typography>
+        <div style={{ display: 'flex', alignItems: 'center', marginTop: '16px' }}>
+          {icono}
+          <IconButton onClick={handleIrActividades} color="primary">
+            <ArrowForwardIcon />
+          </IconButton>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default CardInformacionDia;
