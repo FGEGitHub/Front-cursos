@@ -6,7 +6,7 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate } from 'react-router-dom';
-
+import Navbar from '../Navbar';
 export default function SimpleBottomNavigation(props) {
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ export default function SimpleBottomNavigation(props) {
   };
 
   return (
+    <><Navbar/>
     <Box sx={{ width: 500 }}>
       <BottomNavigation showLabels value={value}>
         <BottomNavigationAction
@@ -39,6 +40,6 @@ export default function SimpleBottomNavigation(props) {
           onClick={() => handleClick('/dtc/usuario1/personal')}
         />
       </BottomNavigation>
-    </Box>
+    </Box></>
   );
 }

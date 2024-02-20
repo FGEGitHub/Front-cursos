@@ -199,7 +199,7 @@ const TablaNotificaciones = (props) => {
                         <>
                             <MUIDataTable
 
-                                title={"Clase del curso"}
+                                title={"Lista de chicos"}
                                 data={chicos}
                                 columns={columns}
                                 actions={[

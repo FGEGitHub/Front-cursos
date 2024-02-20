@@ -65,7 +65,7 @@ export default function Paginas() {
       {isMatch ? 
      <>
      <div  className={classes.container}> 
-     <MenuuCel texto="Menu"/>
+     <MenuuCel texto="Personal"/>
      <img src={Login}/>
     </div>
      </>:<>
