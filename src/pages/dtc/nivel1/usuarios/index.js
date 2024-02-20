@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: '600px', // Define el ancho máximo en pantallas más grandes
       margin: '0 auto', // Centra el contenido en pantallas más grandes
     },
-    transform: 'scale(0.75)', // Escala al 75%
+    transform: 'scale(0.90)', // Escala al 75%
     transformOrigin: 'center center', // Origen de la transformación en el centro
   },
 }));
