@@ -3,7 +3,7 @@ import Menuizq from '../../../../components/dtc/usuario1/menuizq1'
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
 import React, { useEffect, useState } from "react";
-
+import Listachiquesa from '../../../../components/dtc/usuario1/chiques/lista'
 
 export default function Paginas() {
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ export default function Paginas() {
     return (
         <>
         <Menuizq>
-      <img src={Login}/>
+      <Listachiquesa/>
       </Menuizq>
         </>
    
