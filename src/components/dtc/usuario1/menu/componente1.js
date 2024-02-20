@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import CardInformacionDia from './tarjetahoy';
 import CardSeleccionFecha from './tarjetaselecionar';
-import  Acordeon   from '../acordeon';
+import  Acordeon   from '../actividades/acordeon';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -32,7 +32,7 @@ const LoginForm = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const fechaActual = new Date();
-
+console.log(fechaActual)
   return (<>
     <Container component="main" className={classes.container}>
       <CssBaseline />

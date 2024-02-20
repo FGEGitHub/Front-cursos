@@ -217,6 +217,22 @@ const TablaNotificaciones = (props) => {
                                                         <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
                                                         <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Apellido</b></TableCell>
                                                         <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fecha de nacimiento</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Primer contacto</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Primer ingreso</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Admision</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Domicilio</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>telefono</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Autorizacion de imagen</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fotoc DNI</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fotoc dni Responsable</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>tel_responsable</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>visita_social</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Egreso</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>aut_retirar</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>dato_escolar</b></TableCell>
+                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>hora merienda</b></TableCell>
+
                                                        
                                                     </TableRow>
                                                 </TableHead>
@@ -228,7 +244,24 @@ const TablaNotificaciones = (props) => {
                                                         <StyledTableRow key={row.name}>
                                                             <StyledTableCell component="th" scope="row">{row.apellido} </StyledTableCell>
                                                             <StyledTableCell component="th" scope="row"> <b>{row.nombre} </b> </StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.fecha_nacimiento}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.primer_contacto}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.primer_ingreso}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.admision}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.dni}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.domicilio}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.telefono}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.autorizacion_imagen}</b></StyledTableCell> 
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.fotoc_dni}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.fotoc_responsable}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.tel_responsable}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.visita_social}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.egreso}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.aut_retirar}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.dato_escolar}</b></StyledTableCell>
+                                                            <StyledTableCell component="th" scope="row"> <b>{row.hora_merienda}</b></StyledTableCell>
+
+
+
                                                            
                                                         </StyledTableRow>
                                                     ))}
