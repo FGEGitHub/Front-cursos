@@ -9,15 +9,15 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import GroupIcon from '@mui/icons-material/Group';
+import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
+import WcTwoToneIcon from '@mui/icons-material/WcTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
+import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
 //import logo from "../../Assets/logocuqui.webp";
 import Navbar from '../Navbar'
-import GradeIcon from '@mui/icons-material/Grade';
-
+import EngineeringTwoToneIcon from '@mui/icons-material/EngineeringTwoTone';
 const drawerWidth = 240;
 const darkTheme = createTheme({
   palette: {
@@ -51,20 +51,24 @@ export default function MenuIzq2 ({children}) {
     const menuItems = [
         { 
           text: 'Menu', 
-          icon: <ApartmentIcon color="primary" />, 
+          icon: <GradingTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/menu' 
         },
         { 
           text: 'Usuarios', 
-          icon: <ApartmentIcon color="primary" />, 
+          icon: <PeopleAltTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/usuarios' 
         },
         { 
           text: 'Chiques', 
-          icon: <ApartmentIcon color="primary" />, 
+          icon: <WcTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/chiques' 
         },
-     
+        { 
+          text: 'personal', 
+          icon: <EngineeringTwoToneIcon color="primary" />, 
+          path: '/dtc/usuario1/personal' 
+        },
       ];
       const islogo = {
         width: "100%",                  
