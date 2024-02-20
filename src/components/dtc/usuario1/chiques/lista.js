@@ -142,7 +142,72 @@ const TablaNotificaciones = (props) => {
             label: "observaciones",
 
         },
-         
+        {
+            name: "primer_contacto",
+            label: "primer_contacto",
+
+        },    {
+            name: "primer_ingreso",
+            label: "primer_ingreso",
+
+        },    {
+            name: "admision",
+            label: "admision",
+
+        },    {
+            name: "dni",
+            label: "dni",
+
+        },    {
+            name: "domicilio",
+            label: "domicilio",
+
+        },    {
+            name: "telefono",
+            label: "telefono",
+
+        },    {
+            name: "autorizacion_imagen",
+            label: "autorizacion_imagen",
+
+        },    {
+            name: "fotoc_dni",
+            label: "fotoc_dni",
+
+        },    {
+            name: "fotoc_responsable",
+            label: "fotoc_responsable",
+
+        },    {
+            name: "tel_responsable",
+            label: "tel_responsable",
+
+        },
+        {
+            name: "visita_social",
+            label: "visita_social",
+
+        },
+        {
+            name: "egreso",
+            label: "egreso",
+
+        },
+        {
+            name: "aut_retirar",
+            label: "aut_retirar",
+
+        },
+        {
+            name: "dato_escolar",
+            label: "dato_escolar",
+
+        },
+        {
+            name: "hora_merienda",
+            label: "hora_merienda",
+
+        },
 
         {
             name: "Acciones",
