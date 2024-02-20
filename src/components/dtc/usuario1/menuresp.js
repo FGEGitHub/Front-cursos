@@ -17,7 +17,11 @@ export default function SimpleBottomNavigation(props) {
 
   return (
     <><Navbar/>
-    <Box sx={{ width: 500 }}>
+<br/>
+<br/>
+<br/>
+<br/>
+    <Box >
       <BottomNavigation showLabels value={value}>
         <BottomNavigationAction
           label="Menu"
