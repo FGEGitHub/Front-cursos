@@ -22,7 +22,7 @@ import {
     makeStyles,
     useMediaQuery,
     useTheme,
-  } from '@material-ui/core';
+} from '@material-ui/core';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -50,7 +50,7 @@ const TablaNotificaciones = (props) => {
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
- 
+
 
     let params = useParams()
     let id = params.id
@@ -60,7 +60,10 @@ const TablaNotificaciones = (props) => {
 
 
     }, [])
-
+    const options = {
+        selectableRows: false, // Desactivar la selección de filas
+        stickyHeader: true,
+    };
 
     const traer = async () => {
         try {
@@ -78,41 +81,24 @@ const TablaNotificaciones = (props) => {
 
         }
 
-
-
-
-
-
     }
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
 
-                {usuario.nivel == 2 ? <>
-                    <div onClick={() => navigate('/administracion/clase/' + chicos[dataIndex]['id'])}>
+                <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
 
-                        < Tooltip title="ASISTENCIA">
-                            <AccountBoxIcon onClick={() => navigate('/administracion/clase/' + chicos[dataIndex]['id'])} />
-                        </Tooltip>
-
-
-
-
-                    </div>
-
-                </> : <>
-                    <div onClick={() => navigate('/coordinadores/clase/' + chicos[dataIndex]['id'])}>
-
-                        < Tooltip title="ASISTENCIA">
-                            <AccountBoxIcon onClick={() => navigate('/coordinadores/clase/' + chicos[dataIndex]['id'])} />
-                        </Tooltip>
+                    < Tooltip title="Ver">
+                        <AccountBoxIcon onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} />
+                    </Tooltip>
 
 
 
 
-                    </div>
-                </>}
+                </div>
+
+
             </>
         );
     }
@@ -142,72 +128,6 @@ const TablaNotificaciones = (props) => {
             label: "observaciones",
 
         },
-        {
-            name: "primer_contacto",
-            label: "primer_contacto",
-
-        },    {
-            name: "primer_ingreso",
-            label: "primer_ingreso",
-
-        },    {
-            name: "admision",
-            label: "admision",
-
-        },    {
-            name: "dni",
-            label: "dni",
-
-        },    {
-            name: "domicilio",
-            label: "domicilio",
-
-        },    {
-            name: "telefono",
-            label: "telefono",
-
-        },    {
-            name: "autorizacion_imagen",
-            label: "autorizacion_imagen",
-
-        },    {
-            name: "fotoc_dni",
-            label: "fotoc_dni",
-
-        },    {
-            name: "fotoc_responsable",
-            label: "fotoc_responsable",
-
-        },    {
-            name: "tel_responsable",
-            label: "tel_responsable",
-
-        },
-        {
-            name: "visita_social",
-            label: "visita_social",
-
-        },
-        {
-            name: "egreso",
-            label: "egreso",
-
-        },
-        {
-            name: "aut_retirar",
-            label: "aut_retirar",
-
-        },
-        {
-            name: "dato_escolar",
-            label: "dato_escolar",
-
-        },
-        {
-            name: "hora_merienda",
-            label: "hora_merienda",
-
-        },
 
         {
             name: "Acciones",
@@ -225,13 +145,7 @@ const TablaNotificaciones = (props) => {
 
 
     ];
-    const options = {
 
-        /*    rowsPerPage: 10,
-           download: false, // hide csv download option
-           onTableInit: this.handleTableInit,
-           onTableChange: this.handleTableChange, */
-    };
     // renderiza la data table
     return (
         <div>
@@ -270,96 +184,96 @@ const TablaNotificaciones = (props) => {
                     {chicos.length > 0 ? <>
 
 
-                        {isMatch ? 
-     <>
-     
-<TableContainer>
-                                        {!chicos ? <Skeleton /> : <>
-                                            <h1>Lista </h1>
-                                            <Table >
-                                                <TableHead>
-                                                    <TableRow>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Apellido</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fecha de nacimiento</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Primer contacto</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Primer ingreso</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Admision</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Domicilio</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>telefono</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Autorizacion de imagen</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fotoc DNI</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fotoc dni Responsable</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>tel_responsable</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>visita_social</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Egreso</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>aut_retirar</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>dato_escolar</b></TableCell>
-                                                        <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>hora merienda</b></TableCell>
+                        {isMatch ?
+                            <>
 
-                                                       
-                                                    </TableRow>
-                                                </TableHead>
-                                                <TableBody>
+                                <TableContainer>
+                                    {!chicos ? <Skeleton /> : <>
+                                        <h1>Lista de usuarios </h1>
+                                        <Table >
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Apellido</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fecha de nacimiento</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Primer contacto</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Primer ingreso</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Admision</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Domicilio</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>telefono</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Autorizacion de imagen</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fotoc DNI</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fotoc dni Responsable</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>tel_responsable</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>visita_social</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Egreso</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>aut_retirar</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>dato_escolar</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>hora merienda</b></TableCell>
 
 
-
-                                                    {chicos.map((row) => (
-                                                        <StyledTableRow key={row.name}>
-                                                            <StyledTableCell component="th" scope="row">{row.apellido} </StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.nombre} </b> </StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.primer_contacto}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.primer_ingreso}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.admision}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.dni}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.domicilio}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.telefono}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.autorizacion_imagen}</b></StyledTableCell> 
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.fotoc_dni}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.fotoc_responsable}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.tel_responsable}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.visita_social}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.egreso}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.aut_retirar}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.dato_escolar}</b></StyledTableCell>
-                                                            <StyledTableCell component="th" scope="row"> <b>{row.hora_merienda}</b></StyledTableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
 
 
 
-                                                           
-                                                        </StyledTableRow>
-                                                    ))}
+                                                {chicos.map((row) => (
+                                                    <StyledTableRow key={row.name}>
+                                                        <StyledTableCell component="th" scope="row">{row.apellido} </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.nombre} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.primer_contacto}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.primer_ingreso}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.admision}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.dni}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.domicilio}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.telefono}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.autorizacion_imagen}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.fotoc_dni}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.fotoc_responsable}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.tel_responsable}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.visita_social}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.egreso}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.aut_retirar}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.dato_escolar}</b></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.hora_merienda}</b></StyledTableCell>
 
 
 
 
-                                                </TableBody>
-                                            </Table>
-                                        </>}
-
-                                    </TableContainer>
-                                    </>:<><>
-                            <MUIDataTable
-
-                                title={"Lista de chicos"}
-                                data={chicos}
-                                columns={columns}
-                                actions={[
-                                    {
-                                        icon: 'save',
-                                        tooltip: 'Save User',
-                                        onClick: (event, rowData) => alert("You saved " + rowData.name)
-                                    }
-                                ]}
-                                options={options}
+                                                    </StyledTableRow>
+                                                ))}
 
 
-                            />
 
-                        </></>}
 
-                        </> : <> <h2>El curso aun no tiene chicos</h2></>}
+                                            </TableBody>
+                                        </Table>
+                                    </>}
+
+                                </TableContainer>
+                            </> : <><>
+                                <MUIDataTable
+
+                                    title={"Lista de chicos"}
+                                    data={chicos}
+                                    columns={columns}
+                                    actions={[
+                                        {
+                                            icon: 'save',
+                                            tooltip: 'Save User',
+                                            onClick: (event, rowData) => alert("You saved " + rowData.name)
+                                        }
+                                    ]}
+                                    options={options}
+
+
+                                />
+
+                            </></>}
+
+                    </> : <> <h2>El curso aun no tiene chicos</h2></>}
 
 
 

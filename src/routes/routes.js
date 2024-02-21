@@ -123,6 +123,8 @@ import DtcMenu from '../pages/dtc/nivel1/menu';
 import DetUsuarios from '../pages/dtc/nivel1/usuarios';
 import DtcMedtchiques from '../pages/dtc/nivel1/chiques';
 import DtcPersonal from '../pages/dtc/nivel1/personal';
+import Dtcusuario from '../pages/dtc/nivel1/usuario';
+
 
 const Rutas = [
 	 <Navbar/> ,
@@ -248,8 +250,10 @@ const Rutas = [
 		{ path: '/dtc/usuario1/usuarios', element: <DetUsuarios/> },
 		{ path: '/dtc/usuario1/chiques', element: <DtcMedtchiques/> },
 		{ path: '/dtc/usuario1/personal', element: <DtcPersonal/> },
+		{ path: '/dtc/usuario1/usuario/:id', element: <Dtcusuario/> },
 		
-
+		
+		
 
 ];
 

@@ -54,12 +54,12 @@ export default function MenuIzq2 ({children}) {
           path: '/dtc/usuario1/menu' 
         },
         { 
-          text: 'Usuarios', 
+          text: 'Personal', 
           icon: <PeopleAltTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/usuarios' 
         },
         { 
-          text: 'Chiques', 
+          text: 'Usuarios', 
           icon: <WcTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/chiques' 
         },

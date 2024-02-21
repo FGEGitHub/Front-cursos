@@ -42,6 +42,16 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 return data
        
   }
+  
+
+  const datosdechique = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'datosdechique/'+id, config)
+return data
+       
+  }
+
 
 
   const nuevochique= async  (datos) => {
@@ -51,4 +61,4 @@ return data
      alert(data)  
  } 
  
-export default {listachiques,nuevochique}
+export default {listachiques,nuevochique,datosdechique}
