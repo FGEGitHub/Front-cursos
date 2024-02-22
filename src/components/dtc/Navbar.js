@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import DrawerNav from "./DrawerNav";
 import servicioPErsonas from '../../services/personas'
+import logo from '../../Assets/dtc.png'
 
 
 const Navbar = (props) => {
@@ -27,7 +28,7 @@ const Navbar = (props) => {
 
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const islogo = {
-                  width: "130px",                  
+                  width: "80px",                  
                   };
   const navigate = useNavigate();
 
@@ -78,7 +79,7 @@ const traer = async () => {
     <React.Fragment>
       <AppBar sx={{ background: "#Primary" }}>
         <Toolbar>
-        {/*    <img style={islogo} src={logo} alt="logo" />  */}
+           <img style={islogo} src={logo} alt="logo" />  
           {isMatch ? (
             <>
               <DrawerNav />

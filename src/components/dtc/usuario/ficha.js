@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, Typography, Grid } from '@mui/material';
 import { useNavigate, useParams } from "react-router-dom";
 import servicioDtc from '../../../services/dtc'
+import Modificar from './modificar'
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = ({ datosPersona }) => {
     let params = useParams()
@@ -109,6 +110,45 @@ const FichaPersona = ({ datosPersona }) => {
         </Grid>
       </CardContent>
     </Card>
+    <Modificar 
+    id ={chico.id}
+    nombre={chico.nombre}
+    apellido={chico.apellido}
+       fecha_nacimiento={chico.fecha_nacimiento}
+       observaciones={chico.observaciones}
+       primer_contacto={chico.primer_contacto}
+       primer_ingreso={chico.primer_ingreso}
+       admision={chico.admision}
+       dni={chico.dni}
+       domicilio={chico.domicilio}
+       telefono={chico.telefono}
+       autorizacion_imagen={chico.autorizacion_imagen}
+       fotoc_dni={chico.fotoc_dni}
+       fotoc_responsable={chico.fotoc_responsable}
+       tel_responsable={chico.tel_responsable}
+       visita_social={chico.visita_social}
+       egreso={chico.egreso}
+       aut_retirar={chico.aut_retirar}
+       dato_escolar={chico.dato_escolar}
+       hora_merienda={chico.hora_merienda}
+       traer ={async () => {
+        try {
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
+
+
+                const novedades_aux = await servicioDtc.datosdechique(id)
+                setchico(novedades_aux[0][0])
+            }
+
+        } catch (error) {
+
+        }
+
+    }}
+    
+    />
     </>:<>Cargando</>}
     </>
   );

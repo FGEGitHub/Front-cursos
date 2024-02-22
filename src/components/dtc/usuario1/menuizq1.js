@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
-
+import logo from "../../../Assets/dtcletra.png"
 import WcTwoToneIcon from '@mui/icons-material/WcTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
@@ -93,8 +93,8 @@ export default function MenuIzq2 ({children}) {
         <Navbar
       logout = {{hanleLogout}}/>
         <Toolbar />
-       {/*  <img style={islogo} src={logo} alt="logo" />  */}
-        Logo
+        <img style={islogo} src={logo} alt="logo" />  
+       
         <Toolbar />
         <Divider />
         <List>

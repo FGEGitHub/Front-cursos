@@ -74,11 +74,18 @@ return data
      
      return data   
  } 
- const borrarlegajo= async  (datos) => {
+ const modificarusuario= async  (datos) => {
   console.log(datos)
-   const {data } = await axios.post(baseUrl+'borrarlegajo',datos,config)
+   const {data } = await axios.post(baseUrl+'modificarusuario',datos,config)
+   
+   return data   
+}
+ 
+ const borrarlegajo= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'borrarlegajo',datos,config)
    
    return data  
 }
  
-export default {listachiques,nuevochique,datosdechique,subirlegajo,listadelegajos,borrarlegajo}
+export default {listachiques,nuevochique,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario}
