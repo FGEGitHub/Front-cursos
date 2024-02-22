@@ -46,7 +46,7 @@ const MobileAutocomplete = (props) => {
       />
 
       <Button variant="contained" color="primary" onClick={handleBackendCall}>
-        Poner presente
+        Poner/Quitar presente
       </Button>
     </div>
   );
