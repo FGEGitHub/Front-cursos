@@ -74,13 +74,12 @@ const MobileFriendlyTable = () => {
       />
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
-                                        <h1>Lista de presentes, Totales:{datos[0].length}</h1>
+                                        <h1>Lista de presentes, Totales: {datos[0].length}</h1>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
-                                                   <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Dni</b></TableCell>
 
 
                                                 </TableRow>
@@ -91,7 +90,7 @@ const MobileFriendlyTable = () => {
 
                                                 {datos[0].map((row) => (
                                                     <StyledTableRow key={row.name}>
-                                                        <StyledTableCell component="th" scope="row">{row.apellido} {row.nombre}</StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
 
 
