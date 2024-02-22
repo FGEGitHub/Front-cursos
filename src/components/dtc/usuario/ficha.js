@@ -105,6 +105,10 @@ const FichaPersona = ({ datosPersona }) => {
             <Typography color="textSecondary">Fecha de Nacimiento:</Typography>
             <Typography>{chico.fecha_nacimiento}</Typography>
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">Domicilio:</Typography>
+            <Typography>{chico.domicilio}</Typography>
+          </Grid>
           
           {/* Agrega más campos aquí */}
         </Grid>
