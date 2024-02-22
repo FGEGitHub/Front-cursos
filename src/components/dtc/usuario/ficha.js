@@ -33,7 +33,12 @@ const FichaPersona = ({ datosPersona }) => {
   return (
     <>
     {chico ? <>
-    <Card variant="outlined">
+    <Card variant="outlined"  sx={{
+          cursor: 'pointer',
+          background: '#e0e0b2',
+          border: '1px dashed #ccc',
+          '&:hover': { border: '1px solid #ccc' },
+        }}>
       <CardContent>
         <Typography variant="h5" component="div">
           Información de {chico.apellido} {chico.nombre}

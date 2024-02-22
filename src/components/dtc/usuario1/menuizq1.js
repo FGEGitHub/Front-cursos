@@ -63,11 +63,7 @@ export default function MenuIzq2 ({children}) {
           icon: <WcTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/chiques' 
         },
-        { 
-          text: 'personal', 
-          icon: <EngineeringTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/personal' 
-        },
+  
       ];
       const islogo = {
         width: "100%",                  

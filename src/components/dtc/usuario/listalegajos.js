@@ -1,6 +1,6 @@
-import servicioDtc from '../../../../services/dtc'
-import ModalVer from './ModalVer'
-import ModaNueva from './nuevo'
+import servicioDtc from '../../../services/dtc'
+import ModalVer from './Modallegajo'
+import ModaNueva from './Modallegajo'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
@@ -23,6 +23,8 @@ import {
     useMediaQuery,
     useTheme,
 } from '@material-ui/core';
+import Ver from './verlegajo';
+import Borrarlegajo from './Modalborrar'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -73,8 +75,8 @@ const TablaNotificaciones = (props) => {
 
                 setUsuario(usuario)
 
-                const novedades_aux = await servicioDtc.listachiques()
-                setchicos(novedades_aux[0])
+                const novedades_aux = await servicioDtc.listadelegajos(id)
+                setchicos(novedades_aux)
             }
 
         } catch (error) {
@@ -87,16 +89,19 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-                <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
 
                     < Tooltip title="Ver">
-                        <AccountBoxIcon onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} />
+                        <Ver 
+                        imagenBase64 = {chicos[dataIndex]['imagenBase64']}
+                        descripcion = {chicos[dataIndex]['descripcion']}/>
+                    </Tooltip>
+                    < Tooltip title="Borrar">
+                        <Borrarlegajo 
+                        id = {chicos[dataIndex]['id']}
+                       />
                     </Tooltip>
 
 
-
-
-                </div>
 
 
             </>
@@ -114,23 +119,14 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "apellido",
-            label: "apellido",
+            name: "descripcion",
+            label: "descripcion",
 
         },
-        {
-            name: "fecha_nacimiento",
-            label: "Fecha de nacimiento",
-
-        },
-        {
-            name: "observaciones",
-            label: "observaciones",
-
-        },
+       
 
         {
-            name: "Acciones",
+            name: "Ver",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -149,7 +145,7 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            <h2>Lista de chicos</h2>
+            <h2>Legajo del usuario</h2>
             {chicos ? <>
                 <div>
 
@@ -164,8 +160,8 @@ const TablaNotificaciones = (props) => {
 
                                     setUsuario(usuario)
 
-                                    const novedades_aux = await servicioDtc.lista(id)
-                                    setchicos(novedades_aux[0])
+                                    const novedades_aux = await servicioDtc.listadelegajos(id)
+                                    setchicos(novedades_aux)
                                 }
 
                             } catch (error) {
@@ -189,14 +185,14 @@ const TablaNotificaciones = (props) => {
 
                                 <TableContainer>
                                     {!chicos ? <Skeleton /> : <>
-                                        <h1>Lista de usuarios </h1>
+                                        <h1>Lista de legajos </h1>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Descripcion</b></TableCell>
                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
-
+                                                   <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Borrar</b></TableCell>
 
                                                 </TableRow>
                                             </TableHead>
@@ -206,10 +202,16 @@ const TablaNotificaciones = (props) => {
 
                                                 {chicos.map((row) => (
                                                     <StyledTableRow key={row.name}>
-                                                        <StyledTableCell component="th" scope="row">{row.apellido} {row.nombre}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <AccountBoxIcon onClick={() => navigate('/dtc/usuario1/usuario/' + row.id)} /> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> {row.nombre}</StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.descripcion} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row">    <Ver 
+                        imagenBase64 = {row.imagenBase64}
+                        descripcion = {row.descripcion}/></StyledTableCell>
 
+<StyledTableCell component="th" scope="row">    
+<Borrarlegajo 
+                        imagenBase64 = {row.id}
+                      /></StyledTableCell>
 
 
 
@@ -244,7 +246,7 @@ const TablaNotificaciones = (props) => {
 
                             </></>}
 
-                    </> : <> <h2>El curso aun no tiene chicos</h2></>}
+                    </> : <> <h2>no se encontraron legajos</h2></>}
 
 
 

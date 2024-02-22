@@ -39,12 +39,12 @@ export default function SimpleBottomNavigation() {
             onClick={() => handleClick(menuPath)}
           />
           <BottomNavigationAction
-            label="Usuarios"
+            label="Personal"
             icon={<FavoriteIcon />}
             onClick={() => handleClick(usuariosPath)}
           />
           <BottomNavigationAction
-            label="Chiques"
+            label="Usuarios"
             icon={<LocationOnIcon />}
             onClick={() => handleClick(chiquesPath)}
           />

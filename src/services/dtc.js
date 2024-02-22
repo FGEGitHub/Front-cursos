@@ -51,14 +51,34 @@ return data
 return data
        
   }
+  
+  
+  const listadelegajos = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'listadelegajos/'+id, config)
+return data
+       
+  }
 
+  const subirlegajo= async  (datos) => {
 
-
+    const {data } = await axios.post(baseUrl+'subirlegajo',datos,config)
+     
+    return data  
+ } 
+ 
   const nuevochique= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'nuevochique',datos,config)
      
-     alert(data)  
+     return data   
  } 
+ const borrarlegajo= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'borrarlegajo',datos,config)
+   
+   return data  
+}
  
-export default {listachiques,nuevochique,datosdechique}
+export default {listachiques,nuevochique,datosdechique,subirlegajo,listadelegajos,borrarlegajo}
