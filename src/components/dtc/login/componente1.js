@@ -80,15 +80,17 @@ const LoginForm = () => {
     )
 
    // servicioUsuario.setToken(user.token)
-    console.log(user)
-   
-
-    console.log(user.nivel)
+  
     switch(user.nivel){
       case 20: navigate('/dtc/usuario1/menu')
       window.location.reload(true);
         break;
-      
+        case 21: navigate('/dtc/usuario2/asistencia')
+        window.location.reload(true);
+          break;
+          case 22: navigate('/dtc/usuario3/lista')
+          window.location.reload(true);
+            break;
         default: alert("error")
         break;
   

@@ -116,16 +116,7 @@ alert(nov)
 
 
 
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Tipo de legajo"
-            name="nombre"
-            onChange={handleChange}
-            fullWidth
-            variant="standard"
-          />
+   
 
           <InputLabel variant="standard" htmlFor="uncontrolled-native">
             Categoria
@@ -134,14 +125,14 @@ alert(nov)
             defaultValue={'sin determnar'}
             onChange={handleChange}
             inputProps={{
-              name: 'categoria1',
+              name: 'nombre',
               id: 'uncontrolled-native',
 
             }}
           >  <option value={1}>Seleccionar</option>
-            <option value={"uno"}>uno</option>
-            <option value={"dos"}>dos</option>
-            <option value={"tres"}>value</option>
+            <option value={"DNI"}>DNI</option>
+            <option value={"DNI Referente"}>DNI Referente</option>
+            <option value={"Otros"}>Otros</option>
        
 
 

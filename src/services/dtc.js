@@ -60,7 +60,22 @@ return data
 return data
        
   }
-
+  
+  const traerpresentes = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.post(baseUrl+'traerpresentes/',{fecha:id}, config)
+return data
+       
+  }
+  const ponerpresente = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.post(baseUrl+'ponerpresente/',id, config)
+return data
+       
+  }
+  
   const subirlegajo= async  (datos) => {
 
     const {data } = await axios.post(baseUrl+'subirlegajo',datos,config)
@@ -88,4 +103,4 @@ return data
    return data  
 }
  
-export default {listachiques,nuevochique,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario}
+export default {listachiques,nuevochique,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
