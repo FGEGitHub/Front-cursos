@@ -74,7 +74,7 @@ const MobileFriendlyTable = () => {
       />
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
-                                        <h1>Lista de presentes, Totales: {datos[0].length}</h1>
+                                        <h1>Lista de presentes , Totales: {datos[0].length}</h1>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>

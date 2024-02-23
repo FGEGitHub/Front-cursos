@@ -126,6 +126,7 @@ import DtcPersonal from '../pages/dtc/nivel1/personal';
 import Dtcusuario from '../pages/dtc/nivel1/usuario';
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
+import DTCactividadescarga from '../pages/dtc/cargaactividades';
 
 
 const Rutas = [
@@ -256,7 +257,7 @@ const Rutas = [
 
 		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
 		
-		
+		{ path: '/dtc/actividades', element: <DTCactividadescarga/> },
 		
 		
 

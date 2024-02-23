@@ -55,7 +55,7 @@ const traer = async () => {
 }
 
   const handleClick = () => {
-    navigate("/login");
+    navigate("/dtc/actividades");
   };
   const hanleLogout = () => {
     /* console.log('click')
@@ -99,7 +99,9 @@ const traer = async () => {
          
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
                 {user.length > 0? <>
+                 
                   <Tab label= {`hola  ${user[0].nombre} !`}/>
+
                   </>:<>
                   <Tab />
 </>}
@@ -108,6 +110,9 @@ const traer = async () => {
 
 
               {user? <>
+                <Button onClick={handleClick} sx={{ marginLeft: "10px" }} variant="Outlined">
+                  <Tab label= {`Actividades`}/>
+              </Button>
               <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
                   <Tab label= {`Cerrar sesion`}/>
               </Button>
