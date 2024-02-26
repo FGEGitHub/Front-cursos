@@ -112,4 +112,18 @@ return data
    return data  
 }
  
-export default {listachiques,nuevochique,traeractividades,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+
+const nuevaactividad= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'nuevaactividad',datos,config)
+   
+   return data  
+}
+
+const borraractividad= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'borraractividad',datos,config)
+   
+   return data  
+}
+export default {listachiques,nuevochique,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

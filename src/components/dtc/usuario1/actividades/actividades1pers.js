@@ -2,7 +2,7 @@ import servicioDtc from '../../../../services/dtc'
 //import ModalVer from './ModalVer'
 import ModaNueva from './nueva'
 import React, { useEffect, useState, Fragment } from "react";
-import { Paper } from '@mui/material';
+import Modalver from './modalver'
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
@@ -79,7 +79,7 @@ const TablaNotificaciones = (props) => {
 
                 setCurrentDate(formattedDate);
                 const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
-            
+                setchicos(historial)
             }
 
         } catch (error) {
@@ -92,16 +92,37 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-                <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
-
+             
                     < Tooltip title="Ver">
-                        <AccountBoxIcon onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} />
+                    <Modalver
+                    id={ chicos[dataIndex]['id']}
+                    detalle={ chicos[dataIndex]['detalle']}
+                    titulo={ chicos[dataIndex]['titulo']}
+                    traer={async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const today = new Date();
+                                const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+                
+                                setCurrentDate(formattedDate);
+                                const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
+                                setchicos(historial)
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                    }}
+                    />
                     </Tooltip>
 
 
-
-
-                </div>
 
 
             </>
@@ -114,25 +135,17 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
-            name: "nombre",
-            label: "nombre",
+            name: "fecha",
+            label: "fecha",
 
         },
         {
-            name: "apellido",
-            label: "apellido",
+            name: "titulo",
+            label: "titulo",
 
         },
-        {
-            name: "fecha_nacimiento",
-            label: "Fecha de nacimiento",
-
-        },
-        {
-            name: "observaciones",
-            label: "observaciones",
-
-        },
+       
+  
 
         {
             name: "Acciones",
@@ -154,34 +167,34 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            <h2>Lista de chicos</h2>
+            <h2>Lista de actividades</h2>
             {chicos ? <>
                 <div>
 
 
                     <ModaNueva
-                        id_turno={id}
+                    id_usuario={usuario.id}
+                    fecha={currentDate}
                         traer={async () => {
                             try {
                                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                                 if (loggedUserJSON) {
                                     const usuario = JSON.parse(loggedUserJSON)
-
+                    
                                     setUsuario(usuario)
-
-                                    const novedades_aux = await servicioDtc.lista(id)
-                                    setchicos(novedades_aux[0])
+                    
+                                    const today = new Date();
+                                    const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+                    
+                                    setCurrentDate(formattedDate);
+                                    const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
+                                    setchicos(historial)
                                 }
-
+                    
                             } catch (error) {
-
+                    
                             }
-
-
-
-
-
-
+                    
                         }
 
                         }
@@ -194,12 +207,12 @@ const TablaNotificaciones = (props) => {
 
                                 <TableContainer>
                                     {!chicos ? <Skeleton /> : <>
-                                        <h1>Lista de usuarios </h1>
+                                        <h1>Lista de actividades </h1>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Fecha</b> <b /></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Titulo</b></TableCell>
                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
 
 
@@ -211,9 +224,34 @@ const TablaNotificaciones = (props) => {
 
                                                 {chicos.map((row) => (
                                                     <StyledTableRow key={row.name}>
-                                                        <StyledTableCell component="th" scope="row">{row.apellido} {row.nombre}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <AccountBoxIcon onClick={() => navigate('/dtc/usuario1/usuario/' + row.id)} /> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row">{row.fecha}</StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.titulo} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row">  <Modalver
+                    id={ row.id}
+                    detalle={row.detalle}
+                    titulo={row.titulo}
+                    traer={async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const today = new Date();
+                                const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+                
+                                setCurrentDate(formattedDate);
+                                const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
+                                setchicos(historial)
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                    }}
+                    /> </StyledTableCell>
 
 
 
@@ -249,7 +287,7 @@ const TablaNotificaciones = (props) => {
 
                             </></>}
 
-                    </> : <> <h2>El curso aun no tiene chicos</h2></>}
+                    </> : <> <h2>El dia de hoy no hay actividades aun</h2></>}
 
 
 

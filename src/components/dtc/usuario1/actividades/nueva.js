@@ -22,24 +22,7 @@ export default function SelectTextFields(props) {
     const [open, setOpen] = React.useState(false);
     //const usuario  = useUser().userContext
     const [form, setForm] = useState({
-        fecha_nacimiento: "Sin determinar",
-        observaciones: "Sin determinar",
-        primer_contacto: "Sin determinar",
-        primer_ingreso: "Sin determinar",
-        admision: "Sin determinar",
-
-        dni: "Sin determinar",
-        domicilio: "Sin determinar",
-        telefono: "Sin determinar",
-        autorizacion_imagen: "Sin determinar",
-        fotoc_dni: "Sin determinar",
-        fotoc_responsable: "Sin determinar",
-        tel_responsable: "Sin determinar",
-        visita_social: "Sin determinar",
-        egreso: "Sin determinar",
-        aut_retirar: "Sin determinar",
-        dato_escolar: "Sin determinar",
-        hora_merienda: "Sin determinar",
+       
     })
     const [datos, setDatos] = useState()
     const [activo, setActivo] = useState(false)
@@ -71,9 +54,13 @@ export default function SelectTextFields(props) {
 
         try {
             event.preventDefault();
-
-            const nov = await servicioDtc.nuevochique(form)
-
+            const mergedJSON = {
+                ...form,
+                ...{id_usuario:props.id_usuario,fecha:props.fecha}
+              };
+              console.log(mergedJSON)
+            const nov = await servicioDtc.nuevaactividad(mergedJSON)
+              alert(nov)
         } catch (error) {
             console.error(error);
             console.log('Error algo sucedio')
@@ -101,7 +88,7 @@ export default function SelectTextFields(props) {
         <Box
 
             sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
+                '& .MuiTextField-root': { m: 1, width: '125ch' },
             }}
             noValidate
             autoComplete="off"
@@ -110,7 +97,9 @@ export default function SelectTextFields(props) {
                 <Button variant="outlined" onClick={handleClickOpen}> Nuevo  </Button>
 
             </Tooltip>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleClose}   sx={{
+                '& .MuiTextField-root': { m: 1, width: '125ch' },
+            }}>
                 <DialogContent>
 
 
@@ -121,7 +110,7 @@ export default function SelectTextFields(props) {
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="Nombre"
+                        label="Titulo"
                         name="nombre"
                         onChange={handleChange}
                         fullWidth

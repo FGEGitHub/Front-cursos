@@ -38,7 +38,7 @@ export default function Paginas() {
         console.log(loggedUserJSON) 
         if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON)
-          console.log(user)
+          
           switch (user.nivel) {
             case 21:
              break;
