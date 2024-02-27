@@ -34,7 +34,7 @@ export default function SimpleBottomNavigation() {
       <Box>
         <BottomNavigation showLabels value={value}>
           <BottomNavigationAction
-            label="Menu"
+            label="Actividades"
             icon={<RestoreIcon />}
             onClick={() => handleClick(menuPath)}
           />
@@ -48,12 +48,12 @@ export default function SimpleBottomNavigation() {
             icon={<LocationOnIcon />}
             onClick={() => handleClick(chiquesPath)}
           />
-          <BottomNavigationAction
+         {/*  <BottomNavigationAction
             label="Personal"
             icon={<LocationOnIcon />}
             onClick={() => handleClick(personalPath)}
-          />
-        </BottomNavigation>
+          />*/}
+        </BottomNavigation> 
       </Box>
     </>
   );

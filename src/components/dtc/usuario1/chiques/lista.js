@@ -22,6 +22,7 @@ import {
     makeStyles,
     useMediaQuery,
     useTheme,
+    Button
 } from '@material-ui/core';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -90,7 +91,8 @@ const TablaNotificaciones = (props) => {
                 <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
 
                     < Tooltip title="Ver">
-                        <AccountBoxIcon onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} />
+                        <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} variant="contained">
+Ver                        </Button>
                     </Tooltip>
 
 
@@ -109,15 +111,16 @@ const TablaNotificaciones = (props) => {
     // definimos las columnas
     const columns = [
         {
-            name: "nombre",
-            label: "nombre",
-
-        },
-        {
             name: "apellido",
             label: "apellido",
 
         },
+        {
+            name: "nombre",
+            label: "nombre",
+
+        },
+    
         {
             name: "fecha_nacimiento",
             label: "Fecha de nacimiento",
@@ -130,7 +133,7 @@ const TablaNotificaciones = (props) => {
         },
 
         {
-            name: "Acciones",
+            name: "Ver",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(

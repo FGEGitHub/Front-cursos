@@ -65,6 +65,14 @@ const TablaNotificaciones = (props) => {
     const options = {
         selectableRows: false, // Desactivar la selección de filas
         stickyHeader: true,
+        filterType: 'checkbox', // Opciones adicionales de configuración según tus necesidades
+    responsive: 'vertical',
+    selectableRows: 'none',
+    rowsPerPage: 10,
+    rowsPerPageOptions: [10, 20, 30],
+    elevation: 0, // Elimina la sombra si no la deseas
+
+    
     };
 
     const traer = async () => {
@@ -98,6 +106,23 @@ const TablaNotificaciones = (props) => {
                     < Tooltip title="Borrar">
                         <Borrarlegajo 
                         id = {chicos[dataIndex]['id']}
+                        traer={ async () => {
+                            try {
+                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                if (loggedUserJSON) {
+                                    const usuario = JSON.parse(loggedUserJSON)
+                    
+                                    setUsuario(usuario)
+                    
+                                    const novedades_aux = await servicioDtc.listadelegajos(id)
+                                    setchicos(novedades_aux)
+                                }
+                    
+                            } catch (error) {
+                    
+                            }
+                    
+                        }}
                        />
                     </Tooltip>
 
@@ -157,24 +182,18 @@ const TablaNotificaciones = (props) => {
                                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                                 if (loggedUserJSON) {
                                     const usuario = JSON.parse(loggedUserJSON)
-
+                    
                                     setUsuario(usuario)
-
+                    
                                     const novedades_aux = await servicioDtc.listadelegajos(id)
                                     setchicos(novedades_aux)
                                 }
-
+                    
                             } catch (error) {
-
+                    
                             }
-
-
-
-
-
-
+                    
                         }
-
                         }
                     />
                     {chicos.length > 0 ? <>

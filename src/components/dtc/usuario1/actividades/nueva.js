@@ -98,7 +98,7 @@ export default function SelectTextFields(props) {
 
             </Tooltip>
             <Dialog open={open} onClose={handleClose}   sx={{
-                '& .MuiTextField-root': { m: 1, width: '125ch' },
+                width: '100%' 
             }}>
                 <DialogContent>
 
@@ -120,11 +120,11 @@ export default function SelectTextFields(props) {
 
 
 
-
+{/* 
                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                         <Typography variant="p" component="div" color="black">
                             <StyledParagraph>
-                                Dato selectcioanr
+                                Dato seleccionar
                             </StyledParagraph>
                         </Typography>
                     </InputLabel>
@@ -145,7 +145,7 @@ export default function SelectTextFields(props) {
                         </option>
                         <option value={'Con acompaniante'}>Con acompañante</option>
 
-                    </NativeSelect>
+                    </NativeSelect> */}
                     <br />
                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                         <Typography variant="p" component="div" color="black">
@@ -157,7 +157,7 @@ export default function SelectTextFields(props) {
                     <TextField
                         multiline
                         rows={4}  // Ajusta el número de filas según sea necesario
-                        label="Detallar"
+                        label=""
                         variant="outlined"
                         onChange={handleChange}
                         name="detalle"

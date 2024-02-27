@@ -86,7 +86,7 @@ alert(nov)
     });
     setFile(null);
     setPreviewImage(null);
-
+props.traer()
     setOpen(false);
   }
 

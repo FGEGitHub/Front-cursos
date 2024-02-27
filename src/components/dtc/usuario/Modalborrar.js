@@ -42,7 +42,7 @@ export default function Clasenueva(props) {
 
 
         }
-        props.getClients()
+        props.traer()
 
         setOpen(false);
     };
@@ -56,7 +56,7 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="contained"  color="error" onClick={handleClickOpen}  >
+            <Button variant="contained"  color="error" onClick={handleClickOpen} style={{ width: '25%' }} >
             Borrar
             </Button>
             <Dialog open={open} onClose={handleClose}>
