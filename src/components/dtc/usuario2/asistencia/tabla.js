@@ -27,7 +27,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const MobileFriendlyTable = () => {
   const [currentDate, setCurrentDate] = useState('');
   const [datos, setDatos] = useState();
-
+  const [usuario, setUsuario] = useState();
   useEffect(() => {
     traer()
     const fetchCurrentDate = () => {
@@ -40,6 +40,11 @@ const MobileFriendlyTable = () => {
   }, []);
 
   const traer = async () => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUsuario(user)
+    }
     const today = new Date();
     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
     setCurrentDate(formattedDate);
@@ -57,6 +62,7 @@ const MobileFriendlyTable = () => {
       <Typography variant="h5" gutterBottom>
         Fecha: {currentDate}
       </Typography>
+      { usuario ?  <>
       <Buscador
       chicos={datos[1]}
       fecha={currentDate}
@@ -71,7 +77,7 @@ const MobileFriendlyTable = () => {
         // 
     
     }}
-      />
+      /></>:<></>}
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
                                         <h1>Lista de presentes , Totales: {datos[0].length}</h1>
