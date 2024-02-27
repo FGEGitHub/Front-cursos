@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-const CardInformacionDia = ({ fecha }) => {
+const CardInformacionDia = (props) => {
   // Puedes personalizar este avatar o icono según tus necesidades
   const icono = <Avatar>A</Avatar>;
 
@@ -27,7 +27,7 @@ const CardInformacionDia = ({ fecha }) => {
           Información del Día
         </Typography>
         <Typography variant="subtitle1" color="textSecondary">
-          {fecha.toLocaleDateString('es-ES', {
+          {props.fecha.toLocaleDateString('es-ES', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
@@ -36,7 +36,7 @@ const CardInformacionDia = ({ fecha }) => {
         </Typography>
         <div style={{ display: 'flex', alignItems: 'center', marginTop: '16px' }}>
           {icono}
-          <IconButton onClick={handleIrActividades} color="primary">
+          <IconButton onClick={() => props.traer()}color="primary">
             <ArrowForwardIcon />
           </IconButton>
         </div>

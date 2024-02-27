@@ -6,16 +6,9 @@ import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-const CardSeleccionFecha = ({ onFechaSeleccionada }) => {
+const CardSeleccionFecha = (props) => {
   const [fechaSeleccionada, setFechaSeleccionada] = useState('');
 
-  const handleIrActividades = () => {
-    // Lógica para navegar a la página de actividades con la fecha seleccionada
-    if (fechaSeleccionada) {
-      console.log('Ir a actividades con fecha:', fechaSeleccionada);
-      onFechaSeleccionada(new Date(fechaSeleccionada));
-    }
-  };
 
   return (
     <Card  sx={{
@@ -31,15 +24,12 @@ const CardSeleccionFecha = ({ onFechaSeleccionada }) => {
         <TextField
           type="date"
           value={fechaSeleccionada}
-          onChange={(e) => setFechaSeleccionada(e.target.value)}
+          onChange={(e) =>{ props.traer(e.target.value) 
+           }}
           fullWidth
           style={{ marginTop: '16px', marginBottom: '16px' }}
         />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton onClick={handleIrActividades} color="primary">
-            <ArrowForwardIcon />
-          </IconButton>
-        </div>
+     
       </CardContent>
     </Card>
   );

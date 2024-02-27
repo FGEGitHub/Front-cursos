@@ -20,6 +20,8 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 const pages = [
   "Inicio",
+  "actividades",
+  
   ,
   "Cerrar Sesión"];
 const pagesdeslogueado = [
@@ -68,14 +70,16 @@ const DrawerNav = () => {
   const irContacto = () => {
     navigate("/usuario/contacto");
   }
-  const irAyuda = () => {
-    navigate("/");
+  const iaActividades = () => {
+    navigate("/dtc/actividades");
   }
   const nomb = () => {
     navigate("/usuario/datosPers");
   };
   const notif = () => {
-    navigate("/usuario/notificaciones");
+    window.localStorage.removeItem('loggedNoteAppUser')
+    navigate("/dtc/login")
+
   };
 
 
@@ -88,7 +92,7 @@ const DrawerNav = () => {
    
     
      window.localStorage.removeItem('loggedNoteAppUser')
-     navigate("/")
+     navigate("/dtc/login")
 
    } 
 
@@ -101,7 +105,7 @@ const DrawerNav = () => {
         break;
 
       case 1:
-        hanleLogout()
+        iaActividades()
         break;
       case 2:
         hanleLogout()
