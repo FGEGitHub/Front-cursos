@@ -8,11 +8,15 @@ import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import servicioDtc from '../../../services/dtc';
 import InputLabel from '@mui/material/InputLabel';
 import { useParams } from "react-router-dom"
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 
 export default function SelectTextFields(props) {
     let params = useParams()
     let id = params.id
   const [open, setOpen] = React.useState(false);
+  const [cargando, setCargando] = React.useState(false);
   const [file, setFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [form, setForm] = useState({
@@ -54,7 +58,7 @@ export default function SelectTextFields(props) {
 
   const enviar = async (e) => {
     e.preventDefault();
-
+    setCargando(true)
     // Guardar la imagen solo si hay un archivo seleccionado
     if (file) {
       // Guardar el nombre de la imagen en el frontend
@@ -74,8 +78,9 @@ export default function SelectTextFields(props) {
       formData.append('id', form.id);
       formData.append('imagen', file);
       const nov = await servicioDtc.subirlegajo(formData)
+   
 alert(nov)
-
+setCargando(false)
     // Puedes resetear el formulario y cerrar el diálogo si es necesario
     setForm({
       nombre: '',
@@ -165,7 +170,7 @@ props.traer()
 
 
             <>
-              <Button variant="contained" color="primary" onClick={enviar}> Agregar </Button>
+              <Button variant="contained" color="primary" onClick={enviar}> {cargando ? <> <CircularProgress /></>:<>Agregar</>} </Button>
             </>
             <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
           </DialogActions>
