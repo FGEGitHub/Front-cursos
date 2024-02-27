@@ -96,14 +96,14 @@ const traer = async () => {
               <Tab label= '' />
 
          
-                {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
+                {cargado ? <div> 
                 {user.length > 0? <>
                   <Tab label= {`hola  ${user[0].nombre} !`}/>
                   </>:<>
                   <Tab />
 </>}
 
-              </Button> </div>:<div></div>}
+      </div>:<div></div>}
 
 
               {user? <>

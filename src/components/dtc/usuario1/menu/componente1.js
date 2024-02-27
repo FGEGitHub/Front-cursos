@@ -52,7 +52,6 @@ const traer = async () => {
 
           setCurrentDate(formattedDate);
           const historial = await servicioDtc.traertodaslasactividades({fecha:formattedDate})
-          console.log(historial)
           setactividades(historial)
       }
 
@@ -62,7 +61,7 @@ const traer = async () => {
 
 }
   const fechaActual = new Date();
-console.log(fechaActual)
+
   return (<>
    
     <Container component="main" className={classes.container}>
@@ -76,6 +75,7 @@ console.log(fechaActual)
                 try {
                     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                     if (loggedUserJSON) {
+                        const usuario = JSON.parse(loggedUserJSON)
               
               
                         const today = new Date();
@@ -83,7 +83,6 @@ console.log(fechaActual)
               
                         setCurrentDate(formattedDate);
                         const historial = await servicioDtc.traertodaslasactividades({fecha:formattedDate})
-                        console.log(historial)
                         setactividades(historial)
                     }
               

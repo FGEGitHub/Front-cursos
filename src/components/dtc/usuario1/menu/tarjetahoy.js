@@ -24,7 +24,7 @@ const CardInformacionDia = (props) => {
     }}>
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
-          Información del Día
+         Ir al dia de hoy
         </Typography>
         <Typography variant="subtitle1" color="textSecondary">
           {props.fecha.toLocaleDateString('es-ES', {

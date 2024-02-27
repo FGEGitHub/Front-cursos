@@ -2,12 +2,13 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import GroupIcon from '@mui/icons-material/Group';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '../Navbar';
-
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 export default function SimpleBottomNavigation() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -40,12 +41,12 @@ export default function SimpleBottomNavigation() {
           />
           <BottomNavigationAction
             label="Personal"
-            icon={<FavoriteIcon />}
+            icon={<GroupIcon />}
             onClick={() => handleClick(usuariosPath)}
           />
           <BottomNavigationAction
             label="Usuarios"
-            icon={<LocationOnIcon />}
+            icon={<AccessibilityIcon />}
             onClick={() => handleClick(chiquesPath)}
           />
          {/*  <BottomNavigationAction
@@ -58,3 +59,4 @@ export default function SimpleBottomNavigation() {
     </>
   );
 }
+  

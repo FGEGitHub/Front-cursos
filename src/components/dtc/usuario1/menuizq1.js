@@ -49,7 +49,7 @@ export default function MenuIzq2 ({children}) {
       } 
     const menuItems = [
         { 
-          text: 'Menu', 
+          text: 'Actividades', 
           icon: <GradingTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/menu' 
         },
