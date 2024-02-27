@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { Card, CardContent, Typography, Grid,Button } from '@mui/material';
 import { useNavigate, useParams } from "react-router-dom";
 import servicioDtc from '../../../services/dtc'
 import Modificar from './modificar'
@@ -8,6 +8,12 @@ const FichaPersona = ({ datosPersona }) => {
     let params = useParams()
     let id = params.id
     const [chico, setchico] = useState()
+    const [showAllData, setShowAllData] = useState(false);
+
+    // La función para alternar entre "Ver más" y "Ver menos"
+    const toggleShowAllData = () => {
+      setShowAllData(!showAllData);
+    };
     useEffect(() => {
         traer()
 
@@ -31,6 +37,7 @@ const FichaPersona = ({ datosPersona }) => {
         }
 
     }
+
   return (
     <>
     {chico ? <>
@@ -45,18 +52,7 @@ const FichaPersona = ({ datosPersona }) => {
           Información de {chico.apellido} {chico.nombre}
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <Typography color="textSecondary">Primer contacto:</Typography>
-            <Typography>{chico.primer_contacto}</Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography color="textSecondary">Primer ingreso:</Typography>
-            <Typography>{chico.primer_ingreso}</Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography color="textSecondary">Admision:</Typography>
-            <Typography>{chico.admision}</Typography>
-          </Grid>
+         
           <Grid item xs={12} sm={6}>
             <Typography color="textSecondary">DNI:</Typography>
             <Typography>{chico.dni}</Typography>
@@ -89,10 +85,25 @@ const FichaPersona = ({ datosPersona }) => {
             <Typography color="textSecondary">Egreso:</Typography>
             <Typography>{chico.egreso}</Typography>
           </Grid>
-          <Grid item xs={12} sm={6}>
+  
+       {showAllData ?<>
+        <Grid item xs={12} sm={6}>
             <Typography color="textSecondary">Autorizadoa  retirar:</Typography>
             <Typography>{chico.aut_retirar}</Typography>
           </Grid>
+                  <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">Primer contacto:</Typography>
+            <Typography>{chico.primer_contacto}</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">Primer ingreso:</Typography>
+            <Typography>{chico.primer_ingreso}</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">Admision:</Typography>
+            <Typography>{chico.admision}</Typography>
+          </Grid>
+           
           <Grid item xs={12} sm={6}>
             <Typography color="textSecondary">Dato  escolar:</Typography>
             <Typography>{chico.dato_escolar}</Typography>
@@ -109,7 +120,15 @@ const FichaPersona = ({ datosPersona }) => {
             <Typography color="textSecondary">Domicilio:</Typography>
             <Typography>{chico.domicilio}</Typography>
           </Grid>
-          
+          </>:<></>}
+          {chico && (
+                <Fragment>
+                  <Button onClick={toggleShowAllData}>
+                    {showAllData ? 'Ver menos' : 'Ver más'}
+                  </Button>
+                  {/* Agrega más campos adicionales aquí */}
+                </Fragment>
+              )}
           {/* Agrega más campos aquí */}
         </Grid>
       </CardContent>

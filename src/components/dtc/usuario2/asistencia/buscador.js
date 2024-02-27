@@ -38,7 +38,7 @@ const MobileAutocomplete = (props) => {
     <div>
       <Autocomplete
         options={props.chicos}
-        getOptionLabel={(option) => option.nombre +option.apellido }
+        getOptionLabel={(option) => option.id_usuario == null ? option.nombre +" "+option.apellido :option.nombre +" "+option.apellido +"  Presente" }
         renderInput={(params) => (
           <TextField {...params} label="Selecciona una opción" variant="outlined" />
         )}
