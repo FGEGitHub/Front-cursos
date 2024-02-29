@@ -8,6 +8,7 @@ import Login from '../../../../components/dtc/usuario/ficha'
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
 import Modallegajo from '../../../../components/dtc/usuario/listalegajos'
+import Avtvidadchicos from '../../../../components/dtc/usuario1/actividades/actividades1pers'
 import {
 
   makeStyles,
@@ -31,19 +32,26 @@ export default function Paginas() {
     const theme = useTheme();
     const classes = useStyles();
     const [loginVisible, setLoginvisible] = useState(false)
+    const [usuario, setUsuario] = useState({})
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     useEffect(() => {
-      
+      traer()
+       
+      }, [])
+      const traer = async () => {
+
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-        console.log(loggedUserJSON) 
         if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON)
-          console.log(user)
+          console.log(usuario)
+          setUsuario(usuario)
+         console.log(usuario)
           switch (user.nivel) {
             case 20:
              break;
            //   navigate('/')
-           
+           case 21:
+            break;
            
             default:
             
@@ -58,23 +66,27 @@ export default function Paginas() {
               alert('usuario no autorizado')
         }
         setLoginvisible(true)
-      }, [])
+
+      }
 
     return (
       <>
+      {usuario ? <>
+      {usuario.nivel  == 20 ? <>
       {isMatch ? 
      <>
      <div  className={classes.container}> 
      <MenuuCel texto="Usuarios"/>
      <Login/>
      <Modallegajo/>
-
+     <Avtvidadchicos/>
     </div>
      </>:<>
  <Menuizq>
 <Login/>
 <Modallegajo/>
-</Menuizq></>}
+<Avtvidadchicos/>
+</Menuizq></>}</>:<>     <Login/> <Avtvidadchicos/></>}</>:<>54558585  {usuario}</>}
  </>
    
     );

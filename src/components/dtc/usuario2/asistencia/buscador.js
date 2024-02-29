@@ -4,8 +4,9 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { getThemeProps } from '@material-ui/styles';
 import servicioDtc from '../../../../services/dtc'
-
+import { useNavigate } from "react-router-dom";
 const MobileAutocomplete = (props) => {
+  const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState(null);
 
   const handleSelection = (event, value) => {
@@ -33,6 +34,14 @@ const MobileAutocomplete = (props) => {
       props.traer()
     }
   };
+  const ir = async () => {
+    // Lógica para hacer un llamado al backend con el valor seleccionado
+
+    navigate('/dtc/usuario1/usuario/'+selectedValue.id)
+      // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
+      // Ejemplo: axios.post('/api/backend', { selectedValue });
+
+  };
 
   return (
     <div>
@@ -47,6 +56,9 @@ const MobileAutocomplete = (props) => {
 
       <Button variant="contained" color="primary" onClick={handleBackendCall}>
         Poner/Quitar presente
+      </Button>
+      <Button variant="contained" color="primary" onClick={ir}>
+        Ver usuario
       </Button>
     </div>
   );
