@@ -56,10 +56,10 @@ export default function SelectTextFields(props) {
             event.preventDefault();
             const mergedJSON = {
                 ...form,
-                ...{id_usuario:props.id_usuario,fecha:props.fecha}
+                ...{id_usuario:props.id_usuario,fecha:props.fecha,id_tallerista:props.id_tallerista}
               };
               console.log(mergedJSON)
-            const nov = await servicioDtc.nuevaactividad(mergedJSON)
+            const nov = await servicioDtc.nuevaactividadchico(mergedJSON)
               alert(nov)
         } catch (error) {
             console.error(error);
@@ -111,7 +111,7 @@ export default function SelectTextFields(props) {
                         margin="dense"
                         id="name"
                         label="Titulo"
-                        name="nombre"
+                        name="titulo"
                         onChange={handleChange}
                         fullWidth
                         variant="standard"
@@ -150,7 +150,7 @@ export default function SelectTextFields(props) {
                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                         <Typography variant="p" component="div" color="black">
                             <StyledParagraph>
-                                Detalle
+                                Detalle:
                             </StyledParagraph>
                         </Typography>
                     </InputLabel>

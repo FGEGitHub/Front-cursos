@@ -104,7 +104,13 @@ return data
    
    return data   
 }
- 
+const traeractividadeschico= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'traeractividadeschico',datos,config)
+   
+   return data   
+}
+
  const borrarlegajo= async  (datos) => {
 
   const {data } = await axios.post(baseUrl+'borrarlegajo',datos,config)
@@ -133,4 +139,10 @@ const traertodaslasactividades= async  (datos) => {
    return data  
 }
 
-export default {listachiques,nuevochique,traertodaslasactividades,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+const nuevaactividadchico= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'nuevaactividadchico',datos,config)
+   
+   return data  
+}
+export default {listachiques,nuevochique,nuevaactividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

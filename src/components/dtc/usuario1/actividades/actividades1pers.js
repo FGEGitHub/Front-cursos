@@ -3,7 +3,7 @@ import servicioDtc from '../../../../services/dtc'
 import ModaNueva from './nueva'
 import React, { useEffect, useState, Fragment } from "react";
 import Modalver from './modalver'
-import MUIDataTable from "mui-datatables";
+import Acordeon from './acordeon';
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
@@ -46,7 +46,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const TablaNotificaciones = (props) => {
     const theme = useTheme();
-    const [chicos, setchicos] = useState([''])
+    const [actividades, setactividades] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -78,8 +78,8 @@ const TablaNotificaciones = (props) => {
                 const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
                 setCurrentDate(formattedDate);
-                const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
-                setchicos(historial)
+                const historial = await servicioDtc.traeractividadeschico({id_usuario:id})
+                setactividades(historial)
             }
 
         } catch (error) {
@@ -95,9 +95,9 @@ const TablaNotificaciones = (props) => {
              
                     < Tooltip title="Ver">
                     <Modalver
-                    id={ chicos[dataIndex]['id']}
-                    detalle={ chicos[dataIndex]['detalle']}
-                    titulo={ chicos[dataIndex]['titulo']}
+                    id={ actividades[dataIndex]['id']}
+                    detalle={ actividades[dataIndex]['detalle']}
+                    titulo={ actividades[dataIndex]['titulo']}
                     traer={async () => {
                         try {
                             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -110,8 +110,8 @@ const TablaNotificaciones = (props) => {
                                 const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
                 
                                 setCurrentDate(formattedDate);
-                                const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
-                                setchicos(historial)
+                                const historial = await servicioDtc.traeractividadeschico({id_usuario:id})
+                                setactividades(historial)
                             }
                 
                         } catch (error) {
@@ -168,13 +168,14 @@ const TablaNotificaciones = (props) => {
     return (
         <div>
             <h2>Lista de actividades</h2>
-            {chicos ? <>
+            {actividades ? <>
                 <div>
 
 
                     <ModaNueva
-                    id_usuario={usuario.id}
+                    id_usuario={id}
                     fecha={currentDate}
+                    id_tallerista={usuario.id}
                         traer={async () => {
                             try {
                                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -188,7 +189,7 @@ const TablaNotificaciones = (props) => {
                     
                                     setCurrentDate(formattedDate);
                                     const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
-                                    setchicos(historial)
+                                    setactividades(historial)
                                 }
                     
                             } catch (error) {
@@ -199,14 +200,14 @@ const TablaNotificaciones = (props) => {
 
                         }
                     />
-                    {chicos.length > 0 ? <>
+                    {actividades.length > 0 ? <>
 
 {/* 
                         {isMatch ?
                             <>
 
                                 <TableContainer>
-                                    {!chicos ? <Skeleton /> : <>
+                                    {!actividades ? <Skeleton /> : <>
                                         <h1>Lista de actividades </h1>
                                         <Table >
                                             <TableHead>
@@ -222,7 +223,7 @@ const TablaNotificaciones = (props) => {
 
 
 
-                                                {chicos.map((row) => (
+                                                {actividades.map((row) => (
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.fecha}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.titulo} </b> </StyledTableCell>
@@ -243,7 +244,7 @@ const TablaNotificaciones = (props) => {
                 
                                 setCurrentDate(formattedDate);
                                 const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
-                                setchicos(historial)
+                                setactividades(historial)
                             }
                 
                         } catch (error) {
@@ -270,8 +271,8 @@ const TablaNotificaciones = (props) => {
                             </> : <><>
                                 <MUIDataTable
 
-                                    title={"Lista de chicos"}
-                                    data={chicos}
+                                    title={"Lista de actividades"}
+                                    data={actividades}
                                     columns={columns}
                                     actions={[
                                         {
@@ -287,7 +288,10 @@ const TablaNotificaciones = (props) => {
 
                             </></>} */}
 
-                            
+{actividades ? <> <Acordeon
+          actividades={actividades}
+    
+    /> </>:<>cargando</>}
 
                     </> : <> <h2>El dia de hoy no hay actividades aun</h2></>}
 
