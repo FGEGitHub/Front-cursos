@@ -2,9 +2,7 @@ import servicioDtc from '../../../services/dtc'
 import ModalVer from './Modallegajo'
 import ModaNueva from './Modallegajo'
 import React, { useEffect, useState, Fragment } from "react";
-import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -12,7 +10,6 @@ import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -50,7 +47,7 @@ const TablaNotificaciones = (props) => {
     const theme = useTheme();
     const [chicos, setchicos] = useState([''])
     const [usuario, setUsuario] = useState([''])
-    const navigate = useNavigate();
+   // const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
 

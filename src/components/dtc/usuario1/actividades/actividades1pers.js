@@ -201,7 +201,7 @@ const TablaNotificaciones = (props) => {
                     />
                     {chicos.length > 0 ? <>
 
-
+{/* 
                         {isMatch ?
                             <>
 
@@ -285,7 +285,9 @@ const TablaNotificaciones = (props) => {
 
                                 />
 
-                            </></>}
+                            </></>} */}
+
+                            
 
                     </> : <> <h2>El dia de hoy no hay actividades aun</h2></>}
 
