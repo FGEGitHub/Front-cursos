@@ -13,6 +13,7 @@ import Skeleton from '@mui/material/Skeleton';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import TableRow from '@mui/material/TableRow';
 import {
 
@@ -81,6 +82,7 @@ const TablaNotificaciones = (props) => {
                 setUsuario(usuario)
 
                 const novedades_aux = await servicioDtc.listadelegajos(id)
+                console.log(novedades_aux)
                 setchicos(novedades_aux)
             }
 
@@ -95,12 +97,7 @@ const TablaNotificaciones = (props) => {
             <>
 
 
-                    < Tooltip title="Ver">
-                        <Ver 
-                        imagenBase64 = {chicos[dataIndex]['imagenBase64']}
-                        descripcion = {chicos[dataIndex]['descripcion']}/>
-                    </Tooltip>
-                    < Tooltip title="Borrar">
+                   
                         <Borrarlegajo 
                         id = {chicos[dataIndex]['id']}
                         traer={ async () => {
@@ -121,7 +118,13 @@ const TablaNotificaciones = (props) => {
                     
                         }}
                        />
+                  
+                    < Tooltip title="Descargar">
+                        <CloudDownloadIcon 
+                         onClick={() => handleDownload(dataIndex)}
+                        />
                     </Tooltip>
+                  
 
 
 
@@ -130,8 +133,22 @@ const TablaNotificaciones = (props) => {
         );
     }
 
-
-
+  
+  
+        const handleDownload = (dataIndex) => {
+          // Lógica para descargar el archivo
+          fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
+            .then(response => response.blob())
+            .then(blob => {
+              const url = window.URL.createObjectURL(new Blob([blob]));
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'filename.pdf';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            });
+        }
 
     // definimos las columnas
     const columns = [

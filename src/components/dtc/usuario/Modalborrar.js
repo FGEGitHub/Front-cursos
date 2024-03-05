@@ -9,8 +9,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from "react";
 import servicioDtc from '../../../services/dtc'
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Paper } from '@mui/material';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import Box from '@mui/material/Box';
 
@@ -55,10 +56,10 @@ export default function Clasenueva(props) {
     return (
         <div>
 
-
-            <Button variant="contained"  color="error" onClick={handleClickOpen} style={{ width: '25%' }} >
-            Borrar
-            </Button>
+< Tooltip title="Borrar">
+            <DeleteIcon variant="contained"  color="error" onClick={handleClickOpen}  />
+        
+            </Tooltip>
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Borrar legajo</DialogTitle>
