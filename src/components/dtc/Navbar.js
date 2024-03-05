@@ -77,7 +77,7 @@ const traer = async () => {
   }
   return (
     <React.Fragment>
-      <AppBar sx={{ background: "#Primary" }}>
+      <AppBar sx={{ background: "#263238" }}>
         <Toolbar>
            <img style={islogo} src={logo} alt="logo" />  
           {isMatch ? (
@@ -100,7 +100,7 @@ const traer = async () => {
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
                 {user.length > 0? <>
                  
-                  <Tab label= {`hola  ${user[0].nombre} !`}/>
+                  <Tab sx={{fontSize:" 17px "}}label= {`hola  ${user[0].nombre} !`}/>
 
                   </>:<>
                   <Tab />
@@ -111,14 +111,14 @@ const traer = async () => {
 
               {user? <>
                 <Button onClick={handleClick} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`Actividades`}/>
+                  <Tab sx={{fontSize:" 17px "}}label= {`Actividades`}/>
               </Button>
               <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`Cerrar sesion`}/>
+                  <Tab sx={{fontSize:" 17px "}}label= {`Cerrar sesion`}/>
               </Button>
               </>:<>
               <Button sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`Iniciar sesion`}/>
+                  <Tab sx={{fontSize:" 17px "}}label= {`Iniciar sesion`}/>
               </Button></>}
               </Tabs>
              

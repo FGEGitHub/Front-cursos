@@ -62,7 +62,7 @@ const DrawerNav = () => {
     navigate("/encargados/cursos");
   };
   const iraMenu = () => {
-    navigate("/encargados/cursos");
+    navigate("/dtc/usuario2/asistencia");
   };
   const irNosotros = () => {
     navigate("/usuario/nosotros");

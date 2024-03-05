@@ -1,0 +1,8 @@
+.fondo-imagen {
+    background-image: url("../../Assets/fondo.avif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 85vw; /* Ancho del viewport */
+    height: 100vh; /* Altura del viewport */
+    margin: 0; /* Elimina el margen predeterminado del body */
+  }

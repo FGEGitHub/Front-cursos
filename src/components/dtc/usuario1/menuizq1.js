@@ -11,6 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
 import logo from "../../../Assets/dtcletra.png"
+import estilos from  "../estilos.css"
 import WcTwoToneIcon from '@mui/icons-material/WcTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
@@ -66,13 +67,13 @@ export default function MenuIzq2 ({children}) {
   
       ];
       const islogo = {
-        width: "100%",                  
+        width: "80%",                  
         };
     return(
       <>
         
     
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{   backgroundColor:"#37474f", display: 'flex' }}>
       <CssBaseline />
       
     
@@ -82,11 +83,13 @@ export default function MenuIzq2 ({children}) {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
+            backgroundColor:"#263238",
             boxSizing: 'border-box',
           },
         }}
         variant="permanent"
-        color="orange"
+
+        color="#37474f"
         anchor="left"
       >asdsadsadasdasdsad
       
@@ -97,7 +100,7 @@ export default function MenuIzq2 ({children}) {
        
         <Toolbar />
         <Divider />
-        <List>
+        <List     sx={{  color:"#fafafa"}}>
         {menuItems.map((item) => (
             <ListItem 
               button 
@@ -124,7 +127,10 @@ export default function MenuIzq2 ({children}) {
       cantidadInusual={cantidadInusual} />
         <AlertaAprobaciones
       cantidad={cantidad} /> */}
+   
+      <div className="fondo-imagen">
    { children}
+   </div>
       </Box>
     </Box>
     

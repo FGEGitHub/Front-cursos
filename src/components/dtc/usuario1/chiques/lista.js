@@ -24,6 +24,7 @@ import {
     useTheme,
     Button
 } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -65,7 +66,17 @@ const TablaNotificaciones = (props) => {
         selectableRows: false, // Desactivar la selección de filas
         stickyHeader: true,
     };
-
+    const theme2 = createMuiTheme({
+        overrides: {
+          MUIDataTable: {
+            root: {
+             // backgroundColor: 'lightblue', // Cambia el color de fondo
+              // O puedes usar backgroundImage para establecer una imagen de fondo
+               backgroundImage: 'url(""../../../../Assets/fondo.avif")',
+            },
+          },
+        },
+      });
     const traer = async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -228,6 +239,7 @@ Ver                        </Button>
 
                                 </TableContainer>
                             </> : <><>
+                        <MuiThemeProvider theme={theme2}>
                                 <MUIDataTable
 
                                     title={"Lista de chicos"}
@@ -243,7 +255,7 @@ Ver                        </Button>
                                     options={options}
 
 
-                                />
+                                /></MuiThemeProvider>
 
                             </></>}
 
