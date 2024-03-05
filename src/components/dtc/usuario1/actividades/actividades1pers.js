@@ -188,7 +188,7 @@ const TablaNotificaciones = (props) => {
                                     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
                     
                                     setCurrentDate(formattedDate);
-                                    const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
+                                    const historial = await servicioDtc.traeractividadeschico({id_usuario:id})
                                     setactividades(historial)
                                 }
                     
@@ -196,9 +196,7 @@ const TablaNotificaciones = (props) => {
                     
                             }
                     
-                        }
-
-                        }
+                        }}
                     />
                     {actividades.length > 0 ? <>
 
@@ -290,6 +288,27 @@ const TablaNotificaciones = (props) => {
 
 {actividades ? <> <Acordeon
           actividades={actividades}
+          traer={async () => {
+            try {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                if (loggedUserJSON) {
+                    const usuario = JSON.parse(loggedUserJSON)
+    
+                    setUsuario(usuario)
+    
+                    const today = new Date();
+                    const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+    
+                    setCurrentDate(formattedDate);
+                    const historial = await servicioDtc.traeractividadeschico({id_usuario:id})
+                    setactividades(historial)
+                }
+    
+            } catch (error) {
+    
+            }
+    
+        }}
     
     /> </>:<>cargando</>}
 
