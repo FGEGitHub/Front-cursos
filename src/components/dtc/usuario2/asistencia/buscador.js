@@ -45,7 +45,7 @@ const MobileAutocomplete = (props) => {
 
   return (
     <div>
-      <Autocomplete
+      <Autocomplete 
         options={props.chicos}
         getOptionLabel={(option) => option.id_usuario == null ? option.nombre +" "+option.apellido :option.nombre +" "+option.apellido +"  Presente" }
         renderInput={(params) => (
@@ -54,12 +54,16 @@ const MobileAutocomplete = (props) => {
         onChange={handleSelection}
       />
 
-      <Button variant="contained" color="primary" onClick={handleBackendCall}>
+      <button variant="outlined" color="primary" onClick={handleBackendCall}>
         Poner/Quitar presente
-      </Button>
-      <Button variant="contained" color="primary" onClick={ir}>
+      </button>
+      {selectedValue ? <>  <button variant="outlined" color="primary" onClick={ir}>
         Ver usuario
-      </Button>
+      </button></>:<>
+      <button variant="outlined" color="primary" onClick={ir} disabled>
+        Ver usuario
+      </button></>}
+    
     </div>
   );
 };

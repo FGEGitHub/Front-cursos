@@ -168,7 +168,10 @@ export default function SelectTextFields(props) {
 
 
                         <>
+                        {form.detalle && form.titulo ? <>
                             <> <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></>
+                            </>:<>                            <> <Button variant="contained" color="primary" onClick={handleDeterminar} disabled> crear </Button></>
+</>}
                         </>
                         <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
                     </DialogActions>

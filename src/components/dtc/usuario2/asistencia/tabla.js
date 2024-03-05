@@ -59,7 +59,7 @@ const MobileFriendlyTable = () => {
   return (
     <div>    
         {datos ? <>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="p" gutterBottom>
         Fecha: {currentDate}
       </Typography>
       { usuario ?  <>
@@ -80,7 +80,7 @@ const MobileFriendlyTable = () => {
       /></>:<></>}
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
-                                        <h1>Lista de presentes , Totales: {datos[0].length}</h1>
+                                        <h4>Lista de presentes ({datos[0].length}) </h4>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
