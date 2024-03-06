@@ -3,17 +3,10 @@ import { TextField, Button, Input, Card, CardContent, CardMedia } from '@mui/mat
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-import NativeSelect from '@mui/material/NativeSelect';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import { styled } from '@mui/material/styles';
-
-import CardHeader from '@mui/material/CardHeader';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
+import Tooltip from '@material-ui/core/Tooltip';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
@@ -87,9 +80,9 @@ export default function SelectTextFields(props) {
   return (
 
 <>
-
-<Button onClick={handleClickOpen} variant='contained'style={{ width: '25%' }}> Ver</Button>
-
+<  Tooltip title="ver"> 
+<VisibilityIcon onClick={handleClickOpen} variant='contained'/>
+</Tooltip>
 
 
 
@@ -107,7 +100,7 @@ export default function SelectTextFields(props) {
         component="img"
         height="194"
         src={`data:image/jpeg;base64,${props.imagenBase64}`}
-        alt="Paella dish"
+        alt="La imagen es PDF, descargar pata ver"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">

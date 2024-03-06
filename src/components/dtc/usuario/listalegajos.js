@@ -155,6 +155,23 @@ const TablaNotificaciones = (props) => {
             setCargando(false)
         }
 
+        const handleDownloadd = async (dataIndex) => {
+            // Lógica para descargar el archivo
+            setCargando(true)
+           await fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ dataIndex)
+           //await fetch('http://localhost:4000/dtc/descargar/'+ dataIndex)
+              .then(response => response.blob())
+              .then(blob => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'filename.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+              });
+              setCargando(false)
+          }
     // definimos las columnas
     const columns = [
         {
@@ -244,12 +261,37 @@ const TablaNotificaciones = (props) => {
                                                         <StyledTableCell component="th" scope="row"> <b>{row.descripcion} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row">    <Ver 
                         imagenBase64 = {row.imagenBase64}
-                        descripcion = {row.descripcion}/></StyledTableCell>
+                        descripcion = {row.descripcion}/>
 
-<StyledTableCell component="th" scope="row">    
-<Borrarlegajo 
-                        imagenBase64 = {row.id}
-                      /></StyledTableCell>
+                         <Borrarlegajo 
+                        id = {row.id}
+                        traer={ async () => {
+                            try {
+                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                if (loggedUserJSON) {
+                                    const usuario = JSON.parse(loggedUserJSON)
+                    
+                                    setUsuario(usuario)
+                    
+                                    const novedades_aux = await servicioDtc.listadelegajos(id)
+                                    setchicos(novedades_aux)
+                                }
+                    
+                            } catch (error) {
+                    
+                            }
+                    
+                        }}
+                       />
+                  {!cargando ? <>
+                    < Tooltip title="Descargar">
+                        <CloudDownloadIcon 
+                         onClick={() => handleDownloadd(row.id)}
+                        />
+                    </Tooltip>
+                    </>:<>Descarga en proceso</> }
+
+</StyledTableCell>
 
 
 

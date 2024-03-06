@@ -6,16 +6,12 @@ import Modalver from './modalver'
 import Acordeon from './acordeon';
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import TableHead from '@mui/material/TableHead';
+import Typography from '@mui/material/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-import Skeleton from '@mui/material/Skeleton';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
+import { Paper } from '@mui/material';
 import TableRow from '@mui/material/TableRow';
 import {
 
@@ -167,7 +163,17 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-            <h2>Lista de actividades</h2>
+                           <Paper
+        sx={{
+          cursor: 'pointer',
+          background: '#fafafa',
+          color: '#e0e0b2',
+          
+          border: '1px dashed #ccc',
+          '&:hover': { border: '1px solid #ccc' },
+        }}
+      > <Typography variant="body1" style={{ color: 'black' }}>
+            <h2>Lista de actividades</h2></Typography>
             {actividades ? <>
                 <div>
 
@@ -317,7 +323,7 @@ const TablaNotificaciones = (props) => {
 
 
                 </div>
-            </> : <></>}
+            </> : <></>}</Paper>
         </div>
     )
 }
