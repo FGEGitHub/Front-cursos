@@ -96,10 +96,10 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-
-<Ver 
+<button style={{ width: '80px' }} onClick={() => window.open('/dtc/verfoto/'+chicos[dataIndex]['id'], '_blank')}>Ver online</button>
+{/* <Ver 
                         imagenBase64 = {chicos[dataIndex]['imagenBase64']}
-                        descripcion = {chicos[dataIndex]['descripcion']}/>
+                        descripcion = {chicos[dataIndex]['descripcion']}/> */}
                    
                         <Borrarlegajo 
                         id = {chicos[dataIndex]['id']}
@@ -123,9 +123,8 @@ const TablaNotificaciones = (props) => {
                        />
                   {!cargando ? <>
                     < Tooltip title="Descargar">
-                        <CloudDownloadIcon 
-                         onClick={() => handleDownload(dataIndex)}
-                        />
+                     <button style={{ width: '80px' }} onClick={() => handleDownload(dataIndex)}>Descargar</button>   
+                     
                     </Tooltip>
                     </>:<>Descarga en proceso</> }
 
@@ -161,7 +160,7 @@ const TablaNotificaciones = (props) => {
             // Lógica para descargar el archivo
             setCargando(true)
          await fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ dataIndex)
-          // await fetch('http://localhost:4000/dtc/descargar/'+ dataIndex)
+        //   await fetch('http://localhost:4000/dtc/descargar/'+ dataIndex)
               .then(response => response.blob())
               .then(blob => {
                 const url = window.URL.createObjectURL(new Blob([blob]));
@@ -248,8 +247,7 @@ const TablaNotificaciones = (props) => {
                                                 <TableRow>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Descripcion</b></TableCell>
-                                                   <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
-                                                   <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Borrar</b></TableCell>
+                                                   <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Opciones</b></TableCell>
 
                                                 </TableRow>
                                             </TableHead>
@@ -261,9 +259,7 @@ const TablaNotificaciones = (props) => {
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row"> {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.descripcion} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">    <Ver 
-                        imagenBase64 = {row.imagenBase64}
-                        descripcion = {row.descripcion}/>
+                                                        <StyledTableCell component="th" scope="row">   <button style={{ width: '80px' }} onClick={() => window.open('/dtc/verfoto/'+row.id, '_blank')}>Ver online</button>
 
                          <Borrarlegajo 
                         id = {row.id}
@@ -285,14 +281,11 @@ const TablaNotificaciones = (props) => {
                     
                         }}
                        />
-                       fff
-
-                
+                   
                   {!cargando ? <>
                     < Tooltip title="Descargar">
-                        <CloudDownloadIcon 
-                         onClick={() => handleDownloadd(row.id)}
-                        />
+                   
+                         <button style={{ width: '80px' }} onClick={() => handleDownloadd(row.id)}>Descargar</button>  
                     </Tooltip>
                     </>:<>Descarga en proceso</> }
 

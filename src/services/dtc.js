@@ -60,6 +60,13 @@ return data
 return data
        
   }
+  const traerfoto = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerfoto/'+id, config)
+return data
+       
+  }
   
   const traerpresentes = async (id) => {
   
@@ -159,4 +166,4 @@ const nuevaactividadchico= async  (datos) => {
    
    return data  
 }
-export default {listachiques,nuevochique,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {listachiques,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

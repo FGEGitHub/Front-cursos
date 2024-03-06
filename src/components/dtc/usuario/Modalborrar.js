@@ -57,7 +57,7 @@ export default function Clasenueva(props) {
         <div>
 
 < Tooltip title="Borrar">
-            <DeleteIcon variant="contained"  color="error" onClick={handleClickOpen}  />
+           <button  style={{ width: '80px' }} onClick={handleClickOpen}>Borrar</button> 
         
             </Tooltip>
             <Dialog open={open} onClose={handleClose}>

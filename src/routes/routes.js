@@ -127,7 +127,7 @@ import Dtcusuario from '../pages/dtc/nivel1/usuario';
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
 import DTCactividadescarga from '../pages/dtc/cargaactividades';
-
+import DTCverfoto from '../pages/dtc/verimagen';
 import DTCpresentes from '../pages/dtc/libre/asistencia';
 
 
@@ -259,6 +259,8 @@ const Rutas = [
 		{ path: '/dtc/usuario1/usuario/:id', element: <Dtcusuario/> },
 
 		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
+		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },
+		
 		
 		{ path: '/dtc/actividades', element: <DTCactividadescarga/> },
 		{ path: '/dtc/presentes', element: <DTCpresentes/> },
