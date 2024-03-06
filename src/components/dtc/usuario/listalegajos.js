@@ -1,5 +1,5 @@
 import servicioDtc from '../../../services/dtc'
-import ModalVer from './Modallegajo'
+
 import ModaNueva from './Modallegajo'
 import React, { useEffect, useState, Fragment } from "react";
 import MUIDataTable from "mui-datatables";
@@ -283,6 +283,9 @@ const TablaNotificaciones = (props) => {
                     
                         }}
                        />
+                       fff
+
+                
                   {!cargando ? <>
                     < Tooltip title="Descargar">
                         <CloudDownloadIcon 

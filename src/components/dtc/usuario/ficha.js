@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Grid,Button } from '@mui/material';
 import { useNavigate, useParams } from "react-router-dom";
 import servicioDtc from '../../../services/dtc'
 import Modificar from './modificar'
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import Modalperfil from './modaldeperfil'
 import Avatar from "@mui/material/Avatar";
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = ({ datosPersona }) => {
@@ -53,6 +53,9 @@ const FichaPersona = ({ datosPersona }) => {
              <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
                 <Avatar sx={{ width: 170, height: 140 }}>Foto </Avatar>
               </Grid> 
+              <Modalperfil 
+              id ={chico.id}
+              traer={5}/>
       <CardContent>
         <Typography variant="h5" component="div">
           Información de {chico.apellido} {chico.nombre}

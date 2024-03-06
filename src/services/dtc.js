@@ -82,6 +82,12 @@ return data
      
     return data  
  } 
+ const subirfotoperfil= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'subirfotoperfil',datos,config)
+   
+  return data  
+} 
  
   const nuevochique= async  (datos) => {
     console.log(datos)
@@ -153,4 +159,4 @@ const nuevaactividadchico= async  (datos) => {
    
    return data  
 }
-export default {listachiques,nuevochique,nuevaactividadchico,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {listachiques,nuevochique,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
