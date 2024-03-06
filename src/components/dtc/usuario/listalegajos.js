@@ -141,7 +141,9 @@ const TablaNotificaciones = (props) => {
         const handleDownload = async (dataIndex) => {
           // Lógica para descargar el archivo
           setCargando(true)
-         await fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
+       await fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
+       //  await fetch('http://localhost:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
+
             .then(response => response.blob())
             .then(blob => {
               const url = window.URL.createObjectURL(new Blob([blob]));
@@ -158,8 +160,8 @@ const TablaNotificaciones = (props) => {
         const handleDownloadd = async (dataIndex) => {
             // Lógica para descargar el archivo
             setCargando(true)
-           await fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ dataIndex)
-           //await fetch('http://localhost:4000/dtc/descargar/'+ dataIndex)
+         await fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ dataIndex)
+          // await fetch('http://localhost:4000/dtc/descargar/'+ dataIndex)
               .then(response => response.blob())
               .then(blob => {
                 const url = window.URL.createObjectURL(new Blob([blob]));

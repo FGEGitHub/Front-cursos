@@ -139,8 +139,9 @@ const Rutas = [
 	
 	/*{	path: '/',	element: <NotFound />
 		}, */
-		{ path: '/', element: <Login /> },
-		{ path: '/login', element: <Login /> },
+		{ path: '/', element: <Logindtc /> },
+		{ path: '/loginn', element: <Login /> },
+		{ path: '/login', element: <Logindtc /> },
 		{ path: '/deslogin', element: <Deslogin /> },
 		
 	

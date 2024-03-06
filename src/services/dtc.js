@@ -118,7 +118,7 @@ const traeractividadeschico= async  (datos) => {
 }
 
  const borrarlegajo= async  (datos) => {
-
+console.log(datos)
   const {data } = await axios.post(baseUrl+'borrarlegajo',datos,config)
    
    return data  
