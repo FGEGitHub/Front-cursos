@@ -101,7 +101,7 @@ props.traer()
 <>
 
 
-<Button onClick={handleClickOpen} >Agregar legajo</Button>
+<Button onClick={handleClickOpen} variant='containded' >Agregar legajo</Button>
 
 
 
