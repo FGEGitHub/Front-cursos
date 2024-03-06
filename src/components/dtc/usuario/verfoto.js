@@ -48,8 +48,8 @@ const TablaNotificaciones = (props) => {
     const theme = useTheme();
     const [foto, setfoto] = useState()
     const [usuario, setUsuario] = useState([''])
-    const [cargando, setCargando] = useState(false)
-   // const navigate = useNavigate();
+    const [formato, setFormato] = useState()
+    // const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
 
@@ -61,7 +61,7 @@ const TablaNotificaciones = (props) => {
 
 
     }, [])
-  
+
     const traer = async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -71,8 +71,18 @@ const TablaNotificaciones = (props) => {
                 setUsuario(usuario)
 
                 const novedades_aux = await servicioDtc.traerfoto(id)
-                console.log(novedades_aux)
-                setfoto(novedades_aux)
+                console.log(typeof(novedades_aux))
+
+               
+                if (Array.isArray(novedades_aux) ) {
+                    setfoto(novedades_aux[0])
+                    setFormato("otro")
+                  
+                } else {
+                    const blob = new Blob([novedades_aux[0]], { type: 'application/pdf' });
+                    const url = URL.createObjectURL(blob);
+                    setfoto(url);
+                }
             }
 
         } catch (error) {
@@ -81,15 +91,22 @@ const TablaNotificaciones = (props) => {
 
     }
 
-   
+
 
     // renderiza la data table
     return (
         <div>
-          {foto ? <>
-          <img  src={`data:image/jpeg;base64,${foto}`}/>
-          
-          </>:<></>}
+            {foto ? <>
+                {formato ? <>
+                    {formato === "otro" ? <>
+                   
+                    <img src={`data:image/jpeg;base64,${foto}`} width="600" height="400"/>
+                        
+
+                    </> : <> </>}</> : <>Archivos PDF descargar para ver {foto && <iframe title="PDF Viewer" src={foto} width="600" height="400" />}</>}
+
+
+            </> : <></>}
         </div>
     )
 }
