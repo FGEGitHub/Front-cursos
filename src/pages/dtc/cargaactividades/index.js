@@ -2,7 +2,7 @@
 
 
 
-import Asis from '../../../components/dtc/usuario1/actividades/actividades1pers'
+import Asis from '../../../components/dtc/usuario1/actividadestalleristas/actividadestallerista'
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../components/dtc/usuario1/usuarios/todos'
 import React, { useEffect, useState } from "react";

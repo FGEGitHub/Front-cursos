@@ -48,6 +48,7 @@ const TablaNotificaciones = (props) => {
     const theme = useTheme();
     const [chicos, setchicos] = useState([''])
     const [usuario, setUsuario] = useState([''])
+    const [cargando, setCargando] = useState(false)
    // const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -118,13 +119,13 @@ const TablaNotificaciones = (props) => {
                     
                         }}
                        />
-                  
+                  {!cargando ? <>
                     < Tooltip title="Descargar">
                         <CloudDownloadIcon 
                          onClick={() => handleDownload(dataIndex)}
                         />
                     </Tooltip>
-                  
+                    </>:<>Descarga en proceso</> }
 
 
 
@@ -135,9 +136,10 @@ const TablaNotificaciones = (props) => {
 
   
   
-        const handleDownload = (dataIndex) => {
+        const handleDownload = async (dataIndex) => {
           // Lógica para descargar el archivo
-          fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
+          setCargando(true)
+         await fetch('http://localhost:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
             .then(response => response.blob())
             .then(blob => {
               const url = window.URL.createObjectURL(new Blob([blob]));
@@ -148,6 +150,7 @@ const TablaNotificaciones = (props) => {
               a.click();
               document.body.removeChild(a);
             });
+            setCargando(false)
         }
 
     // definimos las columnas

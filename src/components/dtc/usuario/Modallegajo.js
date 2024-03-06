@@ -137,6 +137,7 @@ props.traer()
           >  <option value={1}>Seleccionar</option>
             <option value={"DNI"}>DNI</option>
             <option value={"DNI Referente"}>DNI Referente</option>
+            <option value={"Autorizacion imagen"}>Autorizacion imagen</option>
             <option value={"Otros"}>Otros</option>
        
 
