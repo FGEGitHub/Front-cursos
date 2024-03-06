@@ -81,16 +81,7 @@ export default function SelectTextFields(props) {
    
 alert(nov)
 setCargando(false)
-    // Puedes resetear el formulario y cerrar el diálogo si es necesario
-    setForm({
-      nombre: '',
-      categoria1: '',
-      descripcion: '',
-      precio: '',
-      stock: '',
-    });
-    setFile(null);
-    setPreviewImage(null);
+
 props.traer()
     setOpen(false);
   }

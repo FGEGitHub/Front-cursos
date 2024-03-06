@@ -12,7 +12,7 @@ const FichaPersona = ({ datosPersona }) => {
     const [chico, setchico] = useState()
     const [nivel, setNivel] = useState()
     const [showAllData, setShowAllData] = useState(false);
-
+    const [foto, setfoto] = useState()
     // La función para alternar entre "Ver más" y "Ver menos"
     const toggleShowAllData = () => {
       setShowAllData(!showAllData);
@@ -32,6 +32,7 @@ const FichaPersona = ({ datosPersona }) => {
 
 
                 const novedades_aux = await servicioDtc.datosdechique(id)
+                setfoto(novedades_aux[1])
                 setchico(novedades_aux[0][0])
             }
 
@@ -51,11 +52,27 @@ const FichaPersona = ({ datosPersona }) => {
           '&:hover': { border: '1px solid #ccc' },
         }}>
              <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
-                <Avatar sx={{ width: 170, height: 140 }}>Foto </Avatar>
+                <Avatar sx={{ width: 170, height: 140 }}>{foto?<> <img src={`data:image/jpeg;base64,${foto}`} width="170" height="140"/></>:<>Subir foto</>} </Avatar>
               </Grid> 
               <Modalperfil 
               id ={chico.id}
-              traer={5}/>
+              traer={ async () => {
+                try {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                    if (loggedUserJSON) {
+                        const usuario = JSON.parse(loggedUserJSON)
+        
+        
+                        const novedades_aux = await servicioDtc.datosdechique(id)
+                        setfoto(novedades_aux[1])
+                        setchico(novedades_aux[0][0])
+                    }
+        
+                } catch (error) {
+        
+                }
+        
+            }}/>
       <CardContent>
         <Typography variant="h5" component="div">
           Información de {chico.apellido} {chico.nombre}
