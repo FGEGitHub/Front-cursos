@@ -33,7 +33,7 @@ export default function Clasenueva(props) {
         try {
 
          const respuesta=  await servicioDtc.borraractividad({id:props.id})
-         alert(respuesta)
+      
 
 
         } catch (error) {

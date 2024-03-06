@@ -187,7 +187,7 @@ const TablaNotificaciones = (props) => {
                                     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
                     
                                     setCurrentDate(formattedDate);
-                                    const historial = await servicioDtc.traeractividades({id_usuario:id})
+                                    const historial = await servicioDtc.traeractividades({id_usuario:usuario.id})
                                     setactividades(historial)
                                 }
                     
@@ -299,7 +299,8 @@ const TablaNotificaciones = (props) => {
                     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
     
                     setCurrentDate(formattedDate);
-                    const historial = await servicioDtc.traeractividades({id_usuario:id})
+                 
+                    const historial = await servicioDtc.traeractividades({id_usuario:usuario.id})
                     setactividades(historial)
                 }
     

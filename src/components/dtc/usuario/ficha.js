@@ -8,6 +8,7 @@ const FichaPersona = ({ datosPersona }) => {
     let params = useParams()
     let id = params.id
     const [chico, setchico] = useState()
+    const [nivel, setNivel] = useState()
     const [showAllData, setShowAllData] = useState(false);
 
     // La función para alternar entre "Ver más" y "Ver menos"

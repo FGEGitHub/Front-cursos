@@ -97,7 +97,9 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-
+<Ver 
+                        imagenBase64 = {chicos[dataIndex]['imagenBase64']}
+                        descripcion = {chicos[dataIndex]['descripcion']}/>
                    
                         <Borrarlegajo 
                         id = {chicos[dataIndex]['id']}

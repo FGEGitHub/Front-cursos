@@ -127,7 +127,7 @@ const nuevaactividad= async  (datos) => {
 }
 
 const borraractividad= async  (datos) => {
-
+console.log(datos)
   const {data } = await axios.post(baseUrl+'borraractividad',datos,config)
    
    return data  
