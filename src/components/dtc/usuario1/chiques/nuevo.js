@@ -80,7 +80,24 @@ export default function SelectTextFields(props) {
 
 
     }
-
+   setForm({ fecha_nacimiento:"Sin determinar",
+    observaciones:"Sin determinar",
+    primer_contacto:"Sin determinar",
+    primer_ingreso:"Sin determinar",
+    admision:"Sin determinar",
+    
+    dni:"Sin determinar",
+    domicilio:"Sin determinar",
+    telefono:"Sin determinar",
+    autorizacion_imagen:"Sin determinar",
+    fotoc_dni:"Sin determinar",
+    fotoc_responsable:"Sin determinar",
+    tel_responsable:"Sin determinar",
+    visita_social:"Sin determinar",
+    egreso:"Sin determinar",
+    aut_retirar:"Sin determinar",
+    dato_escolar:"Sin determinar",
+    hora_merienda:"Sin determinar"})
     props.traer()
 
     setOpen(false);
