@@ -96,7 +96,9 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-<button style={{ width: '80px' }} onClick={() => window.open('/dtc/verfoto/'+chicos[dataIndex]['id'], '_blank')}>Ver online</button>
+<button style={{ width: '80px' }} onClick={() => window.open('/dtc/verfoto/'+chicos[dataIndex]['id'], '_blank')}>Ver imagen</button>
+
+<button style={{ width: '80px' }} onClick={() => window.open('https://esme.cuquicalvano.com:4000/dtc/traerfoto/'+chicos[dataIndex]['id'], '_blank')}>Ver PDF</button>
 {/* <Ver 
                         imagenBase64 = {chicos[dataIndex]['imagenBase64']}
                         descripcion = {chicos[dataIndex]['descripcion']}/> */}
@@ -141,7 +143,7 @@ const TablaNotificaciones = (props) => {
           // Lógica para descargar el archivo
           setCargando(true)
        await fetch('https://esme.cuquicalvano.com:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
-       //  await fetch('http://localhost:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
+      //   await fetch('http://localhost:4000/dtc/descargar/'+ chicos[dataIndex]['id'])
 
             .then(response => response.blob())
             .then(blob => {
@@ -259,7 +261,9 @@ const TablaNotificaciones = (props) => {
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row"> {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.descripcion} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">   <button style={{ width: '80px' }} onClick={() => window.open('/dtc/verfoto/'+row.id, '_blank')}>Ver online</button>
+                                                        <StyledTableCell component="th" scope="row">   <button style={{ width: '80px' }} onClick={() => window.open('/dtc/verfoto/'+row.id, '_blank')}>Ver foto</button>
+                                                        <button style={{ width: '80px' }} onClick={() => window.open('https://esme.cuquicalvano.com:4000/dtc/traerfoto/'+row.id, '_blank')}>Ver PDF</button>
+
 
                          <Borrarlegajo 
                         id = {row.id}

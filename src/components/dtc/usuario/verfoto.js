@@ -9,11 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-import Skeleton from '@mui/material/Skeleton';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+
 import TableRow from '@mui/material/TableRow';
 import {
 
@@ -78,11 +74,12 @@ const TablaNotificaciones = (props) => {
                     setfoto(novedades_aux[0])
                     setFormato("otro")
                   
-                } else {
+                } /* else {
+                window.open(`http://localhost:4000/dtc/traerfoto/${id}`)
                     const blob = new Blob([novedades_aux[0]], { type: 'application/pdf' });
                     const url = URL.createObjectURL(blob);
-                    setfoto(url);
-                }
+                    setfoto(novedades_aux[0]);
+                } */
             }
 
         } catch (error) {
@@ -103,7 +100,10 @@ const TablaNotificaciones = (props) => {
                     <img src={`data:image/jpeg;base64,${foto}`} width="600" height="400"/>
                         
 
-                    </> : <> </>}</> : <>Archivos PDF descargar para ver {foto && <iframe title="PDF Viewer" src={foto} width="600" height="400" />}</>}
+                    </> : <> </>}</> : <>Archivos PDF, seleccionar boton VER PDF para ver
+                   
+                        
+                    </>}
 
 
             </> : <></>}
