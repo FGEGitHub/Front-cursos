@@ -11,6 +11,7 @@ const FichaPersona = ({ datosPersona }) => {
     let id = params.id
     const [chico, setchico] = useState()
     const [nivel, setNivel] = useState()
+    const [usuario, setUsuario] = useState()
     const [showAllData, setShowAllData] = useState(false);
     const [foto, setfoto] = useState()
     // La función para alternar entre "Ver más" y "Ver menos"
@@ -30,7 +31,7 @@ const FichaPersona = ({ datosPersona }) => {
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
 
-
+                setUsuario(usuario)
                 const novedades_aux = await servicioDtc.datosdechique(id)
                 setfoto(novedades_aux[1])
                 setchico(novedades_aux[0][0])
@@ -84,14 +85,20 @@ const FichaPersona = ({ datosPersona }) => {
             <Typography>{chico.dni}</Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography color="textSecondary">Telefono personal:</Typography>
-            <Typography>{chico.telefono}</Typography>
+            <Typography color="textSecondary">Autorizadoa  retirar:</Typography>
+            <Typography>{chico.aut_retirar}</Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography color="textSecondary">Autorizacion de imagen:</Typography>
             <Typography>{chico.autorizacion_imagen}</Typography>
           </Grid>
+          {showAllData ?<>
           <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">Telefono personal:</Typography>
+            <Typography>{chico.telefono}</Typography>
+          </Grid>
+        
             <Typography color="textSecondary">Fotocopia de dni:</Typography>
             <Typography>{chico.fotoc_dni}</Typography>
           </Grid>
@@ -112,11 +119,8 @@ const FichaPersona = ({ datosPersona }) => {
             <Typography>{chico.egreso}</Typography>
           </Grid>
   
-       {showAllData ?<>
-        <Grid item xs={12} sm={6}>
-            <Typography color="textSecondary">Autorizadoa  retirar:</Typography>
-            <Typography>{chico.aut_retirar}</Typography>
-          </Grid>
+  
+       
                   <Grid item xs={12} sm={6}>
             <Typography color="textSecondary">Primer contacto:</Typography>
             <Typography>{chico.primer_contacto}</Typography>
@@ -149,9 +153,13 @@ const FichaPersona = ({ datosPersona }) => {
           </>:<></>}
           {chico && (
                 <Fragment>
+                  { usuario ? <>
+                  {usuario.nivel ==20?<>
                   <Button onClick={toggleShowAllData}>
                     {showAllData ? 'Ver menos' : 'Ver más'}
                   </Button>
+                  </>:<></>}
+                  </>:<></>}
                   {/* Agrega más campos adicionales aquí */}
                 </Fragment>
               )}
