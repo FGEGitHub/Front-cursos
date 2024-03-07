@@ -94,7 +94,7 @@ export default function SelectTextFields(props) {
             autoComplete="off"
         >
             < Tooltip title="Nueva Clase">
-                <Button variant="outlined" onClick={handleClickOpen}> Nuevo  </Button>
+                <Button variant="contained" onClick={handleClickOpen}> Nuevo  </Button>
 
             </Tooltip>
             <Dialog open={open} onClose={handleClose}   sx={{
