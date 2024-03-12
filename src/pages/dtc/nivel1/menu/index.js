@@ -72,6 +72,7 @@ export default function Paginas() {
             </>:<>
         <Menuizq>
       <Menu/>
+      
       </Menuizq></>}
         </>
    

@@ -73,7 +73,7 @@ export default function MenuIzq2 ({children}) {
       <>
         
     
-    <Box sx={{   backgroundColor:"#cddc39", display: 'flex' }}>
+    <Box sx={{  display: 'flex' }}>
       <CssBaseline />
       
     
@@ -120,7 +120,7 @@ export default function MenuIzq2 ({children}) {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+        sx={{ flexGrow: 1,  p:0 }}
       >
         <Toolbar />
       {/*   <AlertaInusual
@@ -129,6 +129,7 @@ export default function MenuIzq2 ({children}) {
       cantidad={cantidad} /> */}
    
       <div className="fondo-imagen">
+        <br/>
    { children}
    </div>
       </Box>

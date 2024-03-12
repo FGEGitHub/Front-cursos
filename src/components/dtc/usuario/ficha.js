@@ -48,9 +48,7 @@ const FichaPersona = ({ datosPersona }) => {
     {chico ? <>
     <Card variant="outlined"  sx={{
           cursor: 'pointer',
-          backgroundImage: 'linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%)',
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
+          backgroundImage: 'linear-gradient(90deg, #3bc9db 0%, #9775fa 0%, #ed6ea0 100%, #ffa94d 100%, #ec8c69 100%, #f783ac 100%, #69db7c 100%)',            '&:hover': { border: '1px solid #ccc' },
         }}>
              <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
                 <Avatar sx={{ width: 170, height: 140 }}>{foto?<> <img src={`data:image/jpeg;base64,${foto}`} width="170" height="140"/></>:<>Subir foto</>} </Avatar>
