@@ -67,13 +67,13 @@ export default function MenuIzq2 ({children}) {
   
       ];
       const islogo = {
-        width: "80%",                  
+        width: "70%",                  
         };
     return(
       <>
         
     
-    <Box sx={{   backgroundColor:"#37474f", display: 'flex' }}>
+    <Box sx={{   backgroundColor:"#cddc39", display: 'flex' }}>
       <CssBaseline />
       
     
@@ -83,7 +83,7 @@ export default function MenuIzq2 ({children}) {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            backgroundColor:"#263238",
+            backgroundColor:"#1b5e20",
             boxSizing: 'border-box',
           },
         }}

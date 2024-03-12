@@ -17,7 +17,7 @@ import  { useEffect, useState } from "react";
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.up('md')]: {
-      maxWidth: '600px',
+      maxWidth: '800px',
       margin: '0 auto',
     },
   },
@@ -64,7 +64,7 @@ const traer = async () => {
 
   return (<>
    
-    <Container component="main" className={classes.container}>
+    <Container component="main" >
       <CssBaseline />
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>

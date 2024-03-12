@@ -1,8 +1,8 @@
 .fondo-imagen {
-    background-image: url("../../Assets/fondo.avif");
-    background-size: cover;
+  background-image: linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%);
+      background-size: cover;
     background-repeat: no-repeat;
-    width: 85vw; /* Ancho del viewport */
+    width: 75vw; /* Ancho del viewport */
     height: 100vh; /* Altura del viewport */
     margin: 0; /* Elimina el margen predeterminado del body */
   }

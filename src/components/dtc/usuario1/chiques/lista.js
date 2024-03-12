@@ -24,7 +24,10 @@ import {
     useTheme,
     Button
 } from '@material-ui/core';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -44,6 +47,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         border: 0,
     },
 }));
+const transparentStyle = {
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Ajusta el valor alfa según sea necesario
+  };
+
+  const useStyles = makeStyles({
+    table: {
+      backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    },
+    bodyCell: {
+      color: 'blue',
+    },
+    selectCell: {
+      headerCell: {
+        backgroundColor: '#880e4f',
+      },
+      checkboxRoot: {
+        color: 'green',
+      },
+    },
+  });
+
 
 
 const TablaNotificaciones = (props) => {
@@ -52,7 +76,7 @@ const TablaNotificaciones = (props) => {
     const [usuario, setUsuario] = useState([''])
     const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-
+    const classes = useStyles();
 
     let params = useParams()
     let id = params.id
@@ -62,17 +86,86 @@ const TablaNotificaciones = (props) => {
 
 
     }, [])
+
+    
     const options = {
+        setTableProps: () => {
+            return {
+              style: {
+                backgroundColor: "#e3f2fd", // Cambia el color de fondo de la tabla
+              },
+            };
+          },
+          customHeadRender: (columnMeta, handleToggleColumn) => ({
+            TableCell: {
+              style: {
+                backgroundColor: '#1565c0', // Cambia el color de fondo del encabezado
+                color: 'white', // Cambia el color del texto del encabezado
+              },
+            },
+          }),
         selectableRows: false, // Desactivar la selección de filas
         stickyHeader: true,
-    };
-    const theme2 = createMuiTheme({
+        selectableRowsHeader: false,
+        selectableRowsOnClick: true,
+        responsive: 'scroll',
+        rowsPerPage: 5,
+        rowsPerPageOptions: [5, 10, 15],
+        downloadOptions: { filename: 'tableDownload.csv', separator: ',' },
+        print: true,
+        filter: true,
+        viewColumns: true,
+        pagination: true,
+
+        textLabels: {
+          body: {
+            noMatch: "No se encontraron registros",
+            toolTip: "Ordenar",
+          },
+          pagination: {
+            next: "Siguiente",
+            previous: "Anterior",
+            rowsPerPage: "Filas por página:",
+            displayRows: "de",
+          },
+          toolbar: {
+            search: "Buscar",
+            downloadCsv: "Descargar CSV",
+            print: "Imprimir",
+            viewColumns: "Ver columnas",
+            filterTable: "Filtrar tabla",
+          },
+          filter: {
+            all: "Todos",
+            title: "FILTROS",
+            reset: "RESETEAR",
+          },
+          viewColumns: {
+            title: "Mostrar columnas",
+            titleAria: "Mostrar/ocultar columnas de la tabla",
+          },
+          selectedRows: {
+            text: "fila(s) seleccionada(s)",
+            delete: "Eliminar",
+            deleteAria: "Eliminar filas seleccionadas",
+          },
+        },
+
+      };
+    
+      const theme2 = createTheme({
         overrides: {
-          MUIDataTable: {
+          MUIDataTableBodyCell: {
             root: {
-             // backgroundColor: 'lightblue', // Cambia el color de fondo
-              // O puedes usar backgroundImage para establecer una imagen de fondo
-               backgroundImage: 'url(""../../../../Assets/fondo.avif")',
+              color: '#1e88e5', // Cambia el color del texto en las celdas del cuerpo
+            },
+          },
+          MUIDataTableSelectCell: {
+            headerCell: {
+              backgroundColor: '#3f51b5', // Cambia el color de fondo de las celdas de selección en el encabezado
+            },
+            checkboxRoot: {
+              color: '#3f51b5', // Cambia el color del icono de la casilla de verificación de selección
             },
           },
         },
@@ -162,7 +255,14 @@ Ver                        </Button>
 
     // renderiza la data table
     return (
-        <div>
+        <div sx={{
+            cursor: 'pointer',
+            backgroundImage: 'linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%)',
+            
+            color: '#bdbdbd',
+        
+          }}
+  >
             <h2>Lista de chicos</h2>
             {chicos ? <>
                 <div>
@@ -239,7 +339,8 @@ Ver                        </Button>
 
                                 </TableContainer>
                             </> : <><>
-                        <MuiThemeProvider theme={theme2}>
+                      
+               
                                 <MUIDataTable
 
                                     title={"Lista de chicos"}
@@ -253,9 +354,13 @@ Ver                        </Button>
                                         }
                                     ]}
                                     options={options}
+                                    className={classes.table} // Aplica el estilo de la tabla
+                                    classes={{
+                                      bodyCell: classes.bodyCell, // Aplica el estilo del texto en las celdas del cuerpo
+                                      selectCell: classes.selectCell, // Aplica el estilo de las celdas de selección
+                                    }}
 
-
-                                /></MuiThemeProvider>
+                                />
 
                             </></>}
 

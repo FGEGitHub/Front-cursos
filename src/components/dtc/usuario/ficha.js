@@ -48,7 +48,7 @@ const FichaPersona = ({ datosPersona }) => {
     {chico ? <>
     <Card variant="outlined"  sx={{
           cursor: 'pointer',
-          background: '#e0e0b2',
+          backgroundImage: 'linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%)',
           border: '1px dashed #ccc',
           '&:hover': { border: '1px solid #ccc' },
         }}>

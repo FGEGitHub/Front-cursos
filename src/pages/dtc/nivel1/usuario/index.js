@@ -72,6 +72,8 @@ export default function Paginas() {
 
   return (
     <>
+    <div sx={{          backgroundImage: 'linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%)',
+}}>
       {usuario ? <>
         {usuario.nivel == "20" ? <>
           {isMatch ?
@@ -92,6 +94,7 @@ export default function Paginas() {
               </Menuizq></>}</> : 
               <>     <Login /> <Avtvidadchicos /> </>}</> : 
               <>54558585  {usuario}</>}
+              </div>
     </>
 
   );
