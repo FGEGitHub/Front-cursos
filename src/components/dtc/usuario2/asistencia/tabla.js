@@ -58,6 +58,14 @@ const MobileFriendlyTable = (props) => {
 
 };
 
+const ausente = async (row) => {
+  console.log(row)
+  const ta = await servicioDtc.ponerpresente({fecha:row.fecha,id:row.id_usuario})
+  console.log(ta)
+   // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
+   // Ejemplo: axios.post('/api/backend', { selectedValue });
+   traer()
+}
   return (
     <div>    
         {datos ? <>
@@ -88,6 +96,7 @@ const MobileFriendlyTable = (props) => {
                                                 <TableRow>
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Dni</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Quitar</b></TableCell>
 
 
                                                 </TableRow>
@@ -101,6 +110,7 @@ const MobileFriendlyTable = (props) => {
                                                         <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
 
+                                                        <StyledTableCell component="th" scope="row"> <b><button  onClick={() => ausente(row)}>Quitar</button> </b> </StyledTableCell>
 
 
 
