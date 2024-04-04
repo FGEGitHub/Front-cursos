@@ -50,7 +50,7 @@ const MobileFriendlyTable = (props) => {
     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
     props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
-    const historial = await servicioDtc.traerpresentes(formattedDate)
+    const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? formattedDate:props.fecha)
    
 
     setDatos(historial)
@@ -72,7 +72,7 @@ const MobileFriendlyTable = (props) => {
         const today = new Date();
         const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
         props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
-        const historial = await servicioDtc.traerpresentes(formattedDate)
+        const historial = await servicioDtc.traerpresentes(  props.fecha == undefined ? formattedDate:props.fecha)
     
     
         setDatos(historial)
