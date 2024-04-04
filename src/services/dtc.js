@@ -71,7 +71,7 @@ return data
   const traerpresentes = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
-      const {data} = await axios.post(baseUrl+'traerpresentes/',{fecha:id}, config)
+      const {data} = await axios.post(baseUrl+'traerpresentes/',{fecha:id.fecha,id:id.id}, config)
 return data
        
   }

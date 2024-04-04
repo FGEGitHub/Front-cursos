@@ -24,12 +24,14 @@ const MobileAutocomplete = (props) => {
   const handleBackendCall = async () => {
     // Lógica para hacer un llamado al backend con el valor seleccionado
     if (selectedValue) {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      console.log(loggedUserJSON) 
         const mergedJSON = {
             ...selectedValue,
-            ...{fecha:props.fecha}
+            ...{fecha:props.fecha,
+              id_tallerista:JSON.parse(loggedUserJSON).id}
           };
-      console.log(props.fecha)
-      console.log(mergedJSON)
+  
      const ta = await servicioDtc.ponerpresente(mergedJSON)
      console.log(ta)
       // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería

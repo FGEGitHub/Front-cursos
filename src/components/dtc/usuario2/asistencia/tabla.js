@@ -42,15 +42,15 @@ const MobileFriendlyTable = (props) => {
 
   const traer = async () => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-    if (loggedUserJSON) {
+   
       const user = JSON.parse(loggedUserJSON)
       setUsuario(user)
-    }
+    
     const today = new Date();
     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
     props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
-    const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? formattedDate:props.fecha)
+    const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:user.id}:{fecha:props.fecha,id:user.id})
    
 
     setDatos(historial)
@@ -80,7 +80,11 @@ const ausente = async (row) => {
         const today = new Date();
         const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
         props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
-        const historial = await servicioDtc.traerpresentes(  props.fecha == undefined ? formattedDate:props.fecha)
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+   
+      const user = JSON.parse(loggedUserJSON)
+      setUsuario(user)
+        const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:user.id}:{fecha:props.fecha,id:user.id})
     
     
         setDatos(historial)
