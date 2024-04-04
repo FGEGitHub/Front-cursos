@@ -4,15 +4,18 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { getThemeProps } from '@material-ui/styles';
 import servicioDtc from '../../../../services/dtc'
+import Ficha from '../../usuario/ficha'
 import { useNavigate } from "react-router-dom";
 const MobileAutocomplete = (props) => {
   const navigate = useNavigate();
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState();
 
-  const handleSelection = (event, value) => {
+  const handleSelection = async (event, value) => {
     // Aquí puedes realizar alguna acción cuando se selecciona un valor
     console.log('Valor seleccionado:', value);
-    setSelectedValue({id:value.id});
+   await setSelectedValue();
+   await setSelectedValue({id:value.id});
+  
    
     // También puedes hacer un llamado al backend con el valor seleccionado
     // Ejemplo: hacerLlamadoAlBackend(value);
@@ -59,11 +62,13 @@ const MobileAutocomplete = (props) => {
       </button>
       {selectedValue ? <>  <button variant="outlined" color="primary" onClick={ir}>
         Ver usuario
-      </button></>:<>
+      </button>
+      </>
+      :<>
       <button variant="outlined" color="primary" onClick={ir} disabled>
         Ver usuario
       </button></>}
-    
+    {selectedValue ? <><Ficha id={selectedValue.id}/></> :<></>}
     </div>
   );
 };

@@ -14,6 +14,8 @@ import CardInformacionDia from './tarjetahoy';
 import CardSeleccionFecha from './tarjetaselecionar';
 import  Acordeon   from '../actividades/acordeon';
 import  { useEffect, useState } from "react";
+import Asistencia from  '../../usuario2/asistencia/tabla'
+//import Casasa from './asist'
 const useStyles = makeStyles((theme) => ({
   container: {
     [theme.breakpoints.up('md')]: {
@@ -66,9 +68,10 @@ const traer = async () => {
    
     <Container component="main" >
       <CssBaseline />
-      <Grid container spacing={2}>
+      <Grid container spacing={2} >
         <Grid item xs={12} md={6}>
-          <Card>
+          <Card sx={{backgroundImage: 'linear-gradient(90deg, #1d6b14 0%, #9775fa 0%, #71ff89 0%, #ffd43b 0%, #ff5d00 100%, #9775fa 100%, #71ff89 100%)',}}>
+            
             <CardContent>
               <CardInformacionDia fecha={fechaActual}
               traer={async () => {
@@ -80,8 +83,8 @@ const traer = async () => {
               
                         const today = new Date();
                         const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-              
-                        setCurrentDate(formattedDate);
+                        await  setCurrentDate()
+                        await  setCurrentDate(formattedDate);
                         const historial = await servicioDtc.traertodaslasactividades({fecha:formattedDate})
                         setactividades(historial)
                     }
@@ -107,7 +110,8 @@ const traer = async () => {
                  const fechaFormateada = dia + "-" + mes + "-" + partesFecha[0];
 
                   console.log(fechaFormateada);
-              
+                  await setCurrentDate()
+                  await setCurrentDate(fechaFormateada)
                         const historial = await servicioDtc.traertodaslasactividades({fecha:fechaFormateada})
                         console.log(historial)
                         setactividades(historial)            
@@ -122,10 +126,18 @@ const traer = async () => {
         </Grid>
       </Grid>
     </Container>
+
+{currentDate}
+    {currentDate ? <>   <Asistencia fecha={currentDate}/></>:<></>}
     {actividades ? <> <Acordeon
           actividades={actividades}
+
+        
+    />  
     
-    /> </>:<>cargando</>}
+
+  
+    </>:<>cargando</>}
 
 
     </>

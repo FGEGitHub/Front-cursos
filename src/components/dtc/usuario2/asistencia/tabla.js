@@ -24,7 +24,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         border: 0,
     },
 }));
-const MobileFriendlyTable = () => {
+const MobileFriendlyTable = (props) => {
   const [currentDate, setCurrentDate] = useState('');
   const [datos, setDatos] = useState();
   const [usuario, setUsuario] = useState();
@@ -33,7 +33,8 @@ const MobileFriendlyTable = () => {
     const fetchCurrentDate = () => {
       const today = new Date();
       const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-      setCurrentDate(formattedDate);
+      console.log(props.fecha)
+      props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
     };
 
     fetchCurrentDate();
@@ -47,9 +48,10 @@ const MobileFriendlyTable = () => {
     }
     const today = new Date();
     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-    setCurrentDate(formattedDate);
-    const historial = await servicioDtc.traerpresentes(formattedDate)
 
+    props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
+    const historial = await servicioDtc.traerpresentes(formattedDate)
+   
 
     setDatos(historial)
     // 
@@ -69,7 +71,7 @@ const MobileFriendlyTable = () => {
       traer={async () => {
         const today = new Date();
         const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-        setCurrentDate(formattedDate);
+        props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
         const historial = await servicioDtc.traerpresentes(formattedDate)
     
     

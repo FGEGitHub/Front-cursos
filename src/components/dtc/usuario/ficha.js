@@ -6,7 +6,7 @@ import Modificar from './modificar'
 import Modalperfil from './modaldeperfil'
 import Avatar from "@mui/material/Avatar";
 import  { useEffect, useState, Fragment } from "react";
-const FichaPersona = ({ datosPersona }) => {
+const FichaPersona = (props) => {
     let params = useParams()
     let id = params.id
     const [chico, setchico] = useState()
@@ -32,7 +32,7 @@ const FichaPersona = ({ datosPersona }) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-                const novedades_aux = await servicioDtc.datosdechique(id)
+                const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
                 setfoto(novedades_aux[1])
                 setchico(novedades_aux[0][0])
             }
@@ -62,7 +62,7 @@ const FichaPersona = ({ datosPersona }) => {
                         const usuario = JSON.parse(loggedUserJSON)
         
         
-                        const novedades_aux = await servicioDtc.datosdechique(id)
+                        const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
                         setfoto(novedades_aux[1])
                         setchico(novedades_aux[0][0])
                     }
@@ -78,10 +78,7 @@ const FichaPersona = ({ datosPersona }) => {
         </Typography>
         <Grid container spacing={2}>
          
-          <Grid item xs={12} sm={6}>
-            <Typography color="textSecondary">DNI:</Typography>
-            <Typography>{chico.dni}</Typography>
-          </Grid>
+      
           <Grid item xs={12} sm={6}>
             <Typography color="textSecondary">Autorizadoa  retirar:</Typography>
             <Typography>{chico.aut_retirar}</Typography>
@@ -93,6 +90,10 @@ const FichaPersona = ({ datosPersona }) => {
           {showAllData ?<>
           <Grid item xs={12} sm={6}>
           <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">DNI:</Typography>
+            <Typography>{chico.dni}</Typography>
+          </Grid>
             <Typography color="textSecondary">Telefono personal:</Typography>
             <Typography>{chico.telefono}</Typography>
           </Grid>
@@ -193,7 +194,7 @@ const FichaPersona = ({ datosPersona }) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
 
-                const novedades_aux = await servicioDtc.datosdechique(id)
+                const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
                 setchico(novedades_aux[0][0])
             }
 
