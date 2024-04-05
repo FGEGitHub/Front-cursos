@@ -17,6 +17,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
 import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
 //import logo from "../../Assets/logocuqui.webp";
+import ArchitectureIcon from '@mui/icons-material/Architecture';
 import Navbar from '../Navbar'
 import EngineeringTwoToneIcon from '@mui/icons-material/EngineeringTwoTone';
 const drawerWidth = 240;
@@ -64,6 +65,11 @@ export default function MenuIzq2 ({children}) {
           icon: <WcTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/chiques' 
         },
+        { 
+          text: 'Talleres', 
+          icon: <ArchitectureIcon color="primary" />,
+          path: '/dtc/usuario1/talleres' 
+        },
   
       ];
       const islogo = {
@@ -91,7 +97,7 @@ export default function MenuIzq2 ({children}) {
 
         color="#37474f"
         anchor="left"
-      >asdsadsadasdasdsad
+      >
       
         <Navbar
       logout = {{hanleLogout}}/>

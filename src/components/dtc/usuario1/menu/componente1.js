@@ -112,7 +112,7 @@ const traer = async () => {
                   console.log(fechaFormateada);
                   await setCurrentDate()
                   await setCurrentDate(fechaFormateada)
-                        const historial = await servicioDtc.traertodaslasactividades({fecha:fechaFormateada})
+                        const historial = await servicioDtc.traertodaslasactividades({fecha:fechaFormateada,id:238})
                         console.log(historial)
                         setactividades(historial)            
               
@@ -128,7 +128,7 @@ const traer = async () => {
     </Container>
 
 {currentDate}
-    {currentDate ? <>   <Asistencia fecha={currentDate}/></>:<></>}
+    {currentDate ? <>   <Asistencia fecha={currentDate} idt={238}/></>:<></>}
     {actividades ? <> <Acordeon
           actividades={actividades}
 

@@ -70,7 +70,7 @@ const MobileFriendlyTable = () => {
         const today = new Date();
         const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
         setCurrentDate(formattedDate);
-        const historial = await servicioDtc.traerpresentes(formattedDate)
+        const historial = await servicioDtc.traerpresentes({formattedDate})
     
     
         setDatos(historial)

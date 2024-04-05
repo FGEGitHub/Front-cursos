@@ -50,7 +50,8 @@ const MobileFriendlyTable = (props) => {
     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
     props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
-    const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:user.id}:{fecha:props.fecha,id:user.id})
+    
+    const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:props.idt == undefined ? user.id:props.idt}:{fecha:props.fecha,id:props.idt == undefined ? user.id:props.idt})
    
 
     setDatos(historial)
@@ -73,6 +74,7 @@ const ausente = async (row) => {
         Fecha: {currentDate}
       </Typography>
       { usuario ?  <>
+        {usuario.nivel==21 ?<>
       <Buscador
       chicos={datos[1]}
       fecha={currentDate}
@@ -84,14 +86,14 @@ const ausente = async (row) => {
    
       const user = JSON.parse(loggedUserJSON)
       setUsuario(user)
-        const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:user.id}:{fecha:props.fecha,id:user.id})
+        const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:props.idt == undefined ? user.id:props.idt}:{fecha:props.fecha,id:props.idt == undefined ? user.id:props.idt})
     
     
         setDatos(historial)
         // 
     
     }}
-      /></>:<></>}
+      /></>:<></>}</>:<></>}
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
                                         <h4>Lista de presentes ({datos[0].length}) </h4>

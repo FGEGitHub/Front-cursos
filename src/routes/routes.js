@@ -129,6 +129,8 @@ import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
 import DTCactividadescarga from '../pages/dtc/cargaactividades';
 import DTCverfoto from '../pages/dtc/verimagen';
 import DTCpresentes from '../pages/dtc/libre/asistencia';
+import Dtctalleres from '../pages/dtc/nivel1/talleres';
+import Dtctaller from '../pages/dtc/nivel1/taller';
 
 
 const Rutas = [
@@ -257,6 +259,8 @@ const Rutas = [
 		{ path: '/dtc/usuario1/chiques', element: <DtcMedtchiques/> },
 		{ path: '/dtc/usuario1/personal', element: <DtcPersonal/> },
 		{ path: '/dtc/usuario1/usuario/:id', element: <Dtcusuario/> },
+		{ path: '/dtc/usuario1/talleres', element: <Dtctalleres/> },
+		{ path: '/dtc/usuario1/taller/:id', element: <Dtctaller/> },
 
 		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
 		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },
@@ -264,7 +268,7 @@ const Rutas = [
 		
 		{ path: '/dtc/actividades', element: <DTCactividadescarga/> },
 		{ path: '/dtc/presentes', element: <DTCpresentes/> },
-		
+	
 		
 
 ];

@@ -67,6 +67,26 @@ return data
 return data
        
   }
+
+  
+  const clasesdetaller = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'clasesdetaller/'+id, config)
+return data
+       
+  }
+
+
+
+
+  const traertalleres = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traertalleres/', config)
+return data
+       
+  }
   
   const traerpresentes = async (id) => {
   
@@ -166,4 +186,7 @@ const nuevaactividadchico= async  (datos) => {
    
    return data  
 }
-export default {listachiques,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+
+
+
+export default {listachiques,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
