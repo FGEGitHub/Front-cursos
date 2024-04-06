@@ -14,6 +14,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import  Acordeon   from '../actividades/acordeon';
 import  { useEffect, useState } from "react";
 import Asistencia from  '../../usuario2/asistencia/tabla'
+import InputLabel from '@mui/material/InputLabel';
+import NativeSelect from '@mui/material/NativeSelect';
+
 //import Casasa from './asist'
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -43,6 +46,21 @@ const LoginForm = () => {
 
 
 }, [])
+const handleChange = async (e) => {
+  try {
+    console.log(e.target.value )
+    await setCurrentDate();
+
+   await setCurrentDate(e.target.value );
+
+    const historial = await servicioDtc.traertodaslasactividades({fecha:e.target.value})
+    setactividades(historial)
+
+  } catch (error) {
+
+  }
+
+}
 const traer = async () => {
   try {
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -81,9 +99,33 @@ const traer = async () => {
   }
   return (<>
    
-    
+   <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                               Clases
+                            </InputLabel>
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'fecha',
+                                    id: 'uncontrolled-native',
 
-{currentDate}
+                                }}
+                            
+                            >  
+
+                            {clasess ? <>
+                             <option value={'1'}> Elegir</option>
+                          
+                             {clasess.map((row) => (
+                                       
+                                       <option value={row.fecha}> {row.fecha} - {row.count} Presentes</option>
+         
+                             ))}
+                                  </>:<>Cargando</>}
+                            </NativeSelect>
+
+
+
     {currentDate ? <>   <Asistencia fecha={currentDate}
                                     idt={id}/></>:<></>}
     {actividades ? <> <Acordeon

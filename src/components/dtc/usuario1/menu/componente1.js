@@ -127,7 +127,7 @@ const traer = async () => {
       </Grid>
     </Container>
 
-{currentDate}
+
     {currentDate ? <>   <Asistencia fecha={currentDate} idt={238}/></>:<></>}
     {actividades ? <> <Acordeon
           actividades={actividades}

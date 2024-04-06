@@ -60,7 +60,7 @@ const MobileFriendlyTable = () => {
     <div>    
         {datos ? <>
       <Typography variant="p" gutterBottom>
-        Fecha: {currentDate}
+        Fechaa: <b>{currentDate}</b>
       </Typography>
       { usuario ?  <>
       <Buscador
