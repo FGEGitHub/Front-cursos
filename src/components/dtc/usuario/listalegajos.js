@@ -328,7 +328,7 @@ const TablaNotificaciones = (props) => {
 
                             </></>}
 
-                    </> : <> <h2>no se encontraron legajos</h2></>}
+                    </> : <> <p>Ninguno</p></>}
 
 
 

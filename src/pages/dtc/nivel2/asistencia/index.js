@@ -42,6 +42,8 @@ export default function Paginas() {
           switch (user.nivel) {
             case 21:
              break;
+             case 22:
+              break;
            //   navigate('/')
            
            
