@@ -78,6 +78,7 @@ const ausente = async (row) => {
       <Buscador
       chicos={datos[1]}
       fecha={currentDate}
+      usuario={usuario}
       traer={async () => {
         const today = new Date();
         const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;

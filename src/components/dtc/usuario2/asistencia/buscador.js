@@ -62,9 +62,11 @@ const MobileAutocomplete = (props) => {
       <button variant="outlined" color="primary" onClick={handleBackendCall}>
         Poner/Quitar presente
       </button>
-      {selectedValue ? <>  <button variant="outlined" color="primary" onClick={ir}>
+      {selectedValue ? <> 
+        {props.usuario.id != 238 ? <>
+       <button variant="outlined" color="primary" onClick={ir}>
         Ver usuario
-      </button>
+      </button></>:<></>}
       </>
       :<>
       <button variant="outlined" color="primary" onClick={ir} disabled>
