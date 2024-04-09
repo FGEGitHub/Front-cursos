@@ -192,7 +192,12 @@ const nuevaactividadchico= async  (datos) => {
    
    return data  
 }
+const traerasistenciasdetaller= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'traerasistenciasdetaller',datos,config)
+   
+   return data  
+}
 
 
-
-export default {listachiques,traerasistencia,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {listachiques,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

@@ -8,6 +8,7 @@ import Login from '../../../../components/dtc/usuario/ficha'
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
 import Listalegajos from '../../../../components/dtc/usuario/listalegajos'
+import Asistencia from '../../../../components/dtc/usuario/asistenciadelusuario'
 import Avtvidadchicos from '../../../../components/dtc/usuario1/actividades/actividades1pers'
 import {
 
@@ -81,14 +82,14 @@ export default function Paginas() {
               <div className={classes.container}>
                 <MenuuCel texto="Usuarios" />
                 <Login />
-                
+                <Asistencia/>
                 <Avtvidadchicos />
                 <Listalegajos />
               </div>
             </> : <>
               <Menuizq>
                 <Login />
-              
+                <Asistencia/>
                 <Avtvidadchicos />
                 <Listalegajos />
               </Menuizq></>}</> : 

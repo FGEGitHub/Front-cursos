@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
-import servicioDtc from '../../../../services/dtc'
+import servicioDtc from '../../../services/dtc'
 import  { tableCellClasses } from '@mui/material/TableCell';
+import Ver from './modalclasesasistidas'
 import { styled } from '@mui/material/styles';
 import { useNavigate, useParams } from "react-router-dom";import Skeleton from '@mui/material/Skeleton';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -70,13 +71,13 @@ const MobileFriendlyTable = (props) => {
      
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
-                                        <h4>Lista de asistencia ({datos[0].length}) </h4>
+                                        <h4>Asistencia ({datos[0].length}) </h4>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Dni</b></TableCell>
-                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Quitar</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }} ><b>Detalle</b> <b /></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Cantidad</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Ver</b></TableCell>
 
 
                                                 </TableRow>
@@ -87,10 +88,9 @@ const MobileFriendlyTable = (props) => {
 
                                                 {datos[0].map((row) => (
                                                     <StyledTableRow key={row.name}>
-                                                        <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-
-                                                        <StyledTableCell component="th" scope="row"> <b><button  onClick={() => ausente(row)}>Quitar</button> </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row">{row.apellido}  {row.taller}</StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.count} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <Ver id_usuario={id} id_tallerista={row.id_tallerista} />  </StyledTableCell>
 
 
 
