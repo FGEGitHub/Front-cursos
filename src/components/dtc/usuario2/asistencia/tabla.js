@@ -61,7 +61,7 @@ const MobileFriendlyTable = (props) => {
 
 const ausente = async (row) => {
   console.log(row)
-  const ta = await servicioDtc.ponerpresente({fecha:row.fecha,id:row.id_usuario})
+  const ta = await servicioDtc.ponerpresente({fecha:row.fecha,id:row.id_usuario,id_tallerista:usuario.id})
   console.log(ta)
    // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
    // Ejemplo: axios.post('/api/backend', { selectedValue });
