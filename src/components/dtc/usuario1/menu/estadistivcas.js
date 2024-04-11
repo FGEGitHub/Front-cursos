@@ -55,8 +55,8 @@ setDatos(historial)
         </Typography>
 z
        {datos ? <>
-       
-        Cantidad de presentes del mes: {datos[0].length}
+    
+        Cantidad de presentes del mes: {datos[0].length}<br/>
         Cantidad de usuarios que concurrieron en el mes: {datos[1].length}
        </>:<></>}
       </CardContent>
