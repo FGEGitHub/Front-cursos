@@ -8,6 +8,7 @@ import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
 import Menu from '../../../../components/dtc/usuario1/menu/componente1'
+import Estadis from '../../../../components/dtc/usuario1/menu/estadistivcas'
 import React, { useEffect, useState } from "react";
 import {
 
@@ -66,11 +67,13 @@ export default function Paginas() {
              {isMatch ? 
             <>
             <div  className={classes.container}> 
+            <Estadis/>
             <MenuuCel texto="Menu"/>
             <Menu/>
            </div>
             </>:<>
         <Menuizq>
+        <Estadis/>
       <Menu/>
       
       </Menuizq></>}

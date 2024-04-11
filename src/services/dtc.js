@@ -42,8 +42,8 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 return data
        
   }
-  
 
+  
   const datosdechique = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -165,6 +165,12 @@ const nuevaactividad= async  (datos) => {
    return data  
 }
 
+const traerestadisticas= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'traerestadisticas',{fecha:datos},config)
+   
+   return data  
+}
 const borraractividad= async  (datos) => {
 console.log(datos)
   const {data } = await axios.post(baseUrl+'borraractividad',datos,config)
@@ -200,4 +206,4 @@ const traerasistenciasdetaller= async  (datos) => {
 }
 
 
-export default {listachiques,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

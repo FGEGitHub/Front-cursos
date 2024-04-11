@@ -1,13 +1,23 @@
 import React from 'react';
+import servicioDtc from '../../../../services/dtc'
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import  { useEffect, useState } from "react";
 
 const CardInformacionDia = (props) => {
+    const [datos, setDatos] = useState()
   // Puedes personalizar este avatar o icono según tus necesidades
+  useEffect(() => {
+    traer()
+
+
+
+}, [])
   const icono = <Avatar>A</Avatar>;
 
   const handleIrActividades = () => {
@@ -15,6 +25,23 @@ const CardInformacionDia = (props) => {
     console.log('Ir a actividades');
   };
 
+const traer = async () => {
+  try {
+     
+
+
+          const today = new Date();
+          const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+
+        //  setCurrentDate(formattedDate);
+          const historial = await servicioDtc.traerestadisticas(formattedDate)
+setDatos(historial)   
+
+  } catch (error) {
+
+  }
+
+}
   return (
     <Card sx={{
       cursor: 'pointer',
@@ -27,12 +54,11 @@ const CardInformacionDia = (props) => {
          Ir al dia de hoy
         </Typography>
 z
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: '16px' }}>
-          {icono}
-          <IconButton onClick={() => props.traer()}color="primary">
-            <ArrowForwardIcon />
-          </IconButton>
-        </div>
+       {datos ? <>
+       
+        Cantidad de presentes del mes: {datos[0].length}
+        Cantidad de usuarios que concurrieron en el mes: {datos[1].length}
+       </>:<></>}
       </CardContent>
     </Card>
   );
