@@ -11,7 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
 import logo from "../../../Assets/dtcletra.png"
-import estilos from  "../estilos.css"
+import servicioDtc from '../../../services/dtc'
 import WcTwoToneIcon from '@mui/icons-material/WcTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
@@ -19,8 +19,7 @@ import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
 //import logo from "../../Assets/logocuqui.webp";
 import ArchitectureIcon from '@mui/icons-material/Architecture';
 import Navbar from '../Navbar'
-import EngineeringTwoToneIcon from '@mui/icons-material/EngineeringTwoTone';
-const drawerWidth = 240;
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';const drawerWidth = 240;
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -33,9 +32,35 @@ const darkTheme = createTheme({
   },
 });
 export default function MenuIzq2 ({children}) {
+  const [cumple, setCumple] = useState()
+  const [estemes, setEstemes] = useState()
     const navigate = useNavigate();
+    useEffect(() => {
+      traer()
+  
+  
+  
+  }, [])
+    const traer = async () => {
+      try {
+         
+    
+    
+              const today = new Date();
+              const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+    console.log(formattedDate)
+            //  setCurrentDate(formattedDate);
+              const historial = await servicioDtc.traercumples({fecha:formattedDate})
 
-
+    setCumple(historial[0])  
+    setEstemes(historial[1])  
+    
+     
+      } catch (error) {
+    
+      }
+    
+    }
     const handleClick = (path) => {
         
         navigate(path);
@@ -70,6 +95,8 @@ export default function MenuIzq2 ({children}) {
           icon: <ArchitectureIcon color="primary" />,
           path: '/dtc/usuario1/talleres' 
         },
+
+        
   
       ];
       const islogo = {
@@ -120,6 +147,37 @@ export default function MenuIzq2 ({children}) {
             </ListItem>
           ))}
         </List>
+        {cumple ? <>
+       { cumple.length>0? <>
+        {cumple.map((item) => (
+            <ListItem 
+             
+            >
+              
+              HOY HAY CUMPLE
+              <p sx={{color:'white'}}>{item.nombre}  {item.apellido} </p>
+            
+            </ListItem>
+          ))}
+       
+       </>:<><p sx={{color:'white'}}>Hoy no hay cumples <SentimentVeryDissatisfiedIcon/> </p></>}
+        
+        </>:<></>}
+        {estemes ? <>
+       { estemes.length>0? <>
+       Cumples este mes
+        {estemes.map((item) => (
+            <ListItem 
+             
+            >
+              <ListItemIcon sx={{color:'white'}}>{item.nombre} {item.apellido} <br/>el dia ({item.fecha_nacimiento})</ListItemIcon>
+            
+            </ListItem>
+          ))}
+       
+       </>:<></>}
+        
+        </>:<></>}
         
         <Divider />
        

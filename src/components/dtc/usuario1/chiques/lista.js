@@ -227,11 +227,7 @@ Ver                        </Button>
             label: "nombre",
 
         },
-        {
-          name: "kid",
-          label: "kid",
-
-      },
+    
     
         {
             name: "fecha_nacimiento",
