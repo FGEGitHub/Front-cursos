@@ -66,11 +66,11 @@ setDatos(historial)
                           <Widget  type="Cantidad presentes mes pasado"
                       cantidad={datos[0].presentes_totales_reales_mespasado}
                     />
-                          <Widget  type="Cupos disponibles"
-                      cantidad={datos[0].cantidaddis}
+                          <Widget  type="presentes en la semana"
+                      cantidad={datos[0].presentes_totales_semana}
                     />
-                           <Widget  type="No contestada"
-                      cantidad={datos[0].cant_nc}
+                           <Widget  type="presentes reales en lasemana"
+                      cantidad={datos[0].presentes_totales_reales_semana}
                     />
                           
                     </div>
