@@ -1878,12 +1878,14 @@ InputLabelProps={{
                                 sx={'width:250px'}
                             >
                                 <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
-                                <option value={133}>Maquillaje y peinado para eventos</option>
-                                <option value={134}>Diseño de lenceria femenina</option>
-                                <option value={135}>Textiles y accesorios para el verano</option>
-                                <option value={136}>Refacción integral para el hogar</option>
+        <option value={'1'}> Elegir</option>
+                                {cohortes ? <>
+                             {cohortes.map((row) => (
+                                       
+                                       <option value={row.id}> {row.descripcion} </option>
+         
+                             ))}
+                                  </>:<>Cargando</>}
 
                             </NativeSelect>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
@@ -1905,11 +1907,13 @@ InputLabelProps={{
                             >
                                 <option value={'Sin determinar'}>Elegir</option>
 
-                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
-                                <option value={133}>Maquillaje y peinado para eventos</option>
-                                <option value={134}>Diseño de lenceria femenina</option>
-                                <option value={135}>Textiles y accesorios para el verano</option>
-                                <option value={136}>Refacción integral para el hogar</option>
+                                {cohortes ? <>
+                             {cohortes.map((row) => (
+                                       
+                                       <option value={row.id}> {row.descripcion} </option>
+         
+                             ))}
+                                  </>:<>Cargando</>}
 
                             </NativeSelect>
 
