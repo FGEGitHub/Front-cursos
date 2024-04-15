@@ -633,7 +633,6 @@ InputLabelProps={{
 
                                 <option value={'Si'}>Si</option>
                                 <option value={'No'}>No</option>
-                                <option value={'He participado pero actualmente no'}>He participado pero actualmente no</option>
 
                             </NativeSelect>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
@@ -1829,7 +1828,6 @@ InputLabelProps={{
 
                                 <option value={'Si'}>Si</option>
                                 <option value={'No'}>No</option>
-                                <option value={'He participado pero actualmente no'}>He participado pero actualmente no</option>
 
                             </NativeSelect>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
