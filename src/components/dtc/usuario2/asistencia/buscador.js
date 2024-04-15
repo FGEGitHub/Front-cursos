@@ -33,7 +33,7 @@ const MobileAutocomplete = (props) => {
           };
   
      const ta = await servicioDtc.ponerpresente(mergedJSON)
-     console.log(ta)
+     alert(ta)
       // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
       // Ejemplo: axios.post('/api/backend', { selectedValue });
       props.traer()
