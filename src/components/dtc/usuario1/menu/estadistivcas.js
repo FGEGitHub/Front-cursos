@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import  { useEffect, useState } from "react";
-
+import Widget from '../../../fiscalizacion/Widget/Widget'
 const CardInformacionDia = (props) => {
     const [datos, setDatos] = useState()
   // Puedes personalizar este avatar o icono según tus necesidades
@@ -51,16 +51,30 @@ setDatos(historial)
     }}>
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
-         Ir al dia de hoy
+         Estadisticas
         </Typography>
-z
+
        {datos ? <>
-        (funcionando)
-        Cantidad de presentes del mes: {datos[0].length}<br/>
-        Cantidad de usuarios que concurrieron en el mes: {datos[1].length}
-        (por funcionar)
-        Porcentaje mes a mes
-       </>:<></>}
+             <div className="home">
+                
+                <Widget  type="Cantidad de presentes del mes: "
+                      cantidad={datos[0].presentes_totales}
+                    />
+                          <Widget  type=" Cantidad de usuarios que concurrieron en el mes:"
+                      cantidad={datos[0].presentes_totales_reales}
+                    />
+                          <Widget  type="Cantidad presentes mes pasado"
+                      cantidad={datos[0].presentes_totales_reales_mespasado}
+                    />
+                          <Widget  type="Cupos disponibles"
+                      cantidad={datos[0].cantidaddis}
+                    />
+                           <Widget  type="No contestada"
+                      cantidad={datos[0].cant_nc}
+                    />
+                          
+                    </div>
+                    </>:<></>}
       </CardContent>
     </Card>
   );
