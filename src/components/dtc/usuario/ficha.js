@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import servicioDtc from '../../../services/dtc'
 import Modificar from './modificar'
 import Modalperfil from './modaldeperfil'
+import Borrarusuaio from "./modalborrarusuario"
 import Avatar from "@mui/material/Avatar";
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = (props) => {
@@ -179,6 +180,8 @@ backgroundColor:'#b0bec5'        }}>
                 <Fragment>
                   { usuario ? <>
                   {usuario.nivel ==20?<>
+                    <Borrarusuaio 
+                        id ={chico.id}/>
                     <Modificar 
     id ={chico.id}
     nombre={chico.nombre}
