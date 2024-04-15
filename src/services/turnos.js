@@ -134,4 +134,19 @@ const traerclase = async (usuario) => {
 return data
      
 }
-export default {lista,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
+
+
+const traerturnosparainscri = async (usuario) => {
+  
+  // const data = await axios.post('http://localhost:4000/signupp', datos)
+    const {data} = await axios.get(baseUrl+'traerturnosparainscri/', config)
+    if(data=== 'error login'){
+     
+      window.localStorage.removeItem('loggedNoteAppUser')
+      window.location.reload();
+    }
+return data
+     
+}
+
+export default {lista,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}

@@ -41,7 +41,7 @@ export default function Paginas() {
            
             default:
               window.localStorage.removeItem('loggedNoteAppUser')
-              navigate('/login')
+              navigate('/loginn')
               
               break;
           }

@@ -60,7 +60,7 @@ export default function MenuIzq2 ({children}) {
           path: '/administracion/cursos' 
         },
         { 
-          text: 'Turnos', 
+          text: 'Turnos (Cohortes)', 
           icon: <AppsIcon color="primary" />, 
           path: '/administracion/turnos' 
         },
@@ -132,7 +132,7 @@ export default function MenuIzq2 ({children}) {
         }}
         variant="permanent"
         anchor="left"
-      >asdsadsadasdasdsad
+      >
       
         <Navbar
       logout = {{hanleLogout}}/>

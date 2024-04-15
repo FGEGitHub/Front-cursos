@@ -94,7 +94,7 @@ break;
           break; */
           default:
             window.localStorage.removeItem('loggedNoteAppUser')
-            navigate('/login')
+            navigate('/loginn')
 
       }
       setLoading(false);
