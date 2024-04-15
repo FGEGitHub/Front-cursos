@@ -609,7 +609,7 @@ InputLabelProps={{
                                     variant="outlined"
                                 />
                             </> : <></>}
-                            Si participa de nuestra Feria de Mujeres Emprendedoras
+                    
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
@@ -624,7 +624,7 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'participante_anterior',
+                                    name: 'participante_feria',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
@@ -1806,7 +1806,32 @@ InputLabelProps={{
                                     variant="outlined"
                                 />
                             </> : <></>}
+                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        Participastes de nuestra  <br />
+                                        Feria de Mujeres Emprendedoras<br />
+                                      
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
 
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'participante_feria',
+                                    id: 'uncontrolled-native',
+                                }}
+                                sx={'width:250px'}
+                            >
+                                <option value={'Sin determinar'}>Elegir</option>
+
+                                <option value={'Si'}>Si</option>
+                                <option value={'No'}>No</option>
+                                <option value={'He participado pero actualmente no'}>He participado pero actualmente no</option>
+
+                            </NativeSelect>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>

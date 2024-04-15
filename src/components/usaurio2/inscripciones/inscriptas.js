@@ -5,7 +5,7 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import Observaciones from '../Personas/observaciones'
 import { useNavigate } from "react-router-dom";
-
+import Tablaprioridades from './TablaPrioridades'
 
 import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from "react-router-dom"
@@ -334,8 +334,9 @@ const TablaNotificaciones = (props) => {
                     </>
                 
                 </div>
-            </> : <><Carga/></>}
+            </> : <><Carga/></>}  <Tablaprioridades/>
         </div>
+      
     )
 }
 export default TablaNotificaciones

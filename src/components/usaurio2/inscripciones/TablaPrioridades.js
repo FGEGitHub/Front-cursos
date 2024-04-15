@@ -84,6 +84,7 @@ const Lotes = () => {
         const clients = await ServicioInscripciones.listacriterios({
 
         })
+        console.log(clients)
         setClients(clients)
         setLoading(false);
     }
