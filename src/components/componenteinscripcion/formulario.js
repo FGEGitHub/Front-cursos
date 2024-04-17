@@ -199,11 +199,11 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="h7" component="div" color="black">
                                 <StyledParagraph>
-                                    Sumate a la Escuela de Mujeres
+                                Completá con tus datos este formulario para inscribirte a los cursos. 
                                     <br />
 
                                     Equipo CC ARI Corrientes
-
+                                  ¡Muy pronto nos estaremos comunicando con vos!
                                 </StyledParagraph>
                             </Typography>
                         </Box>
