@@ -105,7 +105,7 @@ const Estracto = () => {
     const getCursos = async (e) => {
     
             const clientss = await servicioTurnos.traerturnosparainscri();
-            setCohorte(clientss[0])
+            setCohorte(clientss)
            
 
     
