@@ -12,16 +12,15 @@ export default function Paginas() {
     const navigate = useNavigate();
     const [loginVisible, setLoginvisible] = useState(false)
 
-    useEffect(() => {
+ /*    useEffect(() => {
       
         window.localStorage.removeItem('loggedNoteAppUser')
         navigate('/login')
-      }, [])
+      }, []) */
 
     return (
         <>
-        
-        <Navbar/>
+        hola
        
         </>
    
