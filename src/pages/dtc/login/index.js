@@ -62,7 +62,14 @@ export default function Paginas() {
       };
     return (
         <>
-dfgdfgdgdfgfdgd
+        <div style={{background:Backg}}>
+
+      
+        {loginVisible ? <>
+       
+        <Login/>
+        </>:<></>}
+        </div>
         </>
    
     );
