@@ -98,6 +98,7 @@ const ausente = async (row) => {
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
                                         <h4>Lista de presentes ({datos[0].length}) </h4>
+                                        Kid1:{datos[2].kid1}, Kid2:{datos[2].kid2}, Kid1:{datos[2].kid3}
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
