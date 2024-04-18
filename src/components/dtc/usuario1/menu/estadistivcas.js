@@ -76,7 +76,7 @@ console.log(historial[0].semana)
                           <Widget  type=" Cantidad de usuarios que concurrieron en el mes:"
                       cantidad={datos[0].presentes_totales_reales}
                     />
-                                 <Widget  type="antidad de usuarios que concurrieron en el mes pasado:"
+                                 <Widget  type="Cantidad de usuarios que concurrieron en el mes pasado:"
                       cantidad={datos[0].presentes_totales_reales_mespasado}
                     />
                           

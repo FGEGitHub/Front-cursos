@@ -102,7 +102,7 @@ function LineChartWithCheckboxes(props) {
 
   return (
     <div>
-        <h3>TODAVIA NO FUNCIONA EL GRAFICO </h3><h5>Pero dirá la comparacion dia a dia con la semana/mes pasado</h5>
+        <h3>Dia a dia con semana pasada</h3>
       <canvas
         ref={canvasRef}
         width="800"
