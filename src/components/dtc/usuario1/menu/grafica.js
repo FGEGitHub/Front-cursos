@@ -4,7 +4,7 @@ import { Checkbox, FormControlLabel } from '@mui/material';
 function LineChartWithCheckboxes(props) {
   const canvasRef = useRef(null);
   const [chartData, setChartData] = useState({
-    labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
+    labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes','Sabado'],
     datasets: [
       {
         label: 'semana actual',

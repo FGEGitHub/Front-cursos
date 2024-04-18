@@ -74,7 +74,7 @@ const ausente = async (row) => {
         Fecha: {currentDate}
       </Typography>
       { usuario ?  <>
-        {usuario.nivel==21 ?<>
+        {usuario.nivel==21 || usuario.nivel==20 ?<>
       <Buscador
       chicos={datos[1]}
       fecha={currentDate}

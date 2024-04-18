@@ -33,7 +33,7 @@ const LoginForm = () => {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [currentDate, setCurrentDate] = useState('');
+  const [currentDate, setCurrentDate] = useState();
   const [actividades, setactividades] = useState()
 
   useEffect(() => {
