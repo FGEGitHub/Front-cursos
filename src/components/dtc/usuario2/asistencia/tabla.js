@@ -53,7 +53,7 @@ const MobileFriendlyTable = (props) => {
     
     const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:props.idt == undefined ? user.id:props.idt}:{fecha:props.fecha,id:props.idt == undefined ? user.id:props.idt})
    
-
+console.log(historial)
     setDatos(historial)
     // 
 
@@ -116,7 +116,7 @@ const ausente = async (row) => {
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.kid} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b><button  onClick={() => ausente(row)}>Quitar</button> </b> </StyledTableCell>
 
 
