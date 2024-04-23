@@ -133,6 +133,8 @@ import Dtctalleres from '../pages/dtc/nivel1/talleres';
 import Dtctaller from '../pages/dtc/nivel1/taller';
 
 
+import CargarExcel from '../pages/subirexcel'
+
 const Rutas = [
 	 <Navbar/> ,
 
@@ -146,7 +148,7 @@ const Rutas = [
 		{ path: '/login', element: <Logindtc /> },
 		{ path: '/deslogin', element: <Deslogin /> },
 		
-	
+		{ path: '/subirexcel', element: <CargarExcel /> },
 		
 		{ path: '/usuario/novedades', element: <Novedades1 /> },
 		{ path: '/usuario/cursos', element: <Menu1 /> },
