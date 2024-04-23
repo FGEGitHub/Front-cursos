@@ -98,7 +98,7 @@ const ausente = async (row) => {
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
                                         <h4>Lista de presentes ({datos[0].length}) </h4>
-                                        Kid1:{datos[2].kid1}, Kid2:{datos[2].kid2}, Kid1:{datos[2].kid3}
+                                        Kid1:{datos[2].kid1}, Kid2:{datos[2].kid2}, Adolescentes:{datos[2].kid3}
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
@@ -121,7 +121,7 @@ const ausente = async (row) => {
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.kid} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.kid == "kid3" ? <>Adolescentes</>:<>{row.kid}</>} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.hora} </b> </StyledTableCell>
 
                                                         <StyledTableCell component="th" scope="row"> <b><button  onClick={() => ausente(row)}>Quitar</button> </b> </StyledTableCell>
