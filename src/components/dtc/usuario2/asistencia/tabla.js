@@ -106,6 +106,8 @@ const ausente = async (row) => {
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Dni</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Kid</b></TableCell>
 
+
+
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Hora</b></TableCell>
 
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Quitar</b></TableCell>
