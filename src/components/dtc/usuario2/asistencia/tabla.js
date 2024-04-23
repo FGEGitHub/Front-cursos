@@ -104,6 +104,10 @@ const ausente = async (row) => {
                                                 <TableRow>
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Dni</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Kid</b></TableCell>
+
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Hora</b></TableCell>
+
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Quitar</b></TableCell>
 
 
@@ -118,6 +122,8 @@ const ausente = async (row) => {
                                                         <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.kid} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.hora} </b> </StyledTableCell>
+
                                                         <StyledTableCell component="th" scope="row"> <b><button  onClick={() => ausente(row)}>Quitar</button> </b> </StyledTableCell>
 
 
