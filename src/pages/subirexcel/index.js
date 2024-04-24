@@ -30,7 +30,7 @@ const handleUpload = async () => {
     formData.append('excel', selectedFile);
 
     // Envía el archivo al servidor
-    const response = await axios.post('http://localhost:4000/personas/subirexcel', formData, {
+    const response = await axios.post('https://esme.cuquicalvano.com:4000/personas/subirexcel', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
