@@ -164,18 +164,18 @@ const TablaNotificaciones = (props) => {
         <div>
          <p  style={{ color: 'crimson' }}  >***Nota: si no asignaste el encargado entonces habra 0(cero) Alumnas por responder llamado</p>
             {datos? <>
-          Categoria uno 30%: {datos.uno} (max 450)<br/>
-          Categoria dos 10%: {datos.dos} (max 150)<br/>
-          Categoria tres 5%: {datos.tres} (max 75)<br/>
-          Categoria cuatro 15%: {datos.cuatro} (max 225)<br/>
-          Categoria cinco 5%: {datos.cinco} (max 75)<br/>
-          Categoria seis 5%: {datos.seis} (max 75)<br/>
-          Categoria siete 5%: {datos.siete} (max 75)<br/>
-          Categoria ocho 2%: {datos.ocho} (max 30)<br/>
-          Categoria nueve 3%: {datos.nueve} (max 45)<br/>
-          Categoria diez 10%: {datos.diez} (max 150)<br/>
-          Categoria once 2%: {datos.once} (max 30)<br/>
-          Categoria doce 3%: {datos.doce} (max 45)<br/>
+          Categoria uno 30%: {datos.uno} (max 450)no participante anterior hijos si   trabajo no  informal <br/>
+          Categoria dos 10%: {datos.dos} (max 150) no participante anterior hijos si   trabajo si  informal<br/>
+          Categoria tres 5%: {datos.tres} (max 75) no participante anterior hijos si   trabajo si  formal<br/>
+          Categoria cuatro 15%: {datos.cuatro} (max 225) no participante anterior hijos no   trabajo no  informal<br/>
+          Categoria cinco 5%: {datos.cinco} (max 75) no participante anterior hijos no   trabajo si  informal<br/>
+          Categoria seis 5%: {datos.seis} (max 75) no participante anterior hijos no   trabajo si  formal<br/>
+          Categoria siete 5%: {datos.siete} (max 75) participante anterior hijos si   trabajo no  informal<br/>
+          Categoria ocho 2%: {datos.ocho} (max 30) participante anterior hijos si   trabajo si  informal<br/>
+          Categoria nueve 3%: {datos.nueve} (max 45) participante anterior hijos si   trabajo si  formal<br/>
+          Categoria diez 10%: {datos.diez} (max 150) participante anterior hijos no   trabajo no  informal<br/>
+          Categoria once 2%: {datos.once} (max 30) participante anterior hijos no   trabajo si  informal<br/>
+          Categoria doce 3%: {datos.doce} (max 45) participante anterior hijos no   trabajo si  formal<br/>
             </>:<></>}
             {clases ? <>
                 <div>
