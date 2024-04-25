@@ -44,7 +44,7 @@ export default function MenuIzq2 ({children}) {
         window.location.reload(true);
       } 
     const menuItems = [
-      { 
+ /*      { 
         text: 'Carnavales', 
         icon: <CelebrationIcon color="error" />, 
         path: '/administracion/inscripcionescarnavales' 
@@ -53,12 +53,12 @@ export default function MenuIzq2 ({children}) {
         text: 'Llamados carnavales', 
         icon: <PhoneForwardedIcon color="error" />, 
         path: '/administracion/llamadoscarnaval' 
-      },
+      }, 
         { 
           text: 'Cursos', 
           icon: <ApartmentIcon color="primary" />, 
           path: '/administracion/cursos' 
-        },
+        },*/
         { 
           text: 'Turnos (Cohortes)', 
           icon: <AppsIcon color="primary" />, 
@@ -84,11 +84,11 @@ export default function MenuIzq2 ({children}) {
           icon: <PeopleAltIcon color="primary" />, 
           path: '/administracion/usuarios' 
         },
-        { 
+     /*    { 
           text: 'Carga de inscripciones', 
           icon: <GetAppIcon color="primary" />, 
           path: '/administracion/cargarinscripciones' 
-        },
+        }, */
         { 
           text: 'Call center', 
           icon: <PhoneForwardedIcon color="green" />, 

@@ -231,7 +231,7 @@ const TablaNotificaciones = (props) => {
         <div>
 
             {inscriptos && datos ? <>       
-                {datos ? <>
+           {/*      {datos ? <>
              <div className="home">
                 
                 <Widget  type="Cupos totales "
@@ -259,7 +259,7 @@ const TablaNotificaciones = (props) => {
                     </>:<></>}
                 <Button variant="outlined" onClick={crearcursos}>
        Crear Cursos 
-      </Button>
+      </Button> */}
                 <Paper
                                                 sx={{
                                                     cursor: 'pointer',

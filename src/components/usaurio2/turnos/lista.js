@@ -1,6 +1,7 @@
 import servicioCursos from '../../../services/Cursos'
 import Modificarturno from '../Cursos/ModalModificarclasesdelcurso'
 import ModalCoordina from '../Cursos/ModalAsignarcoordinador'
+import Modalagregar from './asignarnuevos'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import Face3Icon from '@mui/icons-material/Face3';
@@ -186,7 +187,7 @@ Borrarturno
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.coordinador}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.encargado}</StyledTableCell>
-              <StyledTableCell > {row.cantidad}/{row.cupo}  </StyledTableCell>
+              <StyledTableCell > {row.cantidad}/60  </StyledTableCell>
   
 
               <StyledTableCell style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >  < Tooltip title="ir al turno">
@@ -206,6 +207,19 @@ Borrarturno
             
                 }}/>
                  <ModalCoordina
+                id={row.id}
+                getClients= { async () => {
+
+
+                    const tur = await servicioCursos.listadetodoslosturnos()
+                    console.log(tur)
+                    setClases(tur)
+            
+            
+            
+            
+                }}/>
+                    <Modalagregar
                 id={row.id}
                 getClients= { async () => {
 
