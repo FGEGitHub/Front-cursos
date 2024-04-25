@@ -47,6 +47,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([''])
     const [usuario, setUsuario] = useState([''])
+    const [datos, setDatos] = useState([])
     const navigate = useNavigate();
     
   let params = useParams()
@@ -63,8 +64,10 @@ const TablaNotificaciones = (props) => {
 
 
         const tur = await servicioCursos.listadetodoslosturnos()
+        setDatos(tur[1])
+            setClases(tur[0])
         console.log(tur)
-        setClases(tur)
+       
 
 
 
@@ -95,8 +98,10 @@ const TablaNotificaciones = (props) => {
 
 
                     const tur = await servicioCursos.listadetodoslosturnos()
+                    setDatos(tur[1])
+                        setClases(tur[0])
                     console.log(tur)
-                    setClases(tur)
+                   
             
             
             
@@ -144,7 +149,7 @@ const TablaNotificaciones = (props) => {
 
         },
 
-Borrarturno
+
     ];
 
     const options = {
@@ -158,6 +163,20 @@ Borrarturno
     return (
         <div>
          <p  style={{ color: 'crimson' }}  >***Nota: si no asignaste el encargado entonces habra 0(cero) Alumnas por responder llamado</p>
+            {datos? <>
+          Categoria uno 30%: {datos.uno} (max 450)<br/>
+          Categoria dos 10%: {datos.dos} (max 150)<br/>
+          Categoria tres 5%: {datos.tres} (max 75)<br/>
+          Categoria cuatro 15%: {datos.cuatro} (max 225)<br/>
+          Categoria cinco 5%: {datos.cinco} (max 75)<br/>
+          Categoria seis 5%: {datos.seis} (max 75)<br/>
+          Categoria siete 5%: {datos.siete} (max 75)<br/>
+          Categoria ocho 2%: {datos.ocho} (max 30)<br/>
+          Categoria nueve 3%: {datos.nueve} (max 45)<br/>
+          Categoria diez 10%: {datos.diez} (max 150)<br/>
+          Categoria once 2%: {datos.once} (max 30)<br/>
+          Categoria doce 3%: {datos.doce} (max 45)<br/>
+            </>:<></>}
             {clases ? <>
                 <div>
                   
@@ -199,9 +218,10 @@ Borrarturno
 
 
                     const tur = await servicioCursos.listadetodoslosturnos()
+                    setDatos(tur[1])
+                        setClases(tur[0])
                     console.log(tur)
-                    setClases(tur)
-            
+                   
             
             
             
@@ -212,8 +232,10 @@ Borrarturno
 
 
                     const tur = await servicioCursos.listadetodoslosturnos()
+                    setDatos(tur[1])
+                        setClases(tur[0])
                     console.log(tur)
-                    setClases(tur)
+                   
             
             
             
@@ -221,12 +243,14 @@ Borrarturno
                 }}/>
                     <Modalagregar
                 id={row.id}
-                getClients= { async () => {
+                getClients= {async () => {
 
 
                     const tur = await servicioCursos.listadetodoslosturnos()
+                    setDatos(tur[1])
+                        setClases(tur[0])
                     console.log(tur)
-                    setClases(tur)
+                   
             
             
             
