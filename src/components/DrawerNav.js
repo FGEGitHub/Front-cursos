@@ -69,7 +69,7 @@ const DrawerNav = () => {
     navigate("/usuario/contacto");
   }
   const irAyuda = () => {
-    navigate("/");
+    navigate("/loginn");
   }
   const nomb = () => {
     navigate("/usuario/datosPers");
@@ -88,7 +88,7 @@ const DrawerNav = () => {
    
     
      window.localStorage.removeItem('loggedNoteAppUser')
-     navigate("/")
+     navigate("/loginn")
 
    } 
 

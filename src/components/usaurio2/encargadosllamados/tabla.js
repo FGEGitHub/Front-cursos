@@ -64,7 +64,7 @@ setInscrip(ins[0])
             label: "nombre",
         },
         {
-            name: "asignados",
+            name: "asig",
             label: "asignadas",
 
         },
@@ -74,11 +74,7 @@ setInscrip(ins[0])
 
         },
       
-        {
-            name: "asig",
-            label: "Asignadas a curso",
-
-        },
+      
         {
             name: "rech",
             label: "Rechazados",

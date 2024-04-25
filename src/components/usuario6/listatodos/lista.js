@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
-import servicioCarnaval from '../../../services/carnavales'
+import serviciocursos from '../../../services/Cursos'
 import { useNavigate } from "react-router-dom";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
@@ -45,7 +45,7 @@ export default function Ingresos() {
       if (loggedUserJSON) {
           const usuario = JSON.parse(loggedUserJSON)
 
-          const ins = await servicioCarnaval.preinscriptascall(usuario.id)
+          const ins = await serviciocursos.preinscriptascall(usuario.id)
           setInscrip(ins[0])
       }
    
@@ -55,7 +55,7 @@ export default function Ingresos() {
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
   
 
-           await servicioCarnaval.agregadoawasap(inscrip[idd].id)
+           await serviciocursos.agregadoawasap(inscrip[idd].id)
          traer()
  
    
@@ -63,14 +63,14 @@ export default function Ingresos() {
     const noagregadoawasap = async (idd) => {
    
 
-          await servicioCarnaval.noagregadoawasap(inscrip[idd].id)
+          await serviciocursos.noagregadoawasap(inscrip[idd].id)
           traer()
     
    
     };
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         const handleButtonClick = async () => {
-          const ins = await servicioCarnaval.todaspaso4();
+          const ins = await serviciocursos.todaspaso4();
           setInscrip(ins[0]);
         };
       
@@ -97,14 +97,13 @@ export default function Ingresos() {
       {inscrip[dataIndex].estado != 'Asignadx a curso' ? <>
           <Vernscripto
           dni= {inscrip[dataIndex].dni}
+          id= {inscrip[dataIndex].id}
           nombre= {inscrip[dataIndex].nombre}
           apellido= {inscrip[dataIndex].apellido}
           telefono={inscrip[dataIndex].tel}
           telefono2={inscrip[dataIndex].tel2}
-          maquillaje={inscrip[dataIndex].maquillaje}
-          peinado={inscrip[dataIndex].peinado}
-          confeccion={inscrip[dataIndex].confeccion}
-          baile={inscrip[dataIndex].baile}
+          descripcion={inscrip[dataIndex].descripcion}
+  
           id_inscripcion={inscrip[dataIndex].id}
        
     
@@ -115,7 +114,7 @@ export default function Ingresos() {
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
       
-                const ins = await servicioCarnaval.preinscriptascall(usuario.id)
+                const ins = await serviciocursos.preinscriptascall(usuario.id)
                 setInscrip(ins[0])
             }
          
@@ -129,7 +128,7 @@ export default function Ingresos() {
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
       
-                const ins = await servicioCarnaval.preinscriptascall(usuario.id)
+                const ins = await serviciocursos.preinscriptascall(usuario.id)
                 setInscrip(ins[0])
             }
          
@@ -142,7 +141,7 @@ export default function Ingresos() {
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
       
-                const ins = await servicioCarnaval.preinscriptascall(usuario.id)
+                const ins = await serviciocursos.preinscriptascall(usuario.id)
                 setInscrip(ins[0])
             }
          
@@ -208,26 +207,7 @@ export default function Ingresos() {
 
         },
    
-        {
-          name: "maquillaje",
-          label: "maquillaje",
-
-      },
-      {
-        name: "peinado",
-        label: "peinado",
-
-    },
-    {
-      name: "confeccion",
-      label: "confeccion",
-
-  },
-  {
-    name: "baile",
-    label: "baile",
-
-},
+ 
 {
   name: "agregadoagrupo",
   label: "Agregado a grupo WASAP",

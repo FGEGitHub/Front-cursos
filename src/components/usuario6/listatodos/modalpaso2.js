@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioCarnaval from '../../../services/carnavales'
+import servicioturnos from '../../../services/turnos'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import NativeSelect from '@mui/material/NativeSelect';
@@ -117,7 +117,7 @@ export default function SelectTextFields(props) {
 
 
 
-    const respuesta = await servicioCarnaval.nocontesta(
+    const respuesta = await servicioturnos.nocontesta(
       inscripcion
 
     )
@@ -133,7 +133,7 @@ setRta(respuesta)
 
 
 
-    const respuesta = await servicioCarnaval.mensajeenviado(
+    const respuesta = await servicioturnos.mensajeenviado(
       inscripcion
 
     )
@@ -148,7 +148,22 @@ setRta(respuesta)
 
 
 
-    const respuesta = await servicioCarnaval.rechazarinscrip(
+    const respuesta = await servicioturnos.rechazarinscrip(
+      inscripcion
+
+    )
+    console.log(respuesta)
+setRta(respuesta)
+    props.traer()
+    setMostrarDialogo(true)
+    setActivo(false)
+
+  };/////
+  const handleCambiarhorario = async (event) => {
+
+
+
+    const respuesta = await servicioturnos.cambiarhorario(
       inscripcion
 
     )
@@ -167,8 +182,8 @@ setRta(respuesta)
 
     const enviar = { ...inscripcion,...options };
 
-    const respuesta = await servicioCarnaval.asignarcurso(
-      enviar
+    const respuesta = await servicioturnos.asignarcurso(
+      {id:props.id}
 
 
     )
@@ -212,28 +227,12 @@ setRta(respuesta)
 
                 <h5><CheckCircleOutlineIcon />Ha seleccionado los cursos: </h5>
                 <ol>
-    {props.maquillaje === "Si" && (
-        <li style={{ color: 'green' }}>
-            ✓ Maquillaje
-        </li>
-    )}
-    {props.peinado === "Si" && (
-        <li style={{ color: 'green' }}>
-            ✓ Peinado
-        </li>
-    )}
-    {props.confeccion === "Si" && (
-        <li style={{ color: 'green' }}>
-            ✓ Confección
-        </li>
-    )}
-    {props.baile === "Si" && (
-        <li style={{ color: 'green' }}>
-            ✓ Baile
-        </li>
-    )}
+   Agregadoa  curso {props.descripcion }
 </ol>
-
+                        <FormControlLabel
+                            control={<Checkbox checked={options.option2} onChange={handleCheckboxChange('option2')} />}
+                            label="Quiere otro curso "
+                        /><br />
 
                 
 
@@ -241,24 +240,9 @@ setRta(respuesta)
 
 
                 <br />
-                <label><b>Elegir  Curso/s</b></label>
+             
                 <br />
-                <FormControlLabel
-                            control={<Checkbox checked={options.option1} onChange={handleCheckboxChange('option1')} />}
-                            label="Maquillaje💅🏻"
-                        /><br />
-                        <FormControlLabel
-                            control={<Checkbox checked={options.option2} onChange={handleCheckboxChange('option2')} />}
-                            label="Peinado 💆🏽‍♀️ "
-                        /><br />
-                        <FormControlLabel
-                            control={<Checkbox checked={options.option3} onChange={handleCheckboxChange('option3')} />}
-                            label="Confección de trajes 🦹🏼‍♂️"
-                        /><br />
-                        <FormControlLabel
-                            control={<Checkbox checked={options.option4} onChange={handleCheckboxChange('option4')} />}
-                            label="Baile💃"
-                        /><br />
+            
 
 
 
@@ -280,9 +264,12 @@ setRta(respuesta)
                 <DialogActions>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button variant="contained" color="success" onClick={mensajeenviado} >Mensaje enviado</Button>
-                {options.option1 ||options.option2 ||options.option3 ||options.option4  ? <>
-                  <Button variant="contained" color="primary" onClick={handleDeterminar} >Inscribir</Button>
-</>:<>  <Button variant="contained" color="primary" disabled>Inscribir</Button></>}
+               
+                {(options.option1 ||options.option2 ||options.option3 ||options.option4 ) && (inscripcion.observaciones) ? <>
+                  <Button variant="contained" color="primary" onClick={handleCambiarhorario} >Solicitar cambio de horario</Button>     
+
+</>:<>  {options.option1 ||options.option2 ||options.option3 ||options.option4 ? <>detallar horario</>:<><Button variant="contained" color="primary" onClick={handleDeterminar} >Confirmar</Button></>}  </>}
+
                   <Button variant="contained" color="error" onClick={handleCancelar} >Rechazar</Button>
                   <Button variant="contained" color="warning" onClick={handleNocontesta} >No contesta</Button>
             

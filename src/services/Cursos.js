@@ -54,8 +54,20 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 return data
        
   }
-
   
+  
+  const preinscriptascall = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'preinscriptascall/'+ usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+return data
+       
+  }
   const detalledelcurso = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -343,4 +355,4 @@ const nocontesta = async (formdata) => {
 
 }
 
-export default {borrarturno,ausente,nocontesta,rechazarinscrip,asignarcurso,getturnos,traerturnos,avancedelcurso,traercursos,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}
+export default {borrarturno,preinscriptascall,ausente,nocontesta,rechazarinscrip,asignarcurso,getturnos,traerturnos,avancedelcurso,traercursos,listadetodoslosturnos,datosdelturno,traerlosturnos,nuevoturno,modificarcurso,presente,asistencia,listadeturnos,datosusuario,verclases,inscribir,listaniv1,lista,crear,nuevaclase,detalledelcurso}

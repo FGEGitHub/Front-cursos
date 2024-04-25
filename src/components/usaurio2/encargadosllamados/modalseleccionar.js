@@ -90,14 +90,14 @@ export default function Clasenueva(props) {
                         <DialogContentText>
                             <div>
                                 <h2>Selecciona tus opciones:</h2>
-                               {props.id}
+                              
                                 {escuelas ? <>
                                     {escuelas.map((row) => (
 
                                         <>
                                             <label>
                                                  <p>  <input type="checkbox" checked={selectedOptions.includes( row.id )} onChange={() => handleOptionChange( row.id )} />
-                                             {row.apellido}  {row.nombre} </p>  
+                                             {row.descripcion} </p>  
                                             </label>
                                             <br />
                                         </>

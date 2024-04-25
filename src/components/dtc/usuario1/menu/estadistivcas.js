@@ -49,6 +49,7 @@ const traer = async () => {
         //  setCurrentDate(formattedDate);
           const historial = await servicioDtc.traerestadisticas({fecha:formattedDate})
 setDatos(historial)   
+
 console.log(historial[0].semana)
   } catch (error) {
 

@@ -33,7 +33,7 @@ const Navbar = (props) => {
 
 
   const handleClick = () => {
-    navigate("/login");
+    navigate("/loginn");
   };
   const hanleLogout = () => {
     /* console.log('click')
@@ -42,14 +42,14 @@ const Navbar = (props) => {
         //  navigate('/login')
      */
    
-      window.location.reload();
+        navigate("/loginn")
      window.localStorage.removeItem('loggedNoteAppUser')
    
 
    } 
 
   const inicio = () => {
-    navigate("/")
+    navigate("/loginn")
     
 
   }

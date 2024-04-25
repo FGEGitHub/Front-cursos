@@ -124,6 +124,12 @@ const ponerausentes= async  (datos) => {
 
 
 
+const asignarcurso= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'asignarcurso',datos,config)
+   
+   return data
+}
 const asignarinscripciones= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'asignarinscripciones',datos,config)
@@ -176,4 +182,27 @@ return data
      
 }
 
-export default {lista,traerinscripcionesenc,asignarinscripciones,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
+
+const rechazarinscrip= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'rechazarinscrip',datos,config)
+  if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }  
+  return data
+} 
+const cambiarhorario= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'cambiarhorario',datos,config)
+  if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }  
+  return data
+} 
+
+
+export default {lista,cambiarhorario,asignarcurso,rechazarinscrip,traerinscripcionesenc,asignarinscripciones,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
