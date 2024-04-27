@@ -204,5 +204,16 @@ const cambiarhorario= async  (datos) => {
   return data
 } 
 
+const mensajeenviado= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'mensajeenviado',datos,config)
+  if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }  
+  return data
+} 
 
-export default {lista,cambiarhorario,asignarcurso,rechazarinscrip,traerinscripcionesenc,asignarinscripciones,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
+
+export default {mensajeenviado,lista,cambiarhorario,asignarcurso,rechazarinscrip,traerinscripcionesenc,asignarinscripciones,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
