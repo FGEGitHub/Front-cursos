@@ -197,16 +197,12 @@ export default function Ingresos() {
    
 
       {
-        name: "nombrecurso1",
-        label: "nombrecurso1",
+        name: "descripcion",
+        label: "turno",
 
     },
     
-    {
-        name: "nombrecurso2",
-        label: "nombrecurso2",
-
-    },
+ 
     {
       name: "Acciones",
       options: {
