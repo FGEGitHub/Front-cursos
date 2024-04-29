@@ -180,7 +180,9 @@ backgroundColor:'#b0bec5'        }}>
                 <Fragment>
                   { usuario ? <>
                   {usuario.nivel ==20?<>
+                  
                     <Borrarusuaio 
+
                         id ={chico.id}/>
                     <Modificar 
     id ={chico.id}
