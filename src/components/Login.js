@@ -70,7 +70,7 @@ const Login = () => {
     /*     case 1: navigate('/usuario/novedades')
         window.location.reload(true);
           break; */
-          case 2:navigate('/administracion/inscripciones')
+          case 2:navigate('/administracion/callcenter')
                 window.location.reload(true);
           break;
           case 3:navigate('/coordinadores/cursos')

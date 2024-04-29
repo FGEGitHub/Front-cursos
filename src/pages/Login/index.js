@@ -26,7 +26,7 @@ export default function Paginas() {
            //   navigate('/')
               break;
             case 2:
-              navigate('/administracion/inscripciones')
+              navigate('/administracion/callcenter')
               break;
           
             case 3:
