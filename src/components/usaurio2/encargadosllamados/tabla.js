@@ -55,6 +55,24 @@ setInscrip(ins[0])
       }
 
 
+
+      function CutomButtonconfirmadas(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+               <p style={{ color: "green"}}><b>{inscrip[dataIndex].asignada}</b> </p> 
+          </>
+
+        );
+      }
+      function CutomButtonsinc(dataIndex, rowIndex, data, onClick) {
+        return (
+          <>
+               <p style={{ color: "crimson"}}><b>{inscrip[dataIndex].sinc}</b> </p> 
+          </>
+
+        );
+      }
+
     
     const columns = [
 
@@ -69,11 +87,37 @@ setInscrip(ins[0])
 
         },
         {
-            name: "sinc",
-            label: "Sin Contactar",
+            name: "mensaje",
+            label: "Mensaje enviado",
 
         },
-      
+        {
+            name: "Confirmadas",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                CutomButtonconfirmadas(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        },   
+
+        {
+            name: "Sin contactar",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                CutomButtonsinc(
+                        dataIndex,
+                        rowIndex,
+                       // overbookingData,
+                       // handleEditOpen
+                    )
+            }
+        
+        }, 
       
         {
             name: "rech",
@@ -103,7 +147,28 @@ setInscrip(ins[0])
 
     ];
 
+    const options = {
+        filterType: 'checkbox', // Opciones adicionales de configuración según tus necesidades
+    responsive: 'vertical',
+    selectableRows: 'none',
+    rowsPerPage: 10,
+    rowsPerPageOptions: [10, 20, 30],
+    elevation: 0, // Elimina la sombra si no la deseas
 
+    // Opciones de estilo
+    tableBody: {
+      // Puedes ajustar estos estilos según tus necesidades
+      style: {
+        backgroundColor: 'lightblue', // Cambia el color de fondo de la tabla
+      },
+    },
+    rows: {
+      style: {
+        color: 'red', // Cambia el color del texto de las filas
+      },
+    },
+
+    };
     return (
         <div>
                 <Stack sx={{ width: '100%' }} spacing={2}>
@@ -125,6 +190,7 @@ setInscrip(ins[0])
                     title={"Lista de encargados"}
                     data={inscrip}
                     columns={columns}
+                    options={options}
                     actions={[
                         {
                             icon: 'save',
