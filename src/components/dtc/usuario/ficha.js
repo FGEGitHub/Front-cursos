@@ -202,6 +202,7 @@ backgroundColor:'#b0bec5'        }}>
        egreso={chico.egreso}
        aut_retirar={chico.aut_retirar}
        dato_escolar={chico.dato_escolar}
+       kid={chico.kid}
        hora_merienda={chico.hora_merienda}
        traer ={async () => {
         try {

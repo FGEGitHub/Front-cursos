@@ -23,6 +23,7 @@ export default function SelectTextFields(props) {
     //const usuario  = useUser().userContext
     const [form, setForm] = useState({
         id: props.id,
+        kid: props.kid,
         fecha_nacimiento: props.fecha_nacimiento,
         observaciones: props.observaciones,
         primer_contacto: props.primer_contacto,
@@ -152,7 +153,32 @@ alert(nov)
                         onChange={handleChange}
                         fullWidth
                         variant="standard"
-                    />
+                    /><br/>
+                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                        <Typography variant="p" component="div" color="black">
+                            <StyledParagraph>
+                                KID1/KID2/ADOLESCENTES
+                            </StyledParagraph>
+                        </Typography>
+                    </InputLabel>
+                    <NativeSelect
+                        defaultValue={props.kid}
+                        onChange={handleChange}
+                        inputProps={{
+                            name: 'kid',
+                            id: 'uncontrolled-native',
+                        }}
+                        sx={'width:250px'}
+                    >
+                        <option value={'Sin determinar'} >Elegir</option>
+                        <option value={'kid1'}>
+                                Si
+                        
+                        </option>
+                        <option value={'kid2'}>Kid2</option>
+                        <option value={'kid3'}>Adolescentes</option>
+
+                    </NativeSelect>
                     <br />
                     <TextField
 
