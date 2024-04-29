@@ -215,5 +215,14 @@ const mensajeenviado= async  (datos) => {
   return data
 } 
 
-
-export default {mensajeenviado,lista,cambiarhorario,asignarcurso,rechazarinscrip,traerinscripcionesenc,asignarinscripciones,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
+const nocontesta= async  (datos) => {
+ console.log(datos)
+  const {data } = await axios.post(baseUrl+'nocontesta',datos,config)
+  if(data=== 'error login'){
+       
+    window.localStorage.removeItem('loggedNoteAppUser')
+    window.location.reload();
+  }  
+  return data
+} 
+export default {mensajeenviado,nocontesta,lista,cambiarhorario,asignarcurso,rechazarinscrip,traerinscripcionesenc,asignarinscripciones,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
