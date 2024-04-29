@@ -172,10 +172,10 @@ alert(nov)
                     >
                         <option value={'Sin determinar'} >Elegir</option>
                         <option value={'kid1'}>
-                                Si
+                             Kids1
                         
                         </option>
-                        <option value={'kid2'}>Kid2</option>
+                        <option value={'kid2'}>Kids2</option>
                         <option value={'kid3'}>Adolescentes</option>
 
                     </NativeSelect>
