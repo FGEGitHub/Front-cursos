@@ -17,6 +17,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
+import Alert from '@mui/material/Alert';
 import {
 
     makeStyles,
@@ -74,6 +75,7 @@ const TablaNotificaciones = (props) => {
     const theme = useTheme();
     const [chicos, setchicos] = useState([''])
     const [usuario, setUsuario] = useState([''])
+    const [datos, setDatos] = useState()
     const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     const classes = useStyles();
@@ -180,6 +182,7 @@ const TablaNotificaciones = (props) => {
 
                 const novedades_aux = await servicioDtc.listachiques()
                 setchicos(novedades_aux[0])
+                setDatos(novedades_aux[1])
             }
 
         } catch (error) {
@@ -224,6 +227,11 @@ Ver                        </Button>
             label: "nombre",
 
         },
+        {
+          name: "kid",
+          label: "kid",
+
+      },
     
         {
             name: "fecha_nacimiento",
@@ -263,6 +271,11 @@ Ver                        </Button>
         
           }}
   >
+   
+    { datos ? <>  <Alert variant="filled" severity="success">
+ <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
+</Alert> </>:<></>}
+
             <h2>Lista de chicos</h2>
             {chicos ? <>
                 <div>
