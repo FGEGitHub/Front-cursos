@@ -97,7 +97,7 @@ export default function Clasenueva(props) {
                                         <>
                                             <label>
                                                  <p>  <input type="checkbox" checked={selectedOptions.includes( row.id )} onChange={() => handleOptionChange( row.id )} />
-                                             {row.apellido}  {row.nombre} </p>   <div style={{ color: 'green' }} >{row.elec1}</div> <div style={{ color: '#ffff00' }} >{row.elec2}</div>Categoria {row.categoria}
+                                             {row.apellido}  {row.nombre} </p>   <div style={{ color: 'green' }} >{row.elec1}</div> <div style={{ backgroundColor: 'black', color:"white" }} >{row.elec2}</div>Categoria {row.categoria}
                                             </label>
                                             <br />
                                         </>
