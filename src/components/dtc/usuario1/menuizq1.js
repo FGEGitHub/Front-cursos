@@ -95,6 +95,11 @@ export default function MenuIzq2 ({children}) {
           icon: <ArchitectureIcon color="primary" />,
           path: '/dtc/usuario1/talleres' 
         },
+        { 
+          text: 'Personas Psiq', 
+          icon: <ArchitectureIcon color="primary" />,
+          path: '/dtc/usuario1/personaspsiq' 
+        },
 
         
   

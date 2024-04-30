@@ -42,7 +42,15 @@ const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 return data
        
   }
-
+  
+    //////desde el id usaurio coordinador
+    const listadepersonaspsiq = async () => {
+  
+      // const data = await axios.post('http://localhost:4000/signupp', datos)
+        const {data} = await axios.get(baseUrl+'listadepersonaspsiq/', config)
+  return data
+         
+    }
   
   const datosdechique = async (id) => {
   
@@ -129,7 +137,12 @@ return data
      return data   
  } 
  
-
+ const nuevapersonapsiq= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'nuevapersonapsiq',datos,config)
+   
+   return data   
+} 
  const traeractividades= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'traeractividades',datos,config)
@@ -219,4 +232,4 @@ const traercumples= async  (datos) => {
 }
 
 
-export default {borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {listadepersonaspsiq,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
