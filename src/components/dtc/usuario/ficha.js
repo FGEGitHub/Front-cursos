@@ -180,12 +180,13 @@ backgroundColor:'#b0bec5'        }}>
                 <Fragment>
                   { usuario ? <>
                   {usuario.nivel ==20?<>
-                  
+
                     <Borrarusuaio 
 
                         id ={chico.id}/>
                     <Modificar 
     id ={chico.id}
+    
     nombre={chico.nombre}
     apellido={chico.apellido}
        fecha_nacimiento={chico.fecha_nacimiento}
