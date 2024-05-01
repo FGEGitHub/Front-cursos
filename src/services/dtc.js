@@ -51,7 +51,14 @@ return data
   return data
          
     }
+    
+    const datosdepersonapsi = async (id) => {
   
+      // const data = await axios.post('http://localhost:4000/signupp', datos)
+        const {data} = await axios.get(baseUrl+'datosdepersonapsi/'+id, config)
+  return data
+         
+    }
   const datosdechique = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -232,4 +239,4 @@ const traercumples= async  (datos) => {
 }
 
 
-export default {listadepersonaspsiq,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

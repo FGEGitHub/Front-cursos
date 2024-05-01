@@ -125,7 +125,7 @@ import DtcMedtchiques from '../pages/dtc/nivel1/chiques';
 import DtcPersonal from '../pages/dtc/nivel1/personal';
 import Dtcusuario from '../pages/dtc/nivel1/usuario';
 import Dtcpersonal_psiq from '../pages/dtc/nivel1/personaspsiq';
-
+import Dtcpersonapsiq from '../pages/dtc/nivel1/personapsiq';
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
 import DTCactividadescarga from '../pages/dtc/cargaactividades';
@@ -266,8 +266,8 @@ const Rutas = [
 		{ path: '/dtc/usuario1/talleres', element: <Dtctalleres/> },
 		{ path: '/dtc/usuario1/taller/:id', element: <Dtctaller/> },
 		{ path: '/dtc/usuario1/personaspsiq', element: <Dtcpersonal_psiq/> },
+		{ path: '/dtc/usuario1/personapsiq/:id', element: <Dtcpersonapsiq/> },
 		
-
 
 		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
 		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },

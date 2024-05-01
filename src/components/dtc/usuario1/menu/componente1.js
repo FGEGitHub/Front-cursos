@@ -128,7 +128,7 @@ const traer = async () => {
     </Container>
 
 
-    {currentDate ? <>   <Asistencia fecha={currentDate} idt={238}/></>:<></>}
+    {currentDate ? <>   <Asistencia fecha={currentDate} idt={236}/></>:<></>}
     {actividades ? <> <Acordeon
           actividades={actividades}
 
