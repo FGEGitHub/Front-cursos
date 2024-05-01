@@ -32,7 +32,7 @@ export default function Clasenueva(props) {
         event.preventDefault();
         try {
 
-         const respuesta=  await servicioDtc.borrarusuariodtc({id:props.id})
+         const respuesta=  await servicioDtc.borrarusuariodtcpsiq({id:props.id})
          alert(respuesta)
          if(respuesta=="Usuario borrado"){
            navigate('/dtc/usuario1/chiques')
@@ -77,7 +77,7 @@ export default function Clasenueva(props) {
                 >
                     <DialogContent>
                         <DialogContentText>
-                           Seguro que quieres borrar alusuario?
+                           Seguro que quieres borrar al usuario?
                          
                         </DialogContentText>
                       

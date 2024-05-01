@@ -75,7 +75,7 @@ export default function SelectTextFields(props) {
         try {
             event.preventDefault();
 
-            const nov = await servicioDtc.modificarusuario(form)
+            const nov = await servicioDtc.modificarusuariopsiq(form)
 alert(nov)
         } catch (error) {
             console.error(error);
@@ -154,31 +154,7 @@ alert(nov)
                         fullWidth
                         variant="standard"
                     /><br/>
-                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                KID1/KID2/ADOLESCENTES
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.kid}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'kid',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'kid1'}>
-                             Kids1
-                        
-                        </option>
-                        <option value={'kid2'}>Kids2</option>
-                        <option value={'kid3'}>Adolescentes</option>
-
-                    </NativeSelect>
+                
                     <br />
                     <TextField
 
@@ -194,18 +170,7 @@ alert(nov)
                             shrink: true,
                         }}
                     />
-                    <TextField
-
-                        onChange={handleChange}
-                        name="primer_contacto"
-                        id="date"
-                        label="primer_contacto"
-                        type="date"
-                        defaultValue={props.primer_contacto} sx={{ width: 220 }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
+                  
                     <TextField
 
                         onChange={handleChange}
@@ -218,181 +183,7 @@ alert(nov)
                             shrink: true,
                         }}
                     />
-                    <TextField
-
-                        onChange={handleChange}
-                        name="admision"
-                        id="date"
-                        label="admision"
-                        type="date"
-                        defaultValue={props.admision}
-                        sx={{ width: 220 }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Autorizacion de imagen?
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.autorizacion_imagen}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'autorizacion_imagen',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Si'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Si
-                            </Typography>
-                        </option>
-                        <option value={'No'}>No</option>
-
-                    </NativeSelect>
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Fotocopia de DNI?
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.fotoc_dni}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'fotoc_dni',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Si'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Si
-                            </Typography>
-                        </option>
-                        <option value={'No'}>No</option>
-
-                    </NativeSelect>
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Fotocopia DNI Responsable?
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.fotoc_responsable}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'fotoc_responsable',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Si'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Si
-                            </Typography>
-                        </option>
-                        <option value={'No'}>No</option>
-
-                    </NativeSelect>
-
-
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Visita social?
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.visita_social}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'visita_social',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Si'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Si
-                            </Typography>
-                        </option>
-                        <option value={'No'}>No</option>
-
-                    </NativeSelect>
-
-
-
-
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Egreso del DTC
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.egreso}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'egreso',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Solo'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Solo
-                            </Typography>
-                        </option>
-                        <option value={'Con acompaniante'}>Con acompañante</option>
-
-                    </NativeSelect>
-
-
-
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                Dato escolar
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.dato_escolar}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'dato_escolar',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Turno maniana'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Turno mañana
-                            </Typography>
-                        </option>
-                        <option value={'Turno tarde'}>Turno tarde</option>
-                        <option value={'Turno noche'}>Turno noche</option>
-                        <option value={'Horario extendido'}>Horario extendido</option>
-                        <option value={'No asiste'}>No asiste</option>
-                        <option value={'Asiste'}>Asiste</option>
-                    </NativeSelect>
+                   
                     <TextField
 
                         margin="dense"
@@ -415,37 +206,7 @@ alert(nov)
                         fullWidth
                         variant="standard"
                     />
-                    <TextField
-
-                        margin="dense"
-                        defaultValue={props.tel_responsable}
-                        label="Telefono responsable"
-                        name="tel_responsable"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-
-                        margin="dense"
-                        defaultValue={props.aut_retirar}
-                        label="autorizado a retirar"
-                        name="aut_retirar"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-
-                        margin="dense"
-                        id="dni"
-                        defaultValue={props.hora_merienda}
-                        label="Hora merienda"
-                        name="hora_merienda"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
+                   
                     <TextField
 
                         margin="dense"

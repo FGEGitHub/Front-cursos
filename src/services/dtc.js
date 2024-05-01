@@ -163,6 +163,15 @@ return data
    
    return data   
 }
+
+
+const modificarusuariopsiq= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'modificarusuariopsiq',datos,config)
+   
+   return data   
+}
+
 const traeractividadeschico= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'traeractividadeschico',datos,config)
@@ -231,6 +240,12 @@ const borrarusuariodtc= async  (datos) => {
    return data  
 }
 
+const borrarusuariodtcpsiq= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'borrarusuariodtcpsiq',datos,config)
+   
+   return data  
+}
 const traercumples= async  (datos) => {
 
   const {data } = await axios.post(baseUrl+'traercumples',datos,config)
@@ -239,4 +254,4 @@ const traercumples= async  (datos) => {
 }
 
 
-export default {listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
