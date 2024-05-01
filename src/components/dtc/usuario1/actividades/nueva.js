@@ -82,24 +82,16 @@ export default function SelectTextFields(props) {
 
     return (
 
+<>
 
 
-
-        <Box
-
-            sx={{
-                '& .MuiTextField-root': { m: 1, width: '125ch' },
-            }}
-            noValidate
-            autoComplete="off"
-        >
+     
             < Tooltip title="Nueva Clase">
                 <Button variant="outlined" onClick={handleClickOpen}> Nuevo  </Button>
 
             </Tooltip>
-            <Dialog open={open} onClose={handleClose}   sx={{
-                width: '100%' 
-            }}>
+            <Dialog open={open} onClose={handleClose}   fullWidth={'fullWidth'}
+        maxWidth={'md'}>
                 <DialogContent>
 
 
@@ -150,7 +142,7 @@ export default function SelectTextFields(props) {
                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                         <Typography variant="p" component="div" color="black">
                             <StyledParagraph>
-                                Detalle:
+                                Detalle:{form.detalle? <>Caracteres: {form.detalle.length} / 600</>:<>Caracteres: 0/600</>}
                             </StyledParagraph>
                         </Typography>
                     </InputLabel>
@@ -169,7 +161,9 @@ export default function SelectTextFields(props) {
 
                         <>
                         {form.detalle && form.titulo ? <>
-                            <> <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></>
+                            <> {form.detalle ? <>
+                            {form.detalle.length<600 ? <><Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></>:<><Button variant="contained" color="primary" disabled> crear muchos caracteres {form.detalle.length} </Button></>}
+                        </>:<> <Button variant="contained" color="primary" disabled> crear </Button></>}</>
                             </>:<>                            <> <Button variant="contained" color="primary" onClick={handleDeterminar} disabled> crear </Button></>
 </>}
                         </>
@@ -179,8 +173,8 @@ export default function SelectTextFields(props) {
 
                 </DialogContent>
             </Dialog>
-        </Box >
-
+      
+            </>
 
     );
 }
