@@ -104,6 +104,7 @@ export default function Ingresos() {
                                     <MenuItem value={'20'}>1-DTC 1 admin</MenuItem>
                                     <MenuItem value={'21'}>1-DTC 2 tallerista</MenuItem>
                                     <MenuItem value={'22'}>1-DTC 3 cocina</MenuItem>
+                                    <MenuItem value={'22'}>1-DTC 4 turnos</MenuItem>
                                     
                                 </Select>
                             </FormControl>
