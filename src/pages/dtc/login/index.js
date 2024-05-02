@@ -41,10 +41,12 @@ export default function Paginas() {
            
                             navigate('/dtc/usuario1/menu')
                 break;
-                case 20:
+            
            
-                navigate('/dtc/usuario1/menu')
-    break;
+                case 23:
+                  navigate('/dtc/turnos/lista')
+                  break;
+   
            
             default:
                 

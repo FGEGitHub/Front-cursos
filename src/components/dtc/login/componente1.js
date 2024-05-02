@@ -91,6 +91,11 @@ const LoginForm = () => {
           case 22: navigate('/dtc/usuario2/asistencia')
           window.location.reload(true);
             break;
+
+
+            case 23:
+              navigate('/dtc/turnos/lista')
+              break;
         default: alert("error")
         break;
   

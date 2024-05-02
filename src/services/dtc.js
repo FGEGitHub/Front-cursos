@@ -108,6 +108,13 @@ return data
 return data
        
   }
+  const traertodoslosturnosaprobac = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traertodoslosturnosaprobac/', config)
+return data
+       
+  }
   
   const traerpresentes = async (id) => {
   
@@ -116,6 +123,14 @@ return data
 return data
        
   }
+  const traerparaturnos = async (fecha) => {
+  console.log(fecha)
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.post(baseUrl+'traerparaturnos/',fecha, config)
+return data
+       
+  }
+  
   const ponerpresente = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -124,6 +139,20 @@ return data
        
   }
   
+  const sacarturno = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.post(baseUrl+'sacarturno/',id, config)
+return data
+       
+  }
+  const agendarturno = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.post(baseUrl+'agendarturno/',id, config)
+return data
+       
+  }
   const subirlegajo= async  (datos) => {
 
     const {data } = await axios.post(baseUrl+'subirlegajo',datos,config)
@@ -254,4 +283,4 @@ const traercumples= async  (datos) => {
 }
 
 
-export default {borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {traertodoslosturnosaprobac,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

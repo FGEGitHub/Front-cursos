@@ -2,7 +2,7 @@
 
 
 
-import Asis from '../../../../components/dtc/usuario2/asistencia/tabla'
+import Asis from '../../../../components/dtc/turnos/lista'
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../components/dtc/usuario1/usuarios/todos'
 import React, { useEffect, useState } from "react";
@@ -44,7 +44,9 @@ export default function Paginas() {
              break;
              case 22:
               break;
-           //   navigate('/')
+              case 23:
+                break;
+           //   navigate('/dtc/turnos/lista')
            
            
             default:
