@@ -332,7 +332,7 @@ export default function Ingresos(props) {
     <div>
       {nuevos>0 ? <>    <Alert variant="filled" severity="success">
       
-        Tenes {nuevos} fiscales nuevos!
+       
 
 <Button  onClick={revisto}  variant='contained'>Ya revisè</Button>
       </Alert></>:<></>}
@@ -341,7 +341,6 @@ export default function Ingresos(props) {
         
       </> : <></>}
 
-      {vista ? <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a Vista de pc <ComputerTwoToneIcon /></Button></> : <><Button variant='contained' onClick={cambiarvista} color='success'>Cambiar a vista de dispositivo movil <MobileScreenShareTwoToneIcon /></Button></>}
 
       {vista ? <>
         {inscrip.length > 0 ? <>

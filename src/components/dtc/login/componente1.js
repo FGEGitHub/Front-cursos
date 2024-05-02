@@ -88,7 +88,7 @@ const LoginForm = () => {
         case 21: navigate('/dtc/usuario2/asistencia')
         window.location.reload(true);
           break;
-          case 22: navigate('/dtc/usuario2/asistencia')
+          case 22: navigate('/dtc/cocina')
           window.location.reload(true);
             break;
 
