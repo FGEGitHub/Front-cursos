@@ -99,7 +99,23 @@ return data
   }
 
 
+  const restar1 = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'restar1/'+id, config)
+return data
+       
+  }
 
+  
+
+  const sumar1 = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'sumar1/'+id, config)
+return data
+       
+  }
 
   const traertalleres = async (id) => {
   
@@ -291,4 +307,4 @@ const traercumples= async  (datos) => {
 }
 
 
-export default {traertodoslosturnosaprobac,clasificarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {restar1,sumar1,traertodoslosturnosaprobac,clasificarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
