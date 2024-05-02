@@ -178,21 +178,22 @@ export default function Ingresos(props) {
     );
   }
 
-  const cambiarvista = () => {
-    setVista(!vista);
+
+
+
+  const numerosEnPalabras = {
+    0: 'ninguna',
+    1: 'una',
+    2: 'dos',
+    3: 'tres',
+    4: 'cuatro',
+    5: 'cinco',
+    6: 'seis',
+    7: 'siete',
+    8: 'ocho',
+    9: 'nueve',
+    10: 'diez'
   };
-
-
-  function CutomButtonsRenderer2contactado(dataIndex, rowIndex, data, onClick) {
-    return (
-      <>
-
-{inscrip[dataIndex].checkk == null  || inscrip[dataIndex].checkk == 'No'? <>  No contactado <Checkbox   onClick={() => checkede(inscrip[dataIndex].id)}  {...label} /> </>:<> Ya contactado <Checkbox onClick={() => checkede(inscrip[dataIndex].id)}  {...label}  /></>}
-
-      </>
-
-    );
-  }
 
   const columns = [
     {
@@ -302,10 +303,10 @@ export default function Ingresos(props) {
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="Raciones">
 
-                  Restar<RemoveCircleRoundedIcon onClick={() => checkede(row.id)}  {...label}  /> ({row.racion}) Añadir<AddCircleRoundedIcon   onClick={() => checkedemas(row.id)}  {...label} />
+                  Restar<RemoveCircleRoundedIcon onClick={() => checkede(row.id)}  {...label}  /> <b>({row.racion}) {numerosEnPalabras[row.racion]}  </b> <AddCircleRoundedIcon   onClick={() => checkedemas(row.id)}  {...label} />Añadir
                  
                 </StyledTableCell>
-                <StyledTableCell align="left" data-label="telefono">
+                <StyledTableCell align="left" data-label="Kid">
                   {row.kid}
                 </StyledTableCell>
            {/*      <StyledTableCell align="left" data-label="telefono alternativo">
