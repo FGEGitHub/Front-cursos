@@ -300,7 +300,7 @@ export default function Ingresos(props) {
                 <StyledTableCell align="left" data-label="Nombre">
                   {row.nombre}
                 </StyledTableCell>
-                <StyledTableCell align="left" data-label="Presente">
+                <StyledTableCell align="left" data-label="Raciones">
 
                   Restar<RemoveCircleRoundedIcon onClick={() => checkede(row.id)}  {...label}  /> ({row.racion}) Añadir<AddCircleRoundedIcon   onClick={() => checkedemas(row.id)}  {...label} />
                  
