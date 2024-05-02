@@ -25,6 +25,7 @@ import {
     useTheme,
     Button
 } from '@material-ui/core';
+import Clasificar from './clasificar'
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 
@@ -195,18 +196,27 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-                <div onClick={() => navigate('/dtc/usuario1/personapsiq/' + chicos[dataIndex]['id'])} >
-
-                    < Tooltip title="Ver">
-                        <Button  onClick={() => navigate('/dtc/usuario1/personapsiq/' + chicos[dataIndex]['id'])} variant="contained">
-Ver                        </Button>
-                    </Tooltip>
-
-
-
-
-                </div>
-
+              <Clasificar 
+              id={chicos[dataIndex]['id']}
+              traer={async () => {
+                try {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                    if (loggedUserJSON) {
+                        const usuario = JSON.parse(loggedUserJSON)
+        
+                        setUsuario(usuario)
+        
+                        const novedades_aux = await servicioDtc.traertodoslosturnosaprobac()
+                        setchicos(novedades_aux[0])
+                        setDatos(novedades_aux[1])
+                    }
+        
+                } catch (error) {
+        
+                }
+        
+            }}/>
+           
 
             </>
         );
@@ -217,6 +227,12 @@ Ver                        </Button>
 
     // definimos las columnas
     const columns = [
+      
+        {
+            name: "dni",
+            label: "dni",
+
+        },
         {
             name: "apellido",
             label: "apellido",
@@ -227,18 +243,18 @@ Ver                        </Button>
             label: "nombre",
 
         },
-    
+        {
+          name: "fecha",
+          label: "fecha de cita",
+
+      },
     
         {
-            name: "fecha_nacimiento",
-            label: "Fecha de nacimiento",
+          name: "estado",
+          label: "estado",
 
-        },
-        {
-            name: "observaciones",
-            label: "observaciones",
-
-        },
+      },
+      
 
         {
             name: "Ver",
@@ -269,7 +285,7 @@ Ver                        </Button>
   >
    
     { datos ? <>  <Alert variant="filled" severity="success">
- <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
+ <b> Actualmente pendientes {datos.pendientes}</b>
 </Alert> </>:<></>}
 
             <h2>Lista de chicos</h2>
@@ -373,7 +389,7 @@ Ver                        </Button>
 
                             </></>}
 
-                    </> : <> <h2>El curso aun no tiene chicos</h2></>}
+                    </> : <> <h2>No hay turnos aun</h2></>}
 
 
 

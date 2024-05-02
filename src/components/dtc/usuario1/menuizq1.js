@@ -100,7 +100,11 @@ export default function MenuIzq2 ({children}) {
           icon: <ArchitectureIcon color="primary" />,
           path: '/dtc/usuario1/personaspsiq' 
         },
-
+        { 
+          text: 'Turnos psiq', 
+          icon: <ArchitectureIcon color="primary" />,
+          path: '/dtc/usuario1/turnos' 
+        },
         
   
       ];

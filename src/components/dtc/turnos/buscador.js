@@ -42,7 +42,8 @@ const MobileAutocomplete = (props) => {
      alert(ta)
       // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
       // Ejemplo: axios.post('/api/backend', { selectedValue });
-      props.traer()
+   
+      props.traer({fecha:form.fecha})
     }
   };
   const ir = async () => {
