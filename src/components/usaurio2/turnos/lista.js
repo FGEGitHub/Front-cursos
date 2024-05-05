@@ -206,7 +206,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.descripcion}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.coordinador}</StyledTableCell>
               <StyledTableCell  onClick={() => navigate('/administracion/turno/'+row.id)} >{row.encargado}</StyledTableCell>
-              <StyledTableCell > {row.cantidad}/60  </StyledTableCell>
+              <StyledTableCell > {row.cantidad}/60 ({row.confirmadas} confirmadas ) </StyledTableCell>
   
 
               <StyledTableCell style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >  < Tooltip title="ir al turno">

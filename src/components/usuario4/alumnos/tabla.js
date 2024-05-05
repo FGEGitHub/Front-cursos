@@ -131,16 +131,11 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "tel2",
-            label: "Telefono alternativo",
+            name: "Estado",
+            label: "estado",
 
         },
 
-        {
-            name: "observaciones",
-            label: "Estado",
-
-        },
         {
             name: "Presente/ausente/Sin tomar",
             options: {
@@ -192,7 +187,7 @@ const TablaNotificaciones = (props) => {
             <StyledTableCell>APELLDO</StyledTableCell>
             <StyledTableCell >NOMBRE</StyledTableCell>
             <StyledTableCell  >TELEFONO</StyledTableCell>
-            <StyledTableCell  >TELEFONO 2</StyledTableCell>
+            <StyledTableCell  >ESTADO</StyledTableCell>
             <StyledTableCell align="left">Presente/Ausente/Sin tomar</StyledTableCell>
             <StyledTableCell  >Porcentaje</StyledTableCell>
             <StyledTableCell  >Estado</StyledTableCell>
@@ -207,7 +202,7 @@ const TablaNotificaciones = (props) => {
               <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
               <StyledTableCell >{row.tel}</StyledTableCell>
-              <StyledTableCell >{row.tel2}</StyledTableCell>
+              <StyledTableCell >{row.estado}</StyledTableCell>
               <StyledTableCell >{row.presentes}/{row.ausentes}/{row.sintomar}</StyledTableCell>
               <StyledTableCell >{row.presentes*100 / (row.presentes+row.ausentes +row.sintomar)}%</StyledTableCell>
               <StyledTableCell >{row.observaciones}</StyledTableCell> 
