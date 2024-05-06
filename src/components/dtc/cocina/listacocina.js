@@ -83,7 +83,7 @@ export default function Ingresos(props) {
   const[usu, setUsu] = useState();
   const [vista, setVista] = useState(true);
   const [cantidad, setCantidad] = useState([]);
-  const [supl, setPubl] = useState([]);
+  const [raciones, setRaciones] = useState();
   const [nuevos, setNuevos] = useState([]);
   const [currentColor, setCurrentColor] = useState('blue');
   const [currentDate, setCurrentDate] = useState('');
@@ -118,6 +118,8 @@ export default function Ingresos(props) {
       const  historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:props.idt == undefined ? user.id:props.idt}:{fecha:props.fecha,id:props.idt == undefined ? user.id:props.idt})
      console.log(historial)
       setInscrip(historial[0])
+      setDatos(historial[2])
+      setRaciones(historial[3])
     
     }
     
@@ -290,7 +292,11 @@ export default function Ingresos(props) {
   const CustomTable = ({ inscrip }) => {
     return (
       <Box sx={{ overflowX: 'auto' }}>
+        {datos  ? <>      <h4>Lista de presentes (  { inscrip ?inscrip.length:<></> } ) </h4>
+        <h4>Cantidad de raciones (  { raciones ? raciones:<></> } ) </h4>
+                                        Kid1:{datos.kid1}, Kid2:{datos.kid2}, Adolescentes:{datos.kid3}</>:<></>}
         <ResponsiveTable aria-label="customized table">
+
           <TableBody>
             {inscrip.map((row) => (
               <StyledTableRow key={row.name}>

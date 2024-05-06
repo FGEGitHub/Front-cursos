@@ -15,9 +15,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-
-
+import ListItem from '@mui/material/ListItem';
+import servicioDtc from '../../services/dtc'
 import MenuIcon from "@mui/icons-material/Menu";
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied'
 const pages = [
   "Inicio",
   "actividades",
@@ -33,31 +34,38 @@ const pagesdeslogueado = [
 
 const DrawerNav = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [nombre, setNombre] = useState(null)
-  const [notificacioness, setNotificacioness] = useState();
+  const [cumple, setCumple] = useState()
+  const [estemes, setEstemes] = useState()
   const [usuario, setUsuario] = useState(null)
 
   const navigate = useNavigate();
-
-
   useEffect(() => {
-    cantidadnoti()
-  }, [])
-  const cantidadnoti = async () => {
+    traer()
+
+
+
+}, [])
+  const traer = async () => {
     try {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-      if (loggedUserJSON) {
-        const usuario = JSON.parse(loggedUserJSON)
-        //  console.log(usuario.cuil_cuit)
-        setUsuario(usuario)
+       
+  
+  
+            const today = new Date();
+            const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+  console.log(formattedDate)
+          //  setCurrentDate(formattedDate);
+            const historial = await servicioDtc.traercumples({fecha:formattedDate})
 
-      }
-
+  setCumple(historial[0])  
+  setEstemes(historial[1])  
+  
+   
     } catch (error) {
-
+  
     }
-    //
+  
   }
+
   const handleClick = () => {
     navigate("/encargados/cursos");
   };
@@ -182,7 +190,37 @@ const DrawerNav = () => {
               ))} </List></>
           }
 
-
+{cumple ? <>
+       { cumple.length>0? <>
+        {cumple.map((item) => (
+            <ListItem 
+             
+            >
+              
+              HOY HAY CUMPLE
+              <p sx={{color:'white'}}>{item.nombre}  {item.apellido} </p>
+            
+            </ListItem>
+          ))}
+       
+       </>:<><p sx={{color:'white'}}>Hoy no hay cumples <SentimentVeryDissatisfiedIcon/> </p></>}
+        
+        </>:<></>}
+        {estemes ? <>
+       { estemes.length>0? <>
+       Cumples este mes
+        {estemes.map((item) => (
+            <ListItem 
+             
+            >
+              <ListItemIcon sx={{color:'black'}}>{item.nombre} {item.apellido} <br/>el dia ({item.fecha_nacimiento})</ListItemIcon>
+            
+            </ListItem>
+          ))}
+       
+       </>:<></>}
+        
+        </>:<></>}
 
         </Drawer>
         <IconButton
