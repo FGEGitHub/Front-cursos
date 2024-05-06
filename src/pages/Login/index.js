@@ -30,7 +30,7 @@ export default function Paginas() {
               break;
           
             case 3:
-              navigate('encargados/cursos')
+              navigate('/encargados/cursos')
             //  navigate('/coordinadores/novedades')
               break;
 
