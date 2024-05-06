@@ -89,9 +89,7 @@ export default function Clasenueva(props) {
                             >
                                 <option value={'Sin determinar'} >Elegir</option>
                                 <option value={'Aprobado'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
                                     Aprobado
-                                    </Typography>
                                 </option>
                                 <option value={'Rechazado'}>Rechazado</option>
 

@@ -139,7 +139,7 @@ import DTCpresentes from '../pages/dtc/libre/asistencia';
 import Dtctalleres from '../pages/dtc/nivel1/talleres';
 import Dtctaller from '../pages/dtc/nivel1/taller';
 import Dtcturnosadmin from '../pages/dtc/nivel1/turnosadmin';
-
+import Dtcturnopsic from '../pages/dtc/psicologa';
 
 
 import CargarExcel from '../pages/subirexcel'
@@ -276,6 +276,9 @@ const Rutas = [
 		{ path: '/dtc/usuario1/personapsiq/:id', element: <Dtcpersonapsiq/> },
 		{ path: '/dtc/turnos/lista', element: <Dtcturnos/> },
 		{ path: '/dtc/usuario1/turnos', element: <Dtcturnosadmin/> },
+		
+		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
+
 
 		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
 		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },

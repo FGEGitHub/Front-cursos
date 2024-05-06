@@ -46,7 +46,9 @@ export default function Paginas() {
                 case 23:
                   navigate('/dtc/turnos/lista')
                   break;
-   
+                  case 24:
+                    navigate('/dtc/psicologa/turnos')
+                    break;
            
             default:
                 

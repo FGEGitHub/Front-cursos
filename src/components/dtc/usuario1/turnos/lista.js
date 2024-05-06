@@ -334,6 +334,9 @@ const TablaNotificaciones = (props) => {
                                                 <TableRow>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fecha</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Estado</b></TableCell>
+
                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
 
 
@@ -347,7 +350,28 @@ const TablaNotificaciones = (props) => {
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido} {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <AccountBoxIcon onClick={() => navigate('/dtc/usuario1/personapsiq/' + row.id)} /> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.fecha} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
+
+                                                        <StyledTableCell component="th" scope="row">  <Clasificar id={row.id}
+              traer={async () => {
+                try {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                    if (loggedUserJSON) {
+                        const usuario = JSON.parse(loggedUserJSON)
+        
+                        setUsuario(usuario)
+        
+                        const novedades_aux = await servicioDtc.traertodoslosturnosaprobac()
+                        setchicos(novedades_aux[0])
+                        setDatos(novedades_aux[1])
+                    }
+        
+                } catch (error) {
+        
+                }
+        
+            }}/> </StyledTableCell>
 
 
 

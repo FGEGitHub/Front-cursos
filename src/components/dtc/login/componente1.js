@@ -66,6 +66,9 @@ const LoginForm = () => {
         case 23:
           navigate('/dtc/turnos/lista')
           break;
+          case 24: navigate('/dtc/psicologa/turnos')
+          window.location.reload(true);
+          break;
 
         default:
           window.localStorage.removeItem('loggedNoteAppUser')
@@ -106,6 +109,10 @@ const LoginForm = () => {
       case 23:
         navigate('/dtc/turnos/lista')
         break;
+        case 24:
+          navigate('/dtc/psicologa/turnos')
+          window.location.reload(true);
+          break;
       default: alert("error")
         break;
 
