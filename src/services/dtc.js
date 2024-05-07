@@ -307,4 +307,10 @@ const traercumples= async  (datos) => {
 }
 
 
-export default {restar1,sumar1,traertodoslosturnosaprobac,clasificarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+const traerracionesmes= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'traerracionesmes',datos,config)
+   
+   return data  
+}
+export default {traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,clasificarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

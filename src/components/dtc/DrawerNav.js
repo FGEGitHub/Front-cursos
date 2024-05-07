@@ -25,6 +25,13 @@ const pages = [
   
   ,
   "Cerrar Sesión"];
+  const pages2 = [
+    "Inicio",
+    "actividades",
+    "raciones",
+    
+    ,
+    "Cerrar Sesión"];
 const pagesdeslogueado = [
   "Iniciar sesion ",
   "Nosotros",
@@ -47,18 +54,24 @@ const DrawerNav = () => {
 }, [])
   const traer = async () => {
     try {
-       
-  
   
             const today = new Date();
             const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-  console.log(formattedDate)
+
           //  setCurrentDate(formattedDate);
             const historial = await servicioDtc.traercumples({fecha:formattedDate})
 
   setCumple(historial[0])  
   setEstemes(historial[1])  
+  const loggedUserJSON = await window.localStorage.getItem('loggedNoteAppUser')
+
+  if (loggedUserJSON) {
+    const user = JSON.parse(loggedUserJSON)
+    setUsuario(user)
+    
+  }
   
+
    
     } catch (error) {
   
@@ -70,20 +83,18 @@ const DrawerNav = () => {
     navigate("/encargados/cursos");
   };
   const iraMenu = () => {
-    navigate("/dtc/usuario2/asistencia");
+    navigate("/");
   };
-  const irNosotros = () => {
-    navigate("/usuario/nosotros");
+  const irraciones = () => {
+    navigate("/dtc/usuario2/raciones");
   }
   const irContacto = () => {
-    navigate("/usuario/contacto");
+    navigate("/");
   }
   const iaActividades = () => {
     navigate("/dtc/actividades");
   }
-  const nomb = () => {
-    navigate("/usuario/datosPers");
-  };
+
   const notif = () => {
     window.localStorage.removeItem('loggedNoteAppUser')
     navigate("/dtc/login")
@@ -116,12 +127,12 @@ const DrawerNav = () => {
         iaActividades()
         break;
       case 2:
+        irraciones()
+        break;
+      case 3:
         hanleLogout()
         break;
-      case 2:
-        irContacto()
-        break;
-        case 3:
+        case 4:
           notif()
           break;
           case 4:
@@ -171,14 +182,28 @@ const DrawerNav = () => {
         >
 
           {usuario ? <>
-            <List>
-              {pages.map((page, index) => (
+          
+
+              {usuario.nivel==22 ? <>
+              
+                <List>
+              {pages2.map((page, index) => (
                 <ListItemButton key={index}>
                   <ListItemIcon>
                     <ListItemText onClick={() => CutomButtonsRenderer(page, index)} >  {page}  </ListItemText>
                   </ListItemIcon>
                 </ListItemButton>
               ))} </List>
+              
+              </>:<>
+              <List>
+              {pages.map((page, index) => (
+                <ListItemButton key={index}>
+                  <ListItemIcon>
+                    <ListItemText onClick={() => CutomButtonsRenderer(page, index)} >  {page}  </ListItemText>
+                  </ListItemIcon>
+                </ListItemButton>
+              ))} </List></>}
           </> : <>
             <List>
               {pagesdeslogueado.map((page, index) => (

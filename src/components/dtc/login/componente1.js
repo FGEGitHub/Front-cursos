@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     backgroundColor: '#607d8b', // Cambiar el color de fondo aquí
     padding: theme.spacing(2),
-    backgroundImage:Logo,
+    backgroundImage: Logo,
     borderRadius: theme.spacing(2),
     color: 'white'
   },
@@ -50,16 +50,26 @@ const LoginForm = () => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      
+
       switch (user.nivel) {
         case 20:
           navigate('/dtc/usuario1/menu')
           break;
+        case 21: navigate('/dtc/usuario2/asistencia')
+          window.location.reload(true);
+          break;
+        case 22: navigate('/dtc/cocina')
+          window.location.reload(true);
+          break;
 
-        
-          default:
-            window.localStorage.removeItem('loggedNoteAppUser')
-            navigate('/dtc/login')
+
+        case 23:
+          navigate('/dtc/turnos/lista')
+          break;
+
+        default:
+          window.localStorage.removeItem('loggedNoteAppUser')
+          navigate('/dtc/login')
           break;
       }
     }
@@ -67,40 +77,40 @@ const LoginForm = () => {
 
   const handleChange = (e) => {
 
-    setForm({...form,[e.target.name]: e.target.value});
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user= await servicioLogin.login(form)
+    const user = await servicioLogin.login(form)
     window.localStorage.setItem(
       'loggedNoteAppUser', JSON.stringify(user)
     )
 
-   // servicioUsuario.setToken(user.token)
-  
-    switch(user.nivel){
+    // servicioUsuario.setToken(user.token)
+
+    switch (user.nivel) {
       case 20: navigate('/dtc/usuario1/menu')
-      window.location.reload(true);
-        break;
-        case 21: navigate('/dtc/usuario2/asistencia')
         window.location.reload(true);
-          break;
-          case 22: navigate('/dtc/cocina')
-          window.location.reload(true);
-            break;
-
-
-            case 23:
-              navigate('/dtc/turnos/lista')
-              break;
-        default: alert("error")
         break;
-  
-  };
-}
+      case 21: navigate('/dtc/usuario2/asistencia')
+        window.location.reload(true);
+        break;
+      case 22: navigate('/dtc/cocina')
+        window.location.reload(true);
+        break;
+
+
+      case 23:
+        navigate('/dtc/turnos/lista')
+        break;
+      default: alert("error")
+        break;
+
+    };
+  }
 
   const isLogo = {
     width: "80%",
@@ -109,11 +119,11 @@ const LoginForm = () => {
   return (<>
 
     <Container component="main" maxWidth="xs">
-    {/* <Navbar/> */}
+      {/* <Navbar/> */}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <img src={Logo} style={isLogo} alt="logo" /> 
+          <img src={Logo} style={isLogo} alt="logo" />
         </Avatar>
         <Typography component="h1" variant="h5">
           Ingresar
@@ -128,7 +138,7 @@ const LoginForm = () => {
             label="Usuario"
             name="usuario"
             autoComplete="email"
-       
+
             onChange={handleChange}
           />
           <TextField
@@ -141,7 +151,7 @@ const LoginForm = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-           
+
             onChange={handleChange}
           />
           <Button
@@ -153,13 +163,13 @@ const LoginForm = () => {
           >
             Ingresar
           </Button>
-        
+
         </form>
-     
+
         {/* <Registro/> */}
       </div>
     </Container>
-    </>
+  </>
   );
 };
 
