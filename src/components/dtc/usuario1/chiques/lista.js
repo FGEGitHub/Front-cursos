@@ -227,7 +227,10 @@ Ver                        </Button>
             label: "nombre",
 
         },
-    
+        {
+          name: "dni",
+          label: "dni",
+      },
     
         {
             name: "fecha_nacimiento",
