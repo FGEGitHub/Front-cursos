@@ -5,6 +5,7 @@ import servicioDtc from '../../../services/dtc'
 import Modificar from './modificar'
 import Modalperfil from './modaldeperfil'
 import Borrarusuaio from "./modalborrarusuario"
+import Vinculos from './modalvinculos'
 import Avatar from "@mui/material/Avatar";
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = (props) => {
@@ -12,6 +13,7 @@ const FichaPersona = (props) => {
     let id = params.id
     const [chico, setchico] = useState()
     const [nivel, setNivel] = useState()
+    const [vinculos, setVinculos] = useState()
     const [usuario, setUsuario] = useState()
     const [showAllData, setShowAllData] = useState(false);
     const [foto, setfoto] = useState()
@@ -36,6 +38,7 @@ const FichaPersona = (props) => {
                 const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
                 setfoto(novedades_aux[1])
                 setchico(novedades_aux[0][0])
+                setVinculos(novedades_aux[2])
             }
 
         } catch (error) {
@@ -69,6 +72,7 @@ backgroundColor:'#b0bec5'        }}>
                         const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
                         setfoto(novedades_aux[1])
                         setchico(novedades_aux[0][0])
+                        setVinculos(novedades_aux[2])
                     }
         
                 } catch (error) {
@@ -127,7 +131,18 @@ backgroundColor:'#b0bec5'        }}>
             <Typography color="textSecondary">Egreso:</Typography>
             <Typography>{chico.egreso}</Typography>
           </Grid>
-  
+          <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">Escuela:</Typography>
+            <Typography>{chico.escuela}</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">Grado:</Typography>
+            <Typography>{chico.grado}</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography color="textSecondary">Fines:</Typography>
+            <Typography>{chico.fines}</Typography>
+          </Grid>
   
        
                   <Grid item xs={12} sm={6}>
@@ -206,6 +221,9 @@ backgroundColor:'#b0bec5'        }}>
        aut_retirar={chico.aut_retirar}
        dato_escolar={chico.dato_escolar}
        kid={chico.kid}
+       escuela= {chico.escuela}
+       grado= {chico.grado}
+       fines={chico.fines}
        hora_merienda={chico.hora_merienda}
        traer ={async () => {
         try {
@@ -232,6 +250,11 @@ backgroundColor:'#b0bec5'        }}>
               )}
     
     </>:<>Cargando</>}
+    <Vinculos/>
+ 
+    { vinculos ? <>  {vinculos.length>0 ?<>  {vinculos.map((ob)=><>
+              {ob.nombre}, { ob.apellido},  {ob.vinculoo } <br/>
+           </> )}  </>:<>Sin vinculos</>}     </>:<></>}
     </>
   );
 };

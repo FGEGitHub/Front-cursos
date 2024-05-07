@@ -173,7 +173,7 @@ const TablaNotificaciones = (props) => {
           '&:hover': { border: '1px solid #ccc' },
         }}
       > <Typography variant="body1" style={{ color: 'black' }}>
-            <h2>Lista de actividades</h2></Typography>
+            <h2>Lista de intervenciones</h2></Typography>
             {actividades ? <>
                 <div>
 

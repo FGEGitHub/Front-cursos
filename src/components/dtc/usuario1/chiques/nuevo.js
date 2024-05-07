@@ -40,6 +40,9 @@ export default function SelectTextFields(props) {
     aut_retirar:"Sin determinar",
     dato_escolar:"Sin determinar",
     hora_merienda:"Sin determinar",
+    escuela:"escuela",
+    fines:"fines",
+    grado:"grado",
   })
   const [datos, setDatos] = useState()
   const [activo, setActivo] = useState(false)
@@ -433,6 +436,36 @@ InputLabelProps={{
               
               label="Hora merienda"
               name="hora_merienda"
+              onChange={handleChange}
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Escuela"
+              name="escuela"
+              onChange={handleChange}
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Grado"
+              name="grado"
+              onChange={handleChange}
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Fines"
+              name="fines"
               onChange={handleChange}
               fullWidth
               variant="standard"

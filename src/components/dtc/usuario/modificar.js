@@ -43,6 +43,9 @@ export default function SelectTextFields(props) {
         aut_retirar: props.aut_retirar,
         dato_escolar: props.dato_escolar,
         hora_merienda: props.hora_merienda,
+        escuela: props.escuela,
+        grado: props.grado,
+        fines:props.fines,
     })
     const [datos, setDatos] = useState()
     const [activo, setActivo] = useState(false)
@@ -446,6 +449,39 @@ alert(nov)
                         fullWidth
                         variant="standard"
                     />
+                      <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Escuela"
+              name="escuela"
+              onChange={handleChange}
+              defaultValue={props.escuela}
+
+              variant="standard"
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Grado"
+              name="grado"
+              onChange={handleChange}
+              defaultValue={props.grado}
+
+              variant="standard"
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Fines"
+              name="fines"
+              onChange={handleChange}
+              defaultValue={props.fines}
+
+              variant="standard"
+            />
                     <TextField
 
                         margin="dense"
