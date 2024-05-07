@@ -36,7 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
-    
+
   },
 }));
 
@@ -80,7 +80,7 @@ export default function Ingresos(props) {
   const navigate = useNavigate();
 
   const [inscrip, setInscrip] = useState([]);
-  const[usu, setUsu] = useState();
+  const [usu, setUsu] = useState();
   const [vista, setVista] = useState(true);
   const [cantidad, setCantidad] = useState([]);
   const [raciones, setRaciones] = useState();
@@ -105,70 +105,82 @@ export default function Ingresos(props) {
   const traer = async () => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
     if (loggedUserJSON) {
-        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-   
-        const user = JSON.parse(loggedUserJSON)
-       
-      
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+
+      const user = JSON.parse(loggedUserJSON)
+
+
       const today = new Date();
       const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-  
-      props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
-      
-      const  historial = await servicioDtc.traerpresentes(props.fecha == undefined ? {fecha:formattedDate,id:props.idt == undefined ? user.id:props.idt}:{fecha:props.fecha,id:props.idt == undefined ? user.id:props.idt})
-     console.log(historial)
+
+      props.fecha == undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.fecha)
+
+      const historial = await servicioDtc.traerpresentes(props.fecha == undefined ? { fecha: formattedDate, id: props.idt == undefined ? user.id : props.idt } : { fecha: props.fecha, id: props.idt == undefined ? user.id : props.idt })
+      console.log(historial)
       setInscrip(historial[0])
       setDatos(historial[2])
       setRaciones(historial[3])
-    
+
     }
-    
-   
+
+
 
     // 
 
   };
   const checkede = async (id) => {
     console.log(id)
-     const rta= await servicioDtc.restar1(id)
-     console.log(rta)
+    const rta = await servicioDtc.restar1(id)
+    console.log(rta)
     traer()
   };
-  const checkedemas= async (id) => {
+  const checkedep = async (id) => {
     console.log(id)
-    const rta=  await servicioDtc.sumar1(id)
+    const rta = await servicioDtc.restar1p(id)
+    console.log(rta)
+    traer()
+  };
+  const checkedemasp = async (id) => {
+    console.log(id)
+    const rta = await servicioDtc.sumar1p(id)
+    console.log(rta)
+    traer()
+  };
+  const checkedemas = async (id) => {
+    console.log(id)
+    const rta = await servicioDtc.sumar1(id)
     console.log(rta)
     traer()
   };
   const revisto = async (id) => {
     console.log(id)
-    const rta=  await servicioDtc.revisto(usu.id)
-     alert(rta)
+    const rta = await servicioDtc.revisto(usu.id)
+    alert(rta)
     traer()
- 
+
   };
- 
 
-  function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
+
+  function CutomButtonsRenderercapa(dataIndex, rowIndex, data, onClick) {
     return (
       <>
-   {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></>:<><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p></>}
+        {inscrip[dataIndex].capacitado === 'No' ? <><p style={{ color: 'warning' }} >No Capacitado</p></> : <><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon /></p></>}
 
       </>
 
     );
   }
-  function CutomButtonsRenderercapa (dataIndex, rowIndex, data, onClick) {
+  function CutomButtonsRenderercapa(dataIndex, rowIndex, data, onClick) {
     return (
       <>
-   {inscrip[dataIndex].capacitado === 'Si'  ? <><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon/></p> </>:<><p style={{ color: 'warning' }} >No Capacitado</p></>}
+        {inscrip[dataIndex].capacitado === 'Si' ? <><p style={{ color: 'green' }} >Capacitado<SchoolTwoToneIcon /></p> </> : <><p style={{ color: 'warning' }} >No Capacitado</p></>}
 
       </>
 
     );
   }
-  
-  
+
+
   function CutomButtonsRenderer2(dataIndex, rowIndex, data, onClick) {
     return (
       <>
@@ -224,7 +236,7 @@ export default function Ingresos(props) {
       label: "escuela",
 
     },
- 
+
 
     {
       name: "telefono",
@@ -245,7 +257,7 @@ export default function Ingresos(props) {
       }
 
     },
-        {
+    {
       name: "Capacitado",
       options: {
         customBodyRenderLite: (dataIndex, rowIndex) =>
@@ -258,33 +270,33 @@ export default function Ingresos(props) {
       }
 
     },
-    
-  /*   {
-      name: "Contactado",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-        CutomButtonsRenderer2contactado(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
 
-    },
-    {
-      name: "Acciones/llamado",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          CutomButtonsRenderer(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    }, */
+    /*   {
+        name: "Contactado",
+        options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+          CutomButtonsRenderer2contactado(
+              dataIndex,
+              rowIndex,
+              // overbookingData,
+              // handleEditOpen
+            )
+        }
+  
+      },
+      {
+        name: "Acciones/llamado",
+        options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+            CutomButtonsRenderer(
+              dataIndex,
+              rowIndex,
+              // overbookingData,
+              // handleEditOpen
+            )
+        }
+  
+      }, */
 
   ];
 
@@ -292,35 +304,41 @@ export default function Ingresos(props) {
   const CustomTable = ({ inscrip }) => {
     return (
       <Box sx={{ overflowX: 'auto' }}>
-        {datos  ? <>      <h4>Lista de presentes (  { inscrip ?inscrip.length:<></> } ) </h4>
-        <h4>Cantidad de raciones (  { raciones ? raciones:<></> } ) </h4>
-                                        Kid1:{datos.kid1}, Kid2:{datos.kid2}, Adolescentes:{datos.kid3}</>:<></>}
+        {datos ? <>      <h4>Lista de presentes (  {inscrip ? inscrip.length : <></>} ) </h4>
+          <h4>Cantidad de raciones (  {raciones ? raciones : <></>} ) </h4>
+          Kid1:{datos.kid1}, Kid2:{datos.kid2}, Adolescentes:{datos.kid3}</> : <></>}
         <ResponsiveTable aria-label="customized table">
 
           <TableBody>
             {inscrip.map((row) => (
               <StyledTableRow key={row.name}>
-               
+
                 <StyledTableCell align="left" data-label="Apellido">
                   {row.apellido}
                 </StyledTableCell>
                 <StyledTableCell align="left" data-label="Nombre">
                   {row.nombre}
                 </StyledTableCell>
-                <StyledTableCell align="left" data-label="Raciones">
+                <StyledTableCell align="left" data-label="Premerienda">
 
-                  Restar<RemoveCircleRoundedIcon onClick={() => checkede(row.id)}  {...label}  /> <b>({row.racion}) {numerosEnPalabras[row.racion]}  </b> <AddCircleRoundedIcon   onClick={() => checkedemas(row.id)}  {...label} />Añadir
-                 
+                  Restar<RemoveCircleRoundedIcon onClick={() => checkedep(row.id)}  {...label} /> <b>({row.premerienda}) {numerosEnPalabras[row.premerienda]}  </b> <AddCircleRoundedIcon onClick={() => checkedemasp(row.id)}  {...label} />Añadir
+
                 </StyledTableCell>
+                <StyledTableCell align="left" data-label="Merienda">
+
+                  Restar<RemoveCircleRoundedIcon onClick={() => checkede(row.id)}  {...label} /> <b>({row.racion}) {numerosEnPalabras[row.racion]}  </b> <AddCircleRoundedIcon onClick={() => checkedemas(row.id)}  {...label} />Añadir
+
+                </StyledTableCell>
+
                 <StyledTableCell align="left" data-label="Kid">
                   {row.kid}
                 </StyledTableCell>
-           {/*      <StyledTableCell align="left" data-label="telefono alternativo">
+                {/*      <StyledTableCell align="left" data-label="telefono alternativo">
                   {row.telefono2}
                 </StyledTableCell> */}
-             
-              
-             
+
+
+
                 {/* <StyledTableCell align="left" data-label="Contactado">
                 {row.dato1 == null  || row.dato1 == 'No'? <>  Ausente/Sin determinar <Checkbox   onClick={() => checkede(row.id)}  {...label} /> </>:<> Presente <Checkbox onClick={() => checkede(row.id)}  {...label} defaultChecked /></>}
             
@@ -337,15 +355,15 @@ export default function Ingresos(props) {
 
   return (
     <div>
-      {nuevos>0 ? <>    <Alert variant="filled" severity="success">
-      
-       
+      {nuevos > 0 ? <>    <Alert variant="filled" severity="success">
 
-<Button  onClick={revisto}  variant='contained'>Ya revisè</Button>
-      </Alert></>:<></>}
-   
+
+
+        <Button onClick={revisto} variant='contained'>Ya revisè</Button>
+      </Alert></> : <></>}
+
       {inscrip[0] ? <>
-        
+
       </> : <></>}
 
 
