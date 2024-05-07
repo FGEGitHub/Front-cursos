@@ -305,7 +305,7 @@ export default function Ingresos(props) {
     return (
       <Box sx={{ overflowX: 'auto' }}>
         {datos ? <>      <h4>Lista de presentes (  {inscrip ? inscrip.length : <></>} ) </h4>
-          <h4>Cantidad de raciones (  {raciones ? raciones : <></>} ) </h4>
+          <h4>Cantidad de raciones (  {raciones ? raciones : <></>} )Horario extendido:{datos.horario} </h4>
           Kid1:{datos.kid1}, Kid2:{datos.kid2}, Adolescentes:{datos.kid3}</> : <></>}
         <ResponsiveTable aria-label="customized table">
 
