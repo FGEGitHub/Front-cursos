@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import { getThemeProps } from '@material-ui/styles';
+import  Modalnueva from './modalactividad';
 import servicioDtc from '../../../services/dtc'
 import Ficha from '../usuario1/personapsic.js/ficha'
 import { useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ const MobileAutocomplete = (props) => {
 onChange={handleChange}
 name="fecha"
 id="date"
-label="Fecha de nacimiento"
+label="Fecha"
 type="date"
 defaultValue="2023-03-01"
 sx={{ width: 220 }}
@@ -79,11 +79,9 @@ InputLabelProps={{
         onChange={handleSelection}
       />
 
-      <button variant="outlined" color="primary" onClick={handleBackendCall}>
-        Asignar turno
-      </button>
+
      
-    {selectedValue ? <><Ficha id={selectedValue.id}/></> :<></>}
+    {selectedValue ? <><Ficha id={selectedValue.id}/>   <Modalnueva id={selectedValue.id}/></> :<></>}
     </div>
   );
 };

@@ -51,10 +51,10 @@ const MobileFriendlyTable = (props) => {
 
     props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
     
-    const historial = await servicioDtc.traerparaturnos(props.fecha == undefined ? {fecha:formattedDate,id:props.idt == undefined ? user.id:props.idt}:{fecha:props.fecha,id:props.idt == undefined ? user.id:props.idt})
+    const historial = await servicioDtc.listachiques(props.fecha == undefined ? {fecha:formattedDate,id:props.idt == undefined ? user.id:props.idt}:{fecha:props.fecha,id:props.idt == undefined ? user.id:props.idt})
    
 console.log(historial)
-    setDatos(historial)
+    setDatos(historial[0])
     // 
 
 };
@@ -75,7 +75,7 @@ alert(ta)
       </Typography>
    
       <Buscador
-      chicos={datos[1]}
+      chicos={datos}
       fecha={currentDate}
       usuario={usuario}
       traer={ async (fecha) => {
@@ -89,18 +89,18 @@ alert(ta)
     
         props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
         
-        const historial = await servicioDtc.traerparaturnos( fecha)
+        const historial = await servicioDtc.listachiques( fecha)
        
     console.log(historial)
-        setDatos(historial)
+        setDatos(historial[0])
         // 
     
     }}
       />
-      <TableContainer>
+   {/*    <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
-                                        <h4>Lista de presentes ({datos[0].length}) </h4>
-                                        Kid1:{datos[2].kid1}, Kid2:{datos[2].kid2}, Adolescentes:{datos[2].kid3}
+                                        <h4>Lista de presentes ({datos.length}) </h4>
+                                    
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
@@ -121,7 +121,7 @@ alert(ta)
 
 
 
-                                                {datos[0].map((row) => (
+                                                {datos.map((row) => (
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
@@ -142,8 +142,8 @@ alert(ta)
                                         </Table>
                                     </>}
 
-                                </TableContainer>
-      </>:<></>}
+                                </TableContainer>*/}
+      </>:<></>} 
       
       <br/>  <br/>  <br/>  <br/>  <br/></div>
   );
