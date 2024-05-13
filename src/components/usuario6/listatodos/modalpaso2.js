@@ -21,6 +21,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { Paper, CircularProgress, Typography,  } from '@mui/material';
+import servicioTurnos from '../../../services/turnos';
+import styled from 'styled-components';
 const currencies = [
   {
     value: 'CBU',
@@ -35,6 +38,24 @@ const currencies = [
 
 ];
 
+const styles = {
+  paperr: {
+      cursor: 'pointer',
+      background: '#ffffff',
+      color: '#bdbdbd',
+      border: '1px dashed #ccc',
+      padding: 10,
+      width: '100%',
+      maxWidth: 600,
+      margin: '20px auto', // Margen superior e inferior de 20px, centrado horizontalmente
+      display: 'grid',
+      gridTemplateRows: 'auto 1fr',
+      alignItems: 'start',
+      fontSize: '16px',
+  },}
+const StyledParagraph = styled.p`
+  font-family: 'Montserrat', sans-serif;
+`;
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
   //const usuario  = useUser().userContext
@@ -51,7 +72,7 @@ export default function SelectTextFields(props) {
   const [disponibilidad, setDisponibilidad] = useState(0)
   const [mostrarDialogo, setMostrarDialogo] = useState(false);
   const [activo, setActivo] = useState(false)
-
+  const [cohortes, setCohorte] = useState();
 
   const islogo = {
     width: "20%",
@@ -62,14 +83,28 @@ export default function SelectTextFields(props) {
 
   };
 
-  
+  useEffect(() => {
+
+    getCursos();
+   
+}, []);
 
   const [inscripcion, setInscripcion] = useState({
 
 
   })
 
+  const getCursos = async (e) => {
+    
+    const clientss = await servicioTurnos.traerturnosparainscri();
 
+    setCohorte(clientss)
+   
+
+
+
+
+};
   const handleClickOpen = async () => {
 
     setOpen(true);
@@ -182,8 +217,8 @@ setRta(respuesta)
 
     const enviar = { ...inscripcion,...options };
 
-    const respuesta = await servicioturnos.asignarcurso(
-      {id:props.id}
+    const respuesta = await servicioturnos.asignarcursonuevo(
+      {id:props.id, id_turno:inscripcion.id_turno}
 
 
     )
@@ -240,7 +275,33 @@ setRta(respuesta)
 
 
                 <br />
-             
+                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                <Typography variant="p" component="div" color="black">
+                                    <StyledParagraph>
+                                        Seleccionar prioridad 1
+                                    </StyledParagraph>
+                                </Typography>
+                            </InputLabel>
+
+                            <NativeSelect
+                                defaultValue={30}
+                                onChange={handleChange}
+                                inputProps={{
+                                    name: 'id_turno',
+                                    id: 'uncontrolled-native',
+                                }}
+                                sx={'width:250px'}
+                            >
+                                 {cohortes ? <>
+                             <option value={'1'}> Elegir</option>
+                          
+                             {cohortes.map((row) => (
+                                       
+                                       <option value={row.id}> {row.descripcion} </option>
+         
+                             ))}
+                                  </>:<>Cargando</>}
+                            </NativeSelect>
                 <br />
             
 
@@ -265,10 +326,7 @@ setRta(respuesta)
                 <ButtonGroup variant="contained" aria-label="outlined primary button group">
                 <Button variant="contained" color="success" onClick={mensajeenviado} >Mensaje enviado</Button>
                
-                {(options.option1 ||options.option2 ||options.option3 ||options.option4 ) && (inscripcion.observaciones) ? <>
-                  <Button variant="contained" color="primary" onClick={handleCambiarhorario} >Solicitar cambio de horario</Button>     
-
-</>:<>  {options.option1 ||options.option2 ||options.option3 ||options.option4 ? <>detallar horario</>:<><Button variant="contained" color="primary" onClick={handleDeterminar} >Confirmar</Button></>}  </>}
+                <Button variant="contained" color="primary" onClick={handleDeterminar} >Confirmar</Button>
 
                   <Button variant="contained" color="error" onClick={handleCancelar} >Rechazar</Button>
                   <Button variant="contained" color="warning" onClick={handleNocontesta} >No contesta</Button>

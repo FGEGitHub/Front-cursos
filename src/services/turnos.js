@@ -124,6 +124,12 @@ const ponerausentes= async  (datos) => {
 
 
 
+const asignarcursonuevo= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'asignarcursonuevo',datos,config)
+   
+   return data
+}
 const asignarcurso= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'asignarcurso',datos,config)
@@ -225,4 +231,4 @@ const nocontesta= async  (datos) => {
   }  
   return data
 } 
-export default {mensajeenviado,nocontesta,lista,cambiarhorario,asignarcurso,rechazarinscrip,traerinscripcionesenc,asignarinscripciones,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
+export default {asignarcursonuevo,mensajeenviado,nocontesta,lista,cambiarhorario,asignarcurso,rechazarinscrip,traerinscripcionesenc,asignarinscripciones,traerturnosparainscri,desasignar,ponerausentes,modificarunaclase,traerclase,lista2,detalledelcurso,nuevaclase,modificarTurno,modificarclase,borrarclase}
