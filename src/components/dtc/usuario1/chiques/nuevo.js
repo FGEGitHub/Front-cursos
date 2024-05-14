@@ -40,9 +40,9 @@ export default function SelectTextFields(props) {
     aut_retirar:"Sin determinar",
     dato_escolar:"Sin determinar",
     hora_merienda:"Sin determinar",
-    escuela:"escuela",
-    fines:"fines",
-    grado:"grado",
+    escuela:"Sin determinar",
+    fines:"Sin determinar",
+    grado:"Sin determinar",
   })
   const [datos, setDatos] = useState()
   const [activo, setActivo] = useState(false)
@@ -76,7 +76,7 @@ export default function SelectTextFields(props) {
       event.preventDefault();
 
       const nov = await servicioDtc.nuevochique(form)
-
+alert(nov)
     } catch (error) {
       console.error(error);
       console.log('Error algo sucedio')
@@ -100,7 +100,10 @@ export default function SelectTextFields(props) {
     egreso:"Sin determinar",
     aut_retirar:"Sin determinar",
     dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar"})
+    hora_merienda:"Sin determinar",
+    escuela:"Sin determinar",
+    fines:"Sin determinar",
+    grado:"Sin determinar",})
     props.traer()
 
     setOpen(false);
