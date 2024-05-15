@@ -62,7 +62,7 @@ const MobileAutocomplete = (props) => {
 onChange={handleChange}
 name="fecha"
 id="date"
-label="Fecha de nacimiento"
+label="Fecha "
 type="date"
 defaultValue="2024-05-01"
 sx={{ width: 220 }}

@@ -370,7 +370,8 @@ const TablaNotificaciones = (props) => {
                                                         <StyledTableCell component="th" scope="row"> <b>{row.fecha} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
 
-                                                        <StyledTableCell component="th" scope="row">  <Clasificar id={row.id}
+                                                        <StyledTableCell component="th" scope="row">  <Clasificar 
+                                                        id={row.id}
               traer={async () => {
                 try {
                     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')

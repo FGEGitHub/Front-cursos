@@ -4,6 +4,7 @@ import servicioDtc from '../../../services/dtc'
 import  { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import Buscador from './buscador'
+import Asignar from './asignar'
 import Skeleton from '@mui/material/Skeleton';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -89,7 +90,7 @@ alert(ta)
     
         props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
         
-        const historial = await servicioDtc.traerparaturnos( fecha)
+        const historial = await servicioDtc.traertodoslosturnosfecha( fecha)
        
     console.log(historial)
         setDatos(historial)
@@ -99,19 +100,19 @@ alert(ta)
       />
       <TableContainer>
                                     {!datos[0] ? <Skeleton /> : <>
-                                        <h4>Lista de presentes ({datos[0].length}) </h4>
+                                  
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell style={{ backgroundColor: "#37474f", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Dni</b></TableCell>
-                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Kid</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Estado</b></TableCell>
+                                                  
 
 
 
-                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Hora</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Horario</b></TableCell>
 
-                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Quitar</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Asignar</b></TableCell>
 
 
                                                 </TableRow>
@@ -123,11 +124,12 @@ alert(ta)
                                                 {datos[0].map((row) => (
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.kid == "kid3" ? <>Adolescentes</>:<>{row.kid}</>} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.hora} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.detalle} </b> </StyledTableCell>
 
-                                                        <StyledTableCell component="th" scope="row"> <b><button  onClick={() => ausente(row)}>Quitar</button> </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b><Asignar
+                                                        id={row.id}
+                                                              chicos={datos[1]} /></b> </StyledTableCell>
 
 
 
