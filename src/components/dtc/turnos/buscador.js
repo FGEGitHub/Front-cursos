@@ -64,7 +64,7 @@ name="fecha"
 id="date"
 label="Fecha de nacimiento"
 type="date"
-defaultValue="2023-03-01"
+defaultValue="2024-05-01"
 sx={{ width: 220 }}
 InputLabelProps={{
   shrink: true,

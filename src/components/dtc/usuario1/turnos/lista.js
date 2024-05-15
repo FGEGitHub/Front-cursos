@@ -4,10 +4,10 @@ import ModaNueva from './nuevo'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
+import Tarjetabuscar from '../menu/tarjetaselecionar'
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
-import Tooltip from '@material-ui/core/Tooltip';
+import Nuevo from './nuevoturno'
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
@@ -77,18 +77,19 @@ const TablaNotificaciones = (props) => {
     const [chicos, setchicos] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const [datos, setDatos] = useState()
+    const [form, setForm] = useState()
     const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     const classes = useStyles();
 
     let params = useParams()
     let id = params.id
-    useEffect(() => {
+   /*  useEffect(() => {
         traer()
 
 
 
-    }, [])
+    }, []) */
 
     
     const options = {
@@ -173,8 +174,9 @@ const TablaNotificaciones = (props) => {
           },
         },
       });
-    const traer = async () => {
+    const traer = async (fecha) => {
         try {
+          console.log(fecha)
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
@@ -283,43 +285,58 @@ const TablaNotificaciones = (props) => {
         
           }}
   >
-   
+   <Tarjetabuscar
+   traer={ async (fecha) => {
+    try {
+      console.log(fecha)
+      setForm({fecha:fecha})
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+        if (loggedUserJSON) {
+            const usuario = JSON.parse(loggedUserJSON)
+
+            setUsuario(usuario)
+
+            const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+            setchicos(novedades_aux[0])
+            setDatos(novedades_aux[1])
+        }
+
+    } catch (error) {
+
+    }
+
+}
+}/>
+{form ? <><Nuevo fecha={form.fecha}
+ traer={ async (fecha) => {
+  try {
+    console.log(fecha)
+ 
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON)
+
+          setUsuario(usuario)
+
+          const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+          setchicos(novedades_aux[0])
+          setDatos(novedades_aux[1])
+      }
+
+  } catch (error) {
+
+  }
+
+}}/></>:<></>}
     { datos ? <>  <Alert variant="filled" severity="success">
  <b> Actualmente pendientes {datos.pendientes}</b>
 </Alert> </>:<></>}
 
-            <h2>Lista de chicos</h2>
+
             {chicos ? <>
                 <div>
 
 
-                    <ModaNueva
-                        id_turno={id}
-                        traer={async () => {
-                            try {
-                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                                if (loggedUserJSON) {
-                                    const usuario = JSON.parse(loggedUserJSON)
-
-                                    setUsuario(usuario)
-
-                                    const novedades_aux = await servicioDtc.traertodoslosturnosaprobac(id)
-                                    setchicos(novedades_aux[0])
-                                }
-
-                            } catch (error) {
-
-                            }
-
-
-
-
-
-
-                        }
-
-                        }
-                    />
                     {chicos.length > 0 ? <>
 
 
@@ -392,7 +409,7 @@ const TablaNotificaciones = (props) => {
                
                                 <MUIDataTable
 
-                                    title={"Lista de personas que asisten"}
+                                    title={"Lista de Turnos"}
                                     data={chicos}
                                     columns={columns}
                                     actions={[

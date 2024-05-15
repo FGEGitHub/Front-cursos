@@ -23,9 +23,10 @@ const CardSeleccionFecha = (props) => {
         </Typography>
         <TextField
           type="date"
+          defaultValue="2024-05-01"
           value={fechaSeleccionada}
           onChange={(e) =>{ props.traer(e.target.value) 
-           }}
+          setFechaSeleccionada(e.target.value) }}
           fullWidth
           style={{ marginTop: '16px', marginBottom: '16px' }}
         />
