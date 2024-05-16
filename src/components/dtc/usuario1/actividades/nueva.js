@@ -142,7 +142,7 @@ export default function SelectTextFields(props) {
                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                         <Typography variant="p" component="div" color="black">
                             <StyledParagraph>
-                                Detalle:{form.detalle? <>Caracteres: {form.detalle.length} / 800</>:<>Caracteres: 0/800</>}
+                                Detalle:{form.detalle? <>Caracteres: {form.detalle.length} / 1200</>:<>Caracteres: 0/1200</>}
                             </StyledParagraph>
                         </Typography>
                     </InputLabel>
