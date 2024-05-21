@@ -256,6 +256,14 @@ Ver                        </Button>
             }
 
         },
+        {
+          name: "tel_responsable",
+          label: "responsable",
+      },
+      {
+        name: "tel",
+        label: "tel",
+    },
 
 
     ];
