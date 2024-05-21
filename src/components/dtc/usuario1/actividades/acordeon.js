@@ -11,15 +11,15 @@ import logo2 from "../../../../Assets/logomuni.png"; // Logo 2 (Asegúrate de im
 import Button from '@mui/material/Button';
 
 // Convertir imágenes a base64
-const convertImageToBase64 = (url) => {
-  return fetch(url)
-    .then(response => response.blob())
-    .then(blob => new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    }));
+const convertImageToBase64 = async (url) => {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
 };
 
 export default function AccordionExpandIcon(props) {
@@ -31,6 +31,7 @@ export default function AccordionExpandIcon(props) {
     printWindow.document.write(`
       <html>
         <head>
+        <tittle>ij</tittle>
           <style>
             @media print {
               body * {
@@ -91,6 +92,7 @@ export default function AccordionExpandIcon(props) {
           </style>
         </head>
         <body>
+        <hr size="8px" color="black" />
           <div class="print-container">
             <div class="header">
               <img src="${logoBase64}" alt="Logo 1" />
