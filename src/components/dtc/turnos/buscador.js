@@ -70,18 +70,7 @@ InputLabelProps={{
   shrink: true,
 }}
 />
-      <Autocomplete 
-        options={props.chicos}
-        getOptionLabel={(option) => option.id_usuario == null ? option.nombre +" "+option.apellido :option.nombre +" "+option.apellido +"  Presente" }
-        renderInput={(params) => (
-          <TextField {...params} label="Selecciona una opción" variant="outlined" />
-        )}
-        onChange={handleSelection}
-      />
-
-      <button variant="outlined" color="primary" onClick={handleBackendCall}>
-        Asignar turno
-      </button>
+     
      
     {selectedValue ? <><Ficha id={selectedValue.id}/></> :<></>}
     </div>
