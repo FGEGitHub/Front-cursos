@@ -40,10 +40,7 @@ export default function SelectTextFields(props) {
 
 
     const handleClickOpen = () => {
-
         setOpen(true);
-
-
     };
 
     const handleClose = () => {
@@ -58,14 +55,12 @@ export default function SelectTextFields(props) {
                 ...form,
                 ...{id_usuario:props.id_usuario,fecha:props.fecha}
               };
-              console.log(mergedJSON)
+            
             const nov = await servicioDtc.nuevaactividad(mergedJSON)
               alert(nov)
         } catch (error) {
             console.error(error);
             console.log('Error algo sucedio')
-
-
         }
 
         props.traer()

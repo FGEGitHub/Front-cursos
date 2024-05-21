@@ -283,29 +283,23 @@ Ver                        </Button>
                     <ModaNueva
                         id_turno={id}
                         traer={async () => {
-                            try {
-                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                                if (loggedUserJSON) {
-                                    const usuario = JSON.parse(loggedUserJSON)
-
-                                    setUsuario(usuario)
-
-                                    const novedades_aux = await servicioDtc.lista(id)
-                                    setchicos(novedades_aux[0])
-                                }
-
-                            } catch (error) {
-
-                            }
-
-
-
-
-
-
-                        }
-
-                        }
+                          try {
+                              const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                              if (loggedUserJSON) {
+                                  const usuario = JSON.parse(loggedUserJSON)
+                  
+                                  setUsuario(usuario)
+                  
+                                  const novedades_aux = await servicioDtc.listachiques()
+                                  setchicos(novedades_aux[0])
+                                  setDatos(novedades_aux[1])
+                              }
+                  
+                          } catch (error) {
+                  
+                          }
+                  
+                      }}
                     />
                     {chicos.length > 0 ? <>
 
