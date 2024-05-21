@@ -111,7 +111,7 @@ export default function Clasenueva(props) {
             </Tooltip>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>Borrar legajo</DialogTitle>
+                <DialogTitle>Registrar Vinculo</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',

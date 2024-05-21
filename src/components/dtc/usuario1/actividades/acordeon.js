@@ -1,24 +1,36 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import Borrar from"./modalborrar"
-import '../../estilos.css'
-import logo from "../../../../Assets/dtcletra.png";
-export default function AccordionExpandIcon(props) {
-  const printRef = useRef();
+import Borrar from "./modalborrar";
+import '../../estilos.css';
+import logo from "../../../../Assets/dtcletra.png";  // Logo 1
+import logo2 from "../../../../Assets/logomuni.png"; // Logo 2 (Asegúrate de importar el segundo logo)
+import Button from '@mui/material/Button';
 
-  const handlePrint = () => {
-    const printContents = printRef.current.innerHTML;
+// Convertir imágenes a base64
+const convertImageToBase64 = (url) => {
+  return fetch(url)
+    .then(response => response.blob())
+    .then(blob => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    }));
+};
+
+export default function AccordionExpandIcon(props) {
+  const handlePrint = async (content) => {
+    const logoBase64 = await convertImageToBase64(logo);
+    const logo2Base64 = await convertImageToBase64(logo2);
+
     const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write(`
       <html>
         <head>
-        <img src={logo} alt="Logo" />
-          <title>Imprimir PDF</title>
           <style>
             @media print {
               body * {
@@ -33,14 +45,38 @@ export default function AccordionExpandIcon(props) {
                 top: 0;
                 width: 100%;
               }
-              /* Ajusta los estilos para el PDF aquí */
-              .print-container h1 {
-                color: #000;
-                font-size: 24px;
+              .print-container .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
               }
-              .print-container p {
+              .print-container .header img {
+                height: 50px;
+              }
+              .print-container .header .title {
+                flex-grow: 1;
+                text-align: center;
+              }
+              .print-container .header .title h1 {
+                font-size: 24px;
                 color: #000;
-                font-size: 16px;
+                margin: 0;
+              }
+              .print-container .color-line {
+                width: 100%;
+                height: 5px;
+                background: linear-gradient(to right, red, orange, blue, green);
+                margin-bottom: 20px;
+              }
+              .print-container .footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 14px;
+                color: #000;
               }
               .print-container table {
                 width: 100%;
@@ -55,7 +91,18 @@ export default function AccordionExpandIcon(props) {
           </style>
         </head>
         <body>
-          <div class="print-container">${printContents}</div>
+          <div class="print-container">
+            <div class="header">
+              <img src="${logoBase64}" alt="Logo 1" />
+              <div class="title">
+                <h1>Dispositivo territorial comunitario</h1>
+              </div>
+              <img src="${logo2Base64}" alt="Logo 2" />
+            </div>
+            <div class="color-line"></div>
+            ${content}
+            <div class="footer">Secretaría de Salud - Coordinación de Discapacidad e Inclusión Social</div>
+          </div>
         </body>
       </html>
     `);
@@ -64,44 +111,38 @@ export default function AccordionExpandIcon(props) {
     printWindow.print();
     printWindow.close();
   };
-  const islogo = {
-    width: "70%",                  
-    };
+
   return (
     <div>
-      {props.actividades.length>0 ? <>
-        {props.actividades.map((row) => (
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ArrowDownwardIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <Typography>{row.nombre} - {row.titulo} -  {row.fecha} </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          { row.detalle}
-          <Borrar id={row.id}
-          traer={props.traer}/>
-    
-      <div>
-      <div ref={printRef} className="print-container">
-        <div className="header">
-         
-          <h1>Institución XYZ</h1>
-        </div>
-        <p>Este es el contenido que se incluirá en el PDF.</p>
-        { row.detalle}
-        {/* Agrega más contenido según sea necesario */}
-      </div>
-      <button onClick={handlePrint}>Imprimir PDF</button>
-    </div>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-     ) )}
-      </>:<>No hay actividades en el dia</>}
+      {props.actividades.length > 0 ? (
+        props.actividades.map((row, index) => (
+          <Accordion key={index}>
+            <AccordionSummary
+              expandIcon={<ArrowDownwardIcon />}
+              aria-controls={`panel${index}-content`}
+              id={`panel${index}-header`}
+            >
+              <Typography>{`${row.nombre} - ${row.titulo} - ${row.fecha}`}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                {row.detalle}
+                <Borrar id={row.id} traer={props.traer} />
+                <div>
+                  <Button variant="contained" color="success" onClick={() => handlePrint(`
+                    <div>
+                      <h2>${row.nombre} - ${row.titulo} - ${row.fecha}</h2>
+                      <p>${row.detalle}</p>
+                    </div>
+                  `)}>Imprimir PDF</Button>
+                </div>
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))
+      ) : (
+        <Typography>No hay actividades en el día</Typography>
+      )}
     </div>
   );
 }
