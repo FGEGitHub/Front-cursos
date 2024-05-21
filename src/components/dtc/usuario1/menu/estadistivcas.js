@@ -1,6 +1,6 @@
 import React from 'react';
 import servicioDtc from '../../../../services/dtc'
-import Grafico from './grafica'
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -103,10 +103,7 @@ console.log(historial[0].semana)
                     </>:<></>}
       </CardContent>
     </Card>
-    {datos? <>
-    <Grafico
-    semana={datos[0].semana}
-    semanapasada={datos[0].semanapasada}/></>:<></>}
+    
 </>
   );
 };

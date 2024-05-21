@@ -6,3 +6,18 @@
     height: 100vh; /* Altura del viewport */
     margin: 0; /* Elimina el margen predeterminado del body */
   }
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    .print-container, .print-container * {
+      visibility: visible;
+    }
+    .print-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+  }
+  
