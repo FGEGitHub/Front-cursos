@@ -32,7 +32,7 @@ export default function Clasenueva(props) {
         event.preventDefault();
         try {
 
-         const respuesta=  await servicioDtc.clasificarturno(form)
+         const respuesta=  await servicioDtc.borrarturno(form)
          alert(respuesta)
         
 
@@ -59,11 +59,11 @@ export default function Clasenueva(props) {
 
 
             <Button variant="contained"  color="success" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
-            Clasificar
+            Eliminar
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>            Clasificar</DialogTitle>
+                <DialogTitle>            Eliminar turno</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
@@ -76,25 +76,9 @@ export default function Clasenueva(props) {
                     <DialogContent>
                         <DialogContentText>
                         <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                  
+                  Seguro que deseas eliminar el turno?
                             </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'estado',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Aprobado'}>
-                                    Aprobado
-                                </option>
-                                <option value={'Rechazado'}>Rechazado</option>
-
-                            </NativeSelect>
-                         
+                          
                         </DialogContentText>
                       
 

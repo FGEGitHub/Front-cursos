@@ -74,7 +74,7 @@ const transparentStyle = {
 
 const TablaNotificaciones = (props) => {
     const theme = useTheme();
-    const [chicos, setchicos] = useState([''])
+    const [chicos, setchicos] = useState()
     const [usuario, setUsuario] = useState([''])
     const [datos, setDatos] = useState()
     const [form, setForm] = useState()
@@ -200,24 +200,26 @@ const TablaNotificaciones = (props) => {
 
               <Clasificar 
               id={chicos[dataIndex]['id']}
-              traer={async () => {
+              traer={ async (fecha) => {
                 try {
+                  console.log(fecha)
+               
                     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                     if (loggedUserJSON) {
                         const usuario = JSON.parse(loggedUserJSON)
-        
+              
                         setUsuario(usuario)
-        
-                        const novedades_aux = await servicioDtc.traertodoslosturnosaprobac()
+              
+                        const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                         setchicos(novedades_aux[0])
                         setDatos(novedades_aux[1])
                     }
-        
+              
                 } catch (error) {
-        
+              
                 }
-        
-            }}/>
+              
+              }}/>
            
 
             </>
@@ -225,26 +227,56 @@ const TablaNotificaciones = (props) => {
     }
 
 
+    function customdni(dataIndex, rowIndex, data, onClick) {
+      return (
+          <>
 
+{chicos[dataIndex]['nombre'] ? <>{chicos[dataIndex]['dni']} </> :<>Disponible</>}
+
+          </>
+      );
+  }
+
+  function customnombre(dataIndex, rowIndex, data, onClick) {
+    return (
+        <>
+
+{chicos[dataIndex]['nombre'] ? <>{chicos[dataIndex]['nombre']} </> :<>Disponible</>}
+
+        </>
+    );
+}
 
     // definimos las columnas
     const columns = [
       
-        {
-            name: "dni",
-            label: "dni",
+      {
+        name: "Dni",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+              customdni(
+                    dataIndex,
+                    rowIndex,
+                    // overbookingData,
+                    // handleEditOpen
+                )
+        }
 
-        },
-        {
-            name: "apellido",
-            label: "apellido",
+    },
+    {
+      name: "nombre",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+            customnombre(
+                  dataIndex,
+                  rowIndex,
+                  // overbookingData,
+                  // handleEditOpen
+              )
+      }
 
-        },
-        {
-            name: "nombre",
-            label: "nombre",
-
-        },
+  },
+       
         {
           name: "fecha",
           label: "fecha de cita",
@@ -353,7 +385,7 @@ const TablaNotificaciones = (props) => {
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fecha</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Estado</b></TableCell>
-
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Psicologo/a</b></TableCell>
                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
 
 
@@ -365,11 +397,11 @@ const TablaNotificaciones = (props) => {
 
                                                 {chicos.map((row) => (
                                                     <StyledTableRow key={row.name}>
-                                                        <StyledTableCell component="th" scope="row">{row.apellido} {row.nombre}</StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row">{row.apellido ?<>{row.apellido}  {row.nombre}</>: <>Disponible</> }</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.fecha} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
-
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.nombrepsiq} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row">  <Clasificar 
                                                         id={row.id}
               traer={async () => {

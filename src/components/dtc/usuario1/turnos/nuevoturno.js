@@ -54,8 +54,15 @@ setForm({fecha:props.fecha})
 
     try {
       event.preventDefault();
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
-      const nov = await servicioDtc.agregarturno(form)
+      const user = JSON.parse(loggedUserJSON)
+      const mergedJSON = {
+        ...form,
+        ...{id_psic:user.id,
+       }
+      };
+      const nov = await servicioDtc.agregarturno(mergedJSON)
       alert(nov)
     } catch (error) {
       console.error(error);

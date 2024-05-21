@@ -68,6 +68,7 @@ export default function SelectTextFields(props) {
       // Ejemplo: axios.post('/api/backend', { selectedValue });
    
       props.traer({fecha:form.fecha})
+      handleClose()
     }
   };
 
@@ -93,7 +94,7 @@ export default function SelectTextFields(props) {
 
         
             <h3>
-              <b> NUEVO TURNO</b></h3>
+              <b> Agendar Turno</b></h3>
 
               <Autocomplete 
         options={props.chicos}
@@ -104,9 +105,7 @@ export default function SelectTextFields(props) {
         onChange={handleSelection}
       />
 
-      <button variant="outlined" color="primary" onClick={handleBackendCall}>
-        Asignar turno
-      </button>
+  
      
     {selectedValue ? <><Ficha id={selectedValue.id}/></> :<></>}
 
@@ -116,8 +115,9 @@ export default function SelectTextFields(props) {
 
 
               <>
-              {form.horario   ? <> <Button variant="contained" color="primary" onClick={handleBackendCall}> crear </Button></> :  <>Completar los datos</>}
-             </>
+              <Button variant="outlined" color="primary" onClick={handleBackendCall}>
+        Asignar turno
+      </Button>             </>
               <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
             </DialogActions>
 
