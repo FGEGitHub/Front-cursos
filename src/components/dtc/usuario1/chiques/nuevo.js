@@ -88,7 +88,7 @@ alert(nov)
     primer_contacto:"Sin determinar",
     primer_ingreso:"Sin determinar",
     admision:"Sin determinar",
-    
+    kid:"Sin determinar",
     dni:"Sin determinar",
     domicilio:"Sin determinar",
     telefono:"Sin determinar",
@@ -138,8 +138,34 @@ alert(nov)
 
         
             <h3>
-              <b> NUEVO CHIQUE</b></h3>
+              <b> NUEVO USUARIO</b></h3>
+             
+                        <Typography variant="p" component="div" color="black">
+                            
+                               <b> KID1/KID2/ADOLESCENTES</b>
+                          
+                        </Typography>
+                    
+                    <br/>
+                    <NativeSelect
+                        defaultValue={props.kid}
+                        onChange={handleChange}
+                        inputProps={{
+                            name: 'kid',
+                            id: 'uncontrolled-native',
+                        }}
+                        sx={'width:250px'}
+                    >
+                        <option value={'Sin determinar'} >Elegir</option>
+                        <option value={'kid1'}>
+                             Kids1
+                        
+                        </option>
+                        <option value={'kid2'}>Kids2</option>
+                        <option value={'kid3'}>Adolescentes</option>
 
+                    </NativeSelect>
+                    <br />
               <TextField
               autoFocus
               margin="dense"

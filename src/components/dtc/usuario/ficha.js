@@ -88,7 +88,7 @@ backgroundColor:'#b0bec5'        }}>
             
       <CardContent>
         <Typography variant="h5" component="div">
-          Información de {chico.apellido} {chico.nombre}
+          Información de {chico.apellido} {chico.nombre}  {chico.kid =="Sin determinar?" ? <></>:<>({chico.kid })</>} 
         </Typography>
         <Grid container spacing={2}>
          
