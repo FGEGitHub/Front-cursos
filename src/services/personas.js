@@ -237,6 +237,13 @@ const enviarinscripcion = async (formdata) => {
   return data
 
 }
+const enviarinscripcion2 = async (formdata) => {
+  console.log(formdata)
+  const { data } = await axios.post(baseUrl + 'enviarinscripcion2', formdata,config)
+  
+  return data
+
+}
 const enviarinscripcioncarnaval = async (formdata) => {
   console.log(formdata)
   const { data } = await axios.post(baseUrl + 'enviarinscripcioncarnaval', formdata,config)
@@ -254,4 +261,4 @@ const agregarobservacion = async (formdata) => {
 }
 
 
-export default {subirprueba,enviarinscripcioncarnaval,traerobservaciones,desinscribir,enviarinscripcion,traerpersona,traerusuario,cambiarestadocursado,agregarobservacion,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}
+export default {enviarinscripcion2,subirprueba,enviarinscripcioncarnaval,traerobservaciones,desinscribir,enviarinscripcion,traerpersona,traerusuario,cambiarestadocursado,agregarobservacion,asignarcoordinador,traercoordiandores,modificarpersona,asignarllamadoatodas,asignarllamado,crear,asignarEncargado,traerencargados,datosdepersona,modificardatosadic,datosusuario,datosusuarioporid,inscribir,lista}

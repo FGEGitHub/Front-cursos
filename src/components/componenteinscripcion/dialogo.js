@@ -16,7 +16,7 @@ export default function AlertDialog(props) {
   const getClients =async (event) => {
     setCargando(true);
     console.log(props.inscrip)
-   const rta = await servicioPersonas.enviarinscripcion(props.formulario);
+   const rta = await servicioPersonas.enviarinscripcion2(props.formulario);
    console.log(rta)
    setResp(rta)
     setCargando(false);
