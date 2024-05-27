@@ -17,6 +17,22 @@ export default function Paginas() {
 const theme = useTheme();
 useEffect(() => {
     document.title = "Cuqui Calvano";
+    const updateMeta = (property, content) => {
+        let element = document.querySelector(`meta[property='${property}']`);
+        if (!element) {
+          element = document.createElement('meta');
+          element.setAttribute('property', property);
+          document.getElementsByTagName('head')[0].appendChild(element);
+        }
+        element.setAttribute('content', content);
+      };
+  
+      updateMeta('og:CCARI', 'Cuqui Calvanos - ESME');
+      updateMeta('og:description', 'Descripción para compartir');
+      updateMeta('og:image', '../../Assets/logocoalicion.png');
+      updateMeta('twitter:CCARI', 'Cuqui Calvanos - ESME');
+      updateMeta('twitter:description', 'Descripción para compartir');
+      updateMeta('twitter:image', '../../Assets/logocoalicion.png');
   }, []);
 
     const volver = (e) => {
