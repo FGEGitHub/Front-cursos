@@ -27,12 +27,14 @@ useEffect(() => {
         element.setAttribute('content', content);
       };
   
+      // Actualiza las etiquetas meta de Open Graph para WhatsApp
       updateMeta('og:CCARI', 'Cuqui Calvano - ESME');
-      updateMeta('og:CCARI', 'Escuela d Mujeres Emprendedoras');
-      updateMeta('og:image', '../../Assets/logocoalicion.png');
-      updateMeta('twitter:CCARI', 'Cuqui Calvano - ESME');
-      updateMeta('twitter:CCARI', 'Escuela d Mujeres Emprendedoras');
-      updateMeta('twitter:image', '../../Assets/logocoalicion.png');
+      updateMeta('og:CCARI', 'Cuqui Calvano - ESME');
+      updateMeta('og:image', '../../Assets/logocoalicion.png'); // Asegúrate de que la ruta sea correcta
+  
+      // Opcionalmente, puedes actualizar otras etiquetas
+      updateMeta('og:url', window.location.href);
+      updateMeta('og:type', 'website');
   }, []);
 
     const volver = (e) => {

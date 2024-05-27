@@ -211,7 +211,7 @@ const Estracto = () => {
 
                             />
 
-
+<br/>
 
                             {existe.length > 0 ? <>
                                 {loading ? <>
