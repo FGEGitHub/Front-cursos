@@ -15,6 +15,9 @@ import {
 export default function Paginas() {
     const navigate = useNavigate();
 const theme = useTheme();
+useEffect(() => {
+    document.title = "Cuqui Calvano";
+  }, []);
 
     const volver = (e) => {
         navigate('/fiscalizacion/administracion/menu')
