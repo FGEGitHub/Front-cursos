@@ -167,21 +167,12 @@ const TablaNotificaciones = (props) => {
 
         },
 
-        {
-            name: "nombrecurso1",
-            label: "Prioridad 1",
-
-        },
-        {
-            name: "nombrecurso2",
-            label: "Prioridad 2",
-
-        },
+  
    
         
         {
-            name: "estado",
-            label: "estado",
+            name: "modalidad",
+            label: "modalidad",
 
         },
         {
@@ -198,16 +189,7 @@ const TablaNotificaciones = (props) => {
         
         }, 
         
-        {
-            name: "nombrecurso",
-            label: "nombrecurso",
 
-        },
-        {
-            name: "descripcion",
-            label: "Turno",
-
-        },
         {
             name: "Observaciones",
             options: {
