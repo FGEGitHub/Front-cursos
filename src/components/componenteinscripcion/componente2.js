@@ -676,7 +676,7 @@ InputLabelProps={{
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
-                                        Seleccionar prioridad 1
+                                    Cuáles de estas situaciones te define mejor:
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
@@ -685,25 +685,24 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'prioridad1',
+                                    name: 'emprendimiento',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
                             >
-                                 {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
+                                <option value={'Sin determinar'} >Elegir</option>
+
+                                <option value={'Tengo un emprendimiento'}>Tengo un emprendimiento</option>
+                                <option value={'Tengo una idea de emprendimiento pero todavía no la puse en práctica'}>Tengo una idea de emprendimiento pero todavía no la puse en práctica</option>
+                                <option value={'Estoy en la búsqueda de un nuevo emprendimiento'}>Estoy en la búsqueda de un nuevo emprendimiento</option>
+
                             </NativeSelect>
+
+                            <br />
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
-                                        Seleccionar prioridad 2
+                                    Quiero participar de los encuentros: 
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
@@ -712,20 +711,16 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'prioridad2',
+                                    name: 'modalidad',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
                             >
-                                   {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
+                                <option value={'Sin determinar'} >Elegir</option>
+
+                                <option value={'Presencial'}>Presencial (sujeto al cupo disponible)</option>
+                                <option value={'Virtual'}>Virtual</option>
+
                             </NativeSelect>
 
                         </Box>
@@ -1905,8 +1900,7 @@ InputLabelProps={{
                                 <option value={'Sin determinar'} >Elegir</option>
 
                                 <option value={'Presencial'}>Presencial (sujeto al cupo disponible)</option>
-                                <option value={'Tengo una idea de emprendimiento pero todavía no la puse en práctica'}>Tengo una idea de emprendimiento pero todavía no la puse en práctica</option>
-                                <option value={'Estoy en la búsqueda de un nuevo emprendimiento'}>Estoy en la búsqueda de un nuevo emprendimiento</option>
+                                <option value={'Virtual'}>Virtual</option>
 
                             </NativeSelect>
 
