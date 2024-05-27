@@ -27,11 +27,11 @@ useEffect(() => {
         element.setAttribute('content', content);
       };
   
-      updateMeta('og:CCARI', 'Cuqui Calvanos - ESME');
-      updateMeta('og:description', 'Descripción para compartir');
+      updateMeta('og:CCARI', 'Cuqui Calvano - ESME');
+      updateMeta('og:CCARI', 'Escuela d Mujeres Emprendedoras');
       updateMeta('og:image', '../../Assets/logocoalicion.png');
-      updateMeta('twitter:CCARI', 'Cuqui Calvanos - ESME');
-      updateMeta('twitter:description', 'Descripción para compartir');
+      updateMeta('twitter:CCARI', 'Cuqui Calvano - ESME');
+      updateMeta('twitter:CCARI', 'Escuela d Mujeres Emprendedoras');
       updateMeta('twitter:image', '../../Assets/logocoalicion.png');
   }, []);
 
