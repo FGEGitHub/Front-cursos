@@ -56,10 +56,11 @@ backgroundColor:'#b0bec5'        }}>
    {chico && (
                 <Fragment>
                   { usuario ? <>
-                  {usuario.nivel ==20?<>
+                
                     <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
-                <Avatar sx={{ width: 170, height: 140 }}>{foto?<> <img src={`data:image/jpeg;base64,${foto}`} width="170" height="140"/></>:<>Subir foto</>} </Avatar>
-              </Grid> 
+                <Avatar sx={{ width: 170, height: 200 }}>{foto?<> <img src={`data:image/jpeg;base64,${foto}`} width="170" height="200"/></>:<>Subir foto</>} </Avatar>
+              </Grid>   
+              {usuario.nivel ==20?<>
               <Modalperfil 
               id ={chico.id}
               traer={ async () => {
