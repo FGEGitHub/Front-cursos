@@ -456,7 +456,8 @@ InputLabelProps={{
                             >
 
                                 <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Universitario incompleto'}>Primario incompleto</option>
+                                <option value={'Primario incompleto'}>Primario incompleto</option>
+                                <option value={'Primario completo'}>Primario completo</option>
                                 <option value={'Secundario completo'}>Secundario completo</option>
                                 <option value={'Secundario incompleto'}>Secundario incompleto</option>
                                 <option value={'Terciario completo'}>Terciario completo</option>
@@ -1051,7 +1052,8 @@ InputLabelProps={{
                                 sx={'width:250px'}
                             >
                                 <option value={'Sin determinar'}>Elegir</option>
-                                <option value={'Universitario incompleto'}>Primario incompleto</option>
+                                <option value={'Primario incompleto'}>Primario incompleto</option>
+                                <option value={'Primario completo'}>Primario completo</option>
                                 <option value={'Secundario completo'}>Secundario completo</option>
                                 <option value={'Secundario incompleto'}>Secundario incompleto</option>
                                 <option value={'Terciario completo'}>Terciario completo</option>
@@ -1638,7 +1640,8 @@ InputLabelProps={{
                             >
 
                                 <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Universitario incompleto'}>Primario incompleto</option>
+                                <option value={'Primario incompleto'}>Primario incompleto</option>
+                                <option value={'Primario completo'}>Primario completo</option>
                                 <option value={'Secundario completo'}>Secundario completo</option>
                                 <option value={'Secundario incompleto'}>Secundario incompleto</option>
                                 <option value={'Terciario completo'}>Terciario completo</option>
