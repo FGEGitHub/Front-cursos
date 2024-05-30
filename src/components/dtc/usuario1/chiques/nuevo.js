@@ -102,6 +102,7 @@ alert(nov)
     dato_escolar:"Sin determinar",
     hora_merienda:"Sin determinar",
     escuela:"Sin determinar",
+    talle:"Sin determinar",
     fines:"Sin determinar",
     grado:"Sin determinar",})
     props.traer()
@@ -495,6 +496,16 @@ InputLabelProps={{
               id="name"
               label="Fines"
               name="fines"
+              onChange={handleChange}
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Talle "
+              name="talle"
               onChange={handleChange}
               fullWidth
               variant="standard"

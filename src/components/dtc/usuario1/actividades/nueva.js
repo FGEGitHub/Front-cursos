@@ -142,7 +142,7 @@ export default function SelectTextFields(props) {
                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                         <Typography variant="p" component="div" color="black">
                             <StyledParagraph>
-                                Detalle:{form.detalle? <>Caracteres: {form.detalle.length} / 1200</>:<>Caracteres: 0/1200</>}
+                                Detalle:{form.detalle? <>Caracteres: {form.detalle.length} / 1999</>:<>Caracteres: 0/1200</>}
                             </StyledParagraph>
                         </Typography>
                     </InputLabel>
@@ -162,7 +162,7 @@ export default function SelectTextFields(props) {
                         <>
                         {form.detalle && form.titulo ? <>
                             <> {form.detalle ? <>
-                            {form.detalle.length<800 ? <><Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></>:<><Button variant="contained" color="primary" disabled> crear muchos caracteres {form.detalle.length} </Button></>}
+                            {form.detalle.length<1999 ? <><Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></>:<><Button variant="contained" color="primary" disabled> crear muchos caracteres {form.detalle.length} </Button></>}
                         </>:<> <Button variant="contained" color="primary" disabled> crear </Button></>}</>
                             </>:<>                            <> <Button variant="contained" color="primary" onClick={handleDeterminar} disabled> crear </Button></>
 </>}

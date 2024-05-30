@@ -32,6 +32,7 @@ export default function SelectTextFields(props) {
         nombre: props.nombre,
         apellido: props.apellido,
         dni: props.dni,
+        talle: props.talle,
         domicilio: props.domicilio,
         telefono: props.telefono,
         autorizacion_imagen: props.autorizacion_imagen,
@@ -477,6 +478,17 @@ alert(nov)
               id="name"
               label="Fines"
               name="fines"
+              onChange={handleChange}
+              defaultValue={props.fines}
+
+              variant="standard"
+            />
+              <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Talle"
+              name="talle"
               onChange={handleChange}
               defaultValue={props.fines}
 
