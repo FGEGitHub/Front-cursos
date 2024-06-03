@@ -76,7 +76,7 @@ export default function Clasenueva(props) {
             </Tooltip>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>elegir</DialogTitle>
+                <DialogTitle>Cantidad seleccionados: {selectedOptions.length}</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
@@ -97,7 +97,7 @@ export default function Clasenueva(props) {
                                         <>
                                             <label>
                                                  <p>  <input type="checkbox" checked={selectedOptions.includes( row.id )} onChange={() => handleOptionChange( row.id )} />
-                                                 {row.estado=="Rechazada" ? <><p style={{  color:"red"  }}>{row.apellido}  {row.nombre}</p></>:<>{row.apellido}  {row.nombre}</>}  </p>   <div style={{ color: 'green' }} >{row.elec1}</div> <div style={{ backgroundColor: 'black', color:"white"  }} >{row.elec2}</div>Categoria {row.categoria}
+                                                 {row.estado=="Rechazada" ? <><p style={{  color:"red"  }}>{row.apellido}  {row.nombre}</p></>:<>{row.apellido}  {row.nombre}</>}  </p>   <div style={{ color: 'green' }} >Modalidad:{row.modalidad}</div> <div style={{ backgroundColor: 'black', color:"white"  }} >Participante de feria{row.participante_feria}</div>Categoria {row.categoria}
                                             </label>
                                             <br />
                                         </>
@@ -105,7 +105,7 @@ export default function Clasenueva(props) {
 
                                 </> : <></>}
                               
-                                <p>Opciones seleccionadas: {selectedOptions.join(', ')}</p>
+                                <p>Cantidad seleccionadas: {selectedOptions.length}</p>
                             </div>
                         </DialogContentText>
 
