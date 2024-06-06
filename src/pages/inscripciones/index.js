@@ -1,7 +1,7 @@
 
 
 import { useNavigate, useParams } from "react-router-dom";
-import Formulario from '../../components/componenteinscripcion/componente2'
+import Formulario from '../../components/componenteinscripcion/cerrado'
 import React, { useEffect, useState } from "react";
 import {
     Button,
