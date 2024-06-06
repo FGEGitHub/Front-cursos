@@ -275,7 +275,7 @@ setRta(respuesta)
 
 
                 <br />
-                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                {/* <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
                                         Seleccionar prioridad 1
@@ -301,7 +301,7 @@ setRta(respuesta)
          
                              ))}
                                   </>:<>Cargando</>}
-                            </NativeSelect>
+                            </NativeSelect> */}
                 <br />
             
 
