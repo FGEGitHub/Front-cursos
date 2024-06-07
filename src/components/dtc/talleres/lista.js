@@ -80,30 +80,18 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-                {usuario.nivel == 2 ? <>
-                    <div onClick={() => navigate('/administracion/clase/' + clases[dataIndex]['id'])}>
+             
+             
 
                         < Tooltip title="ASISTENCIA">
-                            <AccountBoxIcon onClick={() => navigate('/administracion/clase/' + clases[dataIndex]['id'])} />
+                            <AccountBoxIcon onClick={() => navigate('/dtc/tallerasistencia/' + clases[dataIndex]['id'])} />
                         </Tooltip>
 
 
 
 
-                    </div>
 
-                </> : <>
-                    <div onClick={() => navigate('/coordinadores/clase/' + clases[dataIndex]['id'])}>
-
-                        < Tooltip title="ASISTENCIA">
-                            <AccountBoxIcon onClick={() => navigate('/coordinadores/clase/' + clases[dataIndex]['id'])} />
-                        </Tooltip>
-
-
-
-
-                    </div>
-                </>}
+      
             </>
         );
     }

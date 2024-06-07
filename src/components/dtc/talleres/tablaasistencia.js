@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
-import servicioDtc from '../../../../services/dtc'
+import servicioDtc from '../../../services/dtc'
 import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import Buscador from './buscador'
-import Retiro from './retiro'
-import Retorno from './retorno'
 import Skeleton from '@mui/material/Skeleton';
 import { useParams } from "react-router-dom"
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -66,7 +64,7 @@ const MobileFriendlyTable = (props) => {
 
   const ausente = async (row) => {
     console.log(row)
-    const ta = await servicioDtc.ponerpresente({ fecha: row.fecha, id: row.id_usuario, id_tallerista: usuario.id })
+    const ta = await servicioDtc.ponerausenteclase({ id:row.id})
     console.log(ta)
     // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
     // Ejemplo: axios.post('/api/backend', { selectedValue });
@@ -79,10 +77,9 @@ const MobileFriendlyTable = (props) => {
           Fecha: {currentDate}
         </Typography>
         {usuario ? <>
-          {usuario.nivel == 21 || usuario.nivel == 20 ? <>
-            <Buscador
+          <Buscador
               chicos={datos[1]}
-              fecha={currentDate}
+              id_clase={id}
               usuario={usuario}
               traer={async () => {
                 const today = new Date();
@@ -92,14 +89,14 @@ const MobileFriendlyTable = (props) => {
 
                 const user = JSON.parse(loggedUserJSON)
                 setUsuario(user)
-                const historial = await servicioDtc.traerpresentesdeclase(props.fecha == undefined ? { fecha: formattedDate, id: props.idt == undefined ? user.id : props.idt } : { fecha: props.fecha, id: props.idt == undefined ? user.id : props.idt })
+                const historial = await servicioDtc.traerpresentesdeclase(id)
 
 
                 setDatos(historial)
                 // 
 
               }}
-            /></> : <></>}</> : <></>}
+            /></> : <></>}
         <TableContainer>
           {!datos[0] ? <Skeleton /> : <>
             <h4>Lista de presentes ({datos[0].length}) </h4>
@@ -114,8 +111,7 @@ const MobileFriendlyTable = (props) => {
 
 
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Hora</b></TableCell>
-                  <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Retiro/Retorno</b></TableCell>
-                  <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Anunciar retiro</b></TableCell>
+          
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Quitar</b></TableCell>
 
 
@@ -131,60 +127,8 @@ const MobileFriendlyTable = (props) => {
                     <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
                     <StyledTableCell component="th" scope="row"> <b>{row.kid == "kid3" ? <>Adolescentes</> : <>{row.kid}</>} </b> </StyledTableCell>
                     <StyledTableCell component="th" scope="row"> <b>{row.hora} </b> </StyledTableCell>
-                    <StyledTableCell component="th" scope="row"> <b> {row.retiro !="No" ? <>{row.retiro}{row.retorno !="Sin determinar" ?<>-{row.retorno}</>:<>- Sin regreso</> }</>:<>{row.retiro}</>}     </b> </StyledTableCell>
-                    <StyledTableCell component="th" scope="row">
+                
 
-
-                      {row.retiro == "No" ? <>
-                        <Retiro id={row.id} traer={async () => {
-                          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-
-                          const user = JSON.parse(loggedUserJSON)
-                          setUsuario(user)
-
-                          const today = new Date();
-                          const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-
-                          props.fecha == undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.fecha)
-
-                          const historial = await servicioDtc.traerpresentesdeclase(id)
-
-                          console.log(historial)
-                          setDatos(historial)
-                          // 
-
-                        }} />
-
-                      </> : <>
-
-
-                        <Retorno id={row.id} traer={async () => {
-                          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-
-                          const user = JSON.parse(loggedUserJSON)
-                          setUsuario(user)
-
-                          const today = new Date();
-                          const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-
-                          props.fecha == undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.fecha)
-
-                          const historial = await servicioDtc.traerpresentesdeclase(id)
-
-                          console.log(historial)
-                          setDatos(historial)
-                          // 
-
-                        }} />
-
-
-                      </>}
-
-
-
-
-
-                    </StyledTableCell>
 
                     <StyledTableCell component="th" scope="row"> <b><button onClick={() => ausente(row)}>Quitar</button> </b> </StyledTableCell>
 

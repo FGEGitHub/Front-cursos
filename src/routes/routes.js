@@ -144,7 +144,7 @@ import Dtcsoleinicio from '../pages/dtc/sole';
 import DTCetapas from '../pages/dtc/cargadeetapas';
 import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
 
-
+import DTCTallerAsis from '../pages/dtc/talleresasistencia';
 
 
 import CargarExcel from '../pages/subirexcel'
@@ -296,8 +296,8 @@ const Rutas = [
 	
 		{ path: '/dtc/cargaetapas', element: <DTCetapas/> },
 		{ path: '/dtc/tallerclases', element: <DTCTallerclases/> },
+		{ path: '/dtc/tallerasistencia/:id', element: <DTCTallerAsis/> },
 		
-
 ];
 
 export default Rutas;

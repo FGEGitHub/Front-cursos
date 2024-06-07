@@ -3,8 +3,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { getThemeProps } from '@material-ui/styles';
-import servicioDtc from '../../../../services/dtc'
-import Ficha from '../../usuario/ficha'
+import servicioDtc from '../../../services/dtc'
+
 import { useNavigate } from "react-router-dom";
 const MobileAutocomplete = (props) => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const MobileAutocomplete = (props) => {
     // Aquí puedes realizar alguna acción cuando se selecciona un valor
     console.log('Valor seleccionado:', value);
    await setSelectedValue();
-   await setSelectedValue({id:value.id});
+   await setSelectedValue({id_usuario:value.id});
   
    
     // También puedes hacer un llamado al backend con el valor seleccionado
@@ -28,11 +28,11 @@ const MobileAutocomplete = (props) => {
       console.log(loggedUserJSON) 
         const mergedJSON = {
             ...selectedValue,
-            ...{fecha:props.fecha,
+            ...{id_clase:props.id_clase,
               id_tallerista:JSON.parse(loggedUserJSON).id}
           };
-  
-     const ta = await servicioDtc.ponerpresente(mergedJSON)
+  console.log(mergedJSON)
+     const ta = await servicioDtc.ponerpresenteclase(mergedJSON)
      alert(ta)
       // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
       // Ejemplo: axios.post('/api/backend', { selectedValue });
@@ -72,7 +72,7 @@ const MobileAutocomplete = (props) => {
       <button variant="outlined" color="primary" onClick={ir} disabled>
         Ver usuario
       </button></>}
-    {selectedValue ? <><Ficha id={selectedValue.id}/></> :<></>}
+  
     </div>
   );
 };
