@@ -304,9 +304,11 @@ export default function Ingresos(props) {
   const CustomTable = ({ inscrip }) => {
     return (
       <Box sx={{ overflowX: 'auto' }}>
+        
         {datos ? <>      <h4>Lista de presentes (  {inscrip ? inscrip.length : <></>} ) </h4>
           <h4>Cantidad de raciones (  {raciones ? raciones : <></>} )Horario extendido:{datos.horario} </h4>
           Kid1:{datos.kid1}, Kid2:{datos.kid2}, Adolescentes:{datos.kid3}</> : <></>}
+
         <ResponsiveTable aria-label="customized table">
 
           <TableBody>
@@ -366,7 +368,7 @@ export default function Ingresos(props) {
 
       </> : <></>}
 
-
+      <Button variant='contained' onClick={() => navigate('/dtc/cargaetapas')} >Ir a Etapas</Button>
       {vista ? <>
         {inscrip.length > 0 ? <>
           <CustomTable inscrip={inscrip} />  </> : <><br /> <h3>No hay asignados</h3></>}
