@@ -49,7 +49,9 @@ export default function Paginas() {
                   case 24:
                     navigate('/dtc/psicologa/turnos')
                     break;
-           
+                    case 26:
+                      navigate('/dtc/tallerclases')
+                      break;
             default:
                 
               window.localStorage.removeItem('loggedNoteAppUser')

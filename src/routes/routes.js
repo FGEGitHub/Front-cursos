@@ -142,6 +142,7 @@ import Dtcturnosadmin from '../pages/dtc/nivel1/turnosadmin';
 import Dtcturnopsic from '../pages/dtc/psicologa';
 import Dtcsoleinicio from '../pages/dtc/sole';
 import DTCetapas from '../pages/dtc/cargadeetapas';
+import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
 
 
 
@@ -294,7 +295,7 @@ const Rutas = [
 		{ path: '/dtc/presentes', element: <DTCpresentes/> },
 	
 		{ path: '/dtc/cargaetapas', element: <DTCetapas/> },
-	
+		{ path: '/dtc/tallerclases', element: <DTCTallerclases/> },
 		
 
 ];

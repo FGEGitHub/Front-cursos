@@ -73,6 +73,9 @@ const LoginForm = () => {
             navigate('/dtc/sole/inicio')
             window.location.reload(true);
             break;
+            case 26:
+              navigate('/dtc/tallerclases')
+              break;
 
         default:
           window.localStorage.removeItem('loggedNoteAppUser')
@@ -121,6 +124,10 @@ const LoginForm = () => {
             navigate('/dtc/sole/inicio')
             window.location.reload(true);
             break;
+            case 26:
+              navigate('/dtc/tallerclases')
+              window.location.reload(true);
+              break;
       default: alert("error")
         break;
 
