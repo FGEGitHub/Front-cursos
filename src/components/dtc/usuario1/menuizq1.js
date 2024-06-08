@@ -105,7 +105,11 @@ export default function MenuIzq2 ({children}) {
           icon: <ArchitectureIcon color="primary" />,
           path: '/dtc/usuario1/turnos' 
         },
-        
+        { 
+          text: 'Asistencias', 
+          icon: <ArchitectureIcon color="primary" />,
+          path: '/dtc/usuario1/asisencias' 
+        },
   
       ];
       const islogo = {

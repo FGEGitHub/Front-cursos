@@ -142,24 +142,19 @@ const TablaNotificaciones = (props) => {
             <h2>CLASES DEL CURSO</h2>
             <ModaNueva
                         id_tallerista={usuario.id}
-                        traer={async () => {
-                            try {
+                        traer={ async () => {
+                          
                                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                                 if (loggedUserJSON) {
                                     const usuario = JSON.parse(loggedUserJSON)
-
+                    
                                     setUsuario(usuario)
-
-                                    const novedades_aux = await servicioDtc.lista(usuario.id)
+                    
+                                    const novedades_aux = await servicioDtc.traerclasestaller(usuario.id)
                                     setClases(novedades_aux)
                                 }
-
-                            } catch (error) {
-
-                            }
-
-
-
+                    
+                         
 
 
 

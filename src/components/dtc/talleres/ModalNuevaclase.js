@@ -110,7 +110,7 @@ export default function SelectTextFields(props) {
               id="date"
               label="Fecha"
               type="date"
-              defaultValue="2023-03-01"
+              defaultValue="2024-06-01"
               sx={{ width: 220 }}
               InputLabelProps={{
                 shrink: true,
