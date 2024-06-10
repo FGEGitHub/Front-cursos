@@ -9,6 +9,7 @@ import '../../estilos.css';
 import logo from "../../../../Assets/dtcletra.png";  // Logo 1
 import logo2 from "../../../../Assets/logomuni.png"; // Logo 2
 import Button from '@mui/material/Button';
+import './paraimprimir.css'
 
 // Convertir imágenes a base64
 const convertImageToBase64 = async (url) => {
@@ -28,12 +29,12 @@ export default function AccordionExpandIcon(props) {
     const logo2Base64 = await convertImageToBase64(logo2);
 
     const printWindow = window.open('', '_blank', 'width=800,height=600');
-    
+
     // Establece el título del documento
     printWindow.document.write(`
       <html>
         <head>
-          <title>Imprimir Actividades</title>
+          <title >. </title>
           <style>
             @media print {
               body * {
@@ -55,7 +56,10 @@ export default function AccordionExpandIcon(props) {
                 margin-bottom: 20px;
               }
               .print-container .header img {
-                height: 50px;
+                height: 100px; /* Ajusta la altura del primer logo */
+              }
+              .print-container .header img.logo2 {
+                height: 50px; /* Altura del segundo logo */
               }
               .print-container .header .title {
                 flex-grow: 1;
@@ -66,11 +70,9 @@ export default function AccordionExpandIcon(props) {
                 color: #000;
                 margin: 0;
               }
-              .print-container .color-line {
+              .color-line {
                 width: 100%;
                 height: 5px;
-                background: linear-gradient(to right, red, orange, blue, green);
-                margin-bottom: 20px;
               }
               .print-container .footer {
                 position: fixed;
@@ -91,6 +93,24 @@ export default function AccordionExpandIcon(props) {
                 text-align: left;
               }
             }
+
+            @keyframes colorTransition {
+              0% {
+                border-bottom: 5px solid blue; /* Azul */
+              }
+              25% {
+                border-bottom: 5px solid green; /* Verde */
+              }
+              50% {
+                border-bottom: 5px solid yellow; /* Amarillo */
+              }
+              75% {
+                border-bottom: 5px solid red; /* Rojo */
+              }
+              100% {
+                border-bottom: 5px solid blue; /* Vuelve a Azul */
+              }
+            }
           </style>
         </head>
         <body>
@@ -100,9 +120,9 @@ export default function AccordionExpandIcon(props) {
               <div class="title">
                 <h1>Dispositivo territorial comunitario</h1>
               </div>
-              <img src="${logo2Base64}" alt="Logo 2" />
+              <img src="${logo2Base64}" alt="Logo 2" class="logo2" />
             </div>
-            <div class="color-line"></div>
+            <div class="color-line" style="animation: colorTransition 8s linear infinite;"></div>
             ${content}
             <div class="footer">Secretaría de Salud - Coordinación de Discapacidad e Inclusión Social</div>
           </div>
@@ -137,9 +157,9 @@ export default function AccordionExpandIcon(props) {
                 <div>
                   <Button variant="contained" color="success" onClick={() => handlePrint(`
                     <div>
-                   
                       <b>Nombre:${row.apellido} ${row.nombree} </b><br/>
-                         <b>Fecha de nacimiento:${row.fecha_nacimiento} </b><br/>
+                      <b>Dni:${row.dni} </b><br/>
+                      <b>Fecha de nacimiento:${row.fecha_nacimiento} </b><br/>
                       <p>${row.detalle}</p>
                     </div>
                   `)}>Imprimir PDF</Button>
