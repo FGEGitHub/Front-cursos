@@ -6,7 +6,9 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { styled } from '@mui/material/styles';
 import servicioDtc from '../../../services/dtc';
 import ModaNueva from './ModalNuevaclase';
+import Button from '@mui/material/Button';
 
+import ModalBorrar from './borrarclase';
 const StyledTableCell = styled('td')(({ theme }) => ({
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -42,9 +44,24 @@ const TablaNotificaciones = (props) => {
 
     const CutomButtonsRenderer = (dataIndex) => {
         return (
-            <Tooltip title="ASISTENCIA">
-                <AccountBoxIcon onClick={() => navigate('/dtc/tallerasistencia/' + clases[dataIndex]['id'])} />
+            <><ModalBorrar
+
+            id={clases[dataIndex]['id']}
+            traer={async () => {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                if (loggedUserJSON) {
+                    const usuario = JSON.parse(loggedUserJSON);
+                    setUsuario(usuario);
+                    const novedades_aux = await servicioDtc.traerclasestaller(usuario.id);
+                    setClases(novedades_aux);
+                }
+            }}
+             />
+             <Tooltip title="ASISTENCIA">
+                <Button variant="contained" onClick={() => navigate('/dtc/tallerasistencia/' + clases[dataIndex]['id'])} >Tomar </Button>
             </Tooltip>
+            </>
+           
         );
     };
 
@@ -63,6 +80,7 @@ const TablaNotificaciones = (props) => {
                 customBodyRenderLite: (dataIndex) => CutomButtonsRenderer(dataIndex),
             },
         },
+        
     ];
 
     const options = {
