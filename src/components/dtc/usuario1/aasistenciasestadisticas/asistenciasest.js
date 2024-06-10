@@ -69,7 +69,7 @@ const MensualInusuales = (props) => {
     }
 
 
-    function fecha(dataIndex, rowIndex, data, onClick) {
+    function quedia(dataIndex, rowIndex, data, onClick) {
 
         return (
             <>
@@ -100,7 +100,19 @@ fecha={asistencias[dataIndex].fecha}/>
             label: "cantidad",
 
         },
-      
+        {
+            name: "quedia",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                quedia(
+                        dataIndex,
+                        rowIndex,
+                        // overbookingData,
+                        // handleEditOpen
+                    )
+            }
+
+        },
       
         {
             name: "Ver dia",
@@ -119,7 +131,7 @@ fecha={asistencias[dataIndex].fecha}/>
             name: "Ver constancias",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
-                verconstancias(
+                quedia(
                         dataIndex,
                         rowIndex,
                         // overbookingData,
