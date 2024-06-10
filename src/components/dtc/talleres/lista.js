@@ -84,7 +84,7 @@ const TablaNotificaciones = (props) => {
 
     return (
         <div>
-            <h2>CLASES DEL CURSO</h2>
+            <h2>Clases del Taller</h2>
             <ModaNueva
                 id_tallerista={usuario.id}
                 traer={async () => {
