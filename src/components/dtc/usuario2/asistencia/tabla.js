@@ -133,7 +133,10 @@ const MobileFriendlyTable = (props) => {
 
 
                       {row.retiro == "No" ? <>
-                        <Retiro id={row.id} traer={async () => {
+                        <Retiro id={row.id} 
+                        nombre={row.nombre}
+                        apellido={row.apellido}
+                        traer={async () => {
                           const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
                           const user = JSON.parse(loggedUserJSON)

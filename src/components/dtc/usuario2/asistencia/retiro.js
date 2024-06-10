@@ -62,7 +62,7 @@ export default function Clasenueva(props) {
             </button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>{props.titulo}</DialogTitle>
+                <DialogTitle>Retiro de {props.nombre} {props.apellido}</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
