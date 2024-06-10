@@ -79,7 +79,16 @@ InputLabelProps={{
         onChange={handleSelection}
       />
 
-
+{selectedValue ? <> 
+        {props.usuario.id != 238 ? <>
+       <button variant="outlined" color="primary" onClick={ir}>
+        Ver usuario
+      </button></>:<></>}
+      </>
+      :<>
+      <button variant="outlined" color="primary" onClick={ir} disabled>
+        Ver usuario
+      </button></>}
      
     {selectedValue ? <><Ficha id={selectedValue.id}/>   <Modalnueva id={selectedValue.id}/></> :<></>}
     </div>

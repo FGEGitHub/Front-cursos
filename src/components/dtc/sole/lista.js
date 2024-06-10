@@ -73,7 +73,7 @@ alert(ta)
       <Typography variant="p" gutterBottom>
         Fecha: {currentDate}
       </Typography>
-   
+
       <Buscador
       chicos={datos}
       fecha={currentDate}
