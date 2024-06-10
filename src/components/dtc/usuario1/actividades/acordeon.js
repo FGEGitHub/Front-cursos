@@ -7,7 +7,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Borrar from "./modalborrar";
 import '../../estilos.css';
 import logo from "../../../../Assets/dtcletra.png";  // Logo 1
-import logo2 from "../../../../Assets/logomuni.png"; // Logo 2 (Asegúrate de importar el segundo logo)
+import logo2 from "../../../../Assets/logomuni.png"; // Logo 2
 import Button from '@mui/material/Button';
 
 // Convertir imágenes a base64
@@ -27,11 +27,13 @@ export default function AccordionExpandIcon(props) {
     const logoBase64 = await convertImageToBase64(logo);
     const logo2Base64 = await convertImageToBase64(logo2);
 
-    const printWindow = window.open('', '', 'width=800,height=600');
+    const printWindow = window.open('', '_blank', 'width=800,height=600');
+    
+    // Establece el título del documento
     printWindow.document.write(`
       <html>
         <head>
-        <tittle>ij</tittle>
+          <title>Imprimir Actividades</title>
           <style>
             @media print {
               body * {
@@ -92,7 +94,6 @@ export default function AccordionExpandIcon(props) {
           </style>
         </head>
         <body>
-        <hr size="8px" color="black" />
           <div class="print-container">
             <div class="header">
               <img src="${logoBase64}" alt="Logo 1" />
@@ -108,10 +109,13 @@ export default function AccordionExpandIcon(props) {
         </body>
       </html>
     `);
+
     printWindow.document.close();
     printWindow.focus();
-    printWindow.print();
-    printWindow.close();
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+    }, 500);
   };
 
   return (
@@ -133,7 +137,9 @@ export default function AccordionExpandIcon(props) {
                 <div>
                   <Button variant="contained" color="success" onClick={() => handlePrint(`
                     <div>
-                      <h2>${row.nombre} - ${row.titulo} - ${row.fecha}</h2>
+                   
+                      <b>Nombre:${row.apellido} ${row.nombree} </b><br/>
+                         <b>Fecha de nacimiento:${row.fecha_nacimiento} </b><br/>
                       <p>${row.detalle}</p>
                     </div>
                   `)}>Imprimir PDF</Button>
