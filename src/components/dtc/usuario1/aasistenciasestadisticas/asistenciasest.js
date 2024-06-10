@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import MUIDataTable from "mui-datatables";
 import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
-import InputLabel from '@mui/material/InputLabel';
+import Modaldia from './modaldia';
 import TableBody from '@mui/material/TableBody';
 import Skeleton from '@mui/material/Skeleton';
 import TableContainer from '@mui/material/TableContainer';
@@ -83,9 +83,8 @@ const MensualInusuales = (props) => {
 
         return (
             <>
-            {asistencias[dataIndex].estado ==='declaradosospechoso' ? <>Declarado Sospechoso</>:<>  {asistencias[dataIndex].estado ==='P'? <>Pendiente</>:<> {asistencias[dataIndex].estado ==='A'? <>Aprobado</>:<>{asistencias[dataIndex].estado ==='averificarnivel3'? <>Pendiente clasificacion Nivel 3</>:<></>}</>}</>}     </>}
-
-
+            <Modaldia
+fecha={asistencias[dataIndex].fecha}/>
             </>
         );
     }
@@ -93,27 +92,18 @@ const MensualInusuales = (props) => {
     const columns = [
 
         {
-            name: "cuil_cuit",
-            label: "Cuil/Cuit",
+            name: "fecha",
+            label: "Fecha",
         },
         {
-            name: "ingresos",
-            label: "ingresos",
-
-        },
-        {
-            name: "monto",
-            label: "Monto",
-
-        },
-        {
-            name: "Nombre",
-            label: "Nombre/Razon",
+            name: "cantidad",
+            label: "cantidad",
 
         },
       
+      
         {
-            name: "estado",
+            name: "Ver dia",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     estadoo(
@@ -184,10 +174,12 @@ InputLabelProps={{
   shrink: true,
 }}
 />
+{ FormFecha ? <>
+{FormFecha.fecha_inicio && FormFecha.fecha_fin ? <>
+                        <Button type="outlined" onClick={buscar} >Buscar</Button>
 
-                        <Button onClick={buscar} >Buscar</Button>
-
-
+                        </>:<> <Button type="outlined" disabled >Buscar</Button></>}
+                        </>:<><Button type="outlined" disabled >Buscar</Button></>}
             <div>
                 <div>
                 <br/> <br/>
