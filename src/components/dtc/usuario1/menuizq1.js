@@ -91,7 +91,7 @@ export default function MenuIzq2 ({children}) {
           path: '/dtc/usuario1/chiques' 
         },
         { 
-          text: 'Talleres', 
+          text: 'Talleres(en proceso,  sin funcionar)', 
           icon: <ArchitectureIcon color="primary" />,
           path: '/dtc/usuario1/talleres' 
         },
