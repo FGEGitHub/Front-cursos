@@ -344,8 +344,28 @@ const TablaNotificaciones = (props) => {
                                                         <StyledTableCell component="th" scope="row">{row.titulo}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.expediente} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> {row.descripcion} </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row">  <Modalborrar id={row.id}
+                      traer={async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const novedades_aux = await servicioDtc.traeretapacocina(usuario.id)
+                                setchicos(novedades_aux[0])
+                                setDatos(novedades_aux[1])
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                    } }
+                    /> </StyledTableCell>
 
-
+                                                      
 
 
                                                     </StyledTableRow>
