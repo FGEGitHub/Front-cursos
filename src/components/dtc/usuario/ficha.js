@@ -178,13 +178,9 @@ backgroundColor:'#b0bec5'        }}>
           </>:<></>}
           {chico && (
                 <Fragment>
-                  { usuario ? <>
-                  {usuario.nivel ==20?<>
-                  <Button onClick={toggleShowAllData}>
+                 <Button onClick={toggleShowAllData}>
                     {showAllData ? 'Ver menos' : 'Ver más'}
                   </Button>
-                  </>:<></>}
-                  </>:<></>}
                   {/* Agrega más campos adicionales aquí */}
                 </Fragment>
               )}
