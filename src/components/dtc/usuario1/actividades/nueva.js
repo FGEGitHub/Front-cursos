@@ -110,6 +110,20 @@ export default function SelectTextFields(props) {
                     />
 
 
+<TextField
+
+onChange={handleChange}
+name="fecha_act"
+id="date"
+label="Fecha"
+type="date"
+defaultValue="2024-06-01"
+sx={{ width: 220 }}
+InputLabelProps={{
+  shrink: true,
+}}
+/>
+
 
 
 {/* 

@@ -67,6 +67,7 @@ const DrawerNav = () => {
 
   if (loggedUserJSON) {
     const user = JSON.parse(loggedUserJSON)
+    console.log(user)
     setUsuario(user)
     
   }
@@ -214,8 +215,9 @@ const DrawerNav = () => {
                 </ListItemButton>
               ))} </List></>
           }
-
+{usuario? <>Atencion {usuario.nombre}, </>:<></>}
 {cumple ? <>
+
        { cumple.length>0? <>
         {cumple.map((item) => (
             <ListItem 

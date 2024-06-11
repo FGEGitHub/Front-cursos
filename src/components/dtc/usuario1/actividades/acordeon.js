@@ -148,7 +148,7 @@ export default function AccordionExpandIcon(props) {
               aria-controls={`panel${index}-content`}
               id={`panel${index}-header`}
             >
-              <Typography>{`${row.nombre} - ${row.titulo} - ${row.fecha}`}</Typography>
+              <Typography>{`${row.nombre} - ${row.titulo} -fecha de carga  ${row.fecha}- fecha intervencion:${row.fecha_act}` }</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
@@ -160,6 +160,7 @@ export default function AccordionExpandIcon(props) {
                       <b>Nombre:${row.apellido} ${row.nombree} </b><br/>
                       <b>Dni:${row.dni} </b><br/>
                       <b>Fecha de nacimiento:${row.fecha_nacimiento} </b><br/>
+                       <b>Fecha::${row.fecha_act} </b><br/>
                       <p>${row.detalle}</p>
                     </div>
                   `)}>Imprimir PDF</Button>
