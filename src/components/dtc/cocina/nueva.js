@@ -12,7 +12,6 @@ import InputLabel from '@mui/material/InputLabel';
 import styled from 'styled-components';
 import DialogActions from '@mui/material/DialogActions';
 import servicioDtc from '../../../services/dtc'
-
 const StyledParagraph = styled.p`
   font-family: 'Montserrat', sans-serif;
 `;
@@ -25,6 +24,7 @@ const etapasPorProyecto = {
     'Limpieza'
   ],
   'EL DTC HACIA EL FUTURO 2024': [
+    'Ninguna',
     'Refuerzo de Higiene personal para los usuarios',
     'Fin de año',
     'Dia de la primavera y del estudiante',
@@ -42,9 +42,10 @@ export default function SelectTextFields(props) {
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState('');
 
   const handleChange = (e) => {
-    console.log(form);
     setForm({ ...form, [e.target.name]: e.target.value });
-
+    if (e.target.name === 'proyecto') {
+      setProyectoSeleccionado(e.target.value);
+    }
   };
 
   const handleClickOpen = () => {
@@ -73,7 +74,7 @@ export default function SelectTextFields(props) {
 
   return (
     <Box
-      sx={{
+    sx={{
         '& .MuiTextField-root': { m: 1, width: '125ch' },
       }}
       noValidate
@@ -82,7 +83,7 @@ export default function SelectTextFields(props) {
       <Tooltip title="Nueva">
         <Button variant="outlined" onClick={handleClickOpen}> Nuevo </Button>
       </Tooltip>
-      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+      <Dialog open={open} onClose={handleClose} sx={{ width: '100%' }}>
         <DialogContent>
           <h3>
             <b> Nueva etapa</b>
@@ -103,9 +104,10 @@ export default function SelectTextFields(props) {
             }}
             sx={{ width: 250 }}
           >
+              <option value={'Sin determinar'}>Elegir</option>
             <option value={'sector logística del Dispositivo'}>sector logística del Dispositivo</option>
             <option value={'EL DTC HACIA EL FUTURO 2024'}>EL DTC HACIA EL FUTURO 2024</option>
-            <option value={'No'}>No</option>
+        
           </NativeSelect>
           <br /><br /><br />
           <InputLabel variant="outlined" htmlFor="uncontrolled-native">
