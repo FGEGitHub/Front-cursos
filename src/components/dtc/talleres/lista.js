@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import servicioDtc from '../../../services/dtc';
 import ModaNueva from './ModalNuevaclase';
 import Button from '@mui/material/Button';
-
+import Modificar from './modificar'
 import ModalBorrar from './borrarclase';
 const StyledTableCell = styled('td')(({ theme }) => ({
     backgroundColor: theme.palette.common.black,
@@ -58,8 +58,23 @@ const TablaNotificaciones = (props) => {
             }}
              />
              <Tooltip title="ASISTENCIA">
-                <Button variant="contained" onClick={() => navigate('/dtc/tallerasistencia/' + clases[dataIndex]['id'])} >Tomar </Button>
+                <button variant="contained" onClick={() => navigate('/dtc/tallerasistencia/' + clases[dataIndex]['id'])} >Asistencia </button>
             </Tooltip>
+            <Modificar
+             id={clases[dataIndex]['id']}
+             titulo={clases[dataIndex]['titulo']}
+             descripcion={clases[dataIndex]['descripcion']}
+             fecha={clases[dataIndex]['fecha']}
+             traer={async () => {
+                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                 if (loggedUserJSON) {
+                     const usuario = JSON.parse(loggedUserJSON);
+                     setUsuario(usuario);
+                     const novedades_aux = await servicioDtc.traerclasestaller(usuario.id);
+                     setClases(novedades_aux);
+                 }
+             }}
+              />
             </>
            
         );

@@ -26,7 +26,7 @@ import {
     Button
 } from '@material-ui/core';
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
-
+import Modalborrar from './borrar'
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -195,17 +195,33 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-                <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
 
                     < Tooltip title="Ver">
-                        <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} variant="contained">
-Ver                        </Button>
+                    <Modalborrar id={chicos[dataIndex]['id']}
+                      traer={async () => {
+                        try {
+                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                            if (loggedUserJSON) {
+                                const usuario = JSON.parse(loggedUserJSON)
+                
+                                setUsuario(usuario)
+                
+                                const novedades_aux = await servicioDtc.traeretapacocina(usuario.id)
+                                setchicos(novedades_aux[0])
+                                setDatos(novedades_aux[1])
+                            }
+                
+                        } catch (error) {
+                
+                        }
+                
+                    } }
+                    />
                     </Tooltip>
 
 
 
 
-                </div>
 
 
             </>
@@ -218,10 +234,15 @@ Ver                        </Button>
     // definimos las columnas
     const columns = [
       {
-        name: "id",
-        label: "id",
+        name: "proyecto",
+        label: "proyecto",
 
     },
+    {
+      name: "etapa",
+      label: "etapa",
+
+  },
     {
         name: "fecha",
         label: "fecha",
@@ -267,7 +288,7 @@ Ver                        </Button>
  <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
 </Alert> </>:<></>}
 
-            <h2>Lista de chicos</h2>
+            <h2>Lista de etapas</h2>
             {chicos ? <>
                 <div>
 
@@ -301,7 +322,7 @@ Ver                        </Button>
 
                                 <TableContainer>
                                     {!chicos ? <Skeleton /> : <>
-                                        <h1>Lista de usuarios </h1>
+                                        <h1>Lista de etapas </h1>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>

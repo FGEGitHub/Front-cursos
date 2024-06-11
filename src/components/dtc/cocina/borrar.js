@@ -32,8 +32,8 @@ export default function Clasenueva(props) {
         event.preventDefault();
         try {
 
-         const respuesta=  await servicioDtc.borrarclasee({id:props.id})
-         alert(respuesta)
+         const respuesta=  await servicioDtc.borraretapa({id:props.id})
+      
 
 
         } catch (error) {
@@ -56,9 +56,9 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <button  onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
+            <Button variant="contained"  color="error" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
             Borrar
-            </button>
+            </Button>
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Borrar actividad</DialogTitle>
