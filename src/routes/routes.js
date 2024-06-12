@@ -142,6 +142,9 @@ import Dtcturnosadmin from '../pages/dtc/nivel1/turnosadmin';
 import Dtcturnopsic from '../pages/dtc/psicologa';
 import Dtcsoleinicio from '../pages/dtc/sole';
 import DTCetapas from '../pages/dtc/cargadeetapas';
+import DTCcargaetapascadia from '../pages/dtc/cargaetapascadia';
+
+
 import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
 
 import DTCTallerAsis from '../pages/dtc/talleresasistencia';
@@ -298,7 +301,7 @@ const Rutas = [
 		{ path: '/dtc/tallerclases', element: <DTCTallerclases/> },
 		{ path: '/dtc/tallerasistencia/:id', element: <DTCTallerAsis/> },
 		{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest/> },
-
+		{ path: '/dtc/cargaetapascadia', element: <DTCcargaetapascadia/> },
 
 
 
