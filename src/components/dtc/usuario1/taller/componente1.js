@@ -13,7 +13,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import  Acordeon   from '../actividades/acordeon';
 import  { useEffect, useState } from "react";
-import Asistencia from  '../../usuario2/asistencia/tabla'
+import Asistencia from  '../../talleres/tablasistenciaparaadmin'
 import InputLabel from '@mui/material/InputLabel';
 import NativeSelect from '@mui/material/NativeSelect';
 
@@ -37,12 +37,12 @@ const LoginForm = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [currentDate, setCurrentDate] = useState('');
-  const [actividades, setactividades] = useState()
-  const [clasess, setClases] = useState()
+  const [clasesss, setClases] = useState()
+  const [presentes, setPresentes] = useState()
 
   useEffect(() => {
     traer()
-    clases()
+  
 
 
 }, [])
@@ -54,7 +54,7 @@ const handleChange = async (e) => {
    await setCurrentDate(e.target.value );
 
     const historial = await servicioDtc.traertodaslasactividades({fecha:e.target.value})
-    setactividades(historial)
+    setPresentes(historial)
 
   } catch (error) {
 
@@ -72,8 +72,9 @@ const traer = async () => {
           const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
           setCurrentDate(formattedDate);
-          const historial = await servicioDtc.traertodaslasactividades({fecha:formattedDate})
-          setactividades(historial)
+          const historial = await servicioDtc.traerclasestaller(id)
+          console.log(historial)
+          setClases(historial)
       }
 
   } catch (error) {
@@ -81,22 +82,7 @@ const traer = async () => {
   }
 
 }
-  const fechaActual = new Date();
-  const clases = async () => {
-    try {
-        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-        if (loggedUserJSON) {
-            const usuario = JSON.parse(loggedUserJSON)
-  
-            const hi = await servicioDtc.clasesdetaller(id)
-            setClases(hi)
-        }
-  
-    } catch (error) {
-  
-    }
-  
-  }
+
   return (<>
    
    <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -113,12 +99,12 @@ const traer = async () => {
                             
                             >  
 
-                            {clasess ? <>
+                            {clasesss ? <>
                              <option value={'1'}> Elegir</option>
                           
-                             {clasess.map((row) => (
+                             {clasesss.map((row) => (
                                        
-                                       <option value={row.fecha}> {row.fecha} - {row.count} Presentes</option>
+                                       <option value={row.id}> {row.fecha} - {row.cantidad} Presentes</option>
          
                              ))}
                                   </>:<>Cargando</>}
@@ -126,17 +112,10 @@ const traer = async () => {
 
 
 
-    {currentDate ? <>   <Asistencia fecha={currentDate}
+    {currentDate ? <>   <Asistencia id={currentDate}
                                     idt={id}/></>:<></>}
-    {actividades ? <> <Acordeon
-          actividades={actividades}
-
-        
-    />  
-    
-
+   
   
-    </>:<>cargando</>}
 
 
     </>
