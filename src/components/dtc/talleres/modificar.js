@@ -113,7 +113,7 @@ InputLabelProps={{
                       
 
                             <DialogActions>
-                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Borrar</Button>
+                       <Button variant="contained" color="primary" onClick={handleDeterminar}>Modificar</Button>
                                 <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
 
                             </DialogActions>
