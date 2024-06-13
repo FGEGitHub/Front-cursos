@@ -217,23 +217,23 @@ Ver                        </Button>
     // definimos las columnas
     const columns = [
       {
-        name: "kid",
-        label: "kid",
+        name: "nombretallerista",
+        label: "Registrado por ",
 
     },
         {
-            name: "apellido",
-            label: "apellido",
+            name: "titulo",
+            label: "titulo",
 
         },
         {
-            name: "nombre",
-            label: "nombre",
+            name: "fecha",
+            label: "fecha carga",
 
         },
         {
-          name: "dni",
-          label: "dni",
+          name: "fecha_act",
+          label: "fecha registra",
       },
     
         {
