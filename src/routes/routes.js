@@ -152,6 +152,18 @@ import DTCasistenciasest from '../pages/dtc/nivel1/estadasistencias';
 
 import CargarExcel from '../pages/subirexcel'
 
+
+
+
+
+import LoginCadia from '../pages/cadia/login'
+
+
+import CalendarioCadia from '../pages/cadia/admin/calendario'
+
+
+
+
 const Rutas = [
 	 <Navbar/> ,
 
@@ -303,6 +315,19 @@ const Rutas = [
 		{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest/> },
 		{ path: '/dtc/cargaetapascadia', element: <DTCcargaetapascadia/> },
 		{ path: '/dtc/usuario1/intervenciones', element: <Dtcintervenciones/> },
+
+
+
+
+
+
+
+		{ path: '/cadia/login', element: <LoginCadia/> },
+		{ path: '/cadia/usuario/calendario', element: <CalendarioCadia/> },
+		
+
+
+
 
 
 ];

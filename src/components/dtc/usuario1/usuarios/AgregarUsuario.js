@@ -108,6 +108,7 @@ export default function Ingresos() {
                                     <MenuItem value={'24'}>1-DTC 5 psicologa</MenuItem>
                                     <MenuItem value={'25'}>1-DTC 6 sole</MenuItem>
                                     <MenuItem value={'26'}>1-DTC 6 Taller</MenuItem>
+                                    <MenuItem value={'40'}>1-DTC Cadia</MenuItem>
                                 </Select>
                             </FormControl>
                             <TextField
