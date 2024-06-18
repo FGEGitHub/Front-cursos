@@ -45,17 +45,17 @@ export default function Paginas() {
     console.log(loggedUserJSON)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-    
+
       setUsuario(user)
-   
+
       switch (user.nivel) {
         case 20:
           break;
         //   navigate('/')
         case 21:
           break;
-          case 25:
-            break;
+        case 25:
+          break;
         default:
 
           window.localStorage.removeItem('loggedNoteAppUser')
@@ -74,29 +74,30 @@ export default function Paginas() {
 
   return (
     <>
-    <div sx={{          backgroundImage: 'linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%)',
-}}>
-      {usuario ? <>
-        {usuario.nivel == "20" ? <>
-          {isMatch ?
-            <>
-              <div className={classes.container}>
-                <MenuuCel texto="Usuarios" />
-                <Login />
-                <Asistencia/>
-                <Avtvidadchicos />
-                <Listalegajos />
-              </div>
-            </> : <>
-              <Menuizq>
-                <Login />
-                <Asistencia/>
-                <Avtvidadchicos />
-                <Listalegajos />
-              </Menuizq></>}</> : 
-              <>     <Login /> <Avtvidadchicos /> </>}</> : 
-              <>54558585  {usuario}</>}
-              </div>
+      <div sx={{
+        backgroundImage: 'linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%)',
+      }}>
+        {usuario ? <>
+          {usuario.nivel == "20" ? <>
+            {isMatch ?
+              <>
+                <div className={classes.container}>
+                  <MenuuCel texto="Usuarios" />
+                  <Login />
+                  <Asistencia />
+                  <Avtvidadchicos />
+                  <Listalegajos />
+                </div>
+              </> : <>
+                <Menuizq>
+                  <Login />
+                  <Asistencia />
+                  <Avtvidadchicos />
+                  <Listalegajos />
+                </Menuizq></>}</> :
+            <>     <Login /> <Avtvidadchicos /> </>}</> :
+          <>54558585  {usuario}</>}
+      </div>
     </>
 
   );
