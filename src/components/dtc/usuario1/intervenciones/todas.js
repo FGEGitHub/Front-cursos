@@ -16,6 +16,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
+import Ver from './ver'
 import Alert from '@mui/material/Alert';
 import {
 
@@ -193,12 +194,13 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-
+<Ver
+id={chicos[dataIndex]['id']}/>
                 <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
 
                     < Tooltip title="Ver">
                         <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} variant="contained">
-Ver                        </Button>
+Ver usuario                      </Button>
                     </Tooltip>
 
 
@@ -236,16 +238,7 @@ Ver                        </Button>
           label: "fecha registra",
       },
     
-        {
-            name: "fecha_nacimiento",
-            label: "Fecha de nacimiento",
-
-        },
-        {
-            name: "observaciones",
-            label: "observaciones",
-
-        },
+      
 
         {
             name: "Ver",
@@ -260,14 +253,7 @@ Ver                        </Button>
             }
 
         },
-        {
-          name: "tel_responsable",
-          label: "responsable",
-      },
-      {
-        name: "tel",
-        label: "tel",
-    },
+
 
 
     ];
