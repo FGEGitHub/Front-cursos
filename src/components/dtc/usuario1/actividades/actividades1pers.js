@@ -74,7 +74,7 @@ const TablaNotificaciones = (props) => {
                 const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
                 setCurrentDate(formattedDate);
-                const historial = await servicioDtc.traeractividadeschico({id_usuario:id})
+                const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
                 setactividades(historial)
             }
 
@@ -88,35 +88,35 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-             
-                    < Tooltip title="Ver">
+
+                < Tooltip title="Ver">
                     <Modalver
-                    id={ actividades[dataIndex]['id']}
-                    detalle={ actividades[dataIndex]['detalle']}
-                    titulo={ actividades[dataIndex]['titulo']}
-                    traer={async () => {
-                        try {
-                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                            if (loggedUserJSON) {
-                                const usuario = JSON.parse(loggedUserJSON)
-                
-                                setUsuario(usuario)
-                
-                                const today = new Date();
-                                const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-                
-                                setCurrentDate(formattedDate);
-                                const historial = await servicioDtc.traeractividadeschico({id_usuario:id})
-                                setactividades(historial)
+                        id={actividades[dataIndex]['id']}
+                        detalle={actividades[dataIndex]['detalle']}
+                        titulo={actividades[dataIndex]['titulo']}
+                        traer={async () => {
+                            try {
+                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                if (loggedUserJSON) {
+                                    const usuario = JSON.parse(loggedUserJSON)
+
+                                    setUsuario(usuario)
+
+                                    const today = new Date();
+                                    const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+
+                                    setCurrentDate(formattedDate);
+                                    const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
+                                    setactividades(historial)
+                                }
+
+                            } catch (error) {
+
                             }
-                
-                        } catch (error) {
-                
-                        }
-                
-                    }}
+
+                        }}
                     />
-                    </Tooltip>
+                </Tooltip>
 
 
 
@@ -140,8 +140,8 @@ const TablaNotificaciones = (props) => {
             label: "titulo",
 
         },
-       
-  
+
+
 
         {
             name: "Acciones",
@@ -163,167 +163,83 @@ const TablaNotificaciones = (props) => {
     // renderiza la data table
     return (
         <div>
-                           <Paper
-        sx={{
-          cursor: 'pointer',
-          background: '#fafafa',
-          color: '#e0e0b2',
-          
-          border: '1px dashed #ccc',
-          '&:hover': { border: '1px solid #ccc' },
-        }}
-      > <Typography variant="body1" style={{ color: 'black' }}>
-            <h2>Lista de intervenciones</h2></Typography>
-            {actividades ? <>
-                <div>
+            <Paper
+                sx={{
+                    cursor: 'pointer',
+                    background: '#fafafa',
+                  
+
+                    border: '1px dashed #ccc',
+                    '&:hover': { border: '1px solid #ccc' },
+                }}
+            > <Typography variant="body1" style={{ color: 'black' }}>
+                    <h2>Lista de intervenciones</h2></Typography>
+                {actividades ? <>
+                    <div>
 
 
-                    <ModaNueva
-                    id_usuario={id}
-                    fecha={currentDate}
-                    id_tallerista={usuario.id}
-                        traer={async () => {
-                            try {
-                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                                if (loggedUserJSON) {
-                                    const usuario = JSON.parse(loggedUserJSON)
-                    
-                                    setUsuario(usuario)
-                    
-                                    const today = new Date();
-                                    const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-                    
-                                    setCurrentDate(formattedDate);
-                                    const historial = await servicioDtc.traeractividadeschico({id_usuario:id})
-                                    setactividades(historial)
+                        <ModaNueva
+                            id_usuario={id}
+                            fecha={currentDate}
+                            id_tallerista={usuario.id}
+                            traer={async () => {
+                                try {
+                                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                    if (loggedUserJSON) {
+                                        const usuario = JSON.parse(loggedUserJSON)
+
+                                        setUsuario(usuario)
+
+                                        const today = new Date();
+                                        const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+
+                                        setCurrentDate(formattedDate);
+                                        const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
+                                        setactividades(historial)
+                                    }
+
+                                } catch (error) {
+
                                 }
-                    
-                            } catch (error) {
-                    
-                            }
-                    
-                        }}
-                    />
-                    {actividades.length > 0 ? <>
 
-{/* 
-                        {isMatch ?
-                            <>
+                            }}
+                        />
+                        {actividades.length > 0 ? <>
 
-                                <TableContainer>
-                                    {!actividades ? <Skeleton /> : <>
-                                        <h1>Lista de actividades </h1>
-                                        <Table >
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Fecha</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Titulo</b></TableCell>
-                                                   <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
+                        
 
+                            {actividades ? <> <Acordeon
+                                actividades={actividades}
+                                traer={async () => {
+                                    try {
+                                        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                        if (loggedUserJSON) {
+                                            const usuario = JSON.parse(loggedUserJSON)
 
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
+                                            setUsuario(usuario)
 
+                                            const today = new Date();
+                                            const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
-
-                                                {actividades.map((row) => (
-                                                    <StyledTableRow key={row.name}>
-                                                        <StyledTableCell component="th" scope="row">{row.fecha}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.titulo} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <Modalver
-                    id={ row.id}
-                    detalle={row.detalle}
-                    titulo={row.titulo}
-                    traer={async () => {
-                        try {
-                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                            if (loggedUserJSON) {
-                                const usuario = JSON.parse(loggedUserJSON)
-                
-                                setUsuario(usuario)
-                
-                                const today = new Date();
-                                const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-                
-                                setCurrentDate(formattedDate);
-                                const historial = await servicioDtc.traeractividades({fecha:formattedDate,id_usuario:usuario.id})
-                                setactividades(historial)
-                            }
-                
-                        } catch (error) {
-                
-                        }
-                
-                    }}
-                    /> </StyledTableCell>
-
-
-
-
-                                                    </StyledTableRow>
-                                                ))}
-
-
-
-
-                                            </TableBody>
-                                        </Table>
-                                    </>}
-
-                                </TableContainer>
-                            </> : <><>
-                                <MUIDataTable
-
-                                    title={"Lista de actividades"}
-                                    data={actividades}
-                                    columns={columns}
-                                    actions={[
-                                        {
-                                            icon: 'save',
-                                            tooltip: 'Save User',
-                                            onClick: (event, rowData) => alert("You saved " + rowData.name)
+                                            setCurrentDate(formattedDate);
+                                            const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
+                                            setactividades(historial)
                                         }
-                                    ]}
-                                    options={options}
 
+                                    } catch (error) {
 
-                                />
+                                    }
 
-                            </></>} */}
+                                }}
 
-{actividades ? <> <Acordeon
-          actividades={actividades}
-          traer={async () => {
-            try {
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                if (loggedUserJSON) {
-                    const usuario = JSON.parse(loggedUserJSON)
-    
-                    setUsuario(usuario)
-    
-                    const today = new Date();
-                    const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-    
-                    setCurrentDate(formattedDate);
-                    const historial = await servicioDtc.traeractividadeschico({id_usuario:id})
-                    setactividades(historial)
-                }
-    
-            } catch (error) {
-    
-            }
-    
-        }}
-    
-    /> </>:<>cargando</>}
+                            /> </> : <>cargando</>}
 
-                    </> : <> <h2>El dia de hoy no hay actividades aun</h2></>}
+                        </> : <> <h2>El dia de hoy no hay actividades aun</h2></>}
 
 
 
-                </div>
-            </> : <></>}</Paper>
+                    </div>
+                </> : <></>}</Paper>
         </div>
     )
 }
