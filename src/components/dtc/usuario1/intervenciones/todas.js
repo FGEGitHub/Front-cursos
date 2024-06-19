@@ -219,6 +219,14 @@ Ver usuario                      </Button>
     // definimos las columnas
     const columns = [
       {
+        name: "mes",
+        label: "mes",
+    },
+    {
+      name: "año",
+      label: "año",
+  },
+      {
         name: "nombretallerista",
         label: "Registrado por ",
 
