@@ -149,6 +149,7 @@ import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
 
 import DTCTallerAsis from '../pages/dtc/talleresasistencia';
 import DTCasistenciasest from '../pages/dtc/nivel1/estadasistencias';
+import DTCcumples from '../pages/dtc/nivel1/cumpleaños';
 
 import CargarExcel from '../pages/subirexcel'
 
@@ -296,6 +297,8 @@ const Rutas = [
 		{ path: '/dtc/usuario1/personapsiq/:id', element: <Dtcpersonapsiq/> },
 		{ path: '/dtc/turnos/lista', element: <Dtcturnos/> },
 		{ path: '/dtc/usuario1/turnos', element: <Dtcturnosadmin/> },
+		{ path: '/dtc/usuario1/cumples', element: <DTCcumples/> },
+
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
 		{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio/> },

@@ -86,6 +86,11 @@ export default function MenuIzq2 ({children}) {
           path: '/dtc/usuario1/usuarios' 
         },
         { 
+          text: 'cumples', 
+          icon: <ArchitectureIcon color="primary" />,
+          path: '/dtc/usuario1/cumples' 
+        },
+        { 
           text: 'Usuarios', 
           icon: <WcTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/chiques' 
