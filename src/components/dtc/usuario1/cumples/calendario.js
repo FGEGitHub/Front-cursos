@@ -3,7 +3,10 @@ import servicioDtc from '../../../../services/dtc';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Alert, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from "react-router-dom";
+import './CustomCalendar.css'; // Archivo CSS para personalizar el calendario
 
 const TablaNotificaciones = () => {
     const [chicos, setChicos] = useState([]);
@@ -42,17 +45,6 @@ const TablaNotificaciones = () => {
         }
     };
 
-    const formatDate = (date) => {
-        const d = new Date(date);
-        let month = '' + (d.getMonth() + 1);
-        let day = '' + d.getDate();
-
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-
-        return [month, day].join('-');
-    };
-
     return (
         <div>
             {datos && (
@@ -72,10 +64,10 @@ const TablaNotificaciones = () => {
                                     const chicoDate = new Date(chico.fecha_nacimiento);
                                     return chicoDate.getDate() === date.getDate() && chicoDate.getMonth() === date.getMonth();
                                 });
-                                return user ? <div style={{ color: 'blue' }}>{user.nombre}</div> : null;
+                                return user ? <div className="birthday-icon"><FontAwesomeIcon icon={faBirthdayCake} /></div> : null;
                             }
                         }}
-                        style={{ width: '100%', height: 'auto' }}
+                        className="custom-calendar"
                     />
                     <Dialog
                         open={dialogOpen}
