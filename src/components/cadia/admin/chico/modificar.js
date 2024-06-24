@@ -19,33 +19,37 @@ const StyledParagraph = styled.p`
 `;
 
 export default function SelectTextFields(props) {
-  const [open, setOpen] = React.useState(false);
-  //const usuario  = useUser().userContext
-  const [form, setForm] = useState({
-    fecha_nacimiento:"Sin determinar",
-    observaciones:"Sin determinar",
-    primer_contacto:"Sin determinar",
-    primer_ingreso:"Sin determinar",
-    admision:"Sin determinar",
-    
-    dni:"Sin determinar",
-    domicilio:"Sin determinar",
-    telefono:"Sin determinar",
-    autorizacion_imagen:"Sin determinar",
-    fotoc_dni:"Sin determinar",
-    fotoc_responsable:"Sin determinar",
-    tel_responsable:"Sin determinar",
-    visita_social:"Sin determinar",
-    egreso:"Sin determinar",
-    aut_retirar:"Sin determinar",
-    dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",
-  })
-  const [datos, setDatos] = useState()
-  const [activo, setActivo] = useState(false)
+    const [open, setOpen] = React.useState(false);
+    //const usuario  = useUser().userContext
+    const [form, setForm] = useState({
+        id: props.id,
+        kid: props.kid,
+        fecha_nacimiento: props.fecha_nacimiento,
+        observaciones: props.observaciones,
+        primer_contacto: props.primer_contacto,
+        primer_ingreso: props.primer_ingreso,
+        admision: props.admision,
+        nombre: props.nombre,
+        apellido: props.apellido,
+        dni: props.dni,
+        talle: props.talle,
+        domicilio: props.domicilio,
+        telefono: props.telefono,
+        autorizacion_imagen: props.autorizacion_imagen,
+        fotoc_dni: props.fotoc_dni,
+        fotoc_responsable: props.fotoc_responsable,
+        tel_responsable: props.tel_responsable,
+        visita_social: props.visita_social,
+        egreso: props.egreso,
+        aut_retirar: props.aut_retirar,
+        dato_escolar: props.dato_escolar,
+        hora_merienda: props.hora_merienda,
+        escuela: props.escuela,
+        grado: props.grado,
+        fines:props.fines,
+    })
+    const [datos, setDatos] = useState()
+    const [activo, setActivo] = useState(false)
 
 
 
@@ -53,104 +57,75 @@ export default function SelectTextFields(props) {
 
 
 
-  const handleChange = (e) => {
-    console.log(form)
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
-
-
-  const handleClickOpen = () => {
-
-    setOpen(true);
-
-
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleDeterminar = async (event) => {
-
-    try {
-      event.preventDefault();
-
-      const nov = await servicioDtc.nuevochiquecadia(form)
-alert(nov)
-    } catch (error) {
-      console.error(error);
-      console.log('Error algo sucedio')
-
-
+    const handleChange = (e) => {
+        console.log(form)
+        setForm({ ...form, [e.target.name]: e.target.value })
     }
-   setForm({ fecha_nacimiento:"Sin determinar",
-    observaciones:"Sin determinar",
-    primer_contacto:"Sin determinar",
-    primer_ingreso:"Sin determinar",
-    admision:"Sin determinar",
-    kid:"Sin determinar",
-    dni:"Sin determinar",
-    domicilio:"Sin determinar",
-    telefono:"Sin determinar",
-    autorizacion_imagen:"Sin determinar",
-    fotoc_dni:"Sin determinar",
-    fotoc_responsable:"Sin determinar",
-    tel_responsable:"Sin determinar",
-    visita_social:"Sin determinar",
-    egreso:"Sin determinar",
-    aut_retirar:"Sin determinar",
-    dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    talle:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",})
-    props.traer()
-
-    setOpen(false);
-  };
-
-  const [currency, setCurrency] = React.useState('EUR');
-
-  /*   const handleChange = (event) => {
-      setCurrency(event.target.value);
-    }; */
 
 
-  return (
+    const handleClickOpen = () => {
+
+        setOpen(true);
+
+
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDeterminar = async (event) => {
+
+        try {
+            event.preventDefault();
+
+            const nov = await servicioDtc.modificarusuariocadia(form)
+alert(nov)
+        } catch (error) {
+            console.error(error);
+            console.log('Error algo sucedio')
+
+
+        }
+
+        props.traer()
+
+        setOpen(false);
+    };
+
+    const [currency, setCurrency] = React.useState('EUR');
+
+    /*   const handleChange = (event) => {
+        setCurrency(event.target.value);
+      }; */
+
+
+    return (
 
 
 
 
-    <Box
+        <Box
 
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      < Tooltip title="Nueva Clase">
-        <Button variant="contained" onClick={handleClickOpen}> Nuevo  </Button>
+            sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+            < Tooltip title="Nueva Clase">
+                <Button variant="outlined" onClick={handleClickOpen}> Modificar usuario  </Button>
 
-      </Tooltip>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
+            </Tooltip>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogContent>
 
-        
-            <h3>
-              <b> NUEVO USUARIO</b></h3>
-             
-                        <Typography variant="p" component="div" color="black">
-                            
-                               <b> KID1/KID2/ADOLESCENTES</b>
-                          
-                        </Typography>
-                    
-                   
-                    <br />
-              <TextField
-              autoFocus
+
+                    <h3>
+                        <b> Modificar a {props.nombre}</b></h3>
+
+                        <TextField
+                  defaultValue={props.nombre}
               margin="dense"
               id="name"
               label="Nombre"
@@ -164,7 +139,7 @@ alert(nov)
               autoFocus
               margin="dense"
               id="name"
-              
+              defaultValue={props.apellido}
               label="Apellido"
               name="apellido"
               onChange={handleChange}
@@ -175,7 +150,7 @@ alert(nov)
               autoFocus
               margin="dense"
               id="dni"
-              
+              defaultValue={props.dni}
               label="DNI"
               name="dni"
               onChange={handleChange}
@@ -184,13 +159,12 @@ alert(nov)
             />
             <br/>
             <TextField
-
+    defaultValue={props.fecha_nacimiento}
               onChange={handleChange}
               name="fecha_nacimiento"
               id="date"
               label="Fecha de nacimiento"
               type="date"
-              defaultValue="2023-03-01"
               sx={{ width: 220 }}
               InputLabelProps={{
                 shrink: true,
@@ -198,13 +172,14 @@ alert(nov)
             />
             
 <TextField
+    defaultValue={props.fecha_ingreso}
 
 onChange={handleChange}
 name="fecha_ingreso"
 id="date"
 label="fecha_ingreso"
 type="date"
-defaultValue="2023-03-01"
+
 sx={{ width: 220 }}
 InputLabelProps={{
   shrink: true,
@@ -217,7 +192,7 @@ name="fecha_fin"
 id="date"
 label="fecha_fin"
 type="date"
-defaultValue="2023-03-01"
+defaultValue={props.fecha_fin}
 sx={{ width: 220 }}
 InputLabelProps={{
   shrink: true,
@@ -263,21 +238,23 @@ InputLabelProps={{
               fullWidth
               variant="standard"
             />
-      
-            <DialogActions>
+                
 
 
-              <>
-              {form.nombre &&form.apellido  ? <> <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></> :  <>Completar los datos</>}
-             </>
-              <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
-            </DialogActions>
+                    <DialogActions>
 
 
-        </DialogContent>
-      </Dialog>
-    </Box >
+                        <>
+                            <> <Button variant="contained" color="primary" onClick={handleDeterminar}> Modificar </Button></>
+                        </>
+                        <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
+                    </DialogActions>
 
 
-  );
+                </DialogContent>
+            </Dialog>
+        </Box >
+
+
+    );
 }

@@ -25,6 +25,7 @@ import {
     useTheme,
     Button
 } from '@material-ui/core';
+import Calendario from '../calendario/calendario'
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 
@@ -195,10 +196,10 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-                <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
+                <div onClick={() => navigate('/cadia/usuario/chico/' + chicos[dataIndex]['id'])} >
 
                     < Tooltip title="Ver">
-                        <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} variant="contained">
+                        <Button  onClick={() => navigate('/cadia/usuario/chico/' + chicos[dataIndex]['id'])} variant="contained">
 Ver                        </Button>
                     </Tooltip>
 
@@ -217,11 +218,7 @@ Ver                        </Button>
 
     // definimos las columnas
     const columns = [
-      {
-        name: "kid",
-        label: "kid",
 
-    },
         {
             name: "apellido",
             label: "apellido",
@@ -243,8 +240,8 @@ Ver                        </Button>
 
         },
         {
-            name: "observaciones",
-            label: "observaciones",
+            name: "fecha_ingreso",
+            label: "fecha_ingreso",
 
         },
 
@@ -262,31 +259,42 @@ Ver                        </Button>
 
         },
         {
-          name: "tel_responsable",
-          label: "responsable",
+          name: "fecha_fin",
+          label: "fecha_fin",
       },
-      {
-        name: "tel",
-        label: "tel",
-    },
+
 
 
     ];
 
+    const fechaKeys = ["nacimiento", "aniversario", "graduacion", "logro", "evento"];
+    const iconKeys = {
+        nacimiento: 'birthday',
+        aniversario: 'anniversary',
+        graduacion: 'graduation',
+        logro: 'achievement',
+        evento: 'event'
+    };
     // renderiza la data table
     return (
         <div sx={{
             cursor: 'pointer',
-            backgroundImage: 'linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%)',
+            backgroundColor: '#E09FBB',
             
             color: '#bdbdbd',
         
           }}
   >
-   
-    { datos ? <>  <Alert variant="filled" severity="success">
- <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
+     { datos ? <>  <Alert variant="filled">
+ <b> Actualmente {datos.total}   </b>   
 </Alert> </>:<></>}
+    {chicos ? <>
+    <Calendario 
+     dates={chicos} fecha1Key="fecha_nacimiento" fecha2Key="fecha_fin" fecha3Key="fecha_ingreso" />
+    
+    </>:<></>}
+   
+   
 
             <h2>Lista de chicos</h2>
             {chicos ? <>
@@ -303,7 +311,7 @@ Ver                        </Button>
                   
                                   setUsuario(usuario)
                   
-                                  const novedades_aux = await servicioDtc.listachiques()
+                                  const novedades_aux = await servicioDtc.listachicoscadia()
                                   setchicos(novedades_aux[0])
                                   setDatos(novedades_aux[1])
                               }

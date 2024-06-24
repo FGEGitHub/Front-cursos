@@ -109,7 +109,7 @@ export default function MenuIzq2 ({children}) {
             ))}
           </List>
           <Divider />
-          {cumple && cumple.length > 0 ? (
+      {/*     {cumple && cumple.length > 0 ? (
             <>
               <List>
                 <ListItem>
@@ -142,7 +142,7 @@ export default function MenuIzq2 ({children}) {
                 ))}
               </List>
             </>
-          )}
+          )} */}
           <Divider />
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 0, backgroundColor: "#fff3e0" }}>

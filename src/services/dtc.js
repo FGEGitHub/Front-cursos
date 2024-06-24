@@ -74,7 +74,13 @@ return data
        
   }
   
+  const datosdechiquecadia = async (id) => {
   
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'datosdechiquecadia/'+id, config)
+return data
+       
+  }
   const listadelegajos = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -272,6 +278,12 @@ return data
      return data   
  } 
  
+ const nuevochiquecadia= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'nuevochiquecadia',datos,config)
+   
+   return data   
+} 
  const nuevapersonapsiq= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'nuevapersonapsiq',datos,config)
@@ -292,7 +304,12 @@ return data
    return data   
 }
 
-
+const modificarusuariocadia= async  (datos) => {
+  console.log(datos)
+   const {data } = await axios.post(baseUrl+'modificarusuariocadia',datos,config)
+   
+   return data   
+}
 const modificarusuariopsiq= async  (datos) => {
   console.log(datos)
    const {data } = await axios.post(baseUrl+'modificarusuariopsiq',datos,config)
@@ -368,6 +385,12 @@ const borrarusuariodtc= async  (datos) => {
    return data  
 }
 
+const borrarusuariocadia= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'borrarusuariocadia',datos,config)
+   
+   return data  
+}
 const borrarusuariodtcpsiq= async  (datos) => {
 
   const {data } = await axios.post(baseUrl+'borrarusuariodtcpsiq',datos,config)
@@ -481,4 +504,4 @@ const nuevaetapacadia= async  (datos) => {
    return data  
 }
 
-export default {listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
