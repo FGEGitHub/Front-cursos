@@ -10,215 +10,149 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
-import logo from "../../../Assets/dtcletra.png"
-import servicioDtc from '../../../services/dtc'
+import logo from "../../../Assets/logocadia.jpg";
+import servicioDtc from '../../../services/dtc';
 import WcTwoToneIcon from '@mui/icons-material/WcTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
 import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
-//import logo from "../../Assets/logocuqui.webp";
 import ArchitectureIcon from '@mui/icons-material/Architecture';
-import Navbar from '../Navbar'
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';const drawerWidth = 240;
-const darkTheme = createTheme({
+import Navbar from '../Navbar';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+
+const drawerWidth = 240;
+const theme = createTheme({
   palette: {
-    mode: 'dark',
+    background: {
+      default: "white" // Fondo crema
+    },
     primary: {
-      main: '#b2dfdb',
+      main: '#FFFDD0',
     },
     secondary: {
-      main: '#b2dfdb',
+      main: '#000000',
     },
   },
 });
+
 export default function MenuIzq2 ({children}) {
-  const [cumple, setCumple] = useState()
-  const [estemes, setEstemes] = useState()
-    const navigate = useNavigate();
-    useEffect(() => {
-      traer()
-  
-  
-  
-  }, [])
-    const traer = async () => {
-      try {
-         
-    
-    
-              const today = new Date();
-              const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-    console.log(formattedDate)
-            //  setCurrentDate(formattedDate);
-              const historial = await servicioDtc.traercumples({fecha:formattedDate})
+  const [cumple, setCumple] = useState();
+  const [estemes, setEstemes] = useState();
+  const navigate = useNavigate();
 
-    setCumple(historial[0])  
-    setEstemes(historial[1])  
-    
-     
-      } catch (error) {
-    
-      }
-    
+  useEffect(() => {
+    traer();
+  }, []);
+
+  const traer = async () => {
+    try {
+      const today = new Date();
+      const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+      console.log(formattedDate);
+      const historial = await servicioDtc.traercumples({fecha:formattedDate});
+      setCumple(historial[0]);
+      setEstemes(historial[1]);
+    } catch (error) {
+      console.error(error);
     }
-    const handleClick = (path) => {
-        
-        navigate(path);
-      }; 
-    
+  };
 
-       const hanleLogout = () => {
-       /* console.log('click')
-        setUser(null)
-        servicioUsuario.setToken(user.token) */
-        window.localStorage.removeItem('loggedNoteAppUser')
-        window.location.reload(true);
-      } 
-    const menuItems = [
-        { 
-          text: 'Actividades', 
-          icon: <GradingTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/menu' 
-        },
-        { 
-          text: 'Personal', 
-          icon: <PeopleAltTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/usuarios' 
-        },
-        { 
-          text: 'Usuarios', 
-          icon: <WcTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/chiques' 
-        },
-        { 
-          text: 'Talleres,clases,asistencia', 
-          icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/talleres' 
-        },
-        { 
-          text: 'Personas Psiq', 
-          icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/personaspsiq' 
-        },
-        { 
-          text: 'Turnos psiq', 
-          icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/turnos' 
-        },
-        { 
-          text: 'Asistencias', 
-          icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/asisencias' 
-        },
-        { 
-          text: 'Intervenciones', 
-          icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/intervenciones' 
-        },
-  
-      ];
-      const islogo = {
-        width: "70%",                  
-        };
-    return(
-      <>
-        
-    
-    <Box sx={{  display: 'flex' }}>
-      <CssBaseline />
-      
-    
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+  const handleClick = (path) => {
+    navigate(path);
+  };
+
+  const handleLogout = () => {
+    window.localStorage.removeItem('loggedNoteAppUser');
+    window.location.reload(true);
+  };
+
+  const menuItems = [
+    { text: 'Actividades', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/usuario/menu' },
+    { text: 'Usuarios', icon: <PeopleAltTwoToneIcon color="primary" />, path: '/cadia/usuario/usuarios' },
+    { text: 'Chicos', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/chicos' },
+  ];
+
+  const logoStyle = {
+    width: "80%",
+    margin: "16px auto",
+    display: "block"
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <Drawer
+          sx={{
             width: drawerWidth,
-            backgroundColor:"#1b5e20",
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-
-        color="#37474f"
-        anchor="left"
-      >
-      
-        <Navbar
-      logout = {{hanleLogout}}/>
-        <Toolbar />
-        <img style={islogo} src={logo} alt="logo" />  
-       
-        <Toolbar />
-        <Divider />
-        <List     sx={{  color:"#fafafa"}}>
-        {menuItems.map((item) => (
-            <ListItem 
-              button 
-              key={item.text} 
-              onClick={() => {
-                handleClick(item.path)
-              }}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              backgroundColor: theme.palette.primary.main,
+              boxSizing: 'border-box',
+              color: "#000000"
+            },
+          }}
+          variant="permanent"
+          anchor="left"
+        >
+          <Navbar logout={{ handleLogout }} />
+          <Toolbar />
+          <img style={logoStyle} src={logo} alt="logo" />
+          <Divider />
+          <List>
+            {menuItems.map((item) => (
+              <ListItem button key={item.text} onClick={() => handleClick(item.path)}>
+                <ListItemIcon sx={{ color: "#fafafa" }}>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          {cumple && cumple.length > 0 ? (
+            <>
+              <List>
+                <ListItem>
+                  <ListItemText primary="HOY HAY CUMPLE" />
+                </ListItem>
+                {cumple.map((item) => (
+                  <ListItem key={item.nombre}>
+                    <ListItemText primary={`${item.nombre} ${item.apellido}`} />
+                  </ListItem>
+                ))}
+              </List>
+            </>
+          ) : (
+            <ListItem>
+              <ListItemText primary="Hoy no hay cumples" />
+              <SentimentVeryDissatisfiedIcon />
             </ListItem>
-          ))}
-        </List>
-        {cumple ? <>
-       { cumple.length>0? <>
-        {cumple.map((item) => (
-            <ListItem 
-             
-            >
-              
-              HOY HAY CUMPLE
-              <p sx={{color:'white'}}>{item.nombre}  {item.apellido} </p>
-            
-            </ListItem>
-          ))}
-       
-       </>:<><p sx={{color:'white'}}>Hoy no hay cumples <SentimentVeryDissatisfiedIcon/> </p></>}
-        
-        </>:<></>}
-        {estemes ? <>
-       { estemes.length>0? <>
-       Cumples este mes
-        {estemes.map((item) => (
-            <ListItem 
-             
-            >
-              <ListItemIcon sx={{color:'white'}}>{item.nombre} {item.apellido} <br/>el dia ({item.fecha_nacimiento})</ListItemIcon>
-            
-            </ListItem>
-          ))}
-       
-       </>:<></>}
-        
-        </>:<></>}
-        
-        <Divider />
-       
-      </Drawer>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1,  p:0 }}
-      >
-        <Toolbar />
-      {/*   <AlertaInusual
-      cantidadInusual={cantidadInusual} />
-        <AlertaAprobaciones
-      cantidad={cantidad} /> */}
-   
-      <div className="fondo-imagen">
-        <br/>
-   { children}
-   </div>
+          )}
+          {estemes && estemes.length > 0 && (
+            <>
+              <Divider />
+              <List>
+                <ListItem>
+                  <ListItemText primary="Cumples este mes" />
+                </ListItem>
+                {estemes.map((item) => (
+                  <ListItem key={item.nombre}>
+                    <ListItemText primary={`${item.nombre} ${item.apellido} - el dia (${item.fecha_nacimiento})`} />
+                  </ListItem>
+                ))}
+              </List>
+            </>
+          )}
+          <Divider />
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 0, backgroundColor: "#fff3e0" }}>
+          <Toolbar />
+          <div className="fondo-imagen">
+            <br />
+            {children}
+          </div>
+        </Box>
       </Box>
-    </Box>
-    
-   
-    </>
+    </ThemeProvider>
   );
-
 }

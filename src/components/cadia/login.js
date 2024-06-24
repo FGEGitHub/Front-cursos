@@ -58,7 +58,7 @@ const LoginForm = () => {
       const user = JSON.parse(loggedUserJSON);
 
       switch (user.nivel) {
-        case 0:
+        case 40:
           navigate('/cadia/calendario');
           break;
        
@@ -80,7 +80,7 @@ const LoginForm = () => {
     window.localStorage.setItem('loggedNoteAppUser', JSON.stringify(user));
 
     switch (user.nivel) {
-      case 20:
+      case 40:
         navigate('/cadia/usuario/calendario');
         window.location.reload(true);
         break;

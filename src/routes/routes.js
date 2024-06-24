@@ -161,7 +161,7 @@ import LoginCadia from '../pages/cadia/login'
 
 
 import CalendarioCadia from '../pages/cadia/admin/calendario'
-
+import ChicosCadia from '../pages/cadia/admin/chicos/index.js'
 
 
 
@@ -327,9 +327,10 @@ const Rutas = [
 
 		{ path: '/cadia/login', element: <LoginCadia/> },
 		{ path: '/cadia/usuario/calendario', element: <CalendarioCadia/> },
+		{ path: '/cadia/usuario/chicos', element: <ChicosCadia/> },
+
+
 		
-
-
 
 
 

@@ -5,7 +5,7 @@
 
 
 import { useNavigate, useParams } from "react-router-dom";
-import Login from '../../../components/cadia/componente1'
+import Login from '../../../components/cadia/login'
 import React, { useEffect, useState } from "react";
 import Backg from '../../../Assets/fondodtc.jpg'
 
@@ -34,7 +34,7 @@ export default function Paginas() {
           
             case 40:
               
-                            navigate('/cadia/usuario')
+                            navigate('/cadia/usuario/calendario')
               break;
 
              

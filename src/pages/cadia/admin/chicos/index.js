@@ -3,9 +3,8 @@ import Menuizq from '../../../../components/cadia/admin/menuizq1'
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
 import React, { useEffect, useState } from "react";
-import Listachiquesa from '../../../../components/dtc/usuario1/chiques/lista'
+import Listachiquesa from '../../../../components/cadia/admin/chiques/lista'
 import MenuuCel from '../../../../components/cadia/admin/menuizq1'
-
 
 import {
 
@@ -33,19 +32,6 @@ export default function Paginas() {
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
  
     useEffect(() => {
-      document.title = "Cadia";
-      const updateMeta = (property, content) => {
-          let element = document.querySelector(`meta[property='${property}']`);
-          if (!element) {
-            element = document.createElement('meta');
-            element.setAttribute('property', property);
-            document.getElementsByTagName('head')[0].appendChild(element);
-          }
-          element.setAttribute('content', content);
-        };
-    
-        // Actualiza las etiquetas meta de Open Graph para WhatsApp
-      
       
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
         console.log(loggedUserJSON) 
