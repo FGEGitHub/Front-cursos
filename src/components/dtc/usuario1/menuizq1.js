@@ -120,7 +120,11 @@ export default function MenuIzq2 ({children}) {
           icon: <ArchitectureIcon color="primary" />,
           path: '/dtc/usuario1/intervenciones' 
         },
-  
+        { 
+          text: 'expediente', 
+          icon: <ArchitectureIcon color="primary" />,
+          path: '/dtc/usuario1/expedientes' 
+        },
       ];
       const islogo = {
         width: "70%",                  

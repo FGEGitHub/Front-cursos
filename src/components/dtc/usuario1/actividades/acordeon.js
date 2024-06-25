@@ -213,7 +213,6 @@ export default function TablaActividades(props) {
               <th>Título</th>
               <th>Fecha de Carga</th>
               <th>Fecha de Intervención</th>
-              <th>Detalle</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -224,7 +223,7 @@ export default function TablaActividades(props) {
                 <td>{row.titulo}</td>
                 <td>{row.fecha}</td>
                 <td>{row.fecha_act}</td>
-                <td>{(row.detalle || '').replace(/\./g, '<br/>')}</td>
+                {/* <td>{(row.detalle || '').replace(/\./g, '<br/>')}</td> */}
                 <td>
                   <Borrar id={row.id} traer={props.traer} />
                   <Button 

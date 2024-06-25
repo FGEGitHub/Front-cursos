@@ -150,6 +150,7 @@ import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
 import DTCTallerAsis from '../pages/dtc/talleresasistencia';
 import DTCasistenciasest from '../pages/dtc/nivel1/estadasistencias';
 import DTCcumples from '../pages/dtc/nivel1/cumpleaños';
+import DTCExpedientes from '../pages/dtc/nivel1/expedientes';
 
 import CargarExcel from '../pages/subirexcel'
 
@@ -318,9 +319,10 @@ const Rutas = [
 		{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest/> },
 		{ path: '/dtc/cargaetapascadia', element: <DTCcargaetapascadia/> },
 		{ path: '/dtc/usuario1/intervenciones', element: <Dtcintervenciones/> },
+		{ path: '/dtc/usuario1/expedientes', element: <DTCExpedientes/> },
 
 
-
+		
 
 
 

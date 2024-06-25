@@ -1,9 +1,7 @@
-import servicioDtc from '../../../../services/dtc'
-
+import servicioDtc from '../../../services/dtc'
+import ModaNueva from './nuevo'
 import React, { useEffect, useState, Fragment } from "react";
-import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -16,7 +14,6 @@ import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
-import Ver from './ver'
 import Alert from '@mui/material/Alert';
 import {
 
@@ -180,7 +177,7 @@ const TablaNotificaciones = (props) => {
 
                 setUsuario(usuario)
 
-                const novedades_aux = await servicioDtc.traerintervenciones()
+                const novedades_aux = await servicioDtc.listaexpedientes()
                 setchicos(novedades_aux[0])
                 setDatos(novedades_aux[1])
             }
@@ -194,13 +191,12 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
-<Ver
-id={chicos[dataIndex]['id']}/>
-                <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id_usuario'])} >
+
+                <div onClick={() => navigate('/cadia/usuario/chico/' + chicos[dataIndex]['id'])} >
 
                     < Tooltip title="Ver">
-                        <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id_usuario'])} variant="contained">
-Ver usuario                      </Button>
+                        <Button  onClick={() => navigate('/cadia/usuario/chico/' + chicos[dataIndex]['id'])} variant="contained">
+Ver                        </Button>
                     </Tooltip>
 
 
@@ -218,35 +214,32 @@ Ver usuario                      </Button>
 
     // definimos las columnas
     const columns = [
-      {
-        name: "mes",
-        label: "mes",
-    },
-    {
-      name: "año",
-      label: "año",
-  },
-      {
-        name: "nombretallerista",
-        label: "Registrado por ",
 
-    },
+        {
+            name: "id",
+            label: "id",
+
+        },
         {
             name: "titulo",
             label: "titulo",
 
         },
         {
-            name: "fecha",
-            label: "fecha carga",
+          name: "inicio",
+          label: "inicio",
+      },
+    
+        {
+            name: "cierre",
+            label: "cierre",
 
         },
         {
-          name: "fecha_act",
-          label: "fecha registra",
-      },
-    
-      
+            name: "fecha_ingreso",
+            label: "fecha_ingreso",
+
+        },
 
         {
             name: "Ver",
@@ -261,32 +254,63 @@ Ver usuario                      </Button>
             }
 
         },
+        {
+          name: "fecha_fin",
+          label: "fecha_fin",
+      },
 
 
 
     ];
 
+    const fechaKeys = ["nacimiento", "aniversario", "graduacion", "logro", "evento"];
+    const iconKeys = {
+        nacimiento: 'birthday',
+        aniversario: 'anniversary',
+        graduacion: 'graduation',
+        logro: 'achievement',
+        evento: 'event'
+    };
     // renderiza la data table
     return (
         <div sx={{
             cursor: 'pointer',
-            backgroundImage: 'linear-gradient(90deg, #9775fa 0%, #69db7c 0%, #3bc9db 99%, #ec8c69 100%, #f783ac 100%, #ffa94d 100%, #ed6ea0 100%)',
+            backgroundColor: '#E09FBB',
             
             color: '#bdbdbd',
         
           }}
   >
-   
-    { datos ? <>  <Alert variant="filled" severity="success">
- <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
+     { datos ? <>  <Alert variant="filled">
 </Alert> </>:<></>}
+    
 
             <h2>Lista de chicos</h2>
             {chicos ? <>
                 <div>
 
 
-            
+                    <ModaNueva
+                        id_turno={id}
+                        traer={async () => {
+                          try {
+                              const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                              if (loggedUserJSON) {
+                                  const usuario = JSON.parse(loggedUserJSON)
+                  
+                                  setUsuario(usuario)
+                  
+                                  const novedades_aux = await servicioDtc.listaexpedientes()
+                                  setchicos(novedades_aux[0])
+                                  setDatos(novedades_aux[1])
+                              }
+                  
+                          } catch (error) {
+                  
+                          }
+                  
+                      }}
+                    />
                     {chicos.length > 0 ? <>
 
 
