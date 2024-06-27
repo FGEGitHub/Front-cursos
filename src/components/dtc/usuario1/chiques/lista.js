@@ -243,8 +243,8 @@ Ver                        </Button>
 
         },
         {
-            name: "observaciones",
-            label: "observaciones",
+            name: "escuela",
+            label: "escuela",
 
         },
 
