@@ -25,6 +25,7 @@ const convertImageToBase64 = async (url) => {
 export default function TablaActividades(props) {
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [showDescription, setShowDescription] = useState(false);
   const [selectedFields, setSelectedFields] = useState({
     dni: true,
     fecha_nacimiento: true,
@@ -203,41 +204,51 @@ export default function TablaActividades(props) {
     handleClose();
   };
 
+  const toggleDescription = () => {
+    setShowDescription(!showDescription);
+  };
+
   return (
     <div>
       {props.actividades.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Título</th>
-              <th>Fecha de Carga</th>
-              <th>Fecha de Intervención</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {props.actividades.map((row, index) => (
-              <tr key={index}>
-                <td>{row.nombre}</td>
-                <td>{row.titulo}</td>
-                <td>{row.fecha}</td>
-                <td>{row.fecha_act}</td>
-                {/* <td>{(row.detalle || '').replace(/\./g, '<br/>')}</td> */}
-                <td>
-                  <Borrar id={row.id} traer={props.traer} />
-                  <Button 
-                    variant="contained" 
-                    color="success" 
-                    onClick={() => handleOpen(row)}
-                  >
-                    Imprimir
-                  </Button>
-                </td>
+        <>
+          <Button variant="contained" onClick={toggleDescription}>
+            {showDescription ? 'Ocultar Descripción' : 'Mostrar Descripción'}
+          </Button>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Título</th>
+                <th>Fecha de Carga</th>
+                <th>Fecha de Intervención</th>
+                {showDescription && <th>Descripción</th>}
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {props.actividades.map((row, index) => (
+                <tr key={index}>
+                  <td>{row.nombre}</td>
+                  <td>{row.titulo}</td>
+                  <td>{row.fecha}</td>
+                  <td>{row.fecha_act}</td>
+                  {showDescription && <td>{row.detalle}</td>}
+                  <td>
+                    <Borrar id={row.id} traer={props.traer} />
+                    <Button 
+                      variant="contained" 
+                      color="success" 
+                      onClick={() => handleOpen(row)}
+                    >
+                      Imprimir
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       ) : (
         <Typography>No hay actividades en el día</Typography>
       )}
@@ -271,72 +282,72 @@ export default function TablaActividades(props) {
               />
             }
             label="Nombre"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox 
-                  checked={selectedFields.apellido} 
-                  onChange={handleFieldChange} 
-                  name="apellido" 
-                />
-              }
-              label="Apellido"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox 
-                  checked={selectedFields.dni} 
-                  onChange={handleFieldChange} 
-                  name="dni" 
-                />
-              }
-              label="DNI"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox 
-                  checked={selectedFields.fecha_nacimiento} 
-                  onChange={handleFieldChange} 
-                  name="fecha_nacimiento" 
-                />
-              }
-              label="Fecha de Nacimiento"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox 
-                  checked={selectedFields.fecha_act} 
-                  onChange={handleFieldChange} 
-                  name="fecha_act" 
-                />
-              }
-              label="Fecha"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox 
-                  checked={selectedFields.grado} 
-                  onChange={handleFieldChange} 
-                  name="grado" 
-                />
-              }
-              label="Grado"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox 
-                  checked={selectedFields.escuela} 
-                  onChange={handleFieldChange} 
-                  name="escuela" 
-                />
-              }
-              label="Escuela"
-            />
-            <Button variant="contained" color="primary" onClick={handlePrint}>
-              Imprimir
-            </Button>
-          </Box>
-        </Modal>
-      </div>
-    );
-  }
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={selectedFields.apellido} 
+                onChange={handleFieldChange} 
+                name="apellido" 
+              />
+            }
+            label="Apellido"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={selectedFields.dni} 
+                onChange={handleFieldChange} 
+                name="dni" 
+              />
+            }
+            label="DNI"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={selectedFields.fecha_nacimiento} 
+                onChange={handleFieldChange} 
+                name="fecha_nacimiento" 
+              />
+            }
+            label="Fecha de Nacimiento"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={selectedFields.fecha_act} 
+                onChange={handleFieldChange} 
+                name="fecha_act" 
+              />
+            }
+            label="Fecha"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={selectedFields.grado} 
+                onChange={handleFieldChange} 
+                name="grado" 
+              />
+            }
+            label="Grado"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={selectedFields.escuela} 
+                onChange={handleFieldChange} 
+                name="escuela" 
+              />
+            }
+            label="Escuela"
+          />
+          <Button variant="contained" color="primary" onClick={handlePrint}>
+            Imprimir
+          </Button>
+        </Box>
+      </Modal>
+    </div>
+  );
+}

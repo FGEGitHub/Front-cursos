@@ -23,30 +23,10 @@ export default function SelectTextFields(props) {
     //const usuario  = useUser().userContext
     const [form, setForm] = useState({
         id: props.id,
-        kid: props.kid,
-        fecha_nacimiento: props.fecha_nacimiento,
-        observaciones: props.observaciones,
-        primer_contacto: props.primer_contacto,
-        primer_ingreso: props.primer_ingreso,
-        admision: props.admision,
-        nombre: props.nombre,
-        apellido: props.apellido,
-        dni: props.dni,
-        talle: props.talle,
-        domicilio: props.domicilio,
-        telefono: props.telefono,
-        autorizacion_imagen: props.autorizacion_imagen,
-        fotoc_dni: props.fotoc_dni,
-        fotoc_responsable: props.fotoc_responsable,
-        tel_responsable: props.tel_responsable,
-        visita_social: props.visita_social,
-        egreso: props.egreso,
-        aut_retirar: props.aut_retirar,
-        dato_escolar: props.dato_escolar,
-        hora_merienda: props.hora_merienda,
-        escuela: props.escuela,
-        grado: props.grado,
-        fines:props.fines,
+        titulo: props.titulo,
+        detalle: props.detalle,
+       
+        inicio:props.inicio,
     })
     const [datos, setDatos] = useState()
     const [activo, setActivo] = useState(false)
@@ -124,12 +104,13 @@ alert(nov)
                     <h3>
                         <b> Modificar a {props.nombre}</b></h3>
 
-                        <TextField
-                  defaultValue={props.nombre}
+                        <br />
+              <TextField
+              autoFocus
               margin="dense"
               id="name"
-              label="Nombre"
-              name="nombre"
+              label="Titulo"
+              name="titulo"
               onChange={handleChange}
               fullWidth
               variant="standard"
@@ -139,9 +120,9 @@ alert(nov)
               autoFocus
               margin="dense"
               id="name"
-              defaultValue={props.apellido}
-              label="Apellido"
-              name="apellido"
+              
+              label="inicio"
+              name="inicio"
               onChange={handleChange}
               fullWidth
               variant="standard"
@@ -150,97 +131,26 @@ alert(nov)
               autoFocus
               margin="dense"
               id="dni"
-              defaultValue={props.dni}
-              label="DNI"
-              name="dni"
+              
+              label="cierre"
+              name="cierre"
               onChange={handleChange}
               fullWidth
               variant="standard"
             />
             <br/>
             <TextField
-    defaultValue={props.fecha_nacimiento}
-              onChange={handleChange}
-              name="fecha_nacimiento"
-              id="date"
-              label="Fecha de nacimiento"
-              type="date"
-              sx={{ width: 220 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            
-<TextField
-    defaultValue={props.fecha_ingreso}
-
-onChange={handleChange}
-name="fecha_ingreso"
-id="date"
-label="fecha_ingreso"
-type="date"
-
-sx={{ width: 220 }}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<TextField
-
-onChange={handleChange}
-name="fecha_fin"
-id="date"
-label="fecha_fin"
-type="date"
-defaultValue={props.fecha_fin}
-sx={{ width: 220 }}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Autorizacion de imagen?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'autorizacion_imagen',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                         
-
-
-
-<TextField
               autoFocus
               margin="dense"
               id="dni"
               
-              label="Direccion"
-              name="direccion"
+              label="detalle"
+              name="detalle"
               onChange={handleChange}
               fullWidth
               variant="standard"
             />
-                
-
-
+            
                     <DialogActions>
 
 

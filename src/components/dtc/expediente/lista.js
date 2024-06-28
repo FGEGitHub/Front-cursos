@@ -1,5 +1,6 @@
 import servicioDtc from '../../../services/dtc'
 import ModaNueva from './nuevo'
+import Modificar from './modificar'
 import React, { useEffect, useState, Fragment } from "react";
 import MUIDataTable from "mui-datatables";
 import { useNavigate } from "react-router-dom";
@@ -194,11 +195,19 @@ const TablaNotificaciones = (props) => {
 
                 <div onClick={() => navigate('/cadia/usuario/chico/' + chicos[dataIndex]['id'])} >
 
-                    < Tooltip title="Ver">
                         <Button  onClick={() => navigate('/cadia/usuario/chico/' + chicos[dataIndex]['id'])} variant="contained">
 Ver                        </Button>
-                    </Tooltip>
+                        <Modificar
+                        id={chicos[dataIndex]['id']}
+                        inicio={chicos[dataIndex]['inicio']}
+                        cierre={chicos[dataIndex]['cierre']}
+                        detalle={chicos[dataIndex]['detalle']}
+                        cargado={chicos[dataIndex]['cargado']}
 
+
+
+                        />
+                 
 
 
 

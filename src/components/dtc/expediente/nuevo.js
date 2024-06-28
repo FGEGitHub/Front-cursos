@@ -59,22 +59,26 @@ export default function SelectTextFields(props) {
 
       const nov = await servicioDtc.nuevoexpediente(form)
 alert(nov)
+if(nov!=="No realizado"){
+  setForm({ fecha_nacimiento:"Sin determinar",
+
+    hora_merienda:"Sin determinar",
+    escuela:"Sin determinar",
+    talle:"Sin determinar",
+    fines:"Sin determinar",
+    grado:"Sin determinar"})
+    props.traer()
+
+    setOpen(false);
+}
     } catch (error) {
       console.error(error);
       console.log('Error algo sucedio')
 
 
     }
-   setForm({ fecha_nacimiento:"Sin determinar",
    
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    talle:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",})
-    props.traer()
-
-    setOpen(false);
+   
   };
 
   const [currency, setCurrency] = React.useState('EUR');
