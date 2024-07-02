@@ -96,6 +96,12 @@ export default function MenuIzq2 ({children}) {
           path: '/dtc/usuario1/chiques' 
         },
         { 
+          text: 'gimnasio', 
+          icon: <WcTwoToneIcon color="primary" />, 
+          path: '/dtc/usuario1/usuariosgim' 
+        },
+        
+        { 
           text: 'Talleres,clases,asistencia', 
           icon: <ArchitectureIcon color="primary" />,
           path: '/dtc/usuario1/talleres' 

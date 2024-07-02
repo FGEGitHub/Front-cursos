@@ -145,6 +145,7 @@ import Dtcsoleinicio from '../pages/dtc/sole';
 import DTCetapas from '../pages/dtc/cargadeetapas';
 import DTCcargaetapascadia from '../pages/dtc/cargaetapascadia';
 import Dtcintervenciones from '../pages/dtc/nivel1/intervenciones';
+import Dtcusuariosgim from '../pages/dtc/nivel1/usuariosgim';
 
 import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
 
@@ -152,6 +153,8 @@ import DTCTallerAsis from '../pages/dtc/talleresasistencia';
 import DTCasistenciasest from '../pages/dtc/nivel1/estadasistencias';
 import DTCcumples from '../pages/dtc/nivel1/cumpleaños';
 import DTCExpedientes from '../pages/dtc/nivel1/expedientes';
+import DTCGimnasioclases from '../pages/dtc/gimnasioclases';
+import DTCaGimnasioAsis from '../pages/dtc/gimnasioasistencia';
 
 import CargarExcel from '../pages/subirexcel'
 
@@ -318,12 +321,18 @@ const Rutas = [
 	
 		{ path: '/dtc/cargaetapas', element: <DTCetapas/> },
 		{ path: '/dtc/tallerclases', element: <DTCTallerclases/> },
+		{ path: '/dtc/gimnasioclases', element: <DTCGimnasioclases/> },
+		{ path: '/dtc/gimnasioasistencia', element: <DTCaGimnasioAsis/> },
+		
+
+		
 		{ path: '/dtc/tallerasistencia/:id', element: <DTCTallerAsis/> },
 		{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest/> },
 		{ path: '/dtc/cargaetapascadia', element: <DTCcargaetapascadia/> },
 		{ path: '/dtc/usuario1/intervenciones', element: <Dtcintervenciones/> },
 		{ path: '/dtc/usuario1/expedientes', element: <DTCExpedientes/> },
-
+		{ path: '/dtc/usuario1/usuariosgim', element: <Dtcusuariosgim/> },
+		
 
 		
 
