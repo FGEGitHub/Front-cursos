@@ -24,6 +24,8 @@ export default function SimpleBottomNavigation() {
   const usuariosPath = '/dtc/usuario1/usuarios';
   const chiquesPath = '/dtc/usuario1/chiques';
   const personalPath = '/dtc/usuario1/personal';
+  const gimnasioPath = '/dtc/usuario1/usuariosgim';
+  
 
   return (
     <>
@@ -49,6 +51,12 @@ export default function SimpleBottomNavigation() {
             icon={<AccessibilityIcon />}
             onClick={() => handleClick(chiquesPath)}
           />
+             <BottomNavigationAction
+            label="gimnasio"
+            icon={<AccessibilityIcon />}
+            onClick={() => handleClick(gimnasioPath)}
+          />
+          
          {/*  <BottomNavigationAction
             label="Personal"
             icon={<LocationOnIcon />}
