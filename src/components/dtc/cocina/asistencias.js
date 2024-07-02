@@ -79,18 +79,13 @@ const MensualInusuales = (props) => {
     },
     {
       name: "quedia",
+      label: "Día de la Semana",
       options: {
-        customBodyRenderLite: (dataIndex, rowIndex) => {
+        customBodyRenderLite: (dataIndex) => {
           const diaSemana = obtenerDiaSemana(filteredAsistencias[dataIndex].fecha);
           return (
             <>
-              {filteredAsistencias ? (
-                <>
-                  {diaSemana}
-                </>
-              ) : (
-                <></>
-              )}
+              {filteredAsistencias ? diaSemana : ""}
             </>
           );
         },
@@ -98,12 +93,12 @@ const MensualInusuales = (props) => {
     },
     {
       name: "cantidad",
-      label: "cantidad",
+      label: "Cantidad",
     },
     {
       name: "Ver dia",
       options: {
-        customBodyRenderLite: (dataIndex, rowIndex) => (
+        customBodyRenderLite: (dataIndex) => (
           <Modaldia fecha={filteredAsistencias[dataIndex].fecha} />
         ),
       },
@@ -145,9 +140,7 @@ const MensualInusuales = (props) => {
       {FormFecha ? (
         <>
           {FormFecha.fecha_inicio && FormFecha.fecha_fin ? (
-            <>
-              <Button type="outlined" onClick={buscar}>Buscar</Button>
-            </>
+            <Button type="outlined" onClick={buscar}>Buscar</Button>
           ) : (
             <Button type="outlined" disabled>Buscar</Button>
           )}
@@ -178,24 +171,18 @@ const MensualInusuales = (props) => {
             </div>
           )}
           {vista ? (
-            <>
-              {filteredAsistencias ? (
-                <MUIDataTable
-                  title={"Lista de Asistencia"}
-                  data={filteredAsistencias}
-                  columns={columns}
-                  actions={[
-                    {
-                      icon: 'save',
-                      tooltip: 'Save User',
-                      onClick: (event, rowData) => alert("You saved " + rowData.name),
-                    },
-                  ]}
-                />
-              ) : (
-                <h2>Seleccionar fecha de inicio y de fin</h2>
-              )}
-            </>
+            filteredAsistencias ? (
+              <MUIDataTable
+                title={"Lista de Asistencia"}
+                data={filteredAsistencias}
+                columns={columns}
+                options={{
+                  selectableRows: 'none',
+                }}
+              />
+            ) : (
+              <h2>Seleccionar fecha de inicio y de fin</h2>
+            )
           ) : (
             <Paper
               sx={{
@@ -216,20 +203,19 @@ const MensualInusuales = (props) => {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>FECHA</b> <b /></TableCell>
+                          <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>FECHA</b></TableCell>
                           <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Que dia</b></TableCell>
                           <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Cantidad</b></TableCell>
                           <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {filteredAsistencias.map((row) => (
-                          <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">{row.fecha}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">DIA</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{row.cantidad}</StyledTableCell>
-                            <StyledTableCell component="th" scope="row">{row.monto}</StyledTableCell>
-                    
+                        {filteredAsistencias.map((row, index) => (
+                          <StyledTableRow key={index}>
+                            <StyledTableCell>{row.fecha}</StyledTableCell>
+                            <StyledTableCell>{obtenerDiaSemana(row.fecha)}</StyledTableCell>
+                            <StyledTableCell>{row.cantidad}</StyledTableCell>
+                            <StyledTableCell><Modaldia fecha={row.fecha} /></StyledTableCell>
                           </StyledTableRow>
                         ))}
                       </TableBody>
