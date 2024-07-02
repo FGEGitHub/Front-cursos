@@ -128,6 +128,7 @@ import Dtcpersonal_psiq from '../pages/dtc/nivel1/personaspsiq';
 import Dtcpersonapsiq from '../pages/dtc/nivel1/personapsiq';
 import Dtcturnos from '../pages/dtc/turnos/listaturnos';
 import Dtccocina from '../pages/dtc/cocina/index.js';
+import DtccocinaAsis from '../pages/dtc/cocinaasitencia';
 import Dtcraciones from '../pages/dtc/raciones';
 
 
@@ -307,6 +308,8 @@ const Rutas = [
 		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
 		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },
 		{ path: '/dtc/cocina', element: <Dtccocina/> },
+		{ path: '/dtc/cocinaasis', element: <DtccocinaAsis/> },
+		
 		{ path: '/dtc/usuario2/raciones', element: <Dtcraciones/> },
 
 

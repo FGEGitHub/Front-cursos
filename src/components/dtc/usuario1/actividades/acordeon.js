@@ -25,7 +25,7 @@ const convertImageToBase64 = async (url) => {
 export default function TablaActividades(props) {
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
-  const [showDescription, setShowDescription] = useState(false);
+  const [showDetail, setShowDetail] = useState(false);
   const [selectedFields, setSelectedFields] = useState({
     dni: true,
     fecha_nacimiento: true,
@@ -204,16 +204,16 @@ export default function TablaActividades(props) {
     handleClose();
   };
 
-  const toggleDescription = () => {
-    setShowDescription(!showDescription);
+  const toggleDetail = () => {
+    setShowDetail(!showDetail);
   };
 
   return (
     <div>
       {props.actividades.length > 0 ? (
         <>
-          <Button variant="contained" onClick={toggleDescription}>
-            {showDescription ? 'Ocultar Descripción' : 'Mostrar Descripción'}
+          <Button variant="contained" onClick={toggleDetail}>
+            {showDetail ? 'Ocultar Detalle' : 'Mostrar Detalle'}
           </Button>
           <table>
             <thead>
@@ -222,7 +222,7 @@ export default function TablaActividades(props) {
                 <th>Título</th>
                 <th>Fecha de Carga</th>
                 <th>Fecha de Intervención</th>
-                {showDescription && <th>Descripción</th>}
+                {showDetail && <th>Detalle</th>}
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -233,7 +233,7 @@ export default function TablaActividades(props) {
                   <td>{row.titulo}</td>
                   <td>{row.fecha}</td>
                   <td>{row.fecha_act}</td>
-                  {showDescription && <td>{row.detalle}</td>}
+                  {showDetail && <td>{row.detalle}</td>}
                   <td>
                     <Borrar id={row.id} traer={props.traer} />
                     <Button 
@@ -250,7 +250,7 @@ export default function TablaActividades(props) {
           </table>
         </>
       ) : (
-        <Typography>No hay actividades en el día</Typography>
+        <Typography>No hay actividades </Typography>
       )}
 
       <Modal
