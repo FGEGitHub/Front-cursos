@@ -174,7 +174,7 @@ InputLabelProps={{
 
 
                         <>
-                        {form.detalle && form.titulo ? <>
+                        {form.detalle && form.titulo && form.fecha_act ? <>
                             <> {form.detalle ? <>
                             {form.detalle.length<1999 ? <><Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></>:<><Button variant="contained" color="primary" disabled> crear muchos caracteres {form.detalle.length} </Button></>}
                         </>:<> <Button variant="contained" color="primary" disabled> crear </Button></>}</>
