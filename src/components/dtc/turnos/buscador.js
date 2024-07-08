@@ -10,6 +10,7 @@ const MobileAutocomplete = (props) => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState();
   const [form, setForm] = useState({})
+  const today = new Date().toISOString().split("T")[0]
   const handleSelection = async (event, value) => {
     // Aquí puedes realizar alguna acción cuando se selecciona un valor
     console.log('Valor seleccionado:', value);
@@ -57,19 +58,18 @@ const MobileAutocomplete = (props) => {
 
   return (
     <div>
-        <TextField
-
-onChange={handleChange}
-name="fecha"
-id="date"
-label="Fecha "
-type="date"
-defaultValue="2024-05-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
+ <TextField
+      onChange={handleChange}
+      name="fecha"
+      id="date"
+      label="Fecha"
+      type="date"
+      defaultValue={today} // Establece el valor por defecto como la fecha actual
+      sx={{ width: 220 }}
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
      
      
     {selectedValue ? <><Ficha id={selectedValue.id}/></> :<></>}

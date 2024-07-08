@@ -198,7 +198,7 @@ InputLabelProps={{
 <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
-                                        ¿Tipo de atencion?
+                                        Certificado
                                     </StyledParagraph>
                                 </Typography>
                             </InputLabel>
@@ -206,18 +206,18 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'tipo_tratamiento',
+                                    name: 'certificado',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
                             >
                                 <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Voluntario'}>
+                                <option value={'Si'}>
                                     <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                    Voluntario
+                                    Si
                                     </Typography>
                                 </option>
-                                <option value={'Por orden'}>Por orden</option>
+                                <option value={'No'}>No</option>
 
                             </NativeSelect>
                             

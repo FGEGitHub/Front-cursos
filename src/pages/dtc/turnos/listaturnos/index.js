@@ -4,7 +4,7 @@
 
 import Asis from '../../../../components/dtc/turnos/lista'
 import { useNavigate, useParams } from "react-router-dom";
-import Login from '../../../../components/dtc/usuario1/usuarios/todos'
+import Login from '../../../../components/dtc/turnos/calendariotodos'
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../../components/dtc/Navbar'
 
@@ -69,7 +69,7 @@ export default function Paginas() {
      <MenuuCel/>
      <br/>
      <br/>
-     <br/> <br/>
+     <br/><Login/> <br/>
      <Asis/>
      <br/>
      <br/>
