@@ -70,6 +70,7 @@ export default function MenuIzq2 ({children}) {
     { text: 'Actividades', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/usuario/menu' },
     { text: 'Usuarios', icon: <PeopleAltTwoToneIcon color="primary" />, path: '/cadia/usuario/usuarios' },
     { text: 'Chicos', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/chicos' },
+    { text: 'Profesionales', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/profesionales' },
   ];
 
   const logoStyle = {

@@ -168,7 +168,10 @@ import LoginCadia from '../pages/cadia/login'
 import CalendarioCadia from '../pages/cadia/admin/calendario'
 import ChicosCadia from '../pages/cadia/admin/chicos/index.js'
 import CadiaChico from '../pages/cadia/admin/chico'
+import CadiaProfesionales from '../pages/cadia/admin/profesionales'
 
+
+import CadiaUsuarios from '../pages/cadia/admin/usuarios'
 
 const Rutas = [
 	 <Navbar/> ,
@@ -343,7 +346,8 @@ const Rutas = [
 		{ path: '/cadia/usuario/calendario', element: <CalendarioCadia/> },
 		{ path: '/cadia/usuario/chicos', element: <ChicosCadia/> },
 		{ path: '/cadia/usuario/chico/:id', element: <CadiaChico/> },
-
+		{ path: '/cadia/usuario/usuarios', element: <CadiaUsuarios/> },
+		{ path: '/cadia/usuario/profesionales', element: <CadiaProfesionales/> },
 		
 
 

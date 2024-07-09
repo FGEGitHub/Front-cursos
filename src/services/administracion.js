@@ -88,8 +88,20 @@ return data
        
   }
 
-
   
+  
+  const todoscadia = async (usuario) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'todoscadia/', config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+return data
+       
+  }
   const todosdtc = async (usuario) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -141,4 +153,4 @@ return data
  
        
   }
- export default {todos,registronivel3,traertodoelcursado,sistemas,modificarusuario,borrarusuario,contactos,todosdtc }
+ export default {todoscadia,todos,registronivel3,traertodoelcursado,sistemas,modificarusuario,borrarusuario,contactos,todosdtc }
