@@ -55,7 +55,7 @@ const traer = async () => {
 }
 
   const handleClick = () => {
-    navigate("/dtc/actividades");
+    navigate("/cadia/actividades");
   };
   const hanleLogout = () => {
     /* console.log('click')
@@ -67,11 +67,11 @@ const traer = async () => {
   
      window.localStorage.removeItem('loggedNoteAppUser')
    
-     navigate("/dtc/login")
+     navigate("/cadia/login")
    } 
 
   const inicio = () => {
-    navigate("/dtc/login")
+    navigate("/cadia/login")
     
 
   }

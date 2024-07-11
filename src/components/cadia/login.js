@@ -61,10 +61,13 @@ const LoginForm = () => {
         case 40:
           navigate('/cadia/calendario');
           break;
+          case 41:
+            navigate('/cadia/profesionales/inicio');
+            break;
        
         default:
           window.localStorage.removeItem('loggedNoteAppUser');
-          navigate('/dtc/login');
+          navigate('/cadia/login');
           break;
       }
     }
@@ -84,6 +87,10 @@ const LoginForm = () => {
         navigate('/cadia/usuario/calendario');
         window.location.reload(true);
         break;
+        case 41:
+          navigate('/cadia/profesionales/inicio');
+          window.location.reload(true);
+          break;
    
       default:
         alert('error');

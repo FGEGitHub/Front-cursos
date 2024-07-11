@@ -64,7 +64,7 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-                const talleres = await servicioDtc.traertalleres()
+                const talleres = await servicioDtc.traerprofesionales()
                 console.log(talleres)
                 setTalleres(talleres[0])
             }

@@ -92,7 +92,7 @@ const DrawerNav = () => {
 
   const notif = () => {
     window.localStorage.removeItem('loggedNoteAppUser')
-    navigate("/dtc/login")
+    navigate("/cadia/login")
 
   };
 

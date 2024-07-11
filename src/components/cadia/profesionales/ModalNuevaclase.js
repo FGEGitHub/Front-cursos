@@ -1,17 +1,17 @@
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import Tooltip from "@mui/material/Tooltip";
-import servicioDtc from "../../../services/dtc";
 import DialogActions from '@mui/material/DialogActions';
+import Tooltip from '@mui/material/Tooltip';
+import servicioDtc from '../../../services/dtc';
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
-    fecha: getCurrentDate(),
+    fecha: getCurrentDate() // Establecer la fecha actual como valor predeterminado
   });
 
   // Función para obtener la fecha actual en formato YYYY-MM-DD
@@ -23,10 +23,10 @@ export default function SelectTextFields(props) {
 
     // Formatear mes y día a dos dígitos si es necesario
     if (month < 10) {
-      month = "0" + month;
+      month = '0' + month;
     }
     if (day < 10) {
-      day = "0" + day;
+      day = '0' + day;
     }
 
     return `${year}-${month}-${day}`;
@@ -34,14 +34,9 @@ export default function SelectTextFields(props) {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  }
 
   const handleClickOpen = () => {
-    const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
-    if (loggedUserJSON) {
-      const usuario = JSON.parse(loggedUserJSON);
-      setForm({ ...form, id_tallerista: usuario.id });
-    }
     setOpen(true);
   };
 
@@ -52,31 +47,29 @@ export default function SelectTextFields(props) {
   const handleDeterminar = async (event) => {
     try {
       event.preventDefault();
-      await servicioDtc.nuevaclasetaller(form);
+      await servicioDtc.nuevaclaseprof(form);
       props.traer();
       setOpen(false);
     } catch (error) {
       console.error(error);
-      console.log("Error: algo sucedió");
+      console.log('Error: algo sucedió');
     }
   };
 
   return (
     <Box
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
       noValidate
       autoComplete="off"
     >
       <Tooltip title="Nueva Clase">
-        <button onClick={handleClickOpen}>Nueva Clase</button>
+        <button onClick={handleClickOpen}>Nueva Actividad</button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <h3>
-            <b>NUEVA CLASE</b>
-          </h3>
+          <h3><b>Nueva Actividad</b></h3>
           <TextField
             onChange={handleChange}
             name="fecha"
@@ -101,24 +94,11 @@ export default function SelectTextFields(props) {
           />
           <DialogActions>
             {form.fecha ? (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleDeterminar}
-              >
-                crear
-              </Button>
+              <Button variant="contained" color="primary" onClick={handleDeterminar}>crear</Button>
             ) : (
               <span>Completar los datos</span>
             )}
-            <Button
-              variant="outlined"
-              color="error"
-              style={{ marginLeft: "auto" }}
-              onClick={handleClose}
-            >
-              Cancelar
-            </Button>
+            <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
           </DialogActions>
         </DialogContent>
       </Dialog>

@@ -36,12 +36,15 @@ export default function Paginas() {
               
                             navigate('/cadia/usuario/calendario')
               break;
+              case 41:
+                navigate('/cadia/profesionales/inicio');
+                break;
 
              
             default:
                 
               window.localStorage.removeItem('loggedNoteAppUser')
-              navigate('/dtc/login')
+              navigate('/cadia/login')
               
               break;
           }

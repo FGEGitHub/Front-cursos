@@ -166,6 +166,13 @@ return data
        
   }
   
+  const traerprofesionales = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerprofesionales/', config)
+return data
+       
+  }
   const traeretapacocina = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -189,7 +196,13 @@ return data
        
   }
   
+  const traerclasesprof = async (id) => {
   
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerclasesprof/'+id, config)
+return data
+       
+  }
   const traerintervenciones = async () => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -197,6 +210,16 @@ return data
 return data
        
   }
+  
+  const traerpresentesdeclaseprof = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerpresentesdeclaseprof/'+id, config)
+return data
+       
+  }
+
+
   const traerpresentesdeclase = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -267,6 +290,13 @@ return data
   }
   
     
+  const ponerpresenteclaseprofs = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.post(baseUrl+'ponerpresenteclaseprofs/',id, config)
+return data
+       
+  }
   const ponerpresenteclase = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -503,6 +533,12 @@ const nuevaclasetaller= async  (datos) => {
    return data  
 }
 
+const nuevaclaseprof= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'nuevaclaseprof',datos,config)
+   
+   return data  
+}
 const consultarasitencias= async  (datos) => {
 
   const {data } = await axios.post(baseUrl+'consultarasitencias',datos,config)
@@ -547,4 +583,4 @@ const nuevoexpediente= async  (datos) => {
    return data  
 }
 
-export default {traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
