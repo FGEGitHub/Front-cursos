@@ -5,7 +5,8 @@ import Login from '../../../../Assets/mantenimiento2.jpeg'
 import React, { useEffect, useState } from "react";
 import Listachiquesa from '../../../../components/dtc/usuario1/turnos/lista'
 import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
-
+import Asis from '../../../../components/dtc/usuario1/turnos/lista'
+import Calendario from '../../../../components/dtc/turnos/calendario'
 import {
 
   makeStyles,
@@ -65,11 +66,12 @@ export default function Paginas() {
      <>
      <div  className={classes.container}> 
      <MenuuCel texto="Chiques"/>
-     <Listachiquesa/>
-    </div>
+     <Calendario/><br/>
+     <Asis/>    </div>
      </>:<>
  <Menuizq>
-<Listachiquesa/>
+ <Calendario/><br/>
+ <Asis/>
 </Menuizq></>}
  </>
    
