@@ -124,8 +124,8 @@ return data
  
       const {data} = await axios.post(baseUrl+'signupp', datos,config)
  
-         alert(data)
-    
+        
+    return(data)
  
        
   }

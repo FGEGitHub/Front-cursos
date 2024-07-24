@@ -20,7 +20,7 @@ import Typography from '@mui/material/Typography';
 
 
 
-export default function Ingresos() {
+export default function Ingresos(props) {
     let params = useParams()
 
 
@@ -40,10 +40,12 @@ export default function Ingresos() {
 
 
     const handleDeterminar = async (event) => {
-        event.preventDefault()
+       
         const rta = await servicioAdministracion.registronivel3(
             usuario
         )
+        alert(rta)
+        props.traer()
 
 
     };

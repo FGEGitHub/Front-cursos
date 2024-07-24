@@ -177,7 +177,18 @@ export default function Ingresos(props) {
                     '&:hover': { border: '1px solid #ccc' },
                 }}
             >
-                <Nuevo />
+                <Nuevo 
+                traer={ async () => {
+                    console.log('Historial')
+                    const historial = await servicioAdministracion.todoscadia()
+            
+            
+                    setUsuarios(historial)
+                    // 
+            
+                }
+            }
+                />
 
                 {isMatch ? <>
                     <TableContainer>

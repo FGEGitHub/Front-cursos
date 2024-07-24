@@ -11,7 +11,9 @@ import servicioDtc from '../../../services/dtc';
 export default function SelectTextFields(props) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
-    fecha: getCurrentDate() // Establecer la fecha actual como valor predeterminado
+    id_tallerista:props.id_tallerista,
+    fecha: getCurrentDate(),
+    // Establecer la fecha actual como valor predeterminado
   });
 
   // Función para obtener la fecha actual en formato YYYY-MM-DD
@@ -33,6 +35,7 @@ export default function SelectTextFields(props) {
   }
 
   const handleChange = (e) => {
+    console.log(form)
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
@@ -47,7 +50,8 @@ export default function SelectTextFields(props) {
   const handleDeterminar = async (event) => {
     try {
       event.preventDefault();
-      await servicioDtc.nuevaclaseprof(form);
+      const mergedObj = { ...form, ...{id_tallerista:props.id_tallerista} };
+      await servicioDtc.nuevaclaseprof(mergedObj);
       props.traer();
       setOpen(false);
     } catch (error) {
@@ -70,6 +74,7 @@ export default function SelectTextFields(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <h3><b>Nueva Actividad</b></h3>
+       
           <TextField
             onChange={handleChange}
             name="fecha"

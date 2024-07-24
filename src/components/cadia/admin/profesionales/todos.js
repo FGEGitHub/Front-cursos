@@ -8,7 +8,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
-import Uno from "../../../../Assets/cinco.webp";
+import Uno from "../../../../Assets/dtc.png";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -82,7 +82,7 @@ const TablaNotificaciones = (props) => {
     }
 
     const ir = (id) => {
-        navigate('/dtc/usuario1/taller/'+id)
+        navigate('/cadia/usuario/profesional/'+id)
     }
     // renderiza la data table
     return (
@@ -111,8 +111,7 @@ const TablaNotificaciones = (props) => {
                                         <h5  onClick={() => ir(row.id)}  >{row.usuario}</h5>
                                         
                                         <label onClick={() => ir(row.id)} >{row.nombre}</label>
-                                        <p  onClick={() => ir(row.id)} >IR AL TALLER</p>
-                                        <p  >Cantidad de clases{row.cantidad},En el mes {row.cantidadMes} clases <br/>Hoy({row.cantidadHoy} clases)</p>                                 
+                                        <p  onClick={() => ir(row.id)} >Ver</p>
                                       
                                         
                                         

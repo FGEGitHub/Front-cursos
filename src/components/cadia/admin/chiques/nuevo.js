@@ -139,13 +139,9 @@ alert(nov)
 
         
             <h3>
-              <b> NUEVO USUARIO</b></h3>
+              <b> NUEVO </b></h3>
              
-                        <Typography variant="p" component="div" color="black">
-                            
-                               <b> KID1/KID2/ADOLESCENTES</b>
-                          
-                        </Typography>
+               
                     
                    
                     <br />
