@@ -173,6 +173,8 @@ import CadiaProfesionalesclases from '../pages/cadia/profesionales/clases'
 import CadiaProfesionalesasistencia from '../pages/cadia/profesionales/asistencia'
 import CadiaAdminprofesional from '../pages/cadia/admin/profesional'
 import CadiaUsuarios from '../pages/cadia/admin/usuarios'
+import Cadiaadmincalendario from '../pages/cadia/admin/calendario'
+
 
 const Rutas = [
 	 <Navbar/> ,
@@ -352,6 +354,7 @@ const Rutas = [
 		{ path: '/cadia/profesionales/inicio', element: <CadiaProfesionalesclases/> },
 		{ path: '/cadia/profesionales/asistencia/:id', element: <CadiaProfesionalesasistencia/> },
 		{ path: '/cadia/usuario/profesional/:id', element: <CadiaAdminprofesional/> },
+		{ path: '/cadia/usuario/calendario', element: <Cadiaadmincalendario/> },
 
 		
 

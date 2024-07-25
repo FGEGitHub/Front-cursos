@@ -67,7 +67,7 @@ export default function MenuIzq2 ({children}) {
   };
 
   const menuItems = [
-    { text: 'Actividades', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/usuario/menu' },
+    { text: 'Calendario', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/usuario/calendario' },
     { text: 'Usuarios', icon: <PeopleAltTwoToneIcon color="primary" />, path: '/cadia/usuario/usuarios' },
     { text: 'Chicos', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/chicos' },
     { text: 'Profesionales', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/profesionales' },

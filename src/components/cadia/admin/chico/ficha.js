@@ -7,6 +7,7 @@ import Modificar from './modificar'
 import Borrarusuaio from "./modalborrarusuario"
 import Vinculos from './modalvinculos'
 import Avatar from "@mui/material/Avatar";
+import Calendario from './calendario'
 
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = (props) => {
@@ -164,14 +165,14 @@ backgroundColor:'#b0bec5'        }}>
        primer_ingreso={chico.primer_ingreso}
        admision={chico.admision}
        dni={chico.dni}
-       domicilio={chico.domicilio}
+       direccion={chico.direccion}
        telefono={chico.telefono}
        autorizacion_imagen={chico.autorizacion_imagen}
        fotoc_dni={chico.fotoc_dni}
        fotoc_responsable={chico.fotoc_responsable}
        tel_responsable={chico.tel_responsable}
-       visita_social={chico.visita_social}
-       egreso={chico.egreso}
+       fecha_ingreso={chico.fecha_ingreso}
+       fecha_fin={chico.fecha_fin}
        aut_retirar={chico.aut_retirar}
        dato_escolar={chico.dato_escolar}
        kid={chico.kid}
@@ -179,15 +180,17 @@ backgroundColor:'#b0bec5'        }}>
        grado= {chico.grado}
        fines={chico.fines}
        hora_merienda={chico.hora_merienda}
-       traer ={async () => {
+       traer ={ async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
 
-
-                const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
+                setUsuario(usuario)
+                const novedades_aux = await servicioDtc.datosdechiquecadia(id == undefined ? props.id : id)
+                setfoto(novedades_aux[1])
                 setchico(novedades_aux[0][0])
+                setVinculos(novedades_aux[2])
             }
 
         } catch (error) {
@@ -195,7 +198,6 @@ backgroundColor:'#b0bec5'        }}>
         }
 
     }}
-    
     />
                   </>:<></>}
                   </>:<></>}
@@ -204,7 +206,7 @@ backgroundColor:'#b0bec5'        }}>
               )}
     
     </>:<>Cargando</>}
-    <Vinculos/>
+    <Calendario/>
  
     { vinculos ? <>  {vinculos.length>0 ?<>  {vinculos.map((ob)=><>
               {ob.nombre}, { ob.apellido},  {ob.vinculoo } <br/>

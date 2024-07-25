@@ -41,9 +41,9 @@ export default function SelectTextFields(props) {
         tel_responsable: props.tel_responsable,
         visita_social: props.visita_social,
         egreso: props.egreso,
-        aut_retirar: props.aut_retirar,
-        dato_escolar: props.dato_escolar,
-        hora_merienda: props.hora_merienda,
+        fecha_ingreso: props.fecha_ingreso,
+        fecha_fin: props.fecha_fin,
+        direccion: props.direccion,
         escuela: props.escuela,
         grado: props.grado,
         fines:props.fines,
@@ -81,6 +81,7 @@ export default function SelectTextFields(props) {
 
             const nov = await servicioDtc.modificarusuariocadia(form)
 alert(nov)
+props.traer()
         } catch (error) {
             console.error(error);
             console.log('Error algo sucedio')

@@ -3,7 +3,9 @@ import Menuizq from '../../../../components/cadia/admin/menuizq1'
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
 import React, { useEffect, useState } from "react";
-import Listachiquesa from '../../../../components/dtc/usuario1/chiques/lista'
+import Listachiquesa from '../../../../components/cadia/admin/calendarios/calendariochicos'
+import Listaprof from '../../../../components/cadia/admin/calendarios/calendarioprofesionales'
+
 import MenuuCel from '../../../../components/cadia/admin/menuizq1'
 
 
@@ -80,10 +82,12 @@ export default function Paginas() {
      <div  className={classes.container}> 
      <MenuuCel texto="Chiques"/>
      <Listachiquesa/>
+     <Listaprof/>
     </div>
      </>:<>
  <Menuizq>
 <Listachiquesa/>
+<Listaprof/>
 </Menuizq></>}
  </>
    

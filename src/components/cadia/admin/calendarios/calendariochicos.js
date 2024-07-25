@@ -43,7 +43,7 @@ const CalendarComponent = () => {
 
   const fetchEvents = async () => {
     try {
-      const talleres = await servicioDtc.traerhorariosprofesional(id);
+      const talleres = await servicioDtc.traerhorarioschicos();
       const parsedEvents = talleres.map(event => {
         return { ...event, daysOfWeek: Array.isArray(event.dias) ? event.dias : [] };
       });
