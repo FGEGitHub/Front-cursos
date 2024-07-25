@@ -156,6 +156,8 @@ const CalendarComponent = () => {
             <Box>
               <Typography variant="h6">Detalles del evento</Typography>
               <Typography variant="body1"><strong>Título:</strong> {selectedEvent.titulo}</Typography>
+              <Typography variant="body1"><strong>Nombre:</strong> {selectedEvent.nombre}</Typography>
+
               <Typography variant="body1"><strong>Inicio:</strong> {selectedEvent.fecha_inicio}</Typography>
               <Typography variant="body1"><strong>Final:</strong> {selectedEvent.fecha_fin}</Typography>
               <Typography variant="body1"><strong>Categoría:</strong> {categories.find(cat => cat.value === selectedEvent.categoria)?.label}</Typography>
