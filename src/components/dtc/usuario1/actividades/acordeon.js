@@ -10,6 +10,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FirmaAugusto from "../../../../Assets/firmaaugusto.jpeg";
+import FirmaSole from "../../../../Assets/firmasole.jpeg";
 
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
@@ -35,6 +37,7 @@ export default function TablaActividades(props) {
     grado: true,
     escuela: true,
   });
+  const [includeSignature, setIncludeSignature] = useState(false);
 
   const handleOpen = (row) => {
     setSelectedRow(row);
@@ -52,13 +55,27 @@ export default function TablaActividades(props) {
     });
   };
 
+  const handleSignatureChange = (event) => {
+    setIncludeSignature(event.target.checked);
+  };
+
   const handlePrint = async () => {
     const logoBase64 = await convertImageToBase64(logo);
     const logo2Base64 = await convertImageToBase64(logo2);
 
+    // Obtener la firma según el id_tallerista
+    let firmaBase64 = '';
+    if (includeSignature) {
+      if (selectedRow.id_tallerista == 262) {
+        firmaBase64 = await convertImageToBase64(FirmaAugusto);
+      } else if (selectedRow.id_tallerista == 267) {
+        firmaBase64 = await convertImageToBase64(FirmaSole);
+      }
+    }
+
     const row = selectedRow;
     let content = `<div>
-      ${selectedFields.apellido && selectedFields.nombre ? `<b>Nombre: ${row.apellido} ${row.nombree}</b><br/>` : ''}
+      ${selectedFields.apellido && selectedFields.nombre ? `<b>Nombre: ${row.apellido} ${row.nombre}</b><br/>` : ''}
       ${selectedFields.dni ? `<b>DNI: ${row.dni}</b><br/>` : ''}
       ${selectedFields.fecha_nacimiento ? `<b>Fecha de nacimiento: ${row.fecha_nacimiento}</b><br/>` : ''}
       ${selectedFields.fecha_act ? `<b>Fecha: ${row.fecha_act}</b><br/>` : ''}
@@ -135,6 +152,20 @@ export default function TablaActividades(props) {
                 padding: 8px;
                 text-align: left;
               }
+              .firma {
+                margin-top: 20px;
+                text-align: center;
+              }
+              .firma img {
+                height: 100px;
+                margin-bottom: 20px;
+              }
+              .logo-footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                height: 50px;
+              }
             }
 
             @keyframes colorTransition {
@@ -188,7 +219,13 @@ export default function TablaActividades(props) {
             </div>
             <div class="color-line" style="animation: colorTransition 8s linear infinite;"></div>
             ${content}
-            <div class="footer">Secretaría de Salud - Coordinación de Discapacidad e Inclusión Social</div>
+            <div class="firma">
+              ${firmaBase64 ? `<img src="${firmaBase64}" alt="Firma" />` : ''}
+            </div>
+            <div class="footer">
+              Secretaría de Salud - Coordinación de Discapacidad e Inclusión Social
+              <img src="${logoBase64}" alt="Logo Footer" class="logo-footer" />
+            </div>
           </div>
         </body>
       </html>
@@ -342,6 +379,16 @@ export default function TablaActividades(props) {
               />
             }
             label="Escuela"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={includeSignature} 
+                onChange={handleSignatureChange} 
+                name="firma" 
+              />
+            }
+            label="Incluir Firma"
           />
           <Button variant="contained" color="primary" onClick={handlePrint}>
             Imprimir
