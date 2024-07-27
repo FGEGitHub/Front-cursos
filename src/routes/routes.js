@@ -155,6 +155,7 @@ import DTCcumples from '../pages/dtc/nivel1/cumpleaños';
 import DTCExpedientes from '../pages/dtc/nivel1/expedientes';
 import DTCGimnasioclases from '../pages/dtc/gimnasioclases';
 import DTCaGimnasioAsis from '../pages/dtc/gimnasioasistencia';
+import DTCMapas from '../pages/dtc/nivel1/mapa';
 
 import CargarExcel from '../pages/subirexcel'
 
@@ -338,7 +339,8 @@ const Rutas = [
 		{ path: '/dtc/usuario1/intervenciones', element: <Dtcintervenciones/> },
 		{ path: '/dtc/usuario1/expedientes', element: <DTCExpedientes/> },
 		{ path: '/dtc/usuario1/usuariosgim', element: <Dtcusuariosgim/> },
-		
+		{ path: '/dtc/usuario1/mapas', element: <DTCMapas/> },
+
 
 		
 

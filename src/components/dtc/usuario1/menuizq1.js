@@ -75,6 +75,11 @@ export default function MenuIzq2 ({children}) {
         window.location.reload(true);
       } 
     const menuItems = [
+      { 
+        text: 'Mapas', 
+        icon: <GradingTwoToneIcon color="primary" />, 
+        path: '/dtc/usuario1/mapas' 
+      },
         { 
           text: 'Actividades', 
           icon: <GradingTwoToneIcon color="primary" />, 
