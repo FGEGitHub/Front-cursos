@@ -75,7 +75,7 @@ export default function TablaActividades(props) {
 
     const row = selectedRow;
     let content = `<div>
-      ${selectedFields.apellido && selectedFields.nombre ? `<b>Nombre: ${row.apellido} ${row.nombre}</b><br/>` : ''}
+      ${selectedFields.apellido && selectedFields.nombre ? `<b>Nombre: ${row.apellido} ${row.nombree}</b><br/>` : ''}
       ${selectedFields.dni ? `<b>DNI: ${row.dni}</b><br/>` : ''}
       ${selectedFields.fecha_nacimiento ? `<b>Fecha de nacimiento: ${row.fecha_nacimiento}</b><br/>` : ''}
       ${selectedFields.fecha_act ? `<b>Fecha: ${row.fecha_act}</b><br/>` : ''}
