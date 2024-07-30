@@ -64,7 +64,7 @@ const TablaNotificaciones = () => {
                 <Alert variant="filled" severity="success">
                     <b>Actualmente {datos.total} usuarios</b> - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios, "Adolescentes":{datos.kid3} usuarios, además {datos.sind} sin determinar
                 </Alert>
-            )}
+            )} 
 
             <h2>Lista de chicos</h2>
             {chicos && chicos.length > 0 ? (

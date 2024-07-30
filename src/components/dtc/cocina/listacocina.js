@@ -69,6 +69,8 @@ export default function Ingresos(props) {
   const [inscrip, setInscrip] = useState([]);
   const [datos, setDatos] = useState();
   const [raciones, setRaciones] = useState();
+  const [premerienda, setPremerienda] = useState();
+  
   const [nuevos, setNuevos] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -92,6 +94,8 @@ export default function Ingresos(props) {
       //console.log(kid1Data)
       setDatos(historial[2]);
       setRaciones(historial[3]);
+      setPremerienda(historial[4]);
+      
       setCurrentDate(fecha);
     }
   };
@@ -131,7 +135,7 @@ export default function Ingresos(props) {
               <StyledTableCell align="left" data-label="Apellido">
                 {row.apellido}    {row.nombre}
               </StyledTableCell>
-              {/* <StyledTableCell align="left" data-label="Nombre">
+             <StyledTableCell align="left" data-label="Nombre">
                 {row.nombre}
               </StyledTableCell>
               <StyledTableCell align="left" data-label="Premerienda">
@@ -148,7 +152,7 @@ export default function Ingresos(props) {
               </StyledTableCell>
               <StyledTableCell align="left" data-label="Kid">
                 {row.kid}
-              </StyledTableCell> */}
+              </StyledTableCell> 
             </StyledTableRow>
           ))}
         </TableBody>
@@ -173,7 +177,8 @@ export default function Ingresos(props) {
       {datos && (
         <>
           <h4>Lista de presentes ({inscrip.length})</h4>
-          <h4>Cantidad de raciones ({raciones}) Horario extendido: {datos.horario}</h4>
+          <h4>Cantidad de merienda ({raciones}) Horario extendido: {datos.horario}</h4>
+          <h4>Cantidad de colacion ({premerienda})</h4>
           Kid1: {datos.kid1}, Kid2: {datos.kid2}, Adolescentes: {datos.kid3}
         </>
       )}
