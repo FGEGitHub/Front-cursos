@@ -12,6 +12,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FirmaAugusto from "../../../../Assets/firmaaugusto.jpeg";
 import FirmaSole from "../../../../Assets/firmasole.jpeg";
+import Fotosole from "../../../../Assets/fotosole.jpeg";
+import Fotoaugusto from "../../../../Assets/fotoaugusto.webp";
+
 
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
@@ -63,7 +66,6 @@ export default function TablaActividades(props) {
     const logoBase64 = await convertImageToBase64(logo);
     const logo2Base64 = await convertImageToBase64(logo2);
 
-    // Obtener la firma según el id_tallerista
     let firmaBase64 = '';
     if (includeSignature) {
       if (selectedRow.id_tallerista == 262) {
@@ -256,10 +258,12 @@ export default function TablaActividades(props) {
             <thead>
               <tr>
                 <th>Creado por</th>
+                <th>Foto</th>
                 <th>Título</th>
                 <th>Fecha de Carga</th>
                 <th>Fecha de Intervención</th>
                 {showDetail && <th>Detalle</th>}
+              
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -267,10 +271,15 @@ export default function TablaActividades(props) {
               {props.actividades.map((row, index) => (
                 <tr key={index}>
                   <td>{row.nombre}</td>
+                  <td>
+                    {row.id_tallerista == 262 && <img src={Fotoaugusto} alt="Foto Augusto" style={{ height: '50px' }} />}
+                    {row.id_tallerista == 267 && <img src={Fotosole} alt="Foto Sole" style={{ height: '50px' }} />}
+                  </td>
                   <td>{row.titulo}</td>
                   <td>{row.fecha}</td>
                   <td>{row.fecha_act}</td>
                   {showDetail && <td>{row.detalle}</td>}
+               
                   <td>
                     <Borrar id={row.id} traer={props.traer} />
                     <Button 
