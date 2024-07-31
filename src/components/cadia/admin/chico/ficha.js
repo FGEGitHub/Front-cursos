@@ -8,6 +8,7 @@ import Borrarusuaio from "./modalborrarusuario"
 import Vinculos from './modalvinculos'
 import Avatar from "@mui/material/Avatar";
 import Calendario from './calendario'
+import Anadirprof  from './modalanadirprof'
 
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = (props) => {
@@ -150,7 +151,10 @@ backgroundColor:'#b0bec5'        }}>
                 <Fragment>
                   { usuario ? <>
                   {usuario.nivel ==40?<>
+                    
+                    <Anadirprof 
 
+                        id ={chico.id}/>
                     <Borrarusuaio 
 
                         id ={chico.id}/>
