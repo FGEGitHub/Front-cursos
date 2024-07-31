@@ -51,6 +51,7 @@ const TablaNotificaciones = (props) => {
                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
                 if (loggedUserJSON) {
                     const usuario = JSON.parse(loggedUserJSON);
+                    console.log(usuario)
                     setUsuario(usuario);
                     const novedades_aux = await servicioDtc.traerclasesprof(usuario.id);
                     setClases(novedades_aux);
@@ -117,7 +118,7 @@ const TablaNotificaciones = (props) => {
 
     return (
         <div>
-            <h2>Clases del Taller</h2>
+            <h2>Actividades de {usuario && usuario.mail }</h2>
             <ModaNueva
                 id_tallerista={usuario.id}
                 traer={async () => {
@@ -132,7 +133,7 @@ const TablaNotificaciones = (props) => {
             />
             <Paper>
                 <MUIDataTable
-                    title={"Clase del Taller"}
+                    title={usuario ? "Actividades de " + usuario.mail :  "Actividades en "}
                     data={clases}
                     columns={columns}
                     options={options}

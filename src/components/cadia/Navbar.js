@@ -110,9 +110,7 @@ const traer = async () => {
 
 
               {user? <>
-                <Button onClick={handleClick} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab sx={{fontSize:" 17px "}}label= {`Actividades`}/>
-              </Button>
+          
               <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
                   <Tab sx={{fontSize:" 17px "}}label= {`Cerrar sesion`}/>
               </Button>

@@ -4,7 +4,7 @@ import { Box, Button, Modal, TextField, MenuItem, FormGroup, FormControlLabel, C
 import 'react-calendar/dist/Calendar.css';
 import servicioDtc from '../../../../services/dtc';
 import { useParams } from "react-router-dom";
-import './customcalendar.css'; 
+import './customcalendar.css';
 
 const categories = [
   { value: 'work', label: 'Trabajo', color: '#1E90FF' },
@@ -45,14 +45,25 @@ const CalendarComponent = () => {
     try {
       const talleres = await servicioDtc.traerhorariosprofesional(id);
       const parsedEvents = talleres.map(event => {
-        return { ...event, daysOfWeek: Array.isArray(event.dias) ? event.dias : [] };
+        let daysOfWeek = [];
+
+        try {
+          daysOfWeek = JSON.parse(event.dias);
+        } catch (error) {
+          console.error('Error parsing daysOfWeek:', error);
+        }
+
+        return {
+          ...event,
+          daysOfWeek: Array.isArray(daysOfWeek) ? daysOfWeek : [],
+        };
       });
       setEvents(parsedEvents);
     } catch (error) {
       console.error('Error fetching events', error);
     }
   };
-  
+
   const handleDateChange = (date) => {
     setDate(date);
   };
@@ -86,8 +97,8 @@ const CalendarComponent = () => {
   const handleAddEvent = async () => {
     try {
       const mergedObj = { ...eventData, id_usuario: id };
-      const response = await servicioDtc.agregarhorario(mergedObj);
-      setEvents([...events, response.data]);
+      await servicioDtc.agregarhorario(mergedObj);
+      fetchEvents()
       handleClose();
     } catch (error) {
       console.error('Error adding event', error);
@@ -104,13 +115,13 @@ const CalendarComponent = () => {
   };
 
   const renderEvents = (date) => {
-    const dayOfWeek = date.getDay(); // Obtiene el día de la semana (0-6)
+    const dayOfWeek = date.getDay();
     const dayEvents = events.filter(event => {
       const fecha_inicio = new Date(event.fecha_inicio);
       const fecha_fin = new Date(event.fecha_fin);
       return fecha_inicio <= date && date <= fecha_fin && event.daysOfWeek.includes(dayOfWeek);
     });
-  
+
     return dayEvents.map(event => (
       <Box
         key={event.id}
@@ -119,7 +130,8 @@ const CalendarComponent = () => {
           color: 'white',
           padding: '4px',
           margin: '2px 0',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          fontSize: '1rem' // Aumentar el tamaño de la fuente si es necesario
         }}
         onClick={() => setSelectedEvent(event)}
       >
@@ -129,14 +141,14 @@ const CalendarComponent = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ maxWidth: '1400px', margin: 'auto', padding: '20px' }}>
       <Calendar
         onChange={handleDateChange}
         value={date}
         tileContent={({ date }) => renderEvents(date)}
         className="custom-calendar"
       />
-      <Button variant="contained" color="primary" onClick={handleOpen}>
+      <Button variant="contained" color="primary" onClick={handleOpen} sx={{ marginTop: 2 }}>
         Agregar horario
       </Button>
       <Modal open={open || !!selectedEvent} onClose={handleClose}>
@@ -146,7 +158,7 @@ const CalendarComponent = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: 500, /* Ancho del modal */
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
@@ -156,8 +168,8 @@ const CalendarComponent = () => {
             <Box>
               <Typography variant="h6">Detalles del evento</Typography>
               <Typography variant="body1"><strong>Título:</strong> {selectedEvent.titulo}</Typography>
-              <Typography variant="body1"><strong>Inicio:</strong> {selectedEvent.fecha_inicio}</Typography>
-              <Typography variant="body1"><strong>Final:</strong> {selectedEvent.fecha_fin}</Typography>
+              <Typography variant="body1"><strong>Inicio:</strong> {new Date(selectedEvent.fecha_inicio).toLocaleString()}</Typography>
+              <Typography variant="body1"><strong>Final:</strong> {new Date(selectedEvent.fecha_fin).toLocaleString()}</Typography>
               <Typography variant="body1"><strong>Categoría:</strong> {categories.find(cat => cat.value === selectedEvent.categoria)?.label}</Typography>
               <Typography variant="body1"><strong>Días:</strong> {selectedEvent.daysOfWeek.map(day => daysOfWeek.find(d => d.value === day)?.label).join(', ')}</Typography>
               <Button variant="contained" color="secondary" onClick={() => handleDeleteEvent(selectedEvent.id)}>

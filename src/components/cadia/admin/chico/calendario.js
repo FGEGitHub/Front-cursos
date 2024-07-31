@@ -45,7 +45,18 @@ const CalendarComponent = () => {
     try {
       const talleres = await servicioDtc.traerhorarioschico(id);
       const parsedEvents = talleres.map(event => {
-        return { ...event, daysOfWeek: Array.isArray(event.dias) ? event.dias : [] };
+        let daysOfWeek = [];
+
+        try {
+          daysOfWeek = JSON.parse(event.dias);
+        } catch (error) {
+          console.error('Error parsing daysOfWeek:', error);
+        }
+
+        return {
+          ...event,
+          daysOfWeek: Array.isArray(daysOfWeek) ? daysOfWeek : [],
+        };
       });
       setEvents(parsedEvents);
     } catch (error) {
@@ -86,12 +97,13 @@ const CalendarComponent = () => {
   const handleAddEvent = async () => {
     try {
       const mergedObj = { ...eventData, id_usuario: id };
-      const response = await servicioDtc.agregarhorario(mergedObj);
-      setEvents([...events, response.data]);
+    await servicioDtc.agregarhorariochico(mergedObj);
+      fetchEvents()
       handleClose();
     } catch (error) {
       console.error('Error adding event', error);
     }
+   
   };
 
   const handleDeleteEvent = async (id) => {

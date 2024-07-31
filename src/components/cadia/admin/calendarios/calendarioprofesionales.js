@@ -41,18 +41,29 @@ const CalendarComponent = () => {
     fetchEvents();
   }, []);
 
+
   const fetchEvents = async () => {
     try {
       const talleres = await servicioDtc.traerhorariosprofesionales();
       const parsedEvents = talleres.map(event => {
-        return { ...event, daysOfWeek: Array.isArray(event.dias) ? event.dias : [] };
+        let daysOfWeek = [];
+
+        try {
+          daysOfWeek = JSON.parse(event.dias);
+        } catch (error) {
+          console.error('Error parsing daysOfWeek:', error);
+        }
+
+        return {
+          ...event,
+          daysOfWeek: Array.isArray(daysOfWeek) ? daysOfWeek : [],
+        };
       });
       setEvents(parsedEvents);
     } catch (error) {
       console.error('Error fetching events', error);
     }
   };
-  
   const handleDateChange = (date) => {
     setDate(date);
   };
@@ -123,7 +134,7 @@ const CalendarComponent = () => {
         }}
         onClick={() => setSelectedEvent(event)}
       >
-        {event.titulo}
+        {event.titulo}  {event.nombre}
       </Box>
     ));
   };
