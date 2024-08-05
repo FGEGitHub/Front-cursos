@@ -156,7 +156,10 @@ import DTCExpedientes from '../pages/dtc/nivel1/expedientes';
 import DTCGimnasioclases from '../pages/dtc/gimnasioclases';
 import DTCaGimnasioAsis from '../pages/dtc/gimnasioasistencia';
 import DTCMapas from '../pages/dtc/nivel1/mapa';
-
+import DTCVisitamenu from '../pages/dtc/visitasoc/visitasocial';
+import DTCVisitausuarios from '../pages/dtc/visitasoc/usaurios';
+import Dtcvisitausuario from '../pages/dtc/visitasoc/usuario';
+import Dtcvisitamapa from '../pages/dtc/visitasoc/mapas';
 import CargarExcel from '../pages/subirexcel'
 
 
@@ -341,10 +344,10 @@ const Rutas = [
 		{ path: '/dtc/usuario1/usuariosgim', element: <Dtcusuariosgim/> },
 		{ path: '/dtc/usuario1/mapas', element: <DTCMapas/> },
 
-
-		
-
-
+		{ path: '/dtc/visitasocial/menu', element: <DTCVisitamenu/> },
+		{ path: '/dtc/visitasocial/usuarios', element: <DTCVisitausuarios/> },
+		{ path: '/dtc/visitasocial/usuario/:id', element: <Dtcvisitausuario/> },
+		{ path: '/dtc/visitasocial/mapas', element: <Dtcvisitamapa/> },
 
 
 		{ path: '/cadia/login', element: <LoginCadia/> },

@@ -80,6 +80,9 @@ const LoginForm = () => {
                 navigate('/dtc/gimnasioclases')
                 window.location.reload(true);
                 break;
+                case 28:
+                  navigate('/dtc/visitasocial/menu')
+                  break;
         default:
           window.localStorage.removeItem('loggedNoteAppUser')
           navigate('/dtc/login')
@@ -135,6 +138,9 @@ const LoginForm = () => {
                 navigate('/dtc/gimnasioclases')
                 window.location.reload(true);
                 break;
+                case 28:
+                  navigate('/dtc/visitasocial/menu')
+                  break;
       default: alert("error")
         break;
 

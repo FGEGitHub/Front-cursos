@@ -55,6 +55,9 @@ export default function Paginas() {
                       case 27:
                       navigate('/dtc/gimnasioclases')
                       break;
+                      case 28:
+                      navigate('/dtc/visitasocial/menu')
+                      break;
             default:
                 
               window.localStorage.removeItem('loggedNoteAppUser')
