@@ -243,8 +243,8 @@ Ver                        </Button>
 
         },
         {
-            name: "escuela",
-            label: "escuela",
+            name: "falta",
+            label: "falta",
 
         },
 
