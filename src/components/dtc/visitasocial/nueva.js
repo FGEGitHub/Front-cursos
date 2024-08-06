@@ -22,17 +22,13 @@ export default function SelectTextFields(props) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({});
   const [usuarios, setUsuarios] = useState([]);
-  const [activo, setActivo] = useState(false);
+  const [archivo, setArchivo] = useState(null);
 
   const handleClickOpen = async () => {
     setOpen(true);
-    // Cargar usuarios al abrir el modal
     try {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-      if (loggedUserJSON) {
-        const novedades_aux = await servicioDtc.listachiques();
-        setUsuarios(novedades_aux[0]);
-      }
+      const novedades_aux = await servicioDtc.listachiques();
+      setUsuarios(novedades_aux[0]);
     } catch (error) {
       console.error('Error al cargar usuarios:', error);
     }
@@ -44,7 +40,10 @@ export default function SelectTextFields(props) {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log(form)
+  };
+
+  const handleFileChange = (e) => {
+    setArchivo(e.target.files[0]);
   };
 
   const handleUserChange = (event, value) => {
@@ -54,29 +53,27 @@ export default function SelectTextFields(props) {
   };
 
   const handleDeterminar = async (event) => {
-    try {
-      event.preventDefault();
-      const mergedJSON = {
-        ...form,
-   
-       
-        id_trabajador: props.id_trabajador
-      };
-      console.log(mergedJSON);
-      
-      const nov = await servicioDtc.nuevaintervencion(mergedJSON);
-      alert(mergedJSON);
-    } catch (error) {
-      console.error('Error algo sucedió:', error);
-    }
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("titulo", form.titulo);
+    formData.append("detalle", form.detalle);
+    formData.append("fecha_carga", form.fecha_carga);
+    formData.append("id_usuario", form.id_usuario);
+    formData.append("id_trabajador", props.id_trabajador);
 
-    props.traer();
-    setOpen(false);
+    try {
+      await servicioDtc.nuevaintervencion(formData);
+      props.traer();
+      setOpen(false);
+    } catch (error) {
+      console.error('Error al enviar la intervención:', error);
+    }
   };
 
   return (
     <>
-      <Tooltip title="Nueva ">
+      <Tooltip title="Nueva">
         <Button variant="contained" color='success' onClick={handleClickOpen}>Nuevo</Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth='md'>
@@ -86,7 +83,7 @@ export default function SelectTextFields(props) {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="titulo"
             label="Título"
             name="titulo"
             onChange={handleChange}
@@ -132,16 +129,18 @@ export default function SelectTextFields(props) {
           <TextField
             multiline
             rows={4}
-            label=""
             variant="outlined"
             onChange={handleChange}
             name="detalle"
             fullWidth
           />
 
+          <InputLabel>Adjuntar archivo</InputLabel>
+          <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} />
+
           <DialogActions>
             {form.detalle && form.titulo && form.fecha_carga ? (
-              form.detalle.length < 1999 ? (
+              form.detalle.length < 1300 ? (
                 <Button variant="contained" color="primary" onClick={handleDeterminar}>crear</Button>
               ) : (
                 <Button variant="contained" color="primary" disabled>crear (muchos caracteres {form.detalle.length})</Button>

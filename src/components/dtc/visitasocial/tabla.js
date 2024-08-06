@@ -15,7 +15,8 @@ import FirmaSole from "../../../Assets/firmasole.jpeg";
 import Fotosole from "../../../Assets/fotosole.jpeg";
 import Fotoaugusto from "../../../Assets/fotoaugusto.webp";
 import servicioDtc from "../../../services/dtc"
-import Nueva from './nueva'
+import Nueva from './nueva';
+
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
   const blob = await response.blob();
@@ -43,18 +44,18 @@ export default function TablaActividades(props) {
     escuela: true,
   });
   const [includeSignature, setIncludeSignature] = useState(false);
+
   useEffect(() => {
     const traer = async () => {
-        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-        if (loggedUserJSON) {
-            const usuario = JSON.parse(loggedUserJSON);
-            setUsuario(usuario);
-            const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
-            setAsitencias(novedades_aux);
-        }
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+      if (loggedUserJSON) {
+        const usuario = JSON.parse(loggedUserJSON);
+        setUsuario(usuario);
+        const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+        setAsitencias(novedades_aux);
+      }
     };
     traer();
-
   }, []);
 
   const handleOpen = (row) => {
@@ -83,9 +84,9 @@ export default function TablaActividades(props) {
 
     let firmaBase64 = '';
     if (includeSignature) {
-      if (selectedRow.id_tallerista == 262) {
+      if (selectedRow.id_tallerista === 262) {
         firmaBase64 = await convertImageToBase64(FirmaAugusto);
-      } else if (selectedRow.id_tallerista == 267) {
+      } else if (selectedRow.id_tallerista === 267) {
         firmaBase64 = await convertImageToBase64(FirmaSole);
       }
     }
@@ -108,9 +109,9 @@ export default function TablaActividades(props) {
           <title>Impresión de Actividades</title>
           <style>
             body {
-              font-family: Arial, sans-serif; /* Cambia la fuente según sea necesario */
-              font-size: 14px; /* Tamaño de fuente base */
-              color: #000; /* Color de texto principal */
+              font-family: Arial, sans-serif;
+              font-size: 14px;
+              color: #000;
             }
             @media print {
               body * {
@@ -132,10 +133,10 @@ export default function TablaActividades(props) {
                 margin-bottom: 20px;
               }
               .print-container .header img {
-                height: 100px; /* Ajusta la altura del primer logo */
+                height: 100px;
               }
               .print-container .header img.logo2 {
-                height: 50px; /* Altura del segundo logo */
+                height: 50px;
               }
               .print-container .header .title {
                 flex-grow: 1;
@@ -187,29 +188,28 @@ export default function TablaActividades(props) {
 
             @keyframes colorTransition {
               0% {
-                border-bottom: 5px solid blue; /* Azul */
+                border-bottom: 5px solid blue;
               }
               25% {
-                border-bottom: 5px solid green; /* Verde */
+                border-bottom: 5px solid green;
               }
               50% {
-                border-bottom: 5px solid yellow; /* Amarillo */
+                border-bottom: 5px solid yellow;
               }
               75% {
-                border-bottom: 5px solid red; /* Rojo */
+                border-bottom: 5px solid red;
               }
               100% {
-                border-bottom: 5px solid blue; /* Vuelve a Azul */
+                border-bottom: 5px solid blue;
               }
             }
-            /* Estilos para la tabla en la vista normal */
             table {
               width: 100%;
               border-collapse: collapse;
               margin: 20px 0;
               font-size: 16px;
               text-align: left;
-              color: #333; /* Color de texto para celdas */
+              color: #333;
             }
             th, td {
               padding: 12px 15px;
@@ -261,9 +261,32 @@ export default function TablaActividades(props) {
   const toggleDetail = () => {
     setShowDetail(!showDetail);
   };
+  const handleViewFile = async (id) => {
+    try {
+      // Llama a la función para obtener el archivo PDF
+      const response = await servicioDtc.verArchivo(id);
+      
+      // Asegúrate de que la respuesta es un Blob
+      if (response && response.data) {
+        const fileBlob = new Blob([response.data], { type: 'application/pdf' });
+        const fileUrl = URL.createObjectURL(fileBlob);
+        window.open(fileUrl, '_blank');
+        
+        // Opcional: liberar el objeto URL después de un tiempo
+        setTimeout(() => {
+          URL.revokeObjectURL(fileUrl);
+        }, 10000); // Revoca la URL después de 10 segundos
+      } else {
+        console.error("No se recibió un archivo válido.");
+      }
+    } catch (error) {
+      console.error("Error al obtener el archivo PDF:", error);
+    }
+  };
+  
 
   return (
-    <div>
+    <div className="App">
       <Nueva
       id_trabajador={usuario.id}
       traer={async () => {
@@ -275,30 +298,27 @@ export default function TablaActividades(props) {
             setAsitencias(novedades_aux);
         }
     }}/>
-      {asistencias ? <>{asistencias.length > 0 ? (
-        <>
-          <Button variant="contained" onClick={toggleDetail}>
-            {showDetail ? 'Ocultar Detalle' : 'Mostrar Detalle'}
-          </Button>
-          <table>
-            <thead>
-              <tr>
-                <th>Creado por</th>
+      <Typography variant="h5" gutterBottom>
+        Actividades
+      </Typography>
+      <table>
+        <thead>
+          <tr>
+          <th>Creado por</th>
                 <th>Foto</th>
                 <th>Título</th>
                 <th>Fecha de Carga</th>
-                
                 {showDetail &&<> <th>Detalle</th>
-                 <th>Fecha de Referencia</th>
-               </>}
+                  <th>Fecha de Referencia</th>
+                  </>}
+                  <th>Acciones</th>
               
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {asistencias.map((row, index) => (
-                <tr key={index}>
-                  <td>{row.nombre}</td>
+          </tr>
+        </thead>
+        <tbody>
+          {asistencias && asistencias.map((row, index) => (
+            <tr key={index}>
+              <td>{row.nombre}</td>
                   <td>
                     {row.id_tallerista == 262 && <img src={Fotoaugusto} alt="Foto Augusto" style={{ height: '50px' }} />}
                     {row.id_tallerista == 267 && <img src={Fotosole} alt="Foto Sole" style={{ height: '50px' }} />}
@@ -310,127 +330,44 @@ export default function TablaActividades(props) {
                    <td>{row.fecha_referencia}</td></>}
                
                   <td>
-                    <Borrar id={row.id} traer={props.traer} />
-                    <Button 
-                      variant="contained" 
-                      color="success" 
-                      onClick={() => handleOpen(row)}
-                    >
-                      Imprimir
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      ) : (
-        <Typography>No hay actividades </Typography>
-      )}</>:<>Cargando</>}
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <Box sx={{ 
-          position: 'absolute', 
-          top: '50%', 
-          left: '50%', 
-          transform: 'translate(-50%, -50%)', 
-          width: 400, 
-          bgcolor: 'background.paper', 
-          border: '2px solid #000', 
-          boxShadow: 24, 
-          p: 4 
-        }}>
-          <Typography id="modal-title" variant="h6" component="h2">
-            Seleccione los campos a imprimir
-          </Typography>
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={selectedFields.nombre} 
-                onChange={handleFieldChange} 
-                name="nombre" 
+                <Button variant="contained" color="primary" onClick={() => handleOpen(row)}>
+                  Ver detalles
+                </Button>
+                {row.ubicacion =="no" ? <></>:<> <Button variant="contained" color="secondary" onClick={() => handleViewFile(row.id)}>
+                  Ver Online
+                </Button></>}
+               
+                <Borrar id={row.id} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <Modal open={open} onClose={handleClose}>
+        <Box>
+          {selectedRow && (
+            <div>
+              <h2>Detalles</h2>
+              <p>{selectedRow.detalle}</p>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={includeSignature}
+                    onChange={handleSignatureChange}
+                    name="includeSignature"
+                    color="primary"
+                  />
+                }
+                label="Incluir Firma"
               />
-            }
-            label="Nombre"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={selectedFields.apellido} 
-                onChange={handleFieldChange} 
-                name="apellido" 
-              />
-            }
-            label="Apellido"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={selectedFields.dni} 
-                onChange={handleFieldChange} 
-                name="dni" 
-              />
-            }
-            label="DNI"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={selectedFields.fecha_nacimiento} 
-                onChange={handleFieldChange} 
-                name="fecha_nacimiento" 
-              />
-            }
-            label="Fecha de Nacimiento"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={selectedFields.fecha_act} 
-                onChange={handleFieldChange} 
-                name="fecha_act" 
-              />
-            }
-            label="Fecha"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={selectedFields.grado} 
-                onChange={handleFieldChange} 
-                name="grado" 
-              />
-            }
-            label="Grado"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={selectedFields.escuela} 
-                onChange={handleFieldChange} 
-                name="escuela" 
-              />
-            }
-            label="Escuela"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox 
-                checked={includeSignature} 
-                onChange={handleSignatureChange} 
-                name="firma" 
-              />
-            }
-            label="Incluir Firma"
-          />
-          <Button variant="contained" color="primary" onClick={handlePrint}>
-            Imprimir
-          </Button>
+              <Button variant="contained" color="primary" onClick={handlePrint}>
+                Imprimir
+              </Button>
+              <Button variant="contained" color="secondary" onClick={handleClose}>
+                Cerrar
+              </Button>
+            </div>
+          )}
         </Box>
       </Modal>
     </div>
