@@ -16,7 +16,7 @@ import Fotosole from "../../../Assets/fotosole.jpeg";
 import Fotoaugusto from "../../../Assets/fotoaugusto.webp";
 import servicioDtc from "../../../services/dtc"
 import Nueva from './nueva';
-
+import Modificar from './editaractividad'
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
   const blob = await response.blob();
@@ -338,6 +338,19 @@ export default function TablaActividades(props) {
                 </Button></>}
                
                 <Borrar id={row.id} 
+                traer={ async () => {
+                  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                  if (loggedUserJSON) {
+                    const usuario = JSON.parse(loggedUserJSON);
+                    setUsuario(usuario);
+                    const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                    setAsitencias(novedades_aux);
+                  }
+                }}/>
+                <Modificar  id={row.id} 
+                fecha_referencia={row.fecha_referencia}
+                titulo={row.titulo}
+                detalle={row.detalle}
                 traer={ async () => {
                   const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
                   if (loggedUserJSON) {

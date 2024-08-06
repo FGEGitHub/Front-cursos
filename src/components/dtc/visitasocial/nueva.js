@@ -61,6 +61,8 @@ export default function SelectTextFields(props) {
     formData.append("fecha_carga", form.fecha_carga);
     formData.append("id_usuario", form.id_usuario);
     formData.append("id_trabajador", props.id_trabajador);
+    formData.append("fecha_referencia", props.fecha_referencia);
+    
 
     try {
       await servicioDtc.nuevaintervencion(formData);
@@ -90,19 +92,19 @@ export default function SelectTextFields(props) {
             fullWidth
             variant="standard"
           />
-
-          <TextField
-            onChange={handleChange}
-            name="fecha_carga"
-            id="date"
-            label="Fecha"
-            type="date"
-            defaultValue="2024-08-01"
-            sx={{ width: 220 }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
+ <TextField
+                        margin="dense"
+                        id="fecha_referencia"
+                        label="Fecha"
+                        type="date"
+                        name="fecha_referencia"
+                        value={form.fecha_referencia}
+                        onChange={handleChange}
+                        fullWidth
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
 
           <Autocomplete
             options={usuarios}
@@ -139,7 +141,7 @@ export default function SelectTextFields(props) {
           <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} />
 
           <DialogActions>
-            {form.detalle && form.titulo && form.fecha_carga ? (
+            {form.detalle && form.titulo && form.fecha_referencia ? (
               form.detalle.length < 1300 ? (
                 <Button variant="contained" color="primary" onClick={handleDeterminar}>crear</Button>
               ) : (
