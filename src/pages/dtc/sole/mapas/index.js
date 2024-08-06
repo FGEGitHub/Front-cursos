@@ -2,10 +2,11 @@
 
 
 
-import Asis from '../../../components/dtc/sole/lista'
+import Asis from '../../../../components/dtc/usuario1/mapa/componente todos'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../components/dtc/Navbar'
+import MenuuCel from '../../../../components/dtc/Navbar'
+import Menulat from '../../../../components/dtc/sole/menuizq'
 
 import {
 
@@ -64,11 +65,12 @@ export default function Paginas() {
     return (
       <>
      <MenuuCel/>
+     <Menulat>
      <br/>
      <br/>
      <br/> <br/>
      <Asis/>
-     <br/>
+     <br/></Menulat>
      <br/>
      <br/> 
  </>

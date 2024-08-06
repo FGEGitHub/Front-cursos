@@ -141,13 +141,15 @@ import Dtctalleres from '../pages/dtc/nivel1/talleres';
 import Dtctaller from '../pages/dtc/nivel1/taller';
 import Dtcturnosadmin from '../pages/dtc/nivel1/turnosadmin';
 import Dtcturnopsic from '../pages/dtc/psicologa';
-import Dtcsoleinicio from '../pages/dtc/sole';
+import Dtcsoleinicio from '../pages/dtc/sole/sole';
 import DTCetapas from '../pages/dtc/cargadeetapas';
 import DTCcargaetapascadia from '../pages/dtc/cargaetapascadia';
 import Dtcintervenciones from '../pages/dtc/nivel1/intervenciones';
 import Dtcusuariosgim from '../pages/dtc/nivel1/usuariosgim';
-
+import Dtcsolecosas from '../pages/dtc/sole/cosas';
 import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
+import Dtcsolemapas from '../pages/dtc/sole/mapas';
+
 
 import DTCTallerAsis from '../pages/dtc/talleresasistencia';
 import DTCasistenciasest from '../pages/dtc/nivel1/estadasistencias';
@@ -317,7 +319,9 @@ const Rutas = [
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
 		{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio/> },
-
+		{ path: '/dtc/sole/cosas', element: <Dtcsolecosas/> },
+		{ path: '/dtc/sole/mapa', element: <Dtcsolemapas/> },
+		
 		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
 		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },
 		{ path: '/dtc/cocina', element: <Dtccocina/> },
