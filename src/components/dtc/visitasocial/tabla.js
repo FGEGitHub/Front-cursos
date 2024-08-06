@@ -14,9 +14,10 @@ import FirmaAugusto from "../../../Assets/firmaaugusto.jpeg";
 import FirmaSole from "../../../Assets/firmasole.jpeg";
 import Fotosole from "../../../Assets/fotosole.jpeg";
 import Fotoaugusto from "../../../Assets/fotoaugusto.webp";
-import servicioDtc from "../../../services/dtc"
+import servicioDtc from "../../../services/dtc";
 import Nueva from './nueva';
-import Modificar from './editaractividad'
+import Modificar from './editaractividad';
+
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
   const blob = await response.blob();
@@ -92,7 +93,7 @@ export default function TablaActividades(props) {
     }
 
     const row = selectedRow;
-    let content = `<div>
+    let content = /* `<div>
       ${selectedFields.apellido && selectedFields.nombre ? `<b>Nombre: ${row.apellido} ${row.nombree}</b><br/>` : ''}
       ${selectedFields.dni ? `<b>DNI: ${row.dni}</b><br/>` : ''}
       ${selectedFields.fecha_nacimiento ? `<b>Fecha de nacimiento: ${row.fecha_nacimiento}</b><br/>` : ''}
@@ -100,7 +101,7 @@ export default function TablaActividades(props) {
       ${selectedFields.grado ? `<b>Grado: ${row.grado}</b><br/>` : ''}
       ${selectedFields.escuela ? `<b>Escuela: ${row.escuela}</b><br/>` : ''}
       <p>${(row.detalle || '').replace(/\./g, '<br/>')}</p>
-    </div>`;
+    </div>` */""
 
     const printWindow = window.open('', '_blank', 'width=800,height=600');
     printWindow.document.write(`
@@ -261,21 +262,17 @@ export default function TablaActividades(props) {
   const toggleDetail = () => {
     setShowDetail(!showDetail);
   };
+  
   const handleViewFile = async (id) => {
     try {
-      // Llama a la función para obtener el archivo PDF
       const response = await servicioDtc.verArchivo(id);
-      
-      // Asegúrate de que la respuesta es un Blob
       if (response && response.data) {
         const fileBlob = new Blob([response.data], { type: 'application/pdf' });
         const fileUrl = URL.createObjectURL(fileBlob);
         window.open(fileUrl, '_blank');
-        
-        // Opcional: liberar el objeto URL después de un tiempo
         setTimeout(() => {
           URL.revokeObjectURL(fileUrl);
-        }, 10000); // Revoca la URL después de 10 segundos
+        }, 10000);
       } else {
         console.error("No se recibió un archivo válido.");
       }
@@ -283,90 +280,96 @@ export default function TablaActividades(props) {
       console.error("Error al obtener el archivo PDF:", error);
     }
   };
-  
 
   return (
     <div className="App">
       <Nueva
-      id_trabajador={usuario.id}
-      traer={ async () => {
-        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-        if (loggedUserJSON) {
-          const usuario = JSON.parse(loggedUserJSON);
-          setUsuario(usuario);
-          const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
-          setAsitencias(novedades_aux);
-        }
-      }}/>
+        id_trabajador={usuario.id}
+        traer={ async () => {
+          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+          if (loggedUserJSON) {
+            const usuario = JSON.parse(loggedUserJSON);
+            setUsuario(usuario);
+            const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+            setAsitencias(novedades_aux);
+          }
+        }}/>
       <Typography variant="h5" gutterBottom>
         Actividades
       </Typography>
       <table>
         <thead>
           <tr>
-          <th>Creado por</th>
-                <th>Foto</th>
-                <th>Título</th>
-                <th>Fecha de Carga</th>
-                {showDetail &&<> <th>Detalle</th>
-                  <th>Fecha de Referencia</th>
-                  </>}
-                  <th>Acciones</th>
-              
+            <th>Creado por</th>
+            <th>Foto</th>
+            <th>Título</th>
+            <th>Fecha de Carga</th>
+            {showDetail && <>
+              <th>Detalle</th>
+              <th>Fecha de Referencia</th>
+            </>}
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {asistencias && asistencias.map((row, index) => (
             <tr key={index}>
               <td>{row.nombre}</td>
-                  <td>
-                    {row.id_tallerista == 262 && <img src={Fotoaugusto} alt="Foto Augusto" style={{ height: '50px' }} />}
-                    {row.id_tallerista == 267 && <img src={Fotosole} alt="Foto Sole" style={{ height: '50px' }} />}
-                  </td>
-                  <td>{row.titulo}</td>
-                  <td>{row.fecha_carga}</td>
-                 
-                  {showDetail && <><td>{row.detalle}</td>
-                   <td>{row.fecha_referencia}</td></>}
-               
-                  <td>
+              <td>
+                {row.id_tallerista == 262 && <img src={Fotoaugusto} alt="Foto Augusto" style={{ height: '50px' }} />}
+                {row.id_tallerista == 267 && <img src={Fotosole} alt="Foto Sole" style={{ height: '50px' }} />}
+              </td>
+              <td>{row.titulo}</td>
+              <td>{row.fecha_carga}</td>
+              {showDetail && <>
+                <td>{row.detalle}</td>
+                <td>{row.fecha_referencia}</td>
+              </>}
+              <td>
                 <Button variant="contained" color="primary" onClick={() => handleOpen(row)}>
                   Ver detalles
                 </Button>
-                {row.ubicacion =="no" ? <></>:<> <Button variant="contained" color="secondary" onClick={() => handleViewFile(row.id)}>
-                  Ver Online
-                </Button></>}
-               
+                {row.ubicacion !== "no" && (
+                  <Button variant="contained" color="secondary" onClick={() => handleViewFile(row.id)}>
+                    Ver Online
+                  </Button>
+                )}
                 <Borrar id={row.id} 
-                traer={ async () => {
-                  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                  if (loggedUserJSON) {
-                    const usuario = JSON.parse(loggedUserJSON);
-                    setUsuario(usuario);
-                    const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
-                    setAsitencias(novedades_aux);
-                  }
-                }}/>
-                <Modificar  id={row.id} 
-                fecha_referencia={row.fecha_referencia}
-                titulo={row.titulo}
-                detalle={row.detalle}
-                traer={ async () => {
-                  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                  if (loggedUserJSON) {
-                    const usuario = JSON.parse(loggedUserJSON);
-                    setUsuario(usuario);
-                    const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
-                    setAsitencias(novedades_aux);
-                  }
-                }}/>
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                      setAsitencias(novedades_aux);
+                    }
+                  }}/>
+                <Modificar id={row.id} 
+                  fecha_referencia={row.fecha_referencia}
+                  titulo={row.titulo}
+                  detalle={row.detalle}
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                      setAsitencias(novedades_aux);
+                    }
+                  }}/>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <Modal open={open} onClose={handleClose}>
-        <Box>
+        <Box className="modal-box" sx={{ 
+          width: 400, 
+          padding: 2, 
+          bgcolor: 'background.paper', 
+          boxShadow: 24,
+          borderRadius: 1 
+        }}>
           {selectedRow && (
             <div>
               <h2>Detalles</h2>
@@ -382,7 +385,7 @@ export default function TablaActividades(props) {
                 }
                 label="Incluir Firma"
               />
-              <Button variant="contained" color="primary" onClick={handlePrint}>
+              <Button variant="contained" color="primary" onClick={handlePrint} style={{ marginRight: 8 }}>
                 Imprimir
               </Button>
               <Button variant="contained" color="secondary" onClick={handleClose}>
