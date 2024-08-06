@@ -301,6 +301,7 @@ export default function TablaActividades(props) {
         <thead>
           <tr>
             <th>Creado por</th>
+            <th>Usuario</th>
             <th>Foto</th>
             <th>Título</th>
             <th>Fecha de Carga</th>
@@ -315,6 +316,7 @@ export default function TablaActividades(props) {
           {asistencias && asistencias.map((row, index) => (
             <tr key={index}>
               <td>{row.nombre}</td>
+              <td>{row.nombree} {row.apellido}</td>
               <td>
                 {row.id_tallerista == 262 && <img src={Fotoaugusto} alt="Foto Augusto" style={{ height: '50px' }} />}
                 {row.id_tallerista == 267 && <img src={Fotosole} alt="Foto Sole" style={{ height: '50px' }} />}
