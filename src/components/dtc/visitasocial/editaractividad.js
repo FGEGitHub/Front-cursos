@@ -59,7 +59,7 @@ export default function SelectTextFields(props) {
         try {
             event.preventDefault();
 
-            const nov = await servicioDtc.modificarusuario(form)
+            const nov = await servicioDtc.modificarasist(form)
 alert(nov)
         } catch (error) {
             console.error(error);
