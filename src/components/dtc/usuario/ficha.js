@@ -60,7 +60,7 @@ backgroundColor:'#b0bec5'        }}>
                     <Grid item xs={8} style={{ justifyContent: "center", display: "flex" }}>
                 <Avatar sx={{ width: 170, height: 200 }}>{foto?<> <img src={`data:image/jpeg;base64,${foto}`} width="170" height="200"/></>:<>Subir foto</>} </Avatar>
               </Grid>   
-              {usuario.nivel ==20?<>
+              {usuario.nivel ==20 || usuario.nivel ==21 || usuario.nivel ==25 ?<>
               <Modalperfil 
               id ={chico.id}
               traer={ async () => {
