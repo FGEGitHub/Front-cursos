@@ -32,7 +32,7 @@ export default function Clasenueva(props) {
         event.preventDefault();
         try {
 
-         const respuesta=  await servicioDtc.borraractividadchico({id:props.id})
+         const respuesta=  await servicioDtc.borraractividadsocial({id:props.id})
          alert(respuesta)
 
 

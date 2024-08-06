@@ -289,15 +289,15 @@ export default function TablaActividades(props) {
     <div className="App">
       <Nueva
       id_trabajador={usuario.id}
-      traer={async () => {
+      traer={ async () => {
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
         if (loggedUserJSON) {
-            const usuario = JSON.parse(loggedUserJSON);
-            setUsuario(usuario);
-            const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
-            setAsitencias(novedades_aux);
+          const usuario = JSON.parse(loggedUserJSON);
+          setUsuario(usuario);
+          const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+          setAsitencias(novedades_aux);
         }
-    }}/>
+      }}/>
       <Typography variant="h5" gutterBottom>
         Actividades
       </Typography>
@@ -337,7 +337,16 @@ export default function TablaActividades(props) {
                   Ver Online
                 </Button></>}
                
-                <Borrar id={row.id} />
+                <Borrar id={row.id} 
+                traer={ async () => {
+                  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                  if (loggedUserJSON) {
+                    const usuario = JSON.parse(loggedUserJSON);
+                    setUsuario(usuario);
+                    const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                    setAsitencias(novedades_aux);
+                  }
+                }}/>
               </td>
             </tr>
           ))}
