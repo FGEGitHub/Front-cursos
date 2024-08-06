@@ -186,7 +186,7 @@ export default function MenuIzq2 ({children}) {
         <AlertaAprobaciones
       cantidad={cantidad} /> */}
    
-      <div className="fondo-imagen">
+      <div backgroundColor="BLue">
         <br/>
    { children}
    </div>

@@ -93,8 +93,11 @@ alert(nov)
             noValidate
             autoComplete="off"
         >
-            < Tooltip title="Nueva Clase">
-                <Button variant="outlined" onClick={handleClickOpen}> Modificar usuario  </Button>
+            < Tooltip title="Modificar">
+                <Button  variant="contained" 
+        color="success" 
+        sx={{ width: '150px', height: '40px', margin: '8px', fontSize: '14px', textTransform: 'none' }}
+ onClick={handleClickOpen}> Modificar   </Button>
 
             </Tooltip>
             <Dialog open={open} onClose={handleClose}>

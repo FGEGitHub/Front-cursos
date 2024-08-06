@@ -328,7 +328,7 @@ export default function TablaActividades(props) {
               <td>
                 <Button variant="contained" color="primary" onClick={() => handleOpen(row)}>
                   Ver detalles
-                </Button>
+                </Button><br/>
                 {row.ubicacion !== "no" && (
                   <Button variant="contained" color="secondary" onClick={() => handleViewFile(row.id)}>
                     Ver Online
@@ -385,10 +385,16 @@ export default function TablaActividades(props) {
                 }
                 label="Incluir Firma"
               />
-              <Button variant="contained" color="primary" onClick={handlePrint} style={{ marginRight: 8 }}>
+              <Button  variant="contained" 
+        color="success" 
+        sx={{ width: '150px', height: '40px', margin: '8px', fontSize: '14px', textTransform: 'none' }}
+ onClick={handlePrint} style={{ marginRight: 8 }}>
                 Imprimir
               </Button>
-              <Button variant="contained" color="secondary" onClick={handleClose}>
+              <Button  variant="contained" 
+        color="success" 
+        sx={{ width: '150px', height: '40px', margin: '8px', fontSize: '14px', textTransform: 'none' }}
+onClick={handleClose}>
                 Cerrar
               </Button>
             </div>
