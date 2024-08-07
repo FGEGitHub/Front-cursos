@@ -1,12 +1,27 @@
-.custom-calendar {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    font-size: 1.2em;
-}
-
+/* customcalendar.css */
 .custom-calendar .react-calendar__tile {
-    background-color: #f0f8ff;
-    border-radius: 8px;
-}
+    position: relative;
+    height: 100px; /* Ajusta la altura según tus necesidades */
+    overflow-y: hidden;
+  }
+  
+  .custom-calendar .react-calendar__tile:hover {
+    overflow-y: auto;
+  }
+  
+  .event-container {
+    max-height: 100px; /* Ajusta la altura según tus necesidades */
+    overflow-y: auto;
+  }
+  
+  .event-box {
+    background-color: #ccc;
+    color: white;
+    padding: 4px;
+    margin: 2px 0;
+    cursor: pointer;
+    word-wrap: break-word; /* Asegura que el texto largo se ajuste */
+  }
 
 .custom-calendar .react-calendar__tile--now {
     background-color: #ffe4e1;

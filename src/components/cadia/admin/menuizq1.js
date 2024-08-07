@@ -146,9 +146,9 @@ export default function MenuIzq2 ({children}) {
           )} */}
           <Divider />
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 0, backgroundColor: "#fff3e0" }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 0, backgroundColor: "#9dfaf7" }}>
           <Toolbar />
-          <div className="fondo-imagen">
+          <div >
             <br />
             {children}
           </div>

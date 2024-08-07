@@ -178,7 +178,7 @@ export default function MenuIzq2 ({children}) {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1,  p:0 }}
+        sx={{ flexGrow: 1,  p:0,backgroundColor:"#88f78e" }}
       >
         <Toolbar />
       {/*   <AlertaInusual
@@ -186,7 +186,7 @@ export default function MenuIzq2 ({children}) {
         <AlertaAprobaciones
       cantidad={cantidad} /> */}
    
-      <div backgroundColor="BLue">
+      <div >
         <br/>
    { children}
    </div>

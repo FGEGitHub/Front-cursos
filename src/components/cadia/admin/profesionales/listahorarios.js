@@ -7,9 +7,9 @@ import { useParams } from "react-router-dom";
 import './customcalendar.css';
 
 const categories = [
-  { value: 'work', label: 'Trabajo', color: '#1E90FF' },
-  { value: 'study', label: 'Estudio', color: '#32CD32' },
-  { value: 'personal', label: 'Personal', color: '#FF6347' },
+  { value: 'mañana', label: 'mañana', color: '#1E90FF' },
+  { value: 'tarde', label: 'tarde', color: '#32CD32' },
+  { value: 'otro', label: 'otro', color: '#FF6347' },
 ];
 
 const daysOfWeek = [

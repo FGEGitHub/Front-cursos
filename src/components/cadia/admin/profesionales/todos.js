@@ -108,9 +108,9 @@ const TablaNotificaciones = (props) => {
     </div>
 
 
-                                        <h5  onClick={() => ir(row.id)}  >{row.usuario}</h5>
+                                        <h5  onClick={() => ir(row.id)}  >{row.nombre}</h5>
                                         
-                                        <label onClick={() => ir(row.id)} >{row.nombre}</label>
+                                        <label onClick={() => ir(row.id)} >{row.mail}</label>
                                         <p  onClick={() => ir(row.id)} >Ver</p>
                                       
                                         

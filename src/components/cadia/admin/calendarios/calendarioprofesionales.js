@@ -41,7 +41,6 @@ const CalendarComponent = () => {
     fetchEvents();
   }, []);
 
-
   const fetchEvents = async () => {
     try {
       const talleres = await servicioDtc.traerhorariosprofesionales();
@@ -64,6 +63,7 @@ const CalendarComponent = () => {
       console.error('Error fetching events', error);
     }
   };
+
   const handleDateChange = (date) => {
     setDate(date);
   };
@@ -121,22 +121,23 @@ const CalendarComponent = () => {
       const fecha_fin = new Date(event.fecha_fin);
       return fecha_inicio <= date && date <= fecha_fin && event.daysOfWeek.includes(dayOfWeek);
     });
-  
-    return dayEvents.map(event => (
-      <Box
-        key={event.id}
-        sx={{
-          backgroundColor: categories.find(cat => cat.value === event.categoria)?.color || '#ccc',
-          color: 'white',
-          padding: '4px',
-          margin: '2px 0',
-          cursor: 'pointer'
-        }}
-        onClick={() => setSelectedEvent(event)}
-      >
-        {event.titulo}  {event.nombre}
+
+    return (
+      <Box className="event-container">
+        {dayEvents.map(event => (
+          <Box
+            key={event.id}
+            className="event-box"
+            sx={{
+              backgroundColor: categories.find(cat => cat.value === event.categoria)?.color || '#ccc',
+            }}
+            onClick={() => setSelectedEvent(event)}
+          >
+            {event.usuario} 
+          </Box>
+        ))}
       </Box>
-    ));
+    );
   };
 
   return (

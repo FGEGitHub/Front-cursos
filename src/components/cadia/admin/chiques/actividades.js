@@ -2,7 +2,6 @@ import servicioDtc from '../../../../services/dtc'
 //import ModalVer from './ModalVer'
 import ModaNueva from './nueva'
 import React, { useEffect, useState, Fragment } from "react";
-import Modalver from './modalver'
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
