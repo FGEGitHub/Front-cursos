@@ -39,6 +39,7 @@ export default function SelectTextFields(props) {
   };
 
   const handleChange = (e) => {
+    console.log(form)
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -61,7 +62,7 @@ export default function SelectTextFields(props) {
     formData.append("fecha_carga", form.fecha_carga);
     formData.append("id_usuario", form.id_usuario);
     formData.append("id_trabajador", props.id_trabajador);
-    formData.append("fecha_referencia", props.fecha_referencia);
+    formData.append("fecha_referencia", form.fecha_referencia);
     
 
     try {
