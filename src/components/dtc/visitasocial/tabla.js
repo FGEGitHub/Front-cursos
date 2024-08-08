@@ -17,7 +17,7 @@ import Fotoaugusto from "../../../Assets/fotoaugusto.webp";
 import servicioDtc from "../../../services/dtc";
 import Nueva from './nueva';
 import Modificar from './editaractividad';
-
+import MUIDataTable from "mui-datatables";
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
   const blob = await response.blob();
@@ -51,6 +51,7 @@ export default function TablaActividades(props) {
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
       if (loggedUserJSON) {
         const usuario = JSON.parse(loggedUserJSON);
+        console.log(usuario)
         setUsuario(usuario);
         const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
         setAsitencias(novedades_aux);
@@ -259,6 +260,123 @@ export default function TablaActividades(props) {
     handleClose();
   };
 
+  function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
+    return (
+        <>
+          e
+          
+
+        </>
+    );
+}
+function Nivel(dataIndex, rowIndex, data, onClick) {
+    return (
+        <>
+<Button variant="contained" color="primary" onClick={() => handleOpen(asistencias[dataIndex])}>
+                  Ver detalles
+                </Button><br/>
+                {asistencias[dataIndex].ubicacion !== "no" && (
+                  <Button variant="contained" color="secondary" onClick={() => handleViewFile(asistencias[dataIndex].id)}>
+                    Ver Online
+                  </Button>
+                )}
+                {usuario ? <>
+      
+                {usuario.id==asistencias[dataIndex].idu ? <>
+                  <Borrar id={asistencias[dataIndex].id} 
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                      setAsitencias(novedades_aux);
+                    }
+                  }}/>
+                <Modificar id={asistencias[dataIndex].id} 
+                  fecha_referencia={asistencias[dataIndex].fecha_referencia}
+                  titulo={asistencias[dataIndex].titulo}
+                  detalle={asistencias[dataIndex].detalle}
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                      setAsitencias(novedades_aux);
+                    }
+                  }}/>
+                  </>:<></>}
+                
+                </>:<></>}
+               
+        </>
+    );
+}
+
+
+
+const columns = [
+    {
+        name: "nombre",
+        label: "nombre",
+    },
+
+    {
+        name: "nombree",
+        label: "nombree",
+    },
+    {
+        name: "usuario",
+        label: "usuario",
+
+    },
+    {
+        name: "titulo",
+        label: "titulo",
+
+    },
+    {
+      name: "fecha_carga",
+      label: "fecha_carga",
+
+  },
+  {
+    name: "fecha_referencia",
+    label: "fecha_referencia",
+
+},
+    {
+        name: "Actions",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                Nivel(
+                    dataIndex,
+                    rowIndex,
+                    // overbookingData,
+                    // handleEditOpen
+                )
+        }
+
+    },
+
+
+    {
+        name: "Actions",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                CutomButtonsRenderer(
+                    dataIndex,
+                    rowIndex,
+                    // overbookingData,
+                    // handleEditOpen
+                )
+        }
+
+    },
+
+
+];
   const toggleDetail = () => {
     setShowDetail(!showDetail);
   };
@@ -294,7 +412,7 @@ export default function TablaActividades(props) {
             setAsitencias(novedades_aux);
           }
         }}/>
-      <Typography variant="h5" gutterBottom>
+      {/* <Typography variant="h5" gutterBottom>
         Actividades
       </Typography>
       <table>
@@ -363,7 +481,23 @@ export default function TablaActividades(props) {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
+      <MUIDataTable
+
+title={"Lista de asistencias"}
+data={asistencias}
+columns={columns}
+actions={[
+    {
+        icon: 'save',
+        tooltip: 'Save User',
+        onClick: (event, rowData) => alert("You saved " + rowData.name)
+    }
+]}
+
+
+
+/>
       <Modal open={open} onClose={handleClose}>
         <Box className="modal-box" sx={{ 
           width: 400, 
