@@ -18,6 +18,7 @@ import servicioDtc from "../../../services/dtc";
 import Nueva from './nueva';
 import Modificar from './editaractividad';
 import MUIDataTable from "mui-datatables";
+import Snack from './snackbar'
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
   const blob = await response.blob();
@@ -263,7 +264,7 @@ export default function TablaActividades(props) {
   function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
     return (
         <>
-          e
+       {asistencias[dataIndex].nombree}    {asistencias[dataIndex].apellido}
           
 
         </>
@@ -323,9 +324,18 @@ const columns = [
     },
 
     {
-        name: "nombree",
-        label: "nombree",
-    },
+      name: "Actions",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+              CutomButtonsRenderer(
+                  dataIndex,
+                  rowIndex,
+                  // overbookingData,
+                  // handleEditOpen
+              )
+      }
+
+  },
     {
         name: "usuario",
         label: "usuario",
@@ -361,19 +371,7 @@ const columns = [
     },
 
 
-    {
-        name: "Actions",
-        options: {
-            customBodyRenderLite: (dataIndex, rowIndex) =>
-                CutomButtonsRenderer(
-                    dataIndex,
-                    rowIndex,
-                    // overbookingData,
-                    // handleEditOpen
-                )
-        }
 
-    },
 
 
 ];
@@ -401,6 +399,7 @@ const columns = [
 
   return (
     <div className="App">
+      <Snack/>
       <Nueva
         id_trabajador={usuario.id}
         traer={ async () => {
