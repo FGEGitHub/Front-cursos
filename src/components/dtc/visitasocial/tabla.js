@@ -320,11 +320,11 @@ function Nivel(dataIndex, rowIndex, data, onClick) {
 const columns = [
     {
         name: "nombre",
-        label: "nombre",
+        label: "Cargado por",
     },
 
     {
-      name: "Actions",
+      name: "Nombre usuario",
       options: {
           customBodyRenderLite: (dataIndex, rowIndex) =>
               CutomButtonsRenderer(
@@ -336,11 +336,7 @@ const columns = [
       }
 
   },
-    {
-        name: "usuario",
-        label: "usuario",
 
-    },
     {
         name: "titulo",
         label: "titulo",
