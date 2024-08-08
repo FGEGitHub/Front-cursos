@@ -242,6 +242,12 @@ Ver                        </Button>
             label: "Fecha de nacimiento",
 
         },
+        
+        {
+          name: "edad",
+          label: "edad",
+
+      },
         {
             name: "falta",
             label: "falta",
