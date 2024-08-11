@@ -1,11 +1,13 @@
 
 
 
-import Asis from '../../../../components/dtc/usuario/ficha'
+
+import Menuizq from '../../../../components/dtc/usuario1/menuizq1'
 import { useNavigate, useParams } from "react-router-dom";
+import Login from '../../../../components/dtc/visitasocial/tabla'
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../../components/dtc/Navbar'
-import Menuizq from '../../../../components/dtc/visitasocial/menuizq'
+import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
+
 import {
 
   makeStyles,
@@ -38,10 +40,8 @@ export default function Paginas() {
           const user = JSON.parse(loggedUserJSON)
           console.log(user)
           switch (user.nivel) {
-            case 21:
+            case 20:
              break;
-             case 28:
-              break;
            //   navigate('/')
            
            
@@ -62,16 +62,16 @@ export default function Paginas() {
 
     return (
       <>
-     <MenuuCel/>
-     <Menuizq>
-     <br/>
-     <br/>
-     <br/> <br/>
-     <Asis/>
-     <br/>
-     <br/>
-     <br/>
-      </Menuizq>
+      {isMatch ? 
+     <>
+     <div  className={classes.container}> 
+     <MenuuCel texto="Usuarios"/>
+     <Login/>
+    </div>
+     </>:<>
+ <Menuizq>
+<Login/>
+</Menuizq></>}
  </>
    
     );

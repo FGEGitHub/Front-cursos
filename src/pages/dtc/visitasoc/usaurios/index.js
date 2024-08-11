@@ -1,7 +1,7 @@
 
 
 
-import Asis from '../../../../components/dtc/visitasocial/tabla'
+import Asis from '../../../../components/dtc/visitasocial/usuarios/lista'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../../components/dtc/Navbar'
@@ -74,7 +74,7 @@ export default function Paginas() {
      <br/>
      <br/>
      <br/> <br/>
-     <img style={islogo} src={Mantenimiento} alt="logo" /> 
+     <Asis/> 
      <br/>
      <br/>
      <br/>

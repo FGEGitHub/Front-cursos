@@ -101,6 +101,11 @@ export default function MenuIzq2 ({children}) {
           path: '/dtc/usuario1/chiques' 
         },
         { 
+          text: 'Asistencias sociales', 
+          icon: <GradingTwoToneIcon color="primary" />, 
+          path: '/dtc/usuario1/asistenciassoc' 
+        },
+        { 
           text: 'gimnasio', 
           icon: <WcTwoToneIcon color="primary" />, 
           path: '/dtc/usuario1/usuariosgim' 

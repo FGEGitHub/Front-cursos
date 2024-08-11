@@ -130,6 +130,7 @@ import Dtcturnos from '../pages/dtc/turnos/listaturnos';
 import Dtccocina from '../pages/dtc/cocina/index.js';
 import DtccocinaAsis from '../pages/dtc/cocinaasitencia';
 import Dtcraciones from '../pages/dtc/raciones';
+import DtcAsisenciasoc from '../pages/dtc/nivel1/asistenciassoc';
 
 
 
@@ -315,7 +316,9 @@ const Rutas = [
 		{ path: '/dtc/turnos/lista', element: <Dtcturnos/> },
 		{ path: '/dtc/usuario1/turnos', element: <Dtcturnosadmin/> },
 		{ path: '/dtc/usuario1/cumples', element: <DTCcumples/> },
+		{ path: '/dtc/usuario1/asistenciassoc', element: <DtcAsisenciasoc/> },
 
+		
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
 		{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio/> },
