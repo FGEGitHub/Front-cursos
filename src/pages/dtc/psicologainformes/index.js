@@ -2,8 +2,7 @@
 
 
 
-import Asis from '../../../components/dtc/usuario1/turnos/lista'
-import Calendario from '../../../components/dtc/turnos/calendario'
+import Asis from '../../../components/dtc/vale/listaactividades'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/Navbar'
@@ -69,7 +68,6 @@ export default function Paginas() {
      <br/>
      <br/>
      <br/> <Menuizq>
-     <Calendario/><br/>
      <Asis/>
      <br/></Menuizq>
      <br/>

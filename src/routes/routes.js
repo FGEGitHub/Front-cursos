@@ -164,7 +164,7 @@ import DTCVisitausuarios from '../pages/dtc/visitasoc/usaurios';
 import Dtcvisitausuario from '../pages/dtc/visitasoc/usuario';
 import Dtcvisitamapa from '../pages/dtc/visitasoc/mapas';
 import CargarExcel from '../pages/subirexcel'
-
+import Dtcpsiclogaacti from '../pages/dtc/psicologainformes';
 
 
 
@@ -321,6 +321,9 @@ const Rutas = [
 		
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
+		{ path: '/dtc/psicologa/informes', element: <Dtcpsiclogaacti/> },
+		
+
 		{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio/> },
 		{ path: '/dtc/sole/cosas', element: <Dtcsolecosas/> },
 		{ path: '/dtc/sole/mapa', element: <Dtcsolemapas/> },
