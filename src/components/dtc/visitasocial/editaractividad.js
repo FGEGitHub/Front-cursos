@@ -105,7 +105,7 @@ alert(nov)
 
 
                     <h3>
-                        <b> Modificar </b></h3>
+                        <b> Modificar</b> {props.id}</h3>
 
                     <TextField
 

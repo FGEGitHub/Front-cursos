@@ -39,7 +39,6 @@ export default function SelectTextFields(props) {
   };
 
   const handleChange = (e) => {
-    console.log(form)
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -63,7 +62,6 @@ export default function SelectTextFields(props) {
     formData.append("id_usuario", form.id_usuario);
     formData.append("id_trabajador", props.id_trabajador);
     formData.append("fecha_referencia", form.fecha_referencia);
-    
 
     try {
       await servicioDtc.nuevaintervencion(formData);
@@ -93,19 +91,19 @@ export default function SelectTextFields(props) {
             fullWidth
             variant="standard"
           />
- <TextField
-                        margin="dense"
-                        id="fecha_referencia"
-                        label="Fecha"
-                        type="date"
-                        name="fecha_referencia"
-                        value={form.fecha_referencia}
-                        onChange={handleChange}
-                        fullWidth
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
+          <TextField
+            margin="dense"
+            id="fecha_referencia"
+            label="Fecha"
+            type="date"
+            name="fecha_referencia"
+            value={form.fecha_referencia}
+            onChange={handleChange}
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
 
           <Autocomplete
             options={usuarios}
@@ -138,8 +136,8 @@ export default function SelectTextFields(props) {
             fullWidth
           />
 
-          <InputLabel>Adjuntar archivo</InputLabel>
-          <input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} />
+          <InputLabel>Adjuntar archivo o imagen</InputLabel>
+          <input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif" onChange={handleFileChange} />
 
           <DialogActions>
             {form.detalle && form.titulo && form.fecha_referencia ? (

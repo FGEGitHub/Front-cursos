@@ -79,11 +79,10 @@ export default function TablaActividades(props) {
   const handleSignatureChange = (event) => {
     setIncludeSignature(event.target.checked);
   };
-
   const handlePrint = async () => {
     const logoBase64 = await convertImageToBase64(logo);
     const logo2Base64 = await convertImageToBase64(logo2);
-
+  
     let firmaBase64 = '';
     if (includeSignature) {
       if (selectedRow.id_tallerista === 262) {
@@ -92,18 +91,10 @@ export default function TablaActividades(props) {
         firmaBase64 = await convertImageToBase64(FirmaSole);
       }
     }
-
+  
     const row = selectedRow;
-    let content = /* `<div>
-      ${selectedFields.apellido && selectedFields.nombre ? `<b>Nombre: ${row.apellido} ${row.nombree}</b><br/>` : ''}
-      ${selectedFields.dni ? `<b>DNI: ${row.dni}</b><br/>` : ''}
-      ${selectedFields.fecha_nacimiento ? `<b>Fecha de nacimiento: ${row.fecha_nacimiento}</b><br/>` : ''}
-      ${selectedFields.fecha_act ? `<b>Fecha: ${row.fecha_act}</b><br/>` : ''}
-      ${selectedFields.grado ? `<b>Grado: ${row.grado}</b><br/>` : ''}
-      ${selectedFields.escuela ? `<b>Escuela: ${row.escuela}</b><br/>` : ''}
-      <p>${(row.detalle || '').replace(/\./g, '<br/>')}</p>
-    </div>` */""
-
+    let content = /* Aquí iría el contenido de tu fila seleccionado */ "";
+  
     const printWindow = window.open('', '_blank', 'width=800,height=600');
     printWindow.document.write(`
       <html>
@@ -124,7 +115,7 @@ export default function TablaActividades(props) {
               }
               .print-container {
                 position: absolute;
-                left: 0;
+                left: 10;
                 top: 0;
                 width: 100%;
               }
@@ -186,8 +177,12 @@ export default function TablaActividades(props) {
                 left: 0;
                 height: 50px;
               }
+              /* Añadimos más margen a la izquierda */
+              .print-container {
+                margin-left: 50px; /* Ajusta este valor según el margen que desees */
+              }
             }
-
+  
             @keyframes colorTransition {
               0% {
                 border-bottom: 5px solid blue;
@@ -249,16 +244,18 @@ export default function TablaActividades(props) {
         </body>
       </html>
     `);
-
+  
     printWindow.document.close();
     printWindow.focus();
     setTimeout(() => {
       printWindow.print();
       printWindow.close();
     }, 500);
-
+  
     handleClose();
   };
+  
+  
 
   function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
     return (
