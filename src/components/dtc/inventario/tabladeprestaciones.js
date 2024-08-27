@@ -179,7 +179,7 @@ const TablaNotificaciones = (props) => {
 
                 setUsuario(usuario)
 
-                const novedades_aux = await servicioDtc.listainventario()
+                const novedades_aux = await servicioDtc.tablaprestacionesa(id)
                 setchicos(novedades_aux[0])
                 setDatos(novedades_aux[1])
             }
@@ -207,7 +207,7 @@ traer={async () => {
 
           setUsuario(usuario)
 
-          const novedades_aux = await servicioDtc.listainventario()
+          const novedades_aux = await servicioDtc.tablaprestacionesa(id)
           setchicos(novedades_aux[0])
           setDatos(novedades_aux[1])
       }
@@ -304,7 +304,6 @@ traer={async () => {
   >
    
     { datos ? <>  <Alert variant="filled" severity="success">
- <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
 </Alert> </>:<></>}
 
             <h2>Lista de inventario</h2>
@@ -313,25 +312,25 @@ traer={async () => {
 
 
                     <ModaNueva
-                        id_turno={id}
+                        id={id}
                         traer={async () => {
-                          try {
-                              const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                              if (loggedUserJSON) {
-                                  const usuario = JSON.parse(loggedUserJSON)
-                  
-                                  setUsuario(usuario)
-                  
-                                  const novedades_aux = await servicioDtc.LISTAINVENTARIO()
-                                  setchicos(novedades_aux[0])
-                                  setDatos(novedades_aux[1])
-                              }
-                  
-                          } catch (error) {
-                  
-                          }
-                  
-                      }}
+                            try {
+                                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                if (loggedUserJSON) {
+                                    const usuario = JSON.parse(loggedUserJSON)
+                    
+                                    setUsuario(usuario)
+                    
+                                    const novedades_aux = await servicioDtc.tablaprestacionesa(id)
+                                    setchicos(novedades_aux[0])
+                                    setDatos(novedades_aux[1])
+                                }
+                    
+                            } catch (error) {
+                    
+                            }
+                    
+                        }}
                     />
                     {chicos.length > 0 ? <>
 
@@ -341,17 +340,17 @@ traer={async () => {
 
                                 <TableContainer>
                                     {!chicos ? <Skeleton /> : <>
-                                        <h1>Lista de usuarios </h1>
+                                        <h1>Lista de prestaciones </h1>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>nombre</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>detalle</b></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>stock</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>estado</b></TableCell>
 
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>ir</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>fecha inicio</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>fecha fin</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>detalle prestacion</b></TableCell>
 
-                                                   <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>nueva</b></TableCell>
 
 
                                                 </TableRow>
@@ -363,12 +362,16 @@ traer={async () => {
                                                 {chicos.map((row) => (
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.nombre}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.detalle} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.prestadas}/{row.stock} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <Button variant='contained'color="success" onClick={() => navigate('/dtc/inventario/prestaicones/'+row.id)}>Ver</Button></StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.fecha_inicio} </b> </StyledTableCell>
 
-                                                        
-                    
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.fecha_fin} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.detalle} </b> </StyledTableCell>
+
+                                                        <StyledTableCell component="th" scope="row">  <ModaNueva id={row.id}
+
+traer={3}/></StyledTableCell>
+
 
 
                                                     </StyledTableRow>

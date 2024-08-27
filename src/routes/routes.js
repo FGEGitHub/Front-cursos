@@ -151,6 +151,8 @@ import Dtcsolecosas from '../pages/dtc/sole/cosas';
 import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
 import Dtcsolemapas from '../pages/dtc/sole/mapas';
 import Stcinventairo from '../pages/dtc/inventario';
+import Stcinventairopretacion from '../pages/dtc/inventarioprestacion';
+
 
 
 import DTCTallerAsis from '../pages/dtc/talleresasistencia';
@@ -361,6 +363,8 @@ const Rutas = [
 		{ path: '/dtc/visitasocial/mapas', element: <Dtcvisitamapa/> },
 
 		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
+		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },
+
 		
 
 		{ path: '/cadia/login', element: <LoginCadia/> },

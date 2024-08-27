@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../../components/dtc/Navbar'
 import Menuizq from '../../../../components/dtc/visitasocial/menuizq'
+import Asistencia from '../../../../components/dtc/usuario/asistenciadelusuario'
+import Avtvidadchicos from '../../../../components/dtc/usuario1/actividades/actividades1pers'
 import {
 
   makeStyles,
@@ -68,6 +70,8 @@ export default function Paginas() {
      <br/>
      <br/> <br/>
      <Asis/>
+     <Asistencia />
+     <Avtvidadchicos />
      <br/>
      <br/>
      <br/>

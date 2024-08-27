@@ -22,27 +22,13 @@ export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
   //const usuario  = useUser().userContext
   const [form, setForm] = useState({
-    fecha_nacimiento:"Sin determinar",
+    id_inventario:props.id,
     observaciones:"Sin determinar",
     primer_contacto:"Sin determinar",
     primer_ingreso:"Sin determinar",
     admision:"Sin determinar",
     
-    dni:"Sin determinar",
-    domicilio:"Sin determinar",
-    telefono:"Sin determinar",
-    autorizacion_imagen:"Sin determinar",
-    fotoc_dni:"Sin determinar",
-    fotoc_responsable:"Sin determinar",
-    tel_responsable:"Sin determinar",
-    visita_social:"Sin determinar",
-    egreso:"Sin determinar",
-    aut_retirar:"Sin determinar",
-    dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",
+
   })
   const [datos, setDatos] = useState()
   const [activo, setActivo] = useState(false)
@@ -62,8 +48,8 @@ export default function SelectTextFields(props) {
   const handleClickOpen = () => {
 
     setOpen(true);
-
-
+    setForm({ id_inventario:props.id})
+   
   };
 
   const handleClose = () => {
@@ -75,7 +61,7 @@ export default function SelectTextFields(props) {
     try {
       event.preventDefault();
 
-      const nov = await servicioDtc.nuevochique(form)
+      const nov = await servicioDtc.nuevaprestacioninv(form)
 alert(nov)
     } catch (error) {
       console.error(error);
@@ -83,29 +69,8 @@ alert(nov)
 
 
     }
-   setForm({ fecha_nacimiento:"Sin determinar",
-    observaciones:"Sin determinar",
-    primer_contacto:"Sin determinar",
-    primer_ingreso:"Sin determinar",
-    admision:"Sin determinar",
-    kid:"Sin determinar",
-    dni:"Sin determinar",
-    domicilio:"Sin determinar",
-    telefono:"Sin determinar",
-    autorizacion_imagen:"Sin determinar",
-    fotoc_dni:"Sin determinar",
-    fotoc_responsable:"Sin determinar",
-    tel_responsable:"Sin determinar",
-    visita_social:"Sin determinar",
-    egreso:"Sin determinar",
-    aut_retirar:"Sin determinar",
-    dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    talle:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",})
-    props.traer()
+    window.location.reload();
+
 
     setOpen(false);
   };
@@ -139,40 +104,14 @@ alert(nov)
 
         
             <h3>
-              <b> NUEVO USUARIO</b></h3>
+              <b> Nueva Prestacion </b>{props.id}</h3>
              
-                        <Typography variant="p" component="div" color="black">
-                            
-                               <b> KID1/KID2/ADOLESCENTES</b>
-                          
-                        </Typography>
-                    
-                    <br/>
-                    <NativeSelect
-                        defaultValue={props.kid}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'kid',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'kid1'}>
-                             Kids1
-                        
-                        </option>
-                        <option value={'kid2'}>Kids2</option>
-                        <option value={'kid3'}>Adolescentes</option>
-
-                    </NativeSelect>
-                    <br />
               <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Nombre"
-              name="nombre"
+              label="detalle"
+              name="detalle"
               onChange={handleChange}
               fullWidth
               variant="standard"
@@ -183,350 +122,46 @@ alert(nov)
               margin="dense"
               id="name"
               
-              label="Apellido"
-              name="apellido"
+              label="persona"
+              name="persona"
               onChange={handleChange}
               fullWidth
               variant="standard"
             />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="DNI"
-              name="dni"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
+      <TextField
+
+onChange={handleChange}
+name="fecha_inicio"
+id="date"
+label="Fecha de inicio"
+type="date"
+defaultValue="2023-03-01"
+sx={{ width: 220 }}
+InputLabelProps={{
+  shrink: true,
+}}
+/> <br/>
+<TextField
+
+onChange={handleChange}
+name="fecha_fin"
+id="date"
+label="Fecha de fin"
+type="date"
+defaultValue="2023-03-01"
+sx={{ width: 220 }}
+InputLabelProps={{
+  shrink: true,
+}}
+/>
             <br/>
-            <TextField
-
-              onChange={handleChange}
-              name="fecha_nacimiento"
-              id="date"
-              label="Fecha de nacimiento"
-              type="date"
-              defaultValue="2023-03-01"
-              sx={{ width: 220 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-              <TextField
-
-onChange={handleChange}
-name="primer_contacto"
-id="date"
-label="primer_contacto"
-type="date"
-defaultValue="2023-03-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<TextField
-
-onChange={handleChange}
-name="primer_ingreso"
-id="date"
-label="primer_ingreso"
-type="date"
-defaultValue="2023-03-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<TextField
-
-onChange={handleChange}
-name="admision"
-id="date"
-label="admision"
-type="date"
-defaultValue="2023-03-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Autorizacion de imagen?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'autorizacion_imagen',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Fotocopia de DNI?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'fotoc_dni',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Fotocopia DNI Responsable?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'fotoc_responsable',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Visita social?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'visita_social',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-
-
-
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Egreso del DTC
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'egreso',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Solo'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                       Solo
-                                    </Typography>
-                                </option>
-                                <option value={'Con acompaniante'}>Con acompañante</option>
-
-                            </NativeSelect>
-
-
-                            
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Dato escolar
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'dato_escolar',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Turno maniana'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                       Turno mañana
-                                    </Typography>
-                                </option>
-                                <option value={'Turno tarde'}>Turno tarde</option>
-                                <option value={'Turno noche'}>Turno noche</option>
-                                <option value={'Horario extendido'}>Horario extendido</option>
-                                <option value={'No asiste'}>No asiste</option>
-                                <option value={'Asiste'}>Asiste</option>
-                            </NativeSelect>
-<TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Domicilio"
-              name="domicilio"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Telefono"
-              name="telefono"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Telefono responsable"
-              name="tel_responsable"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="autorizado a retirar"
-              name="aut_retirar"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-             <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Hora merienda"
-              name="hora_merienda"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Escuela"
-              name="escuela"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Grado"
-              name="grado"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Fines"
-              name="fines"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Talle "
-              name="talle"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-<TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Observaciones"
-              name="observaciones"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-
+    
           
             <DialogActions>
 
 
               <>
-              {form.nombre &&form.apellido  ? <> <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></> :  <>Completar los datos</>}
+           <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button>
              </>
               <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
             </DialogActions>

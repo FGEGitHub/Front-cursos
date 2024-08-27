@@ -11,6 +11,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
 import logo from "../../../Assets/trabajo-social.jpg"
+import logoromi from "../../../Assets/fotoromi.jpeg"
 import servicioDtc from '../../../services/dtc'
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -32,6 +33,7 @@ const darkTheme = createTheme({
 export default function MenuIzq2 ({children}) {
   const [cumple, setCumple] = useState()
   const [estemes, setEstemes] = useState()
+  const [usuario, setUsuario] = useState()
     const navigate = useNavigate();
     useEffect(() => {
       traer()
@@ -41,7 +43,16 @@ export default function MenuIzq2 ({children}) {
   }, [])
     const traer = async () => {
       try {
-         
+      
+          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+          if (loggedUserJSON) {
+              const usuario = JSON.parse(loggedUserJSON)
+
+              setUsuario(usuario)
+
+          }
+
+    
     
     
               const today = new Date();
@@ -122,7 +133,13 @@ export default function MenuIzq2 ({children}) {
       logout = {{hanleLogout}}/>
         <Toolbar />
         <br/>        <br/>
-        <img style={islogo} src={logo} alt="logo" />  
+        {usuario ? <>
+        {usuario.id==274 ? <>
+        
+          <img style={logoromi} src={logo} alt="logo" />  {usuario.id}
+        </>:<>     <img style={islogo} src={logo} alt="logo" /> {usuario.id} </>}
+        </>:<></>}
+   
        
         <Toolbar />
         <Divider />
