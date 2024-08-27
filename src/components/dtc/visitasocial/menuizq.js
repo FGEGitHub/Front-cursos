@@ -105,6 +105,9 @@ export default function MenuIzq2 ({children}) {
       const islogo = {
         width: "70%",                  
         };
+        const islogo2 = {
+          width: "60%",                  
+          };
     return(
       <>
         
@@ -134,10 +137,10 @@ export default function MenuIzq2 ({children}) {
         <Toolbar />
         <br/>        <br/>
         {usuario ? <>
-        {usuario.id==276 ? <>
+        {usuario.id==274 ? <>
         
-          <img style={logoromi} src={logo} alt="logo" />  
-        </>:<>     <img style={islogo} src={logo} alt="logo" />  </>}
+          <img style={islogo2} src={logoromi} alt="logo" />  
+        </>:<>     <img style={islogo} src={logo} alt="logo" /> {usuario.id} </>}
         </>:<></>}
    
        
