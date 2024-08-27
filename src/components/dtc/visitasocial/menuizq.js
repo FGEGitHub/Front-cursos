@@ -134,10 +134,10 @@ export default function MenuIzq2 ({children}) {
         <Toolbar />
         <br/>        <br/>
         {usuario ? <>
-        {usuario.id==274 ? <>
+        {usuario.id==276 ? <>
         
-          <img style={logoromi} src={logo} alt="logo" />  {usuario.id}
-        </>:<>     <img style={islogo} src={logo} alt="logo" /> {usuario.id} </>}
+          <img style={logoromi} src={logo} alt="logo" />  
+        </>:<>     <img style={islogo} src={logo} alt="logo" />  </>}
         </>:<></>}
    
        
