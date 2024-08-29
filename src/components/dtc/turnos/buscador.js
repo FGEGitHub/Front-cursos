@@ -28,33 +28,7 @@ const MobileAutocomplete = (props) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleBackendCall = async () => {
-    // Lógica para hacer un llamado al backend con el valor seleccionado
-    if (selectedValue) {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-      console.log(form.fecha) 
-        const mergedJSON = {
-            ...selectedValue,
-            ...{fecha:form.fecha,
-             }
-          };
-          console.log(mergedJSON) 
-     const ta = await servicioDtc.agendarturno(mergedJSON)
-     alert(ta)
-      // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
-      // Ejemplo: axios.post('/api/backend', { selectedValue });
-   
-      props.traer({fecha:form.fecha})
-    }
-  };
-  const ir = async () => {
-    // Lógica para hacer un llamado al backend con el valor seleccionado
 
-    navigate('/dtc/usuario1/usuario/'+selectedValue.id)
-      // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
-      // Ejemplo: axios.post('/api/backend', { selectedValue });
-
-  };
 
   return (
     <div>

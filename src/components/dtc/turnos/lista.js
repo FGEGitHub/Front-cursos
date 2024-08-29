@@ -5,6 +5,7 @@ import  { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import Buscador from './buscador'
 import Asignar from './asignar'
+import Calend from './calendario'
 import Skeleton from '@mui/material/Skeleton';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,17 +31,11 @@ const MobileFriendlyTable = (props) => {
   const [datos, setDatos] = useState();
   const [fecha, setFecha] = useState();
   const [usuario, setUsuario] = useState();
-  useEffect(() => {
-    traer()
-    const fetchCurrentDate = () => {
-      const today = new Date();
-      const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-      console.log(props.fecha)
-      props.fecha == undefined ? setCurrentDate(formattedDate):setCurrentDate(props.fecha)
-    };
 
-    fetchCurrentDate();
-  }, []);
+  const [fechaSeleccionada, setFechaSeleccionada] = useState('');  
+  useEffect(() => {
+    traer();
+  }, [fechaSeleccionada]);
 
   const traer = async () => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -75,7 +70,9 @@ alert(ta)
       <Typography variant="p" gutterBottom>
         Fecha: {currentDate}
       </Typography>
-   
+   <Calend
+    traer={traer}
+    onDateSelect={(fecha) => setFechaSeleccionada(fecha)}/>
       <Buscador
       chicos={datos[1]}
       fecha={currentDate}

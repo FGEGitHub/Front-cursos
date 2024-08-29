@@ -6,7 +6,7 @@ import { Alert, Dialog, DialogTitle, DialogContent, DialogContentText, DialogAct
 import { useParams } from "react-router-dom";
 import './CustomCalendar.css'; // Archivo CSS para personalizar el calendario
 
-const TablaNotificaciones = () => {
+const TablaNotificaciones = (props) => {
     const [chicos, setChicos] = useState([]);
     const [datos, setDatos] = useState();
     const [fechas1, setFechas1] = useState([]);
@@ -46,6 +46,8 @@ const TablaNotificaciones = () => {
             const chicoDate = new Date(chico.fecha_nacimiento + 'T00:00:00Z');
             return chicoDate.getDate() === date.getDate() && chicoDate.getMonth() === date.getMonth();
         });
+        const formattedDate = date.toISOString().split("T")[0]; // Convertir la fecha a formato YYYY-MM-DD
+    props.traer({ fecha: formattedDate }); 
         if (user) {
             setSelectedUser(user);
             setDialogOpen(true);
@@ -70,6 +72,7 @@ const TablaNotificaciones = () => {
             {chicos && chicos.length > 0 ? (
                 <div>
                     <Calendar
+                    
                         onClickDay={onDateClick}
                         tileContent={({ date, view }) => null} // Eliminar el icono de cumpleaños
                         tileClassName={({ date, view }) => {
