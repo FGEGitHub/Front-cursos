@@ -69,7 +69,7 @@ export default function Paginas() {
      <MenuuCel/>
      <br/>
      <br/>
-     <br/><Login/> <br/>
+     <br/> <br/>
      <Asis/>
      <br/>
      <br/>

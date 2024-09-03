@@ -4,7 +4,7 @@ import ModaNueva from './nuevo'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import Tarjetabuscar from '../menu/tarjetaselecionar'
+import Tarjetabuscar from './calendariobusqueda'
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
 import Nuevo from './nuevoturno'

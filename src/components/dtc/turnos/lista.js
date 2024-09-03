@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import servicioDtc from '../../../services/dtc'
 import  { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
-import Buscador from './buscador'
+import Buscador from '../usuario1/turnos/calendariobusquedadeturnos'
 import Asignar from './asignar'
 import Calend from './calendario'
 import Skeleton from '@mui/material/Skeleton';

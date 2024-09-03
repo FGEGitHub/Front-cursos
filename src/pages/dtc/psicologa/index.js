@@ -69,7 +69,7 @@ export default function Paginas() {
      <br/>
      <br/>
      <br/> <Menuizq>
-     <Calendario/><br/>
+    
      <Asis/>
      <br/></Menuizq>
      <br/>
