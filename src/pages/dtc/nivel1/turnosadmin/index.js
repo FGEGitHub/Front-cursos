@@ -3,10 +3,10 @@ import Menuizq from '../../../../components/dtc/usuario1/menuizq1'
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
 import React, { useEffect, useState } from "react";
-import Listachiquesa from '../../../../components/dtc/usuario1/turnos/lista'
+
 import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
-import Asis from '../../../../components/dtc/usuario1/turnos/lista'
-import Calendario from '../../../../components/dtc/turnos/calendario'
+import Asis from '../../../../components/dtc/turnos/lista'
+
 import {
 
   makeStyles,
@@ -62,17 +62,10 @@ export default function Paginas() {
 
     return (
       <>
-      {isMatch ? 
-     <>
-     <div  className={classes.container}> 
-     <MenuuCel texto="Chiques"/>
-     <Calendario/><br/>
-     <Asis/>    </div>
-     </>:<>
- <Menuizq>
- <Calendario/><br/>
+     <Menuizq>
+ <br/>
  <Asis/>
-</Menuizq></>}
+</Menuizq>
  </>
    
     );
