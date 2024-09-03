@@ -62,7 +62,24 @@ const TablaNotificaciones = (props) => {
                 <div>
                     <Calendar
                         onClickDay={onDateClick}
-                        tileContent={({ date, view }) => null} // Eliminar el icono de cumpleaños
+                        tileContent={({ date, view }) => {
+                            if (view === 'month') {
+                                // Buscar todos los eventos para la fecha actual
+                                const eventos = chicos.filter(chico => isSameDay(new Date(chico.fecha + 'T00:00:00Z'), date));
+                                
+                                // Si hay eventos, renderizar el detalle de cada uno
+                                return eventos.length > 0 ? (
+                                    <ul className="event-detail-list">
+                                        {eventos.map((evento, index) => (
+                                            <li key={index} className="event-detail-item">
+                                                {evento.detalle}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : null;
+                            }
+                            return null;
+                        }}
                         tileClassName={({ date, view }) => {
                             if (view === 'month') {
                                 if (fechas1.some(f1 => isSameDay(f1, date))) {

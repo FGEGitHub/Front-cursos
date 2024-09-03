@@ -369,7 +369,7 @@ const TablaNotificaciones = (props) => {
                 <div>
 
 
-                    {chicos.length > 0 ? <>
+                   
 
 
                         {isMatch ?
@@ -463,7 +463,7 @@ const TablaNotificaciones = (props) => {
 
                             </></>}
 
-                    </> : <> <h2>No hay turnos aun</h2></>}
+                   
 
 
 
