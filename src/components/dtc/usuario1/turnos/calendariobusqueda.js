@@ -50,7 +50,7 @@ const TablaNotificaciones = (props) => {
           
 
             <h2>Lista de chicos</h2>
-            {chicos && chicos.length > 0 ? (
+            {chicos ? (
                 <div>
                     <Calendar
                     tileContent={({ date, view }) => {
