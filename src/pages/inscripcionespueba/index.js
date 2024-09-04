@@ -1,7 +1,7 @@
 
 
 import { useNavigate, useParams } from "react-router-dom";
-import Formulario from '../../components/componenteinscripcion/formulario'
+import Formulario from '../../components/componenteinscripcion/formularioprueba'
 import React, { useEffect, useState } from "react";
 import {
     Button,
