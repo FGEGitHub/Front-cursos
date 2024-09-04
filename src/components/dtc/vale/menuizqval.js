@@ -10,7 +10,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
-import logo from "../../../Assets/trabajo-social.jpg"
+import logo from "../../../Assets/fotopsiq.png"
 import servicioDtc from '../../../services/dtc'
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -92,7 +92,7 @@ export default function MenuIzq2 ({children}) {
       
       ];
       const islogo = {
-        width: "70%",                  
+        width: "90%",                  
         };
     return(
       <>
