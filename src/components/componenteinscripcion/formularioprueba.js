@@ -679,25 +679,19 @@ InputLabelProps={{
                                 </Typography>
                             </InputLabel>
 
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad1',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                 {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
                           
+                            {cohortes ? <>
+                                    <FormControl>
+                                    <RadioGroup name="genero" onChange={handleChange}>
+                  
+                
+                        
                              {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
+                                         <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion}  />
          
                              ))}
-                                  </>:<>Cargando</>}
-                            </NativeSelect>
+                                         </RadioGroup>
+                                         </FormControl> </>:<>Cargando</>}
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
@@ -1237,24 +1231,18 @@ InputLabelProps={{
                                 </Typography>
                             </InputLabel>
 
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'motivacion',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={'Para iniciar mi propio emprendimiento o negocio'}>Para iniciar mi propio emprendimiento o negocio</option>
-                                <option value={'Para potenciar mi idea de negocio o emprendimiento en curso'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
-                                <option value={'Para continuar mi formación personal y agregar mas conocimientos'}>Para continuar mi formación personal y agregar mas conocimientos</option>
-                                <option value={'Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral'}>Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral</option>
-                                <option value={'Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó'}>Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó</option>
-
-                            </NativeSelect>
+                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+                          
+                          <RadioGroup name="genero" onChange={handleChange}>
+                              <FormControlLabel value="mujer" control={<Radio />} label="Para iniciar mi propio emprendimiento o negocio" />
+                              <FormControlLabel value="transgenero" control={<Radio />} label="Para potenciar mi idea de negocio o emprendimiento en curso" />
+                              <FormControlLabel value="transgenero" control={<Radio />} label="Para continuar mi formación personal y agregar mas conocimientos" />
+                              <FormControlLabel value="transgenero" control={<Radio />} label="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" />
+                              <FormControlLabel value="transgenero" control={<Radio />} label="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" />
+                            
+                              
+                          </RadioGroup>
+                          </FormControl>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="h5" component="div" color="black">
                                     <StyledParagraph>
@@ -1292,28 +1280,19 @@ InputLabelProps={{
                                 </Typography>
                             </InputLabel>
 
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad2',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
-                          
+                           
+                            {cohortes ? <>
+                                    <FormControl>
+                                    <RadioGroup name="genero" onChange={handleChange}>
+                  
+                
+                        
                              {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
+                                         <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion}  />
          
                              ))}
-                                  </>:<>Cargando</>}
-
-                            </NativeSelect>
+                                         </RadioGroup>
+                                         </FormControl> </>:<>Cargando</>}
 
                         </Box>
                         <br />
@@ -1890,27 +1869,19 @@ InputLabelProps={{
                                 </Typography>
                             </InputLabel>
 
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad2',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                {cohortes ? <>
+                          
+                            {cohortes ? <>
+                                    <FormControl>
+                                    <RadioGroup name="genero" onChange={handleChange}>
+                  
+                
+                        
                              {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
+                                         <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion}  />
          
                              ))}
-                                  </>:<>Cargando</>}
-
-                            </NativeSelect>
-
+                                         </RadioGroup>
+                                         </FormControl> </>:<>Cargando</>}
                         </Box>
                         </Box>
                         <CardActions sx={{ justifyContent: 'center' }}>
