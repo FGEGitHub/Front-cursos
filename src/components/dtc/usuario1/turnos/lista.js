@@ -25,7 +25,7 @@ import {
     useTheme,
     Button
 } from '@material-ui/core';
-import Clasificar from './clasificar'
+import Clasificar from './borrar'
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 
