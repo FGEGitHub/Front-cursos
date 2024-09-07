@@ -473,6 +473,35 @@ const Estracto = () => {
                                                     shrink: true,
                                                 }}
                                             /> 
+                                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Genero
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+                           
+                                    <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                        <RadioGroup name="genero" onChange={handleChange}>
+                                            <FormControlLabel value="mujer" control={<Radio />} label="mujer" />
+                                            <FormControlLabel value="transgenero" control={<Radio />} label="transgenero" />
+                                            <FormControlLabel value="no-binario" control={<Radio />} label="no-binario" />
+                                            <FormControlLabel value="otro" control={<Radio />} label="otro" />
+                                      
+
+                                            <TextField
+                                                margin="dense"
+                                                id="otroGenero"
+                                                label="Especifique otro"
+                                                name="otroGenero"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                style={{ marginTop: '10px' }}
+                                            />
+                                        </RadioGroup>
+                                    </FormControl>
                                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                                 <Typography variant="p" component="div" color="black">
                                                     <StyledParagraph>
@@ -1021,6 +1050,35 @@ const Estracto = () => {
                                             shrink: true,
                                         }}
                                     />
+                                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Genero
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+                           
+                                    <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                        <RadioGroup name="genero" onChange={handleChange}>
+                                            <FormControlLabel value="mujer" control={<Radio />} label="mujer" />
+                                            <FormControlLabel value="transgenero" control={<Radio />} label="transgenero" />
+                                            <FormControlLabel value="no-binario" control={<Radio />} label="no-binario" />
+                                            <FormControlLabel value="otro" control={<Radio />} label="otro" />
+                                      
+
+                                            <TextField
+                                                margin="dense"
+                                                id="otroGenero"
+                                                label="Especifique otro"
+                                                name="otroGenero"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                style={{ marginTop: '10px' }}
+                                            />
+                                        </RadioGroup>
+                                    </FormControl>
                                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                         <Typography variant="p" component="div" color="black">
                                             <StyledParagraph>
@@ -1090,7 +1148,7 @@ const Estracto = () => {
                                         <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                             <Typography variant="h5" component="div" color="black">
                                                 <StyledParagraph>
-                                                    ¿Qué tipo de tranajo posee?
+                                                    ¿Qué tipo de bajo posee?
                                                 </StyledParagraph>
                                             </Typography>
                                         </InputLabel>
@@ -1600,7 +1658,35 @@ const Estracto = () => {
                                 />
                                     </>}
                                 </>}
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Genero
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+                           
+                                    <FormControl component="fieldset" style={{ marginTop: '30px' }}>
 
+                                        <RadioGroup name="genero" onChange={handleChange}>
+                                            <FormControlLabel value="mujer" control={<Radio />} label="mujer" />
+                                            <FormControlLabel value="transgenero" control={<Radio />} label="transgenero" />
+                                            <FormControlLabel value="no-binario" control={<Radio />} label="no-binario" />
+                                            <FormControlLabel value="otro" control={<Radio />} label="otro" />
+                                      
+
+                                            <TextField
+                                                margin="dense"
+                                                id="otroGenero"
+                                                label="Especifique otro"
+                                                name="otroGenero"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                style={{ marginTop: '10px' }}
+                                            />
+                                        </RadioGroup>
+                                    </FormControl>
                            
                                 <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                     <Typography variant="p" component="div" color="black">
