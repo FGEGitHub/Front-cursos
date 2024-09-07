@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import servicioPersonas from '../../services/personas';
 import servicioTurnos from '../../services/turnos';
 import Dialogo from './dialogo'
-import { Paper, CircularProgress, Typography, Box, TextField, InputLabel, Card, CardActions,FormControlLabel,FormControl,Radio,RadioGroup} from '@mui/material';
+import { Paper, CircularProgress, Typography, Box, TextField, InputLabel, Card, CardActions, FormControlLabel, FormControl, Radio, RadioGroup } from '@mui/material';
 import {
     useMediaQuery,
     useTheme,
@@ -81,34 +81,54 @@ const Estracto = () => {
     const [inscrip, setInscrip] = useState(['']);
     const paperRef = useRef(null);
     const [cohortes, setCohorte] = useState();
-    const [activo, setActivo] = useState(false);
+    const [dni, setDni] = useState(''); // Guardar el valor de DNI
     const theme = useTheme();
-    const [zoomLevel, setZoomLevel] = useState(0.5);
-    const navigate = useNavigate();
-
-    const getClients = async (e) => {
-        if (e != '') {
-            setLoading(true)
-            const clients = await servicioPersonas.traerpersona(e);
-            console.log(clients)
-            await setExiste(clients);
-            if (clients.length > 0) {
-                setInscrip({ ...inscrip, dni: clients[0].dni, nombre: clients[0].nombre, apellido: clients[0].apellido, barrio: clients[0].barrio, direccion: clients[0].direccion, tel: clients[0].tel, mail: clients[0].mail });
-            }
-
-            //traerpersona
-            setLoading(false)
+    const [formVisible, setFormVisible] = useState(false); // Nuevo estado
+  
+    const getClients = async (dni) => {
+        setLoading(true);
+        const clients = await servicioPersonas.traerpersona(dni);
+        console.log(clients);
+        await setExiste(clients);
+        if (clients.length > 0) {
+            setInscrip({
+                ...inscrip,
+                dni: clients[0].dni,
+                nombre: clients[0].nombre,
+                apellido: clients[0].apellido,
+                barrio: clients[0].barrio,
+                direccion: clients[0].direccion,
+                tel: clients[0].tel,
+                mail: clients[0].mail,
+                fecha_nac: clients[0].fecha_nac,
+                tel2: clients[0].tel2
+            });
+        }else{
+            setInscrip({
+                ...inscrip,
+                dni: dni,
+               
+            });
         }
+        setLoading(false);
+    };
+    const handleChangeDni = (e) => {
+        setDni(e.target.value); // Actualizar el valor del DNI
+    };
 
-
+    const confirmarDni = () => {
+        if (dni !== '') {
+            setFormVisible(true); // Mostrar el formulario si el DNI no está vacío
+            getClients(dni); // Llamar a la función para obtener los datos del cliente (si es necesario)
+        }
     };
     const getCursos = async (e) => {
-    
-            const clientss = await servicioTurnos.traerturnosparainscri();
-            setCohorte(clientss)
-           
 
-    
+        const clientss = await servicioTurnos.traerturnosparainscri();
+        setCohorte(clientss)
+
+
+
 
 
     };
@@ -118,7 +138,7 @@ const Estracto = () => {
         getCursos();
         if (paperRef.current) {
             paperRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+        }
     }, []);
     const islogo = {
         width: "40%",
@@ -157,8 +177,14 @@ const Estracto = () => {
         console.log(inscrip)
     };
     const handleChange1 = (e) => {
-        setInscrip({ ...inscrip, [e.target.name]: e.target.value });
-        getClients(e.target.value)
+        const value = e.target.value;
+        setInscrip({ ...inscrip, [e.target.name]: value });
+
+        if (value.length > 0) {
+            setFormVisible(true); // Mostrar formulario cuando hay texto en DNI
+        }
+
+        getClients(value);
     };
 
     const Inscribir = async (event) => {
@@ -178,1464 +204,1436 @@ const Estracto = () => {
         <>
             {isMatch ? (
                 <div >
-                   <div  ref={paperRef}>
+                    <div ref={paperRef}>
 
-                   </div>
-                        
-                        {isMatch ? (
-                <div >
-                    <Paper
+                    </div>
 
-                        className="aparecer-desde-abajo"
-                        style={styles2.paperr}
-                    >
-                        <Box className="logo-container">
-                            <img style={islogoc2} className="islogoc" src={Logocuqui} alt="logo" />
-                            <img style={islogo2} src={Logoccari} alt="logo" />
-                        </Box>
-                        <Box className="logo-container">
-                            <img style={islogo} src={Logoesme} alt="logo" />
-                        </Box>
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography variant="h7" component="div" color="black">
-                                <StyledParagraph>
-                                Completá con tus datos este formulario para inscribirte a los cursos. 
-                                    <br />
+                    {isMatch ? (
+                        <div >
+                            <Paper
 
-                                    Equipo CC ARI Corrientes
-                                  ¡Muy pronto nos estaremos comunicando con vos!
-                                </StyledParagraph>
-                            </Typography>
-                        </Box>
-
-
-                        <Box sx={{ textAlign: 'center', marginLeft: "2em", marginRight: "2em", }}>
-                            <Typography variant="body2" color="textSecondary">
-                                Por favor, ingresa tu DNI sin puntos.
-                            </Typography>
-                            <TextField
-                                margin="dense"
-                                id="name"
-                                label="DNI (Sin puntos)"
-                                name="dni"
-                                onChange={handleChange1}
-
-                                type="number"
-                                variant="outlined"
-                                style={{ width: '250px' }}
-
-                            />
-
-
-
-                            {existe.length > 0 ? <>
-                                {loading ? <>
-                                    <Carga />
-                                </> : <></>}
-                                {loading ? <>
-                                    <Carga />
-                                </> : <>
-
-
-                                    <TextField
-
-                                        defaultValue={existe[0].nombre}
-                                        margin="dense"
-                                        id="name"
-                                        label="Nombre"
-                                        name="nombre"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-
-                                    <TextField
-                                        defaultValue={existe[0].apellido}
-                                        margin="dense"
-                                        id="name"
-                                        label="Apellido"
-                                        name="apellido"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-
-
-
-                                    <TextField
-                                        defaultValue={existe[0].tel}
-                                        margin="dense"
-                                        id="name"
-                                        label="Telefono."
-                                        name="tel"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        type="number"
-                                        variant="outlined"
-                                        style={{ width: '250px' }}
-                                    />
-                                    <TextField
-                                        defaultValue={existe[0].mail}
-                                        margin="dense"
-                                        id="name"
-                                        label="Correo Electronico"
-                                        name="mail"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        style={{ width: '250px' }}
-                                        variant="outlined"
-                                    />
-                                    <TextField
-
-                                        defaultValue={existe[0].direccion}
-                                        margin="dense"
-                                        id="name"
-                                        label="Domicilio"
-                                        name="direccion"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-                                    <TextField
-                                        defaultValue={existe[0].barrio}
-                                        margin="dense"
-                                        id="name"
-                                        label="Barrio"
-                                        name="barrio"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        style={{ width: '250px' }}
-                                        variant="outlined"
-                                    />
-
-                                </>}
-                            </> : <>
-
-                                {loading ? <>
-                                    <Carga />
-                                </> : <>
-
-                                    <TextField
-                                        style={{ width: '250px' }}
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Nombre"
-                                        name="nombre"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                    />
-                                    {inscrip.nombre ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Nombre
-                                    </Typography></>}
-                                    <TextField
-                                        margin="dense"
-                                        id="name"
-                                        label="Apellido"
-                                        name="apellido"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-                                    {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Apellido
-                                    </Typography></>}
-
-
-                                    <TextField
-                                        margin="dense"
-                                        id="name"
-                                        label="Telefono"
-                                        name="tel"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        type="number"
-                                        variant="outlined"
-                                        style={{ width: '250px' }}
-                                    />
-                                    {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu telefono
-                                    </Typography></>}
-                                    <TextField
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Correo Electronico"
-                                        name="mail"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        style={{ width: '250px' }}
-                                        variant="outlined"
-                                    />
-                                    {inscrip.mail ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Correo electronico
-                                    </Typography>
-                                    </>}
-                                    <TextField
-
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Domicilio"
-                                        name="direccion"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-                                    {inscrip.direccion ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Direccion
-                                    </Typography>
-                                    </>}
-
-
-                                    <TextField
-                                        style={{ width: '250px' }}
-                                        margin="dense"
-                                        id="name"
-                                        label="Barrio"
-                                        name="barrio"
-                                        onChange={handleChange}
-                                        fullWidth
-
-                                        variant="outlined"
-                                    />
-                                </>}
-                            </>}
-
-                            <TextField
-                                style={{ width: '250px' }}
-                                margin="dense"
-                                id="name"
-                                label="Telefono alternativo"
-                                name="tel2"
-                                onChange={handleChange}
-                                fullWidth
-                                type="number"
-                                variant="outlined"
-                            />
-
-                            <br />
-                            <br />
-                            <TextField
-
-onChange={handleChange}
-name="fecha_nac"
-id="date"
-label="Fecha de Nacimiento"
-type="date"
-defaultValue="2020-01-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-    shrink: true,
-}}
-/>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        <b>Datos adicionales que nos <br />
-                                            interesaria saber de vos  </b>
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Nivel educativo alcanzado
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                        </Box>
-                        <Box sx={{ textAlign: 'center', marginLeft: "1em", marginRight: "1em", }}>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'nivel_secundario',
-
-                                }}
-                                sx={'width:250px'}
+                                className="aparecer-desde-abajo"
+                                style={styles2.paperr}
                             >
-
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Universitario incompleto'}>Primario incompleto</option>
-                                <option value={'Secundario completo'}>Secundario completo</option>
-                                <option value={'Secundario incompleto'}>Secundario incompleto</option>
-                                <option value={'Terciario completo'}>Terciario completo</option>
-                                <option value={'Tericario incompleto'}>Tericario incompleto</option>
-                                <option value={'Universitario incompleto'}>Universitario incompleto</option>
-                                <option value={'Universitario completo'}>Universitario completo</option>
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Actualmente se encuentra trabajando?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'trabajo',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                            {inscrip.trabajo == "Si" ? <>
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="p" component="div" color="black">
+                                <Box className="logo-container">
+                                    <img style={islogoc2} className="islogoc" src={Logocuqui} alt="logo" />
+                                    <img style={islogo2} src={Logoccari} alt="logo" />
+                                </Box>
+                                <Box className="logo-container">
+                                    <img style={islogo} src={Logoesme} alt="logo" />
+                                </Box>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Typography variant="h7" component="div" color="black">
                                         <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
+                                            Completá con tus datos este formulario para inscribirte a los cursos.
+                                            <br />
+
+                                            Equipo CC ARI Corrientes
+                                            ¡Muy pronto nos estaremos comunicando con vos!
                                         </StyledParagraph>
                                     </Typography>
-                                </InputLabel>
-                                <InputLabel variant="outlined" >
-                                    Formal se refiere a un empleo en relación <br />
-                                    de dependencia, registrado o  <br />
-                                    monotributista con acceso a  <br />
-                                    seguridad social
-                                </InputLabel>
-                                <br />
-                                <NativeSelect
-                                    defaultValue={30}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'tipo_trabajo',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    sx={'width:250px'}
-                                >
-                                    <option value={'Sin determinar'}>Elegir</option>
+                                </Box>
 
 
-
-                                    <option value={'Formal'}>Formal</option>
-                                    <option value={'Informal'}>Informal</option>
-
-                                </NativeSelect>
-
-                                <br />
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="p" component="div" color="black">
-                                        <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-
-                                <NativeSelect
-                                    defaultValue={30}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'tipo_empleo',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    sx={'width:250px'}
-                                >
-                                    <option value={'Sin determinar'}>Elegir</option>
-
-
-
-                                    <option value={'Monotributista/cuenta propista'}>Monotributista/cuenta propista</option>
-                                    <option value={'En relación de dependencia'}>En relación de dependencia</option>
-                                    <option value={'Ambos'}>Ambos</option>
-                                </NativeSelect>
-
-                                <br />
-
-                            </> : <></>}
-
-
-                            <br />
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Tenes hijos
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Si" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="No" />
-              
-                            
-                              
-                          </RadioGroup>
-                          </FormControl>
-
-                            {inscrip.hijos == "Si" ? <>
-                                <TextField
-                                    style={{ width: '250px' }}
-                                    margin="dense"
-                                    id="name"
-                                    label="Cantidad de hijos"
-                                    name="cantidad_hijos"
-                                    onChange={handleChange}
-                                    fullWidth
-                                    type="number"
-                                    variant="outlined"
-                                />
-                            </> : <></>}
-                    
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Participastes de nuestra  <br />
-                                        Feria de Mujeres Emprendedoras<br />
-                                      
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Si" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="No" />
-              
-                            
-                              
-                          </RadioGroup>
-                          </FormControl>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Participaste de algún curso de la <br />
-                                        Escuela de Mujeres Emprendedoras<br />
-                                        anteriormente?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Si" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="No" />
-              
-                            
-                              
-                          </RadioGroup>
-                          </FormControl>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Por qué elegiste tomar este curso?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'motivacion',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-
-                                <option value={'Para iniciar mi propio emprendimiento o negocio'}>Para iniciar mi propio emprendimiento o negocio</option>
-                                <option value={'Para potenciar mi idea de negocio o emprendimiento en curso'}>Para potenciar mi idea de negocio o emprendimiento en curso</option>
-                                <option value={'Para continuar mi formación personal y agregar mas conocimientos'}>Para continuar mi formación personal y agregar mas conocimientos</option>
-                                <option value={'Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral'}>Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral</option>
-                                <option value={'Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó'}>Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó</option>
-
-                            </NativeSelect>
-
-                            <br />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 1
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                          
-                            {cohortes ? <>
-                                    <FormControl>
-                                    <RadioGroup name="genero" onChange={handleChange}>
-                  
-                
-                        
-                             {cohortes.map((row) => (
-                                         <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion}  />
-         
-                             ))}
-                                         </RadioGroup>
-                                         </FormControl> </>:<>Cargando</>}
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 2
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad2',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                   {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
-                            </NativeSelect>
-
-                        </Box>
-                        <CardActions sx={{ justifyContent: 'center' }}>
-                            {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
-                                    <>
-                                        {inscrip.trabajo === 'Si' ? <>
-
-                                            {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
-                                                {/*  Caso que sea trabajo si  y completo le tipo  */}
-
-                                                {inscrip.hijos === 'Si' ? <>
-
-                                                    {inscrip.cantidad_hijos ? <>
-                                                        {/*  Caso que sea hijos si y selecciono cuantos  */}
-
-
-                                                        {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                            <Dialogo formulario={inscrip} />
-                                                        </> : <>Telefono no valido</>}
-                                                    </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                                </> : <>
-                                                    {/*  Caso que sea hijos no */}
-
-                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                        <Dialogo formulario={inscrip} />
-                                                    </> : <>Telefono no valido</>}
-                                                </>}
-
-
-                                            </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                        </> : <>
-                                            {/*  Caso que sea trabajo no */}
-                                            {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                <Dialogo formulario={inscrip} />
-                                            </> : <>Telefono no valido</>}</>}
-                                    </>
-                                    : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
-                            </>}
-
-                        </CardActions>
-                    </Paper>
-                </div>
-            ) : (
-
-
-
-
-
-
-
-                //    FIN responsive  
-
-
-
-
-
-                <div >
-                    <Paper
-                        className="aparecer-desde-abajo"
-                        style={styles.paperr}
-                    >
-                        <Box className="logo-container">
-                            <img style={islogoc} className="islogoc" src={Logocuqui} alt="logo" />
-                            <img style={islogo} src={Logoccari} alt="logo" />
-                        </Box>
-                        <Box className="logo-container">
-                            <img style={islogo} src={Logoesme} alt="logo" />
-                        </Box>
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography variant="p" component="div" color="black">
-                                <StyledParagraph>
-                                    Sumate a la Escuela de Mujeres
-                                    <br />
-
-                                    Equipo CC ARI Corrientes
-
-                                </StyledParagraph>
-                            </Typography>
-                        </Box>
-
-
-                        <Box sx={{ textAlign: 'left', marginLeft: "1em", marginRight: "1em", }}>
-                            <Typography variant="body2" color="textSecondary">
-                                Por favor, ingresa tu DNI sin puntos
-                            </Typography>
-                            <TextField
-                                margin="dense"
-                                id="name"
-                                label="DNI (SIN PUNTOS)"
-                                name="dni"
-                                onChange={handleChange1}
-                                fullWidth
-                                type="number"
-                                variant="outlined"
-                                fontFamily="Montserrat"
-                            />
-
-                        <br/>
-
-                            {existe.length > 0 ? <>
-                                {loading ? <>
-                                    <Carga />
-                                </> : <></>}
-                                {loading ? <>
-                                    <Carga />
-                                </> : <>
-
-
-                                    <TextField
-
-                                        defaultValue={existe[0].nombre}
-                                        margin="dense"
-                                        id="name"
-                                        label="Nombre"
-                                        name="nombre"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                    />
-
-                                    <TextField
-                                        defaultValue={existe[0].apellido}
-                                        margin="dense"
-                                        id="name"
-                                        label="Apellido"
-                                        name="apellido"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                    />
-
-
-
-                                    <TextField
-                                        defaultValue={existe[0].tel}
-                                        margin="dense"
-                                        id="name"
-                                        label="Telefono."
-                                        name="tel"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        type="number"
-                                        variant="outlined"
-                                    />
-                                    <TextField
-                                        defaultValue={existe[0].mail}
-                                        margin="dense"
-                                        id="name"
-                                        label="Correo Electronico"
-                                        name="mail"
-                                        onChange={handleChange}
-                                        fullWidth
-
-                                        variant="outlined"
-                                    />
-                                    <TextField
-                                        defaultValue={existe[0].barrio}
-                                        margin="dense"
-                                        id="name"
-                                        label="Barrio"
-                                        name="barrio"
-                                        onChange={handleChange}
-                                        fullWidth
-
-                                        variant="outlined"
-                                    />
-
-                                </>}
-                            </> : <>
-
-                                {loading ? <>
-                                    <Carga />
-                                </> : <>
+                                <Box sx={{ textAlign: 'center', marginLeft: "2em", marginRight: "2em", }}>
                                     <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Nombre
+                                        Por favor, ingresa tu DNI sin puntos.
                                     </Typography>
-                                    <TextField
 
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Nombre"
-                                        name="nombre"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                    />
-                                    {inscrip.nombre ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Nombre
-                                    </Typography></>}
 
                                     <TextField
                                         margin="dense"
-                                        id="name"
-                                        label="Apellido"
-                                        name="apellido"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                    />
-
-                                    {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Apellido
-                                    </Typography></>}
-
-                                    <TextField
-                                        margin="dense"
-                                        id="name"
-                                        label="Telefono"
-                                        name="tel"
-                                        onChange={handleChange}
-                                        fullWidth
+                                        id="dni"
+                                        label="DNI (Sin puntos)"
+                                        name="dni"
+                                        value={dni}
+                                        onChange={handleChangeDni}
                                         type="number"
                                         variant="outlined"
-                                    />
-                                    {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu telefono
-                                    </Typography></>}
-                                    <TextField
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Correo Electronico"
-                                        name="mail"
-                                        onChange={handleChange}
-                                        fullWidth
-
-                                        variant="outlined"
-                                    />
-                                    {inscrip.direccion ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Direccion de Email
-                                    </Typography>
-                                    </>}
-                                    <TextField
+                                        style={{ width: '250px', marginRight: '1em' }}
+                                    /><br />
+                                    <button variant="contained" onClick={confirmarDni}>
+                                        Confirmar DNI
+                                    </button>
+<br/>
 
 
-                                        margin="dense"
-                                        id="name"
-                                        label="Domicilio"
-                                        name="direccion"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-                                    {inscrip.direccion ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Direccion
-                                    </Typography>
-                                    </>}
-                                    <TextField
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Barrio"
-                                        name="barrio"
-                                        onChange={handleChange}
-                                        fullWidth
-
-                                        variant="outlined"
-                                    />
-                                    {inscrip.barrio ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Barrio
-                                    </Typography>
-                                    </>}
-                                </>}
-                            </>}
-
-                            <TextField
-
-                                margin="dense"
-                                id="name"
-                                label="Telefono alternativo"
-                                name="tel2"
-                                onChange={handleChange}
-                                fullWidth
-                                type="number"
-                                variant="outlined"
-                            />
-
-                            <br />
-                            <br />
-                            <TextField
-
-                                onChange={handleChange}
-                                name="fecha_nac"
-                                id="date"
-                                label="Fecha de nacimiento"
-                                type="date"
-                                defaultValue="2000-01-01"
-                                sx={{ width: 220 }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        <b>Datos adicionales que nos interesaria saber de vos</b>
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                        </Box>
-                        <Box sx={{ textAlign: 'center', marginLeft: "1em", marginRight: "1em", }}>
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Nivel educativo alcanzado
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                        </Box>
-                        <Box sx={{ textAlign: 'center', marginLeft: "1em", marginRight: "1em", }}>
-                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Primario incompleto" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Secundario completo" />
-                              <FormControlLabel value="no-binario" control={<Radio />} label="Secundario incompleto" />
-                              <FormControlLabel value="otro" control={<Radio />} label="Terciario completo" />
-                              <FormControlLabel value="otro" control={<Radio />} label="Tericario incompleto" />
-                              <FormControlLabel value="otro" control={<Radio />} label="Universitario incompleto" />
-                              <FormControlLabel value="otro" control={<Radio />} label="Universitario completo" />
-                            
-                              <TextField
-                                  margin="dense"
-                                  id="otroGenero"
-                                  label="Especifique otro"
-                                  name="otroGenero"
-                                  onChange={handleChange}
-                                  fullWidth
-                                  variant="outlined"
-                                  style={{ marginTop: '10px' }}
-                              />
-                          </RadioGroup>
-                          </FormControl>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Actualmente se encuentra trabajando?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'trabajo',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-
-                            {inscrip.trabajo == "Si" ? <>
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="h5" component="div" color="black">
-                                        <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-                                <InputLabel variant="outlined" >
-                                    Formal se refiere a un empleo en relación de dependencia,<br />
-                                    registrado o monotributista con acceso a seguridad social
-                                </InputLabel>
-                                <br />
-                                <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Formal" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Informal" />
-             
-                            
-                         
-                          </RadioGroup>
-                          </FormControl>
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="h5" component="div" color="black">
-                                        <StyledParagraph>
-                                            Tipo de empleo
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-
-                                <NativeSelect
-                                    defaultValue={30}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'tipo_empleo',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    sx={'width:250px'}
-                                >
-                                    <option value={'Sin determinar'}>Elegir</option>
-
-
-
-                                    <option value={'Monotributista/cuenta propista'}>Monotributista/cuenta propista</option>
-                                    <option value={'En relación de dependencia'}>En relación de dependencia</option>
-                                    <option value={'Ambos'}>Ambos</option>
-                                </NativeSelect>
-                            </> : <></>}
-
-                            <br />
-
-
-
-
-
-                            <br />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Tenes hijos
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'hijos',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-
-
-                            {inscrip.hijos == "Si" ? <>
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="h5" component="div" color="black">
-                                        <StyledParagraph>
-                                            Cuantos hijos?
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-
-                                <TextField
-                                    style={{ width: '250px' }}
-                                    margin="dense"
-                                    id="name"
-                                    label="Cantidad de hijos"
-                                    name="cantidad_hijos"
-                                    onChange={handleChange}
-                                    fullWidth
-                                    type="number"
-                                    variant="outlined"
-                                />
-                            </> : <></>}
-
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Participaste de algún curso de la <br />
-                                        Escuela de Mujeres Emprendedoras<br />
-                                        anteriormente?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'participante_anterior',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={'Si'}>Si</option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                            <br />
-
-                            <br />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Por qué elegiste tomar este curso?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Para iniciar mi propio emprendimiento o negocio" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Para potenciar mi idea de negocio o emprendimiento en curso" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Para continuar mi formación personal y agregar mas conocimientos" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" />
-                            
-                              
-                          </RadioGroup>
-                          </FormControl>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 1
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad1',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-   {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 2
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                           
-                            {cohortes ? <>
-                                    <FormControl>
-                                    <RadioGroup name="genero" onChange={handleChange}>
-                  
-                
-                        
-                             {cohortes.map((row) => (
-                                         <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion}  />
-         
-                             ))}
-                                         </RadioGroup>
-                                         </FormControl> </>:<>Cargando</>}
-
-                        </Box>
-                        <br />
-                        <CardActions sx={{ justifyContent: 'center' }}>
-                            {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
-                                    <>
-                                        {inscrip.trabajo === 'Si' ? <>
-
-                                            {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
-                                                {/*  Caso que sea trabajo si  y completo le tipo  */}
-
-                                                {inscrip.hijos === 'Si' ? <>
-
-                                                    {inscrip.cantidad_hijos ? <>
-                                                        {/*  Caso que sea hijos si y selecciono cuantos  */}
-
-
-                                                        {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                            <Dialogo formulario={inscrip} />
-                                                        </> : <>Telefono no valido</>}
-                                                    </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                    {formVisible && ( // Condicional para mostrar el resto del formulario
+                                        <>
+                                            {existe.length > 0 ? <>
+                                                {loading ? <>
+                                                    <Carga />
+                                                </> : <></>}
+                                                {loading ? <>
+                                                    <Carga />
                                                 </> : <>
-                                                    {/*  Caso que sea hijos no */}
-
-                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                        <Dialogo formulario={inscrip} />
-                                                    </> : <>Telefono no valido</>} </>}
 
 
-                                            </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                        </> : <>
-                                            {/*  Caso que sea trabajo no */}
+                                                    <TextField
 
-                                            {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                <Dialogo formulario={inscrip} />
-                                            </> : <>Telefono no valido</>}</>}
-                                    </>
-                                    : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
-                            </>}
+                                                        defaultValue={existe[0].nombre}
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Nombre"
+                                                        name="nombre"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        variant="outlined"
+                                                        fontFamily="Montserrat"
+                                                        style={{ width: '250px' }}
+                                                    />
 
-                        </CardActions>
-                    </Paper>
-                </div>)
-            }
-                      
-                       
-                </div>
-            ) : (
-
-                <div >
-                    <Paper
-                        className="aparecer-desde-abajo"
-                        style={styles.paperr}
-                    >
-                        <Box className="logo-container">
-                            <img style={islogoc} className="islogoc" src={Logocuqui} alt="logo" />
-                            <img style={islogo} src={Logoccari} alt="logo" />
-                        </Box>
-                        <Box className="logo-container">
-                            <img style={islogo} src={Logoesme} alt="logo" />
-                        </Box>
-                        <Box sx={{ textAlign: 'center' }}>
-                            <Typography variant="p" component="div" color="black">
-                                <StyledParagraph>
-                                    Sumate a la Escuela de Mujeres
-                                    <br />
-
-                                    Equipo CC ARI Corrientes
-
-                                </StyledParagraph>
-                            </Typography>
-                            <Box sx={{ textAlign: 'center', marginLeft: "2em", marginRight: "2em", }}>
-                            <Typography variant="body2" color="textSecondary">
-                                Por favor, ingresa tu DNI sin puntos.
-                            </Typography>
-                            <TextField
-                                margin="dense"
-                                id="name"
-                                label="DNI (Sin puntos)"
-                                name="dni"
-                                onChange={handleChange1}
-
-                                type="number"
-                                variant="outlined"
-                                style={{ width: '250px' }}
-
-                            />
+                                                    <TextField
+                                                        defaultValue={existe[0].apellido}
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Apellido"
+                                                        name="apellido"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        variant="outlined"
+                                                        fontFamily="Montserrat"
+                                                        style={{ width: '250px' }}
+                                                    />
 
 
 
-                            {existe.length > 0 ? <>
-                                {loading ? <>
-                                    <Carga />
-                                </> : <></>}
-                                {loading ? <>
-                                    <Carga />
-                                </> : <>
+                                                    <TextField
+                                                        defaultValue={existe[0].tel}
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Telefono."
+                                                        name="tel"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        type="number"
+                                                        variant="outlined"
+                                                        style={{ width: '250px' }}
+                                                    />
+                                                    <TextField
+                                                        defaultValue={existe[0].mail}
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Correo Electronico"
+                                                        name="mail"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        style={{ width: '250px' }}
+                                                        variant="outlined"
+                                                    />
+                                                    <TextField
+
+                                                        defaultValue={existe[0].direccion}
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Domicilio"
+                                                        name="direccion"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        variant="outlined"
+                                                        fontFamily="Montserrat"
+                                                        style={{ width: '250px' }}
+                                                    />
+                                                    <TextField
+                                                        defaultValue={existe[0].barrio}
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Barrio"
+                                                        name="barrio"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        style={{ width: '250px' }}
+                                                        variant="outlined"
+                                                    />
+
+                                                </>}
+                                            </> : <>
+
+                                                {loading ? <>
+                                                    <Carga />
+                                                </> : <>
+
+                                                    <TextField
+                                                        style={{ width: '250px' }}
+
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Nombre"
+                                                        name="nombre"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        variant="outlined"
+                                                        fontFamily="Montserrat"
+                                                    />
+                                                    {inscrip.nombre ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                        Por favor, ingresa tu Nombre
+                                                    </Typography></>}
+                                                    <TextField
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Apellido"
+                                                        name="apellido"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        variant="outlined"
+                                                        fontFamily="Montserrat"
+                                                        style={{ width: '250px' }}
+                                                    />
+                                                    {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                        Por favor, ingresa tu Apellido
+                                                    </Typography></>}
 
 
-                                    <TextField
+                                                    <TextField
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Telefono"
+                                                        name="tel"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        type="number"
+                                                        variant="outlined"
+                                                        style={{ width: '250px' }}
+                                                    />
+                                                    {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                        Por favor, ingresa tu telefono
+                                                    </Typography></>}
+                                                    <TextField
 
-                                        defaultValue={existe[0].nombre}
-                                        margin="dense"
-                                        id="name"
-                                        label="Nombre"
-                                        name="nombre"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-
-                                    <TextField
-                                        defaultValue={existe[0].apellido}
-                                        margin="dense"
-                                        id="name"
-                                        label="Apellido"
-                                        name="apellido"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-
-
-
-                                    <TextField
-                                        defaultValue={existe[0].tel}
-                                        margin="dense"
-                                        id="name"
-                                        label="Telefono."
-                                        name="tel"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        type="number"
-                                        variant="outlined"
-                                        style={{ width: '250px' }}
-                                    />
-                                    <TextField
-                                        defaultValue={existe[0].mail}
-                                        margin="dense"
-                                        id="name"
-                                        label="Correo Electronico"
-                                        name="mail"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        style={{ width: '250px' }}
-                                        variant="outlined"
-                                    />
-                                    <TextField
-
-                                        defaultValue={existe[0].direccion}
-                                        margin="dense"
-                                        id="name"
-                                        label="Domicilio"
-                                        name="direccion"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-                                    <TextField
-                                        defaultValue={existe[0].barrio}
-                                        margin="dense"
-                                        id="name"
-                                        label="Barrio"
-                                        name="barrio"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        style={{ width: '250px' }}
-                                        variant="outlined"
-                                    />
-
-                                </>}
-                            </> : <>
-
-                                {loading ? <>
-                                    <Carga />
-                                </> : <>
-
-                                    <TextField
-                                        style={{ width: '250px' }}
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Nombre"
-                                        name="nombre"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                    />
-                                    {inscrip.nombre ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Nombre
-                                    </Typography></>}
-                                    <TextField
-                                        margin="dense"
-                                        id="name"
-                                        label="Apellido"
-                                        name="apellido"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-                                    {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Apellido
-                                    </Typography></>}
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Correo Electronico"
+                                                        name="mail"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        style={{ width: '250px' }}
+                                                        variant="outlined"
+                                                    />
+                                                    {inscrip.mail ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                        Por favor, ingresa tu Correo electronico
+                                                    </Typography>
+                                                    </>}
+                                                    <TextField
 
 
-                                    <TextField
-                                        margin="dense"
-                                        id="name"
-                                        label="Telefono"
-                                        name="tel"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        type="number"
-                                        variant="outlined"
-                                        style={{ width: '250px' }}
-                                    />
-                                    {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu telefono
-                                    </Typography></>}
-                                    <TextField
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Correo Electronico"
-                                        name="mail"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        style={{ width: '250px' }}
-                                        variant="outlined"
-                                    />
-                                    {inscrip.mail ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Correo electronico
-                                    </Typography>
-                                    </>}
-                                    <TextField
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Domicilio"
+                                                        name="direccion"
+                                                        onChange={handleChange}
+                                                        fullWidth
+                                                        variant="outlined"
+                                                        fontFamily="Montserrat"
+                                                        style={{ width: '250px' }}
+                                                    />
+                                                    {inscrip.direccion ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                        Por favor, ingresa tu Direccion
+                                                    </Typography>
+                                                    </>}
 
 
-                                        margin="dense"
-                                        id="name"
-                                        label="Domicilio"
-                                        name="direccion"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        variant="outlined"
-                                        fontFamily="Montserrat"
-                                        style={{ width: '250px' }}
-                                    />
-                                    {inscrip.direccion ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Direccion
-                                    </Typography>
-                                    </>}
+                                                    <TextField
+                                                        style={{ width: '250px' }}
+                                                        margin="dense"
+                                                        id="name"
+                                                        label="Barrio"
+                                                        name="barrio"
+                                                        onChange={handleChange}
+                                                        fullWidth
+
+                                                        variant="outlined"
+                                                    />
+                                                </>}
+                                            </>}
+
+                                            <TextField
+                                                style={{ width: '250px' }}
+                                                margin="dense"
+                                                id="name"
+                                                label="Telefono alternativo"
+                                                name="tel2"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                type="number"
+                                                variant="outlined"
+                                            />
+
+                                            <br />
+                                            <br />
+                                            <TextField
+
+                                                onChange={handleChange}
+                                                name="fecha_nac"
+                                                id="date"
+                                                label="Fecha de Nacimiento"
+                                                type="date"
+                                                defaultValue="2020-01-01"
+                                                sx={{ width: 220 }}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                            /> 
+                                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                                <Typography variant="p" component="div" color="black">
+                                                    <StyledParagraph>
+                                                        <b>Datos adicionales que nos <br />
+                                                            interesaria saber de vos  </b>
+                                                    </StyledParagraph>
+                                                </Typography>
+                                            </InputLabel>
 
 
-                                    <TextField
-                                        style={{ width: '250px' }}
-                                        margin="dense"
-                                        id="name"
-                                        label="Barrio"
-                                        name="barrio"
-                                        onChange={handleChange}
-                                        fullWidth
+                                        
+                                    
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                                <Typography variant="p" component="div" color="black">
+                                                    <StyledParagraph>
+                                                        Nivel educativo alcanzado
+                                                    </StyledParagraph>
+                                                </Typography>
+                                            </InputLabel>
+                                     
+                                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
 
-                                        variant="outlined"
-                                    />
-                                </>}
-                            </>}
+                                            <RadioGroup name="nivel_secundario" onChange={handleChange}>
+                                                <FormControlLabel value="Primario incompleto" control={<Radio />} label="Primario incompleto" />
+                                                <FormControlLabel value="Secundario completo" control={<Radio />} label="Secundario completo" />
+                                                <FormControlLabel value="Secundario incompleto" control={<Radio />} label="Secundario incompleto" />
+                                                <FormControlLabel value="Terciario completo" control={<Radio />} label="Terciario completo" />
+                                                <FormControlLabel value="Tericario incompleto" control={<Radio />} label="Tericario incompleto" />
+                                                <FormControlLabel value="Universitario incompleto" control={<Radio />} label="Universitario incompleto" />
+                                                <FormControlLabel value="Universitario completo" control={<Radio />} label="Universitario completo" />
+                                           
 
-                            <TextField
-                                style={{ width: '250px' }}
-                                margin="dense"
-                                id="name"
-                                label="Telefono alternativo"
-                                name="tel2"
-                                onChange={handleChange}
-                                fullWidth
-                                type="number"
-                                variant="outlined"
-                            />
 
-                            <br />
-                            <br />
-                            <TextField
 
-onChange={handleChange}
-name="fecha_nac"
-id="date"
-label="Fecha de Nacimiento"
-type="date"
-defaultValue="2020-01-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-    shrink: true,
-}}
-/>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        <b>Datos adicionales que nos <br />
-                                            interesaria saber de vos  </b>
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Nivel educativo alcanzado
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-<RadioGroup name="genero" onChange={handleChange}>
-    <FormControlLabel value="mujer" control={<Radio />} label="Primario incompleto" />
-    <FormControlLabel value="transgenero" control={<Radio />} label="Secundario completo" />
-    <FormControlLabel value="no-binario" control={<Radio />} label="Secundario incompleto" />
-    <FormControlLabel value="otro" control={<Radio />} label="Terciario completo" />
-    <FormControlLabel value="otro" control={<Radio />} label="Tericario incompleto" />
-    <FormControlLabel value="otro" control={<Radio />} label="Universitario incompleto" />
-    <FormControlLabel value="otro" control={<Radio />} label="Universitario completo" />
-  
-    <TextField
-        margin="dense"
-        id="otroGenero"
-        label="Especifique otro"
-        name="otroGenero"
-        onChange={handleChange}
-        fullWidth
-        variant="outlined"
-        style={{ marginTop: '10px' }}
-    />
+                                            </RadioGroup>
+                                        </FormControl>
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="p" component="div" color="black">
+                                                <StyledParagraph>
+                                                    Actualmente se encuentra trabajando?
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+                                        
+                                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                            <RadioGroup name="trabajo" onChange={handleChange}>
+                                                <FormControlLabel value="Si" control={<Radio />} label="Si" />
+                                                <FormControlLabel value="No" control={<Radio />} label="No" />
+
+
+
+                                            </RadioGroup>
+                                        </FormControl>
+                                        {inscrip.trabajo == "Si" ? <>
+                                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                                <Typography variant="p" component="div" color="black">
+                                                    <StyledParagraph>
+                                                        ¿Qué tipo de trabajo posee?
+                                                    </StyledParagraph>
+                                                </Typography>
+                                            </InputLabel>
+                                            <InputLabel variant="outlined" >
+                                                Formal se refiere a un empleo en relación <br />
+                                                de dependencia, registrado o  <br />
+                                                monotributista con acceso a  <br />
+                                                seguridad social
+                                            </InputLabel>
+                                            <br />
+                                          
+                                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+<RadioGroup name="tipo_trabajo" onChange={handleChange}>
+    <FormControlLabel value="Formal" control={<Radio />} label="Formal" />
+    <FormControlLabel value="Informal" control={<Radio />} label="Informal" />
+
+
+
 </RadioGroup>
 </FormControl>
-                           {/*  <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <br />
+                                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                                <Typography variant="p" component="div" color="black">
+                                                    <StyledParagraph>
+                                                        ¿Qué tipo de empleo posee?
+                                                    </StyledParagraph>
+                                                </Typography>
+                                            </InputLabel>
+
+                                          
+                                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+<RadioGroup name="tipo_empleo" onChange={handleChange}>
+    <FormControlLabel value="Monotributista/cuenta propista" control={<Radio />} label="Monotributista/cuenta propista" />
+    <FormControlLabel value="En relación de dependencia" control={<Radio />} label="En relación de dependencia" />
+    <FormControlLabel value="Ambos" control={<Radio />} label="Ambos" />
+
+
+</RadioGroup>
+</FormControl>
+                                            <br />
+
+                                        </> : <></>}
+
+
+                                        <br />
+
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="p" component="div" color="black">
+                                                <StyledParagraph>
+                                                    Tenes hijos
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+
+                                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                            <RadioGroup name="hijos" onChange={handleChange}>
+                                                <FormControlLabel value="Si" control={<Radio />} label="Si" />
+                                                <FormControlLabel value="No" control={<Radio />} label="No" />
+
+
+
+                                            </RadioGroup>
+                                        </FormControl>
+
+                                        {inscrip.hijos == "Si" ? <>
+                                            <TextField
+                                                style={{ width: '250px' }}
+                                                margin="dense"
+                                                id="name"
+                                                label="Cantidad de hijos"
+                                                name="cantidad_hijos"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                type="number"
+                                                variant="outlined"
+                                            />
+                                        </> : <></>}
+
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="p" component="div" color="black">
+                                                <StyledParagraph>
+                                                    Participaste de nuestra  <br />
+                                                    Feria de Mujeres Emprendedoras<br />
+
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+                                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                            <RadioGroup name="participante_feria" onChange={handleChange}>
+                                                <FormControlLabel value="Si" control={<Radio />} label="Si" />
+                                                <FormControlLabel value="No" control={<Radio />} label="No" />
+
+
+
+                                            </RadioGroup>
+                                        </FormControl>
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="p" component="div" color="black">
+                                                <StyledParagraph>
+                                                    Participaste de algún curso de la <br />
+                                                    Escuela de Mujeres Emprendedoras<br />
+                                                    anteriormente?
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+                                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                            <RadioGroup name="participante_anterior" onChange={handleChange}>
+                                                <FormControlLabel value="Si" control={<Radio />} label="Si" />
+                                                <FormControlLabel value="No" control={<Radio />} label="No" />
+
+
+
+                                            </RadioGroup>
+                                        </FormControl>
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="p" component="div" color="black">
+                                                <StyledParagraph>
+                                                    Por qué elegiste tomar este curso?
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+
+                                      
+                                      
+                                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+<RadioGroup name="motivacion" onChange={handleChange}>
+    <FormControlLabel value="Para iniciar mi propio emprendimiento o negocio" control={<Radio />} label="Para iniciar mi propio emprendimiento o negocio" />
+    <FormControlLabel value="Para potenciar mi idea de negocio o emprendimiento en curso" control={<Radio />} label="Para potenciar mi idea de negocio o emprendimiento en curso" />
+    <FormControlLabel value="Para continuar mi formación personal y agregar mas conocimientos" control={<Radio />} label="Para continuar mi formación personal y agregar mas conocimientos" />
+    <FormControlLabel value="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" control={<Radio />} label="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" />
+    <FormControlLabel value="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" control={<Radio />} label="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" />
+
+
+
+</RadioGroup>
+</FormControl>
+                                        <br />
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="p" component="div" color="black">
+                                                <StyledParagraph>
+                                                    Seleccionar prioridad 1
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+
+
+                                        {cohortes ? <>
+                                            <FormControl>
+                                                <RadioGroup name="prioridad1" onChange={handleChange}>
+
+
+
+                                                    {cohortes.map((row) => (
+                                                        <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion} />
+
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl> </> : <>Cargando</>}
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="p" component="div" color="black">
+                                                <StyledParagraph>
+                                                  <b> Seleccionar prioridad 2</b> 
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+
+                                        {cohortes ? <>
+                                            <FormControl>
+                                                <RadioGroup name="prioridad2" onChange={handleChange}>
+
+
+
+                                                    {cohortes.map((row) => (
+                                                        <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion} />
+
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl> </> : <>Cargando</>}
+                                        </>
+                                        )}
+                                    </Box>
+                                    <CardActions sx={{ justifyContent: 'center' }}>
+                                        {cargando ? <> <Progreso /> </> : <>
+                                            {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                                <>
+                                                    {inscrip.trabajo === 'Si' ? <>
+
+                                                        {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
+                                                            {/*  Caso que sea trabajo si  y completo le tipo  */}
+
+                                                            {inscrip.hijos === 'Si' ? <>
+
+                                                                {inscrip.cantidad_hijos ? <>
+                                                                    {/*  Caso que sea hijos si y selecciono cuantos  */}
+
+
+                                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                                        <Dialogo formulario={inscrip} />
+                                                                    </> : <>Telefono no valido</>}
+                                                                </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                                            </> : <>
+                                                                {/*  Caso que sea hijos no */}
+
+                                                                {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                                    <Dialogo formulario={inscrip} />
+                                                                </> : <>Telefono no valido</>}
+                                                            </>}
+
+
+                                                        </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                                    </> : <>
+                                                        {/*  Caso que sea trabajo no */}
+                                                        {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                            <Dialogo formulario={inscrip} />
+                                                        </> : <>Telefono no valido</>}</>}
+                                                </>
+                                                : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
+                                        </>}
+
+                                    </CardActions>
+                            </Paper>
+                        </div>
+                    ) : (
+
+
+
+
+
+
+
+                        //    FIN responsive  
+
+
+
+
+
+                        <div >
+                            <Paper
+                                className="aparecer-desde-abajo"
+                                style={styles.paperr}
+                            >
+                                <Box className="logo-container">
+                                    <img style={islogoc} className="islogoc" src={Logocuqui} alt="logo" />
+                                    <img style={islogo} src={Logoccari} alt="logo" />
+                                </Box>
+                                <Box className="logo-container">
+                                    <img style={islogo} src={Logoesme} alt="logo" />
+                                </Box>
+                                <Box sx={{ textAlign: 'center' }}>
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            Sumate a la Escuela de Mujeres
+                                            <br />
+
+                                            Equipo CC ARI Corrientes
+
+                                        </StyledParagraph>
+                                    </Typography>
+                                </Box>
+
+
+                                <Box sx={{ textAlign: 'left', marginLeft: "1em", marginRight: "1em", }}>
+                                    <Typography variant="body2" color="textSecondary">
+                                        Por favor, ingresa tu DNI sin puntos
+                                    </Typography>
+                                    <TextField
+                                        margin="dense"
+                                        id="dni"
+                                        label="DNI (Sin puntos)"
+                                        name="dni"
+                                        value={dni}
+                                        onChange={handleChangeDni}
+                                        type="number"
+                                        variant="outlined"
+                                        style={{ width: '250px', marginRight: '1em' }}
+                                    /><br />
+                                    <button variant="contained" onClick={confirmarDni}>
+                                        Confirmar DNI
+                                    </button>
+
+                                    <br />
+                                    {formVisible && ( // Condicional para mostrar el resto del formulario
+                                        <>
+                                    {existe.length > 0 ? <>
+                                        {loading ? <>
+                                            <Carga />
+                                        </> : <></>}
+                                        {loading ? <>
+                                            <Carga />
+                                        </> : <>
+
+
+                                            <TextField
+
+                                                defaultValue={existe[0].nombre}
+                                                margin="dense"
+                                                id="name"
+                                                label="Nombre"
+                                                name="nombre"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                fontFamily="Montserrat"
+                                            />
+
+                                            <TextField
+                                                defaultValue={existe[0].apellido}
+                                                margin="dense"
+                                                id="name"
+                                                label="Apellido"
+                                                name="apellido"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                fontFamily="Montserrat"
+                                            />
+
+
+
+                                            <TextField
+                                                defaultValue={existe[0].tel}
+                                                margin="dense"
+                                                id="name"
+                                                label="Telefono."
+                                                name="tel"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                type="number"
+                                                variant="outlined"
+                                            />
+                                            <TextField
+                                                defaultValue={existe[0].mail}
+                                                margin="dense"
+                                                id="name"
+                                                label="Correo Electronico"
+                                                name="mail"
+                                                onChange={handleChange}
+                                                fullWidth
+
+                                                variant="outlined"
+                                            />
+                                            <TextField
+                                                defaultValue={existe[0].barrio}
+                                                margin="dense"
+                                                id="name"
+                                                label="Barrio"
+                                                name="barrio"
+                                                onChange={handleChange}
+                                                fullWidth
+
+                                                variant="outlined"
+                                            />
+
+                                        </>}
+                                    </> : <>
+
+                                        {loading ? <>
+                                            <Carga />
+                                        </> : <>
+                                            <Typography variant="body2" color="textSecondary">
+                                                Por favor, ingresa tu Nombre
+                                            </Typography>
+                                            <TextField
+
+
+                                                margin="dense"
+                                                id="name"
+                                                label="Nombre"
+                                                name="nombre"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                fontFamily="Montserrat"
+                                            />
+                                            {inscrip.nombre ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                Por favor, ingresa tu Nombre
+                                            </Typography></>}
+
+                                            <TextField
+                                                margin="dense"
+                                                id="name"
+                                                label="Apellido"
+                                                name="apellido"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                fontFamily="Montserrat"
+                                            />
+
+                                            {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                Por favor, ingresa tu Apellido
+                                            </Typography></>}
+
+                                            <TextField
+                                                margin="dense"
+                                                id="name"
+                                                label="Telefono"
+                                                name="tel"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                type="number"
+                                                variant="outlined"
+                                            />
+                                            {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                Por favor, ingresa tu telefono
+                                            </Typography></>}
+                                            <TextField
+
+                                                margin="dense"
+                                                id="name"
+                                                label="Correo Electronico"
+                                                name="mail"
+                                                onChange={handleChange}
+                                                fullWidth
+
+                                                variant="outlined"
+                                            />
+                                            {inscrip.direccion ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                Por favor, ingresa tu Direccion de Email
+                                            </Typography>
+                                            </>}
+                                            <TextField
+
+
+                                                margin="dense"
+                                                id="name"
+                                                label="Domicilio"
+                                                name="direccion"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                fontFamily="Montserrat"
+                                                style={{ width: '250px' }}
+                                            />
+                                            {inscrip.direccion ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                Por favor, ingresa tu Direccion
+                                            </Typography>
+                                            </>}
+                                            <TextField
+
+                                                margin="dense"
+                                                id="name"
+                                                label="Barrio"
+                                                name="barrio"
+                                                onChange={handleChange}
+                                                fullWidth
+
+                                                variant="outlined"
+                                            />
+                                            {inscrip.barrio ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                                Por favor, ingresa tu Barrio
+                                            </Typography>
+                                            </>}
+                                        </>}
+                                    </>}
+                                   
+                                    <TextField
+
+                                        margin="dense"
+                                        id="name"
+                                        label="Telefono alternativo"
+                                        name="tel2"
+                                        onChange={handleChange}
+                                        fullWidth
+                                        type="number"
+                                        variant="outlined"
+                                    />
+
+                                    <br />
+                                    <br />
+                                    <TextField
+
+                                        onChange={handleChange}
+                                        name="fecha_nac"
+                                        id="date"
+                                        label="Fecha de nacimiento"
+                                        type="date"
+                                        defaultValue="2000-01-01"
+                                        sx={{ width: 220 }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="p" component="div" color="black">
+                                            <StyledParagraph>
+                                                <b>Datos adicionales que nos interesaria saber de vos</b>
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel> 
+                           
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Nivel educativo alcanzado
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel></>)}
+                           
+                                    <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                        <RadioGroup name="genero" onChange={handleChange}>
+                                            <FormControlLabel value="mujer" control={<Radio />} label="Primario incompleto" />
+                                            <FormControlLabel value="transgenero" control={<Radio />} label="Secundario completo" />
+                                            <FormControlLabel value="no-binario" control={<Radio />} label="Secundario incompleto" />
+                                            <FormControlLabel value="otro" control={<Radio />} label="Terciario completo" />
+                                            <FormControlLabel value="otro" control={<Radio />} label="Tericario incompleto" />
+                                            <FormControlLabel value="otro" control={<Radio />} label="Universitario incompleto" />
+                                            <FormControlLabel value="otro" control={<Radio />} label="Universitario completo" />
+
+                                            <TextField
+                                                margin="dense"
+                                                id="otroGenero"
+                                                label="Especifique otro"
+                                                name="otroGenero"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                variant="outlined"
+                                                style={{ marginTop: '10px' }}
+                                            />
+                                        </RadioGroup>
+                                    </FormControl>
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                ¿Actualmente se encuentra trabajando?
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+                                    <NativeSelect
+                                        defaultValue={30}
+                                        onChange={handleChange}
+                                        inputProps={{
+                                            name: 'trabajo',
+                                            id: 'uncontrolled-native',
+                                        }}
+                                        sx={'width:250px'}
+                                    >
+                                        <option value={'Sin determinar'} >Elegir</option>
+                                        <option value={'Si'}>
+                                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
+                                                Si
+                                            </Typography>
+                                        </option>
+                                        <option value={'No'}>No</option>
+
+                                    </NativeSelect>
+
+                                    {inscrip.trabajo == "Si" ? <>
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="h5" component="div" color="black">
+                                                <StyledParagraph>
+                                                    ¿Qué tipo de tranajo posee?
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+                                        <InputLabel variant="outlined" >
+                                            Formal se refiere a un empleo en relación de dependencia,<br />
+                                            registrado o monotributista con acceso a seguridad social
+                                        </InputLabel>
+                                        <br />
+                                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                            <RadioGroup name="tipo_trabajo" onChange={handleChange}>
+                                                <FormControlLabel value="Formal" control={<Radio />} label="Formal" />
+                                                <FormControlLabel value="Informal" control={<Radio />} label="Informal" />
+
+
+
+                                            </RadioGroup>
+                                        </FormControl>
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="h5" component="div" color="black">
+                                                <StyledParagraph>
+                                                    Tipo de empleo
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+
+                                    </> : <></>}
+
+                                    <br />
+
+
+
+
+
+                                    <br />
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Tenes hijos
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+
+                                    <NativeSelect
+                                        defaultValue={30}
+                                        onChange={handleChange}
+                                        inputProps={{
+                                            name: 'hijos',
+                                            id: 'uncontrolled-native',
+                                        }}
+                                        sx={'width:250px'}
+                                    >
+                                        <option value={'Sin determinar'} >Elegir</option>
+                                        <option value={'Si'}>
+                                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
+                                                Si
+                                            </Typography>
+                                        </option>
+                                        <option value={'No'}>No</option>
+
+                                    </NativeSelect>
+
+
+                                    {inscrip.hijos == "Si" ? <>
+                                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                            <Typography variant="h5" component="div" color="black">
+                                                <StyledParagraph>
+                                                    Cuantos hijos?
+                                                </StyledParagraph>
+                                            </Typography>
+                                        </InputLabel>
+
+                                        <TextField
+                                            style={{ width: '250px' }}
+                                            margin="dense"
+                                            id="name"
+                                            label="Cantidad de hijos"
+                                            name="cantidad_hijos"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            type="number"
+                                            variant="outlined"
+                                        />
+                                    </> : <></>}
+
+
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Participaste de algún curso de la <br />
+                                                Escuela de Mujeres Emprendedoras<br />
+                                                anteriormente?
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+
+                                  
+                                    <br />
+
+                                    <br />
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Por qué elegiste tomar este curso?
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+
+                                  
+                                      
+                                    <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+<RadioGroup name="motivacion" onChange={handleChange}>
+    <FormControlLabel value="Para iniciar mi propio emprendimiento o negocio" control={<Radio />} label="Para iniciar mi propio emprendimiento o negocio" />
+    <FormControlLabel value="Para potenciar mi idea de negocio o emprendimiento en curso" control={<Radio />} label="Para potenciar mi idea de negocio o emprendimiento en curso" />
+    <FormControlLabel value="Para continuar mi formación personal y agregar mas conocimientos" control={<Radio />} label="Para continuar mi formación personal y agregar mas conocimientos" />
+    <FormControlLabel value="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" control={<Radio />} label="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" />
+    <FormControlLabel value="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" control={<Radio />} label="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" />
+
+
+
+</RadioGroup>
+</FormControl>
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Seleccionar prioridad 1
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+
+                                    <NativeSelect
+                                        defaultValue={30}
+                                        onChange={handleChange}
+                                        inputProps={{
+                                            name: 'prioridad1',
+                                            id: 'uncontrolled-native',
+                                        }}
+                                        sx={'width:250px'}
+                                    >
+                                        <option value={'Sin determinar'}>Elegir</option>
+                                        {cohortes ? <>
+                                            <option value={'1'}> Elegir</option>
+
+                                            {cohortes.map((row) => (
+
+                                                <option value={row.id}> {row.descripcion} </option>
+
+                                            ))}
+                                        </> : <>Cargando</>}
+
+                                    </NativeSelect>
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                                Seleccionar prioridad 2
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+
+
+                                    {cohortes ? <>
+                                        <FormControl>
+                                            <RadioGroup name="genero" onChange={handleChange}>
+
+
+
+                                                {cohortes.map((row) => (
+                                                    <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion} />
+
+                                                ))}
+                                            </RadioGroup>
+                                        </FormControl> </> : <>Cargando</>}
+
+                                </Box>
+                                <br />
+                                <CardActions sx={{ justifyContent: 'center' }}>
+                                    {cargando ? <> <Progreso /> </> : <>
+                                        {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                            <>
+                                                {inscrip.trabajo === 'Si' ? <>
+
+                                                    {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
+                                                        {/*  Caso que sea trabajo si  y completo le tipo  */}
+
+                                                        {inscrip.hijos === 'Si' ? <>
+
+                                                            {inscrip.cantidad_hijos ? <>
+                                                                {/*  Caso que sea hijos si y selecciono cuantos  */}
+
+
+                                                                {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                                    <Dialogo formulario={inscrip} />
+                                                                </> : <>Telefono no valido</>}
+                                                            </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                                        </> : <>
+                                                            {/*  Caso que sea hijos no */}
+
+                                                            {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                                <Dialogo formulario={inscrip} />
+                                                            </> : <>Telefono no valido</>} </>}
+
+
+                                                    </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
+                                                </> : <>
+                                                    {/*  Caso que sea trabajo no */}
+
+                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                                        <Dialogo formulario={inscrip} />
+                                                    </> : <>Telefono no valido</>}</>}
+                                            </>
+                                            : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
+                                    </>}
+
+                                </CardActions>
+                            </Paper>
+                        </div>)
+                    }
+
+
+                </div>
+            ) : (
+
+                <div >
+                    <Paper
+                        className="aparecer-desde-abajo"
+                        style={styles.paperr}
+                    >
+                        <Box className="logo-container">
+                            <img style={islogoc} className="islogoc" src={Logocuqui} alt="logo" />
+                            <img style={islogo} src={Logoccari} alt="logo" />
+                        </Box>
+                        <Box className="logo-container">
+                            <img style={islogo} src={Logoesme} alt="logo" />
+                        </Box>
+                        <Box sx={{ textAlign: 'center' }}>
+                        
+                                    <Typography variant="h7" component="div" color="black">
+                                        <StyledParagraph>
+                                            Completá con tus datos este formulario para inscribirte a los cursos.
+                                            <br />
+
+                                            Equipo CC ARI Corrientes
+                                            ¡Muy pronto nos estaremos comunicando con vos!
+                                        </StyledParagraph>
+                                    </Typography>
+                              
+                            <Box sx={{ textAlign: 'center', marginLeft: "2em", marginRight: "2em", }}>
+                                <Typography variant="body2" color="textSecondary">
+                                    Por favor, ingresa tu DNI sin puntos.
+                                </Typography>
+                                <TextField
+                                        margin="dense"
+                                        id="dni"
+                                        label="DNI (Sin puntos)"
+                                        name="dni"
+                                        value={dni}
+                                        onChange={handleChangeDni}
+                                        type="number"
+                                        variant="outlined"
+                                        style={{ width: '250px', marginRight: '1em' }}
+                                    /><br />
+                                    <button variant="contained" onClick={confirmarDni}>
+                                        Confirmar DNI
+                                    </button>
+<br/>
+
+                                    {formVisible && ( // Condicional para mostrar el resto del formulario
+                                        <>
+                                {existe.length > 0 ? <>
+                                    {loading ? <>
+                                        <Carga />
+                                    </> : <></>}
+                                    {loading ? <>
+                                        <Carga />
+                                    </> : <>
+
+
+                                        <TextField
+
+                                            defaultValue={existe[0].nombre}
+                                            margin="dense"
+                                            id="name"
+                                            label="Nombre"
+                                            name="nombre"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            variant="outlined"
+                                            fontFamily="Montserrat"
+                                            style={{ width: '250px' }}
+                                        />
+
+                                        <TextField
+                                            defaultValue={existe[0].apellido}
+                                            margin="dense"
+                                            id="name"
+                                            label="Apellido"
+                                            name="apellido"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            variant="outlined"
+                                            fontFamily="Montserrat"
+                                            style={{ width: '250px' }}
+                                        />
+
+
+
+                                        <TextField
+                                            defaultValue={existe[0].tel}
+                                            margin="dense"
+                                            id="name"
+                                            label="Telefono."
+                                            name="tel"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            type="number"
+                                            variant="outlined"
+                                            style={{ width: '250px' }}
+                                        />
+                                        <TextField
+                                            defaultValue={existe[0].mail}
+                                            margin="dense"
+                                            id="name"
+                                            label="Correo Electronico"
+                                            name="mail"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            style={{ width: '250px' }}
+                                            variant="outlined"
+                                        />
+                                        <TextField
+
+                                            defaultValue={existe[0].direccion}
+                                            margin="dense"
+                                            id="name"
+                                            label="Domicilio"
+                                            name="direccion"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            variant="outlined"
+                                            fontFamily="Montserrat"
+                                            style={{ width: '250px' }}
+                                        />
+                                        <TextField
+                                            defaultValue={existe[0].barrio}
+                                            margin="dense"
+                                            id="name"
+                                            label="Barrio"
+                                            name="barrio"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            style={{ width: '250px' }}
+                                            variant="outlined"
+                                        />
+                                              <TextField
+                                               defaultValue={existe[0].tel2}
+                                    style={{ width: '250px' }}
+                                    margin="dense"
+                                    id="name"
+                                    label="Telefono alternativo"
+                                    name="tel2"
+                                    onChange={handleChange}
+                                    fullWidth
+                                    type="number"
+                                    variant="outlined"
+                                />
+
+                                <br />
+                                <br />
+                                <TextField
+
+                                    onChange={handleChange}
+                                    name="fecha_nac"
+                                    id="date"
+                                    label="Fecha de Nacimiento"
+                                    type="date"
+                                    defaultValue={existe[0].fecha_nac}
+                                    sx={{ width: 220 }}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+
+                                    </>}
+                                </> : <>
+
+                                    {loading ? <>
+                                        <Carga />
+                                    </> : <>
+
+                                        <TextField
+                                            style={{ width: '250px' }}
+
+                                            margin="dense"
+                                            id="name"
+                                            label="Nombre"
+                                            name="nombre"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            variant="outlined"
+                                            fontFamily="Montserrat"
+                                        />
+                                        {inscrip.nombre ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                            Por favor, ingresa tu Nombre
+                                        </Typography></>}
+                                        <TextField
+                                            margin="dense"
+                                            id="name"
+                                            label="Apellido"
+                                            name="apellido"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            variant="outlined"
+                                            fontFamily="Montserrat"
+                                            style={{ width: '250px' }}
+                                        />
+                                        {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                            Por favor, ingresa tu Apellido
+                                        </Typography></>}
+
+
+                                        <TextField
+                                            margin="dense"
+                                            id="name"
+                                            label="Telefono"
+                                            name="tel"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            type="number"
+                                            variant="outlined"
+                                            style={{ width: '250px' }}
+                                        />
+                                        {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                            Por favor, ingresa tu telefono
+                                        </Typography></>}
+                                        <TextField
+
+                                            margin="dense"
+                                            id="name"
+                                            label="Correo Electronico"
+                                            name="mail"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            style={{ width: '250px' }}
+                                            variant="outlined"
+                                        />
+                                        {inscrip.mail ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                            Por favor, ingresa tu Correo electronico
+                                        </Typography>
+                                        </>}
+                                        <TextField
+
+
+                                            margin="dense"
+                                            id="name"
+                                            label="Domicilio"
+                                            name="direccion"
+                                            onChange={handleChange}
+                                            fullWidth
+                                            variant="outlined"
+                                            fontFamily="Montserrat"
+                                            style={{ width: '250px' }}
+                                        />
+                                        {inscrip.direccion ? <></> : <>  <Typography variant="body2" color="textSecondary">
+                                            Por favor, ingresa tu Direccion
+                                        </Typography>
+                                        </>}
+
+
+                                        <TextField
+                                            style={{ width: '250px' }}
+                                            margin="dense"
+                                            id="name"
+                                            label="Barrio"
+                                            name="barrio"
+                                            onChange={handleChange}
+                                            fullWidth
+
+                                            variant="outlined"
+                                        />
+                                             <TextField
+                                    style={{ width: '250px' }}
+                                    margin="dense"
+                                    id="name"
+                                    label="Telefono alternativo"
+                                    name="tel2"
+                                    onChange={handleChange}
+                                    fullWidth
+                                    type="number"
+                                    variant="outlined"
+                                />
+
+                                <br />
+                                <br />
+                                <TextField
+
+                                    onChange={handleChange}
+                                    name="fecha_nac"
+                                    id="date"
+                                    label="Fecha de Nacimiento"
+                                    type="date"
+                                    defaultValue="1990-01-01"
+                                    sx={{ width: 220 }}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                    </>}
+                                </>}
+
+                           
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            <b>Datos adicionales que nos <br />
+                                                interesaria saber de vos  </b>
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            Nivel educativo alcanzado
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
+                                <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+<RadioGroup name="nivel_secundario" onChange={handleChange}>
+    <FormControlLabel value="Primario incompleto" control={<Radio />} label="Primario incompleto" />
+    <FormControlLabel value="Secundario completo" control={<Radio />} label="Secundario completo" />
+    <FormControlLabel value="Secundario incompleto" control={<Radio />} label="Secundario incompleto" />
+    <FormControlLabel value="Terciario completo" control={<Radio />} label="Terciario completo" />
+    <FormControlLabel value="Tericario incompleto" control={<Radio />} label="Tericario incompleto" />
+    <FormControlLabel value="Universitario incompleto" control={<Radio />} label="Universitario incompleto" />
+    <FormControlLabel value="Universitario completo" control={<Radio />} label="Universitario completo" />
+
+
+
+
+</RadioGroup>
+</FormControl>
+                                {/*  <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
                                     <StyledParagraph>
                                         Nivel educativo alcanzado
@@ -1665,224 +1663,219 @@ InputLabelProps={{
                                 <option value={'Universitario completo'}>Universitario completo</option>
 
                             </NativeSelect> */}
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Actualmente se encuentra trabajando?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Si" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="No" />
-              
-                            
-                              
-                          </RadioGroup>
-                          </FormControl>
-                            {inscrip.trabajo == "Si" ? <>
                                 <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                     <Typography variant="p" component="div" color="black">
                                         <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-                                <InputLabel variant="outlined" >
-                                    Formal se refiere a un empleo en relación <br />
-                                    de dependencia, registrado o  <br />
-                                    monotributista con acceso a  <br />
-                                    seguridad social
-                                </InputLabel>
-                                <br />
-                                <NativeSelect
-                                    defaultValue={30}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'tipo_trabajo',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    sx={'width:250px'}
-                                >
-                                                  <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Formal" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Informal" />
-             
-                            
-                         
-                          </RadioGroup>
-                          </FormControl>
-                                </NativeSelect>
-
-                                <br />
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="p" component="div" color="black">
-                                        <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
+                                            Actualmente se encuentra trabajando?
                                         </StyledParagraph>
                                     </Typography>
                                 </InputLabel>
                                 <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                 
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Monotributista/cuenta propista" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="En relación de dependencia" />
-                              <FormControlLabel value="no-binario" control={<Radio />} label="Ambos" />
-                              
-                       
-                          </RadioGroup>
-                          </FormControl>
+
+                                    <RadioGroup name="trabajo" onChange={handleChange}>
+                                        <FormControlLabel value="Si" control={<Radio />} label="Si" />
+                                        <FormControlLabel value="No" control={<Radio />} label="No" />
+
+
+
+                                    </RadioGroup>
+                                </FormControl>
+                                {inscrip.trabajo == "Si" ? <>
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="p" component="div" color="black">
+                                            <StyledParagraph>
+                                                ¿Qué tipo de empleo posee?
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+                                    <InputLabel variant="outlined" >
+                                        Formal se refiere a un empleo en relación <br />
+                                        de dependencia, registrado o  <br />
+                                        monotributista con acceso a  <br />
+                                        seguridad social
+                                    </InputLabel>
+                                    <br />
+                                   
+                                        <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                            <RadioGroup name="tipo_trabajo" onChange={handleChange}>
+                                                <FormControlLabel value="Formal" control={<Radio />} label="Formal" />
+                                                <FormControlLabel value="Informal" control={<Radio />} label="Informal" />
+
+
+
+                                            </RadioGroup>
+                                        </FormControl>
+                               
+
+                                    <br />
+                                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="p" component="div" color="black">
+                                            <StyledParagraph>
+                                                ¿Qué tipo de empleo posee?
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+                                    <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+
+
+                                        <RadioGroup name="tipo_empleo" onChange={handleChange}>
+                                            <FormControlLabel value="Monotributista/cuenta propista" control={<Radio />} label="Monotributista/cuenta propista" />
+                                            <FormControlLabel value="En relación de dependencia" control={<Radio />} label="En relación de dependencia" />
+                                            <FormControlLabel value="Ambos" control={<Radio />} label="Ambos" />
+
+
+                                        </RadioGroup>
+                                    </FormControl>
+                                    <br />
+
+                                </> : <></>}
+
+
                                 <br />
 
-                            </> : <></>}
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            Tenes hijos
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
+
+                                <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                    <RadioGroup name="hijos" onChange={handleChange}>
+                                        <FormControlLabel value="Si" control={<Radio />} label="Si" />
+                                        <FormControlLabel value="No" control={<Radio />} label="No" />
 
 
-                            <br />
 
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Tenes hijos
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
+                                    </RadioGroup>
+                                </FormControl>
 
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Si" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="No" />
-              
-                            
+                                {inscrip.hijos == "Si" ? <>
+                                    <TextField
+                                        style={{ width: '250px' }}
+                                        margin="dense"
+                                        id="name"
+                                        label="Cantidad de hijos"
+                                        name="cantidad_hijos"
+                                        onChange={handleChange}
+                                        fullWidth
+                                        type="number"
+                                        variant="outlined"
+                                    />
+                                </> : <></>}
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            Participaste de nuestra  <br />
+                                            Feria de Mujeres Emprendedoras<br />
+
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
+
+                                <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                    <RadioGroup name="participante_feria" onChange={handleChange}>
+                                        <FormControlLabel value="Si" control={<Radio />} label="Si" />
+                                        <FormControlLabel value="No" control={<Radio />} label="No" />
+
+
+
+                                    </RadioGroup>
+                                </FormControl>
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            Participaste de algún curso de la <br />
+                                            Escuela de Mujeres Emprendedoras<br />
+                                            anteriormente?
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
+                                <FormControl component="fieldset" style={{ marginTop: '30px' }}>
+
+                                    <RadioGroup name="participante_anterior" onChange={handleChange}>
+                                        <FormControlLabel value="Si" control={<Radio />} label="Si" />
+                                        <FormControlLabel value="No" control={<Radio />} label="No" />
+
+
+
+                                    </RadioGroup>
+                                </FormControl>
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            Por qué elegiste tomar este curso?
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
                               
-                          </RadioGroup>
-                          </FormControl>
-
-                            {inscrip.hijos == "Si" ? <>
-                                <TextField
-                                    style={{ width: '250px' }}
-                                    margin="dense"
-                                    id="name"
-                                    label="Cantidad de hijos"
-                                    name="cantidad_hijos"
-                                    onChange={handleChange}
-                                    fullWidth
-                                    type="number"
-                                    variant="outlined"
-                                />
-                            </> : <></>}
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Participastes de nuestra  <br />
-                                        Feria de Mujeres Emprendedoras<br />
                                       
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
+                                <FormControl component="fieldset" style={{ marginTop: '30px' }}>
 
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Si" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="No" />
-              
-                            
-                              
-                          </RadioGroup>
-                          </FormControl>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Participaste de algún curso de la <br />
-                                        Escuela de Mujeres Emprendedoras<br />
-                                        anteriormente?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Si" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="No" />
-              
-                            
-                              
-                          </RadioGroup>
-                          </FormControl>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Por qué elegiste tomar este curso?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <FormControl component="fieldset" style={{ marginTop: '30px' }}>
-                          
-                          <RadioGroup name="genero" onChange={handleChange}>
-                              <FormControlLabel value="mujer" control={<Radio />} label="Para iniciar mi propio emprendimiento o negocio" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Para potenciar mi idea de negocio o emprendimiento en curso" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Para continuar mi formación personal y agregar mas conocimientos" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" />
-                              <FormControlLabel value="transgenero" control={<Radio />} label="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" />
-                            
-                              
-                          </RadioGroup>
-                          </FormControl>
-                           
+<RadioGroup name="motivacion" onChange={handleChange}>
+    <FormControlLabel value="Para iniciar mi propio emprendimiento o negocio" control={<Radio />} label="Para iniciar mi propio emprendimiento o negocio" />
+    <FormControlLabel value="Para potenciar mi idea de negocio o emprendimiento en curso" control={<Radio />} label="Para potenciar mi idea de negocio o emprendimiento en curso" />
+    <FormControlLabel value="Para continuar mi formación personal y agregar mas conocimientos" control={<Radio />} label="Para continuar mi formación personal y agregar mas conocimientos" />
+    <FormControlLabel value="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" control={<Radio />} label="Para tener un curso mas que me pueda ayudar en mi curriculum y me ayude a obtener una mejor salida laboral" />
+    <FormControlLabel value="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" control={<Radio />} label="Por que ya hice otros cursos con la Escuela de Mujeres Emprendedoras y me gustó" />
 
-                            <br />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 1
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
+
+
+</RadioGroup>
+</FormControl>
+
+
+                                <br />
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            Seleccionar prioridad 1
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
 
                                 {cohortes ? <>
                                     <FormControl>
-                                    <RadioGroup name="genero" onChange={handleChange}>
-                  
-                
-                        
-                             {cohortes.map((row) => (
-                                         <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion}  />
-         
-                             ))}
-                                         </RadioGroup>
-                                         </FormControl> </>:<>Cargando</>}
-      
-                          
-                           
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 2
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
+                                        <RadioGroup name="prioridad1" onChange={handleChange}>
 
-                          
-                            {cohortes ? <>
+
+
+                                            {cohortes.map((row) => (
+                                                <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion} />
+
+                                            ))}
+                                        </RadioGroup>
+                                    </FormControl> </> : <>Cargando</>}
+
+
+
+                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                    <Typography variant="p" component="div" color="black">
+                                        <StyledParagraph>
+                                            Seleccionar prioridad 2
+                                        </StyledParagraph>
+                                    </Typography>
+                                </InputLabel>
+
+
+                                {cohortes ? <>
                                     <FormControl>
-                                    <RadioGroup name="genero" onChange={handleChange}>
-                  
-                
-                        
-                             {cohortes.map((row) => (
-                                         <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion}  />
-         
-                             ))}
-                                         </RadioGroup>
-                                         </FormControl> </>:<>Cargando</>}
-                        </Box>
+                                        <RadioGroup name="prioridad2" onChange={handleChange}>
+
+
+
+                                            {cohortes.map((row) => (
+                                                <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion} />
+
+                                            ))}
+                                        </RadioGroup>
+                                    </FormControl> </> : <>Cargando</>}</>)}
+                            </Box>
                         </Box>
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
