@@ -492,9 +492,9 @@ const Estracto = () => {
 
                                             <TextField
                                                 margin="dense"
-                                                id="otroGenero"
+                                                id="otrogenero"
                                                 label="Especifique otro"
-                                                name="otroGenero"
+                                                name="otrogenero"
                                                 onChange={handleChange}
                                                 fullWidth
                                                 variant="outlined"
@@ -1069,9 +1069,9 @@ const Estracto = () => {
 
                                             <TextField
                                                 margin="dense"
-                                                id="otroGenero"
+                                                id="otrogenero"
                                                 label="Especifique otro"
-                                                name="otroGenero"
+                                                name="otrogenero"
                                                 onChange={handleChange}
                                                 fullWidth
                                                 variant="outlined"
@@ -1097,20 +1097,20 @@ const Estracto = () => {
                            
                                     <FormControl component="fieldset" style={{ marginTop: '30px' }}>
 
-                                        <RadioGroup name="genero" onChange={handleChange}>
-                                            <FormControlLabel value="mujer" control={<Radio />} label="Primario incompleto" />
-                                            <FormControlLabel value="transgenero" control={<Radio />} label="Secundario completo" />
-                                            <FormControlLabel value="no-binario" control={<Radio />} label="Secundario incompleto" />
-                                            <FormControlLabel value="otro" control={<Radio />} label="Terciario completo" />
-                                            <FormControlLabel value="otro" control={<Radio />} label="Tericario incompleto" />
-                                            <FormControlLabel value="otro" control={<Radio />} label="Universitario incompleto" />
-                                            <FormControlLabel value="otro" control={<Radio />} label="Universitario completo" />
+                                        <RadioGroup name="nivel_secundario" onChange={handleChange}>
+                                            <FormControlLabel value="Primario incompleto" control={<Radio />} label="Primario incompleto" />
+                                            <FormControlLabel value="Secundario completo" control={<Radio />} label="Secundario completo" />
+                                            <FormControlLabel value="Secundario incompleto" control={<Radio />} label="Secundario incompleto" />
+                                            <FormControlLabel value="Terciario completo" control={<Radio />} label="Terciario completo" />
+                                            <FormControlLabel value="Tericario incompleto" control={<Radio />} label="Tericario incompleto" />
+                                            <FormControlLabel value="Universitario incompleto" control={<Radio />} label="Universitario incompleto" />
+                                            <FormControlLabel value="Universitario completo" control={<Radio />} label="Universitario completo" />
 
                                             <TextField
                                                 margin="dense"
-                                                id="otroGenero"
+                                                id="otrogenero"
                                                 label="Especifique otro"
-                                                name="otroGenero"
+                                                name="otrogenero"
                                                 onChange={handleChange}
                                                 fullWidth
                                                 variant="outlined"
@@ -1312,7 +1312,7 @@ const Estracto = () => {
 
                                     {cohortes ? <>
                                         <FormControl>
-                                            <RadioGroup name="genero" onChange={handleChange}>
+                                            <RadioGroup name="prioridad1" onChange={handleChange}>
 
 
 
@@ -1677,9 +1677,9 @@ const Estracto = () => {
 
                                             <TextField
                                                 margin="dense"
-                                                id="otroGenero"
+                                                id="otrogenero"
                                                 label="Especifique otro"
-                                                name="otroGenero"
+                                                name="otrogenero"
                                                 onChange={handleChange}
                                                 fullWidth
                                                 variant="outlined"
