@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioTurnos from '../../../services/turnos'
+import servicioInscripciones from '../../../services/inscripciones'
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
 import FindInPageTwoToneIcon from '@mui/icons-material/FindInPageTwoTone';
@@ -81,7 +81,7 @@ export default function SelectTextFields(props) {
 
     try {
 
-      await servicioTurnos.borrarinscripcionde(
+      await servicioInscripciones.borrarinscripcionde(
         inscripcion
 
 

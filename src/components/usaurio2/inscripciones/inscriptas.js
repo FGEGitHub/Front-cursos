@@ -82,7 +82,7 @@ const TablaNotificaciones = (props) => {
 
                 <Borrar
                 id = {inscriptos[dataIndex].id}
-                getClients={async () => {
+                traer={async () => {
               
        
 
