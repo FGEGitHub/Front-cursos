@@ -715,7 +715,7 @@ const Estracto = () => {
 
                                         {cohortes ? <>
                                             <FormControl>
-                                                <RadioGroup name="prioridad1" onChange={handleChange}>
+                                                <RadioGroup name="uno" onChange={handleChange}>
 
 
 
@@ -735,7 +735,7 @@ const Estracto = () => {
 
                                         {cohortes ? <>
                                             <FormControl>
-                                                <RadioGroup name="prioridad2" onChange={handleChange}>
+                                                <RadioGroup name="dos" onChange={handleChange}>
 
 
 
@@ -750,7 +750,7 @@ const Estracto = () => {
                                     </Box>
                                     <CardActions sx={{ justifyContent: 'center' }}>
                                         {cargando ? <> <Progreso /> </> : <>
-                                            {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                            {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                                 <>
                                                     {inscrip.trabajo === 'Si' ? <>
 
@@ -1280,27 +1280,7 @@ const Estracto = () => {
                                         </Typography>
                                     </InputLabel>
 
-                                    <NativeSelect
-                                        defaultValue={30}
-                                        onChange={handleChange}
-                                        inputProps={{
-                                            name: 'prioridad1',
-                                            id: 'uncontrolled-native',
-                                        }}
-                                        sx={'width:250px'}
-                                    >
-                                        <option value={'Sin determinar'}>Elegir</option>
-                                        {cohortes ? <>
-                                            <option value={'1'}> Elegir</option>
-
-                                            {cohortes.map((row) => (
-
-                                                <option value={row.id}> {row.descripcion} </option>
-
-                                            ))}
-                                        </> : <>Cargando</>}
-
-                                    </NativeSelect>
+                                   
                                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                         <Typography variant="h5" component="div" color="black">
                                             <StyledParagraph>
@@ -1312,7 +1292,7 @@ const Estracto = () => {
 
                                     {cohortes ? <>
                                         <FormControl>
-                                            <RadioGroup name="prioridad1" onChange={handleChange}>
+                                            <RadioGroup name="uno" onChange={handleChange}>
 
 
 
@@ -1327,7 +1307,7 @@ const Estracto = () => {
                                 <br />
                                 <CardActions sx={{ justifyContent: 'center' }}>
                                     {cargando ? <> <Progreso /> </> : <>
-                                        {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                        {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                             <>
                                                 {inscrip.trabajo === 'Si' ? <>
 
@@ -1927,9 +1907,9 @@ const Estracto = () => {
 
                                 {cohortes ? <>
                                     <FormControl>
-                                        <RadioGroup name="prioridad1" onChange={handleChange}>
+                                        <RadioGroup name="uno" onChange={handleChange}>
 
-
+Ñ
 
                                             {cohortes.map((row) => (
                                                 <FormControlLabel value={row.id} control={<Radio />} label={row.descripcion} />
@@ -1951,7 +1931,7 @@ const Estracto = () => {
 
                                 {cohortes ? <>
                                     <FormControl>
-                                        <RadioGroup name="prioridad2" onChange={handleChange}>
+                                        <RadioGroup name="dos" onChange={handleChange}>
 
 
 
@@ -1965,7 +1945,7 @@ const Estracto = () => {
                         </Box>
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                     <>
                                         {inscrip.trabajo === 'Si' ? <>
 

@@ -21,7 +21,7 @@ import Button from '@mui/material/Button';
 import CambiarEstado from '../../usuario6/listatodos/cambiarestado'
 import Widget from '../../fiscalizacion/Widget/Widget'
 import CargaDeTabla from '../../CargaDeTabla';
-
+import Borrar from './modalborrarinsrip'
 
 
 const TablaNotificaciones = (props) => {
@@ -80,7 +80,7 @@ const TablaNotificaciones = (props) => {
 
 
 
-                <CambiarEstado
+                <Borrar
                 id = {inscriptos[dataIndex].id}
                 getClients={async () => {
               
@@ -171,8 +171,13 @@ const TablaNotificaciones = (props) => {
    
         
         {
-            name: "modalidad",
-            label: "modalidad",
+            name: "descripcion",
+            label: "prioridad 1",
+
+        },
+        {
+            name: "descripcion",
+            label: "prioridad 2",
 
         },
         {
