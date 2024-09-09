@@ -176,7 +176,7 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "descripcion",
+            name: "descripcion2",
             label: "prioridad 2",
 
         },
