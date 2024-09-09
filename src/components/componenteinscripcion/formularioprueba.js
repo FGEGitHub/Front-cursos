@@ -345,6 +345,34 @@ const Estracto = () => {
                                                         style={{ width: '250px' }}
                                                         variant="outlined"
                                                     />
+                                                    <TextField
+                                                style={{ width: '250px' }}
+                                                defaultValue={existe[0].tel2}
+                                                margin="dense"
+                                                id="name"
+                                                label="Telefono alternativo"
+                                                name="tel2"
+                                                onChange={handleChange}
+                                                fullWidth
+                                                type="number"
+                                                variant="outlined"
+                                            />
+
+                                            <br />
+                                            <br />
+                                            <TextField
+
+                                                onChange={handleChange}
+                                                name="fecha_nac"
+                                                id="date"
+                                                label="Fecha de Nacimiento"
+                                                type="date"
+                                                defaultValue={existe[0].fecha_nac}
+                                                sx={{ width: 220 }}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                            /> 
 
                                                 </>}
                                             </> : <>
@@ -443,10 +471,7 @@ const Estracto = () => {
 
                                                         variant="outlined"
                                                     />
-                                                </>}
-                                            </>}
-
-                                            <TextField
+                                                    <TextField
                                                 style={{ width: '250px' }}
                                                 margin="dense"
                                                 id="name"
@@ -473,6 +498,10 @@ const Estracto = () => {
                                                     shrink: true,
                                                 }}
                                             /> 
+                                                </>}
+                                            </>}
+
+                                            
                                              <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                         <Typography variant="h5" component="div" color="black">
                                             <StyledParagraph>
