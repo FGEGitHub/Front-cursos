@@ -750,7 +750,7 @@ const Estracto = () => {
                                     </Box>
                                     <CardActions sx={{ justifyContent: 'center' }}>
                                         {cargando ? <> <Progreso /> </> : <>
-                                            {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
+                                            {inscrip.nombre && inscrip.apellido && inscrip.dni  && inscrip.participante_anterior && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                                 <>
                                                     {inscrip.trabajo === 'Si' ? <>
 
@@ -1307,7 +1307,7 @@ const Estracto = () => {
                                 <br />
                                 <CardActions sx={{ justifyContent: 'center' }}>
                                     {cargando ? <> <Progreso /> </> : <>
-                                        {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
+                                        {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.participante_anterior && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                             <>
                                                 {inscrip.trabajo === 'Si' ? <>
 
@@ -1945,7 +1945,7 @@ const Estracto = () => {
                         </Box>
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.participante_anterior && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                     <>
                                         {inscrip.trabajo === 'Si' ? <>
 
