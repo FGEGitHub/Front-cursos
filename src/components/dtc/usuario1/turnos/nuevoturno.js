@@ -1,13 +1,12 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { Button } from '@mui/material';
+import { Button,FormControlLabel, FormControl, Radio, RadioGroup,Typography } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioDtc from '../../../../services/dtc'
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
-import { Paper, CircularProgress, Typography, Card, CardActions } from '@mui/material';
 import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import InputLabel from '@mui/material/InputLabel';
@@ -24,8 +23,8 @@ export default function SelectTextFields(props) {
   const [form, setForm] = useState({
     fecha:props.fecha
   })
-  const [datos, setDatos] = useState()
-  const [activo, setActivo] = useState(false)
+  const [usuario, setUsuario] = useState()
+  const [profesionales, setProfesionales] = useState(false)
 
 
 
@@ -37,11 +36,29 @@ export default function SelectTextFields(props) {
     console.log(form)
     setForm({ ...form, [e.target.name]: e.target.value })
   }
+  const traerprof = async (event) => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
+    const user = JSON.parse(loggedUserJSON)
+    setUsuario(user)
+    if (user.nivel == 40){
+      const nov = await servicioDtc.traerprofesionales()
+      console.log(nov)
+      setProfesionales(nov[0])
+    }
+    if (user.nivel == 20){
+      const nov = await servicioDtc.traerpsicologos()
+      console.log(nov)
+      setProfesionales(nov[0])
+    }
+
+ 
+  };
 
   const handleClickOpen = () => {
 setForm({fecha:props.fecha})
     setOpen(true);
+    traerprof()
 
 
   };
@@ -57,13 +74,18 @@ setForm({fecha:props.fecha})
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
       const user = JSON.parse(loggedUserJSON)
+      setUsuario(user)
       const mergedJSON = {
         ...form,
         ...{id_psic:user.id,
        }
       };
+      if(user.nivel==41 || user.nivel==40 ){
+        const nov = await servicioDtc.agregarturnocadia(mergedJSON)
+        alert(nov)
+      }else{
       const nov = await servicioDtc.agregarturno(mergedJSON)
-      alert(nov)
+      alert(nov)}
     } catch (error) {
       console.error(error);
       console.log('Error algo sucedio')
@@ -97,7 +119,7 @@ props.traer(form.fecha)
       noValidate
       autoComplete="off"
     >
-      < Tooltip title="Nueva Clase">
+      < Tooltip title="Nuevo turno">
         <Button variant="contained" onClick={handleClickOpen}> Nuevo  </Button>
 
       </Tooltip>
@@ -107,7 +129,14 @@ props.traer(form.fecha)
         
             <h3>
               <b> NUEVO TURNO</b></h3>
+              <InputLabel variant="outlined" htmlFor="uncontrolled-native">
 
+              <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                          horario
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
               <TextField
               autoFocus
               margin="dense"
@@ -119,8 +148,36 @@ props.traer(form.fecha)
               variant="standard"
             />
 
+{usuario ? <>
 
-          
+  {usuario.nivel==40 || usuario.nivel==20  ? <>
+<br/>
+    {profesionales ? <>
+      <InputLabel variant="outlined" htmlFor="uncontrolled-native">
+                                        <Typography variant="h5" component="div" color="black">
+                                            <StyledParagraph>
+                                             Profesional
+                                            </StyledParagraph>
+                                        </Typography>
+                                    </InputLabel>
+                                            <FormControl>
+                                                <RadioGroup name="profesional" onChange={handleChange}>
+
+
+
+                                                    {profesionales.map((row) => (
+                                                        <FormControlLabel value={row.id} control={<Radio />} label={row.nombre} />
+
+                                                    ))}
+                                                </RadioGroup>
+                                            </FormControl> </> : <>Cargando</>}
+  </>:<>
+  
+  </>}
+
+
+</>:<></>}
+
             <DialogActions>
 
 

@@ -68,7 +68,7 @@ export default function MenuIzq2 ({children}) {
 
   const menuItems = [
     { text: 'Actividades', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/profesionales/inicio' },
-
+    { text: 'turnos', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/profesionales/turnos' },
   ];
 
   const logoStyle = {
@@ -144,9 +144,9 @@ export default function MenuIzq2 ({children}) {
           )} */}
           <Divider />
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 0, backgroundColor: "#fff3e0" }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 0, backgroundColor: "#ffcdd2" }}>
           <Toolbar />
-          <div className="fondo-imagen">
+          <div >
             <br />
             {children}
           </div>

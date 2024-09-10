@@ -32,9 +32,20 @@ export default function Clasenueva(props) {
         event.preventDefault();
         try {
 
-         const respuesta=  await servicioDtc.borrarturno(form)
-         alert(respuesta)
-        
+    
+         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+         if (loggedUserJSON) {
+             const usuario = JSON.parse(loggedUserJSON)
+   
+   
+             if(usuario.nivel==41){
+                const respuesta=  await servicioDtc.borrarturnocadia(form)
+                alert(respuesta)
+             }else{
+                const respuesta=  await servicioDtc.borrarturno(form)
+                alert(respuesta)
+             }
+         }
 
 
 

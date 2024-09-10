@@ -23,15 +23,28 @@ const TablaNotificaciones = (props) => {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON);
-                const novedades_aux = await servicioDtc.traercitastodos(usuario.id);
-                setChicos(novedades_aux[0]);
-                setDatos(novedades_aux[1]);
-
-                // Extrae fechas1 y fechas2 de los datos recibidos y convierte las fechas a objetos Date en UTC
-                const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
-                const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
-                setFechas1(fechas1);
-                setFechas2(fechas2);
+                if(usuario.nivel==40 || usuario.nivel==41 ){
+                    const novedades_aux = await servicioDtc.traercitastodoscadia(usuario.id);
+                    setChicos(novedades_aux[0]);
+                    setDatos(novedades_aux[1]);
+    
+                    // Extrae fechas1 y fechas2 de los datos recibidos y convierte las fechas a objetos Date en UTC
+                    const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                    const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                    setFechas1(fechas1);
+                    setFechas2(fechas2);
+                }else{
+                    const novedades_aux = await servicioDtc.traercitastodos(usuario.id);
+                    setChicos(novedades_aux[0]);
+                    setDatos(novedades_aux[1]);
+    
+                    // Extrae fechas1 y fechas2 de los datos recibidos y convierte las fechas a objetos Date en UTC
+                    const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                    const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                    setFechas1(fechas1);
+                    setFechas2(fechas2);
+                }
+             
             }
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -51,14 +64,10 @@ const TablaNotificaciones = (props) => {
 
     return (
         <div>
-            {datos && (
-                <Alert variant="filled" severity="success">
-                    <b>Actualmente {datos.total} usuarios</b> - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios, "Adolescentes":{datos.kid3} usuarios, además {datos.sind} sin determinar
-                </Alert>
-            )}
+    
 
             <h2>Lista de chicos</h2>
-            {chicos && chicos.length > 0 ? (
+            {chicos  ? (
                 <div>
                     <Calendar
                         onClickDay={onDateClick}

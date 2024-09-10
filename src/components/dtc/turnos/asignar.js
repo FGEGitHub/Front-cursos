@@ -55,15 +55,21 @@ export default function SelectTextFields(props) {
     // Lógica para hacer un llamado al backend con el valor seleccionado
     if (selectedValue) {
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-      console.log(selectedValue) 
+      const usuario = JSON.parse(loggedUserJSON)
         const mergedJSON = {
             ...selectedValue,
             ...{id:form.id,
              }
           };
           console.log(mergedJSON) 
-     const ta = await servicioDtc.agendarturno(mergedJSON)
-     alert(ta)
+          if(usuario.nivel==40 || usuario.nivel==41 ){
+            const ta = await servicioDtc.agendarturnocadia(mergedJSON)
+            alert(ta)
+          }else{
+            const ta = await servicioDtc.agendarturno(mergedJSON)
+            alert(ta)
+          }
+ 
       // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
       // Ejemplo: axios.post('/api/backend', { selectedValue });
    
@@ -114,10 +120,10 @@ export default function SelectTextFields(props) {
             <DialogActions>
 
 
-              <>
-              <Button variant="outlined" color="primary" onClick={handleBackendCall}>
+            <Button variant="outlined" color="success" onClick={handleBackendCall}>
         Asignar turno
-      </Button>             </>
+      </Button> 
+          
               <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
             </DialogActions>
 

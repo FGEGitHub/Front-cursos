@@ -1,6 +1,6 @@
 import servicioDtc from '../../../../services/dtc'
 
-import ModaNueva from './nuevo'
+import ModaNueva from './nuevoturno'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
@@ -25,7 +25,7 @@ import {
     useTheme,
     Button
 } from '@material-ui/core';
-import Clasificar from './borrar'
+import Borrar from './borrar'
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 
@@ -182,10 +182,15 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-
-                const novedades_aux = await servicioDtc.traertodoslosturnosaprobac()
-                setchicos(novedades_aux[0])
-                setDatos(novedades_aux[1])
+                if(usuario.nivel==41){
+                  const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+                  setchicos(novedades_aux[0])
+                  setDatos(novedades_aux[1])
+                }else{
+                  const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+                  setchicos(novedades_aux[0])
+                  setDatos(novedades_aux[1])
+                }
             }
 
         } catch (error) {
@@ -198,7 +203,7 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
-              <Clasificar 
+              <Borrar 
               id={chicos[dataIndex]['id']}
               traer={ async (fecha) => {
                 try {
@@ -210,9 +215,15 @@ const TablaNotificaciones = (props) => {
               
                         setUsuario(usuario)
               
-                        const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
-                        setchicos(novedades_aux[0])
-                        setDatos(novedades_aux[1])
+                        if(usuario.nivel==41){
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
+                          setchicos(novedades_aux[0])
+                          setDatos(novedades_aux[1])
+                        }else{
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+                          setchicos(novedades_aux[0])
+                          setDatos(novedades_aux[1])
+                        }
                     }
               
                 } catch (error) {
@@ -328,9 +339,15 @@ const TablaNotificaciones = (props) => {
 
             setUsuario(usuario)
 
-            const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
-            setchicos(novedades_aux[0])
-            setDatos(novedades_aux[1])
+            if(usuario.nivel==40 || usuario.nivel==41 ){
+              const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+              setchicos(novedades_aux[0])
+              setDatos(novedades_aux[1])
+            }else{
+              const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+              setchicos(novedades_aux[0])
+              setDatos(novedades_aux[1])
+            }
         }
 
     } catch (error) {
@@ -342,17 +359,23 @@ const TablaNotificaciones = (props) => {
 {form ? <><Nuevo fecha={form.fecha}
  traer={ async (fecha) => {
   try {
-    console.log(fecha)
+   
  
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
       if (loggedUserJSON) {
           const usuario = JSON.parse(loggedUserJSON)
 
           setUsuario(usuario)
-
-          const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
-          setchicos(novedades_aux[0])
-          setDatos(novedades_aux[1])
+          if(usuario.nivel==40 || usuario.nivel==41 ){
+            const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
+            setchicos(novedades_aux[0])
+            setDatos(novedades_aux[1])
+          }else{
+            const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+            setchicos(novedades_aux[0])
+            setDatos(novedades_aux[1])
+          }
+        
       }
 
   } catch (error) {
@@ -377,7 +400,7 @@ const TablaNotificaciones = (props) => {
 
                                 <TableContainer>
                                     {!chicos ? <Skeleton /> : <>
-                                        <h1>Lista de usuarios </h1>
+                                        <h1>Lista  </h1>
                                         <Table >
                                             <TableHead>
                                                 <TableRow>
@@ -402,7 +425,7 @@ const TablaNotificaciones = (props) => {
                                                         <StyledTableCell component="th" scope="row"> <b>{row.fecha} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.nombrepsiq} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <Clasificar 
+                                                        <StyledTableCell component="th" scope="row">  <Borrar 
                                                         id={row.id}
               traer={async () => {
                 try {
@@ -411,10 +434,15 @@ const TablaNotificaciones = (props) => {
                         const usuario = JSON.parse(loggedUserJSON)
         
                         setUsuario(usuario)
-        
-                        const novedades_aux = await servicioDtc.traertodoslosturnosaprobac()
-                        setchicos(novedades_aux[0])
-                        setDatos(novedades_aux[1])
+                        if(usuario.nivel==41){
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
+                          setchicos(novedades_aux[0])
+                          setDatos(novedades_aux[1])
+                        }else{
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+                          setchicos(novedades_aux[0])
+                          setDatos(novedades_aux[1])
+                        }
                     }
         
                 } catch (error) {

@@ -17,17 +17,31 @@ const TablaNotificaciones = (props) => {
 
     const traer = async () => {
         try {
+            console.log(45645465)
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON);
-                const novedades_aux = await servicioDtc.traercitas(usuario.id);
-                setChicos(novedades_aux[0]);
-                setDatos(novedades_aux[1]);
-
-                const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
-                const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
-                setFechas1(fechas1);
-                setFechas2(fechas2);
+                console.log(usuario)
+                if(usuario.nivel==40 || usuario.nivel==41 ){
+                    const novedades_aux = await servicioDtc.traercitascadia(usuario.id);
+                    setChicos(novedades_aux[0]);
+                    setDatos(novedades_aux[1]);
+    
+                    const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                    const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                    setFechas1(fechas1);
+                    setFechas2(fechas2);
+                }else{
+                    const novedades_aux = await servicioDtc.traercitas(usuario.id);
+                    setChicos(novedades_aux[0]);
+                    setDatos(novedades_aux[1]);
+    
+                    const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                    const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                    setFechas1(fechas1);
+                    setFechas2(fechas2);
+                }
+              
             }
         } catch (error) {
             console.error("Error fetching data:", error);

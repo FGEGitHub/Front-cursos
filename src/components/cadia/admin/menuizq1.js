@@ -71,6 +71,8 @@ export default function MenuIzq2 ({children}) {
     { text: 'Usuarios', icon: <PeopleAltTwoToneIcon color="primary" />, path: '/cadia/usuario/usuarios' },
     { text: 'Chicos', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/chicos' },
     { text: 'Profesionales', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/profesionales' },
+    { text: 'Turnos', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/turnos' },
+
   ];
 
   const logoStyle = {

@@ -10,7 +10,7 @@ import 'jspdf-autotable';
 import Clasificar from '../usuario1/turnos/borrar';
 import Skeleton from '@mui/material/Skeleton';
 import logo from "../../../Assets/logomuni.png";
-
+import Nuevo from "../usuario1/turnos/nuevoturno"
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -35,7 +35,7 @@ const MobileFriendlyTable = (props) => {
   const [datos, setDatos] = useState();
   const [fecha, setFecha] = useState();
   const [usuario, setUsuario] = useState();
-
+  const [form, setForm] = useState();
   const [fechaSeleccionada, setFechaSeleccionada] = useState('');
   useEffect(() => {
     traer();
@@ -50,14 +50,24 @@ const MobileFriendlyTable = (props) => {
     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
     props.fecha === undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.fecha);
-
-    const historial = await servicioDtc.traerparaturnos(
-      props.fecha === undefined
-        ? { fecha: formattedDate, id: props.idt === undefined ? user.id : props.idt }
-        : { fecha: props.fecha, id: props.idt === undefined ? user.id : props.idt }
-    );
-
-    setDatos(historial);
+    if(user.nivel==40 || user.nivel==41 ){
+      const historial = await servicioDtc.traerparaturnoscadia(
+        props.fecha === undefined
+          ? { fecha: formattedDate, id: props.idt === undefined ? user.id : props.idt }
+          : { fecha: props.fecha, id: props.idt === undefined ? user.id : props.idt }
+      );
+  
+      setDatos(historial);
+    }else{
+      const historial = await servicioDtc.traerparaturnos(
+        props.fecha === undefined
+          ? { fecha: formattedDate, id: props.idt === undefined ? user.id : props.idt }
+          : { fecha: props.fecha, id: props.idt === undefined ? user.id : props.idt }
+      );
+  
+      setDatos(historial);
+    }
+  
   };
 
   const handlePrint = (row) => {
@@ -134,17 +144,41 @@ const MobileFriendlyTable = (props) => {
           <Buscador
             chicos={datos[1]}
             fecha={currentDate}
+            
             usuario={usuario}
             traer={async (fecha) => {
               const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+              setForm({fecha:fecha})
               const user = JSON.parse(loggedUserJSON);
               setUsuario(user);
-
-              const historial = await servicioDtc.traertodoslosturnosfecha(fecha);
+              if(user.nivel==40 || user.nivel==41 ){
+                const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha);
+                setDatos(historial);
+                setFecha(fecha);
+              }else{
+                const historial = await servicioDtc.traertodoslosturnosfecha(fecha);
               setDatos(historial);
               setFecha(fecha);
+              }
+           
             }}
           />
+          {form ? <><Nuevo fecha={form.fecha}
+ traer={async (fecha) => {
+  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+  const user = JSON.parse(loggedUserJSON);
+  setUsuario(user);
+  if(user.nivel==40 || user.nivel==41 ){
+    const historial = await servicioDtc.traertodoslosturnosfechacadia(form);
+    setDatos(historial);
+    setFecha(fecha);
+  }else{
+    const historial = await servicioDtc.traertodoslosturnosfecha(form);
+  setDatos(historial);
+  setFecha(fecha);
+  }
+
+}}/></>:<></>}
           <TableContainer>
             {!datos[0] ? (
               <Skeleton />

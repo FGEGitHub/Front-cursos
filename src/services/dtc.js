@@ -180,6 +180,14 @@ return data
 return data
        
   }
+  
+  const traerpsicologos = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerpsicologos/', config)
+return data
+       
+  }
   const traeretapacocina = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -257,6 +265,15 @@ return data
 return data
        
   }
+  
+  const traercitascadia = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traercitascadia/'+id, config)
+return data
+       
+  }
+
   const traercitastodos = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -264,7 +281,14 @@ return data
 return data
        
   }
-
+  
+  const traercitastodoscadia = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traercitastodoscadia/', config)
+return data
+       
+  }
   const traerpresentes = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -280,6 +304,15 @@ return data
 return data
        
   }
+  
+  const borrarturnocadia = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.post(baseUrl+'borrarturnocadia/',id, config)
+return data
+       
+  }
+
   const traerparaturnos = async (fecha) => {
   console.log(fecha)
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -288,6 +321,13 @@ return data
        
   }
   
+  const traerparaturnoscadia = async (fecha) => {
+    console.log(fecha)
+      // const data = await axios.post('http://localhost:4000/signupp', datos)
+        const {data} = await axios.post(baseUrl+'traerparaturnoscadia/',fecha, config)
+  return data
+         
+    }
   const ponerpresente = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -325,6 +365,15 @@ return data
 return data
        
   }
+  
+  const agendarturnocadia = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.post(baseUrl+'agendarturnocadia/',id, config)
+return data
+       
+  }
+
   const subirlegajo= async  (datos) => {
 
     const {data } = await axios.post(baseUrl+'subirlegajo',datos,config)
@@ -549,6 +598,12 @@ const agregarturno= async  (datos) => {
    return data  
 }
 
+const agregarturnocadia= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'agregarturnocadia',datos,config)
+   
+   return data  
+}
 const traertodoslosturnosfecha= async  (datos) => {
 
   const {data } = await axios.post(baseUrl+'traertodoslosturnosfecha',datos,config)
@@ -556,6 +611,12 @@ const traertodoslosturnosfecha= async  (datos) => {
    return data  
 }
 
+const traertodoslosturnosfechacadia= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'traertodoslosturnosfechacadia',datos,config)
+   
+   return data  
+}
 const nuevaetapa= async  (datos) => {
 
   const {data } = await axios.post(baseUrl+'nuevaetapa',datos,config)
@@ -736,4 +797,4 @@ const tablaprestacionesa = async (id) => {
 return data
      
 }
-export default {tablaprestacionesa,nuevaprestacioninv,listainventario,borrarinformeps,modificarinformeps,nuevoinformepsiq,traerinformes,modificarasist,traercosassole,borraractividadsocial,verArchivo,nuevaintervencion,traerasitenciasociales,determinaprofesional,listaprofs,traerhorarioschicos,traerhorariosprofesionales,agregarhorariochico,traerhorarioschico,agregarhorario,traerhorariosprofesional,ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {traercitascadia,traerpsicologos,agendarturnocadia,traercitastodoscadia,traerparaturnoscadia,borrarturnocadia,agregarturnocadia,traertodoslosturnosfechacadia,tablaprestacionesa,nuevaprestacioninv,listainventario,borrarinformeps,modificarinformeps,nuevoinformepsiq,traerinformes,modificarasist,traercosassole,borraractividadsocial,verArchivo,nuevaintervencion,traerasitenciasociales,determinaprofesional,listaprofs,traerhorarioschicos,traerhorariosprofesionales,agregarhorariochico,traerhorarioschico,agregarhorario,traerhorariosprofesional,ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
