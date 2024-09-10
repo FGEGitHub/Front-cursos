@@ -7,7 +7,8 @@ import Buscador from '../usuario1/turnos/calendariobusquedadeturnos';
 import Asignar from './asignar';
 import jsPDF from "jspdf";
 import 'jspdf-autotable';
-import Clasificar from '../usuario1/turnos/borrar';
+import Clasificar from '../usuario1/turnos/clasific';
+import Borrar from '../usuario1/turnos/borrar';
 import Skeleton from '@mui/material/Skeleton';
 import logo from "../../../Assets/logomuni.png";
 import Nuevo from "../usuario1/turnos/nuevoturno"
@@ -192,7 +193,7 @@ const MobileFriendlyTable = (props) => {
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Horario</b></TableCell>
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Psicólogo</b></TableCell>
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Asignar</b></TableCell>
-                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Imprimir</b></TableCell>
+                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Acciones</b></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -208,7 +209,42 @@ const MobileFriendlyTable = (props) => {
                           <Asignar id={row.id} chicos={datos[1]} traer={traer} />
                         </StyledTableCell>
                         <StyledTableCell component="th" scope="row">
-                          <Button onClick={() => handlePrint(row)}>Imprimir</Button>
+                        
+<Clasificar 
+              id={row.id}
+              traer={async (fecha) => {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                const user = JSON.parse(loggedUserJSON);
+                setUsuario(user);
+                if(user.nivel==40 || user.nivel==41 ){
+                  const historial = await servicioDtc.traertodoslosturnosfechacadia(form);
+                  setDatos(historial);
+                  setFecha(fecha);
+                }else{
+                  const historial = await servicioDtc.traertodoslosturnosfecha(form);
+                setDatos(historial);
+                setFecha(fecha);
+                }
+              
+              }}/>
+           
+              <Borrar 
+               id={row.id}
+               traer={async (fecha) => {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                const user = JSON.parse(loggedUserJSON);
+                setUsuario(user);
+                if(user.nivel==40 || user.nivel==41 ){
+                  const historial = await servicioDtc.traertodoslosturnosfechacadia(form);
+                  setDatos(historial);
+                  setFecha(fecha);
+                }else{
+                  const historial = await servicioDtc.traertodoslosturnosfecha(form);
+                setDatos(historial);
+                setFecha(fecha);
+                }
+              
+              }}/>
                         </StyledTableCell>
                       </StyledTableRow>
                     ))}

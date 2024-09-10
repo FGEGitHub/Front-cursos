@@ -72,9 +72,19 @@ const traer = async () => {
           const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 
           setCurrentDate(formattedDate);
-          const historial = await servicioDtc.traerclasestaller(id)
-          console.log(historial)
-          setClases(historial)
+          if(usuario.nivel ==40){
+            const historial = await servicioDtc.traerclasestallercadia(id)
+            console.log(historial)
+            setClases(historial)
+
+          }else{    
+            
+            const historial = await servicioDtc.traerclasestaller(id)
+            console.log(historial)
+            setClases(historial)
+
+          }
+   
       }
 
   } catch (error) {
@@ -112,8 +122,8 @@ const traer = async () => {
 
 
 
-    {currentDate ? <>   <Asistencia id={currentDate}
-                                    idt={id}/></>:<></>}
+{/*     {currentDate ? <>   <Asistencia id={currentDate}
+                                    idt={id}/></>:<></>} */}
    
   
 

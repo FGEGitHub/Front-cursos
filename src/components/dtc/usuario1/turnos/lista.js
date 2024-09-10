@@ -2,7 +2,7 @@ import servicioDtc from '../../../../services/dtc'
 
 import ModaNueva from './nuevoturno'
 import React, { useEffect, useState, Fragment } from "react";
-import { Paper } from '@mui/material';
+import Clasificar from'./clasific'
 import MUIDataTable from "mui-datatables";
 import Tarjetabuscar from './calendariobusqueda'
 import { useNavigate } from "react-router-dom";
@@ -203,6 +203,35 @@ const TablaNotificaciones = (props) => {
         return (
             <>
 
+<Clasificar 
+              id={chicos[dataIndex]['id']}
+              traer={ async (fecha) => {
+                try {
+                  console.log(fecha)
+               
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                    if (loggedUserJSON) {
+                        const usuario = JSON.parse(loggedUserJSON)
+              
+                        setUsuario(usuario)
+              
+                        if(usuario.nivel==41){
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
+                          setchicos(novedades_aux[0])
+                          setDatos(novedades_aux[1])
+                        }else{
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+                          setchicos(novedades_aux[0])
+                          setDatos(novedades_aux[1])
+                        }
+                    }
+              
+                } catch (error) {
+              
+                }
+              
+              }}/>
+           
               <Borrar 
               id={chicos[dataIndex]['id']}
               traer={ async (fecha) => {

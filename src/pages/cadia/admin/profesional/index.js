@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
 import React, { useEffect, useState } from "react";
 import Listachiquesa from '../../../../components/cadia/admin/profesionales/listahorarios'
+import Est from '../../../../components/dtc/usuario1/taller/componente1'
 import MenuuCel from '../../../../components/cadia/admin/menuizq1'
 
 import {
@@ -64,11 +65,14 @@ export default function Paginas() {
       {isMatch ? 
      <>
      <div  className={classes.container}> 
+      
      <MenuuCel texto="Chiques"/>
+     <Est/>
      <Listachiquesa/>
     </div>
      </>:<>
  <Menuizq>
+ <Est/>
 <Listachiquesa/>
 </Menuizq></>}
  </>

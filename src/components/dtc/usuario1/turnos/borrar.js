@@ -38,7 +38,7 @@ export default function Clasenueva(props) {
              const usuario = JSON.parse(loggedUserJSON)
    
    
-             if(usuario.nivel==41){
+             if(usuario.nivel==41 || usuario.nivel==40){
                 const respuesta=  await servicioDtc.borrarturnocadia(form)
                 alert(respuesta)
              }else{
@@ -69,12 +69,12 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="contained"  color="success" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
+            <Button variant="contained"  color="error" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
             Eliminar
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>            Eliminar turno</DialogTitle>
+                <DialogTitle>   Seguro que deseas eliminar el turno?</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
@@ -85,12 +85,7 @@ export default function Clasenueva(props) {
                     }}
                 >
                     <DialogContent>
-                        <DialogContentText>
-                        <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                  Seguro que deseas eliminar el turno?
-                            </InputLabel>
-                          
-                        </DialogContentText>
+                  
                       
 
                             <DialogActions>

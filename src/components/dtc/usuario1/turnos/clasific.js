@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useParams } from "react-router-dom"
-import Button from '@mui/material/Button';
+import { Button,FormControlLabel, FormControl, Radio, RadioGroup,Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 import NativeSelect from '@mui/material/NativeSelect';
-import { Paper, CircularProgress, Typography, Card, CardActions } from '@mui/material';
+import { Paper} from '@mui/material';
 export default function Clasenueva(props) {
     let params = useParams()
     let id = params.id
@@ -31,10 +31,19 @@ export default function Clasenueva(props) {
     const handleDeterminar = async (event) => {
         event.preventDefault();
         try {
-
-         const respuesta=  await servicioDtc.borrarturno(form)
-         alert(respuesta)
-        
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
+      
+      
+                if(usuario.nivel==41 || usuario.nivel==40){
+                   const respuesta=  await servicioDtc.clasificarturnocadia(form)
+                   alert(respuesta)
+                }else{
+                   const respuesta=  await servicioDtc.clasificarturno(form)
+                   alert(respuesta)
+                }
+            }
 
 
 
@@ -58,12 +67,12 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="contained"  color="error" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
-            Eliminar
+            <Button variant="contained"  color="success" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
+            Clasificar
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>            Eliminar turno</DialogTitle>
+                <DialogTitle>  Elegir</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
@@ -75,7 +84,15 @@ export default function Clasenueva(props) {
                 >
                     <DialogContent>
                         <DialogContentText>
-          
+                        ¿Paciente concurrio?
+                                            <FormControl>
+                                                <RadioGroup name="estado" onChange={handleChange}>
+
+                                                <FormControlLabel value={"Presente"} control={<Radio />} label={"Presente"} />
+                                                <FormControlLabel value={"Ausente"} control={<Radio />} label={"Ausente"} />
+
+                                                </RadioGroup>
+                                            </FormControl> 
                           
                         </DialogContentText>
                       

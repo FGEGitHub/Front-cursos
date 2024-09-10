@@ -211,6 +211,13 @@ return data
        
   }
   
+  const traerclasestallercadia = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerclasestallercadia/'+id, config)
+return data
+       
+  }
   const traerclasesprof = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -721,6 +728,18 @@ const agregarhorario= async  (datos) => {
    return data  
 }
 
+const clasificarturno= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'clasificarturno',datos,config)
+   
+   return data  
+}
+const clasificarturnocadia= async  (datos) => {
+
+  const {data } = await axios.post(baseUrl+'clasificarturnocadia',datos,config)
+   
+   return data  
+}
 const traerhorariosprofesionales = async (id) => {
   
   // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -797,4 +816,4 @@ const tablaprestacionesa = async (id) => {
 return data
      
 }
-export default {traercitascadia,traerpsicologos,agendarturnocadia,traercitastodoscadia,traerparaturnoscadia,borrarturnocadia,agregarturnocadia,traertodoslosturnosfechacadia,tablaprestacionesa,nuevaprestacioninv,listainventario,borrarinformeps,modificarinformeps,nuevoinformepsiq,traerinformes,modificarasist,traercosassole,borraractividadsocial,verArchivo,nuevaintervencion,traerasitenciasociales,determinaprofesional,listaprofs,traerhorarioschicos,traerhorariosprofesionales,agregarhorariochico,traerhorarioschico,agregarhorario,traerhorariosprofesional,ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {traerclasestallercadia,clasificarturno,clasificarturnocadia,traercitascadia,traerpsicologos,agendarturnocadia,traercitastodoscadia,traerparaturnoscadia,borrarturnocadia,agregarturnocadia,traertodoslosturnosfechacadia,tablaprestacionesa,nuevaprestacioninv,listainventario,borrarinformeps,modificarinformeps,nuevoinformepsiq,traerinformes,modificarasist,traercosassole,borraractividadsocial,verArchivo,nuevaintervencion,traerasitenciasociales,determinaprofesional,listaprofs,traerhorarioschicos,traerhorariosprofesionales,agregarhorariochico,traerhorarioschico,agregarhorario,traerhorariosprofesional,ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
