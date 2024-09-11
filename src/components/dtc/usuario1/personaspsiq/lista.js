@@ -194,19 +194,39 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
+{usuario &&  
 
-                <div onClick={() => navigate('/dtc/usuario1/personapsiq/' + chicos[dataIndex]['id'])} >
+usuario.nivel==20  ? 
+<>
+<div onClick={() => navigate('/dtc/usuario1/personapsiq/' + chicos[dataIndex]['id'])} >
 
-                    < Tooltip title="Ver">
-                        <Button  onClick={() => navigate('/dtc/usuario1/personapsiq/' + chicos[dataIndex]['id'])} variant="contained">
+< Tooltip title="Ver">
+    <Button  onClick={() => navigate('/dtc/usuario1/personapsiq/' + chicos[dataIndex]['id'])} variant="contained">
 Ver                        </Button>
-                    </Tooltip>
+</Tooltip>
 
 
 
 
-                </div>
+</div>
 
+</>:<>
+<div onClick={() => navigate('/dtc/psicologa/usuario/' + chicos[dataIndex]['id'])} >
+
+< Tooltip title="Ver">
+    <Button  onClick={() => navigate('/dtc/psicologa/usuario/' + chicos[dataIndex]['id'])} variant="contained">
+Ver                        </Button>
+</Tooltip>
+
+
+
+
+</div>
+</>
+
+
+}
+               
 
             </>
         );
@@ -230,8 +250,8 @@ Ver                        </Button>
     
     
         {
-            name: "fecha_nacimiento",
-            label: "Fecha de nacimiento",
+            name: "cantidadturnos",
+            label: "Cantidad de turnos",
 
         },
         {
@@ -269,7 +289,8 @@ Ver                        </Button>
   >
    
     { datos ? <>  <Alert variant="filled" severity="success">
- <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
+ datos importantes para rellenar
+
 </Alert> </>:<></>}
 
             <h2>Lista de chicos</h2>
@@ -352,7 +373,7 @@ Ver                        </Button>
                
                                 <MUIDataTable
 
-                                    title={"Lista de personas que asisten"}
+                                    title={"Lista de personas "}
                                     data={chicos}
                                     columns={columns}
                                     actions={[
@@ -373,7 +394,7 @@ Ver                        </Button>
 
                             </></>}
 
-                    </> : <> <h2>El curso aun no tiene chicos</h2></>}
+                    </> : <> </>}
 
 
 

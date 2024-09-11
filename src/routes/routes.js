@@ -171,8 +171,8 @@ import Dtcvisitausuario from '../pages/dtc/visitasoc/usuario';
 import Dtcvisitamapa from '../pages/dtc/visitasoc/mapas';
 import CargarExcel from '../pages/subirexcel'
 import Dtcpsiclogaacti from '../pages/dtc/psicologainformes';
-
-
+import Dtcpsiclogausuarios from '../pages/dtc/psicologamascarpetas/usuarios';
+import Dtcpsiclogausuario from '../pages/dtc/psicologamascarpetas/usuario';
 
 
 import LoginCadia from '../pages/cadia/login'
@@ -332,6 +332,8 @@ const Rutas = [
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
 		{ path: '/dtc/psicologa/informes', element: <Dtcpsiclogaacti/> },
+		{ path: '/dtc/psicologa/usuarios', element: <Dtcpsiclogausuarios/> },
+		{ path: '/dtc/psicologa/usuario/:id', element: <Dtcpsiclogausuario/> },
 		
 
 		{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio/> },

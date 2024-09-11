@@ -88,6 +88,11 @@ export default function MenuIzq2 ({children}) {
           icon: <AccountBoxTwoToneIcon />, 
           path: '/dtc/psicologa/turnos' 
         },
+        { 
+          text: 'usuarios', 
+          icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/psicologa/usuarios' 
+        },
      
       
       ];
