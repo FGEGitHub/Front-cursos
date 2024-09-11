@@ -230,6 +230,7 @@ const MobileFriendlyTable = (props) => {
                         <StyledTableCell component="th" scope="row">
                         
 <Clasificar 
+
               id={row.id}
               traer={async (fecha) => {
                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
