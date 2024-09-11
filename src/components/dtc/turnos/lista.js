@@ -194,6 +194,7 @@ const MobileFriendlyTable = (props) => {
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Nombre</b></TableCell>
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Estado</b></TableCell>
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Horario</b></TableCell>
+                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Asitencia</b></TableCell>
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Psicólogo</b></TableCell>
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Asignar</b></TableCell>
                       <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Acciones</b></TableCell>
@@ -207,6 +208,7 @@ const MobileFriendlyTable = (props) => {
                         </StyledTableCell>
                         <StyledTableCell component="th" scope="row">{row.estado}</StyledTableCell>
                         <StyledTableCell component="th" scope="row">{row.detalle}</StyledTableCell>
+                        <StyledTableCell component="th" scope="row">{row.presente != undefined ?row.presente:<>Sin determ</>}</StyledTableCell>
                         <StyledTableCell component="th" scope="row">{row.nombrepsiq}</StyledTableCell>
                         <StyledTableCell component="th" scope="row">
                           <Asignar id={row.id} chicos={datos[1]} traer={async () => {
@@ -234,11 +236,11 @@ const MobileFriendlyTable = (props) => {
                 const user = JSON.parse(loggedUserJSON);
                 setUsuario(user);
                 if(user.nivel==40 || user.nivel==41 ){
-                  const historial = await servicioDtc.traertodoslosturnosfechacadia(form);
+                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha.fecha);
                   setDatos(historial);
                   setFecha(fecha);
                 }else{
-                  const historial = await servicioDtc.traertodoslosturnosfecha(form);
+                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha.fecha);
                 setDatos(historial);
                 setFecha(fecha);
                 }
