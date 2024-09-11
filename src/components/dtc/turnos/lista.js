@@ -5,6 +5,7 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import Buscador from '../usuario1/turnos/calendariobusquedadeturnos';
 import Asignar from './asignar';
+import Agregarvariasfechas from './agregarvariasfechas';
 import jsPDF from "jspdf";
 import 'jspdf-autotable';
 import Clasificar from '../usuario1/turnos/clasific';
@@ -136,6 +137,7 @@ const MobileFriendlyTable = (props) => {
   };
   return (
     <div>
+      
       {datos ? (
         <>
           <Typography variant="p" gutterBottom>
@@ -164,17 +166,18 @@ const MobileFriendlyTable = (props) => {
            
             }}
           />
+          <Agregarvariasfechas/>
           {form ? <><Nuevo fecha={form.fecha}
  traer={async (fecha) => {
   const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
   const user = JSON.parse(loggedUserJSON);
   setUsuario(user);
   if(user.nivel==40 || user.nivel==41 ){
-    const historial = await servicioDtc.traertodoslosturnosfechacadia(form);
+    const historial = await servicioDtc.traertodoslosturnosfechacadia(form.fecha);
     setDatos(historial);
     setFecha(fecha);
   }else{
-    const historial = await servicioDtc.traertodoslosturnosfecha(form);
+    const historial = await servicioDtc.traertodoslosturnosfecha(form.fecha);
   setDatos(historial);
   setFecha(fecha);
   }
@@ -206,7 +209,21 @@ const MobileFriendlyTable = (props) => {
                         <StyledTableCell component="th" scope="row">{row.detalle}</StyledTableCell>
                         <StyledTableCell component="th" scope="row">{row.nombrepsiq}</StyledTableCell>
                         <StyledTableCell component="th" scope="row">
-                          <Asignar id={row.id} chicos={datos[1]} traer={traer} />
+                          <Asignar id={row.id} chicos={datos[1]} traer={async () => {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                const user = JSON.parse(loggedUserJSON);
+                setUsuario(user);
+                if(user.nivel==40 || user.nivel==41 ){
+                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha);
+                  setDatos(historial);
+                  setFecha(fecha);
+                }else{
+                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha);
+                setDatos(historial);
+                setFecha(fecha);
+                }
+              
+              }} />
                         </StyledTableCell>
                         <StyledTableCell component="th" scope="row">
                         
