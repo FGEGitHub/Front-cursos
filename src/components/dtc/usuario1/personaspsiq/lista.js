@@ -237,6 +237,11 @@ Ver                        </Button>
 
     // definimos las columnas
     const columns = [
+      {
+        name: "id",
+        label: "id",
+
+    },
         {
             name: "apellido",
             label: "apellido",
