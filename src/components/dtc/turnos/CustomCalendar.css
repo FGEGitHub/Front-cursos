@@ -36,6 +36,10 @@
 }
 
 .react-calendar__tile--fechas2 {
-    background-color: red !important;
+    background-color: rgb(241, 47, 47) !important;
+    color: white !important;
+}
+.react-calendar__tile--fechas1y2 {
+    background-color: rgb(208, 208, 4) !important;
     color: white !important;
 }

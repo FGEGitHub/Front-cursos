@@ -66,7 +66,7 @@ const TablaNotificaciones = (props) => {
         <div>
     
 
-            <h2>Lista de chicos</h2>
+            <h2>Lista de Turnos</h2>
             {chicos  ? (
                 <div>
                     <Calendar
@@ -91,11 +91,17 @@ const TablaNotificaciones = (props) => {
                         }}
                         tileClassName={({ date, view }) => {
                             if (view === 'month') {
-                                if (fechas1.some(f1 => isSameDay(f1, date))) {
-                                    return 'react-calendar__tile--fechas1';
+                                const isFecha1 = fechas1.some(f1 => isSameDay(f1, date));
+                                const isFecha2 = fechas2.some(f2 => isSameDay(f2, date));
+                                
+                                if (isFecha1 && isFecha2) {
+                                    return 'react-calendar__tile--fechas1y2'; // Clase para cuando ambas fechas coinciden
                                 }
-                                if (fechas2.some(f2 => isSameDay(f2, date))) {
-                                    return 'react-calendar__tile--fechas2';
+                                if (isFecha1) {
+                                    return 'react-calendar__tile--fechas1'; // Clase para fechas1
+                                }
+                                if (isFecha2) {
+                                    return 'react-calendar__tile--fechas2'; // Clase para fechas2
                                 }
                             }
                             return null;

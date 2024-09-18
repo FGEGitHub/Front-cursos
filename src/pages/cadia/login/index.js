@@ -34,7 +34,7 @@ export default function Paginas() {
           
             case 40:
               
-                            navigate('/cadia/usuario/calendario')
+                            navigate('/cadia/usuario/chicos')
               break;
               case 41:
                 navigate('/cadia/profesionales/inicio');

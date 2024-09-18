@@ -59,7 +59,7 @@ const LoginForm = () => {
 
       switch (user.nivel) {
         case 40:
-          navigate('/cadia/calendario');
+          navigate('/cadia/usuario/chicos');
           break;
           case 41:
             navigate('/cadia/profesionales/inicio');
@@ -84,7 +84,7 @@ const LoginForm = () => {
 
     switch (user.nivel) {
       case 40:
-        navigate('/cadia/usuario/calendario');
+        navigate('/cadia/usuario/turnos');
         window.location.reload(true);
         break;
         case 41:
