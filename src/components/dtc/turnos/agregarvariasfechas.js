@@ -88,13 +88,13 @@ const ScheduleDialog = () => {
      alert(rt)
       handleClose();
     } catch (error) {
-      console.error('Error saving the schedule:', error);
+      console.error('Error :', error);
     }
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary"onClick={handleClickOpen}>
         Agregar varias fechas
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -175,8 +175,8 @@ const ScheduleDialog = () => {
                                             </FormControl> </> : <>Cargando</>}
         </DialogContent>
         <DialogActions>
-          <Button variant='contained' color='primary' onClick={handleClose}>Cancel</Button>
-          <Button  variant='contained' onClick={handleSubmit}>Save</Button>
+          <Button variant='contained' color='primary' onClick={handleClose}>Cancelar</Button>
+          <Button  variant='contained' onClick={handleSubmit}>Guardar</Button>
         </DialogActions>
       </Dialog>
     </div>
