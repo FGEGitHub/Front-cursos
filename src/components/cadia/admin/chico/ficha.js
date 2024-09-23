@@ -9,6 +9,7 @@ import Vinculos from './modalvinculos'
 import Avatar from "@mui/material/Avatar";
 import Calendario from './calendario'
 import Anadirprof  from './modalanadirprof'
+import Anadirhorarios from './asignarhorarios'
 
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = (props) => {
@@ -158,6 +159,8 @@ backgroundColor:'#b0bec5'        }}>
                     <Borrarusuaio 
 
                         id ={chico.id}/>
+                        <Anadirhorarios
+                         id ={chico.id}/>
                     <Modificar 
     id ={chico.id}
     

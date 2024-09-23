@@ -13,6 +13,7 @@ import Borrar from '../usuario1/turnos/borrar';
 import Skeleton from '@mui/material/Skeleton';
 import logo from "../../../Assets/logomuni.png";
 import Nuevo from "../usuario1/turnos/nuevoturno"
+import MUIDataTable from "mui-datatables";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -135,6 +136,224 @@ const MobileFriendlyTable = (props) => {
     // Guardar PDF
     doc.save(`${row.nombre}_turno.pdf`);
   };
+  function customnombre(dataIndex, rowIndex, data, onClick) {
+    return (
+        <>
+
+{datos[0][dataIndex]['nombre'] ? <>{datos[0][dataIndex]['nombre']} </> :<>Disponible</>}
+
+        </>
+    );
+}
+
+function customacciones(dataIndex, rowIndex, data, onClick) {
+  return (
+      <>
+
+                        
+<Clasificar 
+
+              id={datos[0][dataIndex].id}
+              traer={async (fecha) => {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                const user = JSON.parse(loggedUserJSON);
+                setUsuario(user);
+                if(user.nivel==40 || user.nivel==41 ){
+                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha.fecha);
+                  setDatos(historial);
+                  setFecha(fecha);
+                }else{
+                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha.fecha);
+                setDatos(historial);
+                setFecha(fecha);
+                }
+              
+              }}/>
+           
+              <Borrar 
+               id={datos[0][dataIndex].id}
+               traer={async () => {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                const user = JSON.parse(loggedUserJSON);
+                setUsuario(user);
+                if(user.nivel==40 || user.nivel==41 ){
+                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha);
+                  setDatos(historial);
+                  setFecha(fecha);
+                }else{
+                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha);
+                setDatos(historial);
+                setFecha(fecha);
+                }
+              
+              }} />
+
+      </>
+  );
+}
+function customaagendar(dataIndex, rowIndex, data, onClick) {
+  return (
+      <>
+
+<Asignar id={datos[0][dataIndex].id} chicos={datos[1]} traer={async () => {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                const user = JSON.parse(loggedUserJSON);
+                setUsuario(user);
+                if(user.nivel==40 || user.nivel==41 ){
+                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha);
+                  setDatos(historial);
+                  setFecha(fecha);
+                }else{
+                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha);
+                setDatos(historial);
+                setFecha(fecha);
+                }
+              
+              }} />
+      </>
+  );
+}
+
+  const columns = [
+   
+  {
+    name: "nombre",
+    options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+          customnombre(
+                dataIndex,
+                rowIndex,
+                // overbookingData,
+                // handleEditOpen
+            )
+    }
+
+},
+{
+  name: "estado",
+  label: "estado",
+
+},
+{
+  name: "nombrepsiq",
+  label: "psicologo",
+  
+},
+{
+  name: "detalle",
+  label: "horario",
+  
+},
+
+{
+  name: "presente",
+  label: "asistencia",
+  
+},
+
+
+      {
+        name: "fecha",
+        label: "fecha de cita",
+
+    },
+  
+    
+    {
+      name: "agendar",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+            customaagendar(
+                  dataIndex,
+                  rowIndex,
+                  // overbookingData,
+                  // handleEditOpen
+              )
+      }
+  
+  },
+  {
+    name: "acciones",
+    options: {
+        customBodyRenderLite: (dataIndex, rowIndex) =>
+          customacciones(
+                dataIndex,
+                rowIndex,
+                // overbookingData,
+                // handleEditOpen
+            )
+    }
+
+},
+    
+
+
+  ];
+   
+  const options = {
+    setTableProps: () => {
+        return {
+          style: {
+            backgroundColor: "#e3f2fd", // Cambia el color de fondo de la tabla
+          },
+        };
+      },
+      customHeadRender: (columnMeta, handleToggleColumn) => ({
+        TableCell: {
+          style: {
+            backgroundColor: '#1565c0', // Cambia el color de fondo del encabezado
+            color: 'white', // Cambia el color del texto del encabezado
+          },
+        },
+      }),
+    selectableRows: false, // Desactivar la selección de filas
+    stickyHeader: true,
+    selectableRowsHeader: false,
+    selectableRowsOnClick: true,
+    responsive: 'scroll',
+    rowsPerPage: 5,
+    rowsPerPageOptions: [5, 10, 15],
+    downloadOptions: { filename: 'tableDownload.csv', separator: ',' },
+    print: true,
+    filter: true,
+    viewColumns: true,
+    pagination: true,
+
+    textLabels: {
+      body: {
+        noMatch: "No se encontraron registros",
+        toolTip: "Ordenar",
+      },
+      pagination: {
+        next: "Siguiente",
+        previous: "Anterior",
+        rowsPerPage: "Filas por página:",
+        displayRows: "de",
+      },
+      toolbar: {
+        search: "Buscar",
+        downloadCsv: "Descargar CSV",
+        print: "Imprimir",
+        viewColumns: "Ver columnas",
+        filterTable: "Filtrar tabla",
+      },
+      filter: {
+        all: "Todos",
+        title: "FILTROS",
+        reset: "RESETEAR",
+      },
+      viewColumns: {
+        title: "Mostrar columnas",
+        titleAria: "Mostrar/ocultar columnas de la tabla",
+      },
+      selectedRows: {
+        text: "fila(s) seleccionada(s)",
+        delete: "Eliminar",
+        deleteAria: "Eliminar filas seleccionadas",
+      },
+    },
+
+  };
   return (
     <div>
       
@@ -183,7 +402,7 @@ const MobileFriendlyTable = (props) => {
   }
 
 }}/></>:<></>}
-          <TableContainer>
+          {/* <TableContainer>
             {!datos[0] ? (
               <Skeleton />
             ) : (
@@ -272,7 +491,27 @@ const MobileFriendlyTable = (props) => {
                 </Table>
               </>
             )}
-          </TableContainer>
+          </TableContainer> */}
+          <MUIDataTable
+
+title={"Lista de Turnos"}
+data={datos[0]}
+columns={columns}
+actions={[
+    {
+        icon: 'save',
+        tooltip: 'Save User',
+        onClick: (event, rowData) => alert("You saved " + rowData.name)
+    }
+]}
+options={options}
+//className={classes.table} // Aplica el estilo de la tabla
+//classes={{
+ // bodyCell: classes.bodyCell, // Aplica el estilo del texto en las celdas del cuerpo
+ // selectCell: classes.selectCell, // Aplica el estilo de las celdas de selección
+//}}
+
+/>
         </>
       ) : (
         <></>

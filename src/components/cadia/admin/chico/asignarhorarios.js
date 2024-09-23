@@ -1,0 +1,98 @@
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import servicioDtc from '../../../../services/dtc';
+import React, { useState, useEffect } from "react";
+import DialogActions from '@mui/material/DialogActions';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
+// Función para obtener el día de la semana a partir de una fecha
+const obtenerDiaSemana = (fecha) => {
+  const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+  const dia = new Date(fecha).getDay();
+  return diasSemana[dia];
+};
+
+export default function SelectTextFields(props) {
+  const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({
+    id_persona: "",
+    id_turno: props.id_turno,
+    id_cursado: props.id_cursado,
+    horariosSeleccionados: [],
+  });
+  const [datos, setDatos] = useState([]);
+
+  const traer = async () => {
+    const nov = await servicioDtc.traerhorariosdisponiblescadia(props.id);
+    setDatos(nov);
+    setForm({
+      ...form,
+      id_persona: nov[0].id,
+    });
+  };
+
+  const handleChange = (idHorario) => {
+    setForm((prevForm) => {
+      const isSelected = prevForm.horariosSeleccionados.includes(idHorario);
+      const nuevosHorarios = isSelected
+        ? prevForm.horariosSeleccionados.filter((id) => id !== idHorario)
+        : [...prevForm.horariosSeleccionados, idHorario];
+      return { ...prevForm, horariosSeleccionados: nuevosHorarios };
+    });
+  };
+
+  const handleClickOpen = () => {
+    traer();
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDeterminar = async (event) => {
+    event.preventDefault();
+    try {
+      await servicioDtc.enviarhorariosdlchico(form);  // Aquí se envían los horarios seleccionados al backend
+    } catch (error) {
+      console.error(error);
+    }
+    setOpen(false);
+  };
+
+  return (
+    <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
+      <Button variant="outlined" onClick={handleClickOpen}>Seleccionar Horarios</Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <b>Elegir horarios</b><br/>
+          {datos.map((horario) => {
+            const diaSemana = obtenerDiaSemana(horario.fecha); // Obtener el día de la semana
+            const estilo = horario.estado === 'Agendado' ? { color: 'blue' } : {}; // Color azul si está agendado
+
+            return (
+              <FormControlLabel
+                key={horario.id}
+                control={
+                  <Checkbox
+                    checked={form.horariosSeleccionados.includes(horario.id)}
+                    onChange={() => handleChange(horario.id)}
+                  />
+                }
+                label={`${horario.fecha} (${diaSemana}) - ${horario.detalle} hs - ${horario.nombreu} - ${horario.prof}`}
+                style={estilo} // Aplicar estilo condicional
+              />
+            );
+          })}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeterminar}>Confirmar</Button>
+          <Button onClick={handleClose}>Cancelar</Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  );
+}
