@@ -207,7 +207,7 @@ export default function Ingresos() {
 
         },
    
- 
+/*  
 {
   name: "agregadoagrupo",
   label: "Agregado a grupo WASAP",
@@ -225,7 +225,7 @@ export default function Ingresos() {
           )
   }
 
-},  
+},   */
     {
       name: "Acciones",
       options: {
