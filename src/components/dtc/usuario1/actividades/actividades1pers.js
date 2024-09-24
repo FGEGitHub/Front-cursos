@@ -72,7 +72,7 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-
+console.log(usuario.nivel)
                 const today = new Date();
                 const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
 

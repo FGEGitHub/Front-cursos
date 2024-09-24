@@ -72,6 +72,7 @@ export default function MenuIzq2 ({children}) {
     { text: 'Chicos', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/chicos' },
     { text: 'Profesionales', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/profesionales' },
     { text: 'Turnos', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/turnos' },
+    { text: 'Informes', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/actividades' },
 
   ];
 
@@ -82,7 +83,7 @@ export default function MenuIzq2 ({children}) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+   
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Drawer
@@ -156,6 +157,6 @@ export default function MenuIzq2 ({children}) {
           </div>
         </Box>
       </Box>
-    </ThemeProvider>
+    
   );
 }

@@ -191,6 +191,7 @@ import Cadiaprofturnos from '../pages/cadia/profesionales/turnos'
 import TurnosCadia from '../pages/cadia/admin/turnos'
 import Cadiaprofinformes from '../pages/cadia/profesionales/informes'
 
+import Cadiaactivs from '../pages/cadia/admin/actividades'
 
 
 const Rutas = [
@@ -384,6 +385,8 @@ const Rutas = [
 		{ path: '/cadia/usuario/turnos', element: <TurnosCadia/> },
 		{ path: '/cadia/usuario/chico/:id', element: <CadiaChico/> },
 		{ path: '/cadia/usuario/usuarios', element: <CadiaUsuarios/> },
+		{ path: '/cadia/usuario/actividades', element: <Cadiaactivs/> },
+
 		{ path: '/cadia/usuario/profesionales', element: <CadiaProfesionales/> },
 		{ path: '/cadia/profesionales/turnos', element: <Cadiaprofturnos/> },
 		{ path: '/cadia/profesionales/inicio', element: <CadiaProfesionalesclases/> },
