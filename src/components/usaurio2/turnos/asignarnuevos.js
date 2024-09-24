@@ -97,7 +97,7 @@ export default function Clasenueva(props) {
                                         <>
                                             <label>
                                                  <p>  <input type="checkbox" checked={selectedOptions.includes( row.id )} onChange={() => handleOptionChange( row.id )} />
-                                                 {row.estado=="Rechazada" ? <><p style={{  color:"red"  }}>{row.apellido}  {row.nombre}</p></>:<>{row.apellido}  {row.nombre}</>}  </p>   <div style={{ color: 'green' }} >Modalidad:{row.modalidad}</div> <div style={{ backgroundColor: 'black', color:"white"  }} >Participante de feria{row.participante_feria}</div>Categoria {row.categoria}
+                                                 {row.estado=="Rechazada" ? <><p style={{  color:"red"  }}>{row.apellido}  {row.nombre}</p></>:<>{row.apellido}  {row.nombre}</>}  </p>   <div style={{ color: 'green' }} >Priori1: :{row.descripcion}</div> <div style={{ backgroundColor: 'black', color:"white"  }} >Priori2 {row.descripcion2}</div>Categoria {row.categoria}
                                             </label>
                                             <br />
                                         </>
