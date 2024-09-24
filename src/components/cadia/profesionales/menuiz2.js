@@ -9,25 +9,37 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
-import logo from "../../../Assets/logocadia.jpg";
-import servicioDtc from '../../../services/dtc';
-import WcTwoToneIcon from '@mui/icons-material/WcTwoTone';
+import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
+import Navbar from '../Navbar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
-import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
-import ArchitectureIcon from '@mui/icons-material/Architecture';
-import Navbar from '../Navbar';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import servicioDtc from '../../../services/dtc';
+
+// Importa todas las imágenes según el id
+import Rocio from '../../../Assets/rocbon.png'; // id 290
+import Gonzalo from '../../../Assets/gonz.png'; // id 286
+import Laura from '../../../Assets/lauraal.png'; // id 279
+import Mar from '../../../Assets/marburna.png'; // id 282
+import Paz from '../../../Assets/pazizuet.png'; // id 285
+import Vir from '../../../Assets/viraq.png'; // id 280
+import Vic from '../../../Assets/vicsanch.png'; // id 287
+import Ol from '../../../Assets/olgaac.png'; // id 278
+import NAt from '../../../Assets/natacev.png'; // id 277
+import Caro from '../../../Assets/carobernasc.png'; // id 281
+import Agus from '../../../Assets/agfig.png'; // id 291
+import Barb from '../../../Assets/barbfalc.png'; // id 284
+import Guad from '../../../Assets/guadsot.png'; // id 290
+import Pau from '../../../Assets/paukees.png'; // id 290
 
 const drawerWidth = 240;
+
 const theme = createTheme({
   palette: {
     background: {
-      default: "white" // Fondo crema
+      default: "white"
     },
     primary: {
-      main: '#FFFDD0',
+      main: '#E0F8F8',
     },
     secondary: {
       main: '#000000',
@@ -35,9 +47,8 @@ const theme = createTheme({
   },
 });
 
-export default function MenuIzq2 ({children}) {
-  const [cumple, setCumple] = useState();
-  const [estemes, setEstemes] = useState();
+export default function MenuIzq2({ children }) {
+  const [id, setId] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,12 +57,11 @@ export default function MenuIzq2 ({children}) {
 
   const traer = async () => {
     try {
-      const today = new Date();
-      const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-      console.log(formattedDate);
-      const historial = await servicioDtc.traercumples({fecha:formattedDate});
-      setCumple(historial[0]);
-      setEstemes(historial[1]);
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+      if (loggedUserJSON) {
+        const usuario = JSON.parse(loggedUserJSON);
+        setId(usuario.id);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -66,19 +76,36 @@ export default function MenuIzq2 ({children}) {
     window.location.reload(true);
   };
 
+  // Mapeo de ID a imágenes
+  const imageMap = {
+    290: Rocio,
+    286: Gonzalo,
+    279: Laura,
+    282: Mar,
+    285: Paz,
+    280: Vir,
+    287: Vic,
+    278: Ol,
+    277: NAt,
+    281: Caro,
+    291: Agus,
+    284: Barb,
+  };
+
   const menuItems = [
     { text: 'Actividades', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/profesionales/inicio' },
-    { text: 'turnos', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/profesionales/turnos' },
+    { text: 'Turnos', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/profesionales/turnos' },
+    { text: 'Informes', icon: <GradingTwoToneIcon color="primary" />, path: '/cadia/profesionales/informes' },
   ];
 
   const logoStyle = {
     width: "80%",
     margin: "16px auto",
-    display: "block"
+    display: "block",
   };
 
   return (
-    <ThemeProvider theme={theme}>
+
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Drawer
@@ -87,9 +114,9 @@ export default function MenuIzq2 ({children}) {
             flexShrink: 0,
             '& .MuiDrawer-paper': {
               width: drawerWidth,
-              backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.primary.main,
               boxSizing: 'border-box',
-              color: "#000000"
+            //  color: "#000000",
             },
           }}
           variant="permanent"
@@ -97,61 +124,33 @@ export default function MenuIzq2 ({children}) {
         >
           <Navbar logout={{ handleLogout }} />
           <Toolbar />
-          <img style={logoStyle} src={logo} alt="logo" />
+
+          {/* Renderiza la imagen basada en el ID */}
+          {id && (
+            <>
+              <img style={logoStyle} src={imageMap[id]} alt="user" />
+            </>
+          )}
+
           <Divider />
           <List>
             {menuItems.map((item) => (
               <ListItem button key={item.text} onClick={() => handleClick(item.path)}>
-                <ListItemIcon sx={{ color: "#fafafa" }}>{item.icon}</ListItemIcon>
+                <ListItemIcon sx={{ color: "#E0F8F8" }}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItem>
             ))}
           </List>
           <Divider />
-      {/*     {cumple && cumple.length > 0 ? (
-            <>
-              <List>
-                <ListItem>
-                  <ListItemText primary="HOY HAY CUMPLE" />
-                </ListItem>
-                {cumple.map((item) => (
-                  <ListItem key={item.nombre}>
-                    <ListItemText primary={`${item.nombre} ${item.apellido}`} />
-                  </ListItem>
-                ))}
-              </List>
-            </>
-          ) : (
-            <ListItem>
-              <ListItemText primary="Hoy no hay cumples" />
-              <SentimentVeryDissatisfiedIcon />
-            </ListItem>
-          )}
-          {estemes && estemes.length > 0 && (
-            <>
-              <Divider />
-              <List>
-                <ListItem>
-                  <ListItemText primary="Cumples este mes" />
-                </ListItem>
-                {estemes.map((item) => (
-                  <ListItem key={item.nombre}>
-                    <ListItemText primary={`${item.nombre} ${item.apellido} - el dia (${item.fecha_nacimiento})`} />
-                  </ListItem>
-                ))}
-              </List>
-            </>
-          )} */}
-          <Divider />
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 0, backgroundColor: "#ffcdd2" }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 0, backgroundColor: "white" }}>
           <Toolbar />
-          <div >
+          <div>
             <br />
             {children}
           </div>
         </Box>
       </Box>
-    </ThemeProvider>
+
   );
 }

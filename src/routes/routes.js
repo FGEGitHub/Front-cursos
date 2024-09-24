@@ -189,6 +189,8 @@ import CadiaUsuarios from '../pages/cadia/admin/usuarios'
 import Cadiaadmincalendario from '../pages/cadia/admin/calendario'
 import Cadiaprofturnos from '../pages/cadia/profesionales/turnos'
 import TurnosCadia from '../pages/cadia/admin/turnos'
+import Cadiaprofinformes from '../pages/cadia/profesionales/informes'
+
 
 
 const Rutas = [
@@ -388,6 +390,7 @@ const Rutas = [
 		{ path: '/cadia/profesionales/asistencia/:id', element: <CadiaProfesionalesasistencia/> },
 		{ path: '/cadia/usuario/profesional/:id', element: <CadiaAdminprofesional/> },
 		{ path: '/cadia/usuario/calendario', element: <Cadiaadmincalendario/> },
+		{ path: '/cadia/profesionales/informes', element: <Cadiaprofinformes/> },
 
 		
 

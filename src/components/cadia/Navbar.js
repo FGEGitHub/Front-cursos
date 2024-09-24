@@ -77,7 +77,7 @@ const traer = async () => {
   }
   return (
     <React.Fragment>
-      <AppBar sx={{ backgroundColor: '#fff4e5', }}>
+      <AppBar sx={{ backgroundColor: '#E0F8F8', }}>
         <Toolbar>
            <img style={islogo} src={logo} alt="logo" />  
           {isMatch ? (
@@ -100,7 +100,7 @@ const traer = async () => {
                 {cargado ? <div> <Button onClick={inicio} sx={{ marginLeft: "10px" }} variant="Outlined">
                 {user.length > 0? <>
                  
-                  <Tab sx={{fontSize:" 17px "}}label= {`hola  ${user[0].nombre} !`}/>
+                  <Tab sx={{fontSize:" 17px ", color:'#f73378',  textShadow: '1px 1px 2px black'}}label= {`hola  ${user[0].nombre} !`}/>
 
                   </>:<>
                   <Tab />
@@ -112,11 +112,11 @@ const traer = async () => {
               {user? <>
           
               <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab sx={{fontSize:" 17px "}}label= {`Cerrar sesion`}/>
+                  <Tab sx={{fontSize:" 17px ", color:'#f73378',  textShadow: '1px 1px 2px black'}} label= {`Cerrar sesion`}/>
               </Button>
               </>:<>
               <Button sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab sx={{fontSize:" 17px "}}label= {`Iniciar sesion`}/>
+                  <Tab sx={{fontSize:" 17px ", color:'#f73378',  textShadow: '1px 1px 2px black'}}llabel= {`Iniciar sesion`}/>
               </Button></>}
               </Tabs>
              

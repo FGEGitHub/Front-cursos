@@ -18,20 +18,14 @@ const obtenerDiaSemana = (fecha) => {
 export default function SelectTextFields(props) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
-    id_persona: "",
-    id_turno: props.id_turno,
-    id_cursado: props.id_cursado,
-    horariosSeleccionados: [],
+    id_persona: props.id_persona,  // Asignamos el id_persona que viene de props
+    horariosSeleccionados: [],  // Inicializamos los horarios seleccionados
   });
   const [datos, setDatos] = useState([]);
 
   const traer = async () => {
     const nov = await servicioDtc.traerhorariosdisponiblescadia(props.id);
     setDatos(nov);
-    setForm({
-      ...form,
-      id_persona: nov[0].id,
-    });
   };
 
   const handleChange = (idHorario) => {
@@ -55,8 +49,14 @@ export default function SelectTextFields(props) {
 
   const handleDeterminar = async (event) => {
     event.preventDefault();
+
+    const dataToSend = {
+      id_persona: form.id_persona, // Solo enviar el id_persona heredado de props
+      turnos: form.horariosSeleccionados // Solo enviar los id_turno seleccionados
+    };
+
     try {
-      await servicioDtc.enviarhorariosdlchico(form);  // Aquí se envían los horarios seleccionados al backend
+      await servicioDtc.enviarhorariosdlchico(dataToSend);  // Aquí se envían los datos formateados al backend
     } catch (error) {
       console.error(error);
     }
