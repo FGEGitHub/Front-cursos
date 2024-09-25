@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import Listachiquesa from '../../../../components/dtc/usuario1/turnos/lista';
 import Agregarvarios from '../../../../components/dtc/usuario1/turnos/agregarvariosturnos';
 
-import MenuuCel from '../../../../components/cadia/admin/menuizq1';
+import MenuuCel from '../../../../components/cadia/profesionales/menucel';
 
 import {
   makeStyles,
@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+  
   container: {
     padding: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Paginas() {
+  
     const navigate = useNavigate();
     const theme = useTheme();
     const classes = useStyles();
@@ -59,10 +61,10 @@ export default function Paginas() {
       <>
         {isMatch ? 
           <>
-          <Menuizq>
+           <MenuuCel/>
             <div >   <Agregarvarios/>
               <Listachiquesa/>
-            </div> </Menuizq>
+            </div> 
           </> :
           <><Menuizq>  <Agregarvarios/>
             <Listachiquesa/>

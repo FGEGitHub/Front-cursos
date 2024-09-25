@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg';
 import React, { useEffect, useState } from "react";
 import Listachiquesa from '../../../../components/dtc/usuario1/actividades/actividades1pers';
-import MenuuCel from '../../../../components/cadia/admin/menuizq1';
+import MenuuCel from '../../../../components/cadia/profesionales/menucel';
 
 import {
   makeStyles,
@@ -57,10 +57,10 @@ export default function Paginas() {
       <>
         {isMatch ? 
           <>
-          <Menuizq>
+          <MenuuCel/>
             <div > 
               <Listachiquesa/>
-            </div> </Menuizq>
+            </div> 
           </> :
           <><Menuizq>
             <Listachiquesa/></Menuizq>
