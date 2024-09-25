@@ -19,7 +19,7 @@ export default function Clasenueva(props) {
     let id = params.id
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
-    const [form, setForm] = useState({ id: props.id })
+    const [form, setForm] = useState()
     const handleChange = (e) => {
         console.log(form)
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -35,12 +35,13 @@ export default function Clasenueva(props) {
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON)
       
-      
+      //{props.id}
+      const jsonUnido = { ...form, ...{id:props.id} };
                 if(usuario.nivel==41 || usuario.nivel==40){
-                   const respuesta=  await servicioDtc.clasificarturnocadia(form)
+                   const respuesta=  await servicioDtc.clasificarturnocadia(jsonUnido)
                    alert(respuesta)
                 }else{
-                   const respuesta=  await servicioDtc.clasificarturno(form)
+                   const respuesta=  await servicioDtc.clasificarturno(jsonUnido)
                    alert(respuesta)
                 }
             }
@@ -72,7 +73,7 @@ export default function Clasenueva(props) {
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>  Elegir</DialogTitle>
+                <DialogTitle>  Elegir ({props.id})</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',

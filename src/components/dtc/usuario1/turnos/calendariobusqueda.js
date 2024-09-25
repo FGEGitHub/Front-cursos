@@ -63,7 +63,7 @@ const TablaNotificaciones = (props) => {
         <div>
           
 
-            <h2>Lista de chicos</h2>
+            <h2>Lista </h2>
             {chicos ? (
                 <div>
                     <Calendar

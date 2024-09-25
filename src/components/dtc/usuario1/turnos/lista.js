@@ -382,16 +382,9 @@ const TablaNotificaciones = (props) => {
 
             if(usuario.nivel==40 || usuario.nivel==41 ){
 
-              if(usuario.nivel==40  ){
-                const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
-                setchicos(novedades_aux[0])
-                setDatos(novedades_aux[1])
-                
-              }else{
-                const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha,id:usuario.id})
-                setchicos(novedades_aux[0])
-                setDatos(novedades_aux[1])
-              }
+              const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+              setchicos(novedades_aux[0])
+              setDatos(novedades_aux[1])
 
     
 
@@ -446,9 +439,7 @@ const TablaNotificaciones = (props) => {
   }
 
 }}/></>:<></>}
-    { datos ? <>  <Alert variant="filled" severity="success">
- <b> Actualmente pendientes {datos.pendientes}</b>
-</Alert> </>:<></>}
+
 
 
             {chicos ? <>

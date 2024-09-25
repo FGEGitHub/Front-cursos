@@ -12,17 +12,20 @@ import {
   useMediaQuery,
   useTheme,
 } from '@material-ui/core';
-
 const useStyles = makeStyles((theme) => ({
-  
   container: {
     padding: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
       maxWidth: '600px', // Define el ancho máximo en pantallas más grandes
       margin: '0 auto', // Centra el contenido en pantallas más grandes
+      transform: 'scale(0.90)', // Escala al 90% para pantallas grandes
+      transformOrigin: 'center center', // Origen de la transformación en el centro
     },
-    transform: 'scale(0.90)', // Escala al 90%
-    transformOrigin: 'center center', // Origen de la transformación en el centro
+    [theme.breakpoints.down('sm')]: {
+      transform: 'scale(0.75)', // Escala más pequeña para pantallas móviles
+      transformOrigin: 'center top', // Ajusta el origen de la transformación
+      padding: theme.spacing(1), // Reduce el padding para pantallas pequeñas
+    },
     background: 'linear-gradient(to bottom, #f5f5dc, #f5deb3)', // Fondo beige degradado
   },
 }));
