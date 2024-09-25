@@ -334,6 +334,12 @@ const TablaNotificaciones = (props) => {
           label: "estado",
 
       },
+        
+      {
+        name: "presente",
+        label: "asistencia",
+
+    },
       
 
         {
@@ -465,6 +471,7 @@ const TablaNotificaciones = (props) => {
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fecha</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Estado</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Asistencia</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Psicologo/a</b></TableCell>
                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
 
@@ -481,32 +488,64 @@ const TablaNotificaciones = (props) => {
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.fecha} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.presente == null ? <>Sin tomar</> :row.presente} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.nombrepsiq} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <Borrar 
-                                                        id={row.id}
-              traer={async () => {
+                                                        <StyledTableCell component="th" scope="row"> 
+<Clasificar 
+              id={row.id}
+              traer={ async (fecha) => {
                 try {
+                  console.log(fecha)
+               
                     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                     if (loggedUserJSON) {
                         const usuario = JSON.parse(loggedUserJSON)
-        
+              
                         setUsuario(usuario)
+              
                         if(usuario.nivel==41){
-                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
                         }else{
-                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
                         }
                     }
-        
+              
                 } catch (error) {
-        
+              
                 }
-        
-            }}/> </StyledTableCell>
+              
+              }}/> <Borrar 
+                                                        id={row.id}
+              traer={ async (fecha) => {
+                try {
+                  console.log(fecha)
+               
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                    if (loggedUserJSON) {
+                        const usuario = JSON.parse(loggedUserJSON)
+              
+                        setUsuario(usuario)
+              
+                        if(usuario.nivel==41){
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+                          setchicos(novedades_aux[0])
+                          setDatos(novedades_aux[1])
+                        }else{
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+                          setchicos(novedades_aux[0])
+                          setDatos(novedades_aux[1])
+                        }
+                    }
+              
+                } catch (error) {
+              
+                }
+              
+              }}/> </StyledTableCell>
 
 
 
