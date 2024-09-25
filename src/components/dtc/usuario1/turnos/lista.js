@@ -303,6 +303,7 @@ const TablaNotificaciones = (props) => {
         }
 
     },
+
     {
       name: "nombre",
       options: {
@@ -322,6 +323,11 @@ const TablaNotificaciones = (props) => {
           label: "fecha de cita",
 
       },
+      {
+        name: "detalle",
+        label: "Horario",
+
+    },
     
         {
           name: "estado",
@@ -369,9 +375,20 @@ const TablaNotificaciones = (props) => {
             setUsuario(usuario)
 
             if(usuario.nivel==40 || usuario.nivel==41 ){
-              const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
-              setchicos(novedades_aux[0])
-              setDatos(novedades_aux[1])
+
+              if(usuario.nivel==40  ){
+                const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+                setchicos(novedades_aux[0])
+                setDatos(novedades_aux[1])
+                
+              }else{
+                const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha,id:usuario.id})
+                setchicos(novedades_aux[0])
+                setDatos(novedades_aux[1])
+              }
+
+    
+
             }else{
               const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
               setchicos(novedades_aux[0])
@@ -396,11 +413,22 @@ const TablaNotificaciones = (props) => {
 
           setUsuario(usuario)
           if(usuario.nivel==40 || usuario.nivel==41 ){
-            const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
-            setchicos(novedades_aux[0])
-            setDatos(novedades_aux[1])
+
+            if(usuario.nivel==40  ){
+              const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({form})
+              setchicos(novedades_aux[0])
+              setDatos(novedades_aux[1])
+              
+            }else{
+              const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
+              setchicos(novedades_aux[0])
+              setDatos(novedades_aux[1])
+            }
+
+  
+
           }else{
-            const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+            const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
             setchicos(novedades_aux[0])
             setDatos(novedades_aux[1])
           }
