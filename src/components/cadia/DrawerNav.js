@@ -106,7 +106,7 @@ const DrawerNav = () => {
    
     
      window.localStorage.removeItem('loggedNoteAppUser')
-     navigate("/dtc/login")
+     navigate("/cadia/login")
 
    } 
 
@@ -230,7 +230,7 @@ const DrawerNav = () => {
         {estemes ? <>
        { estemes.length>0? <>
        Cumples este mes
-        {estemes.map((item) => (
+  {/*       {estemes.map((item) => (
             <ListItem 
              
             >
@@ -238,7 +238,7 @@ const DrawerNav = () => {
             
             </ListItem>
           ))}
-       
+        */}
        </>:<></>}
         
         </>:<></>}

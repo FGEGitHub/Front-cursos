@@ -37,7 +37,7 @@ export default function Paginas() {
                             navigate('/cadia/usuario/chicos')
               break;
               case 41:
-                navigate('/cadia/profesionales/inicio');
+                navigate('/cadia/profesionales/turnos');
                 break;
 
              

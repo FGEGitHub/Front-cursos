@@ -62,7 +62,7 @@ const LoginForm = () => {
           navigate('/cadia/usuario/chicos');
           break;
           case 41:
-            navigate('/cadia/profesionales/inicio');
+            navigate('/cadia/profesionales/turnos');
             break;
        
         default:
@@ -88,7 +88,7 @@ const LoginForm = () => {
         window.location.reload(true);
         break;
         case 41:
-          navigate('/cadia/profesionales/inicio');
+          navigate('/cadia/profesionales/turnos');
           window.location.reload(true);
           break;
    
