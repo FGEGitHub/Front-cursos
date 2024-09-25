@@ -73,7 +73,7 @@ export default function Clasenueva(props) {
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>  Elegir ({props.id})</DialogTitle>
+                <DialogTitle>  Elegir </DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
