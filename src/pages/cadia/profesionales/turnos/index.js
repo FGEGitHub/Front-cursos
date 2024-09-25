@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg';
 import React, { useEffect, useState } from "react";
 import Listachiquesa from '../../../../components/dtc/usuario1/turnos/lista';
+import Agregarvarios from '../../../../components/dtc/usuario1/turnos/agregarvariosturnos';
+
 import MenuuCel from '../../../../components/cadia/admin/menuizq1';
 
 import {
@@ -58,12 +60,13 @@ export default function Paginas() {
         {isMatch ? 
           <>
           <Menuizq>
-            <div > 
+            <div >   <Agregarvarios/>
               <Listachiquesa/>
             </div> </Menuizq>
           </> :
-          <><Menuizq>
-            <Listachiquesa/></Menuizq>
+          <><Menuizq>  <Agregarvarios/>
+            <Listachiquesa/>
+          </Menuizq>
           </>
          
         }

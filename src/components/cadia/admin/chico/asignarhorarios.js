@@ -44,15 +44,19 @@ export default function SelectTextFields(props) {
   };
 
   const handleClose = () => {
+    setForm({
+      id_persona: props.id_persona,  // Asignamos el id_persona que viene de props
+      horariosSeleccionados: [],  // Inicializamos los horarios seleccionados
+    });
     setOpen(false);
   };
 
   const handleDeterminar = async (event) => {
     event.preventDefault();
-
+    
     const dataToSend = {
-      id_persona: form.id_persona, // Solo enviar el id_persona heredado de props
-      turnos: form.horariosSeleccionados // Solo enviar los id_turno seleccionados
+      id_persona: props.id, // Solo enviar el id_persona heredado de props
+      horariosSeleccionados: form.horariosSeleccionados // Solo enviar los id_turno seleccionados
     };
 
     try {

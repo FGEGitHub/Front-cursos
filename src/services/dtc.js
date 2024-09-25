@@ -861,7 +861,7 @@ const agregarvariasfechas= async  (datos) => {
 
 const enviarhorariosdlchico= async  (datos) => {
 
-  const {data } = await axios.post(baseUrl+'agregarvariasfechas',datos,config)
+  const {data } = await axios.post(baseUrl+'enviarhorariosdlchico',datos,config)
    
    return data  
 }
