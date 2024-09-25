@@ -504,11 +504,11 @@ const TablaNotificaciones = (props) => {
                         setUsuario(usuario)
               
                         if(usuario.nivel==41){
-                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
                         }else{
-                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
                         }
@@ -531,11 +531,11 @@ const TablaNotificaciones = (props) => {
                         setUsuario(usuario)
               
                         if(usuario.nivel==41){
-                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
                         }else{
-                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+                          const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
                         }
