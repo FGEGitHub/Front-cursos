@@ -181,6 +181,11 @@ const TablaNotificaciones = (props) => {
 
         },
         {
+            name: "descripcursado",
+            label: "Inscripta en",
+
+        },
+        {
             name: "Cambiar Estado",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
