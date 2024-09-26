@@ -5,7 +5,7 @@ import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
-import CambiarEstado from '../../usuario3/estado/modalestado'
+import CambiarEstado from '../../usaurio2/Cursos/ModalCAmbiarestado'
 import Tooltip from '@material-ui/core/Tooltip';
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
