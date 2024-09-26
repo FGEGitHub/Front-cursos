@@ -138,12 +138,8 @@ setInscripcion(  {id_cursado:props.id_cursado})
                              
                         
                                         
-                                         <option value='Asignado a curso'> 'Asignado a curso'</option>
-                                         <option value='Contactada esperando respuesta'> 'Contactada esperando respuesta'</option>
-                                         <option value='Confirmado'> 'Confirmado'</option>
-                                         <option value='Rechazado'> 'Rechazado'</option>
-                                         <option value='Asignado a llamado'> 'Asignado a llamado'</option>
-                        
+                                         <option value='Inscripta'> 'Sacar del curso'</option>
+                                     
                               <option value={'Pendiente'}>Asignar</option>
                             
  
