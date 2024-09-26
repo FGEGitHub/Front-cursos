@@ -95,7 +95,7 @@ const TablaNotificaciones = (props) => {
 
     return (
         <div>
-            <h2>Lista de Turnos</h2>
+            <h2>Lista de Turnos .</h2>
             {chicos.length > 0 ? (
                 <div>
                     <Calendar
