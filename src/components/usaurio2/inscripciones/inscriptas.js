@@ -181,6 +181,11 @@ const TablaNotificaciones = (props) => {
 
         },
         {
+            name: "estado",
+            label: "estado",
+
+        },
+        {
             name: "descripcursado",
             label: "Inscripta en",
 
