@@ -218,7 +218,7 @@ setRta(respuesta)
     const enviar = { ...inscripcion,...options };
 
     const respuesta = await servicioturnos.asignarcursonuevo(
-      {id:props.id, id_turno:inscripcion.id_turno}
+      {id:props.id}
 
 
     )
@@ -254,7 +254,6 @@ setRta(respuesta)
           <Dialog open={open} onClose={handleClose}>
             {activo ? <>
               <DialogContent>
-
 
 
                 <h3>Asignacion a curso a {props.nombre} {props.apellido} </h3>

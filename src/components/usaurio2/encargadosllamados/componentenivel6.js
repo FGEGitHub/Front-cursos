@@ -43,6 +43,7 @@ export default function Ingresos() {
    
 
           const ins = await servicioInscripciones.preinscriptascall(id)
+          console.log(ins[0])
           setInscrip(ins[0])
       
    
@@ -75,28 +76,27 @@ export default function Ingresos() {
       function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
           <>
-      {inscrip[dataIndex].estado != 'Asignada a curso' ? <>
+      {inscrip[dataIndex].estado != 'Asignadx a curso' ? <>
           <Vernscripto
           dni= {inscrip[dataIndex].dni}
+          id= {inscrip[dataIndex].id_inscripcion}
           nombre= {inscrip[dataIndex].nombre}
           apellido= {inscrip[dataIndex].apellido}
           telefono={inscrip[dataIndex].tel}
           telefono2={inscrip[dataIndex].tel2}
-          nombrecurso1={inscrip[dataIndex].nombrecurso1}
-          nombrecurso2={inscrip[dataIndex].nombrecurso2}
-          id_inscripcion={inscrip[dataIndex].id}
+          descripcion={inscrip[dataIndex].descripcion}
+  
+          id_inscripcion={inscrip[dataIndex].id_inscripcion}
        
     
           observaciones={inscrip[dataIndex].observaciones}
           fecha_carga={inscrip[dataIndex].fecha}
-          traer = { async () => {
-            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-            if (loggedUserJSON) {
-                const usuario = JSON.parse(loggedUserJSON)
+          traer = {async () => {
+         
       
-                const ins = await servicioInscripciones.preinscriptascall(usuario.id)
+                const ins = await servicioInscripciones.preinscriptascall(id)
                 setInscrip(ins[0])
-            }
+            
          
           }}/>
           </>:<>
@@ -233,7 +233,7 @@ export default function Ingresos() {
         <div >
 
     <MUIDataTable
-      title={"Lista de Inscripciones"}
+      title={"Lista de Inscripcioness"}
       data={inscrip}
       columns={columns}
       options={options}
