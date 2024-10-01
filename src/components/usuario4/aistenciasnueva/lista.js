@@ -98,6 +98,7 @@ const TablaNotificaciones = (props) => {
                         <TableRow>
                           <StyledTableCell>APELLIDO</StyledTableCell>
                           <StyledTableCell>NOMBRE</StyledTableCell>
+                          <StyledTableCell>DNI</StyledTableCell>
                           <StyledTableCell>Clase 1</StyledTableCell>
                           <StyledTableCell>Clase 2</StyledTableCell>
                           <StyledTableCell>Clase 3</StyledTableCell>
@@ -113,6 +114,8 @@ const TablaNotificaciones = (props) => {
                           <StyledTableRow key={row.id}>
                             <StyledTableCell>{row.apellido}</StyledTableCell>
                             <StyledTableCell>{row.nombre}</StyledTableCell>
+                            <StyledTableCell>{row.dni}</StyledTableCell>
+
                             {renderCellWithTooltip(row.id, 'clase1', row.clase1)}
                             {renderCellWithTooltip(row.id, 'clase2', row.clase2)}
                             {renderCellWithTooltip(row.id, 'clase3', row.clase3)}
