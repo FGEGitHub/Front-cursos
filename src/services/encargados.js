@@ -93,8 +93,21 @@ return data
 return data
        
   }
-
   
+  const cursadoparaasistencia = async (usuario) => {
+ 
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'cursadoparaasistencia/'+usuario, config)
+      if(data=== 'error login'){
+       
+        window.localStorage.removeItem('loggedNoteAppUser')
+        window.location.reload();
+      }
+    
+
+return data
+       
+  }
 
   const confirmaciondellamado= async  (datos) => {
     console.log(datos)
@@ -111,5 +124,11 @@ return data
   } 
 
   
-  
-  export default {clases,curso,listadeausentes,confirmaciondellamado,cambiarestadocurado,alumnasdelcurso}
+  const actualizarasistencia= async  (datos) => {
+    console.log(datos)
+     const {data } = await axios.post(baseUrl+'actualizarasistencia',datos,config)
+     
+   return data
+  } 
+
+  export default {actualizarasistencia,cursadoparaasistencia,clases,curso,listadeausentes,confirmaciondellamado,cambiarestadocurado,alumnasdelcurso}
