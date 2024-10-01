@@ -3,7 +3,7 @@ import MenuUsuario4 from '../../../components/usuario3/Menuizq3'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Clases from '../../../components/usuario3/Clasesdelcurso/todas'
-import Ficha from '../../../components/usuario3/datosdelturno/fichaturno'
+import Ficha from '../../../components/usuario4/aistenciasnueva/lista'
 
 export default function Paginas() {
 
