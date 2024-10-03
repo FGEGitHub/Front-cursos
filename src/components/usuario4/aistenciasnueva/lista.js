@@ -87,9 +87,7 @@ const TablaNotificaciones = (props) => {
         {clases ? (
           <>
             <div>
-              <Button variant="contained" onClick={() => setVista(!vista)}>
-                Vista <RemoveRedEyeIcon />
-              </Button>
+        <h2>Puedes hacer clieck en "Ausente" o "Presente" para tomar asistencia</h2>
               {vista ? (
                 <>
                   <TableContainer component={Paper}>

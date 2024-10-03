@@ -4,7 +4,7 @@ import MenuUsuario2 from '../../../components/usaurio2/Menuizq2'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Turno from '../../../components/usaurio2/Cursos/Fichacurso'
-import Clases from '../../../components/usaurio2/Clasesdelcurso/todas'
+import Clases from '../../../components/usuario4/aistenciasnueva/lista'
 
 export default function Paginas() {
 
