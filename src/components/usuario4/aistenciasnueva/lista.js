@@ -1,4 +1,4 @@
-import servicioEncargados from '../../../services/encargados'
+import servicioEncargados from '../../../services/encargados';
 import React, { useEffect, useState } from "react";
 import { Paper, Tooltip } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -71,23 +71,33 @@ const TablaNotificaciones = (props) => {
       }
     };
 
-    const renderCellWithTooltip = (id, clase, valorActual) => (
-      <Tooltip title="🖐️" arrow>
-        <StyledTableCell
-          onClick={() => handleAsistencia(id, clase, valorActual)}
-          style={{ cursor: 'pointer' }}
-        >
-          {valorActual}
-        </StyledTableCell>
-      </Tooltip>
-    );
+    const renderCellWithTooltip = (id, clase, valorActual) => {
+      const getColor = (valor) => {
+        return valor === 'Presente' ? 'green' : 'red';
+      };
+
+      return (
+        <Tooltip title="🖐️" arrow>
+          <StyledTableCell
+            onClick={() => handleAsistencia(id, clase, valorActual)}
+            style={{
+              cursor: 'pointer',
+              backgroundColor: getColor(valorActual),
+              color: 'white',
+            }}
+          >
+            {valorActual}
+          </StyledTableCell>
+        </Tooltip>
+      );
+    };
 
     return (
       <div>
         {clases ? (
           <>
             <div>
-        <h2>Puedes hacer clieck en "Ausente" o "Presente" para tomar asistencia</h2>
+              <h2>Puedes hacer clic en "Ausente" o "Presente" para tomar asistencia</h2>
               {vista ? (
                 <>
                   <TableContainer component={Paper}>
