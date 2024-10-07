@@ -8,10 +8,14 @@ import DialogActions from '@mui/material/DialogActions';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-// Función para obtener el día de la semana a partir de una fecha
+// Función para obtener el día de la semana a partir de una fecha en formato 'YYYY-MM-DD'
 const obtenerDiaSemana = (fecha) => {
-  const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-  const dia = new Date(fecha).getDay();
+  const diasSemana = [ 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado','Domingo'];
+  
+  // Convertir la fecha a un formato aceptado por Date
+  const [year, month, day] = fecha.split('-');
+  const dia = new Date(`${year}-${month}-${day}`).getDay();
+  
   return diasSemana[dia];
 };
 
