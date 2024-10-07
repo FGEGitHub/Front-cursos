@@ -140,7 +140,7 @@ const MobileFriendlyTable = (props) => {
     return (
         <>
 
-{datos[0][dataIndex]['nombre'] ? <>{datos[0][dataIndex]['nombre']} </> :<>Disponible</>}
+{datos[0][dataIndex]['nombre'] ? <>{datos[0][dataIndex]['nombre']} {datos[0][dataIndex]['apellido']} </> :<>Disponible</>}
 
         </>
     );
