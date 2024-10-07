@@ -71,6 +71,11 @@ const TablaNotificaciones = (props) => {
       }
     };
 
+    const handleWhatsAppClick = (numero) => {
+        const url = `https://wa.me/${numero}`;
+        window.open(url, '_blank');
+    };
+
     const renderCellWithTooltip = (id, clase, valorActual) => {
       const getColor = (valor) => {
         return valor === 'Presente' ? 'green' : 'red';
@@ -125,8 +130,18 @@ const TablaNotificaciones = (props) => {
                             <StyledTableCell>{row.apellido}</StyledTableCell>
                             <StyledTableCell>{row.nombre}</StyledTableCell>
                             <StyledTableCell>{row.dni}</StyledTableCell>
-                            <StyledTableCell>{row.tel}</StyledTableCell>
-                            <StyledTableCell>{row.tel2}</StyledTableCell>
+                            <StyledTableCell
+                              onClick={() => handleWhatsAppClick(row.tel)}
+                              style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                            >
+                              {row.tel}
+                            </StyledTableCell>
+                            <StyledTableCell
+                              onClick={() => handleWhatsAppClick(row.tel2)}
+                              style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
+                            >
+                              {row.tel2}
+                            </StyledTableCell>
 
                             {renderCellWithTooltip(row.id, 'clase1', row.clase1)}
                             {renderCellWithTooltip(row.id, 'clase2', row.clase2)}
