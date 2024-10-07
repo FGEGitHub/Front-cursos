@@ -75,14 +75,14 @@ const TablaNotificaciones = (props) => {
 console.log(usuario.nivel)
                 const today = new Date();
                 const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-
+///////////////////////actividades de todos 
                 setCurrentDate(formattedDate);
                 if(usuario.nivel==41){
-                    const historial = await servicioDtc.traeractividadesprofcadia(usuario.id)
+                    const historial = await servicioDtc.traeractividadesprofcadiaadminadmin(usuario.id)
                     setactividades(historial)
                 }else{
                     if(usuario.nivel==40){
-                        const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
+                        const historial = await servicioDtc.traeractividadesprofcadiaadminadmin(usuario.id)
                         setactividades(historial)
                     }else{
                         const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
@@ -123,11 +123,11 @@ console.log(usuario.nivel)
 
                                     setCurrentDate(formattedDate);
                                     if(usuario.nivel==41){
-                                        const historial = await servicioDtc.traeractividadesprofcadia(usuario.id)
+                                        const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
                                         setactividades(historial)
                                     }else{
                                         if(usuario.nivel==40){
-                                            const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
+                                            const historial = await servicioDtc.traeractividadesprofcadiaadminadmin(usuario.id)
                                             setactividades(historial)
                                         }else{
                                             const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
@@ -222,11 +222,11 @@ console.log(usuario.nivel)
 
                                         setCurrentDate(formattedDate);
                                         if(usuario.nivel==41){
-                                            const historial = await servicioDtc.traeractividadesprofcadia(usuario.id)
+                                            const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
                                             setactividades(historial)
                                         }else{
                                             if(usuario.nivel==40){
-                                                const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
+                                                const historial = await servicioDtc.traeractividadesprofcadiaadminadmin(usuario.id)
                                                 setactividades(historial)
                                             }else{
                                                 const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
@@ -261,11 +261,11 @@ console.log(usuario.nivel)
 
                                         setCurrentDate(formattedDate);
                                         if(usuario.nivel==41){
-                                            const historial = await servicioDtc.traeractividadesprofcadia(usuario.id)
+                                            const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
                                             setactividades(historial)
                                         }else{
                                             if(usuario.nivel==40){
-                                                const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
+                                                const historial = await servicioDtc.traeractividadesprofcadiaadminadmin(usuario.id)
                                                 setactividades(historial)
                                             }else{
                                                 const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
@@ -307,11 +307,11 @@ console.log(usuario.nivel)
 
                                         setCurrentDate(formattedDate);
                                         if(usuario.nivel==41){
-                                            const historial = await servicioDtc.traeractividadesprofcadia(usuario.id)
+                                            const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
                                             setactividades(historial)
                                         }else{
                                             if(usuario.nivel==40){
-                                                const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
+                                                const historial = await servicioDtc.traeractividadesprofcadiaadminadmin(usuario.id)
                                                 setactividades(historial)
                                             }else{
                                                 const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
@@ -345,11 +345,11 @@ console.log(usuario.nivel)
 
                                       setCurrentDate(formattedDate);
                                       if(usuario.nivel==41){
-                                          const historial = await servicioDtc.traeractividadesprofcadia(usuario.id)
+                                          const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
                                           setactividades(historial)
                                       }else{
                                           if(usuario.nivel==40){
-                                              const historial = await servicioDtc.traeractividadesprofcadiaadmin(usuario.id)
+                                              const historial = await servicioDtc.traeractividadesprofcadiaadminadmin(usuario.id)
                                               setactividades(historial)
                                           }else{
                                               const historial = await servicioDtc.traeractividadeschico({ id_usuario: id })
