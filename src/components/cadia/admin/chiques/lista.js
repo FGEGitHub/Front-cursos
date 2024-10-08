@@ -185,7 +185,19 @@ const TablaNotificaciones = (props) => {
         { name: "apellido", label: "apellido" },
         { name: "nombre", label: "nombre" },
         { name: "dni", label: "dni" },
-        { name: "fecha_nacimiento", label: "Fecha de nacimiento" },
+        {
+            name: "fecha_espera",
+            label: "Lista de espera",
+            options: {
+                customBodyRender: (value) => {
+                    return (
+                        <div style={{ color: value !== "No" ? "green" : "inherit" }}>
+                            {value}
+                        </div>
+                    );
+                },
+            },
+        },
         { name: "fecha_ingreso", label: "fecha_ingreso" },
         {
             name: "Ver",
@@ -196,6 +208,7 @@ const TablaNotificaciones = (props) => {
         },
         { name: "fecha_fin", label: "fecha_fin" },
     ];
+    
 
     const handleScrollToCalendar = () => {
         calendarRef.current.scrollIntoView({ behavior: 'smooth' });

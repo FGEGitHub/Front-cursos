@@ -1,18 +1,17 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { Button } from '@mui/material';
+import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioDtc from '../../../../services/dtc'
 import NativeSelect from '@mui/material/NativeSelect';
 import Tooltip from '@material-ui/core/Tooltip';
-import { Paper, CircularProgress, Typography, Card, CardActions } from '@mui/material';
-import React, { useEffect, useState, Fragment } from "react";
+import { CircularProgress, Typography } from '@mui/material';
+import React, { useEffect, useState } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import InputLabel from '@mui/material/InputLabel';
 import styled from 'styled-components';
-
 
 const StyledParagraph = styled.p`
   font-family: 'Montserrat', sans-serif;
@@ -20,50 +19,42 @@ const StyledParagraph = styled.p`
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = React.useState(false);
-  //const usuario  = useUser().userContext
   const [form, setForm] = useState({
-    fecha_nacimiento:"Sin determinar",
-    observaciones:"Sin determinar",
-    primer_contacto:"Sin determinar",
-    primer_ingreso:"Sin determinar",
-    admision:"Sin determinar",
-    
-    dni:"Sin determinar",
-    domicilio:"Sin determinar",
-    telefono:"Sin determinar",
-    autorizacion_imagen:"Sin determinar",
-    fotoc_dni:"Sin determinar",
-    fotoc_responsable:"Sin determinar",
-    tel_responsable:"Sin determinar",
-    visita_social:"Sin determinar",
-    egreso:"Sin determinar",
-    aut_retirar:"Sin determinar",
-    dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",
-  })
-  const [datos, setDatos] = useState()
-  const [activo, setActivo] = useState(false)
-
-
-
-
-
-
+    fecha_nacimiento: "Sin determinar",
+    observaciones: "Sin determinar",
+    primer_contacto: "Sin determinar",
+    primer_ingreso: "Sin determinar",
+    admision: "Sin determinar",
+    dni: "Sin determinar",
+    domicilio: "Sin determinar",
+    telefono: "Sin determinar",
+    autorizacion_imagen: "Sin determinar",
+    fotoc_dni: "Sin determinar",
+    fotoc_responsable: "Sin determinar",
+    tel_responsable: "Sin determinar",
+    visita_social: "Sin determinar",
+    egreso: "Sin determinar",
+    aut_retirar: "Sin determinar",
+    dato_escolar: "Sin determinar",
+    hora_merienda: "Sin determinar",
+    escuela: "Sin determinar",
+    fines: "Sin determinar",
+    grado: "Sin determinar",
+    fecha_espera: "Sin determinar"
+  });
+  const [enListaEspera, setEnListaEspera] = useState(false);
 
   const handleChange = (e) => {
-    console.log(form)
-    setForm({ ...form, [e.target.name]: e.target.value })
+    const { name, value, type, checked } = e.target;
+    if (type === 'checkbox') {
+      setEnListaEspera(checked);
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   }
 
-
   const handleClickOpen = () => {
-
     setOpen(true);
-
-
   };
 
   const handleClose = () => {
@@ -71,209 +62,143 @@ export default function SelectTextFields(props) {
   };
 
   const handleDeterminar = async (event) => {
-
     try {
       event.preventDefault();
-
-      const nov = await servicioDtc.nuevochiquecadia(form)
-alert(nov)
+      const nov = await servicioDtc.nuevochiquecadia(form);
+      alert(nov);
     } catch (error) {
       console.error(error);
-      console.log('Error algo sucedio')
-
-
+      console.log('Error algo sucedió');
     }
-   setForm({ fecha_nacimiento:"Sin determinar",
-    observaciones:"Sin determinar",
-    primer_contacto:"Sin determinar",
-    primer_ingreso:"Sin determinar",
-    admision:"Sin determinar",
-    kid:"Sin determinar",
-    dni:"Sin determinar",
-    domicilio:"Sin determinar",
-    telefono:"Sin determinar",
-    autorizacion_imagen:"Sin determinar",
-    fotoc_dni:"Sin determinar",
-    fotoc_responsable:"Sin determinar",
-    tel_responsable:"Sin determinar",
-    visita_social:"Sin determinar",
-    egreso:"Sin determinar",
-    aut_retirar:"Sin determinar",
-    dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    talle:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",})
-    props.traer()
-
+    setForm({
+      fecha_nacimiento: "Sin determinar",
+      observaciones: "Sin determinar",
+      primer_contacto: "Sin determinar",
+      primer_ingreso: "Sin determinar",
+      admision: "Sin determinar",
+      dni: "Sin determinar",
+      domicilio: "Sin determinar",
+      telefono: "Sin determinar",
+      autorizacion_imagen: "Sin determinar",
+      fotoc_dni: "Sin determinar",
+      fotoc_responsable: "Sin determinar",
+      tel_responsable: "Sin determinar",
+      visita_social: "Sin determinar",
+      egreso: "Sin determinar",
+      aut_retirar: "Sin determinar",
+      dato_escolar: "Sin determinar",
+      hora_merienda: "Sin determinar",
+      escuela: "Sin determinar",
+      fines: "Sin determinar",
+      grado: "Sin determinar",
+      fecha_espera: "Sin determinar"
+    });
+    props.traer();
     setOpen(false);
   };
 
-  const [currency, setCurrency] = React.useState('EUR');
-
-  /*   const handleChange = (event) => {
-      setCurrency(event.target.value);
-    }; */
-
-
   return (
-
-
-
-
     <Box
-
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}
       noValidate
       autoComplete="off"
     >
-      < Tooltip title="Nueva Clase">
-        <Button variant="contained" onClick={handleClickOpen}> Nuevo  </Button>
-
+      <Tooltip title="Nueva Clase">
+        <Button variant="contained" onClick={handleClickOpen}>Nuevo</Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
+          <h3><b>NUEVO</b></h3>
 
-        
-            <h3>
-              <b> NUEVO </b></h3>
-             
-               
-                    
-                   
-                    <br />
-              <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Nombre"
-              name="nombre"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="nombre"
+            label="Nombre"
+            name="nombre"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
 
-<TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              
-              label="Apellido"
-              name="apellido"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
+          <TextField
+            margin="dense"
+            id="apellido"
+            label="Apellido"
+            name="apellido"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
+
+          <TextField
+            margin="dense"
+            id="dni"
+            label="DNI"
+            name="dni"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
+
+          <TextField
+            onChange={handleChange}
+            name="fecha_nacimiento"
+            id="date"
+            label="Fecha de nacimiento"
+            type="date"
+            defaultValue="2023-03-01"
+            sx={{ width: 220 }}
+            InputLabelProps={{ shrink: true }}
+          />
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={enListaEspera}
+                onChange={handleChange}
+                name="enListaEspera"
+              />
+            }
+            label="En lista de espera"
+          />
+
+          {enListaEspera && (
             <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="DNI"
-              name="dni"
               onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <br/>
-            <TextField
-
-              onChange={handleChange}
-              name="fecha_nacimiento"
-              id="date"
-              label="Fecha de nacimiento"
+              name="fecha_espera"
+              id="fecha_espera"
+              label="Fecha desde que está en lista de espera"
               type="date"
-              defaultValue="2023-03-01"
+              defaultValue="2024-03-01"
               sx={{ width: 220 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
+              InputLabelProps={{ shrink: true }}
             />
-            
-<TextField
+          )}
 
-onChange={handleChange}
-name="fecha_ingreso"
-id="date"
-label="fecha_ingreso"
-type="date"
-defaultValue="2023-03-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<TextField
+          {/* Otros campos que ya tenías en el formulario */}
+          <TextField
+            margin="dense"
+            id="direccion"
+            label="Direccion"
+            name="direccion"
+            onChange={handleChange}
+            fullWidth
+            variant="standard"
+          />
 
-onChange={handleChange}
-name="fecha_fin"
-id="date"
-label="fecha_fin"
-type="date"
-defaultValue="2023-03-01"
-sx={{ width: 220 }}
-InputLabelProps={{
-  shrink: true,
-}}
-/>
-<InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Autorizacion de imagen?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'autorizacion_imagen',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                         
-
-
-
-<TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Direccion"
-              name="direccion"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-      
-            <DialogActions>
-
-
-              <>
-              {form.nombre &&form.apellido  ? <> <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></> :  <>Completar los datos</>}
-             </>
-              <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
-            </DialogActions>
-
-
+          <DialogActions>
+            {form.nombre && form.apellido ? (
+              <Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button>
+            ) : (
+              <>Completar los datos</>
+            )}
+            <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
+          </DialogActions>
         </DialogContent>
       </Dialog>
-    </Box >
-
-
+    </Box>
   );
 }
