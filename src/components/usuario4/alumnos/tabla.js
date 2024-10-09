@@ -161,6 +161,10 @@ const TablaNotificaciones = (props) => {
            onTableChange: this.handleTableChange, */
     };
     // renderiza la data table
+    const enviarWhatsApp = (telefono) => {
+        const link = `https://wa.me/${telefono}`;
+        window.open(link, '_blank');
+    };
     return (
         <div>
     {/*         {datos ? <>
@@ -201,7 +205,11 @@ const TablaNotificaciones = (props) => {
              <StyledTableCell >{row.dni}</StyledTableCell> 
               <StyledTableCell >{row.apellido}</StyledTableCell>
               <StyledTableCell >{row.nombre}</StyledTableCell>
-              <StyledTableCell >{row.tel}</StyledTableCell>
+              <StyledTableCell>
+                                                <Button onClick={() => enviarWhatsApp(row.tel)}>
+                                                    {row.tel}
+                                                </Button>
+                                            </StyledTableCell>
               <StyledTableCell >{row.estado}</StyledTableCell>
               <StyledTableCell >{row.presentes}/{row.ausentes}/{row.sintomar}</StyledTableCell>
               <StyledTableCell >{row.presentes*100 / (row.presentes+row.ausentes +row.sintomar)}%</StyledTableCell>
