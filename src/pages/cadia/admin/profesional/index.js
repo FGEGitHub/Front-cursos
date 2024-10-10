@@ -3,7 +3,7 @@ import Menuizq from '../../../../components/cadia/admin/menuizq1'
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
 import React, { useEffect, useState } from "react";
-import Listachiquesa from '../../../../components/cadia/admin/profesionales/listahorarios'
+import Listachiquesa from '../../../../components/dtc/usuario1/turnos/lista'
 import Est from '../../../../components/dtc/usuario1/taller/componente1'
 import MenuuCel from '../../../../components/cadia/admin/menuizq1'
 

@@ -206,7 +206,7 @@ const TablaNotificaciones = (props) => {
                     CutomButtonsRenderer(dataIndex, rowIndex),
             },
         },
-        { name: "fecha_fin", label: "fecha_fin" },
+        { name: "turno", label: "turno" },
     ];
     
 

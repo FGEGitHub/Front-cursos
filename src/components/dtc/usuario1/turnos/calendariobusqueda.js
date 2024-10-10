@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import servicioDtc from '../../../../services/dtc';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { Alert } from '@mui/material';
+import { useParams } from "react-router-dom"
 //import './CustomCalendar.css'; // Archivo CSS para personalizar el calendario
-
+import '../cumples/CustomCalendar.css';
 const TablaNotificaciones = (props) => {
     const [chicos, setChicos] = useState([]);
     const [datos, setDatos] = useState();
     const [fechas1, setFechas1] = useState([]);
     const [fechas2, setFechas2] = useState([]);
-    
+    let params = useParams()
+    let idparam = params.id
     useEffect(() => {
         traer();
     }, []);
@@ -23,14 +24,28 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON);
                 console.log(usuario)
                 if(usuario.nivel==40 || usuario.nivel==41 ){
-                    const novedades_aux = await servicioDtc.traercitascadia(usuario.id);
-                    setChicos(novedades_aux[0]);
-                    setDatos(novedades_aux[1]);
+                    if(idparam === undefined){
+
+                        const novedades_aux = await servicioDtc.traercitascadia(usuario.id);
+                        setChicos(novedades_aux[0]);
+                        setDatos(novedades_aux[1]);
+                        const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                        const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                        setFechas1(fechas1);
+                        setFechas2(fechas2);
+                       
+                    }else{
+                        const novedades_aux = await servicioDtc.traercitascadia(idparam);
+                        setChicos(novedades_aux[0]);
+                        setDatos(novedades_aux[1]);
+                        const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                        const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
+                        setFechas1(fechas1);
+                        setFechas2(fechas2);
+                    }
+                  
     
-                    const fechas1 = novedades_aux[0].map(item => new Date(item.fecha + 'T00:00:00Z'));
-                    const fechas2 = novedades_aux[1].map(item => new Date(item.fecha + 'T00:00:00Z'));
-                    setFechas1(fechas1);
-                    setFechas2(fechas2);
+                   
                 }else{
                     const novedades_aux = await servicioDtc.traercitas(usuario.id);
                     setChicos(novedades_aux[0]);
