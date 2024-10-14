@@ -294,7 +294,7 @@ export default function TablaActividades(props) {
         if (loggedUserJSON) {
           const usuario = JSON.parse(loggedUserJSON);
           setUsuario(usuario);
-          const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+          const novedades_aux = await servicioDtc.traercosassole(usuario.id);
           setAsitencias(novedades_aux);
         }
       }}/>

@@ -72,7 +72,7 @@ export default function Paginas() {
     </div>
      </>:<>
  <Menuizq>
- <Est/>
+
 <Listachiquesa/>
 </Menuizq></>}
  </>

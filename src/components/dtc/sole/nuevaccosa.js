@@ -63,7 +63,7 @@ export default function SelectTextFields(props) {
     formData.append("id_trabajador", props.id_trabajador);
 
     try {
-      await servicioDtc.nuevaintervencion(formData);
+      await servicioDtc.nuevacosa(formData);
       props.traer();
       setOpen(false);
     } catch (error) {
@@ -104,7 +104,7 @@ export default function SelectTextFields(props) {
             }}
           />
 
-          <Autocomplete
+          {/* <Autocomplete
             options={usuarios}
             getOptionLabel={(option) => `${option.apellido} ${option.nombre}`}
             onChange={handleUserChange}
@@ -117,7 +117,7 @@ export default function SelectTextFields(props) {
                 fullWidth
               />
             )}
-          />
+          /> */}
 
           <InputLabel variant="outlined" htmlFor="uncontrolled-native">
             <Typography variant="p" component="div" color="black">
