@@ -16,6 +16,8 @@ import Fotosole from "../../../Assets/fotosole.jpeg";
 import Fotoaugusto from "../../../Assets/fotoaugusto.webp";
 import servicioDtc from "../../../services/dtc"
 import Nueva from './nuevaccosa';
+import axios from "axios"
+
 
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
@@ -261,26 +263,29 @@ export default function TablaActividades(props) {
   const toggleDetail = () => {
     setShowDetail(!showDetail);
   };
-  const handleViewFile = async (id) => {
+  const openFile = async (id) => {
     try {
-      // Llama a la función para obtener el archivo PDF
-      const response = await servicioDtc.verArchivo(id);
-      
-      // Asegúrate de que la respuesta es un Blob
-      if (response && response.data) {
-        const fileBlob = new Blob([response.data], { type: 'application/pdf' });
-        const fileUrl = URL.createObjectURL(fileBlob);
-        window.open(fileUrl, '_blank');
-        
-        // Opcional: liberar el objeto URL después de un tiempo
-        setTimeout(() => {
-          URL.revokeObjectURL(fileUrl);
-        }, 10000); // Revoca la URL después de 10 segundos
-      } else {
-        console.error("No se recibió un archivo válido.");
-      }
+    /*   const response = await axios.get(`/serviciodtc/${id}`, {
+        responseType: 'blob' // Para manejar archivos binarios
+      }); */
+      const response = await servicioDtc.traerarcchivoo(id, {
+        responseType: 'blob' // Para manejar archivos binarios
+      })
+       
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+  
+      // Definir el nombre del archivo basado en su tipo (opcional)
+      const contentDisposition = response.headers['content-disposition'];
+      const fileName = contentDisposition ? contentDisposition.split('filename=')[1] : `archivo_${id}`;
+  
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     } catch (error) {
-      console.error("Error al obtener el archivo PDF:", error);
+      console.error('Error al abrir el archivo', error);
     }
   };
   
@@ -333,7 +338,7 @@ export default function TablaActividades(props) {
                 <Button variant="contained" color="primary" onClick={() => handleOpen(row)}>
                   Ver detalles
                 </Button>
-                {row.ubicacion =="no" ? <></>:<> <Button variant="contained" color="secondary" onClick={() => handleViewFile(row.id)}>
+                {row.ubicacion =="no" ? <></>:<> <Button variant="contained" color="secondary" onClick={() => openFile(row.id)}>
                   Ver Online
                 </Button></>}
                
@@ -343,7 +348,7 @@ export default function TablaActividades(props) {
                   if (loggedUserJSON) {
                     const usuario = JSON.parse(loggedUserJSON);
                     setUsuario(usuario);
-                    const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                    const novedades_aux = await servicioDtc.traercosassole(usuario.id);
                     setAsitencias(novedades_aux);
                   }
                 }}/>
