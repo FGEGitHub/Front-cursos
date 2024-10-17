@@ -88,6 +88,16 @@ export default function MenuIzq2 ({children}) {
           icon: <AccountBoxTwoToneIcon />, 
           path: '/dtc/sole/cosas' 
         },
+        { 
+          text: 'Informes Sociales', 
+          icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/sole/informes' 
+        },
+        { 
+          text: 'Intervenciones', 
+          icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/sole/intervenciones' 
+        },
      
       
       ];

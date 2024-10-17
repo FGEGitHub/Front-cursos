@@ -85,7 +85,7 @@ export default function MenuIzq2 ({children}) {
       } 
     const menuItems = [
         { 
-            text: 'Actividades', 
+            text: 'informes', 
             icon: <PeopleAltTwoToneIcon />, 
             path: '/dtc/visitasocial/menu' 
           },
@@ -100,7 +100,12 @@ export default function MenuIzq2 ({children}) {
           path: '/dtc/visitasocial/usuarios' 
         },
      
-      
+        { 
+          text: 'intervenciones', 
+          icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/visitasocial/intervenciones' 
+        },
+        
       ];
       const islogo = {
         width: "70%",                  

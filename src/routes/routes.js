@@ -173,6 +173,8 @@ import CargarExcel from '../pages/subirexcel'
 import Dtcpsiclogaacti from '../pages/dtc/psicologainformes';
 import Dtcpsiclogausuarios from '../pages/dtc/psicologamascarpetas/usuarios';
 import Dtcpsiclogausuario from '../pages/dtc/psicologamascarpetas/usuario';
+import Dtcintervencionesvis from '../pages/dtc/visitasoc/intervenciones';
+import Dtcsoleasitenciasco from '../pages/dtc/sole/asistencias';
 
 
 import LoginCadia from '../pages/cadia/login'
@@ -342,7 +344,10 @@ const Rutas = [
 		{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio/> },
 		{ path: '/dtc/sole/cosas', element: <Dtcsolecosas/> },
 		{ path: '/dtc/sole/mapa', element: <Dtcsolemapas/> },
+		{ path: '/dtc/sole/informes', element: <Dtcsoleasitenciasco/> },
+		{ path: '/dtc/sole/intervenciones', element: <Dtcsoleinicio/> },
 		
+
 		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
 		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },
 		{ path: '/dtc/cocina', element: <Dtccocina/> },
@@ -373,6 +378,8 @@ const Rutas = [
 		{ path: '/dtc/visitasocial/usuarios', element: <DTCVisitausuarios/> },
 		{ path: '/dtc/visitasocial/usuario/:id', element: <Dtcvisitausuario/> },
 		{ path: '/dtc/visitasocial/mapas', element: <Dtcvisitamapa/> },
+		{ path: '/dtc/visitasocial/intervenciones', element: <Dtcintervencionesvis/> },
+
 
 		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
 		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },

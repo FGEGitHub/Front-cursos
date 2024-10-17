@@ -273,7 +273,7 @@ export default function TablaActividades(props) {
         console.log('Respuesta de la API:', response);
 
         // Determinar el tipo de archivo
-        const mimeType = response.data.type || 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        const mimeType = response.data.type;
         const url = window.URL.createObjectURL(new Blob([response.data], { type: mimeType }));
 
         // Crear un enlace temporal para abrir o descargar el archivo
@@ -284,17 +284,18 @@ export default function TablaActividades(props) {
         const contentDisposition = response.headers['content-disposition'];
         const fileName = contentDisposition
             ? contentDisposition.split('filename=')[1].replace(/"/g, '')
-            : `archivo_${id}.docx`; // Nombre por defecto con extensión .docx si no se proporciona en el encabezado
+            : `archivo_${id}.${mimeType.split('/')[1]}`; // Nombre por defecto con extensión según el mimeType
 
-        // Para descargar el archivo
-        link.setAttribute('download', fileName);
-
-        // Opción para abrir en una nueva pestaña (eliminar o comentar la línea de descarga si prefieres abrirlo en lugar de descargarlo)
-        // window.open(url, '_blank');
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Si el archivo es visualizable (PDF, imágenes, etc.), abrir en nueva pestaña
+        if (mimeType === 'application/pdf' || mimeType.startsWith('image/')) {
+            window.open(url, '_blank');
+        } else {
+            // Para descargar el archivo
+            link.setAttribute('download', fileName);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
 
         // Liberar la URL creada para evitar fugas de memoria
         window.URL.revokeObjectURL(url);
