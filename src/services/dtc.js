@@ -862,12 +862,23 @@ return data
      
 }
 const traerarcchivoo = async (id) => {
-  
-  // const data = await axios.post('http://localhost:4000/signupp', datos)
-    const {data} = await axios.get(baseUrl+'traerarcchivoo/'+id, config)
-return data
-     
-}
+  try {
+      console.log(id);
+
+      // Realizar la solicitud GET con axios para obtener el archivo como blob
+      const response = await axios.get(`${baseUrl}traerarcchivoo/${id}`, {
+          ...config,
+          responseType: 'blob' // Para manejar archivos binarios
+      });
+
+      console.log(response);
+
+      return response;
+  } catch (error) {
+      console.error('Error al traer el archivo:', error);
+      throw error;
+  }
+};
 
 const agregarvariasfechas= async  (datos) => {
 

@@ -265,30 +265,83 @@ export default function TablaActividades(props) {
   };
   const openFile = async (id) => {
     try {
-    /*   const response = await axios.get(`/serviciodtc/${id}`, {
-        responseType: 'blob' // Para manejar archivos binarios
-      }); */
+        // Realizar la solicitud para traer el archivo como un blob
+        const response = await servicioDtc.traerarcchivoo(id, {
+            responseType: 'blob' // Asegurarse de que la respuesta sea un blob para manejar archivos binarios
+        });
+
+        console.log('Respuesta de la API:', response);
+
+        // Determinar el tipo de archivo
+        const mimeType = response.data.type || 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        const url = window.URL.createObjectURL(new Blob([response.data], { type: mimeType }));
+
+        // Crear un enlace temporal para abrir o descargar el archivo
+        const link = document.createElement('a');
+        link.href = url;
+
+        // Obtener el nombre del archivo del encabezado 'content-disposition' si está disponible
+        const contentDisposition = response.headers['content-disposition'];
+        const fileName = contentDisposition
+            ? contentDisposition.split('filename=')[1].replace(/"/g, '')
+            : `archivo_${id}.docx`; // Nombre por defecto con extensión .docx si no se proporciona en el encabezado
+
+        // Para descargar el archivo
+        link.setAttribute('download', fileName);
+
+        // Opción para abrir en una nueva pestaña (eliminar o comentar la línea de descarga si prefieres abrirlo en lugar de descargarlo)
+        // window.open(url, '_blank');
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Liberar la URL creada para evitar fugas de memoria
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Error al abrir el archivo', error);
+    }
+};
+
+const downloadFile = async (id) => {
+  try {
+      // Realizar la solicitud para traer el archivo como un blob
       const response = await servicioDtc.traerarcchivoo(id, {
-        responseType: 'blob' // Para manejar archivos binarios
-      })
-       
-      const url = window.URL.createObjectURL(new Blob([response.data]));
+          responseType: 'blob' // Especificar que la respuesta sea un blob para manejar archivos binarios
+      });
+
+      console.log('Respuesta de la API:', response);
+
+      // Determinar el tipo de archivo
+      const mimeType = response.data.type || 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      const url = window.URL.createObjectURL(new Blob([response.data], { type: mimeType }));
+
+      // Crear un enlace temporal para descargar el archivo
       const link = document.createElement('a');
       link.href = url;
-  
-      // Definir el nombre del archivo basado en su tipo (opcional)
+
+      // Obtener el nombre del archivo del encabezado 'content-disposition' si está disponible
       const contentDisposition = response.headers['content-disposition'];
-      const fileName = contentDisposition ? contentDisposition.split('filename=')[1] : `archivo_${id}`;
-  
+      const fileName = contentDisposition
+          ? contentDisposition.split('filename=')[1].replace(/"/g, '')
+          : `archivo_${id}.docx`; // Nombre por defecto con extensión .docx si no se proporciona en el encabezado
+
+      // Configurar el atributo de descarga con el nombre del archivo
       link.setAttribute('download', fileName);
       document.body.appendChild(link);
+
+      // Simular un clic en el enlace para iniciar la descarga
       link.click();
-      link.remove();
-    } catch (error) {
-      console.error('Error al abrir el archivo', error);
-    }
-  };
-  
+
+      // Eliminar el enlace temporal
+      document.body.removeChild(link);
+
+      // Liberar la URL creada para evitar fugas de memoria
+      window.URL.revokeObjectURL(url);
+  } catch (error) {
+      console.error('Error al descargar el archivo', error);
+  }
+};
 
   return (
     <div className="App">
@@ -341,7 +394,9 @@ export default function TablaActividades(props) {
                 {row.ubicacion =="no" ? <></>:<> <Button variant="contained" color="secondary" onClick={() => openFile(row.id)}>
                   Ver Online
                 </Button></>}
-               
+                 {row.ubicacion =="no" ? <></>:<> <Button variant="contained" color="secondary" onClick={() => downloadFile(row.id)}>
+                 Descargar
+                </Button></>}
                 <Borrar id={row.id} 
                 traer={ async () => {
                   const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
