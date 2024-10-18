@@ -199,8 +199,23 @@ id={chicos[dataIndex]['id']}/>
                 <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id_usuario'])} >
 
                     < Tooltip title="Ver">
-                        <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id_usuario'])} variant="contained">
-Ver usuario                      </Button>
+                   {usuario ? <>
+
+                   {usuario.nivel=='28' ? <>
+                    <Button  onClick={() => navigate('/dtc/visitasocial/usuario/' + chicos[dataIndex]['id_usuario'])} variant="contained">
+                    Ver usuario               </Button>
+
+             
+                   </>:<>
+                   <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id_usuario'])} variant="contained">
+                   Ver usuario                 </Button>
+                   
+                   </>}
+                  
+                   
+                   </>:<></>}
+
+                   
                     </Tooltip>
 
 
