@@ -3,7 +3,7 @@ import servicioDtc from '../../../../services/dtc'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
 import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
+import Modificar from './modificar'
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -194,6 +194,10 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
+
+
+
+
 <Ver
 id={chicos[dataIndex]['id']}/>
                 <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id_usuario'])} >
@@ -211,6 +215,7 @@ id={chicos[dataIndex]['id']}/>
                    Ver usuario                 </Button>
                    
                    </>}
+             
                   
                    
                    </>:<></>}
@@ -223,7 +228,28 @@ id={chicos[dataIndex]['id']}/>
 
                 </div>
 
+<Modificar
+id={chicos[dataIndex]['id_usuario']}
+traer={async () => {
+        try {
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
 
+                setUsuario(usuario)
+
+                const novedades_aux = await servicioDtc.traerintervenciones()
+                setchicos(novedades_aux[0])
+                setDatos(novedades_aux[1])
+            }
+
+        } catch (error) {
+
+        }
+
+    }}
+    detalle={chicos[dataIndex]['detalle']}
+    titulo={chicos[dataIndex]['titulo']}/>
             </>
         );
     }
