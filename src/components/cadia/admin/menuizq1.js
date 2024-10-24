@@ -73,7 +73,7 @@ export default function MenuIzq2 ({children}) {
     { text: 'Profesionales', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/profesionales' },
     { text: 'Turnos', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/turnos' },
     { text: 'Informes', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/actividades' },
-
+    { text: 'Lista de espera', icon: <WcTwoToneIcon color="primary" />, path: '/cadia/usuario/listaespera' },
   ];
 
   const logoStyle = {
