@@ -12,8 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FirmaAugusto from "../../../Assets/firmaaugusto.jpeg";
 import FirmaSole from "../../../Assets/firmasole.jpeg";
-import Fotosole from "../../../Assets/fotosole.jpeg";
-import Fotoaugusto from "../../../Assets/fotoaugusto.webp";
+
 import servicioDtc from "../../../services/dtc";
 import Nueva from './nueva';
 import Modificar from './editaractividad';
@@ -270,6 +269,8 @@ export default function TablaActividades(props) {
         </>
     );
 }
+
+
 function Nivel(dataIndex, rowIndex, data, onClick) {
     return (
         <>
@@ -281,6 +282,19 @@ function Nivel(dataIndex, rowIndex, data, onClick) {
                     Ver Online
                   </Button>
                 )}
+               <Modificar id={asistencias[dataIndex].id} 
+                  fecha_referencia={asistencias[dataIndex].fecha_referencia}
+                  titulo={asistencias[dataIndex].titulo}
+                  detalle={asistencias[dataIndex].detalle}
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                      setAsitencias(novedades_aux);
+                    }
+                  }}/>
                 {usuario ? <>
       
                 {usuario.id==asistencias[dataIndex].idu ? <>
