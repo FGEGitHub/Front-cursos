@@ -110,7 +110,11 @@ export default function MenuIzq2 ({children}) {
           icon: <AccountBoxTwoToneIcon />, 
           path: '/dtc/visitasocial/personastratamieto' 
         },
-        
+        { 
+          text: 'Informes tratamiento', 
+          icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/visitasocial/informes' 
+        },
       ];
       const islogo = {
         width: "70%",                  
