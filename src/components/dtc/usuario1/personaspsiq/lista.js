@@ -211,6 +211,8 @@ Ver                        </Button>
 </div>
 
 </>:<>
+
+{usuario.nivel==24  ? 
 <div onClick={() => navigate('/dtc/psicologa/usuario/' + chicos[dataIndex]['id'])} >
 
 < Tooltip title="Ver">
@@ -222,6 +224,19 @@ Ver                        </Button>
 
 
 </div>
+:
+<div onClick={() => navigate('/dtc/visitasocial/personatratamieto/' + chicos[dataIndex]['id'])} >
+
+< Tooltip title="Ver">
+    <Button  onClick={() => navigate('/dtc/visitasocial/personatratamieto/' + chicos[dataIndex]['id'])} variant="contained">
+Ver                        </Button>
+</Tooltip>
+
+
+
+
+</div>
+}
 </>
 
 

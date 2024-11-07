@@ -95,7 +95,7 @@ export default function TablaActividades(props) {
     const row = selectedRow;
     let content = /* Aquí iría el contenido de tu fila seleccionado */ "";
   
-    const printWindow = window.open('', '_blank', 'width=800,height=600');
+    const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write(`
       <html>
         <head>

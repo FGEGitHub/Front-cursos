@@ -175,7 +175,8 @@ import Dtcpsiclogausuarios from '../pages/dtc/psicologamascarpetas/usuarios';
 import Dtcpsiclogausuario from '../pages/dtc/psicologamascarpetas/usuario';
 import Dtcintervencionesvis from '../pages/dtc/visitasoc/intervenciones';
 import Dtcsoleasitenciasco from '../pages/dtc/sole/asistencias';
-
+import Dtcpersonastratamientods from '../pages/dtc/visitasoc/personastratamiento';
+import Dtcpersonaratamientods from '../pages/dtc/visitasoc/personatratamiento';
 
 import LoginCadia from '../pages/cadia/login'
 
@@ -380,7 +381,9 @@ const Rutas = [
 		{ path: '/dtc/visitasocial/usuario/:id', element: <Dtcvisitausuario/> },
 		{ path: '/dtc/visitasocial/mapas', element: <Dtcvisitamapa/> },
 		{ path: '/dtc/visitasocial/intervenciones', element: <Dtcintervencionesvis/> },
-
+		{ path: '/dtc/visitasocial/personastratamieto', element: <Dtcpersonastratamientods/> },
+		{ path: '/dtc/visitasocial/personatratamieto/:id', element: <Dtcpersonaratamientods/> },
+		
 
 		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
 		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },

@@ -105,6 +105,11 @@ export default function MenuIzq2 ({children}) {
           icon: <AccountBoxTwoToneIcon />, 
           path: '/dtc/visitasocial/intervenciones' 
         },
+        { 
+          text: 'Personas con tratamiento', 
+          icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/visitasocial/personastratamieto' 
+        },
         
       ];
       const islogo = {
