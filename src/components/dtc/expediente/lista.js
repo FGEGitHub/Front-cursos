@@ -225,30 +225,31 @@ Ver                        </Button>
     const columns = [
 
         {
-            name: "id",
-            label: "id",
+            name: "proyecto",
+            label: "proyecto",
 
         },
+         
+        {
+          name: "etapa",
+          label: "etapa",
+
+      }, {
+        name: "descriocion",
+        label: "descriocion",
+
+    },
         {
             name: "titulo",
             label: "titulo",
 
         },
         {
-          name: "inicio",
-          label: "inicio",
+          name: "fecha",
+          label: "fecha",
       },
-    
-        {
-            name: "cierre",
-            label: "cierre",
-
-        },
-        {
-            name: "fecha_ingreso",
-            label: "fecha_ingreso",
-
-        },
+   
+       
 
         {
             name: "Ver",
@@ -294,7 +295,7 @@ Ver                        </Button>
 </Alert> </>:<></>}
     
 
-            <h2>Lista de chicos</h2>
+            <h2>Lista </h2>
             {chicos ? <>
                 <div>
 

@@ -248,6 +248,18 @@ const TablaNotificaciones = (props) => {
         label: "fecha",
 
     },
+    {
+      name: "estado",
+      label: "estado",
+
+  },
+
+  {
+    name: "cargado",
+    label: "cargado",
+
+},
+
         {
             name: "descripcion",
             label: "descripcion",
