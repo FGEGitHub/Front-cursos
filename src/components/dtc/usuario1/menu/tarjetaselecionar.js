@@ -19,7 +19,7 @@ const CardSeleccionFecha = (props) => {
       }}>
       <CardContent >
         <Typography variant="h5" component="div" gutterBottom>
-          Seleccionar Fecha
+          Seleccionar Fecha para ver asistencias
         </Typography>
         <TextField
           type="date"

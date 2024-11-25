@@ -26,7 +26,6 @@ const CardInformacionDia = (props) => {
         <Typography variant="h5" component="div" gutterBottom>
          Ir al dia de hoy
         </Typography>
-z
         <div style={{ display: 'flex', alignItems: 'center', marginTop: '16px' }}>
           {icono}
           <IconButton onClick={() => props.traer()}color="primary">

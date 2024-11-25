@@ -17,6 +17,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
 import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
 //import logo from "../../Assets/logocuqui.webp";
+import Tooltip from '@mui/material/Tooltip';
 import ArchitectureIcon from '@mui/icons-material/Architecture';
 import Navbar from '../Navbar'
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';const drawerWidth = 240;
@@ -78,71 +79,87 @@ export default function MenuIzq2 ({children}) {
       { 
         text: 'Mapas', 
         icon: <GradingTwoToneIcon color="primary" />, 
-        path: '/dtc/usuario1/mapas' 
+        path: '/dtc/usuario1/mapas', 
+         tooltip: 'Domicilio de los usuarios'
       },
         { 
           text: 'Actividades', 
           icon: <GradingTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/menu' 
+          path: '/dtc/usuario1/menu' , 
+         tooltip: 'Asistencia y actividades de hoy'
         },
         { 
           text: 'Personal', 
           icon: <PeopleAltTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/usuarios' 
+          path: '/dtc/usuario1/usuarios' , 
+         tooltip: 'Usuarios del sistema '
         },
-        { 
-          text: 'cumples', 
-          icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/cumples' 
-        },
+      
         { 
           text: 'Usuarios', 
           icon: <WcTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/chiques' 
+          path: '/dtc/usuario1/chiques' , 
+         tooltip: 'Lista de usuarios del dispositivo'
         },
         { 
           text: 'Asistencias sociales', 
           icon: <GradingTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/asistenciassoc' 
+          path: '/dtc/usuario1/asistenciassoc' , 
+         tooltip: 'Informes de las trabajadoras sociales'
         },
-        { 
-          text: 'gimnasio', 
-          icon: <WcTwoToneIcon color="primary" />, 
-          path: '/dtc/usuario1/usuariosgim' 
-        },
+       
         
         { 
           text: 'Talleres,clases,asistencia', 
           icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/talleres' 
+          path: '/dtc/usuario1/talleres' , 
+         tooltip: 'Clases y asistencia de talleres'
         },
         { 
           text: 'Personas Psiq', 
           icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/personaspsiq' 
+          path: '/dtc/usuario1/personaspsiq' , 
+         tooltip: 'Lista de personas con tratamiento'
         },
         { 
           text: 'Turnos psiq', 
           icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/turnos' 
+          path: '/dtc/usuario1/turnos' , 
+         tooltip: 'Agenda de turnos'
         },
         { 
           text: 'Asistencias', 
           icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/asisencias' 
+          path: '/dtc/usuario1/asisencias' , 
+         tooltip: 'Detalle de asistencias de usuarios'
         },
         { 
           text: 'Intervenciones', 
           icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/intervenciones' 
+          path: '/dtc/usuario1/intervenciones' , 
+         tooltip: 'Informes'
         },
         { 
           text: 'expediente', 
           icon: <ArchitectureIcon color="primary" />,
-          path: '/dtc/usuario1/expedientes' 
+          path: '/dtc/usuario1/expedientes' , 
+         tooltip: 'Accede a los mapas disponibles'
+        },
+        { 
+          text: 'cumples', 
+          icon: <ArchitectureIcon color="primary" />,
+          path: '/dtc/usuario1/cumples' , 
+         tooltip: 'Accede a los mapas disponibles'
+        },
+        { 
+          text: 'gimnasio', 
+          icon: <WcTwoToneIcon color="primary" />, 
+          path: '/dtc/usuario1/usuariosgim' , 
+         tooltip: 'En proceso carga de usaurios '
         },
       ];
       const islogo = {
+        marginTop:'10%',
         width: "70%",                  
         };
     return(
@@ -176,20 +193,22 @@ export default function MenuIzq2 ({children}) {
        
         <Toolbar />
         <Divider />
-        <List     sx={{  color:"#fafafa"}}>
-        {menuItems.map((item) => (
-            <ListItem 
-              button 
-              key={item.text} 
-              onClick={() => {
-                handleClick(item.path)
-              }}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          ))}
-        </List>
+        
+<List sx={{ color: "#fafafa" }}>
+  {menuItems.map((item) => (
+    <Tooltip title={item.tooltip} arrow key={item.text}>
+      <ListItem
+        button
+        onClick={() => {
+          handleClick(item.path);
+        }}
+      >
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.text} />
+      </ListItem>
+    </Tooltip>
+  ))}
+</List>
         {cumple ? <>
        { cumple.length>0? <>
         {cumple.map((item) => (

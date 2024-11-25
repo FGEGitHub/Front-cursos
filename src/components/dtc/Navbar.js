@@ -28,6 +28,7 @@ const Navbar = (props) => {
 
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const islogo = {
+   
                   width: "80px",                  
                   };
   const navigate = useNavigate();
