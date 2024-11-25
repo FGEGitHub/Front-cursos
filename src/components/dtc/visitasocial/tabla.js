@@ -334,7 +334,7 @@ function Nivel(dataIndex, rowIndex, data, onClick) {
 const columns = [
     {
         name: "nombre",
-        label: "Cargado por",
+        label: "Quen pa cargó",
     },
 
     {
@@ -367,7 +367,7 @@ const columns = [
 
 },
     {
-        name: "Actions",
+        name: "Acciones p ahacer",
         options: {
             customBodyRenderLite: (dataIndex, rowIndex) =>
                 Nivel(
@@ -406,7 +406,70 @@ const columns = [
       console.error("Error al obtener el archivo PDF:", error);
     }
   };
+  const options = {
+    setTableProps: () => {
+        return {
+          style: {
+            backgroundColor: "#e3f2fd", // Cambia el color de fondo de la tabla
+          },
+        };
+      },
+      customHeadRender: (columnMeta, handleToggleColumn) => ({
+        TableCell: {
+          style: {
+            backgroundColor: '#1565c0', // Cambia el color de fondo del encabezado
+            color: 'white', // Cambia el color del texto del encabezado
+          },
+        },
+      }),
+    selectableRows: false, // Desactivar la selección de filas
+    stickyHeader: true,
+    selectableRowsHeader: false,
+    selectableRowsOnClick: true,
+    responsive: 'scroll',
+    rowsPerPage: 5,
+    rowsPerPageOptions: [5, 10, 15],
+    downloadOptions: { filename: 'tableDownload.csv', separator: ',' },
+    print: true,
+    filter: true,
+    viewColumns: true,
+    pagination: true,
 
+    textLabels: {
+      body: {
+        noMatch: "No se encontraron registros",
+        toolTip: "Ordenar",
+      },
+      pagination: {
+        next: "ver la ooooootra pavina",
+        previous: "La que esta antes",
+        rowsPerPage: "Filas por página:",
+        displayRows: "de",
+      },
+      toolbar: {
+        search: "fijate  si está",
+        downloadCsv: "Descargar en excel",
+        print: "Imprimir",
+        viewColumns: "Ver columnas",
+        filterTable: "Filtrar tabla",
+      },
+      filter: {
+        all: "Todos pe",
+        title: "FILTROS",
+        reset: "RESETEAR",
+      },
+      viewColumns: {
+        title: "Que columnas queres verrrr",
+        titleAria: "Mostrar/ocultar columnas de la tabla",
+      },
+      selectedRows: {
+        text: "fila(s) seleccionada(s)",
+        delete: "Eliminar",
+        deleteAria: "Eliminar filas seleccionadas",
+      },
+    },
+
+  };
   return (
     <div className="App">
       <Snack/>
@@ -496,6 +559,7 @@ const columns = [
 title={"Lista de asistencias"}
 data={asistencias}
 columns={columns}
+options={options}
 actions={[
     {
         icon: 'save',
