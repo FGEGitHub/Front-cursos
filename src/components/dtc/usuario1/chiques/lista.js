@@ -179,8 +179,9 @@ const TablaNotificaciones = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-
-                const novedades_aux = await servicioDtc.listachiques()
+               
+               //const novedades_aux = await servicioDtc.listachiques()
+                const novedades_aux = await servicioDtc.listachiquesmomentaneo()
                 setchicos(novedades_aux[0])
                 setDatos(novedades_aux[1])
             }
@@ -216,7 +217,7 @@ Ver                        </Button>
 
 
     // definimos las columnas
-    const columns = [
+ /*    const columns = [
       {
         name: "kid",
         label: "kid",
@@ -277,6 +278,66 @@ Ver                        </Button>
     },
 
 
+    ]; */
+    const columns = [
+      {
+        name: "kid",
+        label: "kid",
+
+    },
+        {
+            name: "apellido",
+            label: "apellido",
+
+        },
+        {
+            name: "nombre",
+            label: "nombre",
+
+        },
+        {
+          name: "primer_asis",
+          label: "primer_asis",
+      },
+    
+        {
+            name: "cant_asist",
+            label: "cant_asist",
+
+        },
+        {
+          name: "total_asis",
+          label: "total_asis",
+
+      },
+      
+        {
+          name: "porcentajeasis",
+          label: "porcentajeasis",
+
+      },
+        {
+            name: "falta",
+            label: "falta",
+
+        },
+
+        {
+            name: "Ver",
+            options: {
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer(
+                        dataIndex,
+                        rowIndex,
+                        // overbookingData,
+                        // handleEditOpen
+                    )
+            }
+
+        },
+
+
+
     ];
 
     // renderiza la data table
@@ -309,7 +370,9 @@ Ver                        </Button>
                   
                                   setUsuario(usuario)
                   
-                                  const novedades_aux = await servicioDtc.listachiques()
+                              //    const novedades_aux = await servicioDtc.listachiques()
+                                  const novedades_aux = await servicioDtc.listachiquesmomentaneo()
+                                  
                                   setchicos(novedades_aux[0])
                                   setDatos(novedades_aux[1])
                               }
