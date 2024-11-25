@@ -5,6 +5,7 @@ import Login from '../../../../Assets/mantenimiento2.jpeg'
 import React, { useEffect, useState } from "react";
 import Listachiquesa from '../../../../components/dtc/usuario1/usuarios_gimnasio/lista'
 import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
+import Mantenimiento from '../../../../Assets/mantenimiento2.jpeg';
 
 import {
 
@@ -59,17 +60,24 @@ export default function Paginas() {
         setLoginvisible(true)
       }, [])
 
+      const islogo = {
+        width: "60%",   
+        margin: 0,
+        padding: 0,
+        display: "flex",
+                
+        };
     return (
       <>
       {isMatch ? 
      <>
      <div  className={classes.container}> 
      <MenuuCel texto="Chiques"/>
-     <Listachiquesa/>
+     <img style={islogo} src={Mantenimiento} alt="logo" /> 
     </div>
      </>:<>
  <Menuizq>
-<Listachiquesa/>
+ <img style={islogo} src={Mantenimiento} alt="logo" /> 
 </Menuizq></>}
  </>
    
