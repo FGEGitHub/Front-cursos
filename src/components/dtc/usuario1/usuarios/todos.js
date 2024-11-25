@@ -101,7 +101,7 @@ export default function Ingresos(props) {
                     nombre={usuarios[dataIndex].nombre}
                     traer={async () => {
                         console.log('Historial')
-                        const historial = await servicioAdministracion.todos()
+                        const historial = await servicioAdministracion.todosdtc()
 
 
                         setUsuarios(historial)
@@ -137,6 +137,11 @@ export default function Ingresos(props) {
         {
             name: "usuario",
             label: "usuario",
+
+        },
+        {
+            name: "mail",
+            label: "mail",
 
         },
         {
