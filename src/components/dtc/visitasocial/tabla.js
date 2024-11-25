@@ -367,7 +367,7 @@ const columns = [
 
 },
     {
-        name: "Acciones p ahacer",
+        name: "Acciones pa hacer",
         options: {
             customBodyRenderLite: (dataIndex, rowIndex) =>
                 Nivel(
