@@ -250,7 +250,7 @@ backgroundColor:'#b0bec5'        }}>
     <Vinculos/>
  
     { vinculos ? <>  {vinculos.length>0 ?<>  {vinculos.map((ob)=><>
-              {ob.nombre}, { ob.apellido},  {ob.vinculoo } <br/>
+              {ob.nombre}, { ob.apellido} -- {ob.vinculoo }  -- {ob.nombree}, { ob.apellidoo} <br/>
            </> )}  </>:<>Sin vinculos</>}     </>:<></>}
     </>
   );
