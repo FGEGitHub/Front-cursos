@@ -281,6 +281,12 @@ Ver                        </Button>
     ]; */
     const columns = [
       {
+        name: "id",
+        label: "id",
+
+    },
+      {
+        
         name: "kid",
         label: "Dimension",
         options: {
@@ -384,7 +390,7 @@ Ver                        </Button>
         
           }}
   >
-   
+  
     { datos ? <>  <Alert variant="filled" severity="success">
  <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
 </Alert> </>:<></>}
