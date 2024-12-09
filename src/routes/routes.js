@@ -134,7 +134,7 @@ import Dtccocina from '../pages/dtc/cocina/index.js';
 import DtccocinaAsis from '../pages/dtc/cocinaasitencia';
 import Dtcraciones from '../pages/dtc/raciones';
 import DtcAsisenciasoc from '../pages/dtc/nivel1/asistenciassoc';
-
+import DtcEntregas from '../pages/dtc/nivel1/entregas';
 
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
@@ -379,7 +379,9 @@ const Rutas = [
 		{ path: '/dtc/usuario1/expedientes', element: <DTCExpedientes/> },
 		{ path: '/dtc/usuario1/usuariosgim', element: <Dtcusuariosgim/> },
 		{ path: '/dtc/usuario1/mapas', element: <DTCMapas/> },
+		{ path: '/dtc/usuario1/entregas', element: <	DtcEntregas/> },
 
+		
 		{ path: '/dtc/visitasocial/menu', element: <DTCVisitamenu/> },
 		{ path: '/dtc/visitasocial/usuarios', element: <DTCVisitausuarios/> },
 		{ path: '/dtc/visitasocial/usuario/:id', element: <Dtcvisitausuario/> },
@@ -392,7 +394,6 @@ const Rutas = [
 		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
 		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },
 
-		
 
 		{ path: '/cadia/login', element: <LoginCadia/> },
 		{ path: '/cadia/usuario/calendario', element: <CalendarioCadia/> },
