@@ -930,13 +930,10 @@ const modificarinterv= async  (datos) => {
 }
 
 
-
 const traermapa = async () => {
   try {
-    const response = await axios.get('/get-map', {
-      responseType: 'text', // El archivo KML es texto
-    });
-    return response.data; // Retorna el contenido del archivo KML
+    const response = await axios.get(`${baseUrl}traermapa`);
+    return response.data;
   } catch (error) {
     console.error('Error al traer el mapa:', error);
     throw error;
@@ -944,5 +941,28 @@ const traermapa = async () => {
 };
 
 
+const guardarMapa = async (updatedKml) => {
+  try {
+    const response = await axios.post(`${baseUrl}actualizarmapa`, { updatedKml });
+    return response.data;
+  } catch (error) {
+    console.error('Error al guardar el mapa:', error);
+    throw error;
+  }
+};
 
-export default {traermapa,listachiquesmomentaneo,listachicoscadiaespera,modificarinterv,traerarcchivoo,borrarcosa,traercosassole,nuevacosa,traeractividadesprofcadiaadmin,borraractividadchicocadia,nuevoinformepsiqcadia,traeractividadesprofcadia,enviarhorariosdlchico,traerhorariosdisponiblescadia,agregarvariasfechas, traerclasestallercadia,clasificarturno,clasificarturnocadia,traercitascadia,traerpsicologos,agendarturnocadia,traercitastodoscadia,traerparaturnoscadia,borrarturnocadia,agregarturnocadia,traertodoslosturnosfechacadia,tablaprestacionesa,nuevaprestacioninv,listainventario,borrarinformeps,modificarinformeps,nuevoinformepsiq,traerinformes,modificarasist,traercosassole,borraractividadsocial,verArchivo,nuevaintervencion,traerasitenciasociales,determinaprofesional,listaprofs,traerhorarioschicos,traerhorariosprofesionales,agregarhorariochico,traerhorarioschico,agregarhorario,traerhorariosprofesional,ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+const borrarpuntoenmapa = async (point) => {
+  try {
+ 
+    const response = await axios.post(baseUrl+'borrarpuntoenmapa', {
+      lat: point.latlng.lat, lng: point.latlng.lng 
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error al borrar el punto:', error);
+    throw error;
+  }
+};
+
+
+export default {borrarpuntoenmapa,guardarMapa,traermapa,listachiquesmomentaneo,listachicoscadiaespera,modificarinterv,traerarcchivoo,borrarcosa,traercosassole,nuevacosa,traeractividadesprofcadiaadmin,borraractividadchicocadia,nuevoinformepsiqcadia,traeractividadesprofcadia,enviarhorariosdlchico,traerhorariosdisponiblescadia,agregarvariasfechas, traerclasestallercadia,clasificarturno,clasificarturnocadia,traercitascadia,traerpsicologos,agendarturnocadia,traercitastodoscadia,traerparaturnoscadia,borrarturnocadia,agregarturnocadia,traertodoslosturnosfechacadia,tablaprestacionesa,nuevaprestacioninv,listainventario,borrarinformeps,modificarinformeps,nuevoinformepsiq,traerinformes,modificarasist,traercosassole,borraractividadsocial,verArchivo,nuevaintervencion,traerasitenciasociales,determinaprofesional,listaprofs,traerhorarioschicos,traerhorariosprofesionales,agregarhorariochico,traerhorarioschico,agregarhorario,traerhorariosprofesional,ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

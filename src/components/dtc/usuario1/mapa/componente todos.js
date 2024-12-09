@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import omnivore from '@mapbox/leaflet-omnivore';
-import Mapa from '../../../../Assets/mapadtc.kml';
+import serviciodtc from '../../../../services/dtc'; // Servicio para obtener el mapa
 
 // Configuración del icono
 delete L.Icon.Default.prototype._getIconUrl;
@@ -14,39 +14,18 @@ L.Icon.Default.mergeOptions({
 });
 
 // Carga del archivo KML y permite marcar un punto
-const LoadKML = ({ kmlUrl, selectedPoint, setMarkedPoint }) => {
+const LoadKML = ({ kmlData, selectedPoint, setMarkedPoint, markers, setMarkers }) => {
   const map = useMap();
   const [kmlLayer, setKmlLayer] = useState(null);
-  const [highlightMarker, setHighlightMarker] = useState(null); // Referencia al marcador resaltado
 
   useEffect(() => {
-    const layer = omnivore.kml(kmlUrl)
+    const layer = omnivore.kml.parse(kmlData)
       .on('ready', function () {
         map.fitBounds(this.getBounds());
         this.eachLayer((layer) => {
           if (layer instanceof L.Marker) {
             const { name, description } = layer.feature.properties;
-
-            // Vincular un popup al marcador
             layer.bindPopup(`<strong>${name || 'Sin nombre'}</strong><br>${description || 'Sin descripción'}`);
-
-            // Evento de clic en el marcador
-            layer.on('click', () => {
-              // Actualizar el estado del punto marcado
-              setMarkedPoint({ name, latlng: layer.getLatLng() });
-
-              // Resaltar el marcador seleccionado
-              if (highlightMarker) {
-                map.removeLayer(highlightMarker); // Eliminar el marcador anterior
-              }
-              const newHighlight = L.circleMarker(layer.getLatLng(), {
-                radius: 10,
-                color: 'red',
-                fillColor: 'red',
-                fillOpacity: 0.5,
-              }).addTo(map);
-              setHighlightMarker(newHighlight);
-            });
           }
         });
       })
@@ -56,9 +35,8 @@ const LoadKML = ({ kmlUrl, selectedPoint, setMarkedPoint }) => {
 
     return () => {
       if (layer) map.removeLayer(layer);
-      if (highlightMarker) map.removeLayer(highlightMarker);
     };
-  }, [kmlUrl, map, setMarkedPoint, highlightMarker]);
+  }, [kmlData, map]);
 
   // Centrar el mapa en el punto seleccionado si cambia
   useEffect(() => {
@@ -75,84 +53,176 @@ const LoadKML = ({ kmlUrl, selectedPoint, setMarkedPoint }) => {
     }
   }, [selectedPoint, kmlLayer, map]);
 
-  return null;
-};
+  // Agregar nuevo marcador al hacer doble clic en el mapa
+  const handleMapDoubleClick = (e) => {
+    const { lat, lng } = e.latlng;
+    const newMarker = L.marker([lat, lng])
+      .bindPopup('Nuevo punto')
+      .addTo(map);
 
-// Selector de puntos
-const PointSelector = ({ points, onSelect, onSave, markedPoint }) => {
-  return (
-    <div style={{ marginBottom: '10px' }}>
-      <label htmlFor="pointSelector">Seleccionar un punto: </label>
-      <select id="pointSelector" onChange={(e) => onSelect(e.target.value)}>
-        <option value="">-- Seleccionar --</option>
-        {points.map((point) => (
-          <option key={point} value={point}>
-            {point}
-          </option>
-        ))}
-      </select>
-      <button
-        style={{ marginLeft: '10px' }}
-        onClick={() => onSave(markedPoint)}
-        disabled={!markedPoint}
-      >
-        Guardar selección
-      </button>
-    </div>
-  );
+    // Guardar el marcador en el estado
+    setMarkers((prevMarkers) => [
+      ...prevMarkers,
+      { latlng: L.latLng(lat, lng), marker: newMarker }
+    ]);
+
+    // Actualizar el punto marcado en el estado
+    setMarkedPoint({ name: 'Nuevo punto', latlng: L.latLng(lat, lng) });
+  };
+
+  useEffect(() => {
+    map.on('dblclick', handleMapDoubleClick);
+
+    return () => {
+      map.off('dblclick', handleMapDoubleClick);
+    };
+  }, [map]);
+
+  return null;
 };
 
 // Componente principal
 const MapComponent = () => {
-  const kmlUrl = Mapa;
+  const [kmlData, setKmlData] = useState(null);
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [markedPoint, setMarkedPoint] = useState(null);
   const [availablePoints, setAvailablePoints] = useState([]);
+  const [newPointName, setNewPointName] = useState(''); // Estado para el nombre del nuevo punto
+  const [markers, setMarkers] = useState([]); // Estado para guardar los marcadores
 
-  // Extraer puntos del KML
+  // Obtener el KML desde el backend
   useEffect(() => {
-    const kmlLayer = omnivore.kml(kmlUrl)
-      .on('ready', function () {
+    const fetchData = async () => {
+      try {
+        const data = await serviciodtc.traermapa();
+        setKmlData(data);
+
+        // Extraer puntos del KML
+        const layer = omnivore.kml.parse(data);
         const points = [];
-        this.eachLayer((layer) => {
+        layer.eachLayer((layer) => {
           if (layer instanceof L.Marker) {
-            const { name } = layer.feature.properties;
-            if (name) points.push(name);
+            const { name } = layer.feature.properties || {};
+            if (name) {
+              points.push({
+                name,
+                latlng: layer.getLatLng(),
+              });
+            }
           }
         });
         setAvailablePoints(points);
-      });
-
-    return () => {
-      kmlLayer.remove();
+      } catch (error) {
+        console.error('Error al cargar el mapa:', error);
+      }
     };
-  }, [kmlUrl]);
+    fetchData();
+  }, []);
 
-  // Guardar el punto marcado (puedes modificar para guardarlo en un backend o almacenamiento local)
-  const handleSave = (point) => {
-    if (point) {
-      console.log('Punto guardado:', point);
-      alert(`Punto guardado: ${point.name}`);
+  // Guardar el punto marcado
+  const handleSavePoint = async () => {
+    if (markedPoint && newPointName) {
+      try {
+        const kmlString = `
+          <kml xmlns="http://www.opengis.net/kml/2.2">
+            <Document>
+              <Placemark>
+                <name>${newPointName}</name> <!-- Nombre del nuevo punto -->
+                <Point>
+                  <coordinates>${markedPoint.latlng.lng},${markedPoint.latlng.lat}</coordinates>
+                </Point>
+              </Placemark>
+            </Document>
+          </kml>
+        `;
+        await serviciodtc.guardarMapa(kmlString);
+        alert('Punto guardado exitosamente.');
+      } catch (error) {
+        console.error('Error al guardar el punto:', error);
+        alert('Error al guardar el punto.');
+      }
+    } else {
+      alert('Por favor ingresa un nombre para el punto.');
+    }
+  };
+
+  // Borrar un punto seleccionado
+  const handleDeletePoint = async () => {
+    if (selectedPoint) {
+      try {
+        // Eliminar el marcador en el mapa
+        const pointToDelete = markers.find((marker) => marker.latlng.lat === selectedPoint.latlng.lat && marker.latlng.lng === selectedPoint.latlng.lng);
+        if (pointToDelete) {
+          pointToDelete.marker.remove();
+          setMarkers((prevMarkers) => prevMarkers.filter((marker) => marker !== pointToDelete));
+        }
+
+        // Llamar al servicio para borrar el punto en el backend
+        await serviciodtc.borrarpuntoenmapa(selectedPoint);
+        alert('Punto borrado exitosamente.');
+      } catch (error) {
+        console.error('Error al borrar el punto:', error);
+        alert('Error al borrar el punto.');
+      }
+    } else {
+      alert('Selecciona un punto para borrar.');
     }
   };
 
   return (
     <div>
-      <PointSelector
-        points={availablePoints}
-        onSelect={(name) => {
-          const point = availablePoints.find((p) => p === name);
-          setSelectedPoint(point ? { name } : null);
-        }}
-        onSave={handleSave}
-        markedPoint={markedPoint}
-      />
-      <MapContainer center={[0, 0]} zoom={2} style={{ height: '500px', width: '100%' }}>
+      <div style={{ marginBottom: '10px' }}>
+        <label htmlFor="pointSelector">Seleccionar un punto: </label>
+        <select
+          id="pointSelector"
+          onChange={(e) => {
+            const selectedName = e.target.value;
+            const point = availablePoints.find((p) => p.name === selectedName);
+            if (point) {
+              setSelectedPoint(point);
+            }
+          }}
+        >
+          <option value="">-- Seleccionar --</option>
+          {availablePoints.map((point) => (
+            <option key={point.name} value={point.name}>
+              {point.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div style={{ marginBottom: '10px' }}>
+        <label htmlFor="newPointName">Nombre del nuevo punto: </label>
+        <input
+          type="text"
+          id="newPointName"
+          value={newPointName}
+          onChange={(e) => setNewPointName(e.target.value)} // Actualizar el nombre del nuevo punto
+          placeholder="Ingrese el nombre del punto"
+        />
+      </div>
+      <div style={{ marginBottom: '10px' }}>
+        <button onClick={handleSavePoint} disabled={!markedPoint || !newPointName}>
+          Guardar Punto
+        </button>
+        <button onClick={handleDeletePoint} disabled={!selectedPoint}>
+          Borrar Punto
+        </button>
+      </div>
+      <MapContainer center={[0, 0]} zoom={15} style={{ height: '500px', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        <LoadKML kmlUrl={kmlUrl} selectedPoint={selectedPoint} setMarkedPoint={setMarkedPoint} />
+        {kmlData && (
+          <LoadKML
+            kmlData={kmlData}
+            selectedPoint={selectedPoint}
+            setMarkedPoint={setMarkedPoint}
+            markers={markers}
+            setMarkers={setMarkers}
+          />
+        )}
       </MapContainer>
     </div>
   );
