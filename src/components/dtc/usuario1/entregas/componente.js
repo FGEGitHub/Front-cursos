@@ -149,7 +149,7 @@ const MapComponent = () => {
   // Borrar un punto seleccionado
   const handleDeletePoint = async () => {
     if (selectedPoint) {
-      try {
+
         // Eliminar el marcador en el mapa
         const pointToDelete = markers.find((marker) => marker.latlng.lat === selectedPoint.latlng.lat && marker.latlng.lng === selectedPoint.latlng.lng);
         if (pointToDelete) {
@@ -158,12 +158,9 @@ const MapComponent = () => {
         }
 
         // Llamar al servicio para borrar el punto en el backend
-        await serviciodtc.borrarpuntoenmapaentregas(selectedPoint);
-        alert('Punto borrado exitosamente.');
-      } catch (error) {
-        console.error('Error al borrar el punto:', error);
-        alert('Error al borrar el punto.');
-      }
+       const rta= await serviciodtc.borrarpuntoenmapaentregas(selectedPoint);
+        alert(rta);
+
     } else {
       alert('Selecciona un punto para borrar.');
     }
