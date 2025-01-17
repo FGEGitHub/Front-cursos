@@ -1,61 +1,116 @@
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { Button } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import servicioDtc from '../../../../services/dtc'
-import NativeSelect from '@mui/material/NativeSelect';
-import Tooltip from '@material-ui/core/Tooltip';
-import PhoneForwardedSharpIcon from '@mui/icons-material/PhoneForwardedSharp';
-import React, { useEffect, useState, Fragment } from "react";
-import DialogActions from '@mui/material/DialogActions';
-import InputLabel from '@mui/material/InputLabel';
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import InputLabel from "@mui/material/InputLabel";
+import NativeSelect from "@mui/material/NativeSelect";
+import Tooltip from "@material-ui/core/Tooltip";
+import React, { useState } from "react";
 
+export default function ModificarElementoDialog(props) {
+  const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({
+    titulo: props.titulo || "",
+    fecha: props.fecha || "",
+    estado: props.estado || "",
+    descripcion: props.descripcion || "",
+    fecha_fin: props.fecha_fin || "",
+  });
 
-export default function SelectTextFields(props) {
-  const [open, setOpen] = React.useState(false);
-  //const usuario  = useUser().userContext
-  const [form, setForm] = useState()
-  const [datos, setDatos] = useState()
-  const [activo, setActivo] = useState(false)
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-
-  const handleClickOpen = () => {
-
-    setOpen(true);
-
-    
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleClose = () => {
+  const handleSubmit = () => {
+    console.log("Datos modificados:", form);
+    // Aquí puedes llamar al servicio para guardar los cambios
+    // servicioDtc.actualizarElemento(form);
     setOpen(false);
   };
 
-
   return (
-
-
-    
-    
     <Box
-
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        "& .MuiTextField-root": { m: 1, width: "25ch" },
       }}
       noValidate
       autoComplete="off"
     >
-       < Tooltip title="Ver">
-      <button variant="outlined" onClick={handleClickOpen} disabled >Ver</button>
+      <Tooltip title="Modificar">
+        <button variant="outlined" onClick={handleClickOpen}>
+          Modificar
+        </button>
       </Tooltip>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogContent>
-dsa
+          <h3>Modificar Elemento {props.titulo}</h3>
+          <TextField
+            label="Título"
+            name="titulo"
+            defaultValue={props.titulo}
+            onChange={handleChange}
+            fullWidth
+          />
+          <TextField
+            label="Fecha de Inicio"
+            name="fecha"
+            type="date"
+            defaultValue={props.fecha}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+            fullWidth
+          />
+          <InputLabel htmlFor="estado-select">Estado</InputLabel>
+          <NativeSelect
+            id="estado-select"
+            name="estado"
+            defaultValue={props.estado}
+            onChange={handleChange}
+            fullWidth
+          >
+            <option value ="">Elegir</option>
+            <option value="Iniciado">Iniciado</option>
+            <option value="Cerrado">Cerrado</option>
+            <option value="Iniciado cargado al proyectar">
+              Iniciado cargado al proyectar
+            </option>
+            <option value="Cerrado cargado en el proyectar">
+              Cerrado cargado en el proyectar
+            </option>
+          </NativeSelect>
+          <TextField
+            label="Descripción"
+            name="descripcion"
+            value={props.descripcion}
+            onChange={handleChange}
+            multiline
+            rows={4}
+            fullWidth
+          />
+          <TextField
+            label="Fecha de Finalización"
+            name="fecha_fin"
+            type="date"
+            value={props.fecha_fin}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+            fullWidth
+          />
         </DialogContent>
+        <DialogActions>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Guardar
+          </Button>
+          <Button variant="outlined" color="error" onClick={handleClose}>
+            Cancelar
+          </Button>
+        </DialogActions>
       </Dialog>
-    </Box >
-
-   
+    </Box>
   );
 }

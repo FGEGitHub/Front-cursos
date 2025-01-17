@@ -2,7 +2,7 @@ import servicioDtc from '../../../../services/dtc'
 
 import ModaNueva from './nueva'
 import React, { useEffect, useState, Fragment } from "react";
-import { Paper } from '@mui/material';
+import Actualizar from './ver';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
@@ -194,7 +194,33 @@ const TablaNotificaciones = (props) => {
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
             <>
+<Actualizar
+id={chicos[dataIndex]['id']}
+fecha={chicos[dataIndex]['fecha']}
+estado={chicos[dataIndex]['estado']}
+titulo={chicos[dataIndex]['titulo']}
+descripcion={chicos[dataIndex]['descripcion']}
 
+traer={async () => {
+  try {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON)
+
+          setUsuario(usuario)
+
+          const novedades_aux = await servicioDtc.traeretapacocinacadia()
+          setchicos(novedades_aux[0])
+          setDatos(novedades_aux[1])
+      }
+
+  } catch (error) {
+
+  }
+
+} }
+
+/>
 
                     < Tooltip title="Ver">
                     <Modalborrar id={chicos[dataIndex]['id']}
@@ -401,7 +427,7 @@ const TablaNotificaciones = (props) => {
                
                                 <MUIDataTable
 
-                                    title={"Lista de chicos"}
+                                    title={"Lista "}
                                     data={chicos}
                                     columns={columns}
                                     actions={[
