@@ -173,7 +173,8 @@ export default function Ingresos(props) {
       )}
       <Button variant="contained" onClick={() => navigate('/dtc/cargaetapas')}>Ir a Etapas</Button>
       <Button variant="contained" onClick={() => navigate('/dtc/cocinaasis')}>Ir a Asistencia</Button>
-      
+      <Button variant="contained" onClick={() => navigate('/dtc/cocinastock')}>Ir a Stock</Button>
+
       {datos && (
         <>
           <h4>Lista de presentes ({inscrip.length})</h4>

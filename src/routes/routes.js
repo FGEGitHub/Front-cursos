@@ -135,6 +135,8 @@ import DtccocinaAsis from '../pages/dtc/cocinaasitencia';
 import Dtcraciones from '../pages/dtc/raciones';
 import DtcAsisenciasoc from '../pages/dtc/nivel1/asistenciassoc';
 import DtcEntregas from '../pages/dtc/nivel1/entregas';
+import DtcCocinastock from '../pages/dtc/cocinastock';
+
 
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
@@ -358,8 +360,9 @@ const Rutas = [
 		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },
 		{ path: '/dtc/cocina', element: <Dtccocina/> },
 		{ path: '/dtc/cocinaasis', element: <DtccocinaAsis/> },
+		{ path: '/dtc/cocinastock', element: <DtcCocinastock/> },
 		{ path: '/dtc/cocinapacientes', element: <DTCcocinpacientes/> },
-
+		
 		
 		{ path: '/dtc/usuario2/raciones', element: <Dtcraciones/> },
 
