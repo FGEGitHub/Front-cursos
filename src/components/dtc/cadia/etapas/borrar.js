@@ -56,9 +56,9 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="contained"  color="error" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
+            <button  onClick={handleClickOpen} style={{ width: '70px' }}  /* style={{ width: '25%' }} */ >
             Borrar
-            </Button>
+            </button>
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Borrar actividad</DialogTitle>

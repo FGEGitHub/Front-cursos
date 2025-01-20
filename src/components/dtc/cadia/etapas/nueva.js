@@ -74,7 +74,13 @@ export default function SelectTextFields(props) {
     props.traer();
     setOpen(false);
   };
+  const isFormValid =
+  form.titulo && form.etapa && form.proyecto && form.fecha;
 
+// Función para resaltar campos faltantes
+const getFieldError = (field) => {
+  return !form[field] ? "Este campo es obligatorio" : "";
+};
   return (
     <Box
       sx={{
@@ -101,6 +107,7 @@ export default function SelectTextFields(props) {
           <NativeSelect
             defaultValue=""
             onChange={handleChange}
+            error={!form.proyecto}
             inputProps={{
               name: "proyecto",
               id: "uncontrolled-native",
@@ -152,6 +159,8 @@ export default function SelectTextFields(props) {
             onChange={handleChange}
             fullWidth
             variant="standard"
+            error={!form.titulo}
+            helperText={getFieldError("titulo")}
           />
           <InputLabel htmlFor="uncontrolled-native">
             <StyledParagraph>EXPEDIENTE</StyledParagraph>
@@ -180,7 +189,9 @@ export default function SelectTextFields(props) {
             id="date"
             label="Fecha"
             type="date"
-            defaultValue={"2024-07-09"}
+            defaultValue={"2025-01-01"}
+            error={!form.fecha}
+            helperText={getFieldError("fecha")}
             sx={{ width: "80%" }}
             InputLabelProps={{
               shrink: true,
@@ -201,9 +212,14 @@ export default function SelectTextFields(props) {
           />
 
           <DialogActions>
-            <Button variant="contained" color="primary" onClick={handleDeterminar}>
-              Crear
-            </Button>
+          <Button 
+  variant="contained" 
+  color="primary" 
+  onClick={handleDeterminar} 
+  disabled={!isFormValid}
+>
+  Crear
+</Button>
             <Button variant="outlined" color="error" onClick={handleClose}>
               Cancelar
             </Button>

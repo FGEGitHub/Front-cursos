@@ -2,7 +2,7 @@ import servicioDtc from '../../../../services/dtc'
 
 import ModaNueva from './nueva'
 import React, { useEffect, useState, Fragment } from "react";
-import Actualizar from './ver';
+import Actualizar from './modificarr';
 import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
@@ -76,6 +76,7 @@ const TablaNotificaciones = (props) => {
     const [chicos, setchicos] = useState([''])
     const [usuario, setUsuario] = useState([''])
     const [datos, setDatos] = useState()
+    const [vistaCelular, setVistaCelular] = useState(true);
     const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     const classes = useStyles();
@@ -155,23 +156,10 @@ const TablaNotificaciones = (props) => {
 
       };
     
-      const theme2 = createTheme({
-        overrides: {
-          MUIDataTableBodyCell: {
-            root: {
-              color: '#1e88e5', // Cambia el color del texto en las celdas del cuerpo
-            },
-          },
-          MUIDataTableSelectCell: {
-            headerCell: {
-              backgroundColor: '#3f51b5', // Cambia el color de fondo de las celdas de selección en el encabezado
-            },
-            checkboxRoot: {
-              color: '#3f51b5', // Cambia el color del icono de la casilla de verificación de selección
-            },
-          },
-        },
-      });
+      const toggleVista = () => {
+        setVistaCelular(!vistaCelular);
+    };
+
     const traer = async () => {
         try {
             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -324,7 +312,9 @@ traer={async () => {
    
     { datos ? <>  <Alert variant="filled" severity="success">
 </Alert> </>:<></>}
-
+<Button variant="contained" color="primary" onClick={toggleVista}>
+                {vistaCelular ? "Cambiar a Vista de PC" : "Cambiar a Vista del Cel"}
+            </Button>
             <h2>Lista de etapas</h2>
             {chicos ? <>
                 <div>
@@ -360,93 +350,94 @@ traer={async () => {
                     {chicos.length > 0 ? <>
 
 
-                        {isMatch ?
-                            <>
-
-                                <TableContainer>
-                                    {!chicos ? <Skeleton /> : <>
-                                        <h1>Lista de etapas </h1>
-                                        <Table >
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Fecha</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Titulo</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>expediente</b></TableCell>
-                                                   <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>descripcion</b></TableCell>
-
-
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-
-
-
-                                                {chicos.map((row) => (
-                                                    <StyledTableRow key={row.name}>
-                                                        <StyledTableCell component="th" scope="row">{row.fecha}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">{row.titulo}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.expediente} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> {row.descripcion} </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <Modalborrar id={row.id}
-                      traer={async () => {
-                        try {
-                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                            if (loggedUserJSON) {
-                                const usuario = JSON.parse(loggedUserJSON)
-                
-                                setUsuario(usuario)
-                
-                                const novedades_aux = await servicioDtc.traeretapacocinacadia()
-                                setchicos(novedades_aux[0])
-                                setDatos(novedades_aux[1])
-                            }
-                
-                        } catch (error) {
-                
-                        }
-                
-                    } }
-                    /> </StyledTableCell>
-
-                                                      
-
-
-                                                    </StyledTableRow>
-                                                ))}
-
-
-
-
-                                            </TableBody>
-                                        </Table>
-                                    </>}
-
-                                </TableContainer>
-                            </> : <><>
-                      
-               
-                                <MUIDataTable
-
-                                    title={"Lista "}
-                                    data={chicos}
-                                    columns={columns}
-                                    actions={[
-                                        {
-                                            icon: 'save',
-                                            tooltip: 'Save User',
-                                            onClick: (event, rowData) => alert("You saved " + rowData.name)
+                      {vistaCelular ? (
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Fecha</TableCell>
+                                <TableCell>Título</TableCell>
+                                <TableCell>Estado</TableCell>
+                                <TableCell>Proyectar</TableCell>
+                                <TableCell>Descripción</TableCell>
+                                <TableCell>Actualizar</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {chicos.map((row, index) => (
+                                <TableRow key={index}>
+                                    <TableCell>{row.fecha}</TableCell>
+                                    <TableCell>{row.titulo}</TableCell>
+                                    <TableCell>{row.estado}
+  {row.estado == "Iniciado" ? ` - Fecha: ${row.fecha}` : `- Fecha: ${row.fecha_fin}`}
+</TableCell>
+                                    <TableCell>{row.proyectar}</TableCell>
+                                    <TableCell>{row.descripcion}</TableCell>
+                                    <TableCell>
+                                    <Actualizar
+                                    id={row.id}
+                                    traer={async () => {
+                                      try {
+                                          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                          if (loggedUserJSON) {
+                                              const usuario = JSON.parse(loggedUserJSON)
+                              
+                                              setUsuario(usuario)
+                              
+                                              const novedades_aux = await servicioDtc.traeretapacocinacadia()
+                                              setchicos(novedades_aux[0])
+                                              setDatos(novedades_aux[1])
+                                          }
+                              
+                                      } catch (error) {
+                              
+                                      }
+                              
+                                  }}/>
+                                    <Modalborrar
+                                       id={row.id}
+                                       titulo={row.id}
+                                       fecha={row.id}
+                                       descripcion={row.id}
+                                       fecha_fin={row.id}
+                                       proyectar={row.id}
+                                       estado={row.estado}
+                                       traer={async () => {
+                                        try {
+                                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                            if (loggedUserJSON) {
+                                                const usuario = JSON.parse(loggedUserJSON)
+                                
+                                                setUsuario(usuario)
+                                
+                                                const novedades_aux = await servicioDtc.traeretapacocinacadia()
+                                                setchicos(novedades_aux[0])
+                                                setDatos(novedades_aux[1])
+                                            }
+                                
+                                        } catch (error) {
+                                
                                         }
-                                    ]}
-                                    options={options}
-                                    className={classes.table} // Aplica el estilo de la tabla
-                                    classes={{
-                                      bodyCell: classes.bodyCell, // Aplica el estilo del texto en las celdas del cuerpo
-                                      selectCell: classes.selectCell, // Aplica el estilo de las celdas de selección
+                                
                                     }}
+                                 />
 
-                                />
 
-                            </></>}
+                                    </TableCell>
+                                    
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            ) : (
+                <MUIDataTable
+                    title="Lista de Etapas"
+                    data={chicos}
+                    columns={columns}
+                    options={options}
+                />
+            )}
 
                     </> : <> <h2>Aun no hay etapas</h2></>}
 

@@ -8,29 +8,38 @@ import InputLabel from "@mui/material/InputLabel";
 import NativeSelect from "@mui/material/NativeSelect";
 import Tooltip from "@material-ui/core/Tooltip";
 import React, { useState } from "react";
-
+import servicioDtc from "../../../../services/dtc";
 export default function ModificarElementoDialog(props) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
+    id: props.id || "",
     titulo: props.titulo || "",
     fecha: props.fecha || "",
     estado: props.estado || "",
     descripcion: props.descripcion || "",
     fecha_fin: props.fecha_fin || "",
+    proyectar: props.proyectar || "",
   });
 
-  const handleClickOpen = () => setOpen(true);
+  const handleClickOpen = () =>{ setOpen(true)
+    setForm({id: props.id })
+  };
   const handleClose = () => setOpen(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    console.log("Datos modificados:", form);
-    // Aquí puedes llamar al servicio para guardar los cambios
-    // servicioDtc.actualizarElemento(form);
-    setOpen(false);
+  const handleSubmit = async () => {
+ try {
+       const nov = await servicioDtc.modificaretapa(form);
+       alert(nov.message);
+     } catch (error) {
+       console.error(error);
+       console.log("Error algo sucedió");
+     }
+     props.traer();
+     setOpen(false);
   };
 
   return (
@@ -76,12 +85,7 @@ export default function ModificarElementoDialog(props) {
             <option value ="">Elegir</option>
             <option value="Iniciado">Iniciado</option>
             <option value="Cerrado">Cerrado</option>
-            <option value="Iniciado cargado al proyectar">
-              Iniciado cargado al proyectar
-            </option>
-            <option value="Cerrado cargado en el proyectar">
-              Cerrado cargado en el proyectar
-            </option>
+   
           </NativeSelect>
           <TextField
             label="Descripción"
@@ -101,6 +105,23 @@ export default function ModificarElementoDialog(props) {
             InputLabelProps={{ shrink: true }}
             fullWidth
           />
+          <NativeSelect
+            id="estado-select"
+            name="proyectar"
+            defaultValue={props.estado}
+            onChange={handleChange}
+            fullWidth
+          >
+            <option value ="">Elegir</option>
+            <option value="Sin cargar">Sin cargar</option>
+            <option value="Cargado inicio">Cargado inicio</option>
+            <option value="Cargado fin">
+            Cargado fin
+            </option>
+            <option value="Cerrado cargado en el proyectar">
+              Cerrado cargado en el proyectar
+            </option>
+          </NativeSelect>
         </DialogContent>
         <DialogActions>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
