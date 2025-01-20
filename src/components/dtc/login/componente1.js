@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 //import   Navbar from "../navbar"
 
-import Logo from "../../../Assets/dtc.png";
+import Logo from "../../../Assets/dtcver.png";
 //import Registro from "./registro"
 import servicioLogin from "../../../services/login"
 //import servicioUsuario from "../../services/usuario"
