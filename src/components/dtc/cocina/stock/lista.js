@@ -16,8 +16,8 @@ import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
-
-import Alert from '@mui/material/Alert';
+import ModalAgregarconsumo from './agregarconsumo'
+import Agregar from './sumar'
 import {
 
     makeStyles,
@@ -174,16 +174,9 @@ const TablaNotificaciones = (props) => {
       });
     const traer = async () => {
         try {
-            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-            if (loggedUserJSON) {
-                const usuario = JSON.parse(loggedUserJSON)
-
-                setUsuario(usuario)
-
-                const novedades_aux = await servicioDtc.traerstock()
-                setchicos(novedades_aux[0])
- 
-            }
+          console.log('trayebdo')
+          const novedades_aux = await servicioDtc.traerstock()
+          setchicos(novedades_aux[0])
 
         } catch (error) {
 
@@ -305,6 +298,7 @@ const TablaNotificaciones = (props) => {
                 }
         
             }}/>
+            <Agregar/>
             {chicos ? <>
                 <div>
 
@@ -312,11 +306,7 @@ const TablaNotificaciones = (props) => {
                    
                     {chicos.length > 0 ? <>
 
-
-                        {isMatch ?
-                            <>
-
-                                <TableContainer>
+                      <TableContainer>
                                     {!chicos ? <Skeleton /> : <>
                                      
                                      
@@ -325,7 +315,7 @@ const TablaNotificaciones = (props) => {
                                                 <TableRow>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>id</b> <b /></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
-                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Cantidad</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Stock</b></TableCell>
                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>descripcion</b></TableCell>
                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Acciones</b></TableCell>
 
@@ -340,9 +330,9 @@ const TablaNotificaciones = (props) => {
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.id}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row">{row.nombre}</StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.cantidad} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> {row.descripcion} </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <Modalborrar id={row.id}
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.total_recepcion-row.total_consumo} de {row.total_recepcion} (total)</b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> descripcion </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> {/*  <Modalborrar id={row.id}
                       traer={async () => {
                         try {
                             const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -361,7 +351,26 @@ const TablaNotificaciones = (props) => {
                         }
                 
                     } }
-                    /> </StyledTableCell>
+                    /> */}<ModalAgregarconsumo id_producto={row.id}
+                    traer={async () => {
+                      try {
+                          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                          if (loggedUserJSON) {
+                              const usuario = JSON.parse(loggedUserJSON)
+              
+                              setUsuario(usuario)
+              
+                              const novedades_aux = await servicioDtc.traerstock()
+                              setchicos(novedades_aux[0])
+                            
+                          }
+              
+                      } catch (error) {
+              
+                      }
+              
+                  } }
+                  /> </StyledTableCell>
 
                                                       
 
@@ -377,31 +386,6 @@ const TablaNotificaciones = (props) => {
                                     </>}
 
                                 </TableContainer>
-                            </> : <><>
-                      
-               
-                                <MUIDataTable
-
-                                    title={"Lista de chicos"}
-                                    data={chicos}
-                                    columns={columns}
-                                    actions={[
-                                        {
-                                            icon: 'save',
-                                            tooltip: 'Save User',
-                                            onClick: (event, rowData) => alert("You saved " + rowData.name)
-                                        }
-                                    ]}
-                                    options={options}
-                                    className={classes.table} // Aplica el estilo de la tabla
-                                    classes={{
-                                      bodyCell: classes.bodyCell, // Aplica el estilo del texto en las celdas del cuerpo
-                                      selectCell: classes.selectCell, // Aplica el estilo de las celdas de selección
-                                    }}
-
-                                />
-
-                            </></>}
 
                     </> : <> <h2>Aun no hay productos</h2></>}
 
