@@ -1,9 +1,7 @@
 import servicioDtc from '../../../../services/dtc'
 
 import React, { useEffect, useState, Fragment } from "react";
-import { Paper } from '@mui/material';
-import MUIDataTable from "mui-datatables";
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
+import Bot from './bot';
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -298,6 +296,7 @@ const TablaNotificaciones = (props) => {
                 }
         
             }}/>
+            <Bot/>
             <Agregar/>
             {chicos ? <>
                 <div>

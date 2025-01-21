@@ -64,7 +64,7 @@ export default function ModificarElementoDialog(props) {
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogContent>
             {etapas ? <>
-        <InputLabel htmlFor="etapa1-select">Etapa 1</InputLabel>
+        <InputLabel htmlFor="etapa1-select">Que producto quieres sumar stock</InputLabel>
           <NativeSelect id="etapa1-select" name="id_producto"  onChange={handleChange} fullWidth>
             <option value="">Elegir</option>
             {etapas[1].map((etapa, index) => (
@@ -72,7 +72,7 @@ export default function ModificarElementoDialog(props) {
             ))}
           </NativeSelect>
 
-          <InputLabel htmlFor="etapa2-select">Etapa 2</InputLabel>
+          <InputLabel htmlFor="etapa2-select">¿cual fue el origen del producto?</InputLabel>
           <NativeSelect id="etapa2-select" name="id_exp" onChange={handleChange} fullWidth>
             <option value="">Elegir</option>
             {etapas[0].map((etapa, index) => (
