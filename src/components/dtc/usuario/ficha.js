@@ -7,6 +7,7 @@ import Modalperfil from './modaldeperfil'
 import Borrarusuaio from "./modalborrarusuario"
 import Vinculos from './modalvinculos'
 import Avatar from "@mui/material/Avatar";
+import Agregarcurso from './modalinscribir'
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = (props) => {
     let params = useParams()
@@ -176,6 +177,7 @@ backgroundColor:'#b0bec5'        }}>
             <Typography>{chico.domicilio}</Typography>
           </Grid>
           </>:<></>}
+        
           {chico && (
                 <Fragment>
                  <Button onClick={toggleShowAllData}>
@@ -193,6 +195,7 @@ backgroundColor:'#b0bec5'        }}>
                   { usuario ? <>
                   {usuario.nivel ==20?<>
 
+                    <Agregarcurso/>
                     <Borrarusuaio 
 
                         id ={chico.id}/>
