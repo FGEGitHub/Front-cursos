@@ -368,7 +368,7 @@ traer={async () => {
                                 <TableRow key={index}>
                                     <TableCell>{row.fecha}</TableCell>
                                     <TableCell>{row.titulo}</TableCell>
-                                    <TableCell>{row.estado}
+                                    <TableCell>
   {row.fecha_fin == undefined ? `iniciado - Fecha: ${row.fecha}` : `finalizado - Fecha:${row.fecha} - ${row.fecha_fin}`}
 </TableCell>
                                     <TableCell>{row.proyectar}</TableCell>
