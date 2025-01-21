@@ -154,7 +154,7 @@ const LoginForm = () => {
   }
 
   const isLogo = {
-    width: "80%",
+    width: "90%",
   };
 
   return (<>

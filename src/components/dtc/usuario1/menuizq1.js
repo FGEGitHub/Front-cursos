@@ -20,7 +20,9 @@ import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
 import Tooltip from '@mui/material/Tooltip';
 import ArchitectureIcon from '@mui/icons-material/Architecture';
 import Navbar from '../Navbar'
+import Dtcito from './bot'
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';const drawerWidth = 240;
+
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -262,7 +264,9 @@ export default function MenuIzq2 ({children}) {
    
       <div >
         <br/>
+    
    { children}
+   <Dtcito/>
    </div>
       </Box>
     </Box>
