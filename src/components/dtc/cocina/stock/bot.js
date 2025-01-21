@@ -34,7 +34,7 @@ const ChatBot = () => {
               .join(", ")}`
           : "Hoy no hay cumples :( pero a la izquierda podes ver los del mes"
       }`,
-      options: ["¿Como agrego un producto?","¿Como agrego stock?",  "¿como duardo el consumo?", "¿como agrego expedientes?"],
+      options: ["¿Como agrego un producto?","¿Como agrego stock?",  "¿como guardo el consumo?", "¿como agrego expedientes?"],
     },
     comoagregounproducto: {
       message:
@@ -49,6 +49,11 @@ const ChatBot = () => {
       comoguardoelconsumo: {
         message:
           "Para agregar el consumo tiene que existir ya cargado el producto y aparecera en la lista, seleciconando Agregar consumo se ponela  fecha que se uso y cuanto",
+        options: ["Volver"],
+      },
+      comoagregoexpedientes: {
+        message:
+          "En un futuro te explicare. Recien estoy aprendiendo el sistema",
         options: ["Volver"],
       },
    
