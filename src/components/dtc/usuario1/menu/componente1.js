@@ -16,7 +16,7 @@ import  Acordeon   from '../actividades/acordeon';
 import  { useEffect, useState } from "react";
 import Asistencia from  '../../usuario2/asistencia/tabla'
 
-import Bot from '../bot';
+import Dtcito from '../bot';
 //import Casasa from './asist'
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -67,7 +67,7 @@ const traer = async () => {
   const fechaActual = new Date();
 
   return (<>
-   
+    <Dtcito/>
     <Container component="main" >
       <CssBaseline />
       <Grid container spacing={2} >

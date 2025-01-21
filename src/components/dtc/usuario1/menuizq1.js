@@ -266,7 +266,7 @@ export default function MenuIzq2 ({children}) {
         <br/>
     
    { children}
-   <Dtcito/>
+  
    </div>
       </Box>
     </Box>
