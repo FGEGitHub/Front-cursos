@@ -1,9 +1,31 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, FormControl, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
-import servicioDtc from '../../../services/dtc'
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
+import servicioDtc from '../../../services/dtc';
+
 const MyDialog = () => {
-  const { id } = useParams(); // Obtener el id de los parámetros de la URL
+  const { id } = useParams();
 
   const optionKeys = {
     Música: 240,
@@ -24,20 +46,32 @@ const MyDialog = () => {
     viernes: false,
   });
 
+  const [optionData, setOptionData] = useState(null);
+
   const allDays = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
   const ludicoDays = ['martes', 'jueves', 'viernes'];
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+  const handleOptionChange = async (event) => {
+    const selected = event.target.value;
+    setSelectedOption(selected);
 
-    // Si se elige "Lúdico", deselecciona los días no permitidos
-    if (event.target.value === 'Lúdico') {
+    const selectedKey = optionKeys[selected] || null;
+
+    if (selected === 'Lúdico') {
       setSelectedDays((prevDays) =>
         Object.keys(prevDays).reduce((acc, day) => {
           acc[day] = ludicoDays.includes(day) ? prevDays[day] : false;
           return acc;
         }, {})
       );
+    }
+
+    try {
+      const response = await servicioDtc.obtenerinfodecursos(selectedKey);
+      setOptionData(response);
+    } catch (error) {
+      console.error('Error al obtener datos:', error);
+      setOptionData(null);
     }
   };
 
@@ -47,7 +81,7 @@ const MyDialog = () => {
 
   const handleDayChange = (event) => {
     if (selectedOption === 'Lúdico' && !ludicoDays.includes(event.target.name)) {
-      return; // Evita seleccionar días no permitidos para la opción Lúdico
+      return;
     }
 
     setSelectedDays({
@@ -58,29 +92,25 @@ const MyDialog = () => {
 
   const handleSubmit = async () => {
     const formData = {
-      id, // ID obtenido de los params
-      option: selectedOption,
-      optionKey: optionKeys[selectedOption] || null, // Obtener el valor clave de la opción seleccionada
+      id,
+      option: optionKeys[selectedOption] || null,
       number: selectedNumber,
-      days: Object.keys(selectedDays).filter((day) => selectedDays[day]), // Solo los días seleccionados
+      days: Object.keys(selectedDays).filter((day) => selectedDays[day]),
     };
-  
-    console.log('Datos enviados:', formData);
-    await  servicioDtc.inscribiracurso(formData)
-    // Aquí puedes enviar `formData` a tu API con fetch o axios
+
+    await servicioDtc.inscribiracurso(formData);
     setOpen(false);
   };
 
   return (
     <div>
       <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
-        Abrir diálogo
+        Inscribir
       </Button>
 
-      <Dialog open={open} onClose={() => setOpen(false)}>
+      <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
         <DialogTitle>Selecciona opciones</DialogTitle>
         <DialogContent>
-          {/* Primer desplegable */}
           <FormControl fullWidth margin="normal">
             <InputLabel>Selecciona una opción</InputLabel>
             <Select value={selectedOption} onChange={handleOptionChange}>
@@ -92,7 +122,32 @@ const MyDialog = () => {
             </Select>
           </FormControl>
 
-          {/* Segundo desplegable */}
+          {/* Mostrar tabla si hay datos */}
+          {optionData && optionData.length > 0 && (
+            <TableContainer component={Paper} sx={{ mt: 2 }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Día</TableCell>
+                    <TableCell>Hora</TableCell>
+                    <TableCell>Cantidad de Kids</TableCell>
+                    <TableCell>Nombres</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {optionData.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{row.dia}</TableCell>
+                      <TableCell>{row.hora}</TableCell>
+                      <TableCell>{row.cantidad_kids}</TableCell>
+                      <TableCell>{row.nombres_kids}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+
           <FormControl fullWidth margin="normal">
             <InputLabel>Selecciona un número</InputLabel>
             <Select value={selectedNumber} onChange={handleNumberChange}>
@@ -104,7 +159,6 @@ const MyDialog = () => {
             </Select>
           </FormControl>
 
-          {/* Checkbox para los días de la semana */}
           <FormGroup>
             {allDays.map((day) => (
               <FormControlLabel
