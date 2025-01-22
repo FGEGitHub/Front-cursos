@@ -13,7 +13,7 @@ const FichaPersona = (props) => {
   let params = useParams()
   let id = params.id
   const [chico, setchico] = useState()
-  const [nivel, setNivel] = useState()
+  const [horario, setHorario] = useState()
   const [vinculos, setVinculos] = useState()
   const [usuario, setUsuario] = useState()
   const [showAllData, setShowAllData] = useState(false);
@@ -40,6 +40,7 @@ const FichaPersona = (props) => {
         setfoto(novedades_aux[1])
         setchico(novedades_aux[0][0])
         setVinculos(novedades_aux[2])
+        setHorario(novedades_aux[3])
       }
 
     } catch (error) {
@@ -47,7 +48,18 @@ const FichaPersona = (props) => {
     }
 
   }
+  
+  const eliminarHorario = async (ido) => {
+    try {
+  
+      const novedades_aux = await servicioDtc.eliminarhorario({id:ido})
+      alert(novedades_aux)
+traer()
+    } catch (error) {
 
+    }
+
+  }
   return (
     <>
       {chico ? <>
@@ -256,6 +268,42 @@ const FichaPersona = (props) => {
       {vinculos ? <>  {vinculos.length > 0 ? <>  {vinculos.map((ob) => <>
         {ob.nombre}, {ob.apellido} -- {ob.vinculoo}  -- {ob.nombree}, {ob.apellidoo} <br />
       </>)}  </> : <>Sin vinculos</>}     </> : <></>}
+      {horario ? (
+  <>
+    {horario.length > 0 ? (
+      <table>
+        <thead>
+          <tr>
+            <th>Taller</th>
+    
+ 
+            <th>dia </th>
+            <th>hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          {horario.map((ob, index) => (
+            <tr key={index}>
+              <td>{ob.mail}</td>
+            
+              <td>{ob.dia}</td>
+              <td>{ob.hora}</td>
+              <td>
+            <button onClick={() => eliminarHorario(ob.id)}>Eliminar horario</button>
+          </td>
+            
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <><h1>No esta inscripto a talleres</h1></>
+    )}
+  </>
+) : (
+  <></>
+)}
+      
     </>
   );
 };
