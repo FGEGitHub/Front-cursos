@@ -208,7 +208,27 @@ traer()
             {usuario ? <>
               {usuario.nivel == 20 ? <>
 
-                <Agregarcurso />
+                <Agregarcurso 
+                traer={ async () => {
+                  try {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON)
+              
+                      setUsuario(usuario)
+                      const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
+                      setfoto(novedades_aux[1])
+                      setchico(novedades_aux[0][0])
+                      setVinculos(novedades_aux[2])
+                      setHorario(novedades_aux[3])
+                    }
+              
+                  } catch (error) {
+              
+                  }
+              
+                }
+                }/>
                 <Borrarusuaio
 
                   id={chico.id} />
@@ -238,22 +258,26 @@ traer()
                   grado={chico.grado}
                   fines={chico.fines}
                   hora_merienda={chico.hora_merienda}
-                  traer={async () => {
+                  traer={ async () => {
                     try {
                       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                       if (loggedUserJSON) {
                         const usuario = JSON.parse(loggedUserJSON)
-
-
+                
+                        setUsuario(usuario)
                         const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
+                        setfoto(novedades_aux[1])
                         setchico(novedades_aux[0][0])
+                        setVinculos(novedades_aux[2])
+                        setHorario(novedades_aux[3])
                       }
-
+                
                     } catch (error) {
-
+                
                     }
-
-                  }}
+                
+                  }
+                  }
 
                 />
               </> : <></>}
