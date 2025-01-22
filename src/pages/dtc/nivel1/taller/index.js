@@ -1,19 +1,16 @@
-
-
-
-
-import Menuizq from '../../../../components/dtc/usuario1/menuizq1'
+import Menuizq from '../../../../components/dtc/usuario1/menuizq1';
 import { useNavigate, useParams } from "react-router-dom";
-import Login from '../../../../components/dtc/usuario1/taller/componente1'
+import Login from '../../../../components/dtc/usuario1/taller/componente1';
+import Inscriptos from '../../../../components/dtc/talleres/infodeincriptos';
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
+import MenuuCel from '../../../../components/dtc/usuario1/menuresp';
 
 import {
-
   makeStyles,
   useMediaQuery,
   useTheme,
 } from '@material-ui/core';
+
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(2),
@@ -28,52 +25,49 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Paginas() {
   const navigate = useNavigate();
-    const theme = useTheme();
-    const classes = useStyles();
-    const [loginVisible, setLoginvisible] = useState(false)
-    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-    useEffect(() => {
-      
-        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-        console.log(loggedUserJSON) 
-        if (loggedUserJSON) {
-          const user = JSON.parse(loggedUserJSON)
-          console.log(user)
-          switch (user.nivel) {
-            case 20:
-             break;
-           //   navigate('/')
-           
-           
-            default:
-            
-                window.localStorage.removeItem('loggedNoteAppUser')
-                navigate("/dtc/login")
-              break;
-          }
-        }else{
-          
-          navigate('/dtc/login')
-              window.localStorage.removeItem('loggedNoteAppUser')
-              alert('usuario no autorizado')
-        }
-        setLoginvisible(true)
-      }, [])
+  const theme = useTheme();
+  const classes = useStyles();
+  const { id } = useParams();  // Obtiene el id desde la URL
+  const [loginVisible, setLoginvisible] = useState(false);
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-    return (
-      <>
-      {isMatch ? 
-     <>
-     <div  className={classes.container}> 
-     <MenuuCel texto="Usuarios"/>
-     <Login/>
-    </div>
-     </>:<>
- <Menuizq>
-<Login/>
-</Menuizq></>}
- </>
-   
-    );
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    console.log(loggedUserJSON);
 
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      console.log(user);
+      switch (user.nivel) {
+        case 20:
+          break;
+        default:
+          window.localStorage.removeItem('loggedNoteAppUser');
+          navigate("/dtc/login");
+          break;
+      }
+    } else {
+      navigate('/dtc/login');
+      window.localStorage.removeItem('loggedNoteAppUser');
+      alert('usuario no autorizado');
+    }
+    setLoginvisible(true);
+  }, [navigate]);
+
+  return (
+    <>
+      {isMatch ? (
+        <div className={classes.container}>
+          <MenuuCel texto="Usuarios" />
+          <Login />
+          <Inscriptos id={id} /> {/* Pasando el id como prop */}
+        </div>
+      ) : (
+        <Menuizq>
+          <Login />
+          <Inscriptos id={id} /> {/* Pasando el id como prop */}
+        </Menuizq>
+      )}
+    </>
+  );
 }
