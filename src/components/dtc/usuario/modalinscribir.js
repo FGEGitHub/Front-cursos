@@ -23,8 +23,9 @@ import {
   Paper,
 } from '@mui/material';
 import servicioDtc from '../../../services/dtc';
+import { getThemeProps } from '@mui/system';
 
-const MyDialog = () => {
+const MyDialog = (props) => {
   const { id } = useParams();
 
   const optionKeys = {
@@ -33,6 +34,8 @@ const MyDialog = () => {
     Educativo: 306,
     Arte: 265,
     Lúdico: 307,
+    Educativo2: 308,
+    Merienda: 309,
   };
 
   const [open, setOpen] = useState(false);
@@ -100,6 +103,7 @@ const MyDialog = () => {
 
     await servicioDtc.inscribiracurso(formData);
     setOpen(false);
+    props.traer()
   };
 
   return (
