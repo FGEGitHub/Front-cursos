@@ -78,18 +78,7 @@ export default function MenuIzq2 ({children}) {
         window.location.reload(true);
       } 
     const menuItems = [
-      { 
-        text: 'Mapas', 
-        icon: <GradingTwoToneIcon color="primary" />, 
-        path: '/dtc/usuario1/mapas', 
-         tooltip: 'Domicilio de los usuarios'
-      },
-      { 
-        text: 'Entregas ', 
-        icon: <GradingTwoToneIcon color="primary" />, 
-        path: '/dtc/usuario1/entregas', 
-         tooltip: 'Domicilio de los usuarios'
-      },
+  
         { 
           text: 'Actividades', 
           icon: <GradingTwoToneIcon color="primary" />, 
@@ -142,6 +131,12 @@ export default function MenuIzq2 ({children}) {
          tooltip: 'Detalle de asistencias de usuarios'
         },
         { 
+          text: 'inscripciones', 
+          icon: <ArchitectureIcon color="primary" />,
+          path: '/dtc/usuario1/inscripciones' , 
+         tooltip: 'Detalle de asistencias de usuarios'
+        },
+       /*  { 
           text: 'Intervenciones', 
           icon: <ArchitectureIcon color="primary" />,
           path: '/dtc/usuario1/intervenciones' , 
@@ -165,6 +160,18 @@ export default function MenuIzq2 ({children}) {
           path: '/dtc/usuario1/usuariosgim' , 
          tooltip: 'En proceso carga de usaurios '
         },
+        { 
+          text: 'Mapas', 
+          icon: <GradingTwoToneIcon color="primary" />, 
+          path: '/dtc/usuario1/mapas', 
+           tooltip: 'Domicilio de los usuarios'
+        },
+        { 
+          text: 'Entregas ', 
+          icon: <GradingTwoToneIcon color="primary" />, 
+          path: '/dtc/usuario1/entregas', 
+           tooltip: 'Domicilio de los usuarios'
+        }, */
       ];
       const islogo = {
         marginTop:'10%',

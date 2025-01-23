@@ -136,7 +136,7 @@ import Dtcraciones from '../pages/dtc/raciones';
 import DtcAsisenciasoc from '../pages/dtc/nivel1/asistenciassoc';
 import DtcEntregas from '../pages/dtc/nivel1/entregas';
 import DtcCocinastock from '../pages/dtc/cocinastock';
-
+import DtcInscripciones from '../pages/dtc/nivel1/inscripciones';
 
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
@@ -340,7 +340,7 @@ const Rutas = [
 		{ path: '/dtc/usuario1/turnos', element: <Dtcturnosadmin/> },
 		{ path: '/dtc/usuario1/cumples', element: <DTCcumples/> },
 		{ path: '/dtc/usuario1/asistenciassoc', element: <DtcAsisenciasoc/> },
-
+		{ path: '/dtc/usuario1/inscripciones', element: <DtcInscripciones/> },
 		
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
