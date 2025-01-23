@@ -79,7 +79,16 @@ const TablaNotificaciones = (props) => {
            
         );
     };
+    const CutomButtonsRenderer2 = (dataIndex) => {
+        return (
+           <>
 
+           {clases[dataIndex]['dia']}- {clases[dataIndex]['hora']}
+          
+            </>
+           
+        );
+    };
     const columns = [
         {
             name: "fecha",
@@ -88,6 +97,13 @@ const TablaNotificaciones = (props) => {
         {
             name: "titulo",
             label: "Título",
+        },
+        {
+            name: "ref",
+         
+            options: {
+                customBodyRenderLite: (dataIndex) => CutomButtonsRenderer2(dataIndex),
+            },
         },
         {
             name: "Asistencia",

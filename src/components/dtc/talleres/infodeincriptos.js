@@ -29,20 +29,14 @@ const CursoDialog = ({ id }) => {
       }
     };
 
-    if (open) {
+ 
       fetchData();
-    }
-  }, [id, open]);
+
+  }, []);
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
-        Ver Cursos
-      </Button>
 
-      <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
-        <DialogTitle>Información de Cursos</DialogTitle>
-        <DialogContent>
           {cursosData.length > 0 ? (
             <TableContainer component={Paper} sx={{ mt: 2 }}>
               <Table>
@@ -69,13 +63,6 @@ const CursoDialog = ({ id }) => {
           ) : (
             <p>No hay datos disponibles.</p>
           )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen(false)} color="secondary">
-            Cerrar
-          </Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 };
