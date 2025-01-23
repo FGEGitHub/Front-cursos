@@ -13,7 +13,7 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
-  Typography,
+  
   Table,
   TableBody,
   TableCell,
@@ -126,32 +126,7 @@ const MyDialog = (props) => {
             </Select>
           </FormControl>
 
-          {/* Mostrar tabla si hay datos */}
-          {optionData && optionData.length > 0 && (
-            <TableContainer component={Paper} sx={{ mt: 2 }}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Día</TableCell>
-                    <TableCell>Hora</TableCell>
-                    <TableCell>Cantidad de Kids</TableCell>
-                    <TableCell>Nombres</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {optionData.map((row, index) => (
-                    <TableRow key={index}>
-                      <TableCell>{row.dia}</TableCell>
-                      <TableCell>{row.hora}</TableCell>
-                      <TableCell>{row.cantidad_kids}</TableCell>
-                      <TableCell>{row.nombres_kids}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
-
+         
           <FormControl fullWidth margin="normal">
             <InputLabel>Selecciona un número</InputLabel>
             <Select value={selectedNumber} onChange={handleNumberChange}>
@@ -179,6 +154,32 @@ const MyDialog = (props) => {
               />
             ))}
           </FormGroup>
+           {/* Mostrar tabla si hay datos */}
+           {optionData && optionData.length > 0 && (
+            <TableContainer component={Paper} sx={{ mt: 2 }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Día</TableCell>
+                    <TableCell>Hora</TableCell>
+                    <TableCell>Cantidad Inscriptos</TableCell>
+                    <TableCell>Nombres</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {optionData.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{row.dia}</TableCell>
+                      <TableCell>{row.hora}</TableCell>
+                      <TableCell>{row.cantidad_kids}</TableCell>
+                      <TableCell>{row.nombres_kids}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)} color="secondary">
