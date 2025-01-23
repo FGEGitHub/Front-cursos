@@ -5,7 +5,7 @@ import servicioDtc from "../../../services/dtc";
 
 const ChatBot = () => {
   const [conversation, setConversation] = useState("inicio");
-  const [showDialog, setShowDialog] = useState(true);
+  const [showDialog, setShowDialog] = useState(false); // Cambiado a false inicialmente
   const [showOptions, setShowOptions] = useState(false);
   const [cumple, setCumple] = useState([]);
 
@@ -25,6 +25,7 @@ const ChatBot = () => {
       console.error("Error al traer cumpleaños", error);
     }
   };
+
   const questions = {
     inicio: {
       message: `Hola, bienvenido!<br/>Mi nombre es Dtcito, primero que nada<br/>   ${
@@ -62,7 +63,6 @@ const ChatBot = () => {
       options: ["Volver"],
     },
   };
-  
 
   useEffect(() => {
     // Mostrar opciones después de 10 segundos si no hay interacción
@@ -87,9 +87,8 @@ const ChatBot = () => {
     }
     setShowOptions(false);
   };
-  
 
-  if (!showDialog) return null; // Oculta el componente si showDialog es false
+  const toggleDialog = () => setShowDialog(!showDialog); // Alternar el estado del diálogo
 
   // Verificamos que la conversación actual exista y tenga opciones
   const currentQuestion = questions[conversation] || questions["inicio"];
@@ -97,29 +96,33 @@ const ChatBot = () => {
 
   return (
     <div className="chat-container">
-      <div className="chat-box">
-        <div className="chat-message speech-bubble">
-          <button className="close-button" onClick={() => setShowDialog(false)}>
-            ✖
-          </button>
-          <p dangerouslySetInnerHTML={{ __html: currentQuestion.message }}></p>
-          {options.length > 0 && (
-            <ul>
-              {options.map((option, index) => (
-                <li key={index} onClick={() => handleOptionClick(option)}>
-                  {option}
-                </li>
-              ))}
-            </ul>
-          )}
-          {conversation === "inicio" && !showOptions && (
-            <button className="chat-button" onClick={() => setShowOptions(true)}>
-              Tengo una pregunta
+      {!showDialog && (
+        <img
+          src={logo}
+          alt="Chat Logo"
+          className="chat-logo floating-logo"
+          onClick={toggleDialog} // Abre el diálogo al hacer clic en el logo
+        />
+      )}
+      {showDialog && (
+        <div className="chat-box">
+          <div className="chat-message speech-bubble">
+            <button className="close-button" onClick={toggleDialog}>
+              ✖
             </button>
-          )}
+            <p dangerouslySetInnerHTML={{ __html: currentQuestion.message }}></p>
+            {options.length > 0 && (
+              <ul>
+                {options.map((option, index) => (
+                  <li key={index} onClick={() => handleOptionClick(option)}>
+                    {option}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-        <img src={logo} alt="Chat Logo" className="chat-logo animated-logo" />
-      </div>
+      )}
     </div>
   );
 };
