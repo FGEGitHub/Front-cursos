@@ -62,9 +62,17 @@ const CursoDialog = () => {
     diasSemana.forEach((dia) => {
       groupedData[dia] = {};
       horarios.forEach((hora) => {
-        groupedData[dia][hora] = filteredData.filter(
-          (row) => row.dia === dia && row.hora === hora
-        );
+        // Agrupamos por hora y día
+        const data = filteredData.filter((row) => row.dia === dia && row.hora === hora);
+        
+        // Sumamos la cantidad de chicos y agrupamos los nombres
+        const totalKids = data.reduce((acc, row) => acc + row.cantidad_kids, 0);
+        const kidsNames = data.map((row) => row.nombres_kids).join(', ');
+  
+        groupedData[dia][hora] = {
+          totalKids,
+          kidsNames
+        };
       });
     });
     return groupedData;
@@ -157,51 +165,49 @@ const CursoDialog = () => {
         </TableContainer>
       )}
 
-      {/* Tabla en modo semanal */}
-      {modoSemanal && (
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Hora</TableCell>
-                {diasSemana.map((dia) => (
-                  <TableCell key={dia}>{dia.charAt(0).toUpperCase() + dia.slice(1)}</TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {horarios.map((hora) => (
-                <TableRow key={hora}>
-                  <TableCell>{hora}:00</TableCell>
-                  {diasSemana.map((dia) => {
-                    const key = `${dia}-${hora}`;
-                    const data = getDataByDayAndHour()[dia][hora];
-                    return (
-                      <TableCell key={key}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                          <Typography>
-                            Cantidad: {data.length > 0 ? data[0].cantidad_kids : 0}
-                          </Typography>
-                          <IconButton size="small" onClick={() => toggleCell(dia, hora)}>
-                            {openCells[key] ? <ExpandLess /> : <ExpandMore />}
-                          </IconButton>
-                          <Collapse in={openCells[key]}>
-                            <Box>
-                              {data.length > 0
-                                ? data[0].nombres_kids
-                                : 'Sin inscriptos'}
-                            </Box>
-                          </Collapse>
-                        </Box>
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+      {/* Tabla en modo <semanal */}
+      {modoSemanal && (<><h1>No funciona aun </h1> pero es la idea
+  <TableContainer component={Paper}>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Hora</TableCell>
+          {diasSemana.map((dia) => (
+            <TableCell key={dia}>{dia.charAt(0).toUpperCase() + dia.slice(1)}</TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {horarios.map((hora) => (
+          <TableRow key={hora}>
+            <TableCell>{hora}:00</TableCell>
+            {diasSemana.map((dia) => {
+              const key = `${dia}-${hora}`;
+              const data = getDataByDayAndHour()[dia][hora];
+              return (
+                <TableCell key={key}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Typography>
+                      {data.totalKids} chico(s)
+                    </Typography>
+                    <IconButton size="small" onClick={() => toggleCell(dia, hora)}>
+                      {openCells[key] ? <ExpandLess /> : <ExpandMore />}
+                    </IconButton>
+                    <Collapse in={openCells[key]}>
+                      <Box>
+                        {data.kidsNames || 'Sin inscriptos'}
+                      </Box>
+                    </Collapse>
+                  </Box>
+                </TableCell>
+              );
+            })}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer></>
+)}
     </div>
   );
 };
