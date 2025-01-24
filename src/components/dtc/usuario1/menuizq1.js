@@ -70,7 +70,7 @@ export default function MenuIzq2 ({children}) {
     {
       text: (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          inscripciones
+          Inscripciones
           <div
             style={{
               backgroundColor: '#ffeb3b',
