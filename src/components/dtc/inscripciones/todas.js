@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import servicioDtc from '../../../services/dtc';
-
+import Agregar from './modalagregar'
 const CursoDialog = () => {
   const [cursosData, setCursosData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -171,6 +171,19 @@ const CursoDialog = () => {
                         <Box sx={{ margin: 1 }}>
                           <Typography variant="subtitle1" gutterBottom>
                             Nombres: {row.nombres_kids || 'Sin información'}
+                            <Agregar id= {row.id_curso}
+                            nombre_curso= {row.nombre_curso}
+                            dia={row.dia}
+                            hora={row.hora}
+                            traer={ async () => {
+                              try {
+                                const response = await servicioDtc.obtenerinfodecursostodos();
+                                setCursosData(response);
+                                setFilteredData(response);
+                              } catch (error) {
+                                console.error('Error al obtener datos del curso:', error);
+                              }
+                            }}/>
                           </Typography>
                         </Box>
                       </Collapse>

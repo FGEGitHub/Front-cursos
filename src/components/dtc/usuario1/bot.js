@@ -35,7 +35,7 @@ const ChatBot = () => {
               .join(", ")}`
           : "Hoy no hay cumples :( pero a la izquierda podes ver los del mes"
       }`,
-      options: ["¿Como tomar asistencia?","¿Como consultar por usuarios?",  "¿Que actividades hubieron hoy?", "¿Quien soy?"],
+      options: ["¿Como tomar asistencia?","¿Como ver los horarios de las inscipciones?",  "¿Que actividades hubieron hoy?", "¿Quien soy?"],
     },
     comotomarasistencia: {
       message:
@@ -46,8 +46,8 @@ const ChatBot = () => {
       message: "Estamos trabajando en eso, todavia no puedo responder pero la idea es decirte que talleres funcionaron hoy",
       options: ["Volver"],
     },
-    comoconsultarporusuarios: {
-      message: "En el menu de la izquierda podras ver la opcion usuarios, una vez que ingreses, hay una lupa que funciona como filtro y peudes buscar por nombre y/o apellido'.",
+    comoverloshorariosdelasinscipciones: {
+      message: "En el menu de la izquierda podras ver la pestaña inscripciones donde tendras 2 modos, vista detallada de cda horario o la vista semanal que se veran el numero de inscriptos de cada taller. Tambien puedes ir a talleres figuran los de cada actividad por separado",
       options: ["¿Cómo buscar por nombre?", "¿Cómo filtrar por fecha?", "Volver"],
     },
     comobuscarpornombre: {
