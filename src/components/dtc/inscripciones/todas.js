@@ -17,9 +17,10 @@ import {
   FormControl,
   InputLabel,
 } from '@mui/material';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
+import { useNavigate } from "react-router-dom";
 import servicioDtc from '../../../services/dtc';
 import Agregar from './modalagregar'
+import Chat from './chat'
 const CursoDialog = () => {
   const [cursosData, setCursosData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -28,7 +29,7 @@ const CursoDialog = () => {
   const [selectedCurso, setSelectedCurso] = useState(''); // Filtro de curso
   const [selectedDia, setSelectedDia] = useState(''); // Filtro de día
   const [openCells, setOpenCells] = useState({}); // Para controlar la expansión de celdas en modo semanal
-
+  const navigate = useNavigate();
   const horarios = ['14', '15', '16'];
   const diasSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
 
@@ -94,7 +95,8 @@ const CursoDialog = () => {
 
   return (
     <div>
-      {/* Botón para cambiar entre los modos */}
+      
+      {/*<Chat/>  Botón para cambiar entre los modos */}
       <Box sx={{ mb: 2 }}>
         <Button variant="contained" onClick={() => setModoSemanal((prev) => !prev)}>
           {modoSemanal ? 'Cambiar a modo detallado' : 'Cambiar a modo semanal'}
@@ -112,11 +114,13 @@ const CursoDialog = () => {
             <MenuItem value="">
               <em>Todos los cursos</em>
             </MenuItem>
-            {[...new Set(cursosData.map((row) => row.id_curso))].map((idCurso) => (
-              <MenuItem key={idCurso} value={idCurso}>
-                Curso {idCurso}
-              </MenuItem>
-            ))}
+      {/* Opciones disponibles: el nombre del curso se muestra, pero el valor es el ID */}
+      {cursosData.map((curso) => (
+        <MenuItem key={curso.id_curso} value={curso.id_curso}>
+          {curso.nombre_curso}
+        </MenuItem>
+      ))}
+            
           </Select>
         </FormControl>
 
@@ -155,8 +159,14 @@ const CursoDialog = () => {
               {filteredData.map((row, index) => (
                 <React.Fragment key={index}>
                   <TableRow>
-                    <TableCell>{row.nombre_curso}</TableCell>
-                    <TableCell>{row.dia}</TableCell>
+                  <TableCell>
+  <div
+    onClick={() => navigate('/dtc/usuario1/taller/' + row.id_curso)}
+    style={{ cursor: 'pointer' }}
+  >
+    {row.nombre_curso}
+  </div>
+</TableCell>                    <TableCell>{row.dia}</TableCell>
                     <TableCell>{row.hora}</TableCell>
                     <TableCell>{row.cantidad_kids}</TableCell>
                     <TableCell>
