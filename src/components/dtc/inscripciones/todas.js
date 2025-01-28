@@ -30,7 +30,8 @@ const CursoDialog = () => {
   const [selectedDia, setSelectedDia] = useState(''); // Filtro de día
   const [openCells, setOpenCells] = useState({}); // Para controlar la expansión de celdas en modo semanal
   const navigate = useNavigate();
-  const horarios = ['14', '15', '16'];
+  const horarios = ['14:00', '14:30', '15:00', '15:30', '16:00', '16:30']; // Nuevos horarios agregados
+
   const diasSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
 
   useEffect(() => {
@@ -165,8 +166,18 @@ const CursoDialog = () => {
     style={{ cursor: 'pointer' }}
   >
     {row.nombre_curso}
+    {row.nombre_curso === "FISICO" && (
+      <div>
+        {row.hora === "14:30" && "FISICO - Gimnasio"}
+        {row.hora === "15:30" && ["lunes", "miércoles", "viernes"].includes(row.dia) && "FISICO - Fútbol masculino"}
+        {row.hora === "15:30" && ["martes", "jueves"].includes(row.dia) && "FISICO - Voley masculino"}
+        {row.hora === "16:30" && ["lunes", "miércoles", "viernes"].includes(row.dia) && "FISICO - Fútbol masculino y Fútbol femenino"}
+        {row.hora === "16:30" && ["martes", "jueves"].includes(row.dia) && "FISICO - Voley femenino"}
+      </div>
+    )}
   </div>
-</TableCell>                    <TableCell>{row.dia}</TableCell>
+</TableCell>
+                   <TableCell>{row.dia}</TableCell>
                     <TableCell>{row.hora}</TableCell>
                     <TableCell>{row.cantidad_kids}</TableCell>
                     <TableCell>
