@@ -171,7 +171,7 @@ const CursoDialog = () => {
         {row.hora === "14:30" && "FISICO - Gimnasio"}
         {row.hora === "15:30" && ["lunes", "miércoles", "viernes"].includes(row.dia) && "FISICO - Fútbol masculino"}
         {row.hora === "15:30" && ["martes", "jueves"].includes(row.dia) && "FISICO - Voley masculino"}
-        {row.hora === "16:30" && ["lunes", "miércoles", "viernes"].includes(row.dia) && "FISICO - Fútbol masculino y Fútbol femenino"}
+        {row.hora === "16:30" && ["lunes", "miércoles", "viernes"].includes(row.dia) && "FISICO -  Fútbol femenino"}
         {row.hora === "16:30" && ["martes", "jueves"].includes(row.dia) && "FISICO - Voley femenino"}
       </div>
     )}
