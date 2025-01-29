@@ -1031,7 +1031,7 @@ const sumarstock = async (datos) => {
 const inscribiracurso = async (datos) => {
   const {data } = await axios.post(baseUrl+'inscribiracurso',datos,config)
   console.log(data)
-    return data
+    return data.message
 };
 const agregarConsumo = async (datos) => {
   const {data } = await axios.post(baseUrl+'agregarconsumo',datos,config)
