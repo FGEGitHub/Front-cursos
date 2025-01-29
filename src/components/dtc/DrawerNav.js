@@ -21,17 +21,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied'
 const pages = [
   "Inicio",
-  "actividades",
+
   
   ,
   "Cerrar Sesión"];
   const pages2 = [
     "Inicio",
-    "actividades",
-    "raciones",
-    
-    ,
-    "Cerrar Sesión"];
+  //  "actividades",  
+"Cerrar Sesión"
+    //"raciones",
+    ];
+  
+ 
 const pagesdeslogueado = [
   "Iniciar sesion ",
   "Nosotros",
@@ -125,10 +126,10 @@ const DrawerNav = () => {
         break;
 
       case 1:
-        iaActividades()
+        hanleLogout()
         break;
       case 2:
-        irraciones()
+        hanleLogout()
         break;
       case 3:
         hanleLogout()

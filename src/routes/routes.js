@@ -183,7 +183,7 @@ import Dtcasisenteinformes from '../pages/dtc/visitasoc/informestrat';
 import DTCcocinpacientes from '../pages/dtc/cocinapacientes';
 
 
-
+import DTCAlumnosdelcurso from '../pages/dtc/alumnosdeltaller';
 import LoginCadia from '../pages/cadia/login'
 
 
@@ -374,8 +374,8 @@ const Rutas = [
 		{ path: '/dtc/tallerclases', element: <DTCTallerclases/> },
 		{ path: '/dtc/gimnasioclases', element: <DTCGimnasioclases/> },
 		{ path: '/dtc/gimnasioasistencia', element: <DTCaGimnasioAsis/> },
+		{ path: '/dtc/alumnosdeltaller', element: <DTCAlumnosdelcurso/> },
 		
-
 		
 		{ path: '/dtc/tallerasistencia/:id', element: <DTCTallerAsis/> },
 		{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest/> },

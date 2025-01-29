@@ -13,7 +13,6 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
-  
   Table,
   TableBody,
   TableCell,
@@ -23,7 +22,6 @@ import {
   Paper,
 } from '@mui/material';
 import servicioDtc from '../../../services/dtc';
-import { getThemeProps } from '@mui/system';
 
 const MyDialog = (props) => {
   const { id } = useParams();
@@ -38,55 +36,63 @@ const MyDialog = (props) => {
     Merienda: 309,
   };
 
+  const physicalSubcategories = {
+    "Fútbol Masculino": { horarios: ["15:30"], dias: ["lunes", "miércoles", "viernes"] },
+    "Fútbol Femenino": { horarios: ["16:30"], dias: ["lunes", "miércoles", "viernes"] },
+    "Gimnasio": { horarios: ["14:30"], dias: ["lunes", "martes", "miércoles", "jueves", "viernes"] },
+    "Vóley Masculino": { horarios: ["15:30"], dias: ["martes", "jueves"] },
+    "Vóley Femenino": { horarios: ["16:30"], dias: ["martes", "jueves"] },
+  };
+
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
-  const [selectedNumber, setSelectedNumber] = useState('');
-  const [selectedDays, setSelectedDays] = useState({
-    lunes: false,
-    martes: false,
-    miercoles: false,
-    jueves: false,
-    viernes: false,
-  });
-
+  const [selectedSubOption, setSelectedSubOption] = useState('');
+  const [selectedHour, setSelectedHour] = useState('');
+  const [selectedDays, setSelectedDays] = useState({});
   const [optionData, setOptionData] = useState(null);
 
-  const allDays = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
-  const ludicoDays = ['martes', 'jueves', 'viernes'];
+  const allDays = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
 
   const handleOptionChange = async (event) => {
     const selected = event.target.value;
     setSelectedOption(selected);
+    setSelectedSubOption('');
+    setSelectedHour('');
+    setSelectedDays({});
 
     const selectedKey = optionKeys[selected] || null;
-
-    if (selected === 'Lúdico') {
-      setSelectedDays((prevDays) =>
-        Object.keys(prevDays).reduce((acc, day) => {
-          acc[day] = ludicoDays.includes(day) ? prevDays[day] : false;
-          return acc;
-        }, {})
-      );
-    }
-
-    try {
-      const response = await servicioDtc.obtenerinfodecursos(selectedKey);
-      setOptionData(response);
-    } catch (error) {
-      console.error('Error al obtener datos:', error);
-      setOptionData(null);
+    if (selectedKey) {
+      try {
+        const response = await servicioDtc.obtenerinfodecursos(selectedKey);
+        setOptionData(response);
+      } catch (error) {
+        console.error('Error al obtener datos:', error);
+        setOptionData(null);
+      }
     }
   };
 
-  const handleNumberChange = (event) => {
-    setSelectedNumber(event.target.value);
+  const handleSubOptionChange = (event) => {
+    const selectedSub = event.target.value;
+    setSelectedSubOption(selectedSub);
+    setSelectedHour('');
+    setSelectedDays({});
+
+    // Preseleccionar los días permitidos
+    const subcategory = physicalSubcategories[selectedSub] || {};
+    const preselectedDays = subcategory.dias?.reduce((acc, day) => {
+      acc[day] = false;
+      return acc;
+    }, {}) || {};
+
+    setSelectedDays(preselectedDays);
+  };
+
+  const handleHourChange = (event) => {
+    setSelectedHour(event.target.value);
   };
 
   const handleDayChange = (event) => {
-    if (selectedOption === 'Lúdico' && !ludicoDays.includes(event.target.name)) {
-      return;
-    }
-
     setSelectedDays({
       ...selectedDays,
       [event.target.name]: event.target.checked,
@@ -97,13 +103,14 @@ const MyDialog = (props) => {
     const formData = {
       id,
       option: optionKeys[selectedOption] || null,
-      number: selectedNumber,
+      subOption: selectedSubOption,
+      hour: selectedHour,
       days: Object.keys(selectedDays).filter((day) => selectedDays[day]),
     };
 
     await servicioDtc.inscribiracurso(formData);
     setOpen(false);
-    props.traer()
+    props.traer();
   };
 
   return (
@@ -115,6 +122,7 @@ const MyDialog = (props) => {
       <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
         <DialogTitle>Selecciona opciones</DialogTitle>
         <DialogContent>
+          {/* Opción principal */}
           <FormControl fullWidth margin="normal">
             <InputLabel>Selecciona una opción</InputLabel>
             <Select value={selectedOption} onChange={handleOptionChange}>
@@ -126,36 +134,56 @@ const MyDialog = (props) => {
             </Select>
           </FormControl>
 
-         
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Selecciona un número</InputLabel>
-            <Select value={selectedNumber} onChange={handleNumberChange}>
-              {[14, 15, 16].map((num) => (
-                <MenuItem key={num} value={num}>
-                  {num}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          {/* Subcategoría si es "Físico 304" */}
+          {selectedOption === "Físico" && (
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Selecciona una subcategoría</InputLabel>
+              <Select value={selectedSubOption} onChange={handleSubOptionChange}>
+                {Object.keys(physicalSubcategories).map((subOption) => (
+                  <MenuItem key={subOption} value={subOption}>
+                    {subOption}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
 
-          <FormGroup>
-            {allDays.map((day) => (
-              <FormControlLabel
-                key={day}
-                control={
-                  <Checkbox
-                    checked={selectedDays[day]}
-                    onChange={handleDayChange}
-                    name={day}
-                    disabled={selectedOption === 'Lúdico' && !ludicoDays.includes(day)}
-                  />
-                }
-                label={day.charAt(0).toUpperCase() + day.slice(1)}
-              />
-            ))}
-          </FormGroup>
-           {/* Mostrar tabla si hay datos */}
-           {optionData && optionData.length > 0 && (
+          {/* Selección de horario si hay subcategoría */}
+          {selectedSubOption && (
+            <FormControl fullWidth margin="normal">
+              <InputLabel>Selecciona un horario</InputLabel>
+              <Select value={selectedHour} onChange={handleHourChange}>
+                {physicalSubcategories[selectedSubOption]?.horarios.map((hour) => (
+                  <MenuItem key={hour} value={hour}>
+                    {hour}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+
+          {/* Selección de días */}
+          {selectedSubOption && (
+            <FormGroup>
+              {allDays.map((day) => (
+                <FormControlLabel
+                  key={day}
+                  control={
+                    <Checkbox
+                      checked={selectedDays[day] || false}
+                      onChange={handleDayChange}
+                      name={day}
+                      disabled={!physicalSubcategories[selectedSubOption]?.dias.includes(day)}
+                    />
+                  }
+                  label={day.charAt(0).toUpperCase() + day.slice(1)}
+                />
+              ))}
+            </FormGroup>
+          )}
+
+          {/* Tabla de datos si hay información */}
+          {optionData && optionData.length > 0 && (
             <TableContainer component={Paper} sx={{ mt: 2 }}>
               <Table>
                 <TableHead>
@@ -179,13 +207,12 @@ const MyDialog = (props) => {
               </Table>
             </TableContainer>
           )}
-
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)} color="secondary">
             Cancelar
           </Button>
-          <Button onClick={handleSubmit} color="primary">
+          <Button onClick={handleSubmit} color="primary" disabled={!selectedSubOption || !selectedHour}>
             Enviar
           </Button>
         </DialogActions>
