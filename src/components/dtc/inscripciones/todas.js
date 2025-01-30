@@ -175,7 +175,7 @@ const CursoDialog = () => {
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow>
+              <TableRow >
                 <TableCell>Taller</TableCell>
                 <TableCell>Día</TableCell>
                 <TableCell>Hora</TableCell>
@@ -186,7 +186,9 @@ const CursoDialog = () => {
             <TableBody>
               {filteredData.map((row, index) => (
                 <React.Fragment key={index}>
-                  <TableRow>
+                  <TableRow
+                     key={index} 
+                     sx={{ backgroundColor: index % 2 === 0 ? '#e0e0e0' : 'white' }}> 
                   <TableCell>
   <div
     onClick={() => navigate('/dtc/usuario1/taller/' + row.id_curso)}
