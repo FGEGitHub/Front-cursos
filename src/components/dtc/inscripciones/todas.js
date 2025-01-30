@@ -188,7 +188,7 @@ const CursoDialog = () => {
                 <React.Fragment key={index}>
                   <TableRow
                      key={index} 
-                     sx={{ backgroundColor: index % 2 === 0 ? '#e0e0e0' : 'white' }}> 
+                     sx={{ backgroundColor: index % 2 === 0 ? '#e0e0e0' : '#e0e0e0' }}> 
                   <TableCell>
   <div
     onClick={() => navigate('/dtc/usuario1/taller/' + row.id_curso)}
@@ -218,7 +218,7 @@ const CursoDialog = () => {
                     
                         <Box sx={{ margin: 1 }}>
                           <Typography variant="subtitle1" gutterBottom>
-                            Nombres: {row.nombres_kids || 'Sin información'}
+                            Nombres: {row.nombres_kids || ''}
                             <Agregar id= {row.id_curso}
                             nombre_curso= {row.nombre_curso}
                             dia={row.dia}
