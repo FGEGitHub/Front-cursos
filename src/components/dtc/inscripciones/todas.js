@@ -49,14 +49,35 @@ const CursoDialog = () => {
 
   useEffect(() => {
     let data = cursosData;
+  
     if (selectedCurso) {
-      data = data.filter((row) => row.id_curso === Number(selectedCurso));
+      if (selectedCurso.startsWith("FISICO")) {
+        data = data.filter((row) => {
+          return (
+            row.nombre_curso === "FISICO" &&
+            (
+              (selectedCurso === "FISICO - Gimnasio" && row.hora === "14:30") ||
+              (selectedCurso === "FISICO - Fútbol masculino" && row.hora === "15:30" && ["lunes", "miércoles", "viernes"].includes(row.dia)) ||
+              (selectedCurso === "FISICO - Fútbol femenino" && row.hora === "16:30" && ["lunes", "miércoles", "viernes"].includes(row.dia)) ||
+              (selectedCurso === "FISICO - Vóley masculino" && row.hora === "16:30" && row.dia === "martes") ||
+              (selectedCurso === "FISICO - Vóley femenino" && row.hora === "15:30" && row.dia === "martes") ||
+              (selectedCurso === "FISICO - Básquet masculino" && row.hora === "16:30" && row.dia === "jueves") ||
+              (selectedCurso === "FISICO - Básquet femenino" && row.hora === "15:30" && row.dia === "jueves")
+            )
+          );
+        });
+      } else {
+        data = data.filter((row) => row.nombre_curso === selectedCurso);
+      }
     }
+  
     if (selectedDia) {
       data = data.filter((row) => row.dia === selectedDia);
     }
+  
     setFilteredData(data);
   }, [selectedCurso, selectedDia, cursosData]);
+  
 
   const toggleRow = (index) => {
     setOpenRows((prev) => ({
@@ -106,24 +127,30 @@ const CursoDialog = () => {
 
       {/* Filtros */}
       <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel>Curso</InputLabel>
-          <Select
-            value={selectedCurso}
-            onChange={(e) => setSelectedCurso(e.target.value)}
-          >
-            <MenuItem value="">
-              <em>Todos los cursos</em>
-            </MenuItem>
-      {/* Opciones disponibles: el nombre del curso se muestra, pero el valor es el ID */}
-      {cursosData.map((curso) => (
-        <MenuItem key={curso.id_curso} value={curso.id_curso}>
-          {curso.nombre_curso}
+      <FormControl sx={{ minWidth: 200 }}>
+  <InputLabel>Curso</InputLabel>
+  <Select value={selectedCurso} onChange={(e) => setSelectedCurso(e.target.value)}>
+    <MenuItem value="">
+      <em>Todos los cursos</em>
+    </MenuItem>
+    {Array.from(new Set(cursosData.map((curso) => curso.nombre_curso)))
+      .map((nombreCurso) => (
+        <MenuItem key={nombreCurso} value={nombreCurso}>
+          {nombreCurso}
         </MenuItem>
       ))}
-            
-          </Select>
-        </FormControl>
+    
+    {/* Opciones detalladas para FISICO */}
+    <MenuItem value="FISICO - Gimnasio">FISICO - Gimnasio</MenuItem>
+    <MenuItem value="FISICO - Fútbol masculino">FISICO - Fútbol masculino</MenuItem>
+    <MenuItem value="FISICO - Fútbol femenino">FISICO - Fútbol femenino</MenuItem>
+    <MenuItem value="FISICO - Vóley masculino">FISICO - Vóley masculino</MenuItem>
+    <MenuItem value="FISICO - Vóley femenino">FISICO - Vóley femenino</MenuItem>
+    <MenuItem value="FISICO - Básquet masculino">FISICO - Básquet masculino</MenuItem>
+    <MenuItem value="FISICO - Básquet femenino">FISICO - Básquet femenino</MenuItem>
+  </Select>
+</FormControl>
+
 
         <FormControl sx={{ minWidth: 200 }}>
           <InputLabel>Día</InputLabel>
