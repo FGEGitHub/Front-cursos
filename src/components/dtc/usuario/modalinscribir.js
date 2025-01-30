@@ -40,9 +40,13 @@ const MyDialog = (props) => {
     "Fútbol Masculino": { horarios: ["15:30"], dias: ["lunes", "miércoles", "viernes"] },
     "Fútbol Femenino": { horarios: ["16:30"], dias: ["lunes", "miércoles", "viernes"] },
     "Gimnasio": { horarios: ["14:30"], dias: ["lunes", "martes", "miércoles", "jueves", "viernes"] },
-    "Vóley Masculino": { horarios: ["15:30"], dias: ["martes", "jueves"] },
-    "Vóley Femenino": { horarios: ["16:30"], dias: ["martes", "jueves"] },
+    "Vóley Masculino": { horarios: ["16:30"], dias: ["martes"] },
+    "Vóley Femenino": { horarios: ["15:30"], dias: ["martes"] },
+    "Basket Masculino": { horarios: ["15:30"], dias: ["jueves"] },
+    "Basket Femenino": { horarios: ["16:30"], dias: ["jueves"] },
   };
+  const generalHorarios = ["14:00", "15:00", "16:00"];
+  const allDays = ["lunes", "martes", "miércoles", "jueves", "viernes"];
 
   const [open, setOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
@@ -51,14 +55,27 @@ const MyDialog = (props) => {
   const [selectedDays, setSelectedDays] = useState({});
   const [optionData, setOptionData] = useState(null);
 
-  const allDays = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
-
-  const handleOptionChange = async (event) => {
-    const selected = event.target.value;
-    setSelectedOption(selected);
+  const resetState = () => {
+    setSelectedOption('');
     setSelectedSubOption('');
     setSelectedHour('');
     setSelectedDays({});
+    setOptionData(null);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    resetState();
+    setOpen(false);
+  };
+
+  const handleOptionChange = async (event) => {
+    const selected = event.target.value;
+    resetState();
+    setSelectedOption(selected);
 
     const selectedKey = optionKeys[selected] || null;
     if (selectedKey) {
@@ -78,7 +95,6 @@ const MyDialog = (props) => {
     setSelectedHour('');
     setSelectedDays({});
 
-    // Preseleccionar los días permitidos
     const subcategory = physicalSubcategories[selectedSub] || {};
     const preselectedDays = subcategory.dias?.reduce((acc, day) => {
       acc[day] = false;
@@ -104,25 +120,24 @@ const MyDialog = (props) => {
       id,
       option: optionKeys[selectedOption] || null,
       subOption: selectedSubOption,
-      hour: selectedHour,
+      number: selectedHour,
       days: Object.keys(selectedDays).filter((day) => selectedDays[day]),
     };
 
     await servicioDtc.inscribiracurso(formData);
-    setOpen(false);
+    handleClose();
     props.traer();
   };
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
+      <Button variant="contained" color="primary" onClick={handleOpen}>
         Inscribir
       </Button>
 
-      <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
+      <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>Selecciona opciones</DialogTitle>
         <DialogContent>
-          {/* Opción principal */}
           <FormControl fullWidth margin="normal">
             <InputLabel>Selecciona una opción</InputLabel>
             <Select value={selectedOption} onChange={handleOptionChange}>
@@ -134,7 +149,6 @@ const MyDialog = (props) => {
             </Select>
           </FormControl>
 
-          {/* Subcategoría si es "Físico 304" */}
           {selectedOption === "Físico" && (
             <FormControl fullWidth margin="normal">
               <InputLabel>Selecciona una subcategoría</InputLabel>
@@ -148,22 +162,25 @@ const MyDialog = (props) => {
             </FormControl>
           )}
 
-          {/* Selección de horario si hay subcategoría */}
-          {selectedSubOption && (
-            <FormControl fullWidth margin="normal">
+          {(selectedOption && selectedOption !== "Físico") || selectedSubOption ? (
+              <FormControl fullWidth margin="normal">
               <InputLabel>Selecciona un horario</InputLabel>
               <Select value={selectedHour} onChange={handleHourChange}>
-                {physicalSubcategories[selectedSubOption]?.horarios.map((hour) => (
+                {(selectedOption === "Merienda"
+                  ? ["17:00"]
+                  : selectedOption === "Físico" && selectedSubOption
+                  ? physicalSubcategories[selectedSubOption]?.horarios
+                  : generalHorarios
+                ).map((hour) => (
                   <MenuItem key={hour} value={hour}>
                     {hour}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
-          )}
+          ) : null}
 
-          {/* Selección de días */}
-          {selectedSubOption && (
+          {selectedOption && (
             <FormGroup>
               {allDays.map((day) => (
                 <FormControlLabel
@@ -173,7 +190,11 @@ const MyDialog = (props) => {
                       checked={selectedDays[day] || false}
                       onChange={handleDayChange}
                       name={day}
-                      disabled={!physicalSubcategories[selectedSubOption]?.dias.includes(day)}
+                      disabled={
+                        selectedSubOption
+                          ? !physicalSubcategories[selectedSubOption]?.dias.includes(day)
+                          : false
+                      }
                     />
                   }
                   label={day.charAt(0).toUpperCase() + day.slice(1)}
@@ -182,7 +203,6 @@ const MyDialog = (props) => {
             </FormGroup>
           )}
 
-          {/* Tabla de datos si hay información */}
           {optionData && optionData.length > 0 && (
             <TableContainer component={Paper} sx={{ mt: 2 }}>
               <Table>
@@ -209,10 +229,10 @@ const MyDialog = (props) => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} color="secondary">
+          <Button onClick={handleClose} color="secondary">
             Cancelar
           </Button>
-          <Button onClick={handleSubmit} color="primary" disabled={!selectedSubOption || !selectedHour}>
+          <Button onClick={handleSubmit} color="primary" disabled={!selectedHour}>
             Enviar
           </Button>
         </DialogActions>
