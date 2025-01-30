@@ -192,7 +192,7 @@ const CursoDialog = () => {
     onClick={() => navigate('/dtc/usuario1/taller/' + row.id_curso)}
     style={{ cursor: 'pointer' }}
   >
-    {row.nombre_curso}
+  <b> {row.nombre_curso}
     {row.nombre_curso === "FISICO" && (
       <div>
         {row.hora === "14:30" && "FISICO - Gimnasio"}
@@ -203,21 +203,17 @@ const CursoDialog = () => {
         {row.hora === "16:30" && row.dia === "martes" && "FISICO - Vóley masculino"}
         {row.hora === "16:30" && row.dia === "jueves" && "FISICO - Básquet masculino"}
       </div>
-    )}
+    )}</b> 
   </div>
 </TableCell>
-                   <TableCell>{row.dia}</TableCell>
-                    <TableCell>{row.hora}</TableCell>
-                    <TableCell>{row.cantidad_kids}</TableCell>
-                    <TableCell>
-                      <Button onClick={() => toggleRow(index)} variant="outlined">
-                        {openRows[index] ? 'Ocultar' : 'Ver'}
-                      </Button>
-                    </TableCell>
+                   <TableCell><b>{row.dia}</b></TableCell>
+                    <TableCell><b>{row.hora}</b></TableCell>
+                    <TableCell><b>{row.cantidad_kids}</b></TableCell>
+               
                   </TableRow>
                   <TableRow>
                     <TableCell colSpan={5} style={{ padding: 0 }}>
-                      <Collapse in={openRows[index]} timeout="auto" unmountOnExit>
+                    
                         <Box sx={{ margin: 1 }}>
                           <Typography variant="subtitle1" gutterBottom>
                             Nombres: {row.nombres_kids || 'Sin información'}
@@ -236,7 +232,7 @@ const CursoDialog = () => {
                             }}/>
                           </Typography>
                         </Box>
-                      </Collapse>
+                     
                     </TableCell>
                   </TableRow>
                 </React.Fragment>
