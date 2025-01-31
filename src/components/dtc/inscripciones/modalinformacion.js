@@ -86,8 +86,8 @@ export default function Clasenueva(props) {
         if (item.mail == "FISICO") {
             let actividad = "";
             if (item.hora == "14:30") actividad = "gimnasio";
-            else if (["lunes", "miercoles", "viernes"].includes(item.dia) && item.hora == "15:30") actividad = "Fútbol Masculino";
-            else if (["lunes", "miercoles", "viernes"].includes(item.dia) && item.hora == "16:30") actividad = "Fútbol Femenino";
+            else if (["lunes", "miércoles", "viernes"].includes(item.dia) && item.hora == "15:30") actividad = "Fútbol Masculino";
+            else if (["lunes", "miércoles", "viernes"].includes(item.dia) && item.hora == "16:30") actividad = "Fútbol Femenino";
             else if (item.dia == "martes" && item.hora == "15:30") actividad = "Vóley Femenino";
             else if (item.dia == "martes" && item.hora == "16:30") actividad = "Vóley Masculino";
             else if (item.dia == "jueves" && item.hora == "15:30") actividad = "Basket Femenino";
