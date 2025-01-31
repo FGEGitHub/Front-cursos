@@ -35,13 +35,7 @@ export default function Clasenueva(props) {
         console.log(form)
         setForm({ ...form, [e.target.name]: e.target.value })
     }
-    useEffect(() => {
-        traer()
-
-
-
-    }, [])
-
+   
 
     const handleSelection = async (event, value) => {
         // Aquí puedes realizar alguna acción cuando se selecciona un valor
@@ -97,6 +91,7 @@ export default function Clasenueva(props) {
             days:[props.dia],
             number:props.hora
         })
+        traer()
     };
 
 
@@ -108,10 +103,10 @@ export default function Clasenueva(props) {
     return (
         <div>
 
-            < Tooltip title="Vinculos">
-                <Button variant='contained'  style={{ width: '80px' }} onClick={handleClickOpen}>Aregar</Button>
+         
+                <button  style={{ width: '80px' }} onClick={handleClickOpen}>Aregar</button>
 
-            </Tooltip>
+          
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Inscribir a usuario a {props.nombre_curso}-{props.dia}-{props.hora} horas</DialogTitle>

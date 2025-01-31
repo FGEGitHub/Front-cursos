@@ -20,7 +20,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import servicioDtc from '../../../services/dtc';
 import Agregar from './modalagregar'
-import Chat from './chat'
+import Info from './modalinformacion'
 const CursoDialog = () => {
   const [cursosData, setCursosData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -117,7 +117,7 @@ const CursoDialog = () => {
 
   return (
     <div>
-      
+      <Info/>
       {/*<Chat/>  Botón para cambiar entre los modos */}
       <Box sx={{ mb: 2 }}>
         <Button variant="contained" onClick={() => setModoSemanal((prev) => !prev)}>
@@ -178,9 +178,9 @@ const CursoDialog = () => {
               <TableRow >
                 <TableCell>Taller</TableCell>
                 <TableCell>Día</TableCell>
-                <TableCell>Hora</TableCell>
-                <TableCell>Cantidad de Kids</TableCell>
-                <TableCell>Acción</TableCell>
+     
+                <TableCell>Cantidad de inscriptos</TableCell>
+         
               </TableRow>
             </TableHead>
             <TableBody>
@@ -208,12 +208,13 @@ const CursoDialog = () => {
     )}</b> 
   </div>
 </TableCell>
-                   <TableCell><b>{row.dia}</b></TableCell>
-                    <TableCell><b>{row.hora}</b></TableCell>
+                   <TableCell><b>{row.dia}-{row.hora} hs</b></TableCell>
+              {/*       <TableCell><b>{row.hora}</b></TableCell> */}
                     <TableCell><b>{row.cantidad_kids}</b></TableCell>
                
                   </TableRow>
-                  <TableRow>
+                  <TableRow  key={index} 
+                     sx={{ backgroundColor: index % 2 === 0 ? '#e0e0e0' : '#e0e0e0' }}>
                     <TableCell colSpan={5} style={{ padding: 0 }}>
                     
                         <Box sx={{ margin: 1 }}>
