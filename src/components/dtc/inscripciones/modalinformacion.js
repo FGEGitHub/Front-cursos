@@ -81,14 +81,31 @@ export default function Clasenueva(props) {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {cursado.map((item, idx) => (
-                                                    <TableRow key={idx}>
-                                                        <TableCell>{item.mail}</TableCell>
-                                                        <TableCell>{item.dia}</TableCell>
-                                                        <TableCell>{item.hora}</TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableBody>
+    {cursado.map((item, idx) => {
+        let mailText = item.mail;
+        if (item.mail == "FISICO") {
+            let actividad = "";
+            if (item.hora == "14:30") actividad = "gimnasio";
+            else if (["lunes", "miercoles", "viernes"].includes(item.dia) && item.hora == "15:30") actividad = "Fútbol Masculino";
+            else if (["lunes", "miercoles", "viernes"].includes(item.dia) && item.hora == "16:30") actividad = "Fútbol Femenino";
+            else if (item.dia == "martes" && item.hora == "15:30") actividad = "Vóley Femenino";
+            else if (item.dia == "martes" && item.hora == "16:30") actividad = "Vóley Masculino";
+            else if (item.dia == "jueves" && item.hora == "15:30") actividad = "Basket Femenino";
+            else if (item.dia == "jueves" && item.hora == "16:30") actividad = "Basket Masculino";
+
+            mailText += actividad ? ` - ${actividad}` : "";
+        }
+
+        return (
+            <TableRow key={idx}>
+                <TableCell>{mailText}</TableCell>
+                <TableCell>{item.dia}</TableCell>
+                <TableCell>{item.hora}</TableCell>
+            </TableRow>
+        );
+    })}
+</TableBody>
+
                                         </Table>
                                     </TableContainer>
                                 </>
