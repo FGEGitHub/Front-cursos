@@ -83,9 +83,20 @@ const ScheduleDialog = () => {
     };
     
     try {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
 
-     const rt=  await servicioDtc.agregarvariasfechas(data);
-     alert(rt)
+      const user = JSON.parse(loggedUserJSON)
+      setUsuario(user)
+      if (user.nivel == 40){
+        const rt=  await servicioDtc.agregarvariasfechas(data);
+        alert(rt)
+      }
+      if (user.nivel == 20){
+        const rt=  await servicioDtc.agregarvariasfechasdtc(data);
+        alert(rt)
+      }
+  
+  
       handleClose();
     } catch (error) {
       console.error('Error :', error);
