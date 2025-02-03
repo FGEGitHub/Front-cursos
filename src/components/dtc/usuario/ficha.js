@@ -209,7 +209,7 @@ traer()
               {usuario.nivel == 20 ? <>
 
                 <div style={{ display: 'flex', gap: '10px' }}>
-  {/* <Agregarcurso 
+  <Agregarcurso 
     traer={ async () => {
       try {
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
@@ -224,7 +224,7 @@ traer()
         }
       } catch (error) {}
     }}
-  /> */}
+  /> 
   <Borrarusuaio id={chico.id} />
   <Modificar
     id={chico.id}

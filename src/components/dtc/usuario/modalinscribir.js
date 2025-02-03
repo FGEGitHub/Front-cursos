@@ -109,6 +109,9 @@ const MyDialog = (props) => {
   };
 
   const handleDayChange = (event) => {
+    if (selectedOption === "Lúdico" && !["martes", "jueves", "viernes"].includes(event.target.name)) {
+      return; // No permite seleccionar otros días si es Lúdico
+    }
     setSelectedDays({
       ...selectedDays,
       [event.target.name]: event.target.checked,
@@ -181,26 +184,23 @@ const MyDialog = (props) => {
           ) : null}
 
           {selectedOption && (
-            <FormGroup>
-              {allDays.map((day) => (
-                <FormControlLabel
-                  key={day}
-                  control={
-                    <Checkbox
-                      checked={selectedDays[day] || false}
-                      onChange={handleDayChange}
-                      name={day}
-                      disabled={
-                        selectedSubOption
-                          ? !physicalSubcategories[selectedSubOption]?.dias.includes(day)
-                          : false
-                      }
-                    />
-                  }
-                  label={day.charAt(0).toUpperCase() + day.slice(1)}
-                />
-              ))}
-            </FormGroup>
+             allDays.map((day) => (
+              <FormControlLabel
+                key={day}
+                control={
+                  <Checkbox
+                    checked={selectedDays[day] || false}
+                    onChange={handleDayChange}
+                    name={day}
+                    disabled={
+                      (selectedOption === "Lúdico" && !["martes", "jueves", "viernes"].includes(day)) ||
+                      (selectedSubOption && !physicalSubcategories[selectedSubOption]?.dias.includes(day))
+                    }
+                  />
+                }
+                label={day.charAt(0).toUpperCase() + day.slice(1)}
+              />
+            ))
           )}
 
           {optionData && optionData.length > 0 && (
