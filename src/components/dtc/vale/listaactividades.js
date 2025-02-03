@@ -373,7 +373,7 @@ const columns = [
   
   const handleViewFile = async (id) => {
     try {
-      const response = await servicioDtc.verArchivo(id);
+      const response = await servicioDtc.verarchivopsiq(id);
       if (response && response.data) {
         const fileBlob = new Blob([response.data], { type: 'application/pdf' });
         const fileUrl = URL.createObjectURL(fileBlob);
