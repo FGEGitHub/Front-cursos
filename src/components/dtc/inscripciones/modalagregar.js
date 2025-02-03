@@ -35,7 +35,7 @@ export default function Clasenueva(props) {
         console.log(form)
         setForm({ ...form, [e.target.name]: e.target.value })
     }
-   
+
 
     const handleSelection = async (event, value) => {
         // Aquí puedes realizar alguna acción cuando se selecciona un valor
@@ -74,7 +74,7 @@ export default function Clasenueva(props) {
 
                 setUsuario(usuario)
 
-                const novedades_aux = await servicioDtc.listachiques()
+                const novedades_aux = await servicioDtc.listachiquesparainscribir()
                 setchicos(novedades_aux[0])
                 setDatos(novedades_aux[1])
             }
@@ -87,9 +87,10 @@ export default function Clasenueva(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
-        setForm({ option: props.id ,
-            days:[props.dia],
-            number:props.hora
+        setForm({
+            option: props.id,
+            days: [props.dia],
+            number: props.hora
         })
         traer()
     };
@@ -103,10 +104,10 @@ export default function Clasenueva(props) {
     return (
         <div>
 
-         
-                <button  style={{ width: '80px' }} onClick={handleClickOpen}>Aregar</button>
 
-          
+            <button style={{ width: '80px' }} onClick={handleClickOpen}>Aregar</button>
+
+
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Inscribir a usuario a {props.nombre_curso}-{props.dia}-{props.hora} horas</DialogTitle>
@@ -123,14 +124,24 @@ export default function Clasenueva(props) {
                         <DialogContentText>
                             <Autocomplete
                                 options={chicos}
-                                getOptionLabel={(option) => option.id_usuario == null ? option.nombre + " " + option.apellido : option.nombre + " " + option.apellido + "  Presente"}
+                                getOptionLabel={(option) =>
+                                    option.id_usuario == null
+                                        ? `${option.nombre} ${option.apellido}`
+                                        : `${option.nombre} ${option.apellido} ${option.yaincripto ? ' - ya inscripto' : ' - Presente'}`
+                                }
+                                renderOption={(props, option) => (
+                                    <li {...props} style={{ color: option.yaincripto ? 'blue' : 'black' }}>
+                                        {option.nombre} {option.apellido} {option.yaincripto ? ' - ya inscripto' : ' - Presente'}
+                                    </li>
+                                )}
                                 renderInput={(params) => (
                                     <TextField {...params} label="Selecciona una opción" variant="outlined" />
                                 )}
                                 onChange={handleSelection}
                             />
 
-                          
+
+
 
                         </DialogContentText>
 
