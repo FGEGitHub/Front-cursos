@@ -6,7 +6,7 @@ import Asis from '../../../../components/dtc/usuario1/personapsic.js/ficha'
 import Calendario from '../../../../components/dtc/turnos/calendario'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../../components/dtc/Navbar'
+import MenuuCel from '../../../../components/dtc/vale/menuresp'
 import Menuizq from '../../../../components/dtc/vale/menuizqval'
 
 import {
@@ -65,8 +65,13 @@ export default function Paginas() {
 
     return (
       <>
-     <MenuuCel/>
-     <br/>
+         {isMatch ? <>
+              <MenuuCel/>
+              
+              <Asis/>
+            </>:<>
+
+            <br/>
      <br/>
      <br/> <Menuizq>
     
@@ -74,6 +79,8 @@ export default function Paginas() {
      <br/></Menuizq>
      <br/>
      <br/> 
+
+            </>}
  </>
    
     );

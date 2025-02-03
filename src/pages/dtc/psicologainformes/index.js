@@ -5,7 +5,7 @@
 import Asis from '../../../components/dtc/vale/listaactividades'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../components/dtc/Navbar'
+import MenuuCel from '../../../components/dtc/vale/menuresp'
 import Menuizq from '../../../components/dtc/vale/menuizqval'
 
 import {
@@ -64,14 +64,24 @@ export default function Paginas() {
 
     return (
       <>
-     <MenuuCel/>
-     <br/>
+            {isMatch ? <>
+              <MenuuCel/>
+              
+              <Asis/>
+            </>:<>
+
+            <br/>
      <br/>
      <br/> <Menuizq>
+    
      <Asis/>
      <br/></Menuizq>
      <br/>
      <br/> 
+
+            </>}
+
+
  </>
    
     );

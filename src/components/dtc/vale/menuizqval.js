@@ -78,11 +78,11 @@ export default function MenuIzq2 ({children}) {
             icon: <PeopleAltTwoToneIcon />, 
             path: '/dtc/psicologa/informes' 
           },
-      { 
+     /*  { 
         text: 'Mapas', 
         icon: <WhereToVoteTwoToneIcon  />, 
         path: '/dtc/psicologa/turnos' 
-      },
+      }, */
         { 
           text: 'turnos', 
           icon: <AccountBoxTwoToneIcon />, 
