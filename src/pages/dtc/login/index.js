@@ -50,7 +50,7 @@ export default function Paginas() {
                     navigate('/dtc/psicologa/turnos')
                     break;
                     case 26:
-                      navigate('/dtc/tallerclases')
+                      navigate('/dtc/tallerprincipal')
                       break;
                       case 27:
                       navigate('/dtc/gimnasioclases')

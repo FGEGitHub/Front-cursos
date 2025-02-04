@@ -74,7 +74,7 @@ const LoginForm = () => {
             window.location.reload(true);
             break;
             case 26:
-              navigate('/dtc/tallerclases')
+              navigate('/dtc/tallerprincipal')
               break;
               case 27:
                 navigate('/dtc/gimnasioclases')
@@ -134,7 +134,7 @@ const LoginForm = () => {
             window.location.reload(true);
             break;
             case 26:
-              navigate('/dtc/tallerclases')
+              navigate('/dtc/tallerprincipal')
               window.location.reload(true);
               break;
               case 27:

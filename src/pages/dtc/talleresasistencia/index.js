@@ -1,4 +1,4 @@
-import Asis from '../../../components/dtc/talleres/tablaasistencia'
+import Asis from '../../../components/dtc/talleres/tablanuevaasitenciaclase'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/Navbar'

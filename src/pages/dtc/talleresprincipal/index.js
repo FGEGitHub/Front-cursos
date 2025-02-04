@@ -1,8 +1,8 @@
-import Asis from '../../../components/dtc/talleres/botoneshorarios'
+import Asis from '../../../components/dtc/talleres/botones'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/Navbar'
-import BotonCambiaColor from '../../../components/dtc/botoncambiacolor'
+
 import {
 
   makeStyles,
@@ -59,14 +59,9 @@ export default function Paginas() {
     return (
       <>
      <MenuuCel/>
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-     <br/>
-{/*      <BotonCambiaColor
-     texto={"Ver mis alumnos"}
-     accion={() => navigate('/dtc/alumnosdeltaller')} /> */}
+
+
+
           <Asis/>
      <br/>
      <br/>

@@ -8,7 +8,7 @@ function App () {
 
   const element = useRoutes(Rutas)
 
-  const navigate = useNavigate();
+
 
   
 ///

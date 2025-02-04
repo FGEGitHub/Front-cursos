@@ -44,7 +44,7 @@ const traer = async () => {
     const user = JSON.parse(loggedUserJSON)
  
   const notis = await servicioPErsonas.traerusuario(user.id)
-  console.log(notis)
+
   setUser(notis)
   setCargado(true)
 

@@ -68,7 +68,7 @@ const DrawerNav = () => {
 
   if (loggedUserJSON) {
     const user = JSON.parse(loggedUserJSON)
-    console.log(user)
+
     setUsuario(user)
     
   }

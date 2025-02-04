@@ -157,6 +157,7 @@ import DTCTallerclases from '../pages/dtc/talleresclases/index.js';
 import Dtcsolemapas from '../pages/dtc/sole/mapas';
 import Stcinventairo from '../pages/dtc/inventario';
 import Stcinventairopretacion from '../pages/dtc/inventarioprestacion';
+import DTCTallerPrinc from '../pages/dtc/talleresprincipal';
 
 
 
@@ -375,7 +376,7 @@ const Rutas = [
 		{ path: '/dtc/gimnasioclases', element: <DTCGimnasioclases/> },
 		{ path: '/dtc/gimnasioasistencia', element: <DTCaGimnasioAsis/> },
 		{ path: '/dtc/alumnosdeltaller', element: <DTCAlumnosdelcurso/> },
-		
+		{ path: '/dtc/tallerprincipal', element: <DTCTallerPrinc/> },
 		
 		{ path: '/dtc/tallerasistencia/:id', element: <DTCTallerAsis/> },
 		{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest/> },
