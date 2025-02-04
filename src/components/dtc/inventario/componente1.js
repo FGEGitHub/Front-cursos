@@ -314,7 +314,7 @@ traer={async () => {
 
                     <ModaNueva
                         id_turno={id}
-                        traer={async () => {
+                        traer={  async () => {
                           try {
                               const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                               if (loggedUserJSON) {
@@ -322,7 +322,7 @@ traer={async () => {
                   
                                   setUsuario(usuario)
                   
-                                  const novedades_aux = await servicioDtc.LISTAINVENTARIO()
+                                  const novedades_aux = await servicioDtc.listainventario()
                                   setchicos(novedades_aux[0])
                                   setDatos(novedades_aux[1])
                               }
@@ -331,7 +331,9 @@ traer={async () => {
                   
                           }
                   
-                      }}
+                      }
+                  
+                  }
                     />
                     {chicos.length > 0 ? <>
 
