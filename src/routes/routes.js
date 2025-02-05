@@ -182,6 +182,7 @@ import Dtcpersonastratamientods from '../pages/dtc/visitasoc/personastratamiento
 import Dtcpersonaratamientods from '../pages/dtc/visitasoc/personatratamiento';
 import Dtcasisenteinformes from '../pages/dtc/visitasoc/informestrat';
 import DTCcocinpacientes from '../pages/dtc/cocinapacientes';
+import DTCcocinaraciones from '../pages/dtc/cocinaraciones';
 
 
 import DTCAlumnosdelcurso from '../pages/dtc/alumnosdeltaller';
@@ -399,8 +400,8 @@ const Rutas = [
 		
 		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
 		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },
-
-
+		{ path: '/dtc/cocinaraciones', element: <DTCcocinaraciones/> },
+		
 		{ path: '/cadia/login', element: <LoginCadia/> },
 		{ path: '/cadia/usuario/calendario', element: <CalendarioCadia/> },
 		{ path: '/cadia/usuario/chicos', element: <ChicosCadia/> },
