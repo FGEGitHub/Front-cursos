@@ -74,7 +74,7 @@ export default function Clasenueva(props) {
 
                 setUsuario(usuario)
 
-                const novedades_aux = await servicioDtc.listachiquesparainscribir()
+                const novedades_aux = await servicioDtc.listachiquesparainscribir({id:props.id,dia:props.dia,hora:props.hora})
                 setchicos(novedades_aux[0])
                 setDatos(novedades_aux[1])
             }
@@ -111,6 +111,7 @@ export default function Clasenueva(props) {
             <Dialog open={open} onClose={handleClose}>
 
                 <DialogTitle>Inscribir a usuario a {props.nombre_curso}-{props.dia}-{props.hora} horas</DialogTitle>
+                NAHUELITO: ahora figura en azul si esta inscripto/a en este mismo curso
                 <Paper
                     sx={{
                         cursor: 'pointer',
@@ -122,23 +123,21 @@ export default function Clasenueva(props) {
                 >
                     <DialogContent>
                         <DialogContentText>
-                            <Autocomplete
-                                options={chicos}
-                                getOptionLabel={(option) =>
-                                    option.id_usuario == null
-                                        ? `${option.nombre} ${option.apellido}`
-                                        : `${option.nombre} ${option.apellido} ${option.yaincripto ? ' - ya inscripto' : ' - Presente'}`
-                                }
-                                renderOption={(props, option) => (
-                                    <li {...props} style={{ color: option.yaincripto ? 'blue' : 'black' }}>
-                                        {option.nombre} {option.apellido} {option.yaincripto ? ' - ya inscripto' : ' - Presente'}
-                                    </li>
-                                )}
-                                renderInput={(params) => (
-                                    <TextField {...params} label="Selecciona una opción" variant="outlined" />
-                                )}
-                                onChange={handleSelection}
-                            />
+                        <Autocomplete
+    options={chicos}
+    getOptionLabel={(option) =>
+        `${option.nombre} ${option.apellido}${option.yainscripto ? ' - ya inscripto' : ''}`
+    }
+    renderOption={(props, option) => (
+        <li {...props} style={{ color: option.yainscripto ? 'blue' : 'black' }}>
+            {option.nombre} {option.apellido} {option.yainscripto ? ' - ya inscripto' : ''}
+        </li>
+    )}
+    renderInput={(params) => (
+        <TextField {...params} label="Selecciona una opción" variant="outlined" />
+    )}
+    onChange={handleSelection}
+/>
 
 
 
