@@ -34,6 +34,7 @@ const MyDialog = (props) => {
     Lúdico: 307,
     Educativo2: 308,
     Merienda: 309,
+    Baile: 266,
   };
 
   const physicalSubcategories = {
@@ -45,6 +46,7 @@ const MyDialog = (props) => {
     "Basket Masculino": { horarios: ["15:30"], dias: ["jueves"] },
     "Basket Femenino": { horarios: ["16:30"], dias: ["jueves"] },
   };
+
   const generalHorarios = ["14:00", "15:00", "16:00"];
   const allDays = ["lunes", "martes", "miércoles", "jueves", "viernes"];
 
@@ -107,16 +109,23 @@ const MyDialog = (props) => {
   const handleHourChange = (event) => {
     setSelectedHour(event.target.value);
   };
-
   const handleDayChange = (event) => {
-    if (selectedOption === "Lúdico" && !["martes", "jueves", "viernes"].includes(event.target.name)) {
-      return; // No permite seleccionar otros días si es Lúdico
+    const { name, checked } = event.target;
+  
+    // Si hay una subcategoría seleccionada, restringir a sus días permitidos
+    if (selectedOption === "Físico" && selectedSubOption) {
+      const allowedDays = physicalSubcategories[selectedSubOption]?.dias || [];
+  
+      // Evitar selección de días no permitidos
+      if (!allowedDays.includes(name)) return;
     }
+  
     setSelectedDays({
       ...selectedDays,
-      [event.target.name]: event.target.checked,
+      [name]: checked,
     });
   };
+  
 
   const handleSubmit = async () => {
     const formData = {
@@ -131,6 +140,15 @@ const MyDialog = (props) => {
     handleClose();
     props.traer();
   };
+
+  // **Filtrado de la tabla según los días y la hora seleccionados**
+  const filteredData = optionData
+    ? optionData.filter((row) => {
+        const dayMatch = Object.keys(selectedDays).some((day) => selectedDays[day] && row.dia === day);
+        const hourMatch = selectedHour ? row.hora === selectedHour : true;
+        return dayMatch && hourMatch;
+      })
+    : [];
 
   return (
     <div>
@@ -166,7 +184,7 @@ const MyDialog = (props) => {
           )}
 
           {(selectedOption && selectedOption !== "Físico") || selectedSubOption ? (
-              <FormControl fullWidth margin="normal">
+            <FormControl fullWidth margin="normal">
               <InputLabel>Selecciona un horario</InputLabel>
               <Select value={selectedHour} onChange={handleHourChange}>
                 {(selectedOption === "Merienda"
@@ -182,28 +200,29 @@ const MyDialog = (props) => {
               </Select>
             </FormControl>
           ) : null}
+{selectedOption && (
+  allDays.map((day) => (
+    <FormControlLabel
+      key={day}
+      control={
+        <Checkbox
+          checked={selectedDays[day] || false}
+          onChange={handleDayChange}
+          name={day}
+          disabled={
+            (selectedOption === "Lúdico" && !["martes", "jueves", "viernes"].includes(day)) ||
+            (selectedOption === "Físico" && selectedSubOption && 
+              !physicalSubcategories[selectedSubOption]?.dias.includes(day))
+          }
+        />
+      }
+      label={day.charAt(0).toUpperCase() + day.slice(1)}
+    />
+  ))
+)}
 
-          {selectedOption && (
-             allDays.map((day) => (
-              <FormControlLabel
-                key={day}
-                control={
-                  <Checkbox
-                    checked={selectedDays[day] || false}
-                    onChange={handleDayChange}
-                    name={day}
-                    disabled={
-                      (selectedOption === "Lúdico" && !["martes", "jueves", "viernes"].includes(day)) ||
-                      (selectedSubOption && !physicalSubcategories[selectedSubOption]?.dias.includes(day))
-                    }
-                  />
-                }
-                label={day.charAt(0).toUpperCase() + day.slice(1)}
-              />
-            ))
-          )}
 
-          {optionData && optionData.length > 0 && (
+          {optionData && (
             <TableContainer component={Paper} sx={{ mt: 2 }}>
               <Table>
                 <TableHead>
@@ -215,7 +234,7 @@ const MyDialog = (props) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {optionData.map((row, index) => (
+                  {filteredData.map((row, index) => (
                     <TableRow key={index}>
                       <TableCell>{row.dia}</TableCell>
                       <TableCell>{row.hora}</TableCell>

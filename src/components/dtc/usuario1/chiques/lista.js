@@ -200,7 +200,7 @@ const TablaNotificaciones = (props) => {
                 <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
 
                     < Tooltip title="Ver">
-                        <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} variant="contained">
+                        <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} variant="contained" color="secondary">
 Ver                        </Button>
                     </Tooltip>
 
@@ -281,6 +281,19 @@ Ver                        </Button>
 
     ]; */
     const columns = [
+      {
+        name: "Ver",
+        options: {
+            customBodyRenderLite: (dataIndex, rowIndex) =>
+                CutomButtonsRenderer(
+                    dataIndex,
+                    rowIndex,
+                    // overbookingData,
+                    // handleEditOpen
+                )
+        }
+
+    },
       {
         name: "id",
         label: "id",

@@ -87,10 +87,9 @@ export default function MenuIzq2 ({children}) {
               boxShadow: '0px 0px 5px #ff9800',
               transform: 'rotate(-10deg)',
               animation: 'pulsate 1.5s infinite',
-              clipPath: 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)',
             }}
           >
-            ¡Nuevo!
+            ¡Cositas nuevas!
           </div>
         </div>
       ),

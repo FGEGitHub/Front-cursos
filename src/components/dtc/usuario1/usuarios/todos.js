@@ -199,7 +199,7 @@ export default function Ingresos(props) {
                 {isMatch ? <>
                     <TableContainer>
                         {!usuarios ? <Skeleton /> : <>
-                            <h1>CUOTAS</h1>
+                            <h1></h1>
                             <Table >
                                 <TableHead>
                                     <TableRow>
