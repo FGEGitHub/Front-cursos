@@ -42,10 +42,10 @@ const ClassDataTable = () => {
   const handleCheckboxChange = async (id_chico, checked) => {
     if (tableData.length === 0) return;
     
-    const id_clase = tableData[0].id;
 
     try {
-      await serviciodtc.ponerpresenteclase({ id_clase, id_usuario: id_chico });
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      await serviciodtc.ponerpresenteclase({ hora, id_usuario: id_chico,id_tallerista:JSON.parse(loggedUserJSON).id });
 
       // Actualizar el estado para reflejar el cambio en la UI
       setClassDetails(prevDetails =>
