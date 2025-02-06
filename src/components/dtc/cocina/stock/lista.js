@@ -1,7 +1,7 @@
 import servicioDtc from '../../../../services/dtc'
 
 import React, { useEffect, useState, Fragment } from "react";
-import Bot from './bot';
+//import Bot from './bot';
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -296,7 +296,7 @@ const TablaNotificaciones = (props) => {
                 }
         
             }}/>
-            <Bot/>
+           
             <Agregar/>
             {chicos ? <>
                 <div>
