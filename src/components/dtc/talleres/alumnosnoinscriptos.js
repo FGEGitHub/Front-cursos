@@ -75,7 +75,7 @@ setUsuario(usuario)
     <div>
       {datos ? <>
         <Typography variant="p" gutterBottom>
-          Fecha: {currentDate}
+          Lista de usuarios
         </Typography>
         {usuario ? <>
           <Buscador
