@@ -30,7 +30,7 @@ const MobileNavigation = () => {
           fullWidth
           onClick={() => navigate(`/dtc/tallerasistencia/${formatHorario(horario)}`)}
         >
-          Horario de {horario} hs
+          Horario de {horario}hs
         </Button>
         
       ))}

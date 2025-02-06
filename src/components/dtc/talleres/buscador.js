@@ -41,11 +41,8 @@ const MobileAutocomplete = (props) => {
   };
   const ir = async () => {
     // Lógica para hacer un llamado al backend con el valor seleccionado
-
     navigate('/dtc/usuario1/usuario/'+selectedValue.id)
-      // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
-      // Ejemplo: axios.post('/api/backend', { selectedValue });
-
+    
   };
 
   return (
@@ -60,7 +57,7 @@ const MobileAutocomplete = (props) => {
       />
 
       <button variant="outlined" color="primary" onClick={handleBackendCall}>
-        Poner/Quitar presente
+        Poner/Quitar Presente
       </button>
       {selectedValue ? <> 
         {props.usuario.id != 238 ? <>
