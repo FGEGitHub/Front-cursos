@@ -1,4 +1,5 @@
 import Asis from '../../../components/dtc/talleres/tablanuevaasitenciaclase'
+import Asis2 from '../../../components/dtc/talleres/alumnosnoinscriptos'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/Navbar'
@@ -64,6 +65,7 @@ export default function Paginas() {
      <br/> <br/>
      <Asis/>
      <br/>
+     <Asis2/>
      <br/>
      <br/> 
  </>

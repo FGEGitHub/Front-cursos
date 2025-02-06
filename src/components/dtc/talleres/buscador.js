@@ -28,7 +28,7 @@ const MobileAutocomplete = (props) => {
       console.log(loggedUserJSON) 
         const mergedJSON = {
             ...selectedValue,
-            ...{id_clase:props.id_clase,
+            ...{hora:props.hora,
               id_tallerista:JSON.parse(loggedUserJSON).id}
           };
   console.log(mergedJSON)
