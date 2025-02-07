@@ -46,7 +46,7 @@ export default function SelectTextFields(props) {
       console.log(nov)
       setProfesionales(nov[0])
     }
-    if (user.nivel == 20){
+    if (user.nivel == 20 || user.nivel == 23){
       const nov = await servicioDtc.traerpsicologos()
       console.log(nov)
       setProfesionales(nov[0])
@@ -150,7 +150,7 @@ props.traer(form.fecha)
 
 {usuario ? <>
 
-  {usuario.nivel==40 || usuario.nivel==20  ? <>
+  {usuario.nivel==40 || usuario.nivel==20 || usuario.nivel==23  ? <>
 <br/>
     {profesionales ? <>
       <InputLabel variant="outlined" htmlFor="uncontrolled-native">
