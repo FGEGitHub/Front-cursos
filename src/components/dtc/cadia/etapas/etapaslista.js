@@ -357,8 +357,8 @@ traer={async () => {
                             <TableRow>
                                 <TableCell>Fecha</TableCell>
                                 <TableCell>Título</TableCell>
-                                <TableCell>Estado</TableCell>
-                                <TableCell>Proyectar</TableCell>
+                                <TableCell>estado(modificaciones soraya)</TableCell>
+                                <TableCell>Proyectar(modificaciones pipo)</TableCell>
                                 <TableCell>Descripción</TableCell>
                                 <TableCell>Actualizar</TableCell>
                             </TableRow>

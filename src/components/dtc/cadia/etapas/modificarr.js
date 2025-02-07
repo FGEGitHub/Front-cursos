@@ -105,6 +105,10 @@ export default function ModificarElementoDialog(props) {
             InputLabelProps={{ shrink: true }}
             fullWidth
           />
+
+
+
+          Carga de pipo:
           <NativeSelect
             id="estado-select"
             name="proyectar"
