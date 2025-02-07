@@ -15,6 +15,7 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import ModalAgregarconsumo from './agregarconsumo'
+import Verusos from './verusos'
 import Agregar from './sumar'
 import {
 
@@ -191,16 +192,9 @@ const TablaNotificaciones = (props) => {
                     <Modalborrar id={chicos[dataIndex]['id']}
                       traer={async () => {
                         try {
-                            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                            if (loggedUserJSON) {
-                                const usuario = JSON.parse(loggedUserJSON)
-                
-                                setUsuario(usuario)
-                
-                                const novedades_aux = await servicioDtc.traerstock()
-                                setchicos(novedades_aux[0])
-                          
-                            }
+                          console.log('trayebdo')
+                          const novedades_aux = await servicioDtc.traerstock()
+                          setchicos(novedades_aux[0])
                 
                         } catch (error) {
                 
@@ -209,7 +203,6 @@ const TablaNotificaciones = (props) => {
                     } }
                     />
                     </Tooltip>
-
 
 
 
@@ -279,23 +272,16 @@ const TablaNotificaciones = (props) => {
             <h2>Lista de Stock</h2>
             <Nuevo
             traer={ async () => {
-                try {
-                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                    if (loggedUserJSON) {
-                        const usuario = JSON.parse(loggedUserJSON)
-        
-                        setUsuario(usuario)
-        
-                        const novedades_aux = await servicioDtc.traerstock()
-                        setchicos(novedades_aux[0])
-         
-                    }
-        
-                } catch (error) {
-        
-                }
-        
-            }}/>
+              try {
+                console.log('trayebdo')
+                const novedades_aux = await servicioDtc.traerstock()
+                setchicos(novedades_aux[0])
+      
+              } catch (error) {
+      
+              }
+      
+          }}/>
            
             <Agregar/>
             {chicos ? <>
@@ -369,7 +355,9 @@ const TablaNotificaciones = (props) => {
                       }
               
                   } }
-                  /> </StyledTableCell>
+                  />
+                  <Verusos
+                  id={row.id}/> </StyledTableCell>
 
                                                       
 

@@ -9,16 +9,18 @@ import React, { useState } from 'react';
 import DialogActions from '@mui/material/DialogActions';
 
 export default function AgregarConsumoModal(props) {
+  const today = new Date().toISOString().split('T')[0];
+  
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
     id_producto: props.id || '',
-    cantidad_usado: '',
-    fecha: ''
+    cantidad: '',
+    fecha: today
   });
 
   const handleClickOpen = () => {
     setOpen(true);
-    setForm({id_producto:props.id_producto})
+    setForm({ id_producto: props.id_producto, cantidad: '', fecha: today });
   };
 
   const handleClose = () => {
@@ -26,6 +28,7 @@ export default function AgregarConsumoModal(props) {
   };
 
   const handleChange = (e) => {
+    console.log(form)
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -60,7 +63,7 @@ export default function AgregarConsumoModal(props) {
             label="Cantidad Usado"
             name="cantidad"
             type="number"
-            value={form.cantidad_usado}
+            value={form.cantidad}
             onChange={handleChange}
             fullWidth
           />
