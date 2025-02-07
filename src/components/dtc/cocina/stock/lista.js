@@ -283,7 +283,21 @@ const TablaNotificaciones = (props) => {
       
           }}/>
            
-            <Agregar/>
+            <Agregar
+            
+            traer={ async () => {
+              try {
+                console.log('trayebdo')
+                const novedades_aux = await servicioDtc.traerstock()
+                setchicos(novedades_aux[0])
+      
+              } catch (error) {
+      
+              }
+      
+          }}
+            
+            />
             {chicos ? <>
                 <div>
 
@@ -337,28 +351,33 @@ const TablaNotificaciones = (props) => {
                 
                     } }
                     /> */}<ModalAgregarconsumo id_producto={row.id}
-                    traer={async () => {
+                    traer={ async () => {
                       try {
-                          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                          if (loggedUserJSON) {
-                              const usuario = JSON.parse(loggedUserJSON)
-              
-                              setUsuario(usuario)
-              
-                              const novedades_aux = await servicioDtc.traerstock()
-                              setchicos(novedades_aux[0])
-                            
-                          }
+                        console.log('trayebdo')
+                        const novedades_aux = await servicioDtc.traerstock()
+                        setchicos(novedades_aux[0])
               
                       } catch (error) {
               
                       }
               
-                  } }
+                  }}
                   />
                   <Verusos
                   id={row.id}
-                  nombre={row.nombre}/> </StyledTableCell>
+                  nombre={row.nombre}
+                  traer={ async () => {
+                    try {
+                      console.log('trayebdo')
+                      const novedades_aux = await servicioDtc.traerstock()
+                      setchicos(novedades_aux[0])
+            
+                    } catch (error) {
+            
+                    }
+            
+                }}
+                /> </StyledTableCell>
 
                                                       
 

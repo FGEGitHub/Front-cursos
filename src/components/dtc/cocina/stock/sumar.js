@@ -45,7 +45,7 @@ export default function ModificarElementoDialog(props) {
   const handleSubmit = async () => {
     try {
       const nov = await servicioDtc.sumarstock(form);
-      alert(nov.message);
+      alert(nov);
     } catch (error) {
       console.error(error);
       console.log("Error algo sucedió");
@@ -89,6 +89,7 @@ export default function ModificarElementoDialog(props) {
                       onChange={handleChange}
                       fullWidth
                       variant="standard"
+                      type="number"
                     />
 
 

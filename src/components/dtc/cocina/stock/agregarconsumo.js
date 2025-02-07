@@ -41,6 +41,7 @@ export default function AgregarConsumoModal(props) {
       console.error('Error al agregar consumo:', error);
       alert('Error al agregar consumo');
     }
+    props.traer()
   };
 
   return (
