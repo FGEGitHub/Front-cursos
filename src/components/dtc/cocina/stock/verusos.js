@@ -7,7 +7,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import React, { useState, useEffect } from 'react';
 import DialogActions from '@mui/material/DialogActions';
 
-export default function VerUsosModal({ id }) {
+export default function VerUsosModal({ id, nombre}) {
   const [open, setOpen] = useState(false);
   const [usos, setUsos] = useState([]);
 
@@ -34,12 +34,12 @@ export default function VerUsosModal({ id }) {
       </Tooltip>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
         <DialogContent>
-          <h3>Usos del Producto - ID: {id}</h3>
+          <h3>Usos del Producto :  {nombre}, id: {id}</h3>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>ID Producto</TableCell>
+                  <TableCell>Tipo de uso</TableCell>
                   <TableCell>Fecha</TableCell>
                   <TableCell>Uso</TableCell>
                 </TableRow>
@@ -47,7 +47,7 @@ export default function VerUsosModal({ id }) {
               <TableBody>
                 {usos.map((uso, index) => (
                   <TableRow key={index}>
-                    <TableCell>{uso.id_producto}</TableCell>
+                    <TableCell>{uso.cantidadconsumo ? <><p style={{ color: 'crimson' }} >Uso </p></>:<><p style={{ color: 'green' }} >Recepcion</p> </>}</TableCell>
                     <TableCell>{uso.fecha}</TableCell>
                     <TableCell>{uso.cantidadconsumo ? <><p style={{ color: 'crimson' }} >{uso.cantidadconsumo} </p></>:<><p style={{ color: 'green' }} >{uso.cantidadrecibido} </p> </>}</TableCell>
                   </TableRow>

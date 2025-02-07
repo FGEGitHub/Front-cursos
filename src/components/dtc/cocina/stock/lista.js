@@ -357,7 +357,8 @@ const TablaNotificaciones = (props) => {
                   } }
                   />
                   <Verusos
-                  id={row.id}/> </StyledTableCell>
+                  id={row.id}
+                  nombre={row.nombre}/> </StyledTableCell>
 
                                                       
 
