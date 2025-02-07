@@ -13,7 +13,7 @@ export default function TablaActividades() {
   const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen
   const [asistencias, setAsistencias] = useState([]);
   const [usuario, setUsuario] = useState([]);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState();
 
   useEffect(() => {
     const traer = async () => {
@@ -45,11 +45,9 @@ export default function TablaActividades() {
   const handleViewFile = async (id) => {
     try {
       const response = await servicioDtc.verimagendemerienda(id);
-      const fileBlob = new Blob([response.data], { type: 'image/png' }); // Ajusta el MIME si no es PNG
-      const fileUrl = URL.createObjectURL(fileBlob);
-  
-      console.log('URL creada con Blob:', fileUrl);
-      setImageUrl(fileUrl); // Guarda la URL para mostrar la imagen
+      console.log(response)
+   
+      setImageUrl(response); // Guarda la URL para mostrar la imagen
       setOpen(true); // Abre el modal
     } catch (error) {
       console.error('Error al cargar la imagen:', error);
@@ -106,12 +104,8 @@ export default function TablaActividades() {
       {/* Modal para mostrar la imagen */}
       <Modal open={open} onClose={handleClose}>
   <Box sx={{ width: 400, padding: 2, bgcolor: 'background.paper', boxShadow: 24, borderRadius: 1 }}>
-    {imageUrl ? (
-      <img
-        src={imageUrl}
-        alt="Imagen de la merienda"
-        style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
-      />
+    {imageUrl ? (<>
+    <img src={`data:image/jpeg;base64,${imageUrl}`} width="100%" height="100%" /></>
     ) : (
       <p>No se encontró la imagen</p>
     )}
