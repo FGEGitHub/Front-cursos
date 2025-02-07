@@ -47,7 +47,7 @@ export default function SelectTextFields(props) {
       setProfesionales(nov[0])
     }
     if (user.nivel == 20 || user.nivel == 23){
-      const nov = await servicioDtc.traerpsicologos()
+      const nov = await servicioDtc.traerpsicologos() 
       console.log(nov)
       setProfesionales(nov[0])
     }
