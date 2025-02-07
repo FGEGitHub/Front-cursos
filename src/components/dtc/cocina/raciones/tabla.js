@@ -115,5 +115,5 @@ export default function TablaActividades() {
   </Box>
 </Modal>
     </div>
-  );
+  ); 
 }
