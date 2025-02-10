@@ -150,7 +150,7 @@ const ClassDataTable = () => {
             p: 4,
             borderRadius: 2
           }}
-        >
+        > 
           <Typography variant="h6" gutterBottom>ModificarClase</Typography>
           <TextField
             label="Título"
