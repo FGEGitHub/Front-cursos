@@ -210,7 +210,7 @@ const MyDialog = (props) => {
           onChange={handleDayChange}
           name={day}
           disabled={
-            (selectedOption === "Lúdico" && !["martes", "jueves", "viernes"].includes(day)) ||
+            (selectedOption === "Lúdico" && !["lunes","martes", "miércoles", "jueves", "viernes"].includes(day)) ||
             (selectedOption === "Físico" && selectedSubOption && 
               !physicalSubcategories[selectedSubOption]?.dias.includes(day))
           }
