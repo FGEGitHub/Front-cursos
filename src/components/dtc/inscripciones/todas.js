@@ -210,7 +210,18 @@ const CursoDialog = () => {
 </TableCell>
                    <TableCell><b>{row.dia}-{row.hora} hs</b></TableCell>
               {/*       <TableCell><b>{row.hora}</b></TableCell> */}
-                    <TableCell><b>{row.cantidad_kids}</b></TableCell>
+                    <TableCell><b><span
+  style={{
+    color:
+      row.cantidad_kids < 8
+        ? "green"
+        : row.cantidad_kids >= 8 && row.cantidad_kids <= 11
+        ? "orange"
+        : "red",
+  }}
+>
+  {row.cantidad_kids}
+</span></b></TableCell>
                
                   </TableRow>
                   <TableRow  key={index} 
@@ -220,6 +231,7 @@ const CursoDialog = () => {
                         <Box sx={{ margin: 1 }}>
                           <Typography variant="subtitle1" gutterBottom>
                             Nombres: {row.nombres_kids || ''}
+                            {row.cantidad_kids >11 ? <></>:<>
                             <Agregar id= {row.id_curso}
                             nombre_curso= {row.nombre_curso}
                             dia={row.dia}
@@ -232,7 +244,7 @@ const CursoDialog = () => {
                               } catch (error) {
                                 console.error('Error al obtener datos del curso:', error);
                               }
-                            }}/>
+                            }}/></>}
                           </Typography>
                         </Box>
                      
