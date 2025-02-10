@@ -210,7 +210,7 @@ const CursoDialog = () => {
 </TableCell>
                    <TableCell><b>{row.dia}-{row.hora} hs</b></TableCell>
               {/*       <TableCell><b>{row.hora}</b></TableCell> */}
-                    <TableCell><b><span
+                    <TableCell><b>Cantidad: <span
   style={{
     color:
       row.cantidad_kids < 8
