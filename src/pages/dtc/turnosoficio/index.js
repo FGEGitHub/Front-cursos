@@ -1,7 +1,7 @@
-import Asis from '../../../../components/dtc/turnos/lista';
+import Asis from '../../../components/dtc/turnos/lista2';
 import { useNavigate } from "react-router-dom";
-import MEnupc from '../../../../components/dtc/usuario1/turnos/menunizq';
-import MenuuCel from '../../../../components/dtc/Navbar';
+import MEnupc from '../../../components/dtc/usuario1/turnos/menunizq';
+import MenuuCel from '../../../components/dtc/Navbar';
 import React, { useEffect, useState } from "react";
 
 import {

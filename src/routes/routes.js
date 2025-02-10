@@ -146,6 +146,7 @@ import DTCpresentes from '../pages/dtc/libre/asistencia';
 import Dtctalleres from '../pages/dtc/nivel1/talleres';
 import Dtctaller from '../pages/dtc/nivel1/taller';
 import Dtcturnosadmin from '../pages/dtc/nivel1/turnosadmin';
+import Dtcturnosoficios from '../pages/dtc/turnosoficio';
 import Dtcturnopsic from '../pages/dtc/psicologa';
 import Dtcsoleinicio from '../pages/dtc/sole/sole';
 import DTCetapas from '../pages/dtc/cargadeetapas';
@@ -397,6 +398,8 @@ const Rutas = [
 		{ path: '/dtc/visitasocial/personastratamieto', element: <Dtcpersonastratamientods/> },
 		{ path: '/dtc/visitasocial/personatratamieto/:id', element: <Dtcpersonaratamientods/> },
 		{ path: '/dtc/visitasocial/informes', element: <Dtcasisenteinformes/> },
+		{ path: '/dtc/turnos/oficios', element: <Dtcturnosoficios/> },
+		
 		
 		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
 		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },
