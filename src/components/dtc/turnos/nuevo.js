@@ -35,7 +35,9 @@ export default function ExpedienteForm(props) {
     event.preventDefault();
     try {
     const respuesta = await serviciodtc.nuevooficio(form)
-      alert(respuesta);
+    
+    
+      alert(respuesta.mensaje);
     } catch (error) {
       console.error("Error al enviar el formulario", error);
     }
