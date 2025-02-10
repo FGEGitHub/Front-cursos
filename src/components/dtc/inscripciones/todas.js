@@ -231,7 +231,9 @@ const CursoDialog = () => {
                         <Box sx={{ margin: 1 }}>
                           <Typography variant="subtitle1" gutterBottom>
                             Nombres: {row.nombres_kids || ''}
-                            {row.cantidad_kids >11 ? <></>:<>
+
+
+                            {row.cantidad_kids >11 && row.nombre_curso != "FISICO" && row.nombre_curso != "merienda" ? <></>:<>
                             <Agregar id= {row.id_curso}
                             nombre_curso= {row.nombre_curso}
                             dia={row.dia}
