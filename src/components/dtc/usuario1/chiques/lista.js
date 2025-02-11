@@ -299,6 +299,11 @@ Ver                        </Button>
         label: "id",
 
     },
+    {
+      name: "dni",
+      label: "dni",
+
+  },
       {
         
         name: "kid",
