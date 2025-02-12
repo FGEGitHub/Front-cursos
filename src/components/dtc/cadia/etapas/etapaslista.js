@@ -357,6 +357,7 @@ traer={async () => {
                             <TableRow>
                                 <TableCell>Fecha</TableCell>
                                 <TableCell>Título</TableCell>
+                                <TableCell>Etapa</TableCell>
                                 <TableCell>estado(modificaciones soraya)</TableCell>
                                 <TableCell>Proyectar(modificaciones pipo)</TableCell>
                                 <TableCell>Descripción</TableCell>
@@ -368,6 +369,7 @@ traer={async () => {
                                 <TableRow key={index}>
                                     <TableCell>{row.fecha}</TableCell>
                                     <TableCell>{row.titulo}</TableCell>
+                                    <TableCell>{row.etapa}</TableCell>
                                     <TableCell>
   {row.fecha_fin == undefined ? `iniciado - Fecha: ${row.fecha}` : `finalizado - Fecha:${row.fecha} - ${row.fecha_fin}`}
 </TableCell>
