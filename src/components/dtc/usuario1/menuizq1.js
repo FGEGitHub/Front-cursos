@@ -71,79 +71,61 @@ export default function MenuIzq2 ({children}) {
       text: (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           Inscripciones
-          <div
-            style={{
-              backgroundColor: '#ffeb3b',
-              color: '#000',
-              fontWeight: 'bold',
-              borderRadius: '50%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '50px',
-              height: '50px',
-              fontSize: '12px',
-              textAlign: 'center',
-              boxShadow: '0px 0px 5px #ff9800',
-              transform: 'rotate(-10deg)',
-              animation: 'pulsate 1.5s infinite',
-            }}
-          >
-            ¡Cositas nuevas!
-          </div>
+      
+      
         </div>
       ),
       icon: <ArchitectureIcon color="primary" />,
       path: '/dtc/usuario1/inscripciones',
-      tooltip: 'Detalle de asistencias de usuarios',
+    //  tooltip: 'Detalle de asistencias de usuarios',
     },
     {
       text: 'Actividades',
       icon: <GradingTwoToneIcon color="primary" />,
       path: '/dtc/usuario1/menu',
-      tooltip: 'Asistencia y actividades de hoy'
+   //  tooltip: 'Asistencia y actividades de hoy'
     },
     {
       text: 'Personal',
       icon: <PeopleAltTwoToneIcon color="primary" />,
       path: '/dtc/usuario1/usuarios',
-      tooltip: 'Usuarios del sistema '
+     // tooltip: 'Usuarios del sistema '
     },
     {
       text: 'Usuarios',
       icon: <WcTwoToneIcon color="primary" />,
       path: '/dtc/usuario1/chiques',
-      tooltip: 'Lista de usuarios del dispositivo'
+     // tooltip: 'Lista de usuarios del dispositivo'
     },
     {
       text: 'Asistencias sociales',
       icon: <GradingTwoToneIcon color="primary" />,
       path: '/dtc/usuario1/asistenciassoc',
-      tooltip: 'Informes de las trabajadoras sociales'
+   //   tooltip: 'Informes de las trabajadoras sociales'
     },
     {
       text: 'Talleres,clases,asistencia',
       icon: <ArchitectureIcon color="primary" />,
       path: '/dtc/usuario1/talleres',
-      tooltip: 'Clases y asistencia de talleres'
+    //  tooltip: 'Clases y asistencia de talleres'
     },
     {
       text: 'Personas Psiq',
       icon: <ArchitectureIcon color="primary" />,
       path: '/dtc/usuario1/personaspsiq',
-      tooltip: 'Lista de personas con tratamiento'
+    //  tooltip: 'Lista de personas con tratamiento'
     },
     {
       text: 'Turnos psiq',
       icon: <ArchitectureIcon color="primary" />,
       path: '/dtc/usuario1/turnos',
-      tooltip: 'Agenda de turnos'
+     // tooltip: 'Agenda de turnos'
     },
     {
       text: 'Asistencias',
       icon: <ArchitectureIcon color="primary" />,
       path: '/dtc/usuario1/asisencias',
-      tooltip: 'Detalle de asistencias de usuarios'
+      //tooltip: 'Detalle de asistencias de usuarios'
     }
   ];
 
