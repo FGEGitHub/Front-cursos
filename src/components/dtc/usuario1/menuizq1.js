@@ -165,7 +165,7 @@ export default function MenuIzq2 ({children}) {
                   <ListItemText primary={item.text} />
                 </ListItem>
               </Tooltip>
-            ))}
+            ))} 
           </List>
           {cumple ? <>
             {cumple.length > 0 ? <>
