@@ -60,7 +60,7 @@ export default function ExpedienteForm(props) {
           <TextField label="Juzgado" name="juzgado" fullWidth margin="dense" onChange={handleChange} />
           <TextField label="Causa" name="causa" fullWidth margin="dense" onChange={handleChange} />
           <TextField label="Solicitud" name="solicitud" fullWidth margin="dense" onChange={handleChange} />
-          <TextField label="Oficio" name="oficio" fullWidth margin="dense" onChange={handleChange} />
+          <TextField label="A travez de" name="oficio" fullWidth margin="dense" onChange={handleChange} />
           <TextField label="Fecha" name="fecha" type="date" fullWidth margin="dense" InputLabelProps={{ shrink: true }} onChange={handleChange} />
         </DialogContent>
         <DialogActions>

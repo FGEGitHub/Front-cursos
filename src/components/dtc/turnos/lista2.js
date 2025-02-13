@@ -110,23 +110,24 @@ export default function OficiosTable() {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID Oficio</TableCell>
+                        <TableCell>Fecha</TableCell>
+                            <TableCell>A travez de</TableCell>
                             <TableCell>Juzgado</TableCell>
                             <TableCell>Causa</TableCell>
-                            <TableCell>Solicitud</TableCell>
-                            <TableCell>Fecha</TableCell>
-                            <TableCell>Expedientes</TableCell>
                             <TableCell>Acciones</TableCell>
+                            <TableCell>Solicitud</TableCell>
+                       
+                            <TableCell>Expedientes</TableCell>
+                       
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {oficios.map((oficio) => (
                             <TableRow key={oficio.id}>
-                                <TableCell>{oficio.id}</TableCell>
+                                 <TableCell>{oficio.fecha}</TableCell>
+                                <TableCell>{oficio.oficio}</TableCell>
                                 <TableCell>{oficio.juzgado}</TableCell>
                                 <TableCell>{oficio.causa}</TableCell>
-                                <TableCell>{oficio.solicitud}</TableCell>
-                                <TableCell>{oficio.fecha}</TableCell>
                                 <TableCell>
                                     <Accordion>
                                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -176,6 +177,9 @@ export default function OficiosTable() {
                                         Modificar
                                     </Button>
                                 </TableCell>
+                                <TableCell>{oficio.solicitud}</TableCell>
+                               
+                              
                             </TableRow>
                         ))}
                     </TableBody>
