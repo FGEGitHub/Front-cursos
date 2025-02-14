@@ -110,13 +110,7 @@ const FichaPersona = (props) => {
     </Card>
     {chico && (
                 <Fragment>
-                  { usuario ? <>
-                  {usuario.nivel ==20?<>
-
-                    <Borrarusuaio 
-
-                        id ={chico.id}/>
-                    <Modificar 
+                  <Modificar 
     id ={chico.id}
     
     nombre={chico.nombre}
@@ -157,6 +151,13 @@ const FichaPersona = (props) => {
     }}
     
     />
+                  { usuario ? <>
+                  {usuario.nivel ==20?<>
+
+                    <Borrarusuaio 
+
+                        id ={chico.id}/>
+                    
                   </>:<></>}
                   </>:<></>}
                   {/* Agrega más campos adicionales aquí */}

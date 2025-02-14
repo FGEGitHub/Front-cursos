@@ -372,7 +372,7 @@ Ver                        </Button>
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido} {row.nombre}</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row">  <AccountBoxIcon onClick={() => navigate('/dtc/usuario1/personapsiq/' + row.id)} /> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row">  <AccountBoxIcon onClick={() => navigate('/dtc/psicologa/usuario/' + row.id)} /> </StyledTableCell>
 
 
 
