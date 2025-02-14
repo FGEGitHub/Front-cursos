@@ -18,6 +18,7 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Alert from '@mui/material/Alert';
+import Modalimprimir from './modalimprimir'
 import {
 
     makeStyles,
@@ -534,6 +535,13 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                           }
                                                         
                                                         }} />
+                                                      
+                                                       { row.estado == 'Agendado' ? <>   <Modalimprimir nombrepsic={row.nombrepsiq}
+                                                       fecha={row.fecha}
+                                                       detalle={row.detalle}
+
+
+                                                       /></>:<></>}
                                                           </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.presente == null ? <>Sin tomar</> :row.presente} </b> </StyledTableCell>
