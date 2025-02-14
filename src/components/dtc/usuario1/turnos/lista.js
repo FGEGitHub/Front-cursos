@@ -504,7 +504,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido ?<>{row.apellido}  {row.nombre}</>: <>Disponible</> }</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.fecha} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.fecha} a las {row.detalle}  </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>
                                                         <Asignar id={row.id}
                                                          chicos={datos} 
