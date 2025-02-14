@@ -437,21 +437,32 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
 }
 }/>
 {form ? <><Nuevo fecha={form.fecha}
- traer={async (fecha) => {
-  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-  const user = JSON.parse(loggedUserJSON);
-  setUsuario(user);
-  if(user.nivel==40 || user.nivel==41 ){
-    const historial = await servicioDtc.traertodoslosturnosfechacadia(form.fecha);
-    setDatos(historial);
-    setFecha(fecha);
-  }else{
-    const historial = await servicioDtc.traertodoslosturnosfecha({fecha:form.fecha});
-  setDatos(historial);
-  setFecha(fecha);
-  }
-
-}}/></>:<></>}
+  traer={ async (fecha) => {
+    try {
+      console.log(fecha)
+   
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+        if (loggedUserJSON) {
+            const usuario = JSON.parse(loggedUserJSON)
+  
+            setUsuario(usuario)
+  
+            if(usuario.nivel==41){
+              const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
+              setchicos(novedades_aux[0])
+              setDatos(novedades_aux[1])
+            }else{
+              const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+              setchicos(novedades_aux[0])
+              setDatos(novedades_aux[1])
+            }
+        }
+  
+    } catch (error) {
+  
+    }
+  
+  }}/></>:<></>}
 
 
 
@@ -500,34 +511,29 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                          traer={ async (fecha) => {
                                                           try {
                                                             console.log(fecha)
-                                                            setForm(fecha)
+                                                         
                                                               const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
                                                               if (loggedUserJSON) {
                                                                   const usuario = JSON.parse(loggedUserJSON)
-                                                      
+                                                        
                                                                   setUsuario(usuario)
-                                                      
-                                                                  if(usuario.nivel==40 || usuario.nivel==41 ){
-                                                      
-                                                                    const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+                                                        
+                                                                  if(usuario.nivel==41){
+                                                                    const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
                                                                     setchicos(novedades_aux[0])
                                                                     setDatos(novedades_aux[1])
-                                                      
-                                                          
-                                                      
                                                                   }else{
-                                                                    const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+                                                                    const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                                                                     setchicos(novedades_aux[0])
                                                                     setDatos(novedades_aux[1])
                                                                   }
                                                               }
-                                                      
+                                                        
                                                           } catch (error) {
-                                                      
+                                                        
                                                           }
-                                                      
-                                                      }
-                                                      } />
+                                                        
+                                                        }} />
                                                           </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.presente == null ? <>Sin tomar</> :row.presente} </b> </StyledTableCell>
