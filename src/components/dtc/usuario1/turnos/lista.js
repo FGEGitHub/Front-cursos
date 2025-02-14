@@ -1,5 +1,5 @@
 import servicioDtc from '../../../../services/dtc'
-
+import Asignar from '../../turnos/asignar';
 import ModaNueva from './nuevoturno'
 import React, { useEffect, useState, Fragment } from "react";
 import Clasificar from'./clasific'
@@ -78,6 +78,7 @@ const TablaNotificaciones = (props) => {
     const [usuario, setUsuario] = useState([''])
     const [datos, setDatos] = useState()
     const [form, setForm] = useState()
+     const [fecha, setFecha] = useState();
     const navigate = useNavigate();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     const classes = useStyles();
@@ -286,7 +287,28 @@ const TablaNotificaciones = (props) => {
         </>
     );
 }
+function customaagendar(dataIndex, rowIndex, data, onClick) {
+  return (
+      <>
 
+<Asignar id={datos[dataIndex].id} chicos={datos} traer={async () => {
+                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                const user = JSON.parse(loggedUserJSON);
+                setUsuario(user);
+                if(user.nivel==40 || user.nivel==41 ){
+                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha);
+                  setDatos(historial);
+                  setFecha(fecha);
+                }else{
+                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha);
+                setDatos(historial);
+                setFecha(fecha);
+                }
+              
+              }} />
+      </>
+  );
+}
     // definimos las columnas
     const columns = [
       
@@ -328,6 +350,19 @@ const TablaNotificaciones = (props) => {
         label: "Horario",
 
     },
+      {
+      name: "agendar",
+      options: {
+          customBodyRenderLite: (dataIndex, rowIndex) =>
+            customaagendar(
+                  dataIndex,
+                  rowIndex,
+                  // overbookingData,
+                  // handleEditOpen
+              )
+      }
+  
+  },
     
         {
           name: "estado",
@@ -402,40 +437,18 @@ const TablaNotificaciones = (props) => {
 }
 }/>
 {form ? <><Nuevo fecha={form.fecha}
- traer={ async (fecha) => {
-  try {
-   
- 
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-      if (loggedUserJSON) {
-          const usuario = JSON.parse(loggedUserJSON)
-
-          setUsuario(usuario)
-          if(usuario.nivel==40 || usuario.nivel==41 ){
-
-            if(usuario.nivel==40  ){
-              const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({form})
-              setchicos(novedades_aux[0])
-              setDatos(novedades_aux[1])
-              
-            }else{
-              const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
-              setchicos(novedades_aux[0])
-              setDatos(novedades_aux[1])
-            }
-
-  
-
-          }else{
-            const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
-            setchicos(novedades_aux[0])
-            setDatos(novedades_aux[1])
-          }
-        
-      }
-
-  } catch (error) {
-
+ traer={async (fecha) => {
+  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+  const user = JSON.parse(loggedUserJSON);
+  setUsuario(user);
+  if(user.nivel==40 || user.nivel==41 ){
+    const historial = await servicioDtc.traertodoslosturnosfechacadia(form.fecha);
+    setDatos(historial);
+    setFecha(fecha);
+  }else{
+    const historial = await servicioDtc.traertodoslosturnosfecha({fecha:form.fecha});
+  setDatos(historial);
+  setFecha(fecha);
   }
 
 }}/></>:<></>}
@@ -461,6 +474,7 @@ const TablaNotificaciones = (props) => {
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Dni</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Fecha</b></TableCell>
+                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Agendar</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Estado</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Asistencia</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Psicologo/a</b></TableCell>
@@ -478,6 +492,41 @@ const TablaNotificaciones = (props) => {
                                                         <StyledTableCell component="th" scope="row">{row.apellido ?<>{row.apellido}  {row.nombre}</>: <>Disponible</> }</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.fecha} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>
+                                                        <Asignar id={row.id}
+                                                         chicos={datos} 
+                                                         traer={ async (fecha) => {
+                                                          try {
+                                                            console.log(fecha)
+                                                            setForm(fecha)
+                                                              const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+                                                              if (loggedUserJSON) {
+                                                                  const usuario = JSON.parse(loggedUserJSON)
+                                                      
+                                                                  setUsuario(usuario)
+                                                      
+                                                                  if(usuario.nivel==40 || usuario.nivel==41 ){
+                                                      
+                                                                    const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
+                                                                    setchicos(novedades_aux[0])
+                                                                    setDatos(novedades_aux[1])
+                                                      
+                                                          
+                                                      
+                                                                  }else{
+                                                                    const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+                                                                    setchicos(novedades_aux[0])
+                                                                    setDatos(novedades_aux[1])
+                                                                  }
+                                                              }
+                                                      
+                                                          } catch (error) {
+                                                      
+                                                          }
+                                                      
+                                                      }
+                                                      } />
+                                                          </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.presente == null ? <>Sin tomar</> :row.presente} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.nombrepsiq} </b> </StyledTableCell>
