@@ -48,6 +48,7 @@ const TablaNotificaciones = (props) => {
                    
                 }else{
                     const novedades_aux = await servicioDtc.traercitas(usuario.id);
+                    console.log(novedades_aux)
                     setChicos(novedades_aux[0]);
                     setDatos(novedades_aux[1]);
     

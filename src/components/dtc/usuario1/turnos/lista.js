@@ -487,7 +487,9 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
 
 
 
-                                                {chicos.map((row) => (
+                                                {chicos.map((row) => (<>
+                                                   {row.id_psico==usuario.id ? <>
+
                                                     <StyledTableRow key={row.name}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido ?<>{row.apellido}  {row.nombre}</>: <>Disponible</> }</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
@@ -591,7 +593,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
 
 
                                                     </StyledTableRow>
-                                                ))}
+                                                    </>:<></>}    </>  ))}
 
 
 
