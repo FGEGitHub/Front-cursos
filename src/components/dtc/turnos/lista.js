@@ -14,6 +14,7 @@ import Skeleton from '@mui/material/Skeleton';
 import logo from "../../../Assets/logomuni.png";
 import Nuevo from "../usuario1/turnos/nuevoturno"
 import MUIDataTable from "mui-datatables";
+import Modalimprimir from '../usuario1/turnos/modalimprimir'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -210,6 +211,12 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                 }
               
               }} />
+               { datos[0][dataIndex].estado == 'Agendado' ? <>   <Modalimprimir nombrepsic={datos[0][dataIndex].nombrepsiq}
+                                                       fecha={datos[0][dataIndex].fecha}
+                                                       detalle={datos[0][dataIndex].detalle}
+
+
+                                                       /></>:<></>}
       </>
   );
 }

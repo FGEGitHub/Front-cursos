@@ -5,6 +5,22 @@ import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
 import logo from "../../../../Assets/dtcletra.png";
 
+
+
+const convertImageToBase64 = async (url) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
+
+
+
 const ModalConstanciaTurno = ({ nombrepsic, detalle, fecha }) => {
   const [isOpen, setIsOpen] = useState(false);
   const printRef = useRef(null);
@@ -16,8 +32,9 @@ const ModalConstanciaTurno = ({ nombrepsic, detalle, fecha }) => {
   const handleClose = () => {
     setIsOpen(false);
   };
-
-  const handlePrint = () => {
+   
+  const handlePrint = async () => {
+    const logoBase64 =  await convertImageToBase64(logo);
     if (printRef.current) {
       const printWindow = window.open("", "_blank");
       printWindow.document.write(`
@@ -36,7 +53,8 @@ const ModalConstanciaTurno = ({ nombrepsic, detalle, fecha }) => {
           </head>
           <body>
             <div class="container">
-              <img src="${logo}" alt="Logo" />
+              <img src="${logoBase64}" alt="Logo" />
+         
               <h2>Turno de ${nombrepsic}</h2>
               <p>Constancia del día ${fecha} a las ${detalle}</p>
             </div>

@@ -307,6 +307,12 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                 }
               
               }} />
+               { datos[dataIndex].estado == 'Agendado' ? <>   <Modalimprimir nombrepsic={datos[dataIndex].nombrepsiq}
+                                                       fecha={datos[dataIndex].fecha}
+                                                       detalle={datos[dataIndex].detalle}
+
+
+                                                       /></>:<></>}
       </>
   );
 }
