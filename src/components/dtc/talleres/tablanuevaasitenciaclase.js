@@ -32,6 +32,7 @@ const ClassDataTable = () => {
 
       try {
         const response = await serviciodtc.traerdatosdeclasehorausuario(requestData);
+        console.log(response)
         if (Array.isArray(response)) {
           setTableData(response[0] || []);
           setClassDetails(response[1] || []);
