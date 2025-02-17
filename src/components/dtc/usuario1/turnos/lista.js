@@ -193,6 +193,7 @@ const TablaNotificaciones = (props) => {
                   setchicos(novedades_aux[0])
                   setDatos(novedades_aux[1])
                 }
+                
             }
 
         } catch (error) {
@@ -292,22 +293,34 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
   return (
       <>
 
-<Asignar id={datos[dataIndex].id} chicos={datos} traer={async () => {
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                const user = JSON.parse(loggedUserJSON);
-                setUsuario(user);
-                if(user.nivel==40 || user.nivel==41 ){
-                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha);
-                  setDatos(historial);
-                  setFecha(fecha);
-                }else{
-                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha);
-                setDatos(historial);
-                setFecha(fecha);
-                }
-              
-              }} />
-               { datos[dataIndex].estado == 'Agendado' ? <>   <Modalimprimir nombrepsic={datos[dataIndex].nombrepsiq}
+<Asignar id={chicos[dataIndex].id} chicos={datos} 
+ traer={ async (fecha) => {
+  try {
+    console.log(fecha)
+ 
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON)
+
+          setUsuario(usuario)
+
+          if(usuario.nivel==41){
+            const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
+            setchicos(novedades_aux[0])
+            setDatos(novedades_aux[1])
+          }else{
+            const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
+            setchicos(novedades_aux[0])
+            setDatos(novedades_aux[1])
+          }
+      }
+
+  } catch (error) {
+
+  }
+
+}} />
+               { chicos[dataIndex].estado == 'Agendado' ? <>   <Modalimprimir nombrepsic={datos[dataIndex].nombrepsiq}
                                                        fecha={datos[dataIndex].fecha}
                                                        detalle={datos[dataIndex].detalle}
 
@@ -319,6 +332,11 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
     // definimos las columnas
     const columns = [
       
+      {
+        name: "nombrepsiq",
+        label: "Psicologo",
+
+    },
       {
         name: "Dni",
         options: {
@@ -508,7 +526,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                 {chicos.map((row) => (<>
                                                    {row.id_psico==usuario.id ? <>
 
-                                                    <StyledTableRow key={row.name}>
+                                                    <StyledTableRow key={row.name}   sx={{ backgroundColor: row.id_psico == usuario?.id ? "lightblue" : "inherit"}}>
                                                         <StyledTableCell component="th" scope="row">{row.apellido ?<>{row.apellido}  {row.nombre}</>: <>Disponible</> }</StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.fecha} a las {row.detalle}  </b> </StyledTableCell>
