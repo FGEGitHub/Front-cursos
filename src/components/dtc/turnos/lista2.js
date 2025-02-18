@@ -176,7 +176,7 @@ export default function OficiosTable() {
                                     </Accordion>
                                 </TableCell>
                                 <TableCell>
-                                  {oficio.solicitud}
+                                  {oficio.solicitud} 
                                 </TableCell>
                                 <TableCell>{oficio.expediente}</TableCell>
                                
