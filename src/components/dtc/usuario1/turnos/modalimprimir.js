@@ -14,7 +14,7 @@ const convertImageToBase64 = async (url) => {
     reader.onerror = reject;
     reader.readAsDataURL(blob);
   });
-};
+}; 
 
 const ModalConstanciaTurno = ({ nombrepersona, nombrepsic, fecha, hora }) => {
   const [isOpen, setIsOpen] = useState(false);
