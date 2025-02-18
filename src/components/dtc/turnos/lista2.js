@@ -129,6 +129,9 @@ export default function OficiosTable() {
                                 <TableCell>{oficio.juzgado}</TableCell>
                                 <TableCell>{oficio.causa}</TableCell>
                                 <TableCell>
+                                <Button variant="contained" color="secondary" onClick={() => handleOpenModal(oficio)}>
+                                        Modificar
+                                    </Button>
                                     <Accordion>
                                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                                             <Typography>Ver Expedientes</Typography>
@@ -173,11 +176,9 @@ export default function OficiosTable() {
                                     </Accordion>
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant="contained" color="secondary" onClick={() => handleOpenModal(oficio)}>
-                                        Modificar
-                                    </Button>
+                                  {oficio.solicitud}
                                 </TableCell>
-                                <TableCell>{oficio.solicitud}</TableCell>
+                                <TableCell>{oficio.expediente}</TableCell>
                                
                               
                             </TableRow>
