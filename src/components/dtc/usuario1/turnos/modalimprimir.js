@@ -77,9 +77,9 @@ const ModalConstanciaTurno = ({ nombrepersona, nombrepsic, fecha, detalle }) => 
     </style>
   </head>
   <body>
-    <img src="${logoBase64}" alt="Logo" />
+  
     <div class="container">
-      <img src="${logoBase64}" alt="Logo" />
+     
       <h2>CONSTANCIA DE TURNO</h2>
       <p>Se deja constancia de que el/la Sr./Sra. <strong>${nombrepersona}</strong> 
       tiene turno con el/la Lic. <strong>${nombrepsic}</strong> el día <strong>${fecha}</strong> 
