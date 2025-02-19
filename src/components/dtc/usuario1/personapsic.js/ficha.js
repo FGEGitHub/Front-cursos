@@ -5,13 +5,13 @@ import servicioDtc from '../../../../services/dtc'
 import Modificar from './modificar'
 import imagen from "../../../../Assets/fondopsiq.avif"
 import Borrarusuaio from "./modalborrarusuario"
-import Avatar from "@mui/material/Avatar";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = (props) => {
     let params = useParams()
     let id = params.id
     const [chico, setchico] = useState()
-    const [nivel, setNivel] = useState()
+    const [turnos, setTurnos] = useState()
     const [usuario, setUsuario] = useState()
     const [showAllData, setShowAllData] = useState(false);
     const [foto, setfoto] = useState()
@@ -36,6 +36,7 @@ const FichaPersona = (props) => {
                 const novedades_aux = await servicioDtc.datosdepersonapsi(id == undefined ? props.id : id)
                 setfoto(novedades_aux[1])
                 setchico(novedades_aux[0][0])
+                setTurnos(novedades_aux[1])
             }
 
         } catch (error) {
@@ -165,6 +166,32 @@ const FichaPersona = (props) => {
               )}
     
     </>:<>Cargando</>}
+    {turnos && 
+    
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Fecha</TableCell>
+            <TableCell>Estado</TableCell>
+            <TableCell>Presente</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {turnos.map((ob, index) => (
+            <TableRow key={index}>
+              <TableCell>{ob.fecha}- {ob.detalle}</TableCell>
+              <TableCell>{ob.estado}</TableCell>
+              <TableCell>{ob.presente}</TableCell>
+             
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    
+    
+    }
     </>
   );
 };
