@@ -112,12 +112,12 @@ export default function OficiosTable() {
                         <TableRow>
                         <TableCell>Fecha</TableCell>
                             <TableCell>A travez de</TableCell>
-                            <TableCell>Juzgado</TableCell>
+                            <TableCell>Juzgado-expte</TableCell>
                             <TableCell>Causa</TableCell>
                             <TableCell>Acciones</TableCell>
                             <TableCell>Solicitud</TableCell>
                        
-                            <TableCell>Expedientes</TableCell>
+                     
                        
                         </TableRow>
                     </TableHead>
@@ -126,7 +126,7 @@ export default function OficiosTable() {
                             <TableRow key={oficio.id}>
                                  <TableCell>{oficio.fecha}</TableCell>
                                 <TableCell>{oficio.oficio}</TableCell>
-                                <TableCell>{oficio.juzgado}</TableCell>
+                                <TableCell>{oficio.juzgado}-{oficio.expediente}</TableCell>
                                 <TableCell>{oficio.causa}</TableCell>
                                 <TableCell>
                                 <Button variant="contained" color="secondary" onClick={() => handleOpenModal(oficio)}>
@@ -178,7 +178,7 @@ export default function OficiosTable() {
                                 <TableCell>
                                   {oficio.solicitud} 
                                 </TableCell>
-                                <TableCell>{oficio.expediente}</TableCell>
+                                
                                
                               
                             </TableRow>
