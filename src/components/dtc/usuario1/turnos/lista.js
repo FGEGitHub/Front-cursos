@@ -20,7 +20,7 @@ import TableRow from '@mui/material/TableRow';
 import Alert from '@mui/material/Alert';
 import Modalimprimir from './modalimprimir'
 import {
-
+  Button,
     makeStyles,
     useMediaQuery,
     useTheme,
@@ -79,7 +79,7 @@ const TablaNotificaciones = (props) => {
     const [usuario, setUsuario] = useState([''])
     const [datos, setDatos] = useState()
     const [datosproximos, setDatosproximos] = useState()
-    
+     const [verproximos, setVerproximos] = useState(false);
     const [form, setForm] = useState()
      const [fecha, setFecha] = useState();
     const navigate = useNavigate();
@@ -463,33 +463,37 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
           }}
   >
 
+<Button variant="contained" color="primary" onClick={() => setVerproximos(!verproximos)}>
+        {verproximos ? "Ocultar" : "Ver próximos"}
+      </Button>
 
-{datosproximos && 
-   <>Proximos turnos:
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Fecha</TableCell>
-            <TableCell>Estado</TableCell>
-            <TableCell>Paciente</TableCell>
-          </TableRow> 
-        </TableHead>
-        <TableBody>
-          {datosproximos.map((ob, index) => (
-            <TableRow key={index}>
-              <TableCell>{ob.fecha}- {ob.detalle}</TableCell>
-              <TableCell>{ob.estado}</TableCell>
-              <TableCell>{ob.nombre} {ob.apellido}</TableCell>
-             
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </> 
-    
-    }
+      {verproximos && datosproximos && (
+        <>
+          <h3>Próximos turnos:</h3>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Fecha</TableCell>
+                  <TableCell>Estado</TableCell>
+                  <TableCell>Paciente</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {datosproximos.map((ob, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{ob.fecha} - {ob.detalle}</TableCell>
+                    <TableCell>{ob.estado}</TableCell>
+                    <TableCell>{ob.nombre} {ob.apellido}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </>
+      )}
+
+
    <Tarjetabuscar
    traer={ async (fecha) => {
     try {

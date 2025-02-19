@@ -25,6 +25,7 @@ import Nuevo from "./nuevo"
 
 export default function OficiosTable() {
     const [oficios, setOficios] = useState([]);
+   
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedOficio, setSelectedOficio] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
