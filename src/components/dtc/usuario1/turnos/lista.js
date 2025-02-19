@@ -473,7 +473,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
             <TableCell>Fecha</TableCell>
             <TableCell>Estado</TableCell>
             <TableCell>Paciente</TableCell>
-          </TableRow>
+          </TableRow> 
         </TableHead>
         <TableBody>
           {datosproximos.map((ob, index) => (
