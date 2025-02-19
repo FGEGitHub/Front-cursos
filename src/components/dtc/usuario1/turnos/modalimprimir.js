@@ -4,19 +4,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
 import logo from "../../../../Assets/dtcletra.png";
-
 const convertImageToBase64 = async (url) => {
   const response = await fetch(url);
   const blob = await response.blob();
-  const logoURL = "/Assets/dtcletra.png";
-  const logoSrc = logoURL; 
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onloadend = () => resolve(reader.result);
     reader.onerror = reject;
     reader.readAsDataURL(blob);
   });
-}; 
+};
+
 
 const ModalConstanciaTurno = ({ nombrepersona, nombrepsic, fecha, detalle }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +77,7 @@ const ModalConstanciaTurno = ({ nombrepersona, nombrepsic, fecha, detalle }) => 
   <body>
   
     <div class="container">
-      
+        <img src="${logoBase64}" alt="Logo 1" />
       <h2>CONSTANCIA DE TURNO</h2>
       <p>Se deja constancia de que el/la Sr./Sra. <strong>${nombrepersona}</strong> 
       tiene turno con el/la Lic. <strong>${nombrepsic}</strong> el día <strong>${fecha}</strong> 

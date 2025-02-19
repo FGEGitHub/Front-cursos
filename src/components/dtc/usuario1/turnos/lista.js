@@ -24,7 +24,7 @@ import {
     makeStyles,
     useMediaQuery,
     useTheme,
-    Button
+    Paper
 } from '@material-ui/core';
 import Borrar from './borrar'
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
@@ -78,6 +78,8 @@ const TablaNotificaciones = (props) => {
     const [chicos, setchicos] = useState()
     const [usuario, setUsuario] = useState([''])
     const [datos, setDatos] = useState()
+    const [datosproximos, setDatosproximos] = useState()
+    
     const [form, setForm] = useState()
      const [fecha, setFecha] = useState();
     const navigate = useNavigate();
@@ -92,6 +94,35 @@ const TablaNotificaciones = (props) => {
 
 
     }, []) */
+    useEffect(() => {
+      traerproximosturnos()
+
+
+
+  }, []) 
+    const traerproximosturnos = async () => {
+      try {
+   
+          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+          if (loggedUserJSON) {
+              const usuario = JSON.parse(loggedUserJSON)
+
+              setUsuario(usuario)
+              if(usuario.nivel==41){
+              console.log('cadia')
+              }else{
+                const novedades_aux = await servicioDtc.traerproximosturnos(usuario.id)
+                console.log(novedades_aux)
+                setDatosproximos(novedades_aux)
+              }
+              
+          }
+
+      } catch (error) {
+
+      }
+
+  }
 
     
     const options = {
@@ -431,6 +462,34 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
         
           }}
   >
+
+
+{datosproximos && 
+   <>Proximos turnos:
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Fecha</TableCell>
+            <TableCell>Estado</TableCell>
+            <TableCell>Paciente</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {datosproximos.map((ob, index) => (
+            <TableRow key={index}>
+              <TableCell>{ob.fecha}- {ob.detalle}</TableCell>
+              <TableCell>{ob.estado}</TableCell>
+              <TableCell>{ob.nombre} {ob.apellido}</TableCell>
+             
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </> 
+    
+    }
    <Tarjetabuscar
    traer={ async (fecha) => {
     try {
