@@ -365,15 +365,34 @@ traer={async () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {chicos.map((row, index) => (
+                         {chicos.map((row, index) => (
                                 <TableRow key={index}>
                                     <TableCell>{row.fecha}</TableCell>
                                     <TableCell>{row.titulo}</TableCell>
-                                    <TableCell>{row.etapa}</TableCell>
-                                    <TableCell>
-  {row.fecha_fin == undefined ? `iniciado - Fecha: ${row.fecha}` : `finalizado - Fecha:${row.fecha} - ${row.fecha_fin}`}
+                                    <TableCell>{row.proyecto}{row.etapa}</TableCell>
+                                    <TableCell
+  sx={{
+    color: row.fecha_fin ? "lightgreen" : "yellow",
+  }}
+>
+  <b> {row.fecha_fin === null
+    ? `Iniciado - Fecha: ${row.fecha}`
+    : `Finalizado - Fecha: ${row.fecha} - ${row.fecha_fin}`}</b>  
 </TableCell>
-                                    <TableCell>{row.proyectar}</TableCell>
+<TableCell
+  sx={{
+    backgroundColor:
+      row.proyectar === "Sin cargar en proyectar"
+        ? "red"
+        : row.proyectar === "Cerrado cargado en el proyectar"
+        ? "lightgreen"
+        : "yellow",
+    color: "white", // Para que el texto sea más legible en rojo
+  }}
+>
+  {row.proyectar}
+</TableCell>
+
                                     <TableCell>{row.descripcion}</TableCell>
                                     <TableCell>
                                     <Actualizar
