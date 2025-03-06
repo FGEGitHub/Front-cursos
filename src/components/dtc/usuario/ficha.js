@@ -19,6 +19,22 @@ const FichaPersona = (props) => {
   const [showAllData, setShowAllData] = useState(false);
   const [foto, setfoto] = useState()
   // La función para alternar entre "Ver más" y "Ver menos"
+  const [orden, setOrden] = useState({ columna: null, asc: true });
+
+  const ordenarPor = (columna) => {
+    const esAsc = orden.columna === columna ? !orden.asc : true;
+    setOrden({ columna, asc: esAsc });
+  };
+
+  const ordenarDatos = (a, b) => {
+    if (!orden.columna) return 0;
+    const valorA = a[orden.columna];
+    const valorB = b[orden.columna];
+    if (valorA < valorB) return orden.asc ? -1 : 1;
+    if (valorA > valorB) return orden.asc ? 1 : -1;
+    return 0;
+  };
+
   const toggleShowAllData = () => {
     setShowAllData(!showAllData);
   };
@@ -283,31 +299,28 @@ traer()
       {horario ? (
   <>
     {horario.length > 0 ? (
-      <table>
-        <thead>
-          <tr>
-            <th>Taller</th>
-    
- 
-            <th>dia </th>
-            <th>hora</th>
-          </tr>
-        </thead>
-        <tbody>
-          {horario.map((ob, index) => (
-            <tr key={index}>
+     <table>
+     <thead>
+       <tr>
+         <th onClick={() => ordenarPor('taller')}>Taller</th>
+         <th onClick={() => ordenarPor('dia')}>Día</th>
+         <th onClick={() => ordenarPor('hora')}>Hora</th>
+         <th>Acción</th>
+       </tr>
+     </thead>
+     <tbody>
+       {horario.sort(ordenarDatos).map((ob, index) => (
+         <tr key={index}>
               <td>{ob.mail}</td>
-            
-              <td>{ob.dia}</td>
-              <td>{ob.hora}</td>
-              <td>
-            <button onClick={() => eliminarHorario(ob.id)}>Eliminar horario</button>
-          </td>
-            
-            </tr>
-          ))}
-        </tbody>
-      </table>
+           <td>{ob.dia}</td>
+           <td>{ob.hora}</td>
+           <td>
+             <button onClick={() => eliminarHorario(ob.id)}>Eliminar</button>
+           </td>
+         </tr>
+       ))}
+     </tbody>
+   </table>
     ) : (
       <><h1>No esta inscripto a talleres</h1></>
     )}

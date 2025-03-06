@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState, useEffect } from "react";
 import servicioDtc from '../../../services/dtc';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel } from '@mui/material';
 
 export default function Clasenueva(props) {
     let params = useParams();
@@ -15,6 +15,8 @@ export default function Clasenueva(props) {
     const [info, setInfo] = useState();
     const [open, setOpen] = useState(false);
     const [cursado, setCursado] = useState(null);
+    const [orderBy, setOrderBy] = useState("mail");
+    const [order, setOrder] = useState("asc");
 
     const traer = async () => {
         try {
@@ -32,18 +34,32 @@ export default function Clasenueva(props) {
 
     const handleClose = () => {
         setOpen(false);
-        setCursado(null); // Limpiar al cerrar el modal
+        setCursado(null);
     };
 
     const verDetalles = async (idChico) => {
         try {
             const rts = await servicioDtc.datosdechique(idChico);
-          
-            setCursado(rts[3]); // Suponiendo que la info está en la posición 3
+            setCursado(rts[3]);
         } catch (error) {
             console.error("Error al obtener detalles:", error);
         }
     };
+
+    const handleSort = (property) => {
+        const isAsc = orderBy === property && order === "asc";
+        setOrder(isAsc ? "desc" : "asc");
+        setOrderBy(property);
+    };
+
+    const sortedCursado = React.useMemo(() => {
+        if (!cursado) return [];
+        return [...cursado].sort((a, b) => {
+            if (a[orderBy] < b[orderBy]) return order === "asc" ? -1 : 1;
+            if (a[orderBy] > b[orderBy]) return order === "asc" ? 1 : -1;
+            return 0;
+        });
+    }, [cursado, orderBy, order]);
 
     return (
         <div>
@@ -75,37 +91,44 @@ export default function Clasenueva(props) {
                                         <Table>
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell><b>Mail</b></TableCell>
-                                                    <TableCell><b>Día</b></TableCell>
-                                                    <TableCell><b>Hora</b></TableCell>
+                                                    {["mail", "dia", "hora"].map((col) => (
+                                                        <TableCell key={col}>
+                                                            <TableSortLabel
+                                                                active={orderBy === col}
+                                                                direction={orderBy === col ? order : "asc"}
+                                                                onClick={() => handleSort(col)}
+                                                            >
+                                                                <b>{col.charAt(0).toUpperCase() + col.slice(1)}</b>
+                                                            </TableSortLabel>
+                                                        </TableCell>
+                                                    ))}
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-    {cursado.map((item, idx) => {
-        let mailText = item.mail;
-        if (item.mail == "FISICO") {
-            let actividad = "";
-            if (item.hora == "14:30") actividad = "gimnasio";
-            else if (["lunes", "miércoles", "viernes"].includes(item.dia) && item.hora == "15:30") actividad = "Fútbol Masculino";
-            else if (["lunes", "miércoles", "viernes"].includes(item.dia) && item.hora == "16:30") actividad = "Fútbol Femenino";
-            else if (item.dia == "martes" && item.hora == "15:30") actividad = "Vóley Femenino";
-            else if (item.dia == "martes" && item.hora == "16:30") actividad = "Vóley Masculino";
-            else if (item.dia == "jueves" && item.hora == "15:30") actividad = "Basket Femenino";
-            else if (item.dia == "jueves" && item.hora == "16:30") actividad = "Basket Masculino";
+                                                {sortedCursado.map((item, idx) => {
+                                                    let mailText = item.mail;
+                                                    if (item.mail === "FISICO") {
+                                                        let actividad = "";
+                                                        if (item.hora === "14:30") actividad = "gimnasio";
+                                                        else if (["lunes", "miércoles", "viernes"].includes(item.dia) && item.hora === "15:30") actividad = "Fútbol Masculino";
+                                                        else if (["lunes", "miércoles", "viernes"].includes(item.dia) && item.hora === "16:30") actividad = "Fútbol Femenino";
+                                                        else if (item.dia === "martes" && item.hora === "15:30") actividad = "Vóley Femenino";
+                                                        else if (item.dia === "martes" && item.hora === "16:30") actividad = "Vóley Masculino";
+                                                        else if (item.dia === "jueves" && item.hora === "15:30") actividad = "Basket Femenino";
+                                                        else if (item.dia === "jueves" && item.hora === "16:30") actividad = "Basket Masculino";
 
-            mailText += actividad ? ` - ${actividad}` : "";
-        }
+                                                        mailText += actividad ? ` - ${actividad}` : "";
+                                                    }
 
-        return (
-            <TableRow key={idx}>
-                <TableCell>{mailText}</TableCell>
-                <TableCell>{item.dia}</TableCell>
-                <TableCell>{item.hora}</TableCell>
-            </TableRow>
-        );
-    })}
-</TableBody>
-
+                                                    return (
+                                                        <TableRow key={idx}>
+                                                            <TableCell>{mailText}</TableCell>
+                                                            <TableCell>{item.dia}</TableCell>
+                                                            <TableCell>{item.hora}</TableCell>
+                                                        </TableRow>
+                                                    );
+                                                })}
+                                            </TableBody>
                                         </Table>
                                     </TableContainer>
                                 </>
