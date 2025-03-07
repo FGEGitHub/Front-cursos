@@ -52,7 +52,9 @@ const traer = async () => {
 
 
           const today = new Date();
-          const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+          const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+          
+          console.log(formattedDate);
 
           setCurrentDate(formattedDate);
           const historial = await servicioDtc.traertodaslasactividades({fecha:formattedDate})
