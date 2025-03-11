@@ -184,6 +184,7 @@ import Dtcpersonaratamientods from '../pages/dtc/visitasoc/personatratamiento';
 import Dtcasisenteinformes from '../pages/dtc/visitasoc/informestrat';
 import DTCcocinpacientes from '../pages/dtc/cocinapacientes';
 import DTCcocinaraciones from '../pages/dtc/cocinaraciones';
+import DTCInscripcionesvisita from '../pages/dtc/visitasoc/inscripciones'
 
 
 import DTCAlumnosdelcurso from '../pages/dtc/alumnosdeltaller';
@@ -399,7 +400,7 @@ const Rutas = [
 		{ path: '/dtc/visitasocial/personatratamieto/:id', element: <Dtcpersonaratamientods/> },
 		{ path: '/dtc/visitasocial/informes', element: <Dtcasisenteinformes/> },
 		{ path: '/dtc/turnos/oficios', element: <Dtcturnosoficios/> },
-		
+		{ path: '/dtc/visitasocial/inscripciones', element: <DTCInscripcionesvisita/> },
 		
 		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
 		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },

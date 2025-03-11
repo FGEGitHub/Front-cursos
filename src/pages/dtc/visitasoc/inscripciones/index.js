@@ -1,15 +1,12 @@
 
 
 
-
-import Menuizq from '../../../../components/dtc/usuario1/menuizq1'
-import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
-
+import Asis from '../../../../components/dtc/inscripciones/todas'
 import { useNavigate, useParams } from "react-router-dom";
-import Login from '../../../../Assets/mantenimiento2.jpeg'
-import Menu from '../../../../components/dtc/usuario1/menu/componente1'
-//import Estadis from '../../../../components/dtc/usuario1/menu/estadistivcas'
 import React, { useEffect, useState } from "react";
+import MenuuCel from '../../../../components/dtc/Navbar'
+import Menuizq from '../../../../components/dtc/visitasocial/menuizq'
+import Mantenimiento from '../../../../Assets/mantenimiento2.jpeg';
 import {
 
   makeStyles,
@@ -30,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Paginas() {
   const navigate = useNavigate();
-   const classes = useStyles();
-    const [loginVisible, setLoginvisible] = useState(false)
     const theme = useTheme();
+    const classes = useStyles();
+    const [loginVisible, setLoginvisible] = useState(false)
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     useEffect(() => {
       
@@ -42,8 +39,10 @@ export default function Paginas() {
           const user = JSON.parse(loggedUserJSON)
           console.log(user)
           switch (user.nivel) {
-            case 20:
+            case 21:
              break;
+             case 28:
+              break;
            //   navigate('/')
            
            
@@ -61,23 +60,26 @@ export default function Paginas() {
         }
         setLoginvisible(true)
       }, [])
-
+      const islogo = {
+        width: "60%",   
+        margin: 0,
+        padding: 0,
+        display: "flex",
+                
+        };
     return (
-        <>
-             {isMatch ? 
-            <>
-            <div  className={classes.container}> 
-            {/* <Estadis/> */}
-            <MenuuCel texto="Menu"/>
-            <Menu/>
-           </div>
-            </>:<>
-        <Menuizq>
-     {/*    <Estadis/> */}
-      <Menu/>
-      
-      </Menuizq></>}
-        </>
+      <>
+     <MenuuCel/>
+     <Menuizq>
+     <br/>
+     <br/>
+     <br/> <br/>
+     <Asis/> 
+     <br/>
+     <br/>
+     <br/>
+      </Menuizq>
+ </>
    
     );
 

@@ -84,6 +84,11 @@ export default function MenuIzq2 ({children}) {
         window.location.reload(true);
       } 
     const menuItems = [
+      { 
+        text: 'Aca tenes las inscripciones', 
+        icon: <PeopleAltTwoToneIcon />, 
+        path: '/dtc/visitasocial/inscripciones' 
+      },
         { 
             text: 'informes', 
             icon: <PeopleAltTwoToneIcon />, 
