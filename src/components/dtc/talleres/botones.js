@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Box, Autocomplete, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Paper } from "@mui/material";
+import { 
+  Button, Box, Autocomplete, TextField, 
+  Table, TableBody, TableCell, TableContainer, 
+  TableHead, TableRow, TableSortLabel, Paper, Typography 
+} from "@mui/material";
 import servicioDtc from "../../../services/dtc";
 
 const MobileNavigation = () => {
@@ -47,7 +51,10 @@ const MobileNavigation = () => {
   });
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100vh" gap={2} p={2} bgcolor="grey.100">
+  
+    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start" minHeight="100vh" gap={2} p={2} bgcolor="grey.100">
+        <br/>  <br/>  <br/>  <br/>  <br/>  <br/>
+      {/* Botones siempre visibles */}
       <Button variant="contained" color="primary" size="large" fullWidth onClick={() => navigate("/dtc/alumnosdeltaller")}>
         Ver Inscriptos
       </Button>
@@ -55,19 +62,29 @@ const MobileNavigation = () => {
         Ir a Asistencia
       </Button>
       
-      <Autocomplete
-        options={chicos}
-        getOptionLabel={(option) => option.nombre ? `${option.nombre} ${option.apellido || ""}`.trim() : "Sin nombre"}
-        onChange={(event, newValue) => {
-          setSelectedChico(newValue);
-          if (newValue) verDetalles(newValue.id);
-        }}
-        renderInput={(params) => <TextField {...params} label="Buscar inscripto" variant="outlined" fullWidth />}
-      />
+      {/* Título */}
+      <Typography variant="h6" textAlign="center" fontWeight="bold">
+        Aquí puedes buscar los horarios de un usuario
+      </Typography>
+
+      {/* Autocomplete más ancho */}
+      <Box width="80%">
+        <Autocomplete
+          options={chicos}
+          getOptionLabel={(option) => option.nombre ? `${option.nombre} ${option.apellido || ""}`.trim() : "Sin nombre"}
+          onChange={(event, newValue) => {
+            setSelectedChico(newValue);
+            if (newValue) verDetalles(newValue.id);
+          }}
+          renderInput={(params) => <TextField {...params} label="Buscar inscripto" variant="outlined" fullWidth />}
+        />
+      </Box>
       
       {selectedChico && (
         <Box width="100%">
-          <h3>Detalles del Inscripto</h3>
+          <Typography variant="h6" fontWeight="bold" mt={2} mb={1}>
+            Detalles del Inscripto
+          </Typography>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
@@ -92,6 +109,11 @@ const MobileNavigation = () => {
               </TableBody>
             </Table>
           </TableContainer>
+
+          {/* Botón Atrás */}
+          <Button variant="contained" color="secondary" fullWidth sx={{ mt: 2 }} onClick={() => setSelectedChico(null)}>
+            Atrás
+          </Button>
         </Box>
       )}
     </Box>
