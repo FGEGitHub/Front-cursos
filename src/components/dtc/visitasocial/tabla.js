@@ -263,7 +263,7 @@ export default function TablaActividades(props) {
   function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
     return (
         <>
-       {asistencias[dataIndex].nombree}    {asistencias[dataIndex].apellido}
+       {asistencias[dataIndex].usuario_nombre}    {asistencias[dataIndex].usuario_apellido}
           
 
         </>
@@ -333,7 +333,7 @@ function Nivel(dataIndex, rowIndex, data, onClick) {
 
 const columns = [
     {
-        name: "nombre",
+        name: "trabajador_nombre",
         label: "Quen pa cargó",
     },
 

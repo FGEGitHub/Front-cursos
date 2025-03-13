@@ -215,7 +215,7 @@ const CursoDialog = () => {
     color:
       row.cantidad_kids < 8
         ? "green"
-        : row.cantidad_kids >= 8 && row.cantidad_kids <= 11
+        : row.cantidad_kids >= 8 && row.cantidad_kids <= 20
         ? "orange"
         : "red",
   }}
@@ -233,7 +233,7 @@ const CursoDialog = () => {
                             Nombres: {row.nombres_kids || ''}
 
 
-                            {row.cantidad_kids >11 && row.nombre_curso != "FISICO" && row.nombre_curso != "merienda" ? <></>:<>
+                            {row.cantidad_kids >20 && row.nombre_curso != "FISICO" && row.nombre_curso != "merienda" ? <></>:<>
                             <Agregar id= {row.id_curso}
                             nombre_curso= {row.nombre_curso}
                             dia={row.dia}

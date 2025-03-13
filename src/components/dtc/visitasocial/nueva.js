@@ -27,7 +27,7 @@ export default function SelectTextFields(props) {
   const handleClickOpen = async () => {
     setOpen(true);
     try {
-      const novedades_aux = await servicioDtc.listachiques();
+      const novedades_aux = await servicioDtc.listatodosdeldtc();
       setUsuarios(novedades_aux[0]);
     } catch (error) {
       console.error('Error al cargar usuarios:', error);
@@ -48,10 +48,14 @@ export default function SelectTextFields(props) {
 
   const handleUserChange = (event, value) => {
     if (value) {
-      setForm({ ...form, id_usuario: value.id });
+      setForm({
+        ...form,
+        id_usuario: value.id,
+        usuariodispositivo: value.kid === undefined ? "No" : "Si", // Se agrega este campo
+      });
     }
   };
-
+  
   const handleDeterminar = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -62,7 +66,8 @@ export default function SelectTextFields(props) {
     formData.append("id_usuario", form.id_usuario);
     formData.append("id_trabajador", props.id_trabajador);
     formData.append("fecha_referencia", form.fecha_referencia);
-
+    formData.append("usuariodispositivo", form.usuariodispositivo); // Se envía el campo
+  
     try {
       await servicioDtc.nuevaintervencion(formData);
       props.traer();
@@ -105,20 +110,23 @@ export default function SelectTextFields(props) {
             }}
           />
 
-          <Autocomplete
-            options={usuarios}
-            getOptionLabel={(option) => `${option.apellido} ${option.nombre}`}
-            onChange={handleUserChange}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Seleccionar Usuario"
-                variant="outlined"
-                margin="normal"
-                fullWidth
-              />
-            )}
-          />
+<Autocomplete
+  options={usuarios}
+  getOptionLabel={(option) =>
+    `${option.apellido} ${option.nombre} ${option.kid == undefined ? "(paciente solamente)" : ""}`
+  }
+  onChange={handleUserChange}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label="Seleccionar Usuario"
+      variant="outlined"
+      margin="normal"
+      fullWidth
+    />
+  )}
+/>
+
 
           <InputLabel variant="outlined" htmlFor="uncontrolled-native">
             <Typography variant="p" component="div" color="black">

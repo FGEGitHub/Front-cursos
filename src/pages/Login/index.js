@@ -21,8 +21,7 @@ export default function Paginas() {
           console.log(user)
           switch (user.nivel) {
             case 1:
-              alert('usuario no autorizado')
-              window.localStorage.removeItem('loggedNoteAppUser')
+              navigate('/usuario/novedades')
            //   navigate('/')
               break;
             case 2:

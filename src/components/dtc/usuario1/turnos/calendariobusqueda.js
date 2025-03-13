@@ -117,7 +117,7 @@ const TablaNotificaciones = (props) => {
                     />
                 </div>
             ) : (
-                <h2>El curso aún no tiene chicos</h2>
+                <h2>sin datos</h2>
             )}
         </div>
     );

@@ -1,8 +1,8 @@
 
 
 import React, { useEffect, useState, Fragment } from "react";
-import Novedades from '../../../components/usuario1/Novedades/Tabla'
-import MenuUsuario from '../../../components/usuario1/Menuizq1'
+import Novedades from '../../../components/usuario1/planillacomponente/componente1'
+import MenuUsuario from '../../../components/usuario1/Navbar1'
 
 
 import { useNavigate } from "react-router-dom";
@@ -42,10 +42,10 @@ export default function Transferencias() {
   return (
     <>
       <div>  {logueado ? <div>
-        <MenuUsuario>
+        <MenuUsuario/>
         <Novedades/>
 
- </MenuUsuario> 
+
    
 
 
