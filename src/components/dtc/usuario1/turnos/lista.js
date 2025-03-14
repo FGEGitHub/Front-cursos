@@ -350,12 +350,13 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
 
   }
 
-}} />
-               { datos[dataIndex].estado == 'Agendado' ? <>   <Modalimprimir 
-             nombrepersona={datos[0][dataIndex].nombre+ " "+ datos[0][dataIndex].apellido}
-               nombrepsic={datos[dataIndex].nombrepsiq}
-                                                       fecha={datos[dataIndex].fecha}
-                                                       detalle={datos[dataIndex].detalle}
+}} /> 
+
+               { chicos[dataIndex].estado == 'Agendado' ? <>   <Modalimprimir 
+             nombrepersona={chicos[dataIndex].nombre+ " "+ chicos[dataIndex].apellido}
+               nombrepsic={chicos[dataIndex].nombrepsiq}
+                                                       fecha={chicos[dataIndex].fecha}
+                                                       detalle={chicos[dataIndex].detalle}
 
 
                                                        /></>:<></>}

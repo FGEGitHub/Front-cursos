@@ -63,7 +63,7 @@ const MobileFriendlyTable = (props) => {
   
       setDatos(historial);
     }else{
-      const historial = await servicioDtc.traerparaturnos(
+      const historial = await servicioDtc.listatodosdeldtc(
         props.fecha === undefined
           ? { fecha: formattedDate, id: props.idt === undefined ? user.id : props.idt }
           : { fecha: props.fecha, id: props.idt === undefined ? user.id : props.idt }
@@ -210,7 +210,9 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                 setFecha(fecha);
                 }
               
-              }} />
+              }}
+              fecha={fecha} />
+             
                { datos[0][dataIndex].estado == 'Agendado' ? <>   <Modalimprimir 
                 nombrepersona={datos[0][dataIndex].nombre+ " "+ datos[0][dataIndex].apellido}
                nombrepsic={datos[0][dataIndex].nombrepsiq}
@@ -403,11 +405,11 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
   if(user.nivel==40 || user.nivel==41 ){
     const historial = await servicioDtc.traertodoslosturnosfechacadia(form.fecha);
     setDatos(historial);
-    setFecha(fecha);
+    setFecha(form.fecha);
   }else{
     const historial = await servicioDtc.traertodoslosturnosfecha(form.fecha);
   setDatos(historial);
-  setFecha(fecha);
+  setFecha(form.fecha);
   }
 
 }}/></>:<></>}

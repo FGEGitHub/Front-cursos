@@ -102,7 +102,7 @@ const ModalConstanciaTurno = ({ nombrepersona, nombrepsic, fecha, detalle }) => 
   return (
     <>
       <Button variant="contained" color="success" onClick={handleOpen}>
-        Imprimir Constancia
+        Constancia
       </Button>
       <Dialog open={isOpen} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogContent style={{ textAlign: "center", padding: "24px" }}>

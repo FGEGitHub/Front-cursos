@@ -1,25 +1,23 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import servicioDtc from '../../../services/dtc';
 import Ficha from '../usuario1/personapsic.js/ficha';
 import Tooltip from '@material-ui/core/Tooltip';
-import { Paper, CircularProgress, Typography, Card, CardActions } from '@mui/material';
-import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import Autocomplete from '@mui/material/Autocomplete';
 import styled from 'styled-components';
+import React, { useState } from "react";
 
 const StyledParagraph = styled.p`
   font-family: 'Montserrat', sans-serif;
 `;
 
 export default function SelectTextFields(props) {
-  const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = useState();
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(null);
   const [form, setForm] = useState({});
   const [nuevoUsuario, setNuevoUsuario] = useState(false);
   const [nombre, setNombre] = useState('');
@@ -27,7 +25,7 @@ export default function SelectTextFields(props) {
 
   const handleSelection = async (event, value) => {
     console.log('Valor seleccionado:', value);
-    setSelectedValue({ id_persona: value?.id });
+    setSelectedValue(value ? { id_persona: value.id, kid: value.kid } : null);
   };
 
   const handleClickOpen = () => {
@@ -37,11 +35,6 @@ export default function SelectTextFields(props) {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleChange = (e) => {
-    props.traer({ fecha: e.target.value });
-    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleBackendCall = async () => {
@@ -54,12 +47,13 @@ export default function SelectTextFields(props) {
         id: form.id,
         nuevoUsuario,
         nombre,
-        apellido
+        apellido,
+        usuariodispositivo: selectedValue?.kid !== undefined ? "Si" : "No"
       };
-      
+
       console.log(mergedJSON);
-      
-      if (usuario.nivel == 40 || usuario.nivel == 41) {
+
+      if (usuario.nivel === 40 || usuario.nivel === 41) {
         const ta = await servicioDtc.agendarturnocadia(mergedJSON);
         alert(ta);
       } else {
@@ -67,7 +61,7 @@ export default function SelectTextFields(props) {
         alert(ta);
       }
 
-      props.traer({ fecha: form.fecha });
+      props.traer();
       handleClose();
     }
   };
@@ -96,14 +90,16 @@ export default function SelectTextFields(props) {
           ) : (
             <Autocomplete 
               options={props.chicos}
-              getOptionLabel={(option) => option.id_usuario == null ? option.nombre + " " + option.apellido : option.nombre + " " + option.apellido + "  Presente"}
+              getOptionLabel={(option) => 
+                option.nombre + " " + option.apellido + (option.kid !== undefined ? " (usuario del dispositivo)" : "")
+              }
               renderInput={(params) => (
                 <TextField {...params} label="Selecciona una opción" variant="outlined" />
               )}
               onChange={handleSelection}
             />
           )}
-          {selectedValue && !nuevoUsuario ? <Ficha id={selectedValue.id} /> : null}
+          {selectedValue && !nuevoUsuario ? <Ficha id={selectedValue.id_persona} /> : null}
           <DialogActions>
             <Button variant="outlined" color="success" onClick={handleBackendCall}>Asignar turno</Button>
             <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
