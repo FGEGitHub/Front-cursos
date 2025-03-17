@@ -5,7 +5,8 @@ import servicioDtc from '../../../services/dtc'
 import Modificar from './modificar'//boton dialogo
 import Modalperfil from './modaldeperfil'//boton dialogo
 import Borrarusuaio from "./modalborrarusuario"//boton dialogo
-import Vinculos from './modalvinculos'//componente, tabla
+import Vinculos from './modalvinculos'//componente, tabl
+import Borrarhorarios from './eliminarhorairos'
 import Avatar from "@mui/material/Avatar";
 import Agregarcurso from './modalinscribir'//boton dialogo
 import { useEffect, useState, Fragment } from "react";
@@ -298,6 +299,26 @@ traer()
       </>)}  </> : <>Sin vinculos</>}     </> : <></>}
       {horario ? (
   <>
+  <Borrarhorarios id={id}
+  traer={async () => {
+    try {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+        const usuario = JSON.parse(loggedUserJSON)
+
+        setUsuario(usuario)
+        const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
+        setfoto(novedades_aux[1])
+        setchico(novedades_aux[0][0])
+        setVinculos(novedades_aux[2])
+        setHorario(novedades_aux[3])
+      }
+
+    } catch (error) {
+
+    }
+
+  }}/>
     {horario.length > 0 ? (
      <table>
      <thead>
