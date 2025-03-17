@@ -196,7 +196,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
   return (
       <>
 
-<Asignar id={datos[0][dataIndex].id} chicos={datos[1]} traer={async () => {
+<Asignar id={datos[0][dataIndex].id} chicos={datos[1]} chicos2={datos[2]} traer={async () => {
                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
                 const user = JSON.parse(loggedUserJSON);
                 setUsuario(user);

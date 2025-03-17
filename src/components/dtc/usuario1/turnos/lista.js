@@ -78,6 +78,7 @@ const TablaNotificaciones = (props) => {
     const [chicos, setchicos] = useState()
     const [usuario, setUsuario] = useState([''])
     const [datos, setDatos] = useState()
+    const [datos2, setDatos2] = useState()
     const [datosproximos, setDatosproximos] = useState()
      const [verproximos, setVerproximos] = useState(false);
     const [form, setForm] = useState()
@@ -219,10 +220,12 @@ const TablaNotificaciones = (props) => {
                   const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
                   setchicos(novedades_aux[0])
                   setDatos(novedades_aux[1])
+                  setDatos2(novedades_aux[2])
                 }else{
                   const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
                   setchicos(novedades_aux[0])
                   setDatos(novedades_aux[1])
+                  setDatos2(novedades_aux[2])
                 }
                 
             }
@@ -253,10 +256,12 @@ const TablaNotificaciones = (props) => {
                           const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
+                          setDatos2(novedades_aux[2])
                         }else{
                           const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
+                          setDatos2(novedades_aux[2])
                         }
                     }
               
@@ -282,10 +287,12 @@ const TablaNotificaciones = (props) => {
                           const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
+                          setDatos2(novedades_aux[2])
                         }else{
                           const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
+                          setDatos2(novedades_aux[2])
                         }
                     }
               
@@ -323,8 +330,7 @@ const TablaNotificaciones = (props) => {
 function customaagendar(dataIndex, rowIndex, data, onClick) {
   return (
       <>
-
-<Asignar id={chicos[dataIndex].id} chicos={datos} 
+<Asignar id={chicos[dataIndex].id} chicos={datos} chicos2={datos2} 
  traer={ async (fecha) => {
   try {
     console.log(fecha)
@@ -339,10 +345,12 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
             const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
             setchicos(novedades_aux[0])
             setDatos(novedades_aux[1])
+            setDatos2(novedades_aux[2])
           }else{
             const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
             setchicos(novedades_aux[0])
             setDatos(novedades_aux[1])
+            setDatos2(novedades_aux[2])
           }
       }
 
@@ -511,6 +519,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
               const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
               setchicos(novedades_aux[0])
               setDatos(novedades_aux[1])
+              setDatos2(novedades_aux[2])
 
     
 
@@ -518,6 +527,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
               const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
               setchicos(novedades_aux[0])
               setDatos(novedades_aux[1])
+              setDatos2(novedades_aux[2])
             }
         }
 
@@ -542,10 +552,12 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
               const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
               setchicos(novedades_aux[0])
               setDatos(novedades_aux[1])
+              setDatos2(novedades_aux[2])
             }else{
               const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
               setchicos(novedades_aux[0])
               setDatos(novedades_aux[1])
+              setDatos2(novedades_aux[2])
             }
         }
   
@@ -599,6 +611,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                         <StyledTableCell component="th" scope="row"> <b>
                                                         <Asignar id={row.id}
                                                          chicos={datos} 
+                                                         chicos2={datos2} 
                                                          traer={ async (fecha) => {
                                                           try {
                                                             console.log(fecha)
@@ -613,10 +626,12 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                                     const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
                                                                     setchicos(novedades_aux[0])
                                                                     setDatos(novedades_aux[1])
+                                                                    setDatos2(novedades_aux[2])
                                                                   }else{
                                                                     const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                                                                     setchicos(novedades_aux[0])
                                                                     setDatos(novedades_aux[1])
+                                                                    setDatos2(novedades_aux[2])
                                                                   }
                                                               }
                                                         
@@ -653,10 +668,12 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                           const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
+                          setDatos2(novedades_aux[2])
                         }else{
                           const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
+                          setDatos2(novedades_aux[2])
                         }
                     }
               
@@ -680,10 +697,12 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                           const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
+                          setDatos2(novedades_aux[2])
                         }else{
                           const novedades_aux = await servicioDtc.traertodoslosturnosfecha(form)
                           setchicos(novedades_aux[0])
                           setDatos(novedades_aux[1])
+                          setDatos2(novedades_aux[2])
                         }
                     }
               
