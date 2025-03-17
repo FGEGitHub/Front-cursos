@@ -151,23 +151,25 @@ const CursoDialog = () => {
   </Select>
 </FormControl>
 
+<FormControl sx={{ minWidth: 200 }}>
+  <InputLabel>Día</InputLabel>
+  <Select
+    value={selectedDia}
+    onChange={(e) => setSelectedDia(e.target.value)}
+  >
+    <MenuItem value="">
+      <em>Todos los días</em>
+    </MenuItem>
+    {diasSemana
+      .filter((dia) => cursosData !== 307 || dia !== "miércoles") // Filtra "miércoles" si cursosData es 307
+      .map((dia) => (
+        <MenuItem key={dia} value={dia}>
+          {dia.charAt(0).toUpperCase() + dia.slice(1)}
+        </MenuItem>
+      ))}
+  </Select>
+</FormControl>
 
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel>Día</InputLabel>
-          <Select
-            value={selectedDia}
-            onChange={(e) => setSelectedDia(e.target.value)}
-          >
-            <MenuItem value="">
-              <em>Todos los días</em>
-            </MenuItem>
-            {diasSemana.map((dia) => (
-              <MenuItem key={dia} value={dia}>
-                {dia.charAt(0).toUpperCase() + dia.slice(1)}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
       </Box>
 
       {/* Tabla detallada */}
@@ -184,77 +186,108 @@ const CursoDialog = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredData.map((row, index) => (
-                <React.Fragment key={index}>
-                  <TableRow
-                     key={index} 
-                     sx={{ backgroundColor: index % 2 === 0 ? '#e0e0e0' : '#e0e0e0' }}> 
-                  <TableCell>
-  <div
-    onClick={() => navigate('/dtc/usuario1/taller/' + row.id_curso)}
-    style={{ cursor: 'pointer' }}
-  >
-  <b> {row.nombre_curso}
-    {row.nombre_curso === "FISICO" && (
-      <div>
-        {row.hora === "14:30" && "FISICO - Gimnasio"}
-        {row.hora === "15:30" && ["lunes", "miércoles", "viernes"].includes(row.dia) && "FISICO - Fútbol masculino"}
-        {row.hora === "15:30" && row.dia === "martes" && "FISICO - Vóley femenino"}
-        {row.hora === "15:30" && row.dia === "jueves" && "FISICO - Básquet femenino"}
-        {row.hora === "16:30" && ["lunes", "miércoles", "viernes"].includes(row.dia) && "FISICO - Fútbol femenino"}
-        {row.hora === "16:30" && row.dia === "martes" && "FISICO - Vóley masculino"}
-        {row.hora === "16:30" && row.dia === "jueves" && "FISICO - Básquet masculino"}
-      </div>
-    )}</b> 
-  </div>
-</TableCell>
-                   <TableCell><b>{row.dia}-{row.hora} hs</b></TableCell>
-              {/*       <TableCell><b>{row.hora}</b></TableCell> */}
-                    <TableCell><b>Cantidad: <span
-  style={{
-    color:
-      row.cantidad_kids < 8
-        ? "green"
-        : row.cantidad_kids >= 8 && row.cantidad_kids <= 20
-        ? "orange"
-        : "red",
-  }}
->
-  {row.cantidad_kids}
-</span></b></TableCell>
-               
-                  </TableRow>
-                  <TableRow  key={index} 
-                     sx={{ backgroundColor: index % 2 === 0 ? '#e0e0e0' : '#e0e0e0' }}>
-                    <TableCell colSpan={5} style={{ padding: 0 }}>
-                    
-                        <Box sx={{ margin: 1 }}>
-                          <Typography variant="subtitle1" gutterBottom>
-                            Nombres: {row.nombres_kids || ''}
+  {filteredData
+    .filter((row) => !(row.id_curso === 307 && row.dia === "miércoles")) // Filtrar solo miércoles para curso 307
+    .map((row, index) => (
+      <React.Fragment key={index}>
+        <TableRow
+          key={index}
+          sx={{ backgroundColor: index % 2 === 0 ? "#e0e0e0" : "#e0e0e0" }}
+        >
+          <TableCell>
+            <div
+              onClick={() => navigate("/dtc/usuario1/taller/" + row.id_curso)}
+              style={{ cursor: "pointer" }}
+            >
+              <b>
+                {row.nombre_curso}
+                {row.nombre_curso === "FISICO" && (
+                  <div>
+                    {row.hora === "14:30" && "FISICO - Gimnasio"}
+                    {row.hora === "15:30" &&
+                      ["lunes", "miércoles", "viernes"].includes(row.dia) &&
+                      "FISICO - Fútbol masculino"}
+                    {row.hora === "15:30" &&
+                      row.dia === "martes" &&
+                      "FISICO - Vóley femenino"}
+                    {row.hora === "15:30" &&
+                      row.dia === "jueves" &&
+                      "FISICO - Básquet femenino"}
+                    {row.hora === "16:30" &&
+                      ["lunes", "miércoles", "viernes"].includes(row.dia) &&
+                      "FISICO - Fútbol femenino"}
+                    {row.hora === "16:30" &&
+                      row.dia === "martes" &&
+                      "FISICO - Vóley masculino"}
+                    {row.hora === "16:30" &&
+                      row.dia === "jueves" &&
+                      "FISICO - Básquet masculino"}
+                  </div>
+                )}
+              </b>
+            </div>
+          </TableCell>
+          <TableCell>
+            <b>
+              {row.dia}-{row.hora} hs
+            </b>
+          </TableCell>
+          <TableCell>
+            <b>
+              Cantidad:{" "}
+              <span
+                style={{
+                  color:
+                    row.cantidad_kids < 8
+                      ? "green"
+                      : row.cantidad_kids >= 8 && row.cantidad_kids <= 20
+                      ? "orange"
+                      : "red",
+                }}
+              >
+                {row.cantidad_kids}
+              </span>
+            </b>
+          </TableCell>
+        </TableRow>
+        <TableRow
+          key={`extra-${index}`}
+          sx={{ backgroundColor: index % 2 === 0 ? "#e0e0e0" : "#e0e0e0" }}
+        >
+          <TableCell colSpan={5} style={{ padding: 0 }}>
+            <Box sx={{ margin: 1 }}>
+              <Typography variant="subtitle1" gutterBottom>
+                Nombres: {row.nombres_kids || ""}
+                {row.cantidad_kids > 20 &&
+                row.nombre_curso !== "FISICO" &&
+                row.nombre_curso !== "merienda" ? (
+                  <></>
+                ) : (
+                  <Agregar
+                    id={row.id_curso}
+                    nombre_curso={row.nombre_curso}
+                    dia={row.dia}
+                    hora={row.hora}
+                    traer={async () => {
+                      try {
+                        const response =
+                          await servicioDtc.obtenerinfodecursostodos();
+                        setCursosData(response);
+                        setFilteredData(response);
+                      } catch (error) {
+                        console.error("Error al obtener datos del curso:", error);
+                      }
+                    }}
+                  />
+                )}
+              </Typography>
+            </Box>
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
+    ))}
+</TableBody>
 
-
-                            {row.cantidad_kids >20 && row.nombre_curso != "FISICO" && row.nombre_curso != "merienda" ? <></>:<>
-                            <Agregar id= {row.id_curso}
-                            nombre_curso= {row.nombre_curso}
-                            dia={row.dia}
-                            hora={row.hora}
-                            traer={ async () => {
-                              try {
-                                const response = await servicioDtc.obtenerinfodecursostodos();
-                                setCursosData(response);
-                                setFilteredData(response);
-                              } catch (error) {
-                                console.error('Error al obtener datos del curso:', error);
-                              }
-                            }}/></>}
-                          </Typography>
-                        </Box>
-                     
-                    </TableCell>
-                  </TableRow>
-                </React.Fragment>
-              ))}
-            </TableBody>
           </Table>
         </TableContainer>
       )}
