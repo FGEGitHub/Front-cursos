@@ -398,6 +398,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
           />
           <Agregarvariasfechas/>
           {form ? <><Nuevo fecha={form.fecha}
+           turnosdeldia={datos[0]}
  traer={async (fecha) => {
   const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
   const user = JSON.parse(loggedUserJSON);

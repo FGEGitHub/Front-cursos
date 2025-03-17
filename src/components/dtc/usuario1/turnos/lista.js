@@ -12,7 +12,6 @@ import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import Skeleton from '@mui/material/Skeleton';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -538,9 +537,9 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
 }
 }/>
 {form ? <><Nuevo fecha={form.fecha}
+          turnosdeldia={chicos}
   traer={ async (fecha) => {
     try {
-      console.log(fecha)
    
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
         if (loggedUserJSON) {

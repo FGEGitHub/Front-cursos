@@ -26,9 +26,15 @@ export default function SelectTextFields(props) {
   const [form, setForm] = useState({ fecha: props.fecha, horario: "" });
   const [usuario, setUsuario] = useState();
   const [profesionales, setProfesionales] = useState(false);
+  const [idPsicoSeleccionado, setIdPsicoSeleccionado] = useState(null); // Estado para el profesional seleccionado
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    
+    // Si el usuario selecciona un profesional, lo guardamos
+    if (e.target.name === "profesional") {
+      setIdPsicoSeleccionado(e.target.value);
+    }
   };
 
   const traerprof = async () => {
@@ -46,8 +52,10 @@ export default function SelectTextFields(props) {
 
   const handleClickOpen = () => {
     setForm({ fecha: props.fecha, horario: "" });
+    setIdPsicoSeleccionado(null);
     setOpen(true);
     traerprof();
+    console.log(props.turnosdeldia);
   };
 
   const handleClose = () => {
@@ -77,6 +85,9 @@ export default function SelectTextFields(props) {
     setOpen(false);
   };
 
+  // Filtrar turnos del día según el profesional seleccionado
+  const turnosDelProfesional = props.turnosdeldia.filter(turno => turno.id_psico == idPsicoSeleccionado);
+
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nuevo turno">
@@ -85,17 +96,7 @@ export default function SelectTextFields(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <h3><b>NUEVO TURNO</b></h3>
-          <InputLabel>Horario</InputLabel>
-          <Select
-            name="horario"
-            value={form.horario}
-            onChange={handleChange}
-            fullWidth
-          >
-            {horariosDisponibles.map((horario) => (
-              <MenuItem key={horario} value={horario}>{horario}</MenuItem>
-            ))}
-          </Select>
+        
           {usuario && (usuario.nivel === 40 || usuario.nivel === 20 || usuario.nivel === 23) && (
             <>
               <br />
@@ -113,8 +114,34 @@ export default function SelectTextFields(props) {
               ) : (
                 <>Cargando...</>
               )}
+
+<InputLabel>Horario</InputLabel>
+          <Select
+            name="horario"
+            value={form.horario}
+            onChange={handleChange}
+            fullWidth
+          >
+            {horariosDisponibles.map((horario) => (
+              <MenuItem key={horario} value={horario}>{horario}</MenuItem>
+            ))}
+          </Select>
+
             </>
           )}
+
+          {/* Mostrar detalles si hay turnos para el profesional seleccionado */}
+          {idPsicoSeleccionado && turnosDelProfesional.length > 0 && (
+            <div>
+              <Typography variant="h6">Turnos que tiene en el dia:</Typography>
+              <ul>
+                {turnosDelProfesional.map((turno, index) => (
+                  <li key={index}>{turno.detalle}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <DialogActions>
             {form.horario ? (
               <Button variant="contained" color="primary" onClick={handleDeterminar}>Crear</Button>
