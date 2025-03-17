@@ -51,11 +51,13 @@ export default function SelectTextFields(props) {
   };
 
   const handleClickOpen = () => {
+
+    console.log(props.turnosdeldia);
     setForm({ fecha: props.fecha, horario: "" });
     setIdPsicoSeleccionado(null);
     setOpen(true);
     traerprof();
-    console.log(props.turnosdeldia);
+   
   };
 
   const handleClose = () => {
@@ -87,7 +89,7 @@ export default function SelectTextFields(props) {
 
   // Filtrar turnos del día según el profesional seleccionado
   const turnosDelProfesional = props.turnosdeldia.filter(turno => turno.id_psico == idPsicoSeleccionado);
-
+  const horariosOcupados = turnosDelProfesional.map(turno => turno.detalle);
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nuevo turno">
@@ -96,8 +98,8 @@ export default function SelectTextFields(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <h3><b>NUEVO TURNO</b></h3>
-        
-          {usuario && (usuario.nivel === 40 || usuario.nivel === 20 || usuario.nivel === 23) && (
+  { usuario &&    usuario.nivel}
+          {usuario && (usuario.nivel == 40 || usuario.nivel == 20 || usuario.nivel == 24) && (
             <>
               <br />
               {profesionales ? (
@@ -123,7 +125,13 @@ export default function SelectTextFields(props) {
             fullWidth
           >
             {horariosDisponibles.map((horario) => (
-              <MenuItem key={horario} value={horario}>{horario}</MenuItem>
+        <MenuItem 
+        key={horario} 
+        value={horario} 
+        disabled={horariosOcupados.includes(horario)}
+      >
+        {horariosOcupados.includes(horario) ? `${horario} - Ya tiene` : horario}
+      </MenuItem>
             ))}
           </Select>
 
@@ -133,7 +141,7 @@ export default function SelectTextFields(props) {
           {/* Mostrar detalles si hay turnos para el profesional seleccionado */}
           {idPsicoSeleccionado && turnosDelProfesional.length > 0 && (
             <div>
-              <Typography variant="h6">Turnos que tiene en el dia:</Typography>
+              <Typography variant="h6">Turnos del día:</Typography>
               <ul>
                 {turnosDelProfesional.map((turno, index) => (
                   <li key={index}>{turno.detalle}</li>

@@ -524,6 +524,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
 
             }else{
               const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
+            
               setchicos(novedades_aux[0])
               setDatos(novedades_aux[1])
               setDatos2(novedades_aux[2])
@@ -536,7 +537,9 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
 
 }
 }/>
-{form ? <><Nuevo fecha={form.fecha}
+{form ? <>
+{chicos ? <>
+<Nuevo fecha={form.fecha}
           turnosdeldia={chicos}
   traer={ async (fecha) => {
     try {
@@ -564,7 +567,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
   
     }
   
-  }}/></>:<></>}
+  }}/></>:<></>}</>:<></>}
 
 
 
