@@ -321,7 +321,7 @@ const TablaNotificaciones = (props) => {
     return (
         <>
 
-{chicos[dataIndex]['nombre'] ? <>{chicos[dataIndex]['nombre']} </> :<>Disponible</>}
+{chicos[dataIndex]['nombre'] ? <>{chicos[dataIndex]['nombre']}{chicos[dataIndex]['agendadopor'] ? <>   cargado por {chicos[dataIndex]['agendadopor']}</>:<></>} el dia  {chicos[dataIndex]['hora']} </> :<>Disponible</>}
 
         </>
     );
@@ -359,7 +359,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
 
 }} /> 
 
-               { chicos[dataIndex].estado == 'Agendado' ? <> {chicos[dataIndex].agendadopor}   <Modalimprimir 
+               { chicos[dataIndex].estado == 'Agendado' ? <>  <Modalimprimir 
              nombrepersona={chicos[dataIndex].nombre+ " "+ chicos[dataIndex].apellido}
                nombrepsic={chicos[dataIndex].nombrepsiq}
                                                        fecha={chicos[dataIndex].fecha}
