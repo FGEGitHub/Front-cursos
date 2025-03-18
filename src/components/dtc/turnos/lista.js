@@ -220,7 +220,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                        detalle={datos[0][dataIndex].detalle}
 
 
-                                                       /></>:<></>}
+                                                       /> {datos[0][dataIndex].agendadopor} </>:<></>}
       </>
   );
 }

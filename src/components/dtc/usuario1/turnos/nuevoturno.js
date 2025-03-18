@@ -15,8 +15,6 @@ const StyledParagraph = styled.p`
   font-family: 'Montserrat', sans-serif;
 `;
 
-
-
 const horariosDisponibles = [
 "08:20", "09:00",  "10:20", "11:00", "11:40", "14:00", "14:40", "15:20", "16:00", "16:40", "17:20"
 ];
@@ -26,12 +24,10 @@ export default function SelectTextFields(props) {
   const [form, setForm] = useState({ fecha: props.fecha, horario: "" });
   const [usuario, setUsuario] = useState();
   const [profesionales, setProfesionales] = useState(false);
-  const [idPsicoSeleccionado, setIdPsicoSeleccionado] = useState(null); // Estado para el profesional seleccionado
+  const [idPsicoSeleccionado, setIdPsicoSeleccionado] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    
-    // Si el usuario selecciona un profesional, lo guardamos
     if (e.target.name === "profesional") {
       setIdPsicoSeleccionado(e.target.value);
     }
@@ -41,6 +37,7 @@ export default function SelectTextFields(props) {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
     const user = JSON.parse(loggedUserJSON);
     setUsuario(user);
+
     if (user.nivel === 40) {
       const nov = await servicioDtc.traerprofesionales();
       setProfesionales(nov[0]);
@@ -51,13 +48,10 @@ export default function SelectTextFields(props) {
   };
 
   const handleClickOpen = () => {
-
-    console.log(props.turnosdeldia);
     setForm({ fecha: props.fecha, horario: "" });
     setIdPsicoSeleccionado(null);
     setOpen(true);
     traerprof();
-   
   };
 
   const handleClose = () => {
@@ -70,7 +64,7 @@ export default function SelectTextFields(props) {
       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
       const user = JSON.parse(loggedUserJSON);
       setUsuario(user);
-      const mergedJSON = { ...form, id_psic: user.id };
+      const mergedJSON = { ...form, id_psic: user.nivel === 24 ? user.id : form.id_psic };
 
       if (user.nivel === 41 || user.nivel === 40) {
         const nov = await servicioDtc.agregarturnocadia(mergedJSON);
@@ -87,9 +81,10 @@ export default function SelectTextFields(props) {
     setOpen(false);
   };
 
-  // Filtrar turnos del día según el profesional seleccionado
-  const turnosDelProfesional = props.turnosdeldia.filter(turno => turno.id_psico == idPsicoSeleccionado);
+  const idPsico = usuario?.nivel === 24 ? usuario.id : idPsicoSeleccionado;
+  const turnosDelProfesional = props.turnosdeldia.filter(turno => turno.id_psico == idPsico);
   const horariosOcupados = turnosDelProfesional.map(turno => turno.detalle);
+
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nuevo turno">
@@ -98,7 +93,7 @@ export default function SelectTextFields(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <h3><b>NUEVO TURNO</b></h3>
-  { usuario &&    usuario.nivel}
+          {usuario && usuario.nivel}
           {usuario && (usuario.nivel == 40 || usuario.nivel == 20 || usuario.nivel == 24) && (
             <>
               <br />
@@ -117,29 +112,27 @@ export default function SelectTextFields(props) {
                 <>Cargando...</>
               )}
 
-<InputLabel>Horario</InputLabel>
-          <Select
-            name="horario"
-            value={form.horario}
-            onChange={handleChange}
-            fullWidth
-          >
-            {horariosDisponibles.map((horario) => (
-        <MenuItem 
-        key={horario} 
-        value={horario} 
-        disabled={horariosOcupados.includes(horario)}
-      >
-        {horariosOcupados.includes(horario) ? `${horario} - Ya tiene` : horario}
-      </MenuItem>
-            ))}
-          </Select>
-
+              <InputLabel>Horario</InputLabel>
+              <Select
+                name="horario"
+                value={form.horario}
+                onChange={handleChange}
+                fullWidth
+              >
+                {horariosDisponibles.map((horario) => (
+                  <MenuItem 
+                    key={horario} 
+                    value={horario} 
+                    disabled={horariosOcupados.includes(horario)}
+                  >
+                    {horariosOcupados.includes(horario) ? `${horario} - Ya tiene` : horario}
+                  </MenuItem>
+                ))}
+              </Select>
             </>
           )}
 
-          {/* Mostrar detalles si hay turnos para el profesional seleccionado */}
-          {idPsicoSeleccionado && turnosDelProfesional.length > 0 && (
+          {idPsico && turnosDelProfesional.length > 0 && (
             <div>
               <Typography variant="h6">Turnos del día:</Typography>
               <ul>

@@ -51,12 +51,16 @@ export default function SelectTextFields(props) {
   const handleBackendCall = async () => {
     let data = {};
 
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    const usuario = JSON.parse(loggedUserJSON);
+    console.log(usuario)
     if (nuevoUsuario) {
       data = {
         id: form.id,
         nuevoUsuario: true,
         nombre,
         apellido,
+        agendadopor:usuario.usuario,
         usuariodispositivo: "No"
       };
     } else {
@@ -66,14 +70,13 @@ export default function SelectTextFields(props) {
       data = {
         ...selected,
         id: form.id,
+        agendadopor:usuario.usuario,
         usuariodispositivo: usarSegundaLista ? "Si" : "No"
       };
     }
 
     console.log("Datos enviados al backend:", data);
 
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-    const usuario = JSON.parse(loggedUserJSON);
 
     if (usuario.nivel === 40 || usuario.nivel === 41) {
       const response = await servicioDtc.agendarturnocadia(data);
