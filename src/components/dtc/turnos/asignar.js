@@ -1,14 +1,14 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, Checkbox, FormControlLabel } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Select, MenuItem } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import servicioDtc from '../../../services/dtc';
 import Tooltip from '@material-ui/core/Tooltip';
 import DialogActions from '@mui/material/DialogActions';
 import Autocomplete from '@mui/material/Autocomplete';
 import styled from 'styled-components';
 import React, { useState } from "react";
+import servicioDtc from '../../../services/dtc';
 
 const StyledParagraph = styled.p`
   font-family: 'Montserrat', sans-serif;
@@ -16,31 +16,33 @@ const StyledParagraph = styled.p`
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState("");
   const [selectedValue2, setSelectedValue2] = useState(null);
   const [form, setForm] = useState({});
   const [usarSegundaLista, setUsarSegundaLista] = useState(false);
   const [nuevoUsuario, setNuevoUsuario] = useState(false);
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
-  const [chicos, setChicos] = useState([]); 
+  const [chicos, setChicos] = useState([]);
 
-  const handleSelection = (event, value) => {
-    setSelectedValue(value ? { id_persona: value.id, kid: value.kid } : null);
+  const handleSelection = (event) => {
+    const selected = props.chicos.find(option => option.id === event.target.value) || null;
+    setSelectedValue(selected);
   };
 
   const handleSelection2 = (event, value) => {
-    setSelectedValue2(value ? { id_persona: value.id, kid: value.kid } : null);
+    setSelectedValue2(value ? { id: value.id, nombre: value.nombre, apellido: value.apellido } : null);
   };
 
   const handleClickOpen = () => {
     setForm({ id: props.id });
-    setSelectedValue(null);
+    setSelectedValue("");
     setSelectedValue2(null);
     setNuevoUsuario(false);
     setUsarSegundaLista(false);
     setChicos(props.chicos || []);
-  
+    console.log(props.chicos);
+    console.log(props.chicos2);
     setOpen(true);
   };
 
@@ -50,17 +52,16 @@ export default function SelectTextFields(props) {
 
   const handleBackendCall = async () => {
     let data = {};
-
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
     const usuario = JSON.parse(loggedUserJSON);
-    console.log(usuario)
+
     if (nuevoUsuario) {
       data = {
         id: form.id,
         nuevoUsuario: true,
         nombre,
         apellido,
-        agendadopor:usuario.usuario,
+        agendadopor: usuario.usuario,
         usuariodispositivo: "No"
       };
     } else {
@@ -70,13 +71,12 @@ export default function SelectTextFields(props) {
       data = {
         ...selected,
         id: form.id,
-        agendadopor:usuario.usuario,
+        agendadopor: usuario.usuario,
         usuariodispositivo: usarSegundaLista ? "Si" : "No"
       };
     }
 
     console.log("Datos enviados al backend:", data);
-
 
     if (usuario.nivel === 40 || usuario.nivel === 41) {
       const response = await servicioDtc.agendarturnocadia(data);
@@ -91,30 +91,26 @@ export default function SelectTextFields(props) {
   };
 
   return (
-    <Box
-      sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-      noValidate
-      autoComplete="off"
-    >
+    <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nueva Clase">
         <Button variant="contained" onClick={handleClickOpen}> Agendar </Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <h3>{props.id} <b> Agendar Turno</b></h3>
+          <h3> <b> Agendar Turno</b></h3>
 
           {/* Checkbox para activar la segunda lista */}
           <FormControlLabel
             control={
-              <Checkbox 
-                checked={usarSegundaLista} 
+              <Checkbox
+                checked={usarSegundaLista}
                 onChange={(e) => {
                   setUsarSegundaLista(e.target.checked);
                   setNuevoUsuario(false);
-                  setSelectedValue(null);
+                  setSelectedValue("");
                   setSelectedValue2(null);
-                }} 
-                disabled={nuevoUsuario} 
+                }}
+                disabled={nuevoUsuario}
               />
             }
             label="Es usuario del dispositivo"
@@ -123,14 +119,14 @@ export default function SelectTextFields(props) {
           {/* Checkbox para usuario nuevo */}
           <FormControlLabel
             control={
-              <Checkbox 
-                checked={nuevoUsuario} 
+              <Checkbox
+                checked={nuevoUsuario}
                 onChange={(e) => {
                   setNuevoUsuario(e.target.checked);
                   setUsarSegundaLista(false);
-                  setSelectedValue(null);
+                  setSelectedValue("");
                   setSelectedValue2(null);
-                }} 
+                }}
               />
             }
             label="Usuario Nuevo"
@@ -144,24 +140,30 @@ export default function SelectTextFields(props) {
             </>
           ) : (
             <>
-              {/* Primer Autocomplete */}
-              <Autocomplete
-                options={chicos}
-                value={selectedValue}
+              {/* Select en lugar del primer Autocomplete */}
+              <Select
+                value={selectedValue?.id || ""}
                 onChange={handleSelection}
-                getOptionLabel={(option) => option.kid == null ? option.nombre + " " + option.apellido : option.nombre + " " + option.apellido + "  Presente"}
-                renderInput={(params) => (
-                  <TextField {...params} label="Selecciona una opción" variant="outlined" />
-                )}
+                fullWidth
+                displayEmpty
+                variant="outlined"
                 disabled={usarSegundaLista}
-              />
+              >
+                <MenuItem value="" disabled>Selecciona una opción</MenuItem>
+                {props.chicos.map((option) => (
+                  <MenuItem key={option.id} value={option.id}>
+                    {option.apellido} {option.nombre} 
+                  </MenuItem>
+                ))}
+              </Select>
 
               {/* Segundo Autocomplete */}
               <Autocomplete
                 options={props.chicos2}
                 value={selectedValue2}
                 onChange={handleSelection2}
-                getOptionLabel={(option) => option.kid == null ? option.nombre + " " + option.apellido : option.nombre + " " + option.apellido + "  Presente"}
+                getOptionLabel={(option) => `${option.nombre} ${option.apellido}`}
+                isOptionEqualToValue={(option, value) => option.id === value?.id}
                 renderInput={(params) => (
                   <TextField {...params} label="Selecciona una opción" variant="outlined" />
                 )}
