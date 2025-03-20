@@ -22,6 +22,7 @@ import Navbar from '../Navbar'
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import InventoryIcon from '@mui/icons-material/Inventory';
 const drawerWidth = 240;
 
 const darkTheme = createTheme({
@@ -116,7 +117,14 @@ export default function MenuIzq2 ({children}) {
         icon: <EmojiFoodBeverageIcon color="primary" />,
         path: '/dtc/cocinaraciones',
         //tooltip: 'Detalle de asistencias de usuarios'
+      },
+      {
+        text: 'Stock',
+        icon: <InventoryIcon color="primary" />,
+        path: '/dtc/cocinastock',
+        //tooltip: 'Detalle de asistencias de usuarios'
       }
+      
   ];
   const islogo = {
     marginTop: '10%',

@@ -285,7 +285,6 @@ const TablaNotificaciones = (props) => {
   >
    
     { datos ? <>  <Alert variant="filled" severity="success">
- <b> Actualmente {datos.total} usuarios  </b>  - "Kid1":{datos.kid1} usuarios, "Kid2":{datos.kid2} usuarios,  "Adolescentes":{datos.kid3} usuarios, ademas {datos.sind} sin determinar 
 </Alert> </>:<></>}
 
             <h2>Lista de etapas</h2>

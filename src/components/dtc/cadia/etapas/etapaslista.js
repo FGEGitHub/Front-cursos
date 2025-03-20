@@ -396,25 +396,32 @@ traer={async () => {
                                     <TableCell>{row.descripcion}</TableCell>
                                     <TableCell>
                                     <Actualizar
-                                    id={row.id}
-                                    traer={async () => {
-                                      try {
-                                          const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                                          if (loggedUserJSON) {
-                                              const usuario = JSON.parse(loggedUserJSON)
-                              
-                                              setUsuario(usuario)
-                              
-                                              const novedades_aux = await servicioDtc.traeretapacocinacadia()
-                                              setchicos(novedades_aux[0])
-                                              setDatos(novedades_aux[1])
-                                          }
-                              
-                                      } catch (error) {
-                              
-                                      }
-                              
-                                  }}/>
+id={row.id}
+fecha={row.fecha}
+estado={row.estado}
+titulo={row.titulo}
+descripcion={row.descripcion}
+
+traer={async () => {
+  try {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON)
+
+          setUsuario(usuario)
+
+          const novedades_aux = await servicioDtc.traeretapacocinacadia()
+          setchicos(novedades_aux[0])
+          setDatos(novedades_aux[1])
+      }
+
+  } catch (error) {
+
+  }
+
+} }
+
+/>
                                     <Modalborrar
                                        id={row.id}
                                        titulo={row.id}
