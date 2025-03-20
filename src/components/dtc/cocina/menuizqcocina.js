@@ -77,7 +77,7 @@ export default function MenuIzq2 ({children}) {
        // tooltip: 'Lista de usuarios del dispositivo'
       },
      
-    {
+   /*  {
       text: (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           Inscripciones
@@ -88,7 +88,7 @@ export default function MenuIzq2 ({children}) {
       icon: <BorderColorIcon color="primary" />,
       path: '/dtc/cocina/inscripciones',
     //  tooltip: 'Detalle de asistencias de usuarios',
-    },
+    }, */
 
     {
       text: 'Usuarios',
@@ -99,12 +99,12 @@ export default function MenuIzq2 ({children}) {
   
 
   
-    {
+ /*    {
       text: 'Turnos psiq',
       icon: <CalendarMonthIcon color="primary" />,
       path: '/dtc/cocina/turnos',
      // tooltip: 'Agenda de turnos'
-    },
+    }, */
 
     {
         text: 'Etapas',
