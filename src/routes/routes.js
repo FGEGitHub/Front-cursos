@@ -160,7 +160,10 @@ import Stcinventairo from '../pages/dtc/inventario';
 import Stcinventairopretacion from '../pages/dtc/inventarioprestacion';
 import DTCTallerPrinc from '../pages/dtc/talleresprincipal';
 
-
+import DTCCocinaTurnos from '../pages/dtc/cocinamas/turnos';
+import STCcocinausuarios from '../pages/dtc/cocinamas/usuarios';
+import DTCCocinausuario from '../pages/dtc/cocinamas/usuario';
+import DTCCocinainscripciones from '../pages/dtc/cocinamas/inscripciones';
 
 import DTCTallerAsis from '../pages/dtc/talleresasistencia';
 import DTCasistenciasest from '../pages/dtc/nivel1/estadasistencias';
@@ -366,7 +369,10 @@ const Rutas = [
 		{ path: '/dtc/cocinaasis', element: <DtccocinaAsis/> },
 		{ path: '/dtc/cocinastock', element: <DtcCocinastock/> },
 		{ path: '/dtc/cocinapacientes', element: <DTCcocinpacientes/> },
-		
+		{ path: '/dtc/cocina/turnos', element: <DTCCocinaTurnos/> },
+		{ path: '/dtc/cocina/usuarios', element: <STCcocinausuarios/> },
+		{ path: '/dtc/cocina/usuario/:id', element: <DTCCocinausuario/> },
+		{ path: '/dtc/cocina/inscripciones', element: <DTCCocinainscripciones/> },
 		
 		{ path: '/dtc/usuario2/raciones', element: <Dtcraciones/> },
 

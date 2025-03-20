@@ -1,5 +1,4 @@
 import servicioDtc from '../../../../services/dtc'
-import ModalVer from './ModalVer'
 import ModaNueva from './nuevo'
 import React, { useEffect, useState, Fragment } from "react";
 import { Paper } from '@mui/material';
@@ -194,25 +193,32 @@ const TablaNotificaciones = (props) => {
     }
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
-        return (
-            <>
-
-                <div onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} >
-
-                    < Tooltip title="Ver">
-                        <Button  onClick={() => navigate('/dtc/usuario1/usuario/' + chicos[dataIndex]['id'])} variant="contained" color="secondary">
-Ver                        </Button>
-                    </Tooltip>
-
-
-
-
-                </div>
-
-
-            </>
-        );
-    }
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+      let usuario = null;
+  
+      if (loggedUserJSON) {
+          usuario = JSON.parse(loggedUserJSON);
+      }
+  
+      const handleNavigation = () => {
+          const userPath = usuario?.nivel === 22 
+              ? `/dtc/cocina/usuario/${chicos[dataIndex]['id']}` 
+              : `/dtc/usuario1/usuario/${chicos[dataIndex]['id']}`;
+          
+          navigate(userPath);
+      };
+  
+      return (
+          <div onClick={handleNavigation}>
+              <Tooltip title="Ver">
+                  <Button onClick={handleNavigation} variant="contained" color="secondary">
+                      Ver
+                  </Button>
+              </Tooltip>
+          </div>
+      );
+  }
+  
 
 
 
@@ -354,32 +360,14 @@ Ver                        </Button>
             label: "nombre",
 
         },
-        {
-          name: "primer_asis",
-          label: "primer_asis",
-      },
-    
-        {
-            name: "cant_asist",
-            label: "cant_asist",
-
-        },
-        {
-          name: "total_asis",
-          label: "total_asis",
-
-      },
+       
       
         {
           name: "porcentajeasis",
           label: "porcentajeasis",
 
       },
-        {
-            name: "falta",
-            label: "falta",
-
-        },
+     
 
         {
             name: "Ver",

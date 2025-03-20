@@ -1,11 +1,9 @@
 
 
-
-
-import Asis from '../../../components/dtc/cadia/etapas/etapaslista'
+import Asis from '../../../../components/dtc/usuario1/chiques/lista'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import Menuizqcocia from '../../../components/dtc/cocina/menuizqcocina'
+import Menuizqcocia from '../../../../components/dtc/cocina/menuizqcocina'
 import {
 
   makeStyles,
@@ -34,10 +32,11 @@ export default function Paginas() {
 
     return (
       <>
-<Menuizqcocia>
+ <Menuizqcocia>
      <br/>
-     <br/> <br/> <br/> <br/>
+     <br/> <br/> 
      <Asis/>
+     <br/>
      </Menuizqcocia>
      <br/>
      <br/>

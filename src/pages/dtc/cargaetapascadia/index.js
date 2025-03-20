@@ -5,7 +5,8 @@
 import Asis from '../../../components/dtc/cadia/etapas/etapaslista'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../components/dtc/Navbar'
+import Menuizqcocia from '../../../components/dtc/cocina/menuizqcocina'
+
 import {
 
   makeStyles,
@@ -34,13 +35,11 @@ export default function Paginas() {
 
     return (
       <>
-  <MenuuCel/>
+<Menuizqcocia>
      <br/>
      <br/> <br/> <br/> <br/>
      <Asis/>
-     <br/>
-     <br/>
-     <br/> 
+     </Menuizqcocia>
  </>
    
     );

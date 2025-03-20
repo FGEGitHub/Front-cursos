@@ -5,7 +5,7 @@
 import Asis from '../../../components/dtc/cocina/asistencias'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../components/dtc/Navbar'
+import Menuizqcocia from '../../../components/dtc/cocina/menuizqcocina'
 import {
 
   makeStyles,
@@ -34,12 +34,11 @@ export default function Paginas() {
 
     return (
       <>
-  <MenuuCel/>
-     <br/>
-     <br/> <br/> <br/> <br/>
+  <Menuizqcocia>
      <Asis/>
      <br/>
      <br/>
+    </Menuizqcocia>
      <br/> 
  </>
    

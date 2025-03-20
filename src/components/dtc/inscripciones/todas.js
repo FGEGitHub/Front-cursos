@@ -29,6 +29,7 @@ const CursoDialog = () => {
   const [selectedCurso, setSelectedCurso] = useState(''); // Filtro de curso
   const [selectedDia, setSelectedDia] = useState(''); // Filtro de día
   const [openCells, setOpenCells] = useState({}); // Para controlar la expansión de celdas en modo semanal
+  const [usuarioo, setUsuarioo] = useState();
   const navigate = useNavigate();
   const horarios = ['14:00', '14:30', '15:00', '15:30', '16:00', '16:30']; // Nuevos horarios agregados
 
@@ -44,6 +45,10 @@ const CursoDialog = () => {
         console.error('Error al obtener datos del curso:', error);
       }
     };
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+   
+    const user = JSON.parse(loggedUserJSON)
+    setUsuarioo(user)
     fetchData();
   }, []);
 
@@ -263,6 +268,7 @@ const CursoDialog = () => {
                 row.nombre_curso !== "merienda" ? (
                   <></>
                 ) : (
+                  usuarioo.nivel==20 &&
                   <Agregar
                     id={row.id_curso}
                     nombre_curso={row.nombre_curso}
