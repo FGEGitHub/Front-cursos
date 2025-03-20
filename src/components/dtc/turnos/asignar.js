@@ -29,10 +29,11 @@ export default function SelectTextFields(props) {
     const selected = props.chicos.find(option => option.id === event.target.value) || null;
     setSelectedValue(selected);
   };
-
+  
   const handleSelection2 = (event, value) => {
-    setSelectedValue2(value ? { id: value.id, nombre: value.nombre, apellido: value.apellido } : null);
+    setSelectedValue2(value || null);
   };
+  
 
   const handleClickOpen = () => {
     setForm({ id: props.id });
@@ -54,7 +55,7 @@ export default function SelectTextFields(props) {
     let data = {};
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
     const usuario = JSON.parse(loggedUserJSON);
-
+  
     if (nuevoUsuario) {
       data = {
         id: form.id,
@@ -67,17 +68,17 @@ export default function SelectTextFields(props) {
     } else {
       const selected = usarSegundaLista ? selectedValue2 : selectedValue;
       if (!selected) return;
-
+  
       data = {
-        ...selected,
+        id_persona: selected.id, // Enviar solo el ID de la persona
         id: form.id,
         agendadopor: usuario.usuario,
         usuariodispositivo: usarSegundaLista ? "Si" : "No"
       };
     }
-
+  
     console.log("Datos enviados al backend:", data);
-
+  
     if (usuario.nivel === 40 || usuario.nivel === 41) {
       const response = await servicioDtc.agendarturnocadia(data);
       alert(response);
@@ -85,10 +86,11 @@ export default function SelectTextFields(props) {
       const response = await servicioDtc.agendarturno(data);
       alert(response);
     }
-
+  
     props.traer();
     handleClose();
   };
+  
 
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
@@ -142,33 +144,32 @@ export default function SelectTextFields(props) {
             <>
               {/* Select en lugar del primer Autocomplete */}
               <Select
-                value={selectedValue?.id || ""}
-                onChange={handleSelection}
-                fullWidth
-                displayEmpty
-                variant="outlined"
-                disabled={usarSegundaLista}
-              >
-                <MenuItem value="" disabled>Selecciona una opción</MenuItem>
-                {props.chicos.map((option) => (
-                  <MenuItem key={option.id} value={option.id}>
-                    {option.apellido} {option.nombre} 
-                  </MenuItem>
-                ))}
-              </Select>
-
+  value={selectedValue?.id || ""}
+  onChange={handleSelection}
+  fullWidth
+  displayEmpty
+  variant="outlined"
+  disabled={usarSegundaLista}
+>
+  <MenuItem value="" disabled>Selecciona una opción</MenuItem>
+  {props.chicos.map((option) => (
+    <MenuItem key={option.id} value={option.id}>
+      {option.apellido} {option.nombre}
+    </MenuItem>
+  ))}
+</Select>
               {/* Segundo Autocomplete */}
               <Autocomplete
-                options={props.chicos2}
-                value={selectedValue2}
-                onChange={handleSelection2}
-                getOptionLabel={(option) => `${option.nombre} ${option.apellido}`}
-                isOptionEqualToValue={(option, value) => option.id === value?.id}
-                renderInput={(params) => (
-                  <TextField {...params} label="Selecciona una opción" variant="outlined" />
-                )}
-                disabled={!usarSegundaLista}
-              />
+  options={props.chicos2}
+  value={selectedValue2}
+  onChange={handleSelection2}
+  getOptionLabel={(option) => `${option.nombre} ${option.apellido}`}
+  isOptionEqualToValue={(option, value) => option.id === value?.id}
+  renderInput={(params) => (
+    <TextField {...params} label="Selecciona una opción" variant="outlined" />
+  )}
+  disabled={!usarSegundaLista}
+/>
             </>
           )}
 
