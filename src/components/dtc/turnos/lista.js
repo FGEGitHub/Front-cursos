@@ -195,7 +195,7 @@ function customacciones(dataIndex, rowIndex, data, onClick) {
 function customaagendar(dataIndex, rowIndex, data, onClick) {
   return (
       <>
-
+{datos[1] ? <>
 <Asignar id={datos[0][dataIndex].id} chicos={datos[1]} chicos2={datos[2]} traer={async () => {
                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
                 const user = JSON.parse(loggedUserJSON);
@@ -211,7 +211,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                 }
               
               }}
-              fecha={fecha} />
+              fecha={fecha} /></>:<></>}
              
                { datos[0][dataIndex].estado == 'Agendado' ? <>   <Modalimprimir 
                 nombrepersona={datos[0][dataIndex].nombre+ " "+ datos[0][dataIndex].apellido}

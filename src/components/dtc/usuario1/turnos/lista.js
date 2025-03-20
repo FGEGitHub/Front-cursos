@@ -329,6 +329,7 @@ const TablaNotificaciones = (props) => {
 function customaagendar(dataIndex, rowIndex, data, onClick) {
   return (
       <>
+      
 <Asignar id={chicos[dataIndex].id} chicos={datos} chicos2={datos2} 
  traer={ async (fecha) => {
   try {
