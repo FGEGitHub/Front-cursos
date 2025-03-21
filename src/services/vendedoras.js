@@ -50,6 +50,24 @@ return data
 return data
        
   }
+
+  
+
+  const traerproductos = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerproductos/'+id, config)
+return data
+       
+  }
+  
+  const traermovimientos = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traermovimientos/'+id, config)
+return data
+       
+  }
   const nuevoprpducto= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'nuevoprpducto',datos,config)
@@ -64,5 +82,11 @@ return data
 } 
  
 
-
-export default {listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+const crearnuevoproducto= async  (datos) => {
+  console.log(datos)
+   const {message } = await axios.post(baseUrl+'crearnuevoproducto',datos,config)
+   
+   return message
+} 
+ 
+export default {traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}

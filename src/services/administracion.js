@@ -129,6 +129,19 @@ return data
  
        
   }
+  
+  const registroemprendedora = async (datos) => {
+    console.log(datos)
+  
+ 
+      const {data} = await axios.post(baseUrl+'registroemprendedora', datos,config)
+ 
+        
+    return(data)
+ 
+       
+  }
+
   const modificarusuario = async (datos) => {
     console.log(datos)
   
@@ -153,4 +166,4 @@ return data
  
        
   }
- export default {todoscadia,todos,registronivel3,traertodoelcursado,sistemas,modificarusuario,borrarusuario,contactos,todosdtc }
+ export default {registroemprendedora,todoscadia,todos,registronivel3,traertodoelcursado,sistemas,modificarusuario,borrarusuario,contactos,todosdtc }

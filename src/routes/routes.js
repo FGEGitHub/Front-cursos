@@ -43,7 +43,7 @@ import Call2 from '../pages/usuario2/call';
 import Inscripcionescarna from '../pages/usuario2/carnavalinscrip';
 import Llamadoscarnaval from '../pages/usuario2/callcentercarnaval.js';
 import Callcarnaval from '../pages/usuario2/carnavalcall';
-
+import Agreagremprendedora from '../pages/usuario2/agregaremprendedora';
 
 
 /// 3
@@ -262,7 +262,8 @@ const Rutas = [
 		{ path: '/administracion/inscripcionescarnavales', element: <Inscripcionescarna /> },
 		{ path: '/administracion/llamadoscarnaval', element: <Llamadoscarnaval /> },
 		{ path: '/administracion/carnavalcall/:id', element: <Callcarnaval /> },
-
+		{ path: '/administracion/agregar', element: <Agreagremprendedora /> },
+		
 
 		{ path: '/coordinadores/novedades', element: <Novedades3 /> },
 		{ path: '/coordinadores/cursos', element: <Clases3 /> },

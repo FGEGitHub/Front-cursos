@@ -3,29 +3,28 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/
 import ModalNuevoProducto from "./modalproducto";
 import ModalNuevoMovimiento from "./modalproducto";
 import ModalFormulario from "./ModalFormulario";
-
-const productosIniciales = [
-  { id: 1, nombre: "Producto A", categoria: "Categoría 1", costo: 100, transporte: 10, packaging: 5, precioVenta: 150, ganancia: 35, gananciaPorcentaje: 23.3 },
-  { id: 2, nombre: "Producto B", categoria: "Categoría 2", costo: 200, transporte: 15, packaging: 10, precioVenta: 280, ganancia: 55, gananciaPorcentaje: 19.6 },
-];
-
-const movimientosIniciales = [
-  { id: 1, fecha: "2024-03-18", movimiento: "Compra", facturaCompra: "123", proveedor: "Proveedor X", producto: "Producto A", cantidad: 10, precio: 150, totalFacturado: 1500 },
-  { id: 2, fecha: "2024-03-19", movimiento: "Venta", facturaVenta: "456", cliente: "Cliente Y", producto: "Producto B", cantidad: 5, precio: 280, totalFacturado: 1400 },
-];
+import serviciousuario1 from "../../../services/vendedoras";
 
 const ControlStock = () => {
   const [productos, setProductos] = useState([]);
   const [movimientos, setMovimientos] = useState([]);
-  const [mostrarTabla, setMostrarTabla] = useState("productos"); // 'productos' o 'movimientos'
+  const [mostrarTabla, setMostrarTabla] = useState("productos");
   const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
   const [modalNuevoProducto, setModalNuevoProducto] = useState(false);
   const [modalNuevoMovimiento, setModalNuevoMovimiento] = useState(false);
   const [registroActual, setRegistroActual] = useState(null);
 
   useEffect(() => {
-    setProductos(productosIniciales);
-    setMovimientos(movimientosIniciales);
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    if (loggedUserJSON) {
+      const usuario = JSON.parse(loggedUserJSON);
+      serviciousuario1.traerproductos(usuario.id).then((data) => {
+        setProductos(data);
+      });
+      serviciousuario1.traermovimientos(usuario.id).then((data) => {
+        setMovimientos(data);
+      });
+    }
   }, []);
 
   const abrirModalEditar = (registro) => {
@@ -72,7 +71,7 @@ const ControlStock = () => {
             <tbody>
               {productos.map((p) => (
                 <tr key={p.id}>
-                  <td>{p.nombre}</td>
+                  <td>{p.producto}</td>
                   <td>{p.categoria}</td>
                   <td>${p.costo}</td>
                   <td>${p.transporte}</td>
@@ -133,7 +132,6 @@ const ControlStock = () => {
         </div>
       )}
 
-      {/* Modal para editar productos o movimientos */}
       <Dialog open={modalEditarAbierto} onClose={cerrarModalEditar} maxWidth="sm" fullWidth>
         <DialogTitle>Editar Registro</DialogTitle>
         <DialogContent>
@@ -144,10 +142,7 @@ const ControlStock = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Modal para agregar un nuevo producto */}
       <ModalNuevoProducto open={modalNuevoProducto} onClose={() => setModalNuevoProducto(false)} />
-
-      {/* Modal para agregar un nuevo movimiento */}
       <ModalNuevoMovimiento open={modalNuevoMovimiento} onClose={() => setModalNuevoMovimiento(false)} />
     </div>
   );
