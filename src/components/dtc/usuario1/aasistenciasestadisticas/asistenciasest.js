@@ -124,7 +124,7 @@ const MensualInusuales = (props) => {
         id="date"
         label="Desde"
         type="date"
-        defaultValue="2024-06-01"
+        defaultValue="2025-03-01"
         sx={{ width: 220 }}
         InputLabelProps={{
           shrink: true,
@@ -136,7 +136,7 @@ const MensualInusuales = (props) => {
         id="date"
         label="Hasta"
         type="date"
-        defaultValue="2024-06-01"
+        defaultValue="2025-03-01"
         sx={{ width: 220 }}
         InputLabelProps={{
           shrink: true,
