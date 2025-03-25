@@ -334,7 +334,7 @@ function Nivel(dataIndex, rowIndex, data, onClick) {
 const columns = [
     {
         name: "trabajador_nombre",
-        label: "Quen pa cargó",
+        label: "Quen cargó",
     },
 
     {
@@ -441,25 +441,25 @@ const columns = [
         toolTip: "Ordenar",
       },
       pagination: {
-        next: "ver la ooooootra pavina",
+        next: "siguiente pagina",
         previous: "La que esta antes",
         rowsPerPage: "Filas por página:",
         displayRows: "de",
       },
       toolbar: {
-        search: "fijate  si está",
+        search: "buscar",
         downloadCsv: "Descargar en excel",
         print: "Imprimir",
         viewColumns: "Ver columnas",
         filterTable: "Filtrar tabla",
       },
       filter: {
-        all: "Todos pe",
+        all: "Todos ",
         title: "FILTROS",
         reset: "RESETEAR",
       },
       viewColumns: {
-        title: "Que columnas queres verrrr",
+        title: "Que columnas quieres verr",
         titleAria: "Mostrar/ocultar columnas de la tabla",
       },
       selectedRows: {
