@@ -32,7 +32,6 @@ const ClassDataTable = () => {
 
       try {
         const response = await serviciodtc.traerdatosdeclasehorausuario(requestData);
-        console.log(response)
         if (Array.isArray(response)) {
           setTableData(response[0] || []);
           setClassDetails(response[1] || []);
@@ -72,17 +71,26 @@ const ClassDataTable = () => {
     setOpenModal(false);
   };
 
+  const handleTitleChange = (e) => {
+    const value = e.target.value.slice(0, 144);
+    setEditedTitle(value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    const value = e.target.value.slice(0, 344);
+    setEditedDescription(value);
+  };
+
   const handleSaveChanges = async () => {
     if (tableData.length === 0) return;
 
     try {
       await serviciodtc.modificarclase({
-        id: tableData[0].id, // ID de la clase
+        id: tableData[0].id,
         titulo: editedTitle,
         descripcion: editedDescription,
       });
 
-      // Actualizar estado local para reflejar cambios
       setTableData(prevData => [
         { ...prevData[0], titulo: editedTitle, descripcion: editedDescription }
       ]);
@@ -99,7 +107,7 @@ const ClassDataTable = () => {
         <Card variant="outlined" style={{ marginBottom: "20px", padding: "10px" }}>
           <CardContent>
             <Typography variant="h6">{tableData[0].titulo || "Clase sin título"}</Typography>
-            <Typography variant="h6">{tableData[0].descripcion || " sin descripcion"}</Typography>
+            <Typography variant="h6">{tableData[0].descripcion || "Sin descripción"}</Typography>
             <Typography variant="body1">Fecha: {tableData[0].fecha}</Typography>
             <Typography variant="body1">Día: {tableData[0].dia}</Typography>
             <Typography variant="body1">Hora: {tableData[0].hora}</Typography>
@@ -151,14 +159,15 @@ const ClassDataTable = () => {
             p: 4,
             borderRadius: 2
           }}
-        > 
-          <Typography variant="h6" gutterBottom>ModificarClase</Typography>
+        >
+          <Typography variant="h6" gutterBottom>Modificar Clase</Typography>
           <TextField
             label="Título"
             fullWidth
             variant="outlined"
             value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
+            onChange={handleTitleChange}
+            helperText={`${editedTitle.length}/144 caracteres`}
             style={{ marginBottom: "15px" }}
           />
           <TextField
@@ -168,7 +177,8 @@ const ClassDataTable = () => {
             multiline
             rows={3}
             value={editedDescription}
-            onChange={(e) => setEditedDescription(e.target.value)}
+            onChange={handleDescriptionChange}
+            helperText={`${editedDescription.length}/344 caracteres`}
             style={{ marginBottom: "15px" }}
           />
           <Button variant="contained" color="primary" onClick={handleSaveChanges}>
