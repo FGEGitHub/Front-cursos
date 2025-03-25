@@ -107,13 +107,15 @@ const traer = async () => {
               <CardSeleccionFecha 
               traer ={async (fechaa) => {
                 try {
-                  console.log(fechaa)
+                  console.log(fechaa);
                   const partesFecha = fechaa.split("-");
-                  const dia = partesFecha[2] < 10 ?   partesFecha[2][1] : partesFecha[2];
-                  const mes = partesFecha[1] < 10 ?   partesFecha[1][1] : partesFecha[1];
-                 const fechaFormateada = dia + "-" + mes + "-" + partesFecha[0];
-
-                  console.log(fechaFormateada);
+                  const dia = partesFecha[2].padStart(2, "0");
+                  const mes = partesFecha[1].padStart(2, "0");
+                  const año = partesFecha[0];
+          
+                  const fechaFormateada = `${año}-${mes}-${dia}`;
+                  console.log(22, fechaFormateada);
+          
                   await setCurrentDate()
                   await setCurrentDate(fechaFormateada)
                         const historial = await servicioDtc.traertodaslasactividades({fecha:fechaFormateada,id:238})
