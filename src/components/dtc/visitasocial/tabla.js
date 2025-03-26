@@ -12,7 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FirmaAugusto from "../../../Assets/firmaaugusto.jpeg";
 import FirmaSole from "../../../Assets/firmasole.jpeg";
-
+import ModalBorrar from "./modalborrar"
 import servicioDtc from "../../../services/dtc";
 import Nueva from './nueva';
 import Modificar from './editaractividad';
@@ -295,6 +295,16 @@ function Nivel(dataIndex, rowIndex, data, onClick) {
                       setAsitencias(novedades_aux);
                     }
                   }}/>
+                    <Borrar id={asistencias[dataIndex].id} 
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                      setAsitencias(novedades_aux);
+                    }
+                  }}/>
                 {usuario ? <>
       
                 {usuario.id==asistencias[dataIndex].idu ? <>
@@ -321,6 +331,8 @@ function Nivel(dataIndex, rowIndex, data, onClick) {
                       setAsitencias(novedades_aux);
                     }
                   }}/>
+             
+                  
                   </>:<></>}
                 
                 </>:<></>}
