@@ -14,6 +14,7 @@ import CardInformacionDia from './tarjetahoy';
 import CardSeleccionFecha from './tarjetaselecionar';
 import  Acordeon   from '../actividades/acordeon';
 import  { useEffect, useState } from "react";
+import Estadisticas from './estadistivcas'
 import Asistencia from  '../../usuario2/asistencia/tabla'
 
 import Dtcito from '../bot';
@@ -71,6 +72,7 @@ const traer = async () => {
   return (<>
     <Dtcito/>
     <Container component="main" >
+    <Estadisticas/>
       <CssBaseline />
       <Grid container spacing={2} >
         <Grid item xs={12} md={6}>

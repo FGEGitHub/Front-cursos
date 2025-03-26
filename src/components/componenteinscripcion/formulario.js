@@ -419,6 +419,8 @@ const Estracto = () => {
                                 margin="dense"
                                 id="name"
                                 label="Telefono alternativo"
+                                error={!inscrip.tel2 && inscrip.dni}
+                                
                                 name="tel2"
                                 onChange={handleChange}
                                 fullWidth
@@ -435,8 +437,9 @@ name="fecha_nac"
 id="date"
 label="Fecha de Nacimiento"
 type="date"
-defaultValue="2020-01-01"
+defaultValue="1990-01-01"
 sx={{ width: 220 }}
+error={!inscrip.fecha_nac && inscrip.dni}
 InputLabelProps={{
     shrink: true,
 }}
@@ -700,7 +703,7 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'prioridad1',
+                                    name: 'uno',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
@@ -727,7 +730,7 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'prioridad2',
+                                    name: 'dos',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
@@ -746,7 +749,7 @@ InputLabelProps={{
                         </Box>
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                     <>
                                         {inscrip.trabajo === 'Si' ? <>
 
@@ -1020,6 +1023,7 @@ InputLabelProps={{
                                 margin="dense"
                                 id="name"
                                 label="Telefono alternativo"
+                                error={!inscrip.tel2 && inscrip.dni}
                                 name="tel2"
                                 onChange={handleChange}
                                 fullWidth
@@ -1037,6 +1041,7 @@ InputLabelProps={{
                                 label="Fecha de nacimiento"
                                 type="date"
                                 defaultValue="2000-01-01"
+                                error={!inscrip.fecha_nac && inscrip.dni}
                                 sx={{ width: 220 }}
                                 InputLabelProps={{
                                     shrink: true,
@@ -1285,14 +1290,14 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'prioridad1',
+                                    name: 'uno',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
                             >
                                 <option value={'Sin determinar'}>Elegir</option>
    {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
+                            
                           
                              {cohortes.map((row) => (
                                        
@@ -1314,7 +1319,7 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'prioridad2',
+                                    name: 'dos',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
@@ -1337,7 +1342,7 @@ InputLabelProps={{
                         <br />
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.fecha_nac && inscrip.dni && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                     <>
                                         {inscrip.trabajo === 'Si' ? <>
 
@@ -1421,7 +1426,7 @@ InputLabelProps={{
 
                             />
 
-
+<br/>
 
                             {existe.length > 0 ? <>
                                 {loading ? <>
@@ -1608,12 +1613,13 @@ InputLabelProps={{
                                     />
                                 </>}
                             </>}
-
+<br/>
                             <TextField
                                 style={{ width: '250px' }}
                                 margin="dense"
                                 id="name"
                                 label="Telefono alternativo"
+                                error={!inscrip.tel2 && inscrip.dni}
                                 name="tel2"
                                 onChange={handleChange}
                                 fullWidth
@@ -1627,10 +1633,11 @@ InputLabelProps={{
 
 onChange={handleChange}
 name="fecha_nac"
+error={!inscrip.fecha_nac && inscrip.dni}
 id="date"
 label="Fecha de Nacimiento"
 type="date"
-defaultValue="2020-01-01"
+defaultValue="1990-01-01"
 sx={{ width: 220 }}
 InputLabelProps={{
     shrink: true,
@@ -1895,7 +1902,7 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'prioridad1',
+                                    name: 'uno',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
@@ -1923,7 +1930,7 @@ InputLabelProps={{
                                 defaultValue={30}
                                 onChange={handleChange}
                                 inputProps={{
-                                    name: 'prioridad2',
+                                    name: 'dos',
                                     id: 'uncontrolled-native',
                                 }}
                                 sx={'width:250px'}
@@ -1944,7 +1951,7 @@ InputLabelProps={{
                         </Box>
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.prioridad1 && inscrip.prioridad2 ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario && inscrip.uno && inscrip.dos ?
                                     <>
                                         {inscrip.trabajo === 'Si' ? <>
 
