@@ -1934,11 +1934,11 @@ InputLabelProps={{
           break;
         case 457:
           customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
-          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' };
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
           break;
         case 458:
           customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
-          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' };
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
           break;
           
         case 459:
@@ -2012,11 +2012,11 @@ InputLabelProps={{
           break;
         case 457:
           customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
-          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' };
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
           break;
         case 458:
           customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
-          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' };
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
           break;
           
         case 459:
