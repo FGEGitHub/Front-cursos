@@ -76,7 +76,20 @@ export default function MenuIzq2 ({children}) {
         path: '/dtc/cocina',
        // tooltip: 'Lista de usuarios del dispositivo'
       },
-     
+      
+      {
+        text: 'Raciones',
+        icon: <CalendarTodayIcon color="primary" />,
+        path: '/dtc/cocinaraciones',
+       // tooltip: 'Lista de usuarios del dispositivo'
+      },
+      {
+        text: 'Asistencias',
+        icon: <CalendarTodayIcon color="primary" />,
+        path: '/dtc/cocinaraciones',
+       // tooltip: 'Lista de usuarios del dispositivo'
+      },
+      
    /*  {
       text: (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

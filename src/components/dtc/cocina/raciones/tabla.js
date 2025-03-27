@@ -1,59 +1,50 @@
-
 import React, { useState, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Borrar from './borar'
+import { Button, Modal, Box, Stepper, Step, StepLabel } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import servicioDtc from "../../../../services/dtc";
-import Nueva from './nuevo';
+import NuevaColacion from './nuevacolacion';
+import NuevaMerienda from './nuevamerienda';
+import Borrar from './borar';
 
 export default function TablaActividades() {
+  const [activeStep, setActiveStep] = useState(0);
   const [open, setOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null); // Estado para la imagen
-  const [asistencias, setAsistencias] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [asistenciasColaciones, setAsistenciasColaciones] = useState([]);
+  const [asistenciasMeriendas, setAsistenciasMeriendas] = useState([]);
   const [usuario, setUsuario] = useState([]);
   const [imageUrl, setImageUrl] = useState();
 
   useEffect(() => {
-    const traer = async () => {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-      if (loggedUserJSON) {
-        const usuario = JSON.parse(loggedUserJSON);
-        setUsuario(usuario);
-        const novedades_aux = await servicioDtc.traermeriendas();
-        setAsistencias(novedades_aux);
-      }
-    };
-    traer();
+    traerDatos();
   }, []);
 
   const handleClose = () => {
     setOpen(false);
     setSelectedImage(null);
   };
-  const traer = async () => {
+
+  const traerDatos = async () => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON);
       setUsuario(usuario);
-      const novedades_aux = await servicioDtc.traermeriendas();
-      setAsistencias(novedades_aux);
+      const colaciones = await servicioDtc.traercolaciones();
+      const meriendas = await servicioDtc.traermeriendas();
+      setAsistenciasColaciones(colaciones);
+      setAsistenciasMeriendas(meriendas);
     }
   };
 
   const handleViewFile = async (id) => {
     try {
       const response = await servicioDtc.verimagendemerienda(id);
-      console.log(response)
-   
-      setImageUrl(response); // Guarda la URL para mostrar la imagen
-      setOpen(true); // Abre el modal
+      setImageUrl(response);
+      setOpen(true);
     } catch (error) {
       console.error('Error al cargar la imagen:', error);
     }
   };
-  
 
   const columns = [
     { name: "fecha", label: "Fecha" },
@@ -64,28 +55,15 @@ export default function TablaActividades() {
       label: "Acciones",
       options: {
         customBodyRenderLite: (dataIndex) => {
-          const rowData = asistencias[dataIndex];
+          const data = activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas;
+          const rowData = data[dataIndex];
           return (
             rowData.ubicacion && (
               <>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleViewFile(rowData.id)}
-              >
-                Ver Imagen
-              </Button>
-              <Borrar
-              id={rowData.id}
-              traer={async () => {
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                if (loggedUserJSON) {
-                  const usuario = JSON.parse(loggedUserJSON);
-                  setUsuario(usuario);
-                  const novedades_aux = await servicioDtc.traermeriendas();
-                  setAsistencias(novedades_aux);
-                }
-              }}/>
+                <Button variant="contained" color="primary" onClick={() => handleViewFile(rowData.id)}>
+                  Ver Imagen
+                </Button>
+                <Borrar id={rowData.id} traer={() => traerDatos()} />
               </>
             )
           );
@@ -96,24 +74,44 @@ export default function TablaActividades() {
 
   return (
     <div className="App">
-      <h1>Total Cantidad: {asistencias.reduce((acc, item) => acc + (item.cantidad || 0), 0)}</h1>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        <Step onClick={() => setActiveStep(0)}>
+          <StepLabel>Colaciones</StepLabel>
+        </Step>
+        <Step onClick={() => setActiveStep(1)}>
+          <StepLabel>Meriendas</StepLabel>
+        </Step>
+      </Stepper>
 
-      <Nueva id_trabajador={usuario.id} traer={traer} />
-      <MUIDataTable title={"Lista de informes"} data={asistencias} columns={columns} />
+      <h1>
+        Total Cantidad: {activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas.reduce((acc, item) => acc + (item.cantidad || 0), 0)}
+      </h1>
 
-      {/* Modal para mostrar la imagen */}
+      {/* Botón para agregar según la pestaña activa */}
+      {activeStep === 0 ? (
+        <NuevaColacion id_trabajador={usuario.id} traer={() => traerDatos()} />
+      ) : (
+        <NuevaMerienda id_trabajador={usuario.id} traer={() => traerDatos()} />
+      )}
+
+      <MUIDataTable
+        title={activeStep === 0 ? "Lista de Colaciones" : "Lista de Meriendas"}
+        data={activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas}
+        columns={columns}
+      />
+
       <Modal open={open} onClose={handleClose}>
-  <Box sx={{ width: 400, padding: 2, bgcolor: 'background.paper', boxShadow: 24, borderRadius: 1 }}>
-    {imageUrl ? (<>
-    <img src={`data:image/jpeg;base64,${imageUrl}`} width="100%" height="100%" /></>
-    ) : (
-      <p>No se encontró la imagen</p>
-    )}
-    <Button variant="contained" color="success" onClick={handleClose} sx={{ mt: 2 }}>
-      Cerrar
-    </Button>
-  </Box>
-</Modal>
+        <Box sx={{ width: 400, padding: 2, bgcolor: 'background.paper', boxShadow: 24, borderRadius: 1 }}>
+          {imageUrl ? (
+            <img src={`data:image/jpeg;base64,${imageUrl}`} width="100%" height="100%" />
+          ) : (
+            <p>No se encontró la imagen</p>
+          )}
+          <Button variant="contained" color="success" onClick={handleClose} sx={{ mt: 2 }}>
+            Cerrar
+          </Button>
+        </Box>
+      </Modal>
     </div>
-  ); 
+  );
 }
