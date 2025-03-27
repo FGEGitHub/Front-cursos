@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox,
-  Card, CardContent, Typography, Button, Modal, TextField, Box
+  Card, CardContent, Typography, Button, Modal, TextField, Box,CardMedia,Input
 } from "@mui/material";
 import serviciodtc from "../../../services/dtc";
 import { useParams } from "react-router-dom";
@@ -16,7 +16,9 @@ const ClassDataTable = () => {
   const [openModal, setOpenModal] = useState(false);
   const [editedTitle, setEditedTitle] = useState("");
   const [editedDescription, setEditedDescription] = useState("");
-
+  const [file, setFile] = useState(null);
+   const [foto, setfoto] = useState()
+  const [previewImage, setPreviewImage] = useState(null);
   useEffect(() => {
     if (!isFetched) {
       traer();
@@ -36,6 +38,7 @@ const ClassDataTable = () => {
         if (Array.isArray(response)) {
           setTableData(response[0] || []);
           setClassDetails(response[1] || []);
+          setfoto(response[2])
         }
       } catch (error) {
         console.error("Error al traer los datos:", error);
@@ -76,11 +79,23 @@ const ClassDataTable = () => {
     if (tableData.length === 0) return;
 
     try {
-      await serviciodtc.modificarclase({
-        id: tableData[0].id, // ID de la clase
-        titulo: editedTitle,
-        descripcion: editedDescription,
-      });
+      if (file) {
+        // Guardar el nombre de la imagen en el frontend
+        const fileName = `${Date.now()}_${file.name}`;
+  
+        // Guardar la imagen en el frontend (puedes almacenarla donde sea necesario)
+        // En este caso, estoy almacenando la imagen en el estado previewImage
+        setPreviewImage(fileName);
+      }
+  
+      // Enviar datos del formulario al backend
+      
+        const formData = new FormData();
+        formData.append('id', tableData[0].id);
+        formData.append('titulo', editedTitle);
+        formData.append('descripcion', editedDescription);
+        formData.append('imagen', file);
+      await serviciodtc.modificarclase(formData);
 
       // Actualizar estado local para reflejar cambios
       setTableData(prevData => [
@@ -92,7 +107,20 @@ const ClassDataTable = () => {
       console.error("Error al modificar la clase:", error);
     }
   };
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
 
+    if (selectedFile) {
+      setFile(selectedFile);
+
+      // Mostrar una vista previa de la imagen en el frontend
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  };
   return (
     <div>
       {tableData.length > 0 && (
@@ -103,6 +131,11 @@ const ClassDataTable = () => {
             <Typography variant="body1">Fecha: {tableData[0].fecha}</Typography>
             <Typography variant="body1">Día: {tableData[0].dia}</Typography>
             <Typography variant="body1">Hora: {tableData[0].hora}</Typography>
+            {foto ? (
+  <img src={`data:image/jpeg;base64,${foto}`} width="170" height="200" />
+) : (
+  <>Sin foto</>
+)}
             <Button variant="contained" color="primary" onClick={handleOpenModal} style={{ marginTop: "10px" }}>
               Editar Clase
             </Button>
@@ -171,6 +204,20 @@ const ClassDataTable = () => {
             onChange={(e) => setEditedDescription(e.target.value)}
             style={{ marginBottom: "15px" }}
           />
+          subir foto(opcional)
+            <Input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+           {previewImage && (
+        <Card>
+          <CardMedia component="img" alt="Preview" height="140" image={previewImage} />
+          <CardContent>
+            <p>Imagen de vista previa</p>
+          </CardContent>
+        </Card>
+      )}
           <Button variant="contained" color="primary" onClick={handleSaveChanges}>
             Guardar Cambios
           </Button>

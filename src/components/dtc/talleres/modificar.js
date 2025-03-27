@@ -12,7 +12,7 @@ import { Paper } from '@mui/material';
 
 export default function Clasenueva(props) {
     let params = useParams();
-    let id = params.id;
+  
 
     const [open, setOpen] = React.useState(false);
     const [form, setForm] = useState({
@@ -38,11 +38,40 @@ export default function Clasenueva(props) {
     const handleClickOpen = () => {
         setOpen(true);
     };
-
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+    
+        if (selectedFile) {
+          setFile(selectedFile);
+    
+          // Mostrar una vista previa de la imagen en el frontend
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setPreviewImage(reader.result);
+          };
+          reader.readAsDataURL(selectedFile);
+        }
+      };
     const handleDeterminar = async (event) => {
         event.preventDefault();
         try {
-            const respuesta = await servicioDtc.modificarclase(form);
+            if (file) {
+                // Guardar el nombre de la imagen en el frontend
+                const fileName = `${Date.now()}_${file.name}`;
+          
+                // Guardar la imagen en el frontend (puedes almacenarla donde sea necesario)
+                // En este caso, estoy almacenando la imagen en el estado previewImage
+                setPreviewImage(fileName);
+              }
+          
+              // Enviar datos del formulario al backend
+              
+                const formData = new FormData();
+                formData.append('titulo', form.titulo);
+                formData.append('fecha', form.fecha);
+                formData.append('fecha', form.fecha);
+                formData.append('imagen', descripcion);
+            const respuesta = await servicioDtc.modificarclase(formData);
             alert(respuesta);
         } catch (error) {
             console.error(error);
@@ -102,6 +131,19 @@ export default function Clasenueva(props) {
                             helperText={`${form.descripcion.length}/344 caracteres`}
                             multiline
                         />
+                        <Input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+           {previewImage && (
+        <Card>
+          <CardMedia component="img" alt="Preview" height="140" image={previewImage} />
+          <CardContent>
+            <p>Imagen de vista previa</p>
+          </CardContent>
+        </Card>
+      )}
                         <DialogActions>
                             <Button variant="contained" color="primary" onClick={handleDeterminar}>Modificar</Button>
                             <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
