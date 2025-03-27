@@ -10,8 +10,8 @@ export default function TablaActividades() {
   const [activeStep, setActiveStep] = useState(0);
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [asistenciasColaciones, setAsistenciasColaciones] = useState([]);
-  const [asistenciasMeriendas, setAsistenciasMeriendas] = useState([]);
+  const [asistenciasColaciones, setAsistenciasColaciones] = useState();
+  const [asistenciasMeriendas, setAsistenciasMeriendas] = useState();
   const [usuario, setUsuario] = useState([]);
   const [imageUrl, setImageUrl] = useState();
 
@@ -29,7 +29,7 @@ export default function TablaActividades() {
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON);
       setUsuario(usuario);
-      const colaciones = await servicioDtc.traercolaciones();
+     const colaciones = await servicioDtc.traercolaciones();
       const meriendas = await servicioDtc.traermeriendas();
       setAsistenciasColaciones(colaciones);
       setAsistenciasMeriendas(meriendas);
@@ -84,7 +84,6 @@ export default function TablaActividades() {
       </Stepper>
 
       <h1>
-        Total Cantidad: {activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas.reduce((acc, item) => acc + (item.cantidad || 0), 0)}
       </h1>
 
       {/* Botón para agregar según la pestaña activa */}

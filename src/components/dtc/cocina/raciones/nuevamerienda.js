@@ -90,7 +90,7 @@ props.traer()
 <>
 
 
-<Button onClick={handleClickOpen} variant='containded' >Agregar consumo del dia</Button>
+<Button onClick={handleClickOpen} variant='containded' >Agregar consumo MEriena</Button>
 
 
 
