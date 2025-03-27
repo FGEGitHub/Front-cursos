@@ -708,15 +708,62 @@ InputLabelProps={{
                                 }}
                                 sx={'width:250px'}
                             >
-                                 {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
+                                 {cohortes ? (
+  <>
+     {cohortes.map((row) => {
+      let customText = row.descripcion;
+      let customStyle = {};
+
+      switch (row.id) {
+        case 453:
+          customText = `LUNES de 09 a 11hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 454:
+          customText = `LUNES de 14 a 16hs PEINADOS PARA EVENTOS (turno tarde)`;
+          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' }
+          break;
+        case 455:
+          customText = `LUNES de 16.30 a 18.30hs PEINADOS PARA EVENTOS (turno tarde)`;
+          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' }
+          break;
+          case 456:
+          customText = `MARTES de 09 a 11hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 457:
+          customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
+          break;
+        case 458:
+          customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
+          break;
+          
+        case 459:
+          customText = `MIÉRCOLES de 09 a 11hs DISEO DE LENCERIA Y PIJAMA (turno mañana)`;
+          customStyle = { backgroundColor: '#FFB6C1', fontWeight: 'bold' };
+          break;
+        case 460:
+          customText = `MIÉRCOLES de 14 a 16hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 461:
+          customText = `MIÉRCOLES de 16.30 a 18.30hs DISEÑO DE LENCERIA Y PIJAMA (turno mañana)`;
+          customStyle = { backgroundColor: '#FFB6C1', fontWeight: 'bold' };
+          break;
+        default:
+          break;
+      }
+
+      return (
+        <option key={row.id} value={row.id} style={customStyle}>
+          {customText}
+        </option>
+      );
+    })}
+  </>
+) : <>Cargando</>}
                             </NativeSelect>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
                                 <Typography variant="p" component="div" color="black">
@@ -735,15 +782,62 @@ InputLabelProps={{
                                 }}
                                 sx={'width:250px'}
                             >
-                                   {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
+                                   {cohortes ? (
+  <>
+     {cohortes.map((row) => {
+      let customText = row.descripcion;
+      let customStyle = {};
+
+      switch (row.id) {
+        case 453:
+          customText = `LUNES de 09 a 11hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 454:
+          customText = `LUNES de 14 a 16hs PEINADOS PARA EVENTOS (turno tarde)`;
+          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' }
+          break;
+        case 455:
+          customText = `LUNES de 16.30 a 18.30hs PEINADOS PARA EVENTOS (turno tarde)`;
+          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' }
+          break;
+          case 456:
+          customText = `MARTES de 09 a 11hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 457:
+          customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
+          break;
+        case 458:
+          customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
+          break;
+          
+        case 459:
+          customText = `MIÉRCOLES de 09 a 11hs DISEO DE LENCERIA Y PIJAMA (turno mañana)`;
+          customStyle = { backgroundColor: '#FFB6C1', fontWeight: 'bold' };
+          break;
+        case 460:
+          customText = `MIÉRCOLES de 14 a 16hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 461:
+          customText = `MIÉRCOLES de 16.30 a 18.30hs DISEÑO DE LENCERIA Y PIJAMA (turno mañana)`;
+          customStyle = { backgroundColor: '#FFB6C1', fontWeight: 'bold' };
+          break;
+        default:
+          break;
+      }
+
+      return (
+        <option key={row.id} value={row.id} style={customStyle}>
+          {customText}
+        </option>
+      );
+    })}
+  </>
+) : <>Cargando</>}
                             </NativeSelect>
 
                         </Box>
@@ -1296,15 +1390,62 @@ InputLabelProps={{
                                 sx={'width:250px'}
                             >
                                 <option value={'Sin determinar'}>Elegir</option>
-   {cohortes ? <>
-                            
-                          
-                             {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
+                                {cohortes ? (
+  <>
+     {cohortes.map((row) => {
+      let customText = row.descripcion;
+      let customStyle = {};
+
+      switch (row.id) {
+        case 453:
+          customText = `LUNES de 09 a 11hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 454:
+          customText = `LUNES de 14 a 16hs PEINADOS PARA EVENTOS (turno tarde)`;
+          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' }
+          break;
+        case 455:
+          customText = `LUNES de 16.30 a 18.30hs PEINADOS PARA EVENTOS (turno tarde)`;
+          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' }
+          break;
+          case 456:
+          customText = `MARTES de 09 a 11hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 457:
+          customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
+          break;
+        case 458:
+          customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
+          break;
+          
+        case 459:
+          customText = `MIÉRCOLES de 09 a 11hs DISEO DE LENCERIA Y PIJAMA (turno mañana)`;
+          customStyle = { backgroundColor: '#FFB6C1', fontWeight: 'bold' };
+          break;
+        case 460:
+          customText = `MIÉRCOLES de 14 a 16hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 461:
+          customText = `MIÉRCOLES de 16.30 a 18.30hs DISEÑO DE LENCERIA Y PIJAMA (turno mañana)`;
+          customStyle = { backgroundColor: '#FFB6C1', fontWeight: 'bold' };
+          break;
+        default:
+          break;
+      }
+
+      return (
+        <option key={row.id} value={row.id} style={customStyle}>
+          {customText}
+        </option>
+      );
+    })}
+  </>
+) : <>Cargando</>}
 
                             </NativeSelect>
                             <InputLabel variant="outlined" htmlFor="uncontrolled-native">
@@ -1326,15 +1467,62 @@ InputLabelProps={{
                             >
                                 <option value={'Sin determinar'}>Elegir</option>
 
-                                {cohortes ? <>
-                             <option value={'1'}> Elegir</option>
-                          
-                             {cohortes.map((row) => (
-                                       
-                                       <option value={row.id}> {row.descripcion} </option>
-         
-                             ))}
-                                  </>:<>Cargando</>}
+                                {cohortes ? (
+  <>
+     {cohortes.map((row) => {
+      let customText = row.descripcion;
+      let customStyle = {};
+
+      switch (row.id) {
+        case 453:
+          customText = `LUNES de 09 a 11hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 454:
+          customText = `LUNES de 14 a 16hs PEINADOS PARA EVENTOS (turno tarde)`;
+          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' }
+          break;
+        case 455:
+          customText = `LUNES de 16.30 a 18.30hs PEINADOS PARA EVENTOS (turno tarde)`;
+          customStyle = { backgroundColor: 'lightgreen', fontStyle: 'italic' }
+          break;
+          case 456:
+          customText = `MARTES de 09 a 11hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 457:
+          customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
+          break;
+        case 458:
+          customText = `MARTES de 16.30hs a 18.30hs DISEÑO DE UÑAS (turno tarde)  (turno mañana)`;
+          customStyle = { backgroundColor: 'lightyellow', fontStyle: 'italic' };
+          break;
+          
+        case 459:
+          customText = `MIÉRCOLES de 09 a 11hs DISEO DE LENCERIA Y PIJAMA (turno mañana)`;
+          customStyle = { backgroundColor: '#FFB6C1', fontWeight: 'bold' };
+          break;
+        case 460:
+          customText = `MIÉRCOLES de 14 a 16hs AUTOMAQUILLAJE (turno mañana)`;
+          customStyle = { backgroundColor: 'lightblue', fontWeight: 'bold' }
+          break;
+        case 461:
+          customText = `MIÉRCOLES de 16.30 a 18.30hs DISEÑO DE LENCERIA Y PIJAMA (turno mañana)`;
+          customStyle = { backgroundColor: '#FFB6C1', fontWeight: 'bold' };
+          break;
+        default:
+          break;
+      }
+
+      return (
+        <option key={row.id} value={row.id} style={customStyle}>
+          {customText}
+        </option>
+      );
+    })}
+  </>
+) : <>Cargando</>}
 
                             </NativeSelect>
 
