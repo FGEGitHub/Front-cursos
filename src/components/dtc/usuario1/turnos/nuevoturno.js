@@ -94,7 +94,7 @@ console.log(user.nivel)
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <h3><b>NUEVO TURNO</b></h3>
-          {usuario && usuario.nivel}sad{usuario.nivel}
+          {usuario && usuario.nivel}
           {usuario && (usuario.nivel == 23 || usuario.nivel == 20 || usuario.nivel == 24) && (
             <>
               <br />
