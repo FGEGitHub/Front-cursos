@@ -37,12 +37,13 @@ export default function SelectTextFields(props) {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
     const user = JSON.parse(loggedUserJSON);
     setUsuario(user);
-
-    if (user.nivel === 40) {
+console.log(user.nivel)
+    if (user.nivel == 40) {
       const nov = await servicioDtc.traerprofesionales();
       setProfesionales(nov[0]);
-    } else if (user.nivel === 20 || user.nivel === 23) {
+    } else if (user.nivel == 20 || user.nivel == 23) {
       const nov = await servicioDtc.traerpsicologos();
+      console.log(nov[0])
       setProfesionales(nov[0]);
     }
   };
@@ -81,7 +82,7 @@ export default function SelectTextFields(props) {
     setOpen(false);
   };
 
-  const idPsico = usuario?.nivel === 24 ? usuario.id : idPsicoSeleccionado;
+  const idPsico = usuario?.nivel == 24 ? usuario.id : idPsicoSeleccionado;
   const turnosDelProfesional = props.turnosdeldia.filter(turno => turno.id_psico == idPsico);
   const horariosOcupados = turnosDelProfesional.map(turno => turno.detalle);
 
@@ -93,8 +94,8 @@ export default function SelectTextFields(props) {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <h3><b>NUEVO TURNO</b></h3>
-          {usuario && usuario.nivel}
-          {usuario && (usuario.nivel == 40 || usuario.nivel == 20 || usuario.nivel == 24) && (
+          {usuario && usuario.nivel}sad{usuario.nivel}
+          {usuario && (usuario.nivel == 23 || usuario.nivel == 20 || usuario.nivel == 24) && (
             <>
               <br />
               {profesionales ? (
@@ -102,6 +103,7 @@ export default function SelectTextFields(props) {
                   <InputLabel>Profesional</InputLabel>
                   <FormControl>
                     <RadioGroup name="profesional" onChange={handleChange}>
+                      
                       {profesionales.map((row) => (
                         <FormControlLabel key={row.id} value={row.id} control={<Radio />} label={row.nombre} />
                       ))}
