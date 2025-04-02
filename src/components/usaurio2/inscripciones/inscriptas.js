@@ -167,6 +167,16 @@ const TablaNotificaciones = (props) => {
 
         },
 
+    {
+            name: "tel",
+            label: "tel",
+
+        },
+        {
+            name: "tel2",
+            label: "tel2",
+
+        },
   
    
         
