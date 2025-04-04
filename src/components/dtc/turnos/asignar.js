@@ -154,7 +154,7 @@ export default function SelectTextFields(props) {
   <MenuItem value="" disabled>Selecciona una opción</MenuItem>
   {props.chicos.map((option) => (
     <MenuItem key={option.id} value={option.id}>
-      {option.apellido} {option.nombre}
+      {option.apellido} {option.nombre} {option.nombrepsic && "  -   se atiende normalmente con "+option.nombrepsic}
     </MenuItem>
   ))}
 </Select>
