@@ -256,7 +256,11 @@ traer={async () => {
       name: "etapa",
       label: "etapa",
 
-  },
+  }, {
+    name: "titulo",
+    label: "titulo",
+
+},
     {
         name: "fecha",
         label: "fecha",
