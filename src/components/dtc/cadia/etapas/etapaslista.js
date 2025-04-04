@@ -113,7 +113,7 @@ const TablaNotificaciones = (props) => {
         selectableRowsOnClick: true,
         responsive: 'scroll',
         rowsPerPage: 5,
-        rowsPerPageOptions: [5, 10, 15],
+        rowsPerPageOptions: [50, 100, 150],
         downloadOptions: { filename: 'tableDownload.csv', separator: ',' },
         print: true,
         filter: true,
@@ -315,7 +315,7 @@ traer={async () => {
 <Button variant="contained" color="primary" onClick={toggleVista}>
                 {vistaCelular ? "Cambiar a Vista de PC" : "Cambiar a Vista del Cel"}
             </Button>
-            <h2>Lista de etapassss</h2>
+            <h2>Lista de etapas</h2>
             {chicos ? <>
                 <div>
 
@@ -350,7 +350,7 @@ traer={async () => {
                     {chicos.length > 0 ? <>
 
 
-                      {vistaCelular ? (
+                      {!vistaCelular ? (
                 <TableContainer>
                     <Table>
                         <TableHead>
