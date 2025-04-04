@@ -113,7 +113,7 @@ const TablaNotificaciones = (props) => {
         selectableRowsOnClick: true,
         responsive: 'scroll',
         rowsPerPage: 5,
-        rowsPerPageOptions: [5, 10, 15],
+        rowsPerPageOptions: [50, 100, 150],
         downloadOptions: { filename: 'tableDownload.csv', separator: ',' },
         print: true,
         filter: true,
