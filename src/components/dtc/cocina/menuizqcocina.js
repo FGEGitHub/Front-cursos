@@ -131,12 +131,7 @@ export default function MenuIzq2 ({children}) {
         path: '/dtc/cocinaraciones',
         //tooltip: 'Detalle de asistencias de usuarios'
       },
-      {
-        text: 'Stock',
-        icon: <InventoryIcon color="primary" />,
-        path: '/dtc/cocinastock',
-        //tooltip: 'Detalle de asistencias de usuarios'
-      }
+    
       
   ];
   const islogo = {

@@ -37,7 +37,7 @@ export default function Paginas() {
       <>
   <MenuuCel/>
   <Menuizqcocia>
-     <Asis/>
+    
      <br/>
      <br/>
     </Menuizqcocia>

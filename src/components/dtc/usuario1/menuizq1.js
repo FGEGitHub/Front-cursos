@@ -126,6 +126,12 @@ export default function MenuIzq2 ({children}) {
       icon: <ArchitectureIcon color="primary" />,
       path: '/dtc/usuario1/asisencias',
       //tooltip: 'Detalle de asistencias de usuarios'
+    },
+    {
+      text: 'Inventario',
+      icon: <ArchitectureIcon color="primary" />,
+      path: '/dtc/usuario1/inventario',
+      //tooltip: 'Detalle de asistencias de usuarios'
     }
   ];
 

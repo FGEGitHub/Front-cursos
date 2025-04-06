@@ -112,6 +112,7 @@ export default function Ingresos() {
                                     <MenuItem value={'29'}>1-DTC inventario</MenuItem>
                                     <MenuItem value={'27'}>Gimnasio</MenuItem>
                                     <MenuItem value={'28'}>Trabajadora social</MenuItem>
+                                    <MenuItem value={'29'}>Fines</MenuItem>
                                 </Select>
                             </FormControl>
                             <TextField
