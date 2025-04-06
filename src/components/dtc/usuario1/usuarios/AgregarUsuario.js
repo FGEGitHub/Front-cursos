@@ -101,12 +101,12 @@ export default function Ingresos() {
                                     </MenuItem>
                                     
                                    
-                                    <MenuItem value={'20'}>1-DTC 1 admin</MenuItem>
-                                    <MenuItem value={'21'}>1-DTC 2 Kid</MenuItem>
-                                    <MenuItem value={'22'}>1-DTC 3 cocina</MenuItem>
-                                    <MenuItem value={'23'}>1-DTC 4 turnos</MenuItem>
-                                    <MenuItem value={'24'}>1-DTC 5 psicologa</MenuItem>
-                                    <MenuItem value={'25'}>1-DTC 6 sole</MenuItem>
+                                    <MenuItem value={'20'}>1-DTC 0 admin</MenuItem>
+                                    <MenuItem value={'21'}>1-DTC 1 Kid</MenuItem>
+                                    <MenuItem value={'22'}>1-DTC 2 cocina</MenuItem>
+                                    <MenuItem value={'23'}>1-DTC 3 turnos</MenuItem>
+                                    <MenuItem value={'24'}>1-DTC 4 psicologa</MenuItem>
+                                    <MenuItem value={'25'}>1-DTC 5 sole</MenuItem>
                                     <MenuItem value={'26'}>1-DTC 6 Taller</MenuItem>
                                     <MenuItem value={'40'}>1-DTC Cadia</MenuItem>
                                     <MenuItem value={'29'}>1-DTC inventario</MenuItem>

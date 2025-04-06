@@ -84,7 +84,7 @@ const LoginForm = () => {
                   navigate('/dtc/visitasocial/menu')
                   break;
                   case 29:
-                    navigate('/dtc/inventario/menu')
+                    navigate('/dtc/fines/menu')
                     break;
         default:
           window.localStorage.removeItem('loggedNoteAppUser')
@@ -145,7 +145,7 @@ const LoginForm = () => {
                   navigate('/dtc/visitasocial/menu')
                   break;
                   case 29:
-                    navigate('/dtc/inventario/menu')
+                    navigate('/dtc/fines/menu')
                     break;
       default: alert("error")
         break;

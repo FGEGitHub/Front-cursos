@@ -59,7 +59,7 @@ export default function Paginas() {
                       navigate('/dtc/visitasocial/menu')
                       break;
                       case 29:
-                        navigate('/dtc/inventario/menu')
+                        navigate('/dtc/fines/menu')
                         break;
             default:
                 

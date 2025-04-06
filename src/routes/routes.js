@@ -137,6 +137,7 @@ import DtcAsisenciasoc from '../pages/dtc/nivel1/asistenciassoc';
 import DtcEntregas from '../pages/dtc/nivel1/entregas';
 import DtcCocinastock from '../pages/dtc/cocinastock';
 import DtcInscripciones from '../pages/dtc/nivel1/inscripciones';
+import DtcInventario from '../pages/dtc/nivel1/inventario';
 
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
@@ -209,6 +210,10 @@ import Cadiaprofinformes from '../pages/cadia/profesionales/informes'
 
 import Cadiaactivs from '../pages/cadia/admin/actividades'
 import Cadialistaespera from '../pages/cadia/admin/listaespera/index.js'
+
+import DTCFinesmenu from '../pages/dtc/fines/menu'
+
+
 
 
 const Rutas = [
@@ -396,6 +401,7 @@ const Rutas = [
 		{ path: '/dtc/usuario1/usuariosgim', element: <Dtcusuariosgim/> },
 		{ path: '/dtc/usuario1/mapas', element: <DTCMapas/> },
 		{ path: '/dtc/usuario1/entregas', element: <	DtcEntregas/> },
+		{ path: '/dtc/usuario1/inventario', element: <	DtcInventario/> },
 
 		
 		{ path: '/dtc/visitasocial/menu', element: <DTCVisitamenu/> },
@@ -430,7 +436,7 @@ const Rutas = [
 		{ path: '/cadia/profesionales/informes', element: <Cadiaprofinformes/> },
 		{ path: '/cadia/usuario/listaespera', element: <Cadialistaespera/> },
 		
-
+		{ path: '/dtc/fines/menu', element: <DTCFinesmenu/> },
 
 ];
 
