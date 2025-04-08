@@ -213,6 +213,7 @@ import Cadialistaespera from '../pages/cadia/admin/listaespera/index.js'
 
 import DTCFinesmenu from '../pages/dtc/fines/menu'
 
+import DTCmerienda from '../pages/dtc/merienda'
 
 
 
@@ -418,6 +419,9 @@ const Rutas = [
 		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
 		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },
 		{ path: '/dtc/cocinaraciones', element: <DTCcocinaraciones/> },
+
+		{ path: '/dtc/meriendas', element: <DTCmerienda/> },
+		
 		
 		{ path: '/cadia/login', element: <LoginCadia/> },
 		{ path: '/cadia/usuario/calendario', element: <CalendarioCadia/> },

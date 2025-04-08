@@ -61,6 +61,9 @@ export default function Paginas() {
                       case 29:
                         navigate('/dtc/fines/menu')
                         break;
+                        case 31:
+                          navigate('/dtc/meriendas')
+                          break;
             default:
                 
               window.localStorage.removeItem('loggedNoteAppUser')
