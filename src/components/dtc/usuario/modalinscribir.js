@@ -38,14 +38,43 @@ const MyDialog = (props) => {
   };
 
   const physicalSubcategories = {
-    "Fútbol Masculino": { horarios: ["15:30"], dias: ["lunes", "miércoles", "viernes"] },
-    "Fútbol Femenino": { horarios: ["16:30"], dias: ["lunes", "miércoles", "viernes"] },
-    "Gimnasio": { horarios: ["14:30"], dias: ["lunes", "martes", "miércoles", "jueves", "viernes"] },
-    "Vóley Masculino": { horarios: ["16:30"], dias: ["martes"] },
-    "Vóley Femenino": { horarios: ["15:30"], dias: ["martes"] },
-    "Basket Masculino": { horarios: ["15:30"], dias: ["jueves"] },
-    "Basket Femenino": { horarios: ["16:30"], dias: ["jueves"] },
+ 
+    "Fútbol Femenino": {
+      horarios: ["16:00"],
+      dias: ["lunes", "miércoles", "viernes"],
+    },
+    "Gimnasio": {
+      horarios: ["14:00"],
+      dias: ["lunes", "martes", "miércoles", "jueves", "viernes"],
+    },
+    "Vóley Masculino": {
+      horarios: ["16:00"],
+      dias: ["martes"],
+    },
+    "Vóley Femenino": {
+      horarios: ["15:00"],
+      dias: ["martes"],
+    },
+    "Básquet Masculino": {
+      horarios: ["16:00"],
+      dias: ["jueves"],
+    },
+    "Básquet Femenino": {
+      horarios: ["15:00"],
+      dias: ["jueves"],
+    },
+  
+    // Nuevas subcategorías
+    "Fútbol de 6 a 10 años": {
+      horarios: ["15:00", "16:00"],
+      dias: ["lunes", "miércoles"],
+    },
+    "Fútbol mayores de 11 años": {
+      horarios: ["15:00"],
+      dias: ["miércoles", "viernes"],
+    },
   };
+  
 
   const generalHorarios = ["14:00", "15:00", "16:00"];
   const allDays = ["lunes", "martes", "miércoles", "jueves", "viernes"];
@@ -187,16 +216,29 @@ const MyDialog = (props) => {
             <FormControl fullWidth margin="normal">
               <InputLabel>Selecciona un horario</InputLabel>
               <Select value={selectedHour} onChange={handleHourChange}>
-                {(selectedOption === "Merienda"
-                  ? ["17:00"]
-                  : selectedOption === "Físico" && selectedSubOption
-                  ? physicalSubcategories[selectedSubOption]?.horarios
-                  : generalHorarios
-                ).map((hour) => (
-                  <MenuItem key={hour} value={hour}>
-                    {hour}
-                  </MenuItem>
-                ))}
+              {(selectedOption === "Merienda"
+  ? ["17:00"]
+  : selectedOption === "Físico" && selectedSubOption
+  ? physicalSubcategories[selectedSubOption]?.horarios
+  : generalHorarios
+).map((hour) => {
+  let label = hour;
+
+  // Aclaraciones específicas para "Fútbol de 6 a 10 años"
+  if (selectedSubOption === "Fútbol de 6 a 10 años") {
+    if (hour === "15:00") {
+      label = "15:00 (lunes)";
+    } else if (hour === "16:00") {
+      label = "16:00 (miércoles)";
+    }
+  }
+
+  return (
+    <MenuItem key={hour} value={hour}>
+      {label}
+    </MenuItem>
+  );
+})}
               </Select>
             </FormControl>
           ) : null}

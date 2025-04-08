@@ -31,7 +31,7 @@ const CursoDialog = () => {
   const [openCells, setOpenCells] = useState({}); // Para controlar la expansión de celdas en modo semanal
   const [usuarioo, setUsuarioo] = useState();
   const navigate = useNavigate();
-  const horarios = ['14:00', '14:30', '15:00', '15:30', '16:00', '16:30']; // Nuevos horarios agregados
+  const horarios = ['14:00', '14:00', '15:00', '15:00', '16:00', '16:00']; // Nuevos horarios agregados
 
   const diasSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
 
@@ -62,15 +62,30 @@ const CursoDialog = () => {
             row.nombre_curso === "FISICO" &&
             (
               (selectedCurso === "FISICO - Gimnasio" && row.hora === "14:00") ||
-              (selectedCurso === "FISICO - Fútbol masculino" && row.hora === "15:30" && ["lunes", "miércoles", "viernes"].includes(row.dia)) ||
-              (selectedCurso === "FISICO - Fútbol femenino" && row.hora === "16:30" && ["lunes", "miércoles", "viernes"].includes(row.dia)) ||
-              (selectedCurso === "FISICO - Vóley masculino" && row.hora === "16:30" && row.dia === "martes") ||
-              (selectedCurso === "FISICO - Vóley femenino" && row.hora === "15:30" && row.dia === "martes") ||
-              (selectedCurso === "FISICO - Básquet masculino" && row.hora === "16:30" && row.dia === "jueves") ||
-              (selectedCurso === "FISICO - Básquet femenino" && row.hora === "15:30" && row.dia === "jueves")
+              (selectedCurso === "FISICO - Fútbol femenino" && row.hora === "16:00" && ["lunes", "viernes"].includes(row.dia)) ||
+              (selectedCurso === "FISICO - Vóley masculino" && row.hora === "16:00" && row.dia === "martes") ||
+              (selectedCurso === "FISICO - Vóley femenino" && row.hora === "15:00" && row.dia === "martes") ||
+              (selectedCurso === "FISICO - Básquet masculino" && row.hora === "16:00" && row.dia === "jueves") ||
+              (selectedCurso === "FISICO - Básquet femenino" && row.hora === "15:00" && row.dia === "jueves")
             )
           );
         });
+      } else if (selectedCurso === "Futbol de 6 a 10 años") {
+        data = data.filter(
+          (row) =>
+            row.nombre_curso === "FISICO" &&
+            (
+              (row.hora === "15:00" && row.dia === "lunes") ||
+              (row.hora === "16:00" && row.dia === "miércoles")
+            )
+        );
+      } else if (selectedCurso === "Fútbol mayores de 11 años") {
+        data = data.filter(
+          (row) =>
+            row.nombre_curso === "FISICO" &&
+            row.hora === "15:00" &&
+            ["miércoles", "viernes"].includes(row.dia)
+        );
       } else {
         data = data.filter((row) => row.nombre_curso === selectedCurso);
       }
@@ -147,12 +162,16 @@ const CursoDialog = () => {
     
     {/* Opciones detalladas para FISICO */}
     <MenuItem value="FISICO - Gimnasio">FISICO - Gimnasio</MenuItem>
-    <MenuItem value="FISICO - Fútbol masculino">FISICO - Fútbol masculino</MenuItem>
-    <MenuItem value="FISICO - Fútbol femenino">FISICO - Fútbol femenino</MenuItem>
-    <MenuItem value="FISICO - Vóley masculino">FISICO - Vóley masculino</MenuItem>
-    <MenuItem value="FISICO - Vóley femenino">FISICO - Vóley femenino</MenuItem>
-    <MenuItem value="FISICO - Básquet masculino">FISICO - Básquet masculino</MenuItem>
-    <MenuItem value="FISICO - Básquet femenino">FISICO - Básquet femenino</MenuItem>
+ 
+  <MenuItem value="FISICO - Fútbol femenino">FISICO - Fútbol femenino</MenuItem>
+  <MenuItem value="FISICO - Vóley masculino">FISICO - Vóley masculino</MenuItem>
+  <MenuItem value="FISICO - Vóley femenino">FISICO - Vóley femenino</MenuItem>
+  <MenuItem value="FISICO - Básquet masculino">FISICO - Básquet masculino</MenuItem>
+  <MenuItem value="FISICO - Básquet femenino">FISICO - Básquet femenino</MenuItem>
+
+  {/* Nuevos cursos agregados */}
+  <MenuItem value="Futbol de 6 a 10 años">Futbol de 6 a 10 años</MenuItem>
+  <MenuItem value="Fútbol mayores de 11 años">Fútbol mayores de 11 años</MenuItem>
   </Select>
 </FormControl>
 
@@ -207,27 +226,34 @@ const CursoDialog = () => {
               <b>
                 {row.nombre_curso}
                 {row.nombre_curso === "FISICO" && (
-                  <div>
-                    {row.hora === "14:30" && "FISICO - Gimnasio"}
-                    {row.hora === "15:30" &&
-                      ["lunes", "miércoles", "viernes"].includes(row.dia) &&
-                      "FISICO - Fútbol masculino"}
-                    {row.hora === "15:30" &&
-                      row.dia === "martes" &&
-                      "FISICO - Vóley femenino"}
-                    {row.hora === "15:30" &&
-                      row.dia === "jueves" &&
-                      "FISICO - Básquet femenino"}
-                    {row.hora === "16:30" &&
-                      ["lunes", "miércoles", "viernes"].includes(row.dia) &&
-                      "FISICO - Fútbol femenino"}
-                    {row.hora === "16:30" &&
-                      row.dia === "martes" &&
-                      "FISICO - Vóley masculino"}
-                    {row.hora === "16:30" &&
-                      row.dia === "jueves" &&
-                      "FISICO - Básquet masculino"}
-                  </div>
+                 <div>
+                 {(row.hora === "15:00" && row.dia === "lunes") ||
+                 (row.hora === "16:00" && row.dia === "miércoles") &&
+                   "Futbol de 6 a 10 años"}
+                   
+                 {row.hora === "15:00" &&
+                   ["miércoles", "viernes"].includes(row.dia) &&
+                   "Fútbol mayores de 11 años"}
+                   
+                 {row.hora === "14:00" && "FISICO - Gimnasio"}
+                 
+                {/*  {row.hora === "15:00" &&
+                   ["lunes", "miércoles", "viernes"].includes(row.dia) &&
+                   "FISICO - Fútbol masculino"} */}
+                   
+                 {row.hora === "15:00" && row.dia === "martes" && "FISICO - Vóley femenino"}
+                 
+                 {row.hora === "15:00" && row.dia === "jueves" && "FISICO - Básquet femenino"}
+                 
+                 {row.hora === "16:00" &&
+                   ["lunes", "viernes"].includes(row.dia) &&
+                   "FISICO - Fútbol femenino"}
+                   
+                 {row.hora === "16:00" && row.dia === "martes" && "FISICO - Vóley masculino"}
+                 
+                 {row.hora === "16:00" && row.dia === "jueves" && "FISICO - Básquet masculino"}
+               </div>
+               
                 )}
               </b>
             </div>
