@@ -61,7 +61,7 @@ const CursoDialog = () => {
           return (
             row.nombre_curso === "FISICO" &&
             (
-              (selectedCurso === "FISICO - Gimnasio" && row.hora === "14:30") ||
+              (selectedCurso === "FISICO - Gimnasio" && row.hora === "14:00") ||
               (selectedCurso === "FISICO - Fútbol masculino" && row.hora === "15:30" && ["lunes", "miércoles", "viernes"].includes(row.dia)) ||
               (selectedCurso === "FISICO - Fútbol femenino" && row.hora === "16:30" && ["lunes", "miércoles", "viernes"].includes(row.dia)) ||
               (selectedCurso === "FISICO - Vóley masculino" && row.hora === "16:30" && row.dia === "martes") ||
