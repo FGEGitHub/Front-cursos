@@ -76,19 +76,18 @@ const CursoDialog = () => {
             row.nombre_curso === "FISICO" &&
             (
               (row.hora === "15:00" && row.dia === "lunes") ||
-              (row.hora === "16:00" && row.dia === "miércoles")
+              (row.hora === "15:00" && row.dia === "miércoles")
             )
         );
       } else if (selectedCurso === "Fútbol mayores de 11 años") {
         data = data.filter(
           (row) =>
-            row.nombre_curso === "FISICO" &&
-            row.hora === "15:00" &&
-            ["miércoles", "viernes"].includes(row.dia)
+           ( (row.hora === "15:00" && row.dia === "viernes") ||
+              (row.hora === "16:00" && row.dia === "miércoles"))
         );
       } else {
         data = data.filter((row) => row.nombre_curso === selectedCurso);
-      }
+      }//"Fútbol mayores de 11 años"
     }
   
     if (selectedDia) {
@@ -227,12 +226,12 @@ const CursoDialog = () => {
                 {row.nombre_curso}
                 {row.nombre_curso === "FISICO" && (
                  <div>
-                 {(row.hora === "15:00" && row.dia === "lunes") ||
-                 (row.hora === "16:00" && row.dia === "miércoles") &&
+                 {((row.hora === "15:00" && row.dia === "lunes") ||
+                 (row.hora === "15:00" && row.dia === "miércoles")) &&
                    "Futbol de 6 a 10 años"}
                    
-                 {row.hora === "15:00" &&
-                   ["miércoles", "viernes"].includes(row.dia) &&
+                 {((row.hora === "15:00" && row.dia === "viernes") ||
+                 (row.hora === "16:00" && row.dia === "miércoles") )&&
                    "Fútbol mayores de 11 años"}
                    
                  {row.hora === "14:00" && "FISICO - Gimnasio"}

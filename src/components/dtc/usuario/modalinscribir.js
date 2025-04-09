@@ -66,11 +66,11 @@ const MyDialog = (props) => {
   
     // Nuevas subcategorías
     "Fútbol de 6 a 10 años": {
-      horarios: ["15:00", "16:00"],
+      horarios: ["15:00"],
       dias: ["lunes", "miércoles"],
     },
     "Fútbol mayores de 11 años": {
-      horarios: ["15:00"],
+      horarios: ["16:00","15:00"],
       dias: ["miércoles", "viernes"],
     },
   };
@@ -225,9 +225,9 @@ const MyDialog = (props) => {
   let label = hour;
 
   // Aclaraciones específicas para "Fútbol de 6 a 10 años"
-  if (selectedSubOption === "Fútbol de 6 a 10 años") {
+  if (selectedSubOption === "Fútbol mayores de 11 años") {
     if (hour === "15:00") {
-      label = "15:00 (lunes)";
+      label = "15:00 (Viernes)";
     } else if (hour === "16:00") {
       label = "16:00 (miércoles)";
     }

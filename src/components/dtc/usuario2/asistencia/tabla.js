@@ -106,10 +106,10 @@ const MobileFriendlyTable = (props) => {
                 <TableRow>
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }} ><b>Nombre</b> <b /></TableCell>
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Dni</b></TableCell>
+                
+                  <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Colacion</b></TableCell>
+                  <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Merienda</b></TableCell>
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Kid</b></TableCell>
-
-
-
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Hora</b></TableCell>
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Retiro/Retorno</b></TableCell>
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Anunciar retiro</b></TableCell>
@@ -126,6 +126,8 @@ const MobileFriendlyTable = (props) => {
                   <StyledTableRow key={row.name}>
                     <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
                     <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
+                    <StyledTableCell component="th" scope="row"> <b>{row.colacion} </b> </StyledTableCell>
+                    <StyledTableCell component="th" scope="row"> <b>{row.merienda} </b> </StyledTableCell>
                     <StyledTableCell component="th" scope="row"> <b>{row.kid == "kid3" ? <>Adolescentes</> : <>{row.kid}</>} </b> </StyledTableCell>
                     <StyledTableCell component="th" scope="row"> <b>{row.hora} </b> </StyledTableCell>
                     <StyledTableCell component="th" scope="row"> <b> {row.retiro !="No" ? <>{row.retiro}{row.retorno !="Sin determinar" ?<>-{row.retorno}</>:<>- Sin regreso</> }</>:<>{row.retiro}</>}     </b> </StyledTableCell>
