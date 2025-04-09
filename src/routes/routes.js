@@ -190,7 +190,7 @@ import DTCcocinpacientes from '../pages/dtc/cocinapacientes';
 import DTCcocinaraciones from '../pages/dtc/cocinaraciones';
 import DTCInscripcionesvisita from '../pages/dtc/visitasoc/inscripciones'
 
-
+import DTCTAlleresver from '../pages/dtc/talleresver'
 import DTCAlumnosdelcurso from '../pages/dtc/alumnosdeltaller';
 import LoginCadia from '../pages/cadia/login'
 
@@ -382,7 +382,7 @@ const Rutas = [
 		{ path: '/dtc/cocina/inscripciones', element: <DTCCocinainscripciones/> },
 		
 		{ path: '/dtc/usuario2/raciones', element: <Dtcraciones/> },
-
+		{ path: '/dtc/talleresver', element: <DTCTAlleresver/> },
 
 		{ path: '/dtc/actividades', element: <DTCactividadescarga/> },
 		{ path: '/dtc/presentes', element: <DTCpresentes/> },

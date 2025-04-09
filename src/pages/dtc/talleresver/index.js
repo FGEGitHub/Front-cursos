@@ -2,7 +2,7 @@
 
 
 
-import Asis from '../../../components/dtc/merienda/componente'
+import Asis from '../../../components/dtc/usuario1/talleres/todos'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/Navbar'

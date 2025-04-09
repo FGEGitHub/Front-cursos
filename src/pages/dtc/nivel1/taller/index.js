@@ -31,7 +31,7 @@ export default function Paginas() {
   const [loginVisible, setLoginvisible] = useState(false);
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-  useEffect(() => {
+ /*  useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
     console.log(loggedUserJSON);
 
@@ -53,15 +53,12 @@ export default function Paginas() {
     }
     setLoginvisible(true);
   }, [navigate]);
-
+ */
   return (
     <>
-      {isMatch ? (
-        <div className={classes.container}>
-          <MenuuCel texto="Usuarios" />
-          <Login />
-          <Inscriptos id={id} /> {/* Pasando el id como prop */}
-        </div>
+      {isMatch ? (  <>  <Login />
+          <Inscriptos id={id} />
+      </>
       ) : (
         <Menuizq>
           <Login />
