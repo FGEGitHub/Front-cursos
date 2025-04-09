@@ -97,7 +97,7 @@ const MobileFriendlyTable = (props) => {
 
               }
             }
-            traer2={props.traer()}
+            traer2={props.traer}
             /></> : <></>}</> : <></>}
         <TableContainer>
           {!datos[0] ? <Skeleton /> : <>
