@@ -76,7 +76,7 @@ const MobileFriendlyTable = (props) => {
           Fecha: {currentDate}
         </Typography>
         {usuario ? <>
-          {usuario.nivel == 21 || usuario.nivel == 20 ? <>
+          {usuario.nivel == 21 || usuario.nivel == 20 || usuario.nivel == 31? <>
             <Buscador
               chicos={datos[1]}
               fecha={currentDate}
@@ -95,12 +95,13 @@ const MobileFriendlyTable = (props) => {
                 setDatos(historial)
                 // 
 
-              }}
+              }
+            }
+            traer2={props.traer()}
             /></> : <></>}</> : <></>}
         <TableContainer>
           {!datos[0] ? <Skeleton /> : <>
-            <h4>Lista de presentes ({datos[0].length}) </h4>
-            Kid1:{datos[2].kid1}, Kid2:{datos[2].kid2}, Adolescentes:{datos[2].kid3}
+      
             <Table >
               <TableHead>
                 <TableRow>

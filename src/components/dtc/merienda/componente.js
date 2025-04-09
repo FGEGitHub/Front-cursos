@@ -15,7 +15,7 @@ import { styled } from '@mui/material/styles';
 import RemoveCircleRoundedIcon from '@mui/icons-material/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import servicioDtc from '../../../services/dtc';
-
+import Asistencia from  '../usuario2/asistencia/tabla'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${TableCell.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -60,7 +60,7 @@ const ResponsiveTable = styled(Table)(({ theme }) => ({
     '& .MuiTableHead-root': {
       display: 'none',
     },
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#0b0d0c",
   },
 }));
 
@@ -151,6 +151,26 @@ export default function Ingresos(props) {
           ))}
         </TableBody>
       </ResponsiveTable>
+      <Asistencia
+      traer={async () => {
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+        if (loggedUserJSON) {
+          const user = JSON.parse(loggedUserJSON);
+    
+          const today = new Date();
+          const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+          
+          const fecha = props.fecha || formattedDate;
+          const id = props.idt || user.id;
+          const historial = await servicioDtc.traerpresentes({ fecha, id });
+    
+          setInscrip(historial[0]);
+          setDatos(historial[2]);
+          setRaciones(historial[3]);
+          setPremerienda(historial[4]);
+          setCurrentDate(fecha);
+        }
+      }}/>
     </Box>
   );
 
@@ -164,12 +184,7 @@ export default function Ingresos(props) {
         </Alert>
       )}
   
-      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
-        <Button variant="contained" onClick={() => navigate('/dtc/cargaetapas')}>Ir a Etapas</Button>
-        <Button variant="contained" onClick={() => navigate('/dtc/cocinaasis')}>Ir a Asistencia</Button>
-        <Button variant="contained" onClick={() => navigate('/dtc/cocinastock')}>Ir a Stock</Button>
-        <Button variant="contained" onClick={() => navigate('/dtc/cocinaraciones')}>Ir a Raciones</Button>
-      </Box>
+  
   
       {datos && (
         <>

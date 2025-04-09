@@ -37,6 +37,11 @@ const MobileAutocomplete = (props) => {
       // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
       // Ejemplo: axios.post('/api/backend', { selectedValue });
       props.traer()
+      try {
+        props.traer2()
+      } catch (error) {
+        
+      }
     }
   };
   const ir = async () => {
@@ -72,7 +77,7 @@ const MobileAutocomplete = (props) => {
       <button variant="outlined" color="primary" onClick={ir} disabled>
         Ver usuario
       </button></>}
-    {selectedValue ? <><Ficha id={selectedValue.id}/></> :<></>}
+    {selectedValue ? <></> :<></>}
     </div>
   );
 };
