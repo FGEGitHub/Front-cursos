@@ -77,8 +77,10 @@ export default function Ingresos(props) {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
+
       const today = new Date();
-      const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+      const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+      
       const fecha = props.fecha || formattedDate;
       const id = props.idt || user.id;
       const historial = await servicioDtc.traerpresentes({ fecha, id });
@@ -152,9 +154,7 @@ export default function Ingresos(props) {
     </Box>
   );
 
-  const kid1Data = inscrip.filter((row) => row.kid === 'kid1');
-  const kid2Data = inscrip.filter((row) => row.kid === 'kid2');
-  const kid3Data = inscrip.filter((row) => row.kid === 'kid3');
+
 
   return (
     <Paper sx={{ padding: 2 }}>
@@ -163,14 +163,14 @@ export default function Ingresos(props) {
           <Button onClick={revisto} variant="contained">Ya revisé</Button>
         </Alert>
       )}
-
+  
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 2 }}>
         <Button variant="contained" onClick={() => navigate('/dtc/cargaetapas')}>Ir a Etapas</Button>
         <Button variant="contained" onClick={() => navigate('/dtc/cocinaasis')}>Ir a Asistencia</Button>
         <Button variant="contained" onClick={() => navigate('/dtc/cocinastock')}>Ir a Stock</Button>
         <Button variant="contained" onClick={() => navigate('/dtc/cocinaraciones')}>Ir a Raciones</Button>
       </Box>
-
+  
       {datos && (
         <>
           <h4>Lista de presentes ({inscrip.length})</h4>
@@ -179,10 +179,8 @@ export default function Ingresos(props) {
           <p>Kid1: {datos.kid1}, Kid2: {datos.kid2}, Adolescentes: {datos.kid3}</p>
         </>
       )}
-
-      {renderTable(kid1Data, "Kid1")}
-      {renderTable(kid2Data, "Kid2")}
-      {renderTable(kid3Data, "Kid3")}
+  
+      {renderTable(inscrip, "Listado completo")}
     </Paper>
   );
 }
