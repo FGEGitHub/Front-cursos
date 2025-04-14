@@ -9,11 +9,13 @@ import {
   ListItemText,
   Button,
   Typography,
+  Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import LogoutIcon from "@mui/icons-material/Logout";
+import Image from "../../Assets/logocuqui.webp"; // cambia esta ruta según tu imagen
 
-const pages = ["Inicio", "Cerrar Sesión"];
 const pagesdeslogueado = ["Iniciar sesión", "Nosotros", "Contacto"];
 
 const DrawerNav = () => {
@@ -23,18 +25,12 @@ const DrawerNav = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    cantidadnoti();
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    if (loggedUserJSON) {
+      const usuario = JSON.parse(loggedUserJSON);
+      setUser(usuario);
+    }
   }, []);
-
-  const cantidadnoti = async () => {
-    try {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-      if (loggedUserJSON) {
-        const usuario = JSON.parse(loggedUserJSON);
-        setUser(usuario);
-      }
-    } catch (error) {}
-  };
 
   const handleClick = () => navigate("/login");
   const irNosotros = () => navigate("/usuario/nosotros");
@@ -44,25 +40,15 @@ const DrawerNav = () => {
   const irStock = () => navigate("/stock");
   const irCaja = () => navigate("/caja");
 
-  const hanleLogout = () => {
-    window.localStorage.removeItem('loggedNoteAppUser');
+  const handleLogout = () => {
+    window.localStorage.removeItem("loggedNoteAppUser");
     navigate("/loginn");
   };
 
-  const CutomButtonsRendererdesloqueado = (dataIndex, rowIndex) => {
-    switch (rowIndex) {
-      case 0:
-        handleClick();
-        break;
-      case 1:
-        hanleLogout();
-        break;
-      case 2:
-        irContacto();
-        break;
-      default:
-        break;
-    }
+  const handleDeslogueadoClick = (index) => {
+    if (index === 0) handleClick();
+    else if (index === 1) irNosotros();
+    else if (index === 2) irContacto();
   };
 
   return (
@@ -71,87 +57,109 @@ const DrawerNav = () => {
         anchor="right"
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
+        PaperProps={{
+          sx: {
+            width: "100vw",
+            maxWidth: 320,
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          },
+        }}
       >
-        <List>
-          <IconButton
-            sx={{ color: "black", marginLeft: "10px", marginTop: "10px" }}
-            onClick={() => setOpenDrawer(false)}
+        <Box>
+          {/* Imagen + Cerrar */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              padding: 2,
+              borderBottom: "1px solid #ddd",
+            }}
           >
-            <ArrowBackIcon />
-          </IconButton>
+         <img
+    src={Image}
+    alt="logo"
+    style={{ width: 40, height: 40, marginRight: 10 }}
+  />
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              Menú
+            </Typography>
+            <IconButton onClick={() => setOpenDrawer(false)}>
+              <ArrowBackIcon />
+            </IconButton>
+          </Box>
 
-          {user ? (
-            <>
-              <Button
-                onClick={irProductos}
-                sx={{
-                  marginLeft: "10px",
-                  marginBottom: "10px",
-                  width: "100%",
-                }}
-                variant="outlined"
-              >
-                Productos
-              </Button>
-              <Button
-                onClick={irMovimientos}
-                sx={{
-                  marginLeft: "10px",
-                  marginBottom: "10px",
-                  width: "100%",
-                }}
-                variant="outlined"
-              >
-                Movimientos
-              </Button>
-              <Button
-                onClick={irStock}
-                sx={{
-                  marginLeft: "10px",
-                  marginBottom: "10px",
-                  width: "100%",
-                }}
-                variant="outlined"
-              >
-                Stock
-              </Button>
-              <Button
-                onClick={irCaja}
-                sx={{
-                  marginLeft: "10px",
-                  marginBottom: "10px",
-                  width: "100%",
-                }}
-                variant="outlined"
-              >
-                Caja
-              </Button>
-            </>
-          ) : (
-            <>
-              {pagesdeslogueado.map((page, index) => (
-                <ListItemButton key={index}>
+          {/* Contenido */}
+          <List>
+            {user ? (
+              <>
+                <Button
+                  onClick={irProductos}
+                  sx={{ margin: "10px", width: "calc(100% - 20px)" }}
+                  variant="outlined"
+                >
+                  Productos
+                </Button>
+                <Button
+                  onClick={irMovimientos}
+                  sx={{ margin: "10px", width: "calc(100% - 20px)" }}
+                  variant="outlined"
+                >
+                  Movimientos
+                </Button>
+                <Button
+                  onClick={irStock}
+                  sx={{ margin: "10px", width: "calc(100% - 20px)" }}
+                  variant="outlined"
+                >
+                  Stock
+                </Button>
+                <Button
+                  onClick={irCaja}
+                  sx={{ margin: "10px", width: "calc(100% - 20px)" }}
+                  variant="outlined"
+                >
+                  Caja
+                </Button>
+              </>
+            ) : (
+              pagesdeslogueado.map((page, index) => (
+                <ListItemButton key={index} onClick={() => handleDeslogueadoClick(index)}>
                   <ListItemIcon>
-                    <ListItemText
-                      onClick={() => CutomButtonsRendererdesloqueado(page, index)}
-                    >
-                      {page}
-                    </ListItemText>
+                    <ListItemText primary={page} />
                   </ListItemIcon>
                 </ListItemButton>
-              ))}
-            </>
-          )}
-        </List>
+              ))
+            )}
+          </List>
+        </Box>
+
+        {/* Footer con Logout */}
+        {user && (
+          <Box sx={{ padding: 2, borderTop: "1px solid #ddd" }}>
+            <Button
+              onClick={handleLogout}
+              variant="contained"
+              color="error"
+              fullWidth
+              startIcon={<LogoutIcon />}
+            >
+              Cerrar sesión
+            </Button>
+          </Box>
+        )}
       </Drawer>
 
+      {/* Botón de apertura */}
       <IconButton
         sx={{ color: "white", marginLeft: "auto" }}
-        onClick={() => setOpenDrawer(!openDrawer)}
+        onClick={() => setOpenDrawer(true)}
       >
         <MenuIcon sx={{ marginRight: "5px" }} />
         <Typography variant="button" sx={{ color: "white" }}>
-          Menu
+          Menú
         </Typography>
       </IconButton>
     </React.Fragment>

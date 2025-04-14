@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import productosImg from "../../../Assets/productos.png";
+import productosImg from "../../../Assets/productos.webp";
 import movimientosImg from "../../../Assets/movimientos.webp";
 
 const NavigationButtons = () => {
@@ -77,13 +77,13 @@ const styles = {
     cursor: "pointer",
   },
   image: {
-    width: "225px",
-    height: "225px",
+    width: "250px",
+    height: "250px",
     objectFit: "contain",
   },
   image2: {
-    width: "200px",
-    height: "200px",
+    width: "250px",
+    height: "250px",
     objectFit: "contain",
   },
 };
