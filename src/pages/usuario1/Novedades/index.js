@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState, Fragment } from "react";
-import Novedades from '../../../components/usuario1/planillacomponente/componente1'
+import Novedades from '../../../components/usuario1/botonesmovimeitnos/componente'
 import MenuUsuario from '../../../components/usuario1/Navbar1'
 
 
@@ -43,6 +43,7 @@ export default function Transferencias() {
     <>
       <div>  {logueado ? <div>
         <MenuUsuario/>
+        <br/>     <br/>     <br/>
         <Novedades/>
 
 
