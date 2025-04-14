@@ -81,7 +81,7 @@ export default function SelectTextFields(props) {
       autoComplete="off"
     >
       <Tooltip title="Nueva">
-        <Button variant="outlined" onClick={handleClickOpen}> Nuevo </Button>
+        <Button variant="outlined" onClick={handleClickOpen}  sx={{ color: "black", borderColor: "black" }}> Nuevo </Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose} sx={{ width: '100%' }}>
         <DialogContent>
