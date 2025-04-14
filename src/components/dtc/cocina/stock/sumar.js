@@ -74,7 +74,7 @@ export default function ModificarElementoDialog(props) {
 
           <InputLabel htmlFor="etapa2-select">¿cual fue el origen del producto?</InputLabel>
           <NativeSelect id="etapa2-select" name="id_exp" onChange={handleChange} fullWidth>
-            <option value="">Elegir</option>
+            <option value="">Ninguno</option>
             {etapas[0].map((etapa, index) => (
               <option key={index} value={etapa.id}>{etapa.titulo}</option>
             ))}

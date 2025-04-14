@@ -60,7 +60,7 @@ const ControlStock = () => {
        <Button variant="contained" color="success" onClick={() => setModalNuevoProducto(true)} style={{ marginBottom: "10px" }}>
          + Agregar Producto
        </Button>
-       <Button onClick={() => setVistaCompactaProductos(!vistaCompactaProductos)} style={{ marginLeft: "10px" }}>
+       <Button onClick={() => setVistaCompactaProductos(!vistaCompactaProductos)} style={{ marginLeft: "10px" , color:"green"}}>
          {vistaCompactaProductos ? "Ver todos los campos" : "Vista compacta"}
        </Button>
      
@@ -108,7 +108,7 @@ const ControlStock = () => {
   <Button variant="contained" color="success" onClick={() => setModalNuevoMovimiento(true)} style={{ marginBottom: "10px" }}>
     + Agregar Movimiento
   </Button>
-  <Button onClick={() => setVistaCompactaMovimientos(!vistaCompactaMovimientos)} style={{ marginLeft: "10px" }}>
+  <Button onClick={() => setVistaCompactaMovimientos(!vistaCompactaMovimientos)} style={{ marginLeft: "10px", color:"green" }}>
     {vistaCompactaMovimientos ? "Ver todos los campos" : "Vista compacta"}
   </Button>
 
