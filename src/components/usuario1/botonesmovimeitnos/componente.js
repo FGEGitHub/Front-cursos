@@ -77,8 +77,8 @@ const styles = {
     cursor: "pointer",
   },
   image: {
-    width: "250px",
-    height: "250px",
+    width: "271px",
+    height: "271px",
     objectFit: "contain",
   },
   image2: {
