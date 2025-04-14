@@ -40,7 +40,7 @@ const NavigationButtons = () => {
           transform: active === "productos" ? "scale(1.1)" : "scale(1)",
         }}
       >
-        <button onClick={() => navigate("/productos")} style={styles.button}>
+        <button onClick={() => navigate("/usuario1/productos")} style={styles.button}>
           <img src={productosImg} alt="Productos" style={styles.image} />
         </button>
       </div>
@@ -52,8 +52,8 @@ const NavigationButtons = () => {
           transform: active === "movimientos" ? "scale(1.1)" : "scale(1)",
         }}
       >
-        <button onClick={() => navigate("/movimientos")} style={styles.button}>
-          <img src={movimientosImg} alt="Movimientos" style={styles.image} />
+        <button onClick={() => navigate("/usuario1/movimientos")} style={styles.button}>
+          <img src={movimientosImg} alt="Movimientos" style={styles.image2} />
         </button>
       </div>
     </div>
@@ -65,8 +65,8 @@ const styles = {
     display: "flex",
     flexDirection: "column", // Uno arriba del otro
     alignItems: "center",    // Centrado
-    gap: "2rem",
-    marginTop: "2rem",
+    gap: "1rem",             // <-- Reducida la distancia entre botones
+    marginTop: "1rem",
   },
   buttonWrapper: {
     transition: "transform 0.3s ease",
@@ -77,6 +77,11 @@ const styles = {
     cursor: "pointer",
   },
   image: {
+    width: "225px",
+    height: "225px",
+    objectFit: "contain",
+  },
+  image2: {
     width: "200px",
     height: "200px",
     objectFit: "contain",

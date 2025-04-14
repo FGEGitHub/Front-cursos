@@ -53,7 +53,7 @@ const Navbar = (props) => {
 
   return (
     <React.Fragment>
-      <AppBar sx={{ background: "#Primary" }}>
+      <AppBar sx={{ background: "#4B944F" }}>
         <Toolbar>
           {isMatch ? (
             <DrawerNav />

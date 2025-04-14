@@ -10,8 +10,8 @@ import Prueba from '../pages/prueba';
 import Menu1 from '../pages/usuario1/Cursos';
 import Perfil from '../pages/usuario1/Perfil';
 import Novedades1 from '../pages/usuario1/Novedades';
-
-
+import Movimientos from '../pages/usuario1/movimientos';
+import Productos from '../pages/usuario1/productos';
 
 
 
@@ -235,7 +235,8 @@ const Rutas = [
 		{ path: '/usuario/novedades', element: <Novedades1 /> },
 		{ path: '/usuario/cursos', element: <Menu1 /> },
 		{ path: '/usuario/perfil', element: <Perfil /> },
-
+		{ path: '/usuario1/movimientos', element: <Movimientos/> },
+		{ path: '/usuario1/productos', element: <Productos/> },
 		
 
 
@@ -355,7 +356,10 @@ const Rutas = [
 		{ path: '/dtc/usuario1/cumples', element: <DTCcumples/> },
 		{ path: '/dtc/usuario1/asistenciassoc', element: <DtcAsisenciasoc/> },
 		{ path: '/dtc/usuario1/inscripciones', element: <DtcInscripciones/> },
-		
+	
+
+
+
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
 		{ path: '/dtc/psicologa/informes', element: <Dtcpsiclogaacti/> },
