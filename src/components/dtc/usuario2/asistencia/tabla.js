@@ -74,7 +74,7 @@ const MobileFriendlyTable = (props) => {
     <div>
       {datos ? <>
         <Typography variant="p" gutterBottom>
-          Fecha: {currentDate}
+          Fecha: {currentDate} - {datos[0].length} presentes
         </Typography>
         {usuario ? <>
           {usuario.nivel == 21 || usuario.nivel == 20 || usuario.nivel == 31? <>

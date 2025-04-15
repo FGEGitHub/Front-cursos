@@ -7,22 +7,9 @@ import { styled } from '@mui/material/styles';
 import servicioDtc from '../../../services/dtc';
 import ModaNueva from './ModalNuevaclase';
 import Button from '@mui/material/Button';
-import Modificar from './modificar'
+//import Modificar from './modificar'
 import ModalBorrar from './borrarclase';
-const StyledTableCell = styled('td')(({ theme }) => ({
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    fontSize: 14,
-}));
 
-const StyledTableRow = styled('tr')(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
 
 const TablaNotificaciones = (props) => {
     const [clases, setClases] = useState([]);
@@ -35,7 +22,8 @@ const TablaNotificaciones = (props) => {
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON);
                 setUsuario(usuario);
-                const novedades_aux = await servicioDtc.traerclasestaller(usuario.id);
+                const novedades_aux = await servicioDtc.traerclasestaller2(usuario.id);
+                console.log(novedades_aux)
                 setClases(novedades_aux);
             }
         };
@@ -60,21 +48,7 @@ const TablaNotificaciones = (props) => {
              <Tooltip title="ASISTENCIA">
                 <button variant="contained" onClick={() => navigate('/dtc/tallerasistencia/' + clases[dataIndex]['id'])} >Asistencia </button>
             </Tooltip>
-            <Modificar
-             id={clases[dataIndex]['id']}
-             titulo={clases[dataIndex]['titulo']}
-             descripcion={clases[dataIndex]['descripcion']}
-             fecha={clases[dataIndex]['fecha']}
-             traer={async () => {
-                 const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                 if (loggedUserJSON) {
-                     const usuario = JSON.parse(loggedUserJSON);
-                     setUsuario(usuario);
-                     const novedades_aux = await servicioDtc.traerclasestaller(usuario.id);
-                     setClases(novedades_aux);
-                 }
-             }}
-              />
+           
             </>
            
         );
@@ -106,10 +80,18 @@ const TablaNotificaciones = (props) => {
             },
         },
         {
-            name: "Asistencia",
+            name: "Ver",
             options: {
-                customBodyRenderLite: (dataIndex) => CutomButtonsRenderer(dataIndex),
-            },
+                customBodyRenderLite: (dataIndex, rowIndex) =>
+                    CutomButtonsRenderer(
+                        dataIndex,
+                        rowIndex,
+                        // overbookingData,
+                        // handleEditOpen
+                    )
+            }
+
+        
         },
         
     ];

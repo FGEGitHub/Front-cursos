@@ -2,7 +2,7 @@ import Asis from '../../../components/dtc/talleres/botoneshorarios'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/Navbar'
-import BotonCambiaColor from '../../../components/dtc/botoncambiacolor'
+import Asis2 from '../../../components/dtc/talleres/lista'
 import {
 
   makeStyles,
@@ -24,16 +24,16 @@ const useStyles = makeStyles((theme) => ({
 export default function Paginas() {
   const navigate = useNavigate();
     const theme = useTheme();
-    const classes = useStyles();
+    const [usuario, setUsuario] = useState()
     const [loginVisible, setLoginvisible] = useState(false)
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     useEffect(() => {
       
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-        console.log(loggedUserJSON) 
+       
         if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON)
-          console.log(user)
+          setUsuario(user)
           switch (user.nivel) {
             case 26:
              break;
@@ -60,15 +60,19 @@ export default function Paginas() {
       <>
      <MenuuCel/>
      <br/>
+   
      <br/>
-     <br/>
-     <br/>
-     <br/>
-{/*      <BotonCambiaColor
-     texto={"Ver mis alumnos"}
-     accion={() => navigate('/dtc/alumnosdeltaller')} /> */}
-          <Asis/>
-     <br/>
+     {  usuario ?<>
+      { usuario.id == 317 ?<>
+     
+     
+    <Asis2/>si es</> :<>
+   
+    <Asis/>   
+   </> }
+   
+   </>:<></>}
+  
      <br/>
      <br/> 
  </>

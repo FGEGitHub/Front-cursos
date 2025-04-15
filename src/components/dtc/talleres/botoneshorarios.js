@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Box } from "@mui/material";
-
+import Nuevaclase from './lista'
 const MobileNavigation = () => {
   const navigate = useNavigate();
   
@@ -23,6 +23,8 @@ const MobileNavigation = () => {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="90vh" gap={2} p={2} bgcolor="grey.100">
+
+
       {botones.map((horario, index) => (
         <Button
           key={index}

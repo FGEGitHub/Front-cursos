@@ -3,6 +3,7 @@ import Asis2 from '../../../components/dtc/talleres/alumnosnoinscriptos'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/Navbar'
+import Tablaasis from '../../../components/dtc/talleres/tablaasistencia'
 
 import {
 
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Paginas() {
   const navigate = useNavigate();
     const theme = useTheme();
-    const classes = useStyles();
+   const [usuario, setUsuario] = useState()
     const [loginVisible, setLoginvisible] = useState(false)
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     useEffect(() => {
@@ -34,7 +35,7 @@ export default function Paginas() {
         console.log(loggedUserJSON) 
         if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON)
-          console.log(user)
+          setUsuario(user)
           switch (user.nivel) {
             case 26:
              break;
@@ -62,12 +63,23 @@ export default function Paginas() {
      <MenuuCel/>
      <br/>
      <br/>
-     <br/> <br/>
-     <Asis/>
+     <br/>
+     {  usuario ?<>
+      { usuario.id == 317 ?<>
+        <Tablaasis/>
+     
+    <Asis2/>si es</> :<>
+   
+    <Asis/>
      <br/>
      <Asis2/>
+   </> }
+   
+   </>:<></>}
+
      <br/>
      <br/> 
+       
  </>
    
     );
