@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from "@mui/material";
 import serviciousuario1 from "../../../services/vendedoras";
 
-const ModalNuevoProducto = ({ open, onClose }) => {
+const ModalNuevoProducto = ({ open, onClose,traer }) => {
   const [producto, setProducto] = useState({
     nombre: "",
     categoria: "",
@@ -26,7 +26,7 @@ const ModalNuevoProducto = ({ open, onClose }) => {
                       const usuario = JSON.parse(loggedUserJSON)
                     const rta =  await serviciousuario1.crearnuevoproducto({ ...producto, usuarioId: usuario.id });
 alert(rta)
-                   
+traer()        
                   }
       onClose();
     } catch (error) {

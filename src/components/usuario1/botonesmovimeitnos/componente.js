@@ -40,7 +40,7 @@ const NavigationButtons = () => {
           transform: active === "productos" ? "scale(1.1)" : "scale(1)",
         }}
       >
-        <button onClick={() => navigate("/usuario1/productos")} style={styles.button}>
+        <button onClick={() => navigate("/usuario1/movimientos")} style={styles.button}>
           <img src={productosImg} alt="Productos" style={styles.image} />
         </button>
       </div>
@@ -52,7 +52,7 @@ const NavigationButtons = () => {
           transform: active === "movimientos" ? "scale(1.1)" : "scale(1)",
         }}
       >
-        <button onClick={() => navigate("/usuario1/movimientos")} style={styles.button}>
+        <button onClick={() => navigate("/usuario1/productos")} style={styles.button}>
           <img src={movimientosImg} alt="Movimientos" style={styles.image2} />
         </button>
       </div>

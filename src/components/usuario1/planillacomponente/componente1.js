@@ -30,7 +30,18 @@ const ControlStock = () => {
       });
     }
   }, []);
-
+  const traerDatos = () => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    if (loggedUserJSON) {
+      const usuario = JSON.parse(loggedUserJSON);
+      serviciousuario1.traerproductos(usuario.id).then((data) => {
+        setProductos(data);
+      });
+      serviciousuario1.traermovimientos(usuario.id).then((data) => {
+        setMovimientos(data);
+      });
+    }
+  };
   const abrirModalEditar = (registro) => {
     setRegistroActual(registro);
     setModalEditarAbierto(true);
@@ -54,7 +65,7 @@ const ControlStock = () => {
         Ver Movimientos
       </Button> */}
 
-      {mostrarTabla === "productos" ? (
+      {mostrarTabla == "productos" ? (
        <div>
        <h3>Lista de Productos</h3>
        <Button variant="contained" color="success" onClick={() => setModalNuevoProducto(true)} style={{ marginBottom: "10px" }}>
@@ -166,8 +177,12 @@ const ControlStock = () => {
         </DialogActions>
       </Dialog>
 
-      <ModalNuevoProducto open={modalNuevoProducto} onClose={() => setModalNuevoProducto(false)} />
-      <ModalNuevoMovimiento open={modalNuevoMovimiento} onClose={() => setModalNuevoMovimiento(false)} />
+      <ModalNuevoProducto open={modalNuevoProducto} onClose={() => setModalNuevoProducto(false)} 
+        traer={traerDatos} // Aquí pasas la función como prop
+        />
+      <ModalNuevoMovimiento open={modalNuevoMovimiento} onClose={() => setModalNuevoMovimiento(false)} 
+           traer={traerDatos} // Aquí pasas la función como prop
+           />
     </div>
   );
 };

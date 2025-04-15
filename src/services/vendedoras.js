@@ -75,18 +75,18 @@ return data
      return data
  } 
  const borrararticulo= async  (datos) => {
-  console.log(datos)
+ 
    const {data } = await axios.post(baseUrl+'borrararticulo',datos,config)
-   
+   console.log(data)
    return data
 } 
  
 
 const crearnuevoproducto= async  (datos) => {
-  console.log(datos)
-   const {message } = await axios.post(baseUrl+'crearnuevoproducto',datos,config)
+ 
+   const {data } = await axios.post(baseUrl+'crearnuevoproducto',datos,config)
    
-   return message
+   return data
 } 
  
 export default {traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
