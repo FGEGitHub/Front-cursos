@@ -79,6 +79,7 @@ const MobileFriendlyTable = (props) => {
         {usuario ? <>
           <Buscador
               chicos={datos[1]}
+              hora={1400}
               id_clase={id}
               usuario={usuario}
               traer={async () => {

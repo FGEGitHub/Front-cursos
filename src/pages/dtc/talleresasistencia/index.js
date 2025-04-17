@@ -68,7 +68,7 @@ export default function Paginas() {
       { usuario.id == 317 ?<>
         <Tablaasis/>
      
-    <Asis2/>si es</> :<>
+    {/* <Asis2/> */}si es</> :<>
    
     <Asis/>
      <br/>
