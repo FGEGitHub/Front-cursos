@@ -15,19 +15,22 @@ import {
   Container,
   Divider,
 } from "@mui/material";
+import ModalConfirmarBorrado from './modalborrargeneral'
 
 const ControlStock = () => {
   const [productos, setProductos] = useState([]);
   const [movimientos, setMovimientos] = useState([]);
   const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
   const [modalNuevoProducto, setModalNuevoProducto] = useState(false);
-  const [modalNuevoMovimiento, setModalNuevoMovimiento] = useState(false);
-  const [registroActual, setRegistroActual] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);  const [registroActual, setRegistroActual] = useState(null);
   const [vistaCompactaProductos, setVistaCompactaProductos] = useState(true);
   const [openCompra, setOpenCompra] = useState(false);
   const [openVenta, setOpenVenta] = useState(false);
   const [busqueda, setBusqueda] = useState("");
+  const [productoAEliminar, setProductoAEliminar] = useState(null);
+
   const location = useLocation();
+
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
@@ -54,7 +57,14 @@ const ControlStock = () => {
       });
     }
   };
-
+  const handleBorrar = async () => {
+    if (productoAEliminar) {
+      await serviciousuario1.borrarproducto({id:productoAEliminar});
+      setModalOpen(false);
+      setProductoAEliminar(null);
+      traerDatos(); // para refrescar la lista después del borrado
+    }
+  };
   const abrirModalEditar = (registro) => {
     setRegistroActual(registro);
     setModalEditarAbierto(true);
@@ -162,7 +172,19 @@ const ControlStock = () => {
                         %)
                       </Typography>
                     </Box>
-
+                
+      <Box textAlign="right">
+      <Button
+  size="small"
+  variant="outlined"
+  onClick={() => {
+    setProductoAEliminar(p.id);
+    setModalOpen(true);
+  }}
+>
+  Borrar
+</Button>
+                    </Box>
                     <Box textAlign="right">
                       <Button
                         size="small"
@@ -212,7 +234,7 @@ const ControlStock = () => {
 
                     <Typography variant="body2">Proveedor: {m.proveedor || "-"}</Typography>
                     <Typography variant="body2">Cliente: {m.cliente || "-"}</Typography>
-
+                  
                     <Box textAlign="right">
                       <Button
                         size="small"
@@ -221,6 +243,7 @@ const ControlStock = () => {
                       >
                         Modificar
                       </Button>
+
                     </Box>
                   </Stack>
                 </CardContent>
@@ -229,7 +252,14 @@ const ControlStock = () => {
           </Container>
         </>
       )}
-
+<ModalConfirmarBorrado
+  open={modalOpen}
+  onClose={() => {
+    setModalOpen(false);
+    setProductoAEliminar(null);
+  }}
+  onConfirm={handleBorrar}
+/>
       <Dialog open={modalEditarAbierto} onClose={cerrarModalEditar} maxWidth="sm" fullWidth>
         <DialogTitle>Editar</DialogTitle>
         <DialogContent>
