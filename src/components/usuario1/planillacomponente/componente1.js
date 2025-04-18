@@ -99,15 +99,26 @@ const ControlStock = () => {
 
               <Box display="flex" justifyContent="space-between">
                 <Typography variant="body2">Costo: ${p.costo}</Typography>
-                <Typography variant="body2">Transporte: ${p.transporte}</Typography>
-                <Typography variant="body2">Packaging: ${p.packaging}</Typography>
-              </Box>
+                <Typography variant="body2">{p.variable1 !=0 && <> {p.variable1}:$ {p.costovariable1}</>     }</Typography>
+                <Typography variant="body2">{p.variable2 !=0 && <> {p.variable2}: ${p.costovariable2}</>     }</Typography>              </Box>
 
               <Box display="flex" justifyContent="space-between">
-                <Typography variant="body1" fontWeight="bold">Precio: ${p.precioVenta}</Typography>
+                <Typography variant="body1" fontWeight="bold">Precio: ${p.precio_venta}</Typography>
                 <Typography variant="body1" color="success.main">
-                  Ganancia: ${p.ganancia} ({p.gananciaPorcentaje}%)
-                </Typography>
+  Ganancia: ${((p.precio_venta || 0) - ((p.costo || 0) - (p.costovariable1 || 0) - (p.costovariable2 || 0))).toFixed(2)} (
+    {(
+  (
+    (
+      (Number(p.costo ?? 0) + Number(p.costovariable1 ?? 0) + Number(p.costovariable2 ?? 0)) /
+      (Number(p.precio_venta ?? 1)) // ponemos 1 para evitar división por cero
+    ) * 100
+  ) || 0
+).toFixed(2)}
+%
+
+    
+  )
+</Typography>
               </Box>
 
               <Box textAlign="right">
