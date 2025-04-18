@@ -178,6 +178,7 @@ const ControlStock = () => {
 
       <ModalNuevoProducto open={modalNuevoProducto} onClose={() => setModalNuevoProducto(false)} 
         traer={traerDatos} // Aquí pasas la función como prop
+        serviciousuario1={serviciousuario1}
         />
         { productos && <>
         <ModalCompra open={openCompra} onClose={() => setOpenCompra(false)} 

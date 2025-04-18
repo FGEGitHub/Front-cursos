@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -8,41 +8,116 @@ import {
   TextField,
   Box,
   Typography,
-  Divider
+  Divider,
+  MenuItem,
+  IconButton,
 } from "@mui/material";
-import serviciousuario1 from "../../../services/vendedoras";
+import {
+  Add,
+  Close,
+  LocalShipping,
+  Inventory,
+  MoreHoriz,
+} from "@mui/icons-material";
 
-const ModalNuevoProducto = ({ open, onClose, traer }) => {
+// Opciones con íconos y colores
+const variableOptions = [
+  {
+    label: "Transporte",
+    value: "transporte",
+    icon: <LocalShipping sx={{ mr: 1 }} />,
+    color: "primary",
+  },
+  {
+    label: "Packaging",
+    value: "packaging",
+    icon: <Inventory sx={{ mr: 1 }} />,
+    color: "secondary",
+  },
+  {
+    label: "Otro",
+    value: "otro",
+    icon: <MoreHoriz sx={{ mr: 1 }} />,
+    color: "default",
+  },
+];
+
+const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer }) => {
   const [producto, setProducto] = useState({
     nombre: "",
     categoria: "",
-    costo: "",
-    transporte: "",
-    packaging: "",
-    precioVenta: "",
   });
 
-  const [totalCosto, setTotalCosto] = useState(0);
-  const [ganancia, setGanancia] = useState(0);
-  const [gananciaPorcentaje, setGananciaPorcentaje] = useState(0);
+  const [costoVariable1, setCostoVariable1] = useState({
+    tipo: "",
+    otro: "",
+    monto: "",
+  });
 
-  useEffect(() => {
-    const c = parseFloat(producto.costo) || 0;
-    const t = parseFloat(producto.transporte) || 0;
-    const p = parseFloat(producto.packaging) || 0;
-    const pv = parseFloat(producto.precioVenta) || 0;
+  const [costoVariable2, setCostoVariable2] = useState(null); // null si no se agregó
 
-    const total = c + t + p;
-    const gan = pv - total;
-    const ganPct = total > 0 ? ((gan / total) * 100).toFixed(2) : 0;
+  const renderCostoVariable = (
+    variable,
+    setVariable,
+    label,
+    usedTipos = [],
+    allowRemove = false
+  ) => {
+    const selectedOption = variableOptions.find(
+      (opt) => opt.value === variable.tipo
+    );
 
-    setTotalCosto(total);
-    setGanancia(gan > 0 ? gan : 0);
-    setGananciaPorcentaje(gan > 0 ? ganPct : 0);
-  }, [producto]);
+    return (
+      <Box display="flex" alignItems="center" gap={1} mt={2}>
+        <TextField
+          select
+          label={label}
+          value={variable.tipo}
+          onChange={(e) =>
+            setVariable({ ...variable, tipo: e.target.value, otro: "" })
+          }
+          sx={{ flex: 1 }}
+        >
+          {variableOptions.map((opt) => (
+            <MenuItem
+              key={opt.value}
+              value={opt.value}
+              disabled={usedTipos.includes(opt.value)}
+            >
+              {opt.icon}
+              {opt.label}
+            </MenuItem>
+          ))}
+        </TextField>
 
-  const handleChange = (e) => {
-    setProducto({ ...producto, [e.target.name]: e.target.value });
+        {variable.tipo === "otro" && (
+          <TextField
+            label="Especifique"
+            value={variable.otro}
+            onChange={(e) =>
+              setVariable({ ...variable, otro: e.target.value })
+            }
+            sx={{ flex: 1 }}
+          />
+        )}
+
+        <TextField
+          label="Monto"
+          type="number"
+          value={variable.monto}
+          onChange={(e) =>
+            setVariable({ ...variable, monto: e.target.value })
+          }
+          sx={{ flex: 1 }}
+        />
+
+        {allowRemove && (
+          <IconButton color="error" onClick={() => setVariable(null)}>
+            <Close />
+          </IconButton>
+        )}
+      </Box>
+    );
   };
 
   const handleGuardar = async () => {
@@ -50,10 +125,28 @@ const ModalNuevoProducto = ({ open, onClose, traer }) => {
       const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
       if (loggedUserJSON) {
         const usuario = JSON.parse(loggedUserJSON);
-        const rta = await serviciousuario1.crearnuevoproducto({
+  
+        // Preparar valores de variables adicionales
+        const productoExtra = {};
+        if (costoVariable1) {
+          productoExtra[`variable1`] =
+            costoVariable1.tipo === "otro" ? costoVariable1.otro : costoVariable1.tipo;
+          productoExtra[`costevariable1`] = parseFloat(costoVariable1.monto) || 0;
+        }
+        if (costoVariable2) {
+          productoExtra[`variable2`] =
+            costoVariable2.tipo === "otro" ? costoVariable2.otro : costoVariable2.tipo;
+          productoExtra[`costevariable2`] = parseFloat(costoVariable2.monto) || 0;
+        }
+  
+        const productoFinal = {
           ...producto,
+          ...productoExtra, // <--- aquí se agregan al producto
+          costoVariables: [costoVariable1, costoVariable2].filter(Boolean),
           usuarioId: usuario.id,
-        });
+        };
+  console.log(productoFinal)
+        const rta = await serviciousuario1.crearnuevoproducto(productoFinal);
         alert(rta);
         traer();
       }
@@ -62,41 +155,136 @@ const ModalNuevoProducto = ({ open, onClose, traer }) => {
       console.error("Error al crear el producto", error);
     }
   };
+  
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>Agregar Nuevo Producto</DialogTitle>
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+      <DialogTitle>Agregar Producto</DialogTitle>
       <DialogContent>
-        <TextField fullWidth margin="dense" label="Nombre del Producto" name="nombre" value={producto.nombre} onChange={handleChange} />
-        <TextField fullWidth margin="dense" label="Categoría" name="categoria" value={producto.categoria} onChange={handleChange} />
-        <TextField fullWidth margin="dense" label="Costo" name="costo" type="number" value={producto.costo} onChange={handleChange} />
-        <TextField fullWidth margin="dense" label="Transporte" name="transporte" type="number" value={producto.transporte} onChange={handleChange} />
-        <TextField fullWidth margin="dense" label="Packaging" name="packaging" type="number" value={producto.packaging} onChange={handleChange} />
-        
+        <TextField
+          label="Nombre"
+          fullWidth
+          value={producto.nombre}
+          onChange={(e) =>
+            setProducto({ ...producto, nombre: e.target.value })
+          }
+          sx={{ mb: 2 }}
+        />
+        <TextField
+          label="Categoria"
+          fullWidth
+          value={producto.categoria}
+          onChange={(e) =>
+            setProducto({ ...producto, categoria: e.target.value })
+          }
+          sx={{ mb: 2 }}
+        />
+ <TextField
+          label="costo"
+          fullWidth
+          value={producto.costo}
+          onChange={(e) =>
+            setProducto({ ...producto, costo: e.target.value })
+          }
+          sx={{ mb: 2 }}
+        />
+        {/* Costo Variable 1 */}
+        {renderCostoVariable(
+          costoVariable1,
+          setCostoVariable1,
+          "Costo Variable 1",
+          costoVariable2 ? [costoVariable2.tipo] : []
+        )}
+
+        {/* Costo Variable 2 */}
+        {costoVariable2 ? (
+          renderCostoVariable(
+            costoVariable2,
+            setCostoVariable2,
+            "Costo Variable 2",
+            [costoVariable1.tipo],
+            true
+          )
+        ) : (
+          <Button
+            startIcon={<Add />}
+            onClick={() =>
+              setCostoVariable2({ tipo: "", otro: "", monto: "" })
+            }
+            sx={{ mt: 2 }}
+          >
+            Agregar Costo Variable 2
+          </Button>
+        )}
+ <TextField
+          label="precio_venta"
+          fullWidth
+          value={producto.precio_venta}
+          onChange={(e) =>
+            setProducto({ ...producto, precio_venta: e.target.value })
+          }
+          sx={{ mb: 2 }}
+        />
         <Divider sx={{ my: 2 }} />
 
+        {/* Resumen */}
         <Box sx={{ mb: 2 }}>
-          <Typography variant="body2" color="text.secondary">Costo total (suma):</Typography>
-          <Typography variant="subtitle1" color="text.primary">${totalCosto.toFixed(2)}</Typography>
-        </Box>
+  <Typography variant="subtitle2">Resumen:</Typography>
 
-        <TextField fullWidth margin="dense" label="Precio de Venta" name="precioVenta" type="number" value={producto.precioVenta} onChange={handleChange} />
+  <Typography sx={{ ml: 2 }}>
+    <strong>Costo fijo:</strong> ${producto.costo || 0}
+  </Typography>
 
-        {producto.precioVenta && (
-          <Box sx={{ mt: 2 }}>
-            <Typography variant="body2" color="text.secondary">Ganancia estimada:</Typography>
-            <Typography variant="subtitle2" color={ganancia > 0 ? "success.main" : "error.main"}>
-              ${ganancia.toFixed(2)} ({gananciaPorcentaje}%)
-            </Typography>
-          </Box>
-        )}
-      </DialogContent>
+  <Typography sx={{ ml: 2 }}>
+    <strong>Precio de venta:</strong> ${producto.precio_venta || 0}
+  </Typography>
+
+  {[costoVariable1, costoVariable2].filter(Boolean).map((cv, idx) => {
+    const opt = variableOptions.find((o) => o.value === cv.tipo);
+    return (
+      <Typography key={idx} sx={{ ml: 2 }}>
+        {opt?.icon}{" "}
+        <strong>
+          {cv.tipo === "otro" ? `Otro: ${cv.otro}` : opt?.label}
+        </strong>
+        : ${cv.monto}
+      </Typography>
+    );
+  })}
+
+  <Divider sx={{ my: 1 }} />
+
+  {(() => {
+    const costoFijo = parseFloat(producto.costo) || 0;
+    const precioVenta = parseFloat(producto.precio_venta) || 0;
+    const costoVarTotal = [costoVariable1, costoVariable2]
+      .filter(Boolean)
+      .reduce((sum, cv) => sum + (parseFloat(cv.monto) || 0), 0);
+    const costoTotal = costoFijo + costoVarTotal;
+    const ganancia = precioVenta - costoTotal;
+
+    return (
+      <>
+        <Typography sx={{ ml: 2 }}>
+          <strong>Costo total:</strong> ${costoTotal.toFixed(2)}
+        </Typography>
+        <Typography sx={{ ml: 2 }}>
+          <strong>Ganancia estimada:</strong> ${ganancia.toFixed(2)}
+        </Typography>
+      </>
+    );
+  })()}
+</Box>
+</DialogContent>
+
       <DialogActions>
-        <Button onClick={onClose} color="secondary">Cancelar</Button>
-        <Button onClick={handleGuardar} color="primary" variant="contained">Guardar</Button>
+        <Button onClick={onClose}>Cancelar</Button>
+        <Button variant="contained" onClick={handleGuardar}>
+          Guardar
+        </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default ModalNuevoProducto;
+export default ModalAgregarProducto;
