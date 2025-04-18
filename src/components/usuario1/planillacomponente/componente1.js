@@ -3,14 +3,13 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/
 import ModalNuevoProducto from "./modalproducto";
 import ModalCompra from "./modalcomprar";
 import ModalVenta from "./modalvender";
-import ModalFormulario from "./ModalFormulario";
+import ModalFormulario from "./modaleditar";
 import serviciousuario1 from "../../../services/vendedoras";
 import { useLocation } from "react-router-dom";
 import {
   Card,
   CardContent,
   Typography,
-  
   Stack,
   Box,
   Container,
@@ -26,11 +25,12 @@ const ControlStock = () => {
   const [registroActual, setRegistroActual] = useState(null);
   const [vistaCompactaProductos, setVistaCompactaProductos] = useState(true);
   const [openCompra, setOpenCompra] = useState(false);
-  const [openVenta, setOpenVenta] = useState(false);  
+  const [openVenta, setOpenVenta] = useState(false);
+  const [busqueda, setBusqueda] = useState("");
   const location = useLocation();
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON);
       serviciousuario1.traerproductos(usuario.id).then((data) => {
@@ -41,8 +41,9 @@ const ControlStock = () => {
       });
     }
   }, []);
+
   const traerDatos = () => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON);
       serviciousuario1.traerproductos(usuario.id).then((data) => {
@@ -53,6 +54,7 @@ const ControlStock = () => {
       });
     }
   };
+
   const abrirModalEditar = (registro) => {
     setRegistroActual(registro);
     setModalEditarAbierto(true);
@@ -65,139 +67,195 @@ const ControlStock = () => {
 
   const mostrarTabla = location.pathname.includes("movimientos") ? "movimientos" : "productos";
 
+  const productosFiltrados = productos.filter((p) =>
+    p.producto.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
   return (
     <div>
-          {mostrarTabla == "productos" ? <>
-      <h2>Control de Stock</h2>
-{/* 
-      <Button variant="contained" color="primary" href="/usuario1/productos" style={{ marginRight: "10px" }}>
-        Ver Productos
-      </Button>
-      <Button variant="contained" color="secondary" href="/usuario1/movimientos">
-        Ver Movimientos
-      </Button> */}
-       <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom>
-        Gestión de Stock
-      </Typography>
-     
-       <Button variant="contained" color="success" onClick={() => setModalNuevoProducto(true)} style={{ marginBottom: "10px" }}>
-         + Agregar Producto
-       </Button>
-       <Button onClick={() => setVistaCompactaProductos(!vistaCompactaProductos)} style={{ marginLeft: "10px" , color:"green"}}>
-         {vistaCompactaProductos ? "Ver todos los campos" : "Vista compacta"}
-       </Button>
-      <Divider sx={{ mb: 2 }} />
+      {mostrarTabla === "productos" ? (
+        <>
+          <h2>Control de Stock</h2>
 
-      {/* Vista de productos */}
-      {productos.map((p) => (
-        <Card key={p.id} variant="outlined" sx={{ mb: 2 }}>
-          <CardContent>
-            <Stack spacing={1}>
-              <Typography variant="h6" color="primary">{p.producto}</Typography>
-              <Typography variant="body2">Categoría: {p.categoria}</Typography>
+          <Container maxWidth="sm" sx={{ mt: 4 }}>
+            <Typography variant="h5" gutterBottom>
+              Gestión de Stock
+            </Typography>
 
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="body2">Costo: ${p.costo}</Typography>
-                <Typography variant="body2">{p.variable1 !=0 && <> {p.variable1}:$ {p.costovariable1}</>     }</Typography>
-                <Typography variant="body2">{p.variable2 !=0 && <> {p.variable2}: ${p.costovariable2}</>     }</Typography>              </Box>
+            <input
+              type="text"
+              placeholder="Buscar producto..."
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              style={{
+                padding: "8px",
+                width: "100%",
+                marginBottom: "10px",
+                borderRadius: "4px",
+                border: "1px solid #ccc",
+              }}
+            />
 
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="body1" fontWeight="bold">Precio: ${p.precio_venta}</Typography>
-                <Typography variant="body1" color="success.main">
-  Ganancia: ${((p.precio_venta || 0) - ((p.costo || 0) - (p.costovariable1 || 0) - (p.costovariable2 || 0))).toFixed(2)} (
-    {(
-  (
-    (
-      (Number(p.costo ?? 0) + Number(p.costovariable1 ?? 0) + Number(p.costovariable2 ?? 0)) /
-      (Number(p.precio_venta ?? 1)) // ponemos 1 para evitar división por cero
-    ) * 100
-  ) || 0
-).toFixed(2)}
-%
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => setModalNuevoProducto(true)}
+              style={{ marginBottom: "10px" }}
+            >
+              + Agregar Producto
+            </Button>
+            <Button
+              onClick={() => setVistaCompactaProductos(!vistaCompactaProductos)}
+              style={{ marginLeft: "10px", color: "green" }}
+            >
+              {vistaCompactaProductos ? "Ver todos los campos" : "Vista compacta"}
+            </Button>
+            <Divider sx={{ mb: 2 }} />
 
-    
-  )
-</Typography>
-              </Box>
+            {productosFiltrados.map((p) => (
+              <Card key={p.id} variant="outlined" sx={{ mb: 2 }}>
+                <CardContent>
+                  <Stack spacing={1}>
+                    <Typography variant="h6" color="primary">
+                      {p.producto}
+                    </Typography>
+                    <Typography variant="body2">Categoría: {p.categoria}</Typography>
 
-              <Box textAlign="right">
-                <Button size="small" variant="outlined" onClick={() => abrirModalEditar(p)}>
-                  Modificar
+                    <Box display="flex" justifyContent="space-between">
+                      <Typography variant="body2">Costo: ${p.costo}</Typography>
+                      <Typography variant="body2">
+                        {p.variable1 !== 0 && (
+                          <>
+                            {p.variable1}: $ {p.costovariable1}
+                          </>
+                        )}
+                      </Typography>
+                      <Typography variant="body2">
+                        {p.variable2 !== 0 && (
+                          <>
+                            {p.variable2}: $ {p.costovariable2}
+                          </>
+                        )}
+                      </Typography>
+                    </Box>
+
+                    <Box display="flex" justifyContent="space-between">
+                      <Typography variant="body1" fontWeight="bold">
+                        Precio: ${p.precio_venta}
+                      </Typography>
+                      <Typography variant="body1" color="success.main">
+                        Ganancia: $
+                        {(
+                          (p.precio_venta || 0) -
+                          (p.costo || 0) -
+                          (p.costovariable1 || 0) -
+                          (p.costovariable2 || 0)
+                        ).toFixed(2)}{" "}
+                        (
+                        {(
+                          ((Number(p.costo ?? 0) +
+                            Number(p.costovariable1 ?? 0) +
+                            Number(p.costovariable2 ?? 0)) /
+                            (Number(p.precio_venta ?? 1))) *
+                          100
+                        ).toFixed(2)}
+                        %)
+                      </Typography>
+                    </Box>
+
+                    <Box textAlign="right">
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={() => abrirModalEditar(p)}
+                      >
+                        Modificar
+                      </Button>
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            ))}
+          </Container>
+        </>
+      ) : (
+        <>
+          <Container maxWidth="sm" sx={{ mt: 4 }}>
+            {productos && (
+              <Stack direction="row" spacing={2}>
+                <Button variant="contained" color="success" onClick={() => setOpenCompra(true)}>
+                  Agregar Compra
                 </Button>
-              </Box>
-            </Stack>
-          </CardContent>
-        </Card>
-      ))} </Container>
-</>:<>  <Container maxWidth="sm" sx={{ mt: 4 }}>
-      {/* Vista de movimientos */}
-
-      { productos &&
-      <Stack direction="row" spacing={2}>
-        <Button variant="contained" color="success" onClick={() => setOpenCompra(true)}>
-          Agregar Compra
-        </Button>
-        <Button variant="contained" color="warning" onClick={() => setOpenVenta(true)}>
-          Agregar Venta
-        </Button>
-      </Stack>
-  }
-
-      {movimientos.map((m) => (
-        <Card key={m.id} variant="outlined" sx={{ mb: 2 }}>
-          <CardContent>
-            <Stack spacing={1}>
-              <Typography variant="subtitle1" color="primary">
-                {m.movimiento} - {m.producto}
-              </Typography>
-              <Typography variant="body2">Fecha: {m.fecha}</Typography>
-
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="body2">Cantidad: {m.cantidad}</Typography>
-                <Typography variant="body2">Precio: ${m.precio}</Typography>
-              </Box>
-
-              <Typography variant="body1" fontWeight="bold">
-                Total: ${m.totalFacturado}
-              </Typography>
-
-              <Typography variant="body2">Proveedor: {m.proveedor || "-"}</Typography>
-              <Typography variant="body2">Cliente: {m.cliente || "-"}</Typography>
-
-              <Box textAlign="right">
-                <Button size="small" variant="outlined" onClick={() => abrirModalEditar(m)}>
-                  Modificar
+                <Button variant="contained" color="warning" onClick={() => setOpenVenta(true)}>
+                  Agregar Venta
                 </Button>
-              </Box>
-            </Stack>
-          </CardContent>
-        </Card>
-      ))}
-    </Container>
-    </>}
+              </Stack>
+            )}
+
+            {movimientos.map((m) => (
+              <Card key={m.id} variant="outlined" sx={{ mb: 2 }}>
+                <CardContent>
+                  <Stack spacing={1}>
+                    <Typography variant="subtitle1" color="primary">
+                      {m.movimiento} - {m.producto}
+                    </Typography>
+                    <Typography variant="body2">Fecha: {m.fecha}</Typography>
+
+                    <Box display="flex" justifyContent="space-between">
+                      <Typography variant="body2">Cantidad: {m.cantidad}</Typography>
+                      <Typography variant="body2">Precio: ${m.precio}</Typography>
+                    </Box>
+
+                    <Typography variant="body1" fontWeight="bold">
+                      Total: ${m.totalFacturado}
+                    </Typography>
+
+                    <Typography variant="body2">Proveedor: {m.proveedor || "-"}</Typography>
+                    <Typography variant="body2">Cliente: {m.cliente || "-"}</Typography>
+
+                    <Box textAlign="right">
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        onClick={() => abrirModalEditar(m)}
+                      >
+                        Modificar
+                      </Button>
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            ))}
+          </Container>
+        </>
+      )}
 
       <Dialog open={modalEditarAbierto} onClose={cerrarModalEditar} maxWidth="sm" fullWidth>
-        <DialogTitle>Editar Registro</DialogTitle>
+        <DialogTitle>Editar</DialogTitle>
         <DialogContent>
-          <ModalFormulario registro={registroActual} />
+          <ModalFormulario registro={registroActual} 
+          serviciousuario1={serviciousuario1}/>
         </DialogContent>
         <DialogActions>
-          <Button onClick={cerrarModalEditar} color="secondary">Cerrar</Button>
+          <Button onClick={cerrarModalEditar} color="secondary">
+            Cerrar
+          </Button>
         </DialogActions>
       </Dialog>
 
-      <ModalNuevoProducto open={modalNuevoProducto} onClose={() => setModalNuevoProducto(false)} 
-        traer={traerDatos} // Aquí pasas la función como prop
+      <ModalNuevoProducto
+        open={modalNuevoProducto}
+        onClose={() => setModalNuevoProducto(false)}
+        traer={traerDatos}
         serviciousuario1={serviciousuario1}
-        />
-        { productos && <>
-        <ModalCompra open={openCompra} onClose={() => setOpenCompra(false)} 
-              traer={traerDatos}
-              productos={productos}/>
-        <ModalVenta open={openVenta} onClose={() => setOpenVenta(false)}
-            traer={traerDatos}
-            productos={productos} /> </> }
+      />
+
+      {productos && (
+        <>
+          <ModalCompra open={openCompra} onClose={() => setOpenCompra(false)} traer={traerDatos} productos={productos} />
+          <ModalVenta open={openVenta} onClose={() => setOpenVenta(false)} traer={traerDatos} productos={productos} />
+        </>
+      )}
     </div>
   );
 };

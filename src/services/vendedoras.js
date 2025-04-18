@@ -97,4 +97,11 @@ const enviarMovimiento= async  (datos) => {
   
   return data
 } 
-export default {enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+
+const modificarproductoesme= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'modificarproductoesme',datos,config)
+  
+  return data
+} 
+export default {modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
