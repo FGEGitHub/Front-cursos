@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import serviciousuario1 from "../../../services/vendedoras";
 
-const ModalCompra = ({ open, onClose, productos = [] }) => {
+const ModalCompra = ({ open, onClose, productos = [],traer }) => {
   const today = new Date().toISOString().split("T")[0];
 
   const [form, setForm] = useState({
@@ -54,6 +54,7 @@ const ModalCompra = ({ open, onClose, productos = [] }) => {
     } catch (error) {
       console.error("Error al guardar compra:", error);
     }
+    traer()
   };
 
   return (

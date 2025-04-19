@@ -127,8 +127,12 @@ const ControlStock = () => {
                 <CardContent>
                   <Stack spacing={1}>
                     <Typography variant="h6" color="primary">
-                      {p.producto}
+                      {p.producto}   
                     </Typography>
+                    <Typography variant="h6" color="primary">
+                    Precio:{p.precioventa} 
+                    </Typography>
+                  
                     <Typography variant="body2">Categoría: {p.categoria}</Typography>
 
                     <Box display="flex" justifyContent="space-between">
@@ -148,31 +152,46 @@ const ControlStock = () => {
                         )}
                       </Typography>
                     </Box>
-                    <Typography variant="body2">Porcentaje: {p.porcentaje}%</Typography>
+                    <Typography variant="body2">Porcentaje de inversion: {p.porcentajedeinvercion}%</Typography>
+                    
+                    <Box display="flex" flexDirection="column" gap={0.5}>
+  <Box display="flex" justifyContent="space-between">
+    <Typography variant="body1" fontWeight="bold" whiteSpace="nowrap">
+      Costo producto:
+    </Typography>
+    <Typography variant="body1" whiteSpace="nowrap">
+      ${p.valorTotal}
+    </Typography>
+  </Box>
 
-                    <Box display="flex" justifyContent="space-between">
-                      <Typography variant="body1" fontWeight="bold">
-                        Precio: ${p.precio_venta}
-                      </Typography>
-                      <Typography variant="body1" color="success.main">
-                        Ganancia: $
-                        {(
-                          (p.precio_venta || 0) -
-                          (p.costo || 0) -
-                          (p.costovariable1 || 0) -
-                          (p.costovariable2 || 0)
-                        ).toFixed(2)}{" "}
-                        (
-                        {(
-                          ((Number(p.costo ?? 0) +
-                            Number(p.costovariable1 ?? 0) +
-                            Number(p.costovariable2 ?? 0)) /
-                            (Number(p.precio_venta ?? 1))) *
-                          100
-                        ).toFixed(2)}
-                        %)
-                      </Typography>
-                    </Box>
+  <Box display="flex" justifyContent="space-between">
+    <Typography variant="body1" fontWeight="bold" whiteSpace="nowrap">
+      Total comprado:
+    </Typography>
+    <Typography variant="body1" whiteSpace="nowrap">
+      {p.stockcomprado}
+    </Typography>
+  </Box>
+
+  <Box display="flex" justifyContent="space-between">
+    <Typography variant="body1" fontWeight="bold" whiteSpace="nowrap">
+      Adic fijo:
+    </Typography>
+    <Typography variant="body1" whiteSpace="nowrap">
+      {p.adicional}
+    </Typography>
+  </Box>
+
+  <Box display="flex" justifyContent="space-between">
+    <Typography variant="body1" fontWeight="bold" whiteSpace="nowrap">
+      Costo final:
+    </Typography>
+    <Typography variant="body1" whiteSpace="nowrap">
+      ${p.valortotal2}
+    </Typography>
+  </Box>
+</Box>
+
                 
       <Box textAlign="right">
       <Button
