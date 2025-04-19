@@ -104,4 +104,11 @@ const modificarproductoesme= async  (datos) => {
   
   return data
 } 
-export default {modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+
+const borrarproducto= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'borrarproducto',datos,config)
+  
+  return data
+} 
+export default {borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
