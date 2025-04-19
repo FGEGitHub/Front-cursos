@@ -16,18 +16,24 @@ import {
   Divider,
 } from "@mui/material";
 import ModalConfirmarBorrado from './modalborrargeneral'
+import ModalConfirmarBorradomovimiento from './modalborrargeneral'
+
+
 
 const ControlStock = () => {
   const [productos, setProductos] = useState([]);
   const [movimientos, setMovimientos] = useState([]);
   const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
   const [modalNuevoProducto, setModalNuevoProducto] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);  const [registroActual, setRegistroActual] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false); 
+  const [modalOpen2, setModalOpen2] = useState(false);  
+   const [registroActual, setRegistroActual] = useState(null);
   const [vistaCompactaProductos, setVistaCompactaProductos] = useState(true);
   const [openCompra, setOpenCompra] = useState(false);
   const [openVenta, setOpenVenta] = useState(false);
   const [busqueda, setBusqueda] = useState("");
   const [productoAEliminar, setProductoAEliminar] = useState(null);
+  const [movimientoAEliminar, setMovimientoAEliminar] = useState(null);
 
   const location = useLocation();
 
@@ -62,6 +68,15 @@ const ControlStock = () => {
       await serviciousuario1.borrarproducto({id:productoAEliminar});
       setModalOpen(false);
       setProductoAEliminar(null);
+      traerDatos(); // para refrescar la lista después del borrado
+    }
+  };
+  const handleBorrarMovimiento = async () => {
+    console.log( movimientoAEliminar) 
+      if (movimientoAEliminar) {
+      await serviciousuario1.borrarmovimiento({id:movimientoAEliminar});
+      setModalOpen(false);
+      setMovimientoAEliminar(null);
       traerDatos(); // para refrescar la lista después del borrado
     }
   };
@@ -114,12 +129,7 @@ const ControlStock = () => {
             >
               + Agregar Producto
             </Button>
-            <Button
-              onClick={() => setVistaCompactaProductos(!vistaCompactaProductos)}
-              style={{ marginLeft: "10px", color: "green" }}
-            >
-              {vistaCompactaProductos ? "Ver todos los campos" : "Vista compacta"}
-            </Button>
+     
             <Divider sx={{ mb: 2 }} />
 
             {productosFiltrados.map((p) => (
@@ -263,7 +273,16 @@ const ControlStock = () => {
                       >
                         Modificar
                       </Button>
-
+                      <Button
+  size="small"
+  variant="outlined"
+  onClick={() => {
+    setMovimientoAEliminar(m.id);
+    setModalOpen2(true);
+  }}
+>
+  Borrar
+</Button>
                     </Box>
                   </Stack>
                 </CardContent>
@@ -279,6 +298,14 @@ const ControlStock = () => {
     setProductoAEliminar(null);
   }}
   onConfirm={handleBorrar}
+/>
+<ModalConfirmarBorradomovimiento
+  open={modalOpen2}
+  onClose={() => {
+    setModalOpen2(false);
+    setMovimientoAEliminar(null);
+  }}
+  onConfirm={handleBorrarMovimiento}
 />
       <Dialog open={modalEditarAbierto} onClose={cerrarModalEditar} maxWidth="sm" fullWidth>
         <DialogTitle>Editar</DialogTitle>
