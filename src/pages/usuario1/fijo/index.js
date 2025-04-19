@@ -1,9 +1,8 @@
 
 
 import React, { useEffect, useState, Fragment } from "react";
-import Novedades from '../../../components/usuario1/planillacomponente/componente1'
+import Novedades from '../../../components/usuario1/costosfijos/componente1'
 import MenuUsuario from '../../../components/usuario1/Navbar1'
-import Gnancia from '../../../components/usuario1/tarjetaganancia'
 
 
 import { useNavigate } from "react-router-dom";
@@ -42,10 +41,9 @@ export default function Transferencias() {
 
   return (
     <>
-       <div style={styles.fondo}>{logueado ? <div>
+          <div style={styles.fondo}>  {logueado ? <div>
         <MenuUsuario/>
         <br/>     <br/>     <br/>
-        <Gnancia/>
         <Novedades/>
 
 
@@ -63,6 +61,7 @@ const styles = {
     fondo: {
 
       background: "linear-gradient(to bottom, #d4f4d2, #ffffff)", // Verde suave a blanco
+   
 
     },
   };

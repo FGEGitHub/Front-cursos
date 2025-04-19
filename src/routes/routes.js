@@ -115,7 +115,7 @@ import Llamadas from '../pages/usuario6/llamados';
 import Vendedoramenu from '../pages/usuario13ventas/menuprinc';
 import Menutodoslosprod from '../pages/ventas/ventas';
 import Ventasproducto from '../pages/ventas/ventas';
-
+import Cstosfijos from '../pages/usuario1/fijo';
 
 import Deslogin from '../pages/deloging/index.js';
 
@@ -356,9 +356,11 @@ const Rutas = [
 		{ path: '/dtc/usuario1/cumples', element: <DTCcumples/> },
 		{ path: '/dtc/usuario1/asistenciassoc', element: <DtcAsisenciasoc/> },
 		{ path: '/dtc/usuario1/inscripciones', element: <DtcInscripciones/> },
-	
 
 
+		{ path: '/usuario1/costosfijos', element: <Cstosfijos/> },
+
+		
 
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },

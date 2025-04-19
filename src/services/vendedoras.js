@@ -68,6 +68,22 @@ return data
 return data
        
   }
+  
+  const traercostosfijos = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traercostosfijos/'+id, config)
+return data
+       
+  }
+  
+  const traerganancia = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerganancia/'+id, config)
+return data
+       
+  }
   const nuevoprpducto= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'nuevoprpducto',datos,config)
@@ -111,4 +127,30 @@ const borrarproducto= async  (datos) => {
   
   return data
 } 
-export default {borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+
+
+
+const agregarcostofijo= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'agregarcostofijo',datos,config)
+  
+  return data
+} 
+
+const modisficarcostosfijos= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'modisficarcostosfijos',datos,config)
+  
+  return data
+}
+
+const modificarganancia= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'modificarganancia',datos,config)
+  
+  return data
+}
+
+
+
+export default {modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}

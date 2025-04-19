@@ -223,13 +223,7 @@ const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer }) => {
         <Box sx={{ mb: 2 }}>
   <Typography variant="subtitle2">Resumen:</Typography>
 
-  <Typography sx={{ ml: 2 }}>
-    <strong>Costo fijo:</strong> ${producto.costo || 0}
-  </Typography>
 
-  <Typography sx={{ ml: 2 }}>
-    <strong>Precio de venta:</strong> ${producto.precio_venta || 0}
-  </Typography>
 
   {[costoVariable1, costoVariable2].filter(Boolean).map((cv, idx) => {
     const opt = variableOptions.find((o) => o.value === cv.tipo);
@@ -260,9 +254,7 @@ const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer }) => {
         <Typography sx={{ ml: 2 }}>
           <strong>Costo total:</strong> ${costoTotal.toFixed(2)}
         </Typography>
-        <Typography sx={{ ml: 2 }}>
-          <strong>Ganancia estimada:</strong> ${ganancia.toFixed(2)}
-        </Typography>
+
       </>
     );
   })()}

@@ -56,6 +56,18 @@ const NavigationButtons = () => {
           <img src={movimientosImg} alt="Movimientos" style={styles.image2} />
         </button>
       </div>
+      <div
+        ref={movimientosRef}
+        data-name="movimientos"
+        style={{
+          ...styles.buttonWrapper,
+          transform: active === "movimientos" ? "scale(1.1)" : "scale(1)",
+        }}
+      >
+        <button onClick={() => navigate("/usuario1/costosfijos")} style={styles.button}>
+          <img src={movimientosImg} alt="Movimientos" style={styles.image2} />
+        </button>
+      </div>
     </div>
   );
 };
