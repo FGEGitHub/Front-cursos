@@ -116,6 +116,8 @@ import Vendedoramenu from '../pages/usuario13ventas/menuprinc';
 import Menutodoslosprod from '../pages/ventas/ventas';
 import Ventasproducto from '../pages/ventas/ventas';
 import Cstosfijos from '../pages/usuario1/fijo';
+import Stockesme from '../pages/usuario1/stock';
+
 
 import Deslogin from '../pages/deloging/index.js';
 
@@ -237,8 +239,9 @@ const Rutas = [
 		{ path: '/usuario/perfil', element: <Perfil /> },
 		{ path: '/usuario1/movimientos', element: <Movimientos/> },
 		{ path: '/usuario1/productos', element: <Productos/> },
-		
+		{ path: '/usuario1/stock', element: <Stockesme/> },
 
+		
 
 
 		{ path: '/administracion/cursos', element: <Menu2 /> },

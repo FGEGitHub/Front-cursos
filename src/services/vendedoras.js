@@ -77,6 +77,13 @@ return data
        
   }
   
+  const traerstock = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerstock/'+id, config)
+return data
+       
+  }
   const traerganancia = async (id) => {
   
     // const data = await axios.post('http://localhost:4000/signupp', datos)
@@ -158,4 +165,4 @@ const modificarganancia= async  (datos) => {
 
 
 
-export default {borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+export default {traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
