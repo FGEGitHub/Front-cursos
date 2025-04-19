@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog, DialogTitle, DialogContent, DialogActions,
   Button, TextField, MenuItem
@@ -17,10 +17,23 @@ const ModalVenta = ({ open, onClose, productos = [] }) => {
     cliente: ""
   });
 
+  const [precioUnitario, setPrecioUnitario] = useState(0);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
+
+  // 🔁 Calcular precio automáticamente
+  useEffect(() => {
+    const prod = productos.find(p => p.id === form.productoId);
+    const cantidad = parseFloat(form.cantidad) || 0;
+    const unitario = prod ? parseFloat(prod.precio_venta || 0) : 0;
+
+    setPrecioUnitario(unitario);
+    const total = unitario * cantidad;
+    setForm(prev => ({ ...prev, precio: total.toFixed(2) }));
+  }, [form.productoId, form.cantidad, productos]);
 
   const handleGuardar = async () => {
     const data = {
@@ -47,16 +60,79 @@ const ModalVenta = ({ open, onClose, productos = [] }) => {
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Agregar Venta</DialogTitle>
       <DialogContent>
-        <TextField fullWidth margin="dense" label="Producto *" select name="productoId" value={form.productoId} onChange={handleChange}>
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Producto *"
+          select
+          name="productoId"
+          value={form.productoId}
+          onChange={handleChange}
+        >
           {productos.map(prod => (
-            <MenuItem key={prod.id} value={prod.id}>{prod.nombre}</MenuItem>
+            <MenuItem key={prod.id} value={prod.id}>{prod.producto}</MenuItem>
           ))}
         </TextField>
-        <TextField fullWidth margin="dense" label="Cantidad *" type="number" name="cantidad" value={form.cantidad} onChange={handleChange} />
-        <TextField fullWidth margin="dense" label="Precio *" type="number" name="precio" value={form.precio} onChange={handleChange} />
-        <TextField fullWidth margin="dense" label="Fecha" type="date" name="fecha" value={form.fecha} onChange={handleChange} InputLabelProps={{ shrink: true }} />
-        <TextField fullWidth margin="dense" label="Factura Venta" name="facturaVenta" value={form.facturaVenta} onChange={handleChange} />
-        <TextField fullWidth margin="dense" label="Cliente" name="cliente" value={form.cliente} onChange={handleChange} />
+
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Cantidad *"
+          type="number"
+          name="cantidad"
+          value={form.cantidad}
+          onChange={handleChange}
+        />
+
+        {/* 💰 Precio unitario */}
+        <TextField
+          disabled
+          fullWidth
+          margin="dense"
+          label="Precio unitario"
+          type="number"
+          value={precioUnitario.toFixed(2)}
+        />
+
+        {/* 💵 Precio total (calculado) */}
+        <TextField
+          disabled
+          fullWidth
+          margin="dense"
+          label="Precio total (auto)"
+          type="number"
+          name="precio"
+          value={form.precio}
+        />
+
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Fecha"
+          type="date"
+          name="fecha"
+          value={form.fecha}
+          onChange={handleChange}
+          InputLabelProps={{ shrink: true }}
+        />
+
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Factura Venta"
+          name="facturaVenta"
+          value={form.facturaVenta}
+          onChange={handleChange}
+        />
+
+        <TextField
+          fullWidth
+          margin="dense"
+          label="Cliente"
+          name="cliente"
+          value={form.cliente}
+          onChange={handleChange}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">Cancelar</Button>

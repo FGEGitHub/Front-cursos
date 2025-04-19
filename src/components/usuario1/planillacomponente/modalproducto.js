@@ -216,15 +216,7 @@ const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer }) => {
             Agregar Costo Variable 2
           </Button>
         )}
- <TextField
-          label="precio_venta"
-          fullWidth
-          value={producto.precio_venta}
-          onChange={(e) =>
-            setProducto({ ...producto, precio_venta: e.target.value })
-          }
-          sx={{ mb: 2 }}
-        />
+
         <Divider sx={{ my: 2 }} />
 
         {/* Resumen */}
