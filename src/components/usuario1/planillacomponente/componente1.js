@@ -148,6 +148,7 @@ const ControlStock = () => {
                         )}
                       </Typography>
                     </Box>
+                    <Typography variant="body2">Porcentaje: {p.porcentaje}%</Typography>
 
                     <Box display="flex" justifyContent="space-between">
                       <Typography variant="body1" fontWeight="bold">
