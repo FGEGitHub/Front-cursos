@@ -361,13 +361,14 @@ const ControlStock = () => {
           </Button>
         </DialogActions>
       </Dialog>
-
+{productos && 
       <ModalNuevoProducto
+      productos={productos}
         open={modalNuevoProducto}
         onClose={() => setModalNuevoProducto(false)}
         traer={traerDatos}
         serviciousuario1={serviciousuario1}
-      />
+      /> }
 
       {productos && (
         <>

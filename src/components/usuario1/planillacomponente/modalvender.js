@@ -20,6 +20,7 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
   const [precioUnitario, setPrecioUnitario] = useState(0);
   const [aplicarDescuento, setAplicarDescuento] = useState(false);
   const [nuevoValor, setNuevoValor] = useState("");
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,7 +61,7 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
     const prod = productos.find(p => p.id === form.productoId);
     const cantidad = parseFloat(form.cantidad) || 0;
     const unitario = prod ? parseFloat(prod.valorTotal || 0) : 0;
-
+    setCategoriaSeleccionada(prod?.categoria || "");
     setPrecioUnitario(unitario);
     const total = unitario * cantidad;
     setForm(prev => ({ ...prev, precio: total.toFixed(2) }));
@@ -93,6 +94,14 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
             <MenuItem key={prod.id} value={prod.id}>{prod.producto}</MenuItem>
           ))}
         </TextField>
+
+        <TextField
+  fullWidth
+  margin="dense"
+  label="Categoría del producto"
+  value={categoriaSeleccionada}
+  disabled
+/>
 
         <TextField
           fullWidth

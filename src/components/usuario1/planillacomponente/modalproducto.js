@@ -42,7 +42,7 @@ const variableOptions = [
   },
 ];
 
-const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer }) => {
+const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer,productos  }) => {
   const [producto, setProducto] = useState({
     nombre: "",
     categoria: "",
@@ -55,7 +55,13 @@ const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer }) => {
   });
 
   const [costoVariable2, setCostoVariable2] = useState(null); // null si no se agregó
+  const [nuevaCategoria, setNuevaCategoria] = useState("");
+  const [usandoNuevaCategoria, setUsandoNuevaCategoria] = useState(false);
 
+  // Obtener categorías únicas de productos
+  const categoriasUnicas = Array.from(
+    new Set(productos.map((p) => p.categoria).filter(Boolean))
+  );
   const renderCostoVariable = (
     variable,
     setVariable,
@@ -170,15 +176,43 @@ const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer }) => {
           }
           sx={{ mb: 2 }}
         />
-        <TextField
-          label="Categoria"
-          fullWidth
-          value={producto.categoria}
-          onChange={(e) =>
-            setProducto({ ...producto, categoria: e.target.value })
-          }
-          sx={{ mb: 2 }}
-        />
+  <TextField
+    select
+    label="Categoría"
+    fullWidth
+    value={usandoNuevaCategoria ? "nueva" : producto.categoria}
+    onChange={(e) => {
+      if (e.target.value === "nueva") {
+        setUsandoNuevaCategoria(true);
+        setProducto({ ...producto, categoria: "" });
+      } else {
+        setUsandoNuevaCategoria(false);
+        setProducto({ ...producto, categoria: e.target.value });
+      }
+    }}
+    sx={{ mb: 2 }}
+  >
+    {categoriasUnicas.map((cat) => (
+      <MenuItem key={cat} value={cat}>
+        {cat}
+      </MenuItem>
+    ))}
+    <MenuItem value="nueva">
+      + Nueva categoría
+    </MenuItem>
+  </TextField>
+
+  {usandoNuevaCategoria && (
+    <TextField
+      label="Nueva categoría"
+      fullWidth
+      value={producto.categoria}
+      onChange={(e) =>
+        setProducto({ ...producto, categoria: e.target.value })
+      }
+      sx={{ mb: 2 }}
+    />
+  )}
  <TextField
           label="costo"
           fullWidth
