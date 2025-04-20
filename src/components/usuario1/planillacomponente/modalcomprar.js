@@ -23,7 +23,7 @@ const ModalCompra = ({ open, onClose, productos = [],traer }) => {
   useEffect(() => {
     const prod = productos.find(p => p.id === form.productoId);
     const cantidad = parseFloat(form.cantidad) || 0;
-    const unitario = prod ? parseFloat(prod.precio_venta || 0) : 0;
+    const unitario = prod ? parseFloat(prod.valorTotal || 0) : 0;
 
     setPrecioUnitario(unitario);
     const total = unitario * cantidad;

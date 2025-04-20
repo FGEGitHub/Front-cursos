@@ -84,7 +84,6 @@ const CostosFijos = () => {
 
   return (
     <div style={{ padding: "1rem" }}>
-      <Button variant="contained" color="primary" onClick={handleOpenAgregar}>Agregar Costo Fijo</Button>
       <Grid container spacing={2} marginTop={2}>
         {costos.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item.id}>
