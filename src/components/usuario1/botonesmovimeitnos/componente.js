@@ -1,84 +1,38 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+
 import productosImg from "../../../Assets/productos.webp";
 import movimientosImg from "../../../Assets/movimientos.webp";
+import costosFijosImg from "../../../Assets/productos.webp";
+import stockImg from "../../../Assets/productos.webp";
+import informesImg from "../../../Assets/productos.webp";
+import cajaImg from "../../../Assets/productos.webp";
+import negocioImg from "../../../Assets/productos.webp";
 
 const NavigationButtons = () => {
   const navigate = useNavigate();
-  const productosRef = useRef(null);
-  const movimientosRef = useRef(null);
-  const [active, setActive] = useState("");
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.dataset.name);
-          }
-        });
-      },
-      { threshold: 0.6 }
-    );
-
-    if (productosRef.current) observer.observe(productosRef.current);
-    if (movimientosRef.current) observer.observe(movimientosRef.current);
-
-    return () => {
-      if (productosRef.current) observer.unobserve(productosRef.current);
-      if (movimientosRef.current) observer.unobserve(movimientosRef.current);
-    };
-  }, []);
+  const buttons = [
+    { img: productosImg, route: "/usuario1/productos", label: "Productos" },
+    { img: movimientosImg, route: "/usuario1/movimientos", label: "Movimientos" },
+    { img: costosFijosImg, route: "/usuario1/costosfijos", label: "Costos Fijos" },
+    { img: stockImg, route: "/usuario1/stock", label: "Stock" },
+    { img: informesImg, route: "/usuario1/informes", label: "Informes" },
+    { img: cajaImg, route: "/usuario1/caja", label: "Caja" },
+    { img: negocioImg, route: "/usuario1/minegocio", label: "Mi Negocio" },
+  ];
 
   return (
     <div style={styles.container}>
-      <div
-        ref={productosRef}
-        data-name="productos"
-        style={{
-          ...styles.buttonWrapper,
-          transform: active === "productos" ? "scale(1.1)" : "scale(1)",
-        }}
-      >
-        <button onClick={() => navigate("/usuario1/movimientos")} style={styles.button}>
-          <img src={productosImg} alt="Productos" style={styles.image} />
-        </button>
-      </div>
-      <div
-        ref={movimientosRef}
-        data-name="movimientos"
-        style={{
-          ...styles.buttonWrapper,
-          transform: active === "movimientos" ? "scale(1.1)" : "scale(1)",
-        }}
-      >
-        <button onClick={() => navigate("/usuario1/productos")} style={styles.button}>
-          <img src={movimientosImg} alt="Movimientos" style={styles.image2} />
-        </button>
-      </div>
-      <div
-        ref={movimientosRef}
-        data-name="movimientos"
-        style={{
-          ...styles.buttonWrapper,
-          transform: active === "movimientos" ? "scale(1.1)" : "scale(1)",
-        }}
-      >
-        <button onClick={() => navigate("/usuario1/costosfijos")} style={styles.button}>
-          <img src={movimientosImg} alt="Movimientos" style={styles.image2} />
-        </button>
-      </div>
-      <div
-        ref={movimientosRef}
-        data-name="stock"
-        style={{
-          ...styles.buttonWrapper,
-          transform: active === "movimientos" ? "scale(1.1)" : "scale(1)",
-        }}
-      >
-        <button onClick={() => navigate("/usuario1/stock")} style={styles.button}>
-          <img src={movimientosImg} alt="Movimientos" style={styles.image2} />
-        </button>
+      <div style={styles.grid}>
+        {buttons.map((btn, index) => (
+          <div key={index} style={styles.card}>
+            <button onClick={() => navigate(btn.route)} style={styles.button}>
+              <img src={btn.img} alt={btn.label} style={styles.image} />
+              <div style={styles.label}>{btn.label}</div>
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -86,29 +40,43 @@ const NavigationButtons = () => {
 
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column", // Uno arriba del otro
-    alignItems: "center",    // Centrado
-    gap: "1rem",             // <-- Reducida la distancia entre botones
-    marginTop: "1rem",
+    maxWidth: "600px", // Limita el ancho total del grid
+    margin: "0 auto",
+    padding: "1rem",
   },
-  buttonWrapper: {
-    transition: "transform 0.3s ease",
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "1rem",
+    justifyItems: "center",
+  },
+  card: {
+    backgroundColor: "#f9f9f9",
+    borderRadius: "10px",
+    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+    padding: "0.8rem",
+    width: "130px", // Tarjetas más angostas
+    textAlign: "center",
+    transition: "transform 0.2s ease",
   },
   button: {
     border: "none",
     background: "none",
     cursor: "pointer",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   image: {
-    width: "271px",
-    height: "271px",
+    width: "90px",
+    height: "90px",
     objectFit: "contain",
   },
-  image2: {
-    width: "250px",
-    height: "250px",
-    objectFit: "contain",
+  label: {
+    marginTop: "0.4rem",
+    fontSize: "0.95rem",
+    fontWeight: "600",
+    color: "#333",
   },
 };
 

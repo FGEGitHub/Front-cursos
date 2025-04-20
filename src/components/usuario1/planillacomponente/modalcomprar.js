@@ -50,7 +50,8 @@ const ModalCompra = ({ open, onClose, productos = [],traer }) => {
     };
 
     try {
-      await serviciousuario1.enviarMovimiento(data);
+     const rta = await serviciousuario1.enviarMovimiento(data);
+     alert(rta)
       onClose();
     } catch (error) {
       console.error("Error al guardar compra:", error);

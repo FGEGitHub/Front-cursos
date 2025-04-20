@@ -12,7 +12,8 @@ import Perfil from '../pages/usuario1/Perfil';
 import Novedades1 from '../pages/usuario1/Novedades';
 import Movimientos from '../pages/usuario1/movimientos';
 import Productos from '../pages/usuario1/productos';
-
+import Informesesme from '../pages/usuario1/informes';
+import Minegocio from '../pages/usuario1/minegocio';
 
 
 ////Usuario 2 ADMINISTRACION
@@ -117,7 +118,7 @@ import Menutodoslosprod from '../pages/ventas/ventas';
 import Ventasproducto from '../pages/ventas/ventas';
 import Cstosfijos from '../pages/usuario1/fijo';
 import Stockesme from '../pages/usuario1/stock';
-
+import Cajaesme from '../pages/usuario1/caja';
 
 import Deslogin from '../pages/deloging/index.js';
 
@@ -240,8 +241,9 @@ const Rutas = [
 		{ path: '/usuario1/movimientos', element: <Movimientos/> },
 		{ path: '/usuario1/productos', element: <Productos/> },
 		{ path: '/usuario1/stock', element: <Stockesme/> },
-
-		
+		{ path: '/usuario1/caja', element: <Cajaesme/> },
+		{ path: '/usuario1/minegocio', element: <Minegocio/> },
+		{ path: '/usuario1/informes', element: <Informesesme/> },
 
 
 		{ path: '/administracion/cursos', element: <Menu2 /> },

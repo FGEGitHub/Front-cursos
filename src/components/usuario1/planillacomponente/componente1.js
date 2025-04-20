@@ -234,59 +234,98 @@ const ControlStock = () => {
           <Container maxWidth="sm" sx={{ mt: 4 }}>
             {productos && (
               <Stack direction="row" spacing={2}>
-                <Button variant="contained" color="success" onClick={() => setOpenCompra(true)}>
+                <Button variant="contained"  onClick={() => setOpenCompra(true)}>
                   Agregar Compra
                 </Button>
-                <Button variant="contained" color="warning" onClick={() => setOpenVenta(true)}>
+                <Button variant="contained" color="success" onClick={() => setOpenVenta(true)}>
                   Agregar Venta
                 </Button>
               </Stack>
             )}
 
-            {movimientos.map((m) => (
-              <Card key={m.id} variant="outlined" sx={{ mb: 2 }}>
-                <CardContent>
-                  <Stack spacing={1}>
-                    <Typography variant="subtitle1" color="primary">
-                      {m.movimiento} - {m.producto}
-                    </Typography>
-                    <Typography variant="body2">Fecha: {m.fecha}</Typography>
+{movimientos.map((m) => {
+  const isVenta = m.tipo == "Venta";
+  const isCompra = m.tipo == "Compra";
+  const tieneDescuento = m.nuevo_precio != "No" && m.nuevo_precio !== undefined;
 
-                    <Box display="flex" justifyContent="space-between">
-                      <Typography variant="body2">Cantidad: {m.cantidad}</Typography>
-                      <Typography variant="body2">Precio: ${m.precio}</Typography>
-                    </Box>
+  const headerStyle = {
+    backgroundColor: isVenta ? "#d0f0c0" : isCompra ? "#cfe8fc" : "#f0f0f0",
+    padding: "0.5rem 1rem",
+    borderTopLeftRadius: "4px",
+    borderTopRightRadius: "4px",
+  };
 
-                    <Typography variant="body1" fontWeight="bold">
-                      Total: ${m.totalFacturado}
-                    </Typography>
+  const icono = isVenta ? "💰" : isCompra ? "📦" : "📄";
 
-                    <Typography variant="body2">Proveedor: {m.proveedor || "-"}</Typography>
-                    <Typography variant="body2">Cliente: {m.cliente || "-"}</Typography>
-                  
-                    <Box textAlign="right">
-                      <Button
-                        size="small"
-                        variant="outlined"
-                        onClick={() => abrirModalEditar(m)}
-                      >
-                        Modificar
-                      </Button>
-                      <Button
-  size="small"
-  variant="outlined"
-  onClick={() => {
-    setMovimientoAEliminar(m.id);
-    setModalOpen2(true);
-  }}
->
-  Borrar
-</Button>
-                    </Box>
-                  </Stack>
-                </CardContent>
-              </Card>
-            ))}
+  return (
+    <Card key={m.id} variant="outlined" sx={{ mb: 2 }}>
+      <Box style={headerStyle}>
+        <Typography variant="h6" sx={{ fontWeight: "bold", color: "#333" }}>
+          {icono} {m.tipo}: {m.movimiento} - {m.producto}
+        </Typography>
+      </Box>
+      <CardContent>
+        <Stack spacing={1}>
+          <Typography variant="body2">Fecha: {m.fecha}</Typography>
+
+          <Box display="flex" justifyContent="space-between">
+            <Typography variant="body2">Cantidad: {m.cantidad}</Typography>
+            <Typography variant="body2">Precio: ${m.precio}</Typography>
+          </Box>
+          {m.nuevo_precio}
+          {isVenta && tieneDescuento && (
+            <Typography variant="body2" color="secondary">
+              csas
+              🏷️ Descuento aplicado: ${m.nuevo_precio}
+            </Typography>
+          )}
+
+          <Box textAlign="right">
+            <Typography variant="body1" fontWeight="bold">
+              Total: ${m.totalFacturado}
+            </Typography>
+          </Box>
+
+          {m.proveedor && (
+            <Box sx={{ backgroundColor: "#fff8dc", p: 1, borderRadius: 1 }}>
+              <Typography variant="body2">Proveedor: {m.proveedor}</Typography>
+            </Box>
+          )}
+
+          {m.cliente && (
+            <Box sx={{ backgroundColor: "#e6f4ff", p: 1, borderRadius: 1 }}>
+              <Typography variant="body2">Cliente: {m.cliente}</Typography>
+            </Box>
+          )}
+
+          <Box textAlign="right" mt={1}>
+            <Button
+              size="small"
+              variant="outlined"
+              sx={{ mr: 1 }}
+              onClick={() => abrirModalEditar(m)}
+            >
+              ✏️ Modificar
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              color="error"
+              onClick={() => {
+                setMovimientoAEliminar(m.id);
+                setModalOpen2(true);
+              }}
+            >
+              🗑️ Borrar
+            </Button>
+          </Box>
+        </Stack>
+      </CardContent>
+    </Card>
+  );
+})}
+
+
           </Container>
         </>
       )}
