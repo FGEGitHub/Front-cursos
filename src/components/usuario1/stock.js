@@ -87,9 +87,10 @@ const CostosFijos = () => {
       <Grid container spacing={2} marginTop={2}>
         {costos.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item.id}>
-            <Card onClick={() => handleOpenEditar(item)} style={{ cursor: "pointer" }}>
+            <Card  style={{ cursor: "pointer" }}>
               <CardContent>
                 <Typography variant="h6">{item.producto}</Typography>
+                <Typography variant="h6">Categoria: {item.categoria}</Typography>
                 <Typography variant="body1">Total compras: {item.total_compras} unidades</Typography>
 
                 <Typography variant="body1">Total Ventas {item.total_ventas} unidades</Typography>
