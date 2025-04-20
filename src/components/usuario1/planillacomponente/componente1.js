@@ -139,7 +139,7 @@ const ControlStock = () => {
                       {p.producto}   
                     </Typography>
                     <Typography variant="h6" color="primary">
-                    Precio:{p.precioventa} 
+                    Precio: ${p.precioventa} 
                     </Typography>
                   
                     <Typography variant="body2">Categoría: {p.categoria}</Typography>

@@ -90,11 +90,11 @@ const CostosFijos = () => {
             <Card onClick={() => handleOpenEditar(item)} style={{ cursor: "pointer" }}>
               <CardContent>
                 <Typography variant="h6">{item.producto}</Typography>
-                <Typography variant="body1">Total compras:{item.total_compras}</Typography>
+                <Typography variant="body1">Total compras: {item.total_compras} unidades</Typography>
 
-                <Typography variant="body1">Total Ventas{item.total_ventas}</Typography>
+                <Typography variant="body1">Total Ventas {item.total_ventas} unidades</Typography>
 
-                <Typography variant="body1">Stock actual{item.total_compras}</Typography>
+                <Typography variant="body1">Stock actual {item.total_compras} unidades</Typography>
               </CardContent>
             </Card>
           </Grid>
