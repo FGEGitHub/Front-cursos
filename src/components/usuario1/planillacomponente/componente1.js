@@ -72,7 +72,6 @@ const ControlStock = () => {
     }
   };
   const handleBorrarMovimiento = async () => {
-    console.log( movimientoAEliminar) 
       if (movimientoAEliminar) {
       await serviciousuario1.borrarmovimiento({id:movimientoAEliminar});
       setModalOpen(false);

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import {
   Dialog, DialogTitle, DialogContent, DialogActions,
-  Button, TextField, MenuItem
+  Button, TextField, MenuItem, Checkbox, FormControlLabel, Typography
 } from "@mui/material";
 import serviciousuario1 from "../../../services/vendedoras";
 
-const ModalVenta = ({ open, onClose, productos = [],traer }) => {
+const ModalVenta = ({ open, onClose, productos = [], traer }) => {
   const today = new Date().toISOString().split("T")[0];
 
   const [form, setForm] = useState({
@@ -18,44 +18,63 @@ const ModalVenta = ({ open, onClose, productos = [],traer }) => {
   });
 
   const [precioUnitario, setPrecioUnitario] = useState(0);
+  const [aplicarDescuento, setAplicarDescuento] = useState(false);
+  const [nuevoValor, setNuevoValor] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  // 🔁 Calcular precio automáticamente
+  const handleGuardar = async () => {
+    const precioOriginal = parseFloat(form.precio);
+    const nuevoPrecio = aplicarDescuento ? parseFloat(nuevoValor) : precioOriginal;
+    const descuentoTotal = aplicarDescuento ? precioOriginal - nuevoPrecio : 0;
+
+    const data = {
+      tipo: "Venta",
+      fecha: form.fecha || today,
+      tipo_movimiento: form.tipo_movimiento || "EFECTIVO",
+      productoId: form.productoId,
+      cantidad: parseFloat(form.cantidad),
+      precio: precioOriginal, // 🔒 el original
+      facturaVenta: form.facturaVenta || 0,
+      cliente: form.cliente || 0,
+      facturaCompra: 0,
+      proveedor: 0,
+      nuevovalor: aplicarDescuento ? nuevoPrecio : null,
+      descuento: aplicarDescuento ? descuentoTotal : 0,
+      precioFinal: nuevoPrecio
+    };
+    try {
+ const rta= await serviciousuario1.enviarMovimiento(data);
+ alert(rta)
+    onClose();
+    } catch (error) {
+      console.error("Error al guardar venta:", error);
+    }
+    traer();
+  };
+
   useEffect(() => {
     const prod = productos.find(p => p.id === form.productoId);
     const cantidad = parseFloat(form.cantidad) || 0;
-    const unitario = prod ? parseFloat(prod.precio_venta || 0) : 0;
+    const unitario = prod ? parseFloat(prod.valorTotal || 0) : 0;
 
     setPrecioUnitario(unitario);
     const total = unitario * cantidad;
     setForm(prev => ({ ...prev, precio: total.toFixed(2) }));
   }, [form.productoId, form.cantidad, productos]);
 
-  const handleGuardar = async () => {
-    const data = {
-      tipo_movimiento: "Venta",
-      fecha: form.fecha || today,
-      productoId: form.productoId,
-      cantidad: parseFloat(form.cantidad),
-      precio: parseFloat(form.precio),
-      facturaVenta: form.facturaVenta || 0,
-      cliente: form.cliente || 0,
-      facturaCompra: 0,
-      proveedor: 0
-    };
+  const descuentoTotal = aplicarDescuento && nuevoValor
+    ? (parseFloat(form.precio) - parseFloat(nuevoValor)).toFixed(2)
+    : 0;
 
-    try {
-      await serviciousuario1.enviarMovimiento(data);
-      onClose();
-    } catch (error) {
-      console.error("Error al guardar venta:", error);
-    }
-    traer()
-  };
+  const porcentajeDescuento = aplicarDescuento && nuevoValor
+    ? ((descuentoTotal / parseFloat(form.precio)) * 100).toFixed(2)
+    : 0;
+
+  const guardarDeshabilitado = aplicarDescuento && (!nuevoValor || isNaN(nuevoValor));
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -84,8 +103,24 @@ const ModalVenta = ({ open, onClose, productos = [],traer }) => {
           value={form.cantidad}
           onChange={handleChange}
         />
+<TextField
+          fullWidth
+          margin="dense"
+          label="Medio de pago"
+          select
+          name="tipo_movimiento"
+          value={form.tipo_movimiento}
+          onChange={handleChange}
+        >
+           <MenuItem   value={"EFECTIVO"}>EFECTIVO</MenuItem>
+           <MenuItem   value={"MERCADO PAGO"}>MERCADO PAGO</MenuItem>
+        <MenuItem   value={"NARANJA X"}>NARANJA X</MenuItem>
+        <MenuItem   value={"ADEUDA"}>ADEUDA</MenuItem>
+        <MenuItem   value={"OTROS"}>OTROS</MenuItem>
+       
+        
+        </TextField>
 
-        {/* 💰 Precio unitario */}
         <TextField
           disabled
           fullWidth
@@ -95,7 +130,6 @@ const ModalVenta = ({ open, onClose, productos = [],traer }) => {
           value={precioUnitario.toFixed(2)}
         />
 
-        {/* 💵 Precio total (calculado) */}
         <TextField
           disabled
           fullWidth
@@ -105,6 +139,36 @@ const ModalVenta = ({ open, onClose, productos = [],traer }) => {
           name="precio"
           value={form.precio}
         />
+
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={aplicarDescuento}
+              onChange={() => {
+                setAplicarDescuento(prev => !prev);
+                setNuevoValor(""); // Limpiar campo al alternar
+              }}
+            />
+          }
+          label="Aplicar descuento"
+        />
+
+        {aplicarDescuento && (
+          <>
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Nuevo valor con descuento *"
+              type="number"
+              value={nuevoValor}
+              onChange={(e) => setNuevoValor(e.target.value)}
+            />
+
+            <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+              Descuento aplicado: ${descuentoTotal} ({porcentajeDescuento}%)
+            </Typography>
+          </>
+        )}
 
         <TextField
           fullWidth
@@ -137,7 +201,13 @@ const ModalVenta = ({ open, onClose, productos = [],traer }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">Cancelar</Button>
-        <Button onClick={handleGuardar} color="primary">Guardar</Button>
+        <Button
+          onClick={handleGuardar}
+          color="primary"
+          disabled={guardarDeshabilitado}
+        >
+          Guardar
+        </Button>
       </DialogActions>
     </Dialog>
   );
