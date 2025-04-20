@@ -37,7 +37,8 @@ const ModalCompra = ({ open, onClose, productos = [],traer }) => {
 
   const handleGuardar = async () => {
     const data = {
-      tipo_movimiento: "Compra",
+      tipo_movimiento: form.tipo_movimiento|| "EFECTIVO",
+      tipo:"Compra",
       fecha: form.fecha || today,
       productoId: form.productoId,
       cantidad: parseFloat(form.cantidad),
@@ -84,7 +85,23 @@ const ModalCompra = ({ open, onClose, productos = [],traer }) => {
           value={form.cantidad}
           onChange={handleChange}
         />
-
+<TextField
+          fullWidth
+          margin="dense"
+          label="Medio de pago"
+          select
+          name="tipo_movimiento"
+          value={form.tipo_movimiento}
+          onChange={handleChange}
+        >
+           <MenuItem   value={"EFECTIVO"}>EFECTIVO</MenuItem>
+           <MenuItem   value={"MERCADO PAGO"}>MERCADO PAGO</MenuItem>
+        <MenuItem   value={"NARANJA X"}>NARANJA X</MenuItem>
+        <MenuItem   value={"ADEUDA"}>ADEUDA</MenuItem>
+        <MenuItem   value={"OTROS"}>OTROS</MenuItem>
+       
+        
+        </TextField>
         {/* 💰 Mostrar precio unitario */}
         <TextField
           disabled
