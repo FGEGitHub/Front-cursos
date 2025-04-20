@@ -246,7 +246,7 @@ const ControlStock = () => {
 {movimientos.map((m) => {
   const isVenta = m.tipo == "Venta";
   const isCompra = m.tipo == "Compra";
-  const tieneDescuento = m.nuevo_precio != "No" && m.nuevo_precio !== undefined;
+  const tieneDescuento = m.nuevo_precio != "No" ;
 
   const headerStyle = {
     backgroundColor: isVenta ? "#d0f0c0" : isCompra ? "#cfe8fc" : "#f0f0f0",
@@ -270,10 +270,14 @@ const ControlStock = () => {
 
           <Box display="flex" justifyContent="space-between">
             <Typography variant="body2">Cantidad: {m.cantidad}</Typography>
-            <Typography variant="body2">Precio: ${m.precio}</Typography>
+           
           </Box>
-          {m.nuevo_precio}
-          {isVenta && tieneDescuento && (
+          <Box display="flex" justifyContent="space-between">
+        
+            <Typography variant="body2">Valor uniatrio:{m.precio/m.cantidad}</Typography> 
+            <Typography variant="body2">Precio ideal: ${m.precio}</Typography>
+          </Box>
+          {isVenta && (m.nuevo_precio != "No") && (
             <Typography variant="body2" color="secondary">
               csas
               🏷️ Descuento aplicado: ${m.nuevo_precio}
@@ -282,7 +286,7 @@ const ControlStock = () => {
 
           <Box textAlign="right">
             <Typography variant="body1" fontWeight="bold">
-              Total: ${m.totalFacturado}
+              Total: ${m.nuevo_precio == "No" ? m.precio :m.nuevo_precio}
             </Typography>
           </Box>
 
