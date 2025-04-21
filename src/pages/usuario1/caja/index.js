@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState, Fragment } from "react";
-import Novedades from '../../../components/usuario1/caja/cajacomponente'
+import Novedades from '../../../components/usuario1/caja/caja2'
 import MenuUsuario from '../../../components/usuario1/Navbar1'
 import Mantenimiento from '../../../Assets/mantenimiento2.jpeg';
 
