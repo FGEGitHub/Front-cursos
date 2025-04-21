@@ -262,8 +262,8 @@ export default function TablaActividades(props) {
 
   function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
     return (
-        <>
-       {asistencias[dataIndex].usuario_nombre}    {asistencias[dataIndex].usuario_apellido}
+        <>   {asistencias[dataIndex].usuariodispositivo =="Si" ? <>   {asistencias[dataIndex].usuario_nombre}    {asistencias[dataIndex].usuario_apellido}</> :<>{asistencias[dataIndex].psicologa_nombre}</>} 
+
           
 
         </>
