@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState, Fragment } from "react";
-import Novedades from '../../../components/usuario1/costosfijos/componente1'
+import Novedades from '../../../components/usuario1/negocio/tarjetas'
 import MenuUsuario from '../../../components/usuario1/Navbar1'
 import Mantenimiento from '../../../Assets/mantenimiento2.jpeg';
 
@@ -51,7 +51,7 @@ export default function Transferencias() {
           <div style={styles.fondo}>  {logueado ? <div>
         <MenuUsuario/>
         <br/>     <br/>     <br/>
-        <img style={islogo} src={Mantenimiento} alt="logo" /> 
+        <Novedades/> 
 
 
    
