@@ -8,7 +8,7 @@ import stockImg from "../../../Assets/irastock.png";
 import informesImg from "../../../Assets/irainformes.png";
 import cajaImg from "../../../Assets/iracaja.png";
 import negocioImg from "../../../Assets/iraproductos.png";
-
+import Bot from '../bot'
 const NavigationButtons = () => {
   const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ const NavigationButtons = () => {
 
   return (
     <div style={styles.container}>
+      <Bot/>
       <div style={styles.grid}>
         {buttons.map((btn, index) => (
           <div key={index} style={styles.card}>
