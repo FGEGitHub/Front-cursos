@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import productosImg from "../../../Assets/productos.webp";
-import movimientosImg from "../../../Assets/movimientos.webp";
-import costosFijosImg from "../../../Assets/productos.webp";
-import stockImg from "../../../Assets/productos.webp";
-import informesImg from "../../../Assets/productos.webp";
-import cajaImg from "../../../Assets/productos.webp";
-import negocioImg from "../../../Assets/productos.webp";
+import productosImg from "../../../Assets/iraproductos.png";
+import movimientosImg from "../../../Assets/iramovimientos.png";
+import costosFijosImg from "../../../Assets/iraproductos.png";
+import stockImg from "../../../Assets/irastock.png";
+import informesImg from "../../../Assets/irainformes.png";
+import cajaImg from "../../../Assets/iracaja.png";
+import negocioImg from "../../../Assets/iraproductos.png";
 
 const NavigationButtons = () => {
   const navigate = useNavigate();
