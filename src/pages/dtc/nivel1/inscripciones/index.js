@@ -7,7 +7,7 @@ import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
 
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
-import Menu from '../../../../components/dtc/inscripciones/todasauxiliar'
+import Menu from '../../../../components/dtc/inscripciones/todas'
 import React, { useEffect, useState } from "react";
 import {
 
