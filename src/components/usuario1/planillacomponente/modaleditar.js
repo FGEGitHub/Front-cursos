@@ -33,13 +33,7 @@ const ModalFormulario = ({ registro, modificarProducto, serviciousuario1 }) => {
       onChange={(e) => setDatos({ ...datos, fecha: e.target.value })}
       fullWidth
     />
-    <TextField
-      label="Cantidad"
-      type="number"
-      value={datos.cantidad}
-      onChange={(e) => setDatos({ ...datos, cantidad: e.target.value })}
-      fullWidth
-    />
+ 
           <Button
             variant="contained"
             color="primary"

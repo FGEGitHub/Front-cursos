@@ -61,16 +61,54 @@ const FinanzasComponent = () => {
           </tr>
         </thead>
         <tbody>
-          {resumenMensual.map((item, index) => (
-            <tr key={index}>
-              <td>{item.mes}</td>
-              <td>${item.total_ingresos}</td>
-              <td>${item.total_egresos}</td>
-              <td style={{ color: item.total_ingresos - item.total_egresos < 0 ? "red" : "inherit" }}>
-  {item.total_ingresos - item.total_egresos}
-</td>
-            </tr>
-          ))}
+        <tr>
+  <td>
+    {filtroFecha
+      ? modoFiltroFecha === "fecha"
+        ? filtroFecha
+        : filtroFecha.split("-").reverse().join("/")
+      : "Sin filtro"}
+  </td>
+  <td>
+    $
+    {movimientosFiltrados
+      .filter((m) => m.tipo === "Venta")
+      .reduce((acc, curr) => acc + parseFloat(curr.nuevo_precio === "No" ? curr.precio : curr.nuevo_precio), 0)
+      .toFixed(2)}
+  </td>
+  <td>
+    $
+    {movimientosFiltrados
+      .filter((m) => m.tipo === "Compra")
+      .reduce((acc, curr) => acc + parseFloat(curr.nuevo_precio === "No" ? curr.precio : curr.nuevo_precio), 0)
+      .toFixed(2)}
+  </td>
+  <td
+    style={{
+      color:
+        movimientosFiltrados
+          .filter((m) => m.tipo === "Venta")
+          .reduce((acc, curr) => acc + parseFloat(curr.nuevo_precio === "No" ? curr.precio : curr.nuevo_precio), 0) -
+          movimientosFiltrados
+            .filter((m) => m.tipo === "Compra")
+            .reduce((acc, curr) => acc + parseFloat(curr.nuevo_precio === "No" ? curr.precio : curr.nuevo_precio), 0) <
+        0
+          ? "red"
+          : "inherit",
+    }}
+  >
+    $
+    {(
+      movimientosFiltrados
+        .filter((m) => m.tipo === "Venta")
+        .reduce((acc, curr) => acc + parseFloat(curr.nuevo_precio === "No" ? curr.precio : curr.nuevo_precio), 0) -
+      movimientosFiltrados
+        .filter((m) => m.tipo === "Compra")
+        .reduce((acc, curr) => acc + parseFloat(curr.nuevo_precio === "No" ? curr.precio : curr.nuevo_precio), 0)
+    ).toFixed(2)}
+  </td>
+</tr>
+
         </tbody>
       </table>
 

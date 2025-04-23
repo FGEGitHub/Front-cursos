@@ -106,8 +106,10 @@ const ModalCompra = ({ open, onClose, productos = [],traer }) => {
            <MenuItem   value={"MERCADO PAGO"}>MERCADO PAGO</MenuItem>
         <MenuItem   value={"NARANJA X"}>NARANJA X</MenuItem>
         <MenuItem   value={"ADEUDA"}>ADEUDA</MenuItem>
+      
+        <MenuItem   value={"TRANSFERENCIA BANCARIA"}>TRANSFERENCIA BANCARIA</MenuItem>
+        <MenuItem   value={"TARJETA DE CREDITO"}>TARJETA DE CREDITO</MenuItem>
         <MenuItem   value={"OTROS"}>OTROS</MenuItem>
-       
         
         </TextField>
         {/* 💰 Mostrar precio unitario */}
