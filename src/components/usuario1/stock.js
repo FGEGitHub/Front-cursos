@@ -95,7 +95,7 @@ const CostosFijos = () => {
 
                 <Typography variant="body1">Total Ventas {item.total_ventas} unidades</Typography>
 
-                <Typography variant="body1">Stock actual {item.total_compras} unidades</Typography>
+                <Typography variant="body1">Stock actual {item.total_compras -item.total_ventas} unidades</Typography>
               </CardContent>
             </Card>
           </Grid>

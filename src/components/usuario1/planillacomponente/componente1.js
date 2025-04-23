@@ -108,13 +108,10 @@ const ControlStock = () => {
     <div>
       {mostrarTabla === "productos" ? (
         <>
-          <h2>Control de Stock</h2>
+    
 
           <Container maxWidth="sm" sx={{ mt: 4 }}>
-            <Typography variant="h5" gutterBottom>
-              Gestión de Stock
-            </Typography>
-
+         
             <input
               type="text"
               placeholder="Buscar producto..."
