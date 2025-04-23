@@ -21,6 +21,7 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
   const [aplicarDescuento, setAplicarDescuento] = useState(false);
   const [nuevoValor, setNuevoValor] = useState("");
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
+  const [stockDisponible, setStockDisponible] = useState(0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,6 +62,16 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
     const prod = productos.find(p => p.id === form.productoId);
     const cantidad = parseFloat(form.cantidad) || 0;
     const unitario = prod ? parseFloat(prod.valorTotal || 0) : 0;
+    
+    if (prod) {
+      const comprado = parseFloat(prod.stockcomprado || 0);
+      const vendido = parseFloat(prod.stockvendido || 0);
+      const disponible = comprado - vendido;
+      setStockDisponible(disponible);
+    } else {
+      setStockDisponible(0);
+    }
+  
     setCategoriaSeleccionada(prod?.categoria || "");
     setPrecioUnitario(unitario);
     const total = unitario * cantidad;
@@ -102,16 +113,23 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
   value={categoriaSeleccionada}
   disabled
 />
+{stockDisponible && "Stock:" + stockDisponible}
+<TextField
+  fullWidth
+  margin="dense"
+  label={`Cantidad * (máx: ${stockDisponible})`}
+  type="number"
+  name="cantidad"
+  value={form.cantidad}
+  onChange={(e) => {
+    const value = parseFloat(e.target.value);
+    if (value <= stockDisponible) {
+      handleChange(e);
+    }
+  }}
+  inputProps={{ min: 1, max: stockDisponible }}
+/>
 
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Cantidad *"
-          type="number"
-          name="cantidad"
-          value={form.cantidad}
-          onChange={handleChange}
-        />
 <TextField
           fullWidth
           margin="dense"

@@ -13,13 +13,14 @@ const NavigationButtons = () => {
   const navigate = useNavigate();
 
   const buttons = [
+    { img: cajaImg, route: "/usuario1/caja", label: "Caja" },
+    { img: negocioImg, route: "/usuario1/minegocio", label: "Mi Negocio" },
     { img: productosImg, route: "/usuario1/productos", label: "Productos" },
     { img: movimientosImg, route: "/usuario1/movimientos", label: "Movimientos" },
     { img: costosFijosImg, route: "/usuario1/costosfijos", label: "Costos Fijos" },
     { img: stockImg, route: "/usuario1/stock", label: "Stock" },
     { img: informesImg, route: "/usuario1/informes", label: "Informes" },
-    { img: cajaImg, route: "/usuario1/caja", label: "Caja" },
-    { img: negocioImg, route: "/usuario1/minegocio", label: "Mi Negocio" },
+
   ];
 
   return (
