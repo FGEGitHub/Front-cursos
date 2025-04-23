@@ -17,7 +17,7 @@ const ModalFormulario = ({ registro, modificarProducto, serviciousuario1 }) => {
 
   const handleGuardar = async () => {
 
-    const rta= await serviciousuario1.modificarproductoesme(datos)
+    const rta= await serviciousuario1.modificarmovimiento(datos)
     alert(rta)
    // modificarProducto(datos, serviiousuario1); // Enviamos el objeto completo, con id
   };
@@ -26,20 +26,20 @@ const ModalFormulario = ({ registro, modificarProducto, serviciousuario1 }) => {
     <div>
       {registro ? (
         <div>
-          {Object.keys(registro).map((key) => (
-            <TextField
-              key={key}
-              label={key}
-              name={key}
-              value={datos[key] || ""}
-              onChange={manejarCambio}
-              fullWidth
-              margin="dense"
-              InputProps={{
-                readOnly: key === "id", // Solo lectura si es el campo 'id'
-              }}
-            />
-          ))}
+             <TextField
+      label="Fecha"
+      type="date"
+      value={datos.fecha}
+      onChange={(e) => setDatos({ ...datos, fecha: e.target.value })}
+      fullWidth
+    />
+    <TextField
+      label="Cantidad"
+      type="number"
+      value={datos.cantidad}
+      onChange={(e) => setDatos({ ...datos, cantidad: e.target.value })}
+      fullWidth
+    />
           <Button
             variant="contained"
             color="primary"

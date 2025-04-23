@@ -156,6 +156,12 @@ const modificarproductoesme= async  (datos) => {
   return data
 } 
 
+const modificarmovimiento= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'modificarmovimiento',datos,config)
+  
+  return data
+} 
 const borrarproducto= async  (datos) => {
  
   const {data } = await axios.post(baseUrl+'borrarproducto',datos,config)
@@ -193,4 +199,4 @@ const modificarganancia= async  (datos) => {
 
 
 
-export default {traerinformes,traercaja2,traercaja,traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+export default {modificarmovimiento,traerinformes,traercaja2,traercaja,traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}

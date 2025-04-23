@@ -4,6 +4,7 @@ import ModalNuevoProducto from "./modalproducto";
 import ModalCompra from "./modalcomprar";
 import ModalVenta from "./modalvender";
 import ModalFormulario from "./modaleditar";
+import ModalFormularioProducto from "./modaleditarproducto";
 import serviciousuario1 from "../../../services/vendedoras";
 import { useLocation } from "react-router-dom";
 import {
@@ -24,6 +25,7 @@ const ControlStock = () => {
   const [productos, setProductos] = useState([]);
   const [movimientos, setMovimientos] = useState([]);
   const [modalEditarAbierto, setModalEditarAbierto] = useState(false);
+  const [modalEditarAbiertoProducto, setModalEditarAbiertoProducto] = useState(false);
   const [modalNuevoProducto, setModalNuevoProducto] = useState(false);
   const [modalOpen, setModalOpen] = useState(false); 
   const [modalOpen2, setModalOpen2] = useState(false);  
@@ -83,12 +85,19 @@ const ControlStock = () => {
     setRegistroActual(registro);
     setModalEditarAbierto(true);
   };
-
+  
+  const abrirModalEditarProducto = (registro) => {
+    setRegistroActual(registro);
+    setModalEditarAbiertoProducto(true);
+  };
   const cerrarModalEditar = () => {
     setModalEditarAbierto(false);
     setRegistroActual(null);
   };
-
+  const cerrarModalEditarProducto = () => {
+    setModalEditarAbiertoProducto(false); // <-- Esto es lo correcto
+    setRegistroActual(null);
+  };
   const mostrarTabla = location.pathname.includes("movimientos") ? "movimientos" : "productos";
 
   const productosFiltrados = productos.filter((p) =>
@@ -218,7 +227,7 @@ const ControlStock = () => {
                       <Button
                         size="small"
                         variant="outlined"
-                        onClick={() => abrirModalEditar(p)}
+                        onClick={() => abrirModalEditarProducto(p)}
                       >
                         Modificar
                       </Button>
@@ -357,6 +366,22 @@ const ControlStock = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={cerrarModalEditar} color="secondary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={modalEditarAbiertoProducto} onClose={cerrarModalEditarProducto} maxWidth="sm" fullWidth>
+        <DialogTitle>Editar</DialogTitle>
+        <DialogContent>
+        <ModalFormularioProducto
+  open={modalEditarAbiertoProducto}
+  onClose={cerrarModalEditarProducto}
+  registro={registroActual}
+  traerDatos={traerDatos}
+/>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cerrarModalEditarProducto} color="secondary">
             Cerrar
           </Button>
         </DialogActions>
