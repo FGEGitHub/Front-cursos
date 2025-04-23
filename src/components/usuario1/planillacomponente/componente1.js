@@ -161,7 +161,7 @@ const ControlStock = () => {
                         )}
                       </Typography>
                     </Box>
-                    <Typography variant="body2">Porcentaje de inversion: {p.porcentajedeinvercion}%</Typography>
+                    <Typography variant="body2">Porcentaje de participacion: {p.porcentajedeinvercion}%</Typography>
                     
                     <Box display="flex" flexDirection="column" gap={0.5}>
   <Box display="flex" justifyContent="space-between">

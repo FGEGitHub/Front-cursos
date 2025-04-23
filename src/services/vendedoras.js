@@ -111,7 +111,14 @@ return data
        
   }
 
-
+  
+  const traerinformes = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'traerinformes/'+id, config)
+return data
+       
+  }
   const nuevoprpducto= async  (datos) => {
     console.log(datos)
      const {data } = await axios.post(baseUrl+'nuevoprpducto',datos,config)
@@ -186,4 +193,4 @@ const modificarganancia= async  (datos) => {
 
 
 
-export default {traercaja2,traercaja,traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+export default {traerinformes,traercaja2,traercaja,traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
