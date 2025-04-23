@@ -92,27 +92,41 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Agregar Venta</DialogTitle>
       <DialogContent>
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Producto *"
-          select
-          name="productoId"
-          value={form.productoId}
-          onChange={handleChange}
-        >
-          {productos.map(prod => (
-            <MenuItem key={prod.id} value={prod.id}>{prod.producto}</MenuItem>
-          ))}
-        </TextField>
-
-        <TextField
+       {/* Selección de categoría */}
+<TextField
   fullWidth
   margin="dense"
-  label="Categoría del producto"
+  label="Producto"
+  select
   value={categoriaSeleccionada}
-  disabled
-/>
+  onChange={(e) => {
+    setCategoriaSeleccionada(e.target.value);
+    setForm(prev => ({ ...prev, productoId: "" })); // Limpiar selección previa
+  }}
+>
+  {[...new Set(productos.map(p => p.categoria))].map((cat, idx) => (
+    <MenuItem key={idx} value={cat}>{cat}</MenuItem>
+  ))}
+</TextField>
+
+{/* Selección de producto según categoría */}
+<TextField
+  fullWidth
+  margin="dense"
+  label="Modelo"
+  select
+  name="productoId"
+  value={form.productoId}
+  onChange={handleChange}
+  disabled={!categoriaSeleccionada}
+>
+  {productos
+    .filter(p => p.categoria === categoriaSeleccionada)
+    .map(prod => (
+      <MenuItem key={prod.id} value={prod.id}>{prod.producto}</MenuItem>
+    ))}
+</TextField>
+
 {stockDisponible && "Stock:" + stockDisponible}
 <TextField
   fullWidth
@@ -121,12 +135,7 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
   type="number"
   name="cantidad"
   value={form.cantidad}
-  onChange={(e) => {
-    const value = parseFloat(e.target.value);
-    if (value <= stockDisponible) {
-      handleChange(e);
-    }
-  }}
+  onChange={handleChange}
   inputProps={{ min: 1, max: stockDisponible }}
 />
 
@@ -230,13 +239,24 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="secondary">Cancelar</Button>
-        <Button
+        
+
+        {form.cantidad && <> {form.cantidad<= stockDisponible ? <>
+          <Button
           onClick={handleGuardar}
           color="primary"
           disabled={guardarDeshabilitado}
         >
           Guardar
         </Button>
+        </>:<>
+        <Button
+          onClick={handleGuardar}
+          color="primary"
+          disabled        >
+        cantidad supera stock
+        </Button></>}</>}
+   
       </DialogActions>
     </Dialog>
   );

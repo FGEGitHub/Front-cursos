@@ -20,6 +20,11 @@ const ModalCompra = ({ open, onClose, productos = [],traer }) => {
   const [precioUnitario, setPrecioUnitario] = useState(0);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
 
+  // Obtener categorías únicas desde los productos
+  const categorias = [...new Set(productos.map(p => p.categoria))];
+  
+  // Filtrar productos por categoría seleccionada
+  const productosFiltrados = productos.filter(p => p.categoria === categoriaSeleccionada);
   // 🔁 Actualizar precio cada vez que cambia producto o cantidad
   useEffect(() => {
     const prod = productos.find(p => p.id === form.productoId);
@@ -64,26 +69,38 @@ const ModalCompra = ({ open, onClose, productos = [],traer }) => {
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Agregar Compra</DialogTitle>
       <DialogContent>
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Producto *"
-          select
-          name="productoId"
-          value={form.productoId}
-          onChange={handleChange}
-        >
-          {productos.map(prod => (
-            <MenuItem key={prod.id} value={prod.id}>{prod.producto}</MenuItem>
-          ))}
-        </TextField>
-        <TextField
+      <TextField
   fullWidth
   margin="dense"
-  label="Categoría del producto"
+  label="Producto"
+  select
   value={categoriaSeleccionada}
-  disabled
-/>
+  onChange={(e) => {
+    setCategoriaSeleccionada(e.target.value);
+    setForm(prev => ({ ...prev, productoId: "" })); // Resetea el producto seleccionado
+  }}
+>
+  {categorias.map((cat, index) => (
+    <MenuItem key={index} value={cat}>
+      {cat}
+    </MenuItem>
+  ))}
+</TextField>
+
+<TextField
+  fullWidth
+  margin="dense"
+  label="Modelo"
+  select
+  name="productoId"
+  value={form.productoId}
+  onChange={handleChange}
+  disabled={!categoriaSeleccionada}
+>
+  {productosFiltrados.map(prod => (
+    <MenuItem key={prod.id} value={prod.id}>{prod.producto}</MenuItem>
+  ))}
+</TextField>
         <TextField
           fullWidth
           margin="dense"

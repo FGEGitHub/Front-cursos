@@ -167,16 +167,7 @@ const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer,productos
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>Agregar Producto</DialogTitle>
       <DialogContent>
-        <TextField
-          label="Nombre"
-          fullWidth
-          value={producto.nombre}
-          onChange={(e) =>
-            setProducto({ ...producto, nombre: e.target.value })
-          }
-          sx={{ mb: 2 }}
-        />
-  <TextField
+      <TextField
     select
     label="Categoría"
     fullWidth
@@ -213,6 +204,16 @@ const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer,productos
       sx={{ mb: 2 }}
     />
   )}
+        <TextField
+          label="Modelo"
+          fullWidth
+          value={producto.nombre}
+          onChange={(e) =>
+            setProducto({ ...producto, nombre: e.target.value })
+          }
+          sx={{ mb: 2 }}
+        />
+  
  <TextField
           label="costo"
           fullWidth
