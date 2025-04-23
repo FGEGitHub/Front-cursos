@@ -101,7 +101,13 @@ return data
        
   }
   
-
+  const getResumenNegocio = async (id) => {
+  
+    // const data = await axios.post('http://localhost:4000/signupp', datos)
+      const {data} = await axios.get(baseUrl+'getResumenNegocio/'+id, config)
+return data
+       
+  }
     
   const traercaja2 = async (id) => {
   
@@ -199,4 +205,4 @@ const modificarganancia= async  (datos) => {
 
 
 
-export default {modificarmovimiento,traerinformes,traercaja2,traercaja,traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+export default {getResumenNegocio,modificarmovimiento,traerinformes,traercaja2,traercaja,traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
