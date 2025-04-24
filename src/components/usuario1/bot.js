@@ -18,7 +18,7 @@ const ChatBot = () => {
         "¿Como registrar una venta o compra?",
         "¿Como cargar stock de un producto?",
         "¿Donde veo el stock disponible?",
-        "¿Como veo cuánto dinero tengo?",
+        "¿Como veo cuanto dinero tengo?",
         "¿Donde veo mis informes?",
         "¿Quien soy?"
       ],
@@ -56,7 +56,7 @@ const ChatBot = () => {
       options: ["Volver"],
     },
     quiensoy: {
-      message: "Soy Lili, tu asistente virtual. Nací en 2025 para ayudarte a llevar mejor tu emprendimiento 💡",
+      message: "Soy CuquiAI, tu asistente virtual. Nací en 2025 para ayudarte a llevar mejor tu emprendimiento 💡",
       options: ["Volver"],
     },
   };
