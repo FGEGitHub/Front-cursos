@@ -29,15 +29,19 @@ export default function MovimientoModal() {
   const [tipo, setTipo] = useState("");
   const [formaPago, setFormaPago] = useState("");
   const [monto, setMonto] = useState("");
+  const [detalle, setDetalle] = useState("");
+  const [fecha, setFecha] = useState("");
 
+  
   const handleSubmit = async () => {
-    const loggedUserJSON = localStorage.getItem("usuario");
+    const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON);
-
+      console.log(1)
       const nuevoMovimiento = {
         id_usuario:usuario.id,
         tipo,
+        detalle,
         formaPago,
         monto: parseFloat(monto),
       };
@@ -74,9 +78,14 @@ export default function MovimientoModal() {
           <FormControl fullWidth margin="normal">
             <InputLabel>Forma de Pago</InputLabel>
             <Select value={formaPago} onChange={(e) => setFormaPago(e.target.value)} label="Forma de Pago">
-              <MenuItem value="efectivo">Efectivo</MenuItem>
-              <MenuItem value="tarjeta de credito">Tarjeta de Crédito</MenuItem>
-              <MenuItem value="mercado pago">Mercado Pago</MenuItem>
+                <MenuItem   value={"EFECTIVO"}>EFECTIVO</MenuItem>
+                <MenuItem   value={"MERCADO PAGO"}>MERCADO PAGO</MenuItem>
+             <MenuItem   value={"NARANJA X"}>NARANJA X</MenuItem>
+             <MenuItem   value={"ADEUDA"}>ADEUDA</MenuItem>
+           
+             <MenuItem   value={"TRANSFERENCIA BANCARIA"}>TRANSFERENCIA BANCARIA</MenuItem>
+             <MenuItem   value={"TARJETA DE CREDITO"}>TARJETA DE CREDITO</MenuItem>
+             <MenuItem   value={"OTROS"}>OTROS</MenuItem>
             </Select>
           </FormControl>
 
@@ -89,13 +98,33 @@ export default function MovimientoModal() {
             onChange={(e) => setMonto(e.target.value)}
           />
 
-          <Button
-            variant="contained"
+<TextField
             fullWidth
-            onClick={handleSubmit}
-            disabled={!tipo || !formaPago || !monto}
-          >
-            Enviar
+            margin="normal"
+            label="Detalle"
+            value={detalle}
+           
+            onChange={(e) => setDetalle(e.target.value)}
+          />
+               <TextField
+                    fullWidth
+                    margin="dense"
+                    label="Fecha"
+                    type="date"
+                    name="fecha"
+                    value={fecha}
+                    onChange={(e) => setFecha(e.target.value)}
+                    InputLabelProps={{ shrink: true }}
+                  />
+          
+     <Button
+  variant="contained"
+  fullWidth
+  onClick={handleSubmit} // <- llamada directa a tu función handleSubmit
+  disabled={!tipo || !formaPago || !monto}
+>
+  Enviar
+
           </Button>
         </Box>
       </Modal>

@@ -11,13 +11,13 @@ import {
   Box,
   useTheme
 } from "@mui/material";
-import serviciousuario1 from "../../../services/vendedoras"; // Asegurate de que esta ruta sea correcta
-import Botonagregar from './botonagregar'
+import serviciousuario1 from "../../../services/vendedoras";
+import Botonagregar from "./botonagregar";
+
 const CajaMobile = () => {
   const [usuarioId, setUsuarioId] = useState(null);
   const [resumen, setResumen] = useState([]);
   const [movimientos, setMovimientos] = useState([]);
-
   const theme = useTheme();
 
   useEffect(() => {
@@ -38,12 +38,10 @@ const CajaMobile = () => {
     try {
       const response = await serviciousuario1.traercaja2(usuarioId);
 
-      // Armar resumen por tipo de movimiento (ej: "Venta", "Compra", etc.)
       const resumenMap = {};
-
       response.movimientos.forEach((mov) => {
         const tipo = mov.tipo_movimiento;
-        let precio = mov.nuevo_precio !== "No" ? mov.nuevo_precio : mov.precio;
+        const precio = mov.nuevo_precio !== "No" ? mov.nuevo_precio : mov.precio;
         const precioNum = parseFloat(precio) || 0;
 
         if (!resumenMap[tipo]) resumenMap[tipo] = 0;
@@ -58,13 +56,14 @@ const CajaMobile = () => {
       const adaptados = response.movimientos.map((mov) => {
         const precio = mov.nuevo_precio !== "No" ? mov.nuevo_precio : mov.precio;
         const precioNum = parseFloat(precio) || 0;
+
         return {
-          fecha: mov.fecha?.slice(0, 10), // Opcional
-          producto: mov.producto,
-          tipo: mov.tipo,
+          fecha: mov.fecha?.slice(0, 10) || "-", // si no tiene fecha
+          producto: mov.producto || mov.categoria || "Concepto", // fallback
+          tipo: mov.tipo_movimiento,
           precio: mov.precio,
           nuevo_precio: mov.nuevo_precio,
-          salidas: mov.tipo == "Venta" ? mov.cantidad : "-",
+          salidas: mov.tipo === "Venta" ? mov.cantidad : "-",
           saldo: precioNum
         };
       });
@@ -72,13 +71,13 @@ const CajaMobile = () => {
       setResumen(resumenArray);
       setMovimientos(adaptados);
     } catch (error) {
-      console.error("Error al traer costos fijos", error);
+      console.error("Error al traer costos", error);
     }
   };
 
   return (
     <Box padding={2}>
-      <Botonagregar/>
+      <Botonagregar />
       <Typography variant="h6" gutterBottom>
         Resumen de Caja
       </Typography>
@@ -115,35 +114,32 @@ const CajaMobile = () => {
               <TableCell><strong>Fecha</strong></TableCell>
               <TableCell><strong>Tipo</strong></TableCell>
               <TableCell><strong>Concepto</strong></TableCell>
-              
               <TableCell align="right"><strong>Precio</strong></TableCell>
               <TableCell align="right"><strong>Saldo</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-  {movimientos.map((mov, idx) => (
-    <TableRow key={idx}>
-      <TableCell>{mov.fecha}</TableCell>
-      <TableCell>{mov.tipo}</TableCell>
-      <TableCell>{mov.producto}</TableCell>
-    
-      <TableCell
-        align="right"
-        style={{ color: mov.tipo == "Compra" ? "red" : "inherit" }}
-      >
-        {mov.tipo == "Venta"
-          ? mov.nuevo_precio == "No"
-            ? mov.precio
-            : mov.nuevo_precio
-          : mov.precio}
-      </TableCell>
-      <TableCell align="right">
-        ${mov.saldo.toLocaleString()}
-      </TableCell>
-    </TableRow>
-  ))}
-</TableBody>
-
+            {movimientos.map((mov, idx) => (
+              <TableRow key={idx}>
+                <TableCell>{mov.fecha}</TableCell>
+                <TableCell>{mov.tipo}</TableCell>
+                <TableCell>{mov.producto}</TableCell>
+                <TableCell
+                  align="right"
+                  style={{ color: mov.tipo === "Compra" ? "red" : "inherit" }}
+                >
+                  {mov.tipo === "Venta"
+                    ? mov.nuevo_precio === "No"
+                      ? mov.precio
+                      : mov.nuevo_precio
+                    : mov.precio}
+                </TableCell>
+                <TableCell align="right">
+                  ${mov.saldo.toLocaleString()}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
       </TableContainer>
     </Box>
