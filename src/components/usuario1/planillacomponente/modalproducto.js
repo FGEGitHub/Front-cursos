@@ -155,6 +155,11 @@ const ModalAgregarProducto = ({ open, onClose, serviciousuario1, traer,productos
         const rta = await serviciousuario1.crearnuevoproducto(productoFinal);
         alert(rta);
         traer();
+        setProducto({ nombre: "", categoria: "", costo: "" });
+      setCostoVariable1({ tipo: "", otro: "", monto: "" });
+      setCostoVariable2(null);
+      setUsandoNuevaCategoria(false);
+      setNuevaCategoria("");
       }
       onClose();
     } catch (error) {

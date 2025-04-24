@@ -211,4 +211,16 @@ const enviarmovimientoingreso= async  (datos) => {
   
   return data
 }
-export default {enviarmovimientoingreso,getResumenNegocio,modificarmovimiento,traerinformes,traercaja2,traercaja,traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}
+
+
+
+
+const updateResumenNegocio= async  (datos) => {
+ 
+  const {data } = await axios.post(baseUrl+'updateResumenNegocio',datos,config)
+  
+  return data
+}
+
+
+export default {updateResumenNegocio,enviarmovimientoingreso,getResumenNegocio,modificarmovimiento,traerinformes,traercaja2,traercaja,traerstock,borrarmovimiento,modificarganancia,traerganancia,traercostosfijos,modisficarcostosfijos,agregarcostofijo,borrarproducto,modificarproductoesme,enviarMovimiento,traermovimientos,traerproductos,crearnuevoproducto,listadeproductos,nuevoprpducto,borrararticulo,listadetodosproductos}

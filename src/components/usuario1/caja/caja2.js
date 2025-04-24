@@ -113,8 +113,9 @@ const CajaMobile = () => {
           <TableHead>
             <TableRow style={{ backgroundColor: theme.palette.grey[200] }}>
               <TableCell><strong>Fecha</strong></TableCell>
-              <TableCell><strong>Producto</strong></TableCell>
               <TableCell><strong>Tipo</strong></TableCell>
+              <TableCell><strong>Concepto</strong></TableCell>
+              
               <TableCell align="right"><strong>Precio</strong></TableCell>
               <TableCell align="right"><strong>Saldo</strong></TableCell>
             </TableRow>
@@ -123,8 +124,9 @@ const CajaMobile = () => {
   {movimientos.map((mov, idx) => (
     <TableRow key={idx}>
       <TableCell>{mov.fecha}</TableCell>
-      <TableCell>{mov.producto}</TableCell>
       <TableCell>{mov.tipo}</TableCell>
+      <TableCell>{mov.producto}</TableCell>
+    
       <TableCell
         align="right"
         style={{ color: mov.tipo == "Compra" ? "red" : "inherit" }}

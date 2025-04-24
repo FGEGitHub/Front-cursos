@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; 
 import {
   Box,
   Card,
@@ -10,7 +10,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField
+  TextField,
+  MenuItem
 } from "@mui/material";
 import serviciousuario1 from "../../../services/vendedoras";
 
@@ -19,6 +20,8 @@ const ResumenNegocio = () => {
   const [actividad, setActividad] = useState("");
   const [domicilio, setDomicilio] = useState("");
   const [estado, setEstado] = useState("");
+  const [nombre, setNombre] = useState("");
+
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -30,6 +33,7 @@ const ResumenNegocio = () => {
           const data = await serviciousuario1.getResumenNegocio(usuario.id);
           setNombrenegocio(data[0].materia);
           setActividad(data[0].anios);
+          setNombre(data[0].nombre);
           setDomicilio(data[0].direccion);
           setEstado(data[0].estado || "Activo");
         } catch (error) {
@@ -44,9 +48,26 @@ const ResumenNegocio = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleGuardar = () => {
-    // Acá podrías agregar la lógica para enviar los datos modificados al backend
-    setOpen(false);
+  const handleGuardar = async () => {
+    const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
+    if (loggedUserJSON) {
+      const usuario = JSON.parse(loggedUserJSON);
+      const nuevoResumen = {
+        id: usuario.id,
+        materia: nombrenegocio,
+        anios: actividad,
+        direccion: domicilio,
+        estado: estado,
+        nombre: nombre
+      };
+
+      try {
+        await serviciousuario1.updateResumenNegocio(nuevoResumen);
+        setOpen(false);
+      } catch (error) {
+        console.error("Error al guardar cambios del negocio:", error);
+      }
+    }
   };
 
   return (
@@ -55,6 +76,9 @@ const ResumenNegocio = () => {
         <CardContent>
           <Typography variant="h6" gutterBottom>
             Información del negocio
+          </Typography>
+          <Typography variant="h6" gutterBottom>
+            Propietaria {nombre}
           </Typography>
           <Divider sx={{ mb: 2 }} />
 
@@ -82,10 +106,15 @@ const ResumenNegocio = () => {
           <TextField
             margin="dense"
             label="Actividad"
+            select
             fullWidth
             value={actividad}
             onChange={(e) => setActividad(e.target.value)}
-          />
+          >
+            <MenuItem value="Venta de productos">Venta de productos</MenuItem>
+            <MenuItem value="Elaboración y venta de productos">Elaboración y venta de productos</MenuItem>
+            <MenuItem value="Prestación de servicios">Prestación de servicios</MenuItem>
+          </TextField>
           <TextField
             margin="dense"
             label="Domicilio"

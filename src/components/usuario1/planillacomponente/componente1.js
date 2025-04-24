@@ -153,14 +153,14 @@ const ControlStock = () => {
                     <Box display="flex" justifyContent="space-between">
                       <Typography variant="body2">Costo: ${p.costo}</Typography>
                       <Typography variant="body2">
-                        {p.variable1 !== 0 && (
+                        {p.variable1 != 0 && (
                           <>
                             {p.variable1}: $ {p.costovariable1}
                           </>
                         )}
                       </Typography>
                       <Typography variant="body2">
-                        {p.variable2 !== 0 && (
+                        {p.variable2 != 0 && (
                           <>
                             {p.variable2}: $ {p.costovariable2}
                           </>
