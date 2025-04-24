@@ -175,7 +175,7 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
           label="Precio total (auto)"
           type="number"
           name="precio"
-          value={form.valortotal2}
+          value={form.cantidad *precioUnitario}
         />
 
         <FormControlLabel
