@@ -10,7 +10,7 @@ const ChatBot = () => {
   const [isLogoToggled, setIsLogoToggled] = useState(false); // Nuevo estado
   const questions = {
     inicio: {
-      message: "¡Hola, bienvenida!<br/>Soy Lili 😊 ¿En qué puedo ayudarte?",
+      message: "¡Hola, bienvenida!<br/>Soy Cuqui 😊 ¿En qué puedo ayudarte?",
       options: [
         "¿Como cargar la informacion de mi negocio?",
         "¿Como cargar un producto?",

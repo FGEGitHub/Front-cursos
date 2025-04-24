@@ -59,15 +59,16 @@
 .chat-message.speech-bubble::after {
   content: "";
   position: absolute;
-  bottom: -10px;
-  left: 20px;
+  top: -10px;
+  left: 45%;
   width: 20px;
   height: 20px;
   background: #e1f5fe;
   border: 2px solid #0277bd;
-  border-width: 0 2px 2px 0;
+  border-width: 2px 0 0 2px;
   transform: rotate(45deg);
 }
+
 
 .chat-message ul {
   list-style: none;
