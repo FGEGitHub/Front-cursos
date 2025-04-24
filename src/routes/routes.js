@@ -235,7 +235,7 @@ const Rutas = [
 
 
 		
-		{ path: '/emprendedoras/registro', element: <REGISTROO /> },
+		
 		{ path: '/emprendedoras/login', element: <LogiEmprendedoras /> },
 		{ path: '/emprendedoras', element: <LogiEmprendedoras /> },
 

@@ -45,7 +45,7 @@ export default function Transferencias() {
        <div style={styles.fondo}>
       
         <br/>     <br/>     <br/>
-        <Novedades/>
+     
 
 
 
