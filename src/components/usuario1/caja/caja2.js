@@ -18,6 +18,8 @@ const CajaMobile = () => {
   const [usuarioId, setUsuarioId] = useState(null);
   const [resumen, setResumen] = useState([]);
   const [movimientos, setMovimientos] = useState([]);
+  const [filtroFecha, setFiltroFecha] = useState("");
+  const [filtroMes, setFiltroMes] = useState("");
   const theme = useTheme();
 
   useEffect(() => {
@@ -33,40 +35,63 @@ const CajaMobile = () => {
       obtenerCostos();
     }
   }, [usuarioId]);
-
+  useEffect(() => {
+    const movimientosFiltrados = movimientos.filter((mov) => {
+      if (filtroFecha) {
+        return mov.fecha === filtroFecha;
+      } else if (filtroMes) {
+        return mov.fecha.startsWith(filtroMes);
+      }
+      return true;
+    });
+  
+    const resumenMap = {};
+    movimientosFiltrados.forEach((mov) => {
+      const tipo = mov.tipo;
+      const saldo = mov.saldo || 0;
+  
+      if (!resumenMap[tipo]) resumenMap[tipo] = 0;
+      resumenMap[tipo] += saldo;
+    });
+  
+    const nuevoResumen = Object.entries(resumenMap).map(([tipo, saldo]) => ({
+      tipo,
+      saldo
+    }));
+  
+    setResumen(nuevoResumen);
+  }, [movimientos, filtroFecha, filtroMes]);
+  
   const obtenerCostos = async () => {
     try {
       const response = await serviciousuario1.traercaja2(usuarioId);
 
       const resumenMap = {};
-      response.movimientos.forEach((mov) => {
-        const tipo = mov.tipo_movimiento;
+      const adaptados = response.movimientos.map((mov) => {
         const precio = mov.nuevo_precio !== "No" ? mov.nuevo_precio : mov.precio;
         const precioNum = parseFloat(precio) || 0;
+        const signo = mov.tipo === "Compra" ? -1 : 1;
 
+        const tipo = mov.tipo_movimiento;
         if (!resumenMap[tipo]) resumenMap[tipo] = 0;
-        resumenMap[tipo] += precioNum;
+        resumenMap[tipo] += precioNum * signo;
+
+        return {
+          fecha: mov.fecha?.slice(0, 10) || "-",
+          producto: mov.producto || mov.categoria || "Concepto",
+          tipo: mov.tipo_movimiento,
+          tipoOperacion: mov.tipo, // Compra o Venta
+          precio: mov.precio,
+          nuevo_precio: mov.nuevo_precio,
+          salidas: mov.tipo === "Venta" ? mov.cantidad : "-",
+          saldo: precioNum * signo
+        };
       });
 
       const resumenArray = Object.entries(resumenMap).map(([tipo, saldo]) => ({
         tipo,
         saldo
       }));
-
-      const adaptados = response.movimientos.map((mov) => {
-        const precio = mov.nuevo_precio !== "No" ? mov.nuevo_precio : mov.precio;
-        const precioNum = parseFloat(precio) || 0;
-
-        return {
-          fecha: mov.fecha?.slice(0, 10) || "-", // si no tiene fecha
-          producto: mov.producto || mov.categoria || "Concepto", // fallback
-          tipo: mov.tipo_movimiento,
-          precio: mov.precio,
-          nuevo_precio: mov.nuevo_precio,
-          salidas: mov.tipo === "Venta" ? mov.cantidad : "-",
-          saldo: precioNum
-        };
-      });
 
       setResumen(resumenArray);
       setMovimientos(adaptados);
@@ -75,9 +100,19 @@ const CajaMobile = () => {
     }
   };
 
+  const movimientosFiltrados = movimientos.filter((mov) => {
+    if (filtroFecha) {
+      return mov.fecha === filtroFecha;
+    } else if (filtroMes) {
+      return mov.fecha.startsWith(filtroMes);
+    }
+    return true;
+  });
+
   return (
     <Box padding={2}>
       <Botonagregar />
+
       <Typography variant="h6" gutterBottom>
         Resumen de Caja
       </Typography>
@@ -102,7 +137,35 @@ const CajaMobile = () => {
         </Table>
       </TableContainer>
 
-      <Box height={20} />
+      <Box mt={3} mb={2}>
+        <Typography variant="subtitle1">Filtrar por Fecha o Mes</Typography>
+        <Box display="flex" gap={2} flexWrap="wrap">
+          <label>
+            Fecha:
+            <input
+              type="date"
+              value={filtroFecha}
+              onChange={(e) => {
+                setFiltroFecha(e.target.value);
+                setFiltroMes("");
+              }}
+              style={{ marginLeft: 10 }}
+            />
+          </label>
+          <label>
+            Mes:
+            <input
+              type="month"
+              value={filtroMes}
+              onChange={(e) => {
+                setFiltroMes(e.target.value);
+                setFiltroFecha("");
+              }}
+              style={{ marginLeft: 10 }}
+            />
+          </label>
+        </Box>
+      </Box>
 
       <Typography variant="h6" gutterBottom>
         Detalle de Movimientos
@@ -119,16 +182,16 @@ const CajaMobile = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {movimientos.map((mov, idx) => (
+            {movimientosFiltrados.map((mov, idx) => (
               <TableRow key={idx}>
                 <TableCell>{mov.fecha}</TableCell>
                 <TableCell>{mov.tipo}</TableCell>
                 <TableCell>{mov.producto}</TableCell>
                 <TableCell
                   align="right"
-                  style={{ color: mov.tipo === "Compra" ? "red" : "inherit" }}
+                  style={{ color: mov.tipoOperacion === "Compra" ? "red" : "inherit" }}
                 >
-                  {mov.tipo === "Venta"
+                  {mov.tipoOperacion === "Venta"
                     ? mov.nuevo_precio === "No"
                       ? mov.precio
                       : mov.nuevo_precio
