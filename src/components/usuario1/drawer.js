@@ -39,7 +39,8 @@ const DrawerNav = () => {
   const irMovimientos = () => navigate("/movimientos");
   const irStock = () => navigate("/stock");
   const irCaja = () => navigate("/caja");
-
+  const cerrars = () => handleLogout();
+  
   const handleLogout = () => {
     window.localStorage.removeItem("loggedNoteAppUser");
     navigate("/emprendedoras/login");
@@ -122,6 +123,13 @@ const DrawerNav = () => {
                   variant="outlined"
                 >
                   Caja
+                </Button>
+                <Button
+                  onClick={cerrars}
+                  sx={{ margin: "10px", width: "calc(100% - 20px)" }}
+                  variant="outlined"
+                >
+                  Cerrar sesion
                 </Button>
               </>
             ) : (
