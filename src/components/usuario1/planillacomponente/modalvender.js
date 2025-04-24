@@ -61,7 +61,7 @@ const ModalVenta = ({ open, onClose, productos = [], traer }) => {
   useEffect(() => {
     const prod = productos.find(p => p.id === form.productoId);
     const cantidad = parseFloat(form.cantidad) || 0;
-    const unitario = prod ? parseFloat(prod.valortotal2 || 0) : 0;
+    const unitario = prod ? parseFloat(prod.precioventa || 0) : 0;
     
     if (prod) {
       const comprado = parseFloat(prod.stockcomprado || 0);
