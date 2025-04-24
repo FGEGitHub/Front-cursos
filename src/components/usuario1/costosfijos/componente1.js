@@ -10,9 +10,10 @@ const CostosFijos = () => {
   const [modoEdicion, setModoEdicion] = useState(false);
   const [itemEditando, setItemEditando] = useState(null);
   const [usuarioId, setUsuarioId] = useState(null); // <-- ID desde localStorage
-
+  const today = new Date().toISOString().split("T")[0];
   const [form, setForm] = useState({
     titulo: "",
+    fecha: today,
     monto: ""
   });
 
@@ -118,6 +119,17 @@ const CostosFijos = () => {
             value={form.monto}
             onChange={handleChange}
           />
+          
+                  <TextField
+                    fullWidth
+                    margin="dense"
+                    label="Fecha"
+                    type="date"
+                    name="fecha"
+                    value={form.fecha}
+                    onChange={handleChange}
+                    InputLabelProps={{ shrink: true }}
+                  />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary">Cancelar</Button>
