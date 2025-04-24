@@ -32,7 +32,7 @@ const DrawerNav = () => {
     }
   }, []);
 
-  const handleClick = () => navigate("/login");
+  const handleClick = () => navigate("/emprendedoras/login");
   const irNosotros = () => navigate("/usuario/nosotros");
   const irContacto = () => navigate("/usuario/contacto");
   const irProductos = () => navigate("/productos");
@@ -42,7 +42,7 @@ const DrawerNav = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedNoteAppUser");
-    navigate("/loginn");
+    navigate("/emprendedoras/login");
   };
 
   const handleDeslogueadoClick = (index) => {

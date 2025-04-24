@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Login from '../pages/Login';
 import Prueba from '../pages/prueba';
 import LogiEmprendedoras from '../pages/usuario1/loginemprended';
-
+import REGISTROO from '../pages/usuario1/registro';
 
 ////Usuario 1
 import Menu1 from '../pages/usuario1/Cursos';
@@ -233,6 +233,9 @@ const Rutas = [
 		{ path: '/login', element: <Logindtc /> },
 		{ path: '/deslogin', element: <Deslogin /> },
 
+
+		
+		{ path: '/emprendedoras/registro', element: <REGISTROO /> },
 		{ path: '/emprendedoras/login', element: <LogiEmprendedoras /> },
 		{ path: '/emprendedoras', element: <LogiEmprendedoras /> },
 
