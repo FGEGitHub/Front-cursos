@@ -43,6 +43,7 @@ export default function MovimientoModal() {
         tipo,
         detalle,
         formaPago,
+        fecha,
         monto: parseFloat(monto),
       };
 
