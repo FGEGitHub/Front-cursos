@@ -93,10 +93,13 @@ const ControlStock = () => {
   const cerrarModalEditar = () => {
     setModalEditarAbierto(false);
     setRegistroActual(null);
+    traerDatos(); // Refresca la lista de movimientos
+
   };
   const cerrarModalEditarProducto = () => {
-    setModalEditarAbiertoProducto(false); // <-- Esto es lo correcto
+    setModalEditarAbiertoProducto(false);
     setRegistroActual(null);
+    traerDatos(); // Refresca la lista de productos
   };
   const mostrarTabla = location.pathname.includes("movimientos") ? "movimientos" : "productos";
 
@@ -359,7 +362,8 @@ const ControlStock = () => {
         <DialogTitle>Editar</DialogTitle>
         <DialogContent>
           <ModalFormulario registro={registroActual} 
-          serviciousuario1={serviciousuario1}/>
+          serviciousuario1={serviciousuario1}
+          refrescarDatos={traerDatos}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={cerrarModalEditar} color="secondary">

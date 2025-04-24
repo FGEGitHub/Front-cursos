@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 
-const ModalFormulario = ({ registro, modificarProducto, serviciousuario1 }) => {
+const ModalFormulario = ({ registro, modificarProducto, serviciousuario1,refrescarDatos }) => {
   const [datos, setDatos] = useState({});
 
   useEffect(() => {
@@ -19,6 +19,7 @@ const ModalFormulario = ({ registro, modificarProducto, serviciousuario1 }) => {
 
     const rta= await serviciousuario1.modificarmovimiento(datos)
     alert(rta)
+    refrescarDatos();
    // modificarProducto(datos, serviiousuario1); // Enviamos el objeto completo, con id
   };
 
