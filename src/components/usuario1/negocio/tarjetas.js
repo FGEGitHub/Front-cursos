@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"; 
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -18,10 +18,10 @@ import serviciousuario1 from "../../../services/vendedoras";
 const ResumenNegocio = () => {
   const [nombrenegocio, setNombrenegocio] = useState("");
   const [actividad, setActividad] = useState("");
+  const [nuevaActividad, setNuevaActividad] = useState("");
   const [domicilio, setDomicilio] = useState("");
   const [estado, setEstado] = useState("");
   const [nombre, setNombre] = useState("");
-
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -52,10 +52,12 @@ const ResumenNegocio = () => {
     const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON);
+      const actividadFinal = actividad === "Nueva" ? nuevaActividad : actividad;
+
       const nuevoResumen = {
         id: usuario.id,
         materia: nombrenegocio,
-        anios: actividad,
+        anios: actividadFinal,
         direccion: domicilio,
         estado: estado,
         nombre: nombre
@@ -74,16 +76,12 @@ const ResumenNegocio = () => {
     <Box p={2}>
       <Card elevation={4}>
         <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Información del negocio
-          </Typography>
-          <Typography variant="h6" gutterBottom>
-            Propietaria {nombre}
-          </Typography>
+          <Typography variant="h6" gutterBottom>Información del negocio</Typography>
+          <Typography variant="h6" gutterBottom>Propietaria {nombre}</Typography>
           <Divider sx={{ mb: 2 }} />
 
           <Typography variant="body2"><strong>Nombre del negocio:</strong> {nombrenegocio}</Typography>
-          <Typography variant="body2"><strong>Actividad:</strong> {actividad}</Typography>
+          <Typography variant="body2"><strong>Actividad:</strong> {actividad === "Nueva" ? nuevaActividad : actividad}</Typography>
           <Typography variant="body2"><strong>Domicilio:</strong> {domicilio}</Typography>
           <Typography variant="body2"><strong>Estado:</strong> {estado}</Typography>
 
@@ -114,7 +112,19 @@ const ResumenNegocio = () => {
             <MenuItem value="Venta de productos">Venta de productos</MenuItem>
             <MenuItem value="Elaboración y venta de productos">Elaboración y venta de productos</MenuItem>
             <MenuItem value="Prestación de servicios">Prestación de servicios</MenuItem>
+            <MenuItem value="Nueva">Nueva</MenuItem>
           </TextField>
+
+          {actividad === "Nueva" && (
+            <TextField
+              margin="dense"
+              label="Especifique nueva actividad"
+              fullWidth
+              value={nuevaActividad}
+              onChange={(e) => setNuevaActividad(e.target.value)}
+            />
+          )}
+
           <TextField
             margin="dense"
             label="Domicilio"
