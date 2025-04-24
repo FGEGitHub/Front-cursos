@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 //////////esme
 import Login from '../pages/Login';
 import Prueba from '../pages/prueba';
-
+import LogiEmprendedoras from '../pages/usuario1/loginemprended';
 
 
 ////Usuario 1
@@ -232,6 +232,10 @@ const Rutas = [
 		{ path: '/loginn', element: <Login /> },
 		{ path: '/login', element: <Logindtc /> },
 		{ path: '/deslogin', element: <Deslogin /> },
+
+		{ path: '/emprendedoras/login', element: <LogiEmprendedoras /> },
+		{ path: '/emprendedoras', element: <LogiEmprendedoras /> },
+
 		
 		{ path: '/subirexcel', element: <CargarExcel /> },
 		

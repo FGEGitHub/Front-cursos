@@ -8,26 +8,43 @@ import stockImg from "../../../Assets/irastock.png";
 import informesImg from "../../../Assets/irainformes.png";
 import cajaImg from "../../../Assets/iracaja.png";
 import negocioImg from "../../../Assets/iraproductos.png";
-import Bot from '../bot'
+import Bot from "../bot";
+
 const NavigationButtons = () => {
   const navigate = useNavigate();
 
-  const buttons = [
+  const mainButton = {
+    img: negocioImg,
+    route: "/usuario1/minegocio",
+    label: "Mi Negocio",
+  };
+
+  const secondaryButtons = [
     { img: cajaImg, route: "/usuario1/caja", label: "Caja" },
-    { img: negocioImg, route: "/usuario1/minegocio", label: "Mi Negocio" },
     { img: productosImg, route: "/usuario1/productos", label: "Productos" },
     { img: movimientosImg, route: "/usuario1/movimientos", label: "Movimientos" },
     { img: costosFijosImg, route: "/usuario1/costosfijos", label: "Costos Fijos" },
     { img: stockImg, route: "/usuario1/stock", label: "Stock" },
     { img: informesImg, route: "/usuario1/informes", label: "Informes" },
-
   ];
 
   return (
     <div style={styles.container}>
-      <Bot/>
+      <Bot />
+      <div style={styles.centered}>
+        <div style={styles.cardMain}>
+          <button
+            onClick={() => navigate(mainButton.route)}
+            style={styles.button}
+          >
+            <img src={mainButton.img} alt={mainButton.label} style={styles.imageMain} />
+            <div style={styles.labelMain}>{mainButton.label}</div>
+          </button>
+        </div>
+      </div>
+
       <div style={styles.grid}>
-        {buttons.map((btn, index) => (
+        {secondaryButtons.map((btn, index) => (
           <div key={index} style={styles.card}>
             <button onClick={() => navigate(btn.route)} style={styles.button}>
               <img src={btn.img} alt={btn.label} style={styles.image} />
@@ -42,9 +59,14 @@ const NavigationButtons = () => {
 
 const styles = {
   container: {
-    maxWidth: "600px", // Limita el ancho total del grid
+    maxWidth: "600px",
     margin: "0 auto",
     padding: "1rem",
+  },
+  centered: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "2rem",
   },
   grid: {
     display: "grid",
@@ -57,9 +79,17 @@ const styles = {
     borderRadius: "10px",
     boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
     padding: "0.8rem",
-    width: "130px", // Tarjetas más angostas
+    width: "130px",
     textAlign: "center",
     transition: "transform 0.2s ease",
+  },
+  cardMain: {
+    backgroundColor: "#e0f2f1",
+    borderRadius: "12px",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
+    padding: "1rem",
+    width: "150px",
+    textAlign: "center",
   },
   button: {
     border: "none",
@@ -74,11 +104,24 @@ const styles = {
     height: "90px",
     objectFit: "contain",
   },
+  imageMain: {
+    width: "100px",
+    height: "100px",
+    objectFit: "contain",
+  },
   label: {
     marginTop: "0.4rem",
     fontSize: "0.95rem",
     fontWeight: "600",
     color: "#333",
+    fontFamily: "Montserrat, sans-serif",
+  },
+  labelMain: {
+    marginTop: "0.6rem",
+    fontSize: "1.05rem",
+    fontWeight: "700",
+    color: "#2e7d32",
+    fontFamily: "Montserrat, sans-serif",
   },
 };
 

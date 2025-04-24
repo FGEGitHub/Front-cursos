@@ -12,7 +12,7 @@ import {
   useTheme
 } from "@mui/material";
 import serviciousuario1 from "../../../services/vendedoras"; // Asegurate de que esta ruta sea correcta
-
+import Botonagregar from './botonagregar'
 const CajaMobile = () => {
   const [usuarioId, setUsuarioId] = useState(null);
   const [resumen, setResumen] = useState([]);
@@ -78,6 +78,7 @@ const CajaMobile = () => {
 
   return (
     <Box padding={2}>
+      <Botonagregar/>
       <Typography variant="h6" gutterBottom>
         Resumen de Caja
       </Typography>
