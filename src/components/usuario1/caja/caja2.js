@@ -99,15 +99,93 @@ const CajaMobile = () => {
       console.error("Error al traer costos", error);
     }
   };
+  const agruparPorTipoMovimiento = (movs) => {
+    const resumen = {};
+    movs.forEach((mov) => {
+      const tipo = mov.tipo;
+      if (!resumen[tipo]) resumen[tipo] = 0;
+      resumen[tipo] += Math.abs(mov.saldo); // usamos Math.abs para sumar sin signo
+    });
+    return Object.entries(resumen).map(([tipo, saldo]) => ({
+      tipo,
+      saldo,
+    }));
+  };
+  
 
-  const movimientosFiltrados = movimientos.filter((mov) => {
-    if (filtroFecha) {
-      return mov.fecha === filtroFecha;
-    } else if (filtroMes) {
-      return mov.fecha.startsWith(filtroMes);
-    }
-    return true;
-  });
+
+const movimientosFiltrados = movimientos.filter((mov) => {
+  if (filtroFecha) {
+    return mov.fecha === filtroFecha;
+  } else if (filtroMes) {
+    return mov.fecha.startsWith(filtroMes);
+  }
+  return true;
+});
+
+const dataVentas = agruparPorTipoMovimiento(
+  movimientosFiltrados.filter((mov) => mov.tipoOperacion === "Venta")
+);
+
+const dataCompras = agruparPorTipoMovimiento(
+  movimientosFiltrados.filter((mov) => mov.tipoOperacion === "Compra")
+);
+
+
+
+  const PieChartSimple = ({ data, title }) => {
+    const total = data.reduce((sum, item) => sum + item.saldo, 0);
+    let cumulative = 0;
+    const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#af52de", "#ff4560"];
+  
+    const slices = data.map((item, i) => {
+      const value = item.saldo;
+      const startAngle = (cumulative / total) * 360;
+      const endAngle = ((cumulative + value) / total) * 360;
+      cumulative += value;
+  
+      const largeArc = endAngle - startAngle > 180 ? 1 : 0;
+  
+      const radius = 50;
+      const x1 = radius + radius * Math.cos((Math.PI * startAngle) / 180);
+      const y1 = radius + radius * Math.sin((Math.PI * startAngle) / 180);
+      const x2 = radius + radius * Math.cos((Math.PI * endAngle) / 180);
+      const y2 = radius + radius * Math.sin((Math.PI * endAngle) / 180);
+  
+      const pathData = `
+        M ${radius} ${radius}
+        L ${x1} ${y1}
+        A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}
+        Z
+      `;
+  
+      return (
+        <path key={i} d={pathData} fill={colors[i % colors.length]}>
+          <title>{item.tipo}: ${item.saldo.toLocaleString()}</title>
+        </path>
+      );
+    });
+  
+    return (
+      <Box display="inline-block" m={2}>
+        <Typography variant="subtitle1" align="center">{title}</Typography>
+        <svg width={120} height={120}>
+          {slices}
+        </svg>
+        <Box>
+          {data.map((item, i) => (
+            <Box key={i} display="flex" alignItems="center" gap={1}>
+              <div style={{ width: 10, height: 10, backgroundColor: colors[i % colors.length] }} />
+              <Typography variant="body2">
+                {item.tipo}: ${item.saldo.toLocaleString()}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+    );
+  };
+  
 
   return (
     <Box padding={2}>
@@ -136,7 +214,10 @@ const CajaMobile = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
+      <Box mt={3} display="flex" flexWrap="wrap" justifyContent="center" gap={4}>
+  <PieChartSimple data={dataVentas} title="Movimientos de Venta" />
+  <PieChartSimple data={dataCompras} title="Movimientos de Compra" />
+</Box>
       <Box mt={3} mb={2}>
         <Typography variant="subtitle1">Filtrar por Fecha o Mes</Typography>
         <Box display="flex" gap={2} flexWrap="wrap">
