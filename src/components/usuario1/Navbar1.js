@@ -37,7 +37,7 @@ const Navbar = (props) => {
     } catch (error) {}
   }
 
-  const handleClick = () => navigate("/login");
+  const handleClick = () => navigate("/emprendedoras/login");
   const irNosotros = () => navigate("/usuario/nosotros");
   const irContacto = () => navigate("/usuario/contacto");
   const irAyuda = () => navigate("/");
@@ -48,7 +48,7 @@ const Navbar = (props) => {
 
   const hanleLogout = () => {
     window.localStorage.removeItem('loggedNoteAppUser')
-    navigate('/login')
+    navigate('/emprendedoras/login')
   }
 
   return (
