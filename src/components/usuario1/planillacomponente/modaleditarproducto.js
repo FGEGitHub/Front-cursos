@@ -12,6 +12,8 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
+import serviciousuario1 from "../../../services/vendedoras";
+
 import { Add, Close, LocalShipping, Inventory, MoreHoriz } from "@mui/icons-material";
 
 const variableOptions = [
@@ -35,7 +37,7 @@ const variableOptions = [
   },
 ];
 
-const ModalFormulario = ({ registro, serviciousuario1, onClose }) => {
+const ModalFormulario = ({ registro, onClose }) => {
   const [datos, setDatos] = useState({});
   const [costoVariable1, setCostoVariable1] = useState(null);
   const [costoVariable2, setCostoVariable2] = useState(null);
@@ -138,11 +140,14 @@ const ModalFormulario = ({ registro, serviciousuario1, onClose }) => {
         : "",
       costevariable2: parseFloat(costoVariable2?.monto) || 0,
     };
-
+  
+    console.log("Datos enviados al backend:", productoEditado); // 👈
+  
     const rta = await serviciousuario1.modificarproductoesme(productoEditado);
     alert(rta);
     if (onClose) onClose();
   };
+  
 
   return (
     <Dialog open={!!registro} onClose={onClose} fullWidth maxWidth="sm">
