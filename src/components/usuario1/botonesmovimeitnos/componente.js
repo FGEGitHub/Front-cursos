@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import productosImg from "../../../Assets/iraproductos.png";
-import movimientosImg from "../../../Assets/iramovimientos.png";
+import movimientosImg from "../../../Assets/iramovimientoss.png";
 import costosFijosImg from "../../../Assets/iraproductos.png";
 import stockImg from "../../../Assets/irastock.png";
-import informesImg from "../../../Assets/irainformes.png";
+import informesImg from "../../../Assets/irainformess.png";
 import cajaImg from "../../../Assets/iracaja.png";
 import negocioImg from "../../../Assets/iraproductos.png";
 import Bot from "../bot";
 
 const NavigationButtons = () => {
   const navigate = useNavigate();
+  const [loadedImages, setLoadedImages] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const imageList = [
+    negocioImg,
+    cajaImg,
+    productosImg,
+    movimientosImg,
+    costosFijosImg,
+    stockImg,
+    informesImg,
+  ];
+
+  useEffect(() => {
+    if (loadedImages === imageList.length) {
+      setIsLoaded(true);
+    }
+  }, [loadedImages]);
+
+  const handleImageLoad = () => {
+    setLoadedImages((prev) => prev + 1);
+  };
 
   const mainButton = {
     img: negocioImg,
@@ -27,6 +49,17 @@ const NavigationButtons = () => {
     { img: stockImg, route: "/usuario1/stock", label: "Stock" },
     { img: informesImg, route: "/usuario1/informes", label: "Informes" },
   ];
+
+  if (!isLoaded) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "3rem", fontSize: "1.2rem" }}>
+        Cargando...
+        {imageList.map((src, index) => (
+          <img key={index} src={src} alt="" style={{ display: "none" }} onLoad={handleImageLoad} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div style={styles.container}>
