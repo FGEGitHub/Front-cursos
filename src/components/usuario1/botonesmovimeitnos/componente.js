@@ -42,11 +42,13 @@ const NavigationButtons = () => {
   };
 
   const secondaryButtons = [
-    { img: cajaImg, route: "/usuario1/caja", label: "Caja" },
+
     { img: productosImg, route: "/usuario1/productos", label: "Productos" },
-    { img: movimientosImg, route: "/usuario1/movimientos", label: "Movimientos" },
-    { img: costosFijosImg, route: "/usuario1/costosfijos", label: "Costos Fijos" },
     { img: stockImg, route: "/usuario1/stock", label: "Stock" },
+    { img: costosFijosImg, route: "/usuario1/costosfijos", label: "Costos Fijos" },
+    { img: movimientosImg, route: "/usuario1/movimientos", label: "Movimientos" },
+    { img: cajaImg, route: "/usuario1/caja", label: "Caja" },
+
     { img: informesImg, route: "/usuario1/informes", label: "Informes" },
   ];
 
