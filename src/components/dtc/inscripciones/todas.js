@@ -329,33 +329,44 @@ const CursoDialog = () => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Hora</TableCell>
-          {diasSemana.map((dia) => (
-            <TableCell key={dia}>{dia.charAt(0).toUpperCase() + dia.slice(1)}</TableCell>
+          <TableCell>Día</TableCell>
+          {horarios.map((hora, idx) => (
+            <TableCell key={idx}>{hora}</TableCell>
           ))}
         </TableRow>
       </TableHead>
       <TableBody>
-        {horarios.map((hora) => (
-          <TableRow key={hora}>
-            <TableCell>{hora}:00</TableCell>
-            {diasSemana.map((dia) => {
-              const key = `${dia}-${hora}`;
-              const data = getDataByDayAndHour()[dia][hora];
+        {diasSemana.map((dia, diaIdx) => (
+          <TableRow key={diaIdx}>
+            <TableCell>{dia.charAt(0).toUpperCase() + dia.slice(1)}</TableCell>
+            {horarios.map((hora, horaIdx) => {
+              const cellKey = `${dia}-${hora}`;
+              const cursos = getDataByDayAndHour()[dia][hora] || [];
+              const cantidadTotal = cursos.reduce((sum, c) => sum + (c.cantidadChicos || 0), 0);
 
               return (
-                <TableCell key={key}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    {data.length > 0 ? (
-                      data.map((course, index) => (
-                        <Typography key={index}>
-                          <b>{course.nombreCurso}</b>: {course.cantidadChicos} chico(s)
-                        </Typography>
-                      ))
-                    ) : (
-                      <Typography>Sin inscriptos</Typography>
-                    )}
+                <TableCell key={horaIdx}>
+                  <Box onClick={() => toggleCell(dia, hora)} sx={{ cursor: 'pointer' }}>
+                    <Typography variant="body2" fontWeight="bold">
+                      {cantidadTotal} inscriptos
+                    </Typography>
                   </Box>
+                  <Collapse in={openCells[cellKey]}>
+                    <Box sx={{ mt: 1 }}>
+                      {cursos.length === 0 ? (
+                        <Typography variant="body2">Sin inscriptos</Typography>
+                      ) : (
+                        cursos.map((curso, idx) => (
+                          <Typography key={idx} variant="body2">
+                            {curso.nombreCurso} ({curso.cantidadChicos})
+                          </Typography>
+                        ))
+                      )}
+                      <Box sx={{ mt: 1 }}>
+                        <Agregar />
+                      </Box>
+                    </Box>
+                  </Collapse>
                 </TableCell>
               );
             })}
@@ -365,6 +376,7 @@ const CursoDialog = () => {
     </Table>
   </TableContainer>
 )}
+
     </div>
   );
 };

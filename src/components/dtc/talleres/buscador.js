@@ -29,11 +29,20 @@ const MobileAutocomplete = (props) => {
         const mergedJSON = {
             ...selectedValue,
             ...{hora:props.hora,
-              id_tallerista:JSON.parse(loggedUserJSON).id}
+              id_tallerista:JSON.parse(loggedUserJSON).id,
+            id_clase:props.id_clase}
           };
   console.log(mergedJSON)
-     const ta = await servicioDtc.ponerpresenteclase(mergedJSON)
-     alert(ta)
+  if(JSON.parse(loggedUserJSON).id==317){///////////ponerpresenteeventos
+console.log(317)
+    const ta = await servicioDtc.ponerpresenteclase2(mergedJSON)
+    alert(ta)
+  }else{
+    console.log("No")
+    const ta = await servicioDtc.ponerpresenteclase(mergedJSON)
+    alert(ta)
+  }
+  
       // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
       // Ejemplo: axios.post('/api/backend', { selectedValue });
       props.traer()
