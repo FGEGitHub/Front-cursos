@@ -290,7 +290,9 @@ const CursoDialog = () => {
                 Nombres: {row.nombres_kids || ""}
                 {row.cantidad_kids > 20 &&
                 row.nombre_curso !== "FISICO" &&
-                row.nombre_curso !== "merienda" ? (
+                row.nombre_curso !== "merienda"&&
+                row.nombre_curso !== "EDUCATIVO"&&
+                row.nombre_curso !== "EDUCATIVO 2" ? (
                   <></>
                 ) : (
                   usuarioo.nivel==20 &&
