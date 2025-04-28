@@ -26,14 +26,11 @@ const FichaPersona = (props) => {
     const esAsc = orden.columna === columna ? !orden.asc : true;
     setOrden({ columna, asc: esAsc });
   };
-
+  const diasOrdenados = ["lunes", "martes", "miércoles", "jueves", "viernes"];
   const ordenarDatos = (a, b) => {
-    if (!orden.columna) return 0;
-    const valorA = a[orden.columna];
-    const valorB = b[orden.columna];
-    if (valorA < valorB) return orden.asc ? -1 : 1;
-    if (valorA > valorB) return orden.asc ? 1 : -1;
-    return 0;
+    const indiceA = diasOrdenados.indexOf(a.dia);
+    const indiceB = diasOrdenados.indexOf(b.dia);
+    return indiceA - indiceB;
   };
 
   const toggleShowAllData = () => {
