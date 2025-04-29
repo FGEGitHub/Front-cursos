@@ -10,8 +10,8 @@ import {
   useTheme,
 } from "@mui/material";
 import DrawerNav from "./drawer";
-import Badge from '@mui/material/Badge';
-import MailIcon from '@mui/icons-material/Mail';
+
+
 import Typography from '@mui/material/Typography';
 
 const Navbar = (props) => {

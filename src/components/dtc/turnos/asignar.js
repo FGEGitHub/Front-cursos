@@ -36,7 +36,7 @@ export default function SelectTextFields(props) {
   
 
   const handleClickOpen = () => {
-    setForm({ id: props.id });
+    setForm({ id: props.id,observaciones:"Sin observaciones" });
     setSelectedValue("");
     setSelectedValue2(null);
     setNuevoUsuario(false);
@@ -63,7 +63,8 @@ export default function SelectTextFields(props) {
         nombre,
         apellido,
         agendadopor: usuario.usuario,
-        usuariodispositivo: "No"
+        usuariodispositivo: "No",
+        observaciones:form.observaciones
       };
     } else {
       const selected = usarSegundaLista ? selectedValue2 : selectedValue;
@@ -73,7 +74,8 @@ export default function SelectTextFields(props) {
         id_persona: selected.id, // Enviar solo el ID de la persona
         id: form.id,
         agendadopor: usuario.usuario,
-        usuariodispositivo: usarSegundaLista ? "Si" : "No"
+        usuariodispositivo: usarSegundaLista ? "Si" : "No",
+        observaciones:form.observaciones
       };
     }
   
@@ -172,7 +174,13 @@ export default function SelectTextFields(props) {
 />
             </>
           )}
-
+<TextField
+  label="Observaciones"
+  variant="outlined"
+  value={form.apellido}
+  onChange={(e) => setForm({ ...form, observaciones: e.target.value })}
+  fullWidth
+/>
           <DialogActions>
             <Button variant="outlined" color="success" onClick={handleBackendCall}>Asignar turno</Button>
             <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
