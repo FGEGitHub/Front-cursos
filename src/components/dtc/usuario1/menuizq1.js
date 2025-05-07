@@ -110,6 +110,12 @@ export default function MenuIzq2 ({children}) {
     //  tooltip: 'Clases y asistencia de talleres'
     },
     {
+      text: 'Psicologos',
+      icon: <ArchitectureIcon color="primary" />,
+      path: '/dtc/usuario1/psicologos',
+    //  tooltip: 'Lista de personas con tratamiento'
+    },
+    {
       text: 'Personas Psiq',
       icon: <ArchitectureIcon color="primary" />,
       path: '/dtc/usuario1/personaspsiq',

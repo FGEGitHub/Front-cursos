@@ -141,7 +141,7 @@ import DtcEntregas from '../pages/dtc/nivel1/entregas';
 import DtcCocinastock from '../pages/dtc/cocinastock';
 import DtcInscripciones from '../pages/dtc/nivel1/inscripciones';
 import DtcInventario from '../pages/dtc/nivel1/inventario';
-
+import Dtcusuario1Psicologo from '../pages/dtc/nivel1/psicologos';
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
 import DTCactividadescarga from '../pages/dtc/cargaactividades';
@@ -192,6 +192,9 @@ import Dtcasisenteinformes from '../pages/dtc/visitasoc/informestrat';
 import DTCcocinpacientes from '../pages/dtc/cocinapacientes';
 import DTCcocinaraciones from '../pages/dtc/cocinaraciones';
 import DTCInscripcionesvisita from '../pages/dtc/visitasoc/inscripciones'
+import STCusuairo1psicologo from '../pages/dtc/nivel1/psicologo'
+
+
 
 import DTCTAlleresver from '../pages/dtc/talleresver'
 import DTCAlumnosdelcurso from '../pages/dtc/alumnosdeltaller';
@@ -368,12 +371,13 @@ const Rutas = [
 		{ path: '/dtc/usuario1/cumples', element: <DTCcumples/> },
 		{ path: '/dtc/usuario1/asistenciassoc', element: <DtcAsisenciasoc/> },
 		{ path: '/dtc/usuario1/inscripciones', element: <DtcInscripciones/> },
-
+		{ path: '/dtc/usuario1/psicologos', element: <Dtcusuario1Psicologo/> },
+		{ path: '/dtc/usuario1/psicologo/:id', element: <STCusuairo1psicologo/> },
 
 		{ path: '/usuario1/costosfijos', element: <Cstosfijos/> },
 
 		
-
+		
 		
 		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
 		{ path: '/dtc/psicologa/informes', element: <Dtcpsiclogaacti/> },
