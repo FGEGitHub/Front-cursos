@@ -164,7 +164,7 @@ export default function SelectTextFields(props) {
   options={props.chicos}
   value={selectedValue}
   onChange={(event, newValue) => setSelectedValue(newValue)}
-  getOptionLabel={(option) => `${option.apellido} ${option.nombre} ${option.nombrepsic ? ` - se atiende normalmente con ${option.nombrepsic}` : ''}`}
+  getOptionLabel={(option) => `${option.apellido} ${option.nombre} ${option.nombrepsic ? `` : ''}`}
   isOptionEqualToValue={(option, value) => option.id === value?.id}
   renderInput={(params) => (
     <TextField {...params} label="Selecciona una opción" variant="outlined" />
