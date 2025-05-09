@@ -207,7 +207,7 @@ export default function MenuIzq2 ({children}) {
         >
           <Toolbar />
           <div>
-            <br />
+            <br />    <br />    <br />
             {children}
           </div>
         </Box>

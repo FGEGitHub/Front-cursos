@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // IMPORTANTE
 import servicioDtc from '../../../../services/dtc';
 
 const ListaAsistencias = () => {
   const [asistencias, setAsistencias] = useState([]);
-  const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-  const usuario = loggedUserJSON ? JSON.parse(loggedUserJSON) : null;
+  const { id } = useParams(); // obtenés el id de la URL
 
   useEffect(() => {
-   
     fetchAsistencias();
   }, []);
+
   const fetchAsistencias = async () => {
     try {
-      if (usuario) {
-        const response = await servicioDtc.traerturnosdepsico(usuario.id);
+      if (id) {
+        const response = await servicioDtc.traerturnosdepsico(id); // usás el id del parámetro
         setAsistencias(response);
       }
     } catch (error) {
@@ -29,6 +29,7 @@ const ListaAsistencias = () => {
           <tr className="bg-gray-100">
             <th className="border px-4 py-2">Fecha</th>
             <th className="border px-4 py-2">Nombre</th>
+             <th className="border px-4 py-2">Fecha</th>
             <th className="border px-4 py-2">Asistencia</th>
           </tr>
         </thead>
@@ -38,6 +39,7 @@ const ListaAsistencias = () => {
               <tr key={index} className="border-b">
                 <td className="border px-4 py-2">{asistencia.fecha}</td>
                 <td className="border px-4 py-2">{asistencia.nombre}</td>
+                 <td className="border px-4 py-2">{asistencia.detalle} hs</td>
                 <td className="border px-4 py-2">{asistencia.presente ? 'Presente' : 'Ausente'}</td>
               </tr>
             ))

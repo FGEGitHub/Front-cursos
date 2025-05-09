@@ -17,12 +17,14 @@ import {
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(2),
+    backgroundColor: '#e8f5e9', // Verde formal claro
     [theme.breakpoints.up('md')]: {
-      maxWidth: '600px', // Define el ancho máximo en pantallas más grandes
-      margin: '0 auto', // Centra el contenido en pantallas más grandes
+      maxWidth: '600px',
+      margin: '0 auto',
     },
-    transform: 'scale(0.90)', // Escala al 75%
-    transformOrigin: 'center center', // Origen de la transformación en el centro
+    transform: 'scale(0.90)',
+    transformOrigin: 'center center',
+    minHeight: '100vh', // Para ocupar toda la altura
   },
 }));
 
