@@ -156,12 +156,12 @@ export default function MenuIzq2 ({children}) {
             flexShrink: 0,
             '& .MuiDrawer-paper': {
               width: drawerWidth,
-              backgroundColor: "#1b5e20",
+              backgroundColor: "#1f5627",
               boxSizing: 'border-box',
             },
           }}
           variant="permanent"
-          color="#37474f"
+          color="#1f5627"
           anchor="left"
         >
           <Navbar logout={{ hanleLogout }} />
@@ -203,7 +203,7 @@ export default function MenuIzq2 ({children}) {
         </Drawer>
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 0, backgroundColor: "#88f78e" }}
+          sx={{ flexGrow: 1, p: 0, /* backgroundColor: "#88f78e" */ }}
         >
           <Toolbar />
           <div>

@@ -78,7 +78,7 @@ const traer = async () => {
   }
   return (
     <React.Fragment>
-      <AppBar sx={{ backgroundImage: 'linear-gradient(90deg, #3bc9db 0%, #9775fa 0%, #71ff89 0%, #1d6b14 48%, #71ff89 100%, #9775fa 100%, #ffd43b 100%)', }}>
+      <AppBar sx={{ background: 'linear-gradient(to right, #2ecc71, #1f8b4c)' }}>
         <Toolbar>
            <img style={islogo} src={logo} alt="logo" />  
           {isMatch ? (
