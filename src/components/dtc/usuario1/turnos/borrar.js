@@ -42,7 +42,7 @@ export default function Clasenueva(props) {
                 const respuesta=  await servicioDtc.borrarturnocadia(form)
                 alert(respuesta)
              }else{
-                const respuesta=  await servicioDtc.borrarturno(form)
+                const respuesta=  await servicioDtc.borrarturno({id:props.id})
                 alert(respuesta)
              }
          }
@@ -74,7 +74,7 @@ export default function Clasenueva(props) {
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>   Seguro que deseas eliminar el turno?</DialogTitle>
+                <DialogTitle>   Seguro que deseas eliminar el turno? {props.id}</DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',
