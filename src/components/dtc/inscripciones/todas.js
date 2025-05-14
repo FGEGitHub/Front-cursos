@@ -295,7 +295,7 @@ const CursoDialog = () => {
                 row.nombre_curso !== "EDUCATIVO 2" ? (
                   <></>
                 ) : (
-                  usuarioo.nivel==20 &&
+                 ( usuarioo.nivel==20 || usuarioo.nivel==28) &&
                   <Agregar
                     id={row.id_curso}
                     nombre_curso={row.nombre_curso}

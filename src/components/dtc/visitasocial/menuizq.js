@@ -85,7 +85,7 @@ export default function MenuIzq2 ({children}) {
       } 
     const menuItems = [
       { 
-        text: 'Aca tenes las inscripciones', 
+        text: ' inscripciones', 
         icon: <PeopleAltTwoToneIcon />, 
         path: '/dtc/visitasocial/inscripciones' 
       },
