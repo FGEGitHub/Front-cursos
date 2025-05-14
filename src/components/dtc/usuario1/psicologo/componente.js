@@ -20,10 +20,30 @@ const ListaAsistencias = () => {
       console.error('Error al obtener asistencias:', error);
     }
   };
+const totalTurnos = asistencias.length;
+const mesActual = new Date().toISOString().slice(0, 7); // Ej: "2025-05"
+const asistenciasMes = asistencias.filter(a => a.fecha.startsWith(mesActual));
 
+const turnosDelMes = asistencias.filter(a => a.fecha.startsWith(mesActual)).length;
+const presentes = asistencias.filter(a => a.presente).length;
+
+const presentesMes = asistenciasMes.filter(a => a.presente).length;
+
+const ausentes = asistencias.filter(a => !a.presente).length;
+
+
+const sinClasificar = asistencias.filter(a => a.presente !== true && a.presente !== false).length;
   return (
     <div className="p-4 bg-white rounded-lg shadow">
       <h2 className="text-xl font-bold mb-4">Lista de Turnos</h2>
+            <h2 className="text-xl font-bold mb-4">Lista de Turnos</h2>
+      <div className="mb-4">
+        <p><strong>Total de turnos:</strong> {totalTurnos}</p>
+        <p><strong>Turnos en el mes ({mesActual}):</strong> {turnosDelMes}</p>
+        <p><strong>Presentes:</strong> {presentes} ({presentesMes} este mes)</p>
+        <p><strong>Ausentes:</strong> {ausentes}  </p>
+          <p><strong>Sin clasificar:</strong> {sinClasificar}</p>
+      </div>
       <table className="w-full border-collapse">
         <thead>
           <tr className="bg-gray-100">
