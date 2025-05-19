@@ -1,6 +1,6 @@
-
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Inscriptos from '../../../components/dtc/talleres/infodeincriptos';
+import OtroComponente from '../../../components/dtc/talleres/listadealumnosfines'; // 🔁 nuevo componente
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/Navbar'
 
@@ -14,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
   container: {
     padding: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
-      maxWidth: '600px', // Define el ancho máximo en pantallas más grandes
-      margin: '0 auto', // Centra el contenido en pantallas más grandes
+      maxWidth: '600px',
+      margin: '0 auto',
     },
-    transform: 'scale(0.90)', // Escala al 75%
-    transformOrigin: 'center center', // Origen de la transformación en el centro
+    transform: 'scale(0.90)',
+    transformOrigin: 'center center',
   },
 }));
 
@@ -32,12 +32,10 @@ export default function Paginas() {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-    console.log(loggedUserJSON);
 
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
-      console.log(user);
-      setUsuario(user)
+      setUsuario(user);
       switch (user.nivel) {
         case 26:
           break;
@@ -56,16 +54,17 @@ export default function Paginas() {
 
   return (
     <>
-      {isMatch ? (
+      {isMatch && (
         <div className={classes.container}>
           <MenuuCel texto="Usuarios" />
-
-        
         </div>
-      ) : (
-  <></>)}
-{usuario &&  
-        <Inscriptos id={usuario.id} />  }
-        </>
+      )}
+
+      {usuario && (
+        usuario.id == 325
+          ? <OtroComponente id={usuario.id} />   // 👈 si es 325 renderiza este
+          : <Inscriptos id={usuario.id} />      // 👈 si no, el original
+      )}
+    </>
   );
 }

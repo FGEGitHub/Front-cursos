@@ -30,7 +30,7 @@ const MobileFriendlyTable = (props) => {
   const [datos, setDatos] = useState();
   const [usuario, setUsuario] = useState();
   let params = useParams()
-    let id = params.id
+  let id = params.id
   useEffect(() => {
     traer()
     const fetchCurrentDate = () => {
@@ -44,27 +44,30 @@ const MobileFriendlyTable = (props) => {
   }, []);
 
   const traer = async () => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-
-    const user = JSON.parse(loggedUserJSON)
-    setUsuario(user)
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    const user = JSON.parse(loggedUserJSON);
+    setUsuario(user);
 
     const today = new Date();
     const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+    props.fecha === undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.fecha);
 
-    props.fecha == undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.fecha)
+    let historial;
 
-    const historial = await servicioDtc.traerpresentesdeclase(id)
+    if (user.id === 325) {
+      historial = await servicioDtc.traerpresentesfines(id);
+    } else {
+      historial = await servicioDtc.traerpresentesdeclase(id);
+    }
 
-    console.log(historial)
-    setDatos(historial)
-    // 
-
+    console.log(historial);
+    setDatos(historial);
   };
+
 
   const ausente = async (row) => {
     console.log(row)
-    const ta = await servicioDtc.ponerausenteclase({ id:row.id})
+    const ta = await servicioDtc.ponerausenteclase({ id: row.id })
     console.log(ta)
     // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
     // Ejemplo: axios.post('/api/backend', { selectedValue });
@@ -78,30 +81,35 @@ const MobileFriendlyTable = (props) => {
         </Typography>
         {usuario ? <>
           <Buscador
-              chicos={datos[1]}
-              hora={1400}
-              id_clase={id}
-              usuario={usuario}
-              traer={async () => {
-                const today = new Date();
-                const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-                props.fecha == undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.fecha)
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            chicos={datos[1]}
+            hora={1400}
+            id_clase={id}
+            usuario={usuario}
+            traer={async () => {
+              const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+              const user = JSON.parse(loggedUserJSON);
+              setUsuario(user);
 
-                const user = JSON.parse(loggedUserJSON)
-                setUsuario(user)
-                const historial = await servicioDtc.traerpresentesdeclase(id)
+              const today = new Date();
+              const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+              props.fecha === undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.fecha);
 
+              let historial;
 
-                setDatos(historial)
-                // 
+              if (user.id == 325) {
+                historial = await servicioDtc.traerpresentesfines(id);
+              } else {
+                historial = await servicioDtc.traerpresentesdeclase(id);
+              }
 
-              }}
-            /></> : <></>}
+              console.log(historial);
+              setDatos(historial);
+            }}
+          /></> : <></>}
         <TableContainer>
           {!datos[0] ? <Skeleton /> : <>
             <h4>Lista de presentes ({datos[0].length}) </h4>
-         
+
             <Table >
               <TableHead>
                 <TableRow>
@@ -112,7 +120,7 @@ const MobileFriendlyTable = (props) => {
 
 
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Hora</b></TableCell>
-          
+
                   <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Quitar</b></TableCell>
 
 
@@ -128,7 +136,7 @@ const MobileFriendlyTable = (props) => {
                     <StyledTableCell component="th" scope="row"> <b>{row.dni} </b> </StyledTableCell>
                     <StyledTableCell component="th" scope="row"> <b>{row.kid == "kid3" ? <>Adolescentes</> : <>{row.kid}</>} </b> </StyledTableCell>
                     <StyledTableCell component="th" scope="row"> <b>{row.hora} </b> </StyledTableCell>
-                
+
 
 
                     <StyledTableCell component="th" scope="row"> <b><button onClick={() => ausente(row)}>Quitar</button> </b> </StyledTableCell>

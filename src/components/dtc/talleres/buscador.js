@@ -22,32 +22,37 @@ const MobileAutocomplete = (props) => {
   };
 
   const handleBackendCall = async () => {
-    // Lógica para hacer un llamado al backend con el valor seleccionado
-    if (selectedValue) {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-      console.log(loggedUserJSON) 
-        const mergedJSON = {
-            ...selectedValue,
-            ...{hora:props.hora,
-              id_tallerista:JSON.parse(loggedUserJSON).id,
-            id_clase:props.id_clase}
-          };
-  console.log(mergedJSON)
-  if(JSON.parse(loggedUserJSON).id==317){///////////ponerpresenteeventos
-console.log(317)
-    const ta = await servicioDtc.ponerpresenteclase2(mergedJSON)
-    alert(ta)
-  }else{
-    console.log("No")
-    const ta = await servicioDtc.ponerpresenteclase(mergedJSON)
-    alert(ta)
-  }
-  
-      // Aquí puedes realizar la llamada al backend utilizando algún servicio o librería
-      // Ejemplo: axios.post('/api/backend', { selectedValue });
-      props.traer()
+  if (selectedValue) {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    const user = JSON.parse(loggedUserJSON);
+
+    const mergedJSON = {
+      ...selectedValue,
+      hora: props.hora,
+      id_tallerista: user.id,
+      id_clase: props.id_clase
+    };
+
+    console.log(mergedJSON);
+
+    let ta;
+
+    if (user.id == 317) {
+      // ponerpresenteclase2
+      ta = await servicioDtc.ponerpresenteclase2(mergedJSON);
+    } else if (user.id == 325) {
+      // ponerpresenteclase3
+      ta = await servicioDtc.ponerpresenteclase2(mergedJSON);
+    } else {
+      // por defecto
+      ta = await servicioDtc.ponerpresenteclase(mergedJSON);
     }
-  };
+
+    alert(ta);
+    props.traer();
+  }
+};
+
   const ir = async () => {
     // Lógica para hacer un llamado al backend con el valor seleccionado
     navigate('/dtc/usuario1/usuario/'+selectedValue.id)

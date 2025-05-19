@@ -36,14 +36,15 @@ const TablaNotificaciones = (props) => {
 
             id={clases[dataIndex]['id']}
             traer={async () => {
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                if (loggedUserJSON) {
-                    const usuario = JSON.parse(loggedUserJSON);
-                    setUsuario(usuario);
-                    const novedades_aux = await servicioDtc.traerclasestaller(usuario.id);
-                    setClases(novedades_aux);
-                }
-            }}
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON);
+                setUsuario(usuario);
+                const novedades_aux = await servicioDtc.traerclasestaller2(usuario.id);
+                console.log(novedades_aux)
+                setClases(novedades_aux);
+            }
+        }}
              />
              <Tooltip title="ASISTENCIA">
                 <button variant="contained" onClick={() => navigate('/dtc/tallerasistencia/' + clases[dataIndex]['id'])} >Asistencia </button>
@@ -72,13 +73,7 @@ const TablaNotificaciones = (props) => {
             name: "titulo",
             label: "Título",
         },
-        {
-            name: "ref",
-         
-            options: {
-                customBodyRenderLite: (dataIndex) => CutomButtonsRenderer2(dataIndex),
-            },
-        },
+      
         {
             name: "Ver",
             options: {
@@ -119,14 +114,15 @@ const TablaNotificaciones = (props) => {
             <ModaNueva
                 id_tallerista={usuario.id}
                 traer={async () => {
-                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                    if (loggedUserJSON) {
-                        const usuario = JSON.parse(loggedUserJSON);
-                        setUsuario(usuario);
-                        const novedades_aux = await servicioDtc.traerclasestaller(usuario.id);
-                        setClases(novedades_aux);
-                    }
-                }}
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON);
+                setUsuario(usuario);
+                const novedades_aux = await servicioDtc.traerclasestaller2(usuario.id);
+                console.log(novedades_aux)
+                setClases(novedades_aux);
+            }
+        }}
             />
             <Paper>
                 <MUIDataTable
