@@ -76,26 +76,27 @@ const TablaAlumnosFinesMobile = () => {
     setNuevoAlumno({ ...nuevoAlumno, [e.target.name]: e.target.value });
   };
 
-  const handleGuardar = async () => {
-    const { nombre, apellido, dni, fecha_nacimiento } = nuevoAlumno;
+ const handleGuardar = async () => {
+  const { nombre, apellido, dni, fecha_nacimiento } = nuevoAlumno;
 
-    if (!nombre || !apellido || !dni || !fecha_nacimiento) {
-      alert('Por favor, completá todos los campos.');
-      return;
-    }
+  if (!nombre || !apellido || !dni || !fecha_nacimiento) {
+    alert('Por favor, completá todos los campos.');
+    return;
+  }
 
-    try {
-      if (modoEdicion) {
-        await servicioDtc.editarAlumnoFines(nuevoAlumno); // Debés tener esta función en tu backend
-      } else {
-        await servicioDtc.agregarAlumnoFines(nuevoAlumno);
-      }
-      handleClose();
-      traerAlumnos();
-    } catch (error) {
-      console.error('Error al guardar alumno:', error);
+  try {
+    if (modoEdicion) {
+      await servicioDtc.modificar_alumno_fines(nuevoAlumno);
+    } else {
+      await servicioDtc.agregarAlumnoFines(nuevoAlumno);
     }
-  };
+    handleClose();
+    traerAlumnos();
+  } catch (error) {
+    console.error('Error al guardar alumno:', error);
+  }
+};
+
 
   const handleEditar = (alumno) => {
     setModoEdicion(true);

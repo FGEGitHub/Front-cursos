@@ -143,7 +143,17 @@ const TablaNotificaciones = () => {
                 />
             </Box>
 
-            <Paper sx={{ overflowX: 'auto' }}>
+          <Paper
+    elevation={3}
+    sx={{
+        overflowX: 'auto',
+        padding: 2,
+        border: '1px solid #ccc',
+        borderRadius: 2,
+        backgroundColor: '#fafafa'
+    }}
+>
+
                 <MUIDataTable
                     title={"Haz click para buscar una clase"}
                     data={filtradas}
