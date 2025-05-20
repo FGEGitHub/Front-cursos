@@ -30,6 +30,8 @@ const style = {
 const TablaAlumnosFinesMobile = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [open, setOpen] = useState(false);
+  const [modoEdicion, setModoEdicion] = useState(false);
+  const [alumnoEditando, setAlumnoEditando] = useState(null);
   const [nuevoAlumno, setNuevoAlumno] = useState({
     nombre: '',
     apellido: '',
@@ -37,7 +39,18 @@ const TablaAlumnosFinesMobile = () => {
     fecha_nacimiento: '',
   });
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setModoEdicion(false);
+    setAlumnoEditando(null);
+    setNuevoAlumno({
+      nombre: '',
+      apellido: '',
+      dni: '',
+      fecha_nacimiento: '',
+    });
+    setOpen(true);
+  };
+
   const handleClose = () => {
     setNuevoAlumno({
       nombre: '',
@@ -45,6 +58,8 @@ const TablaAlumnosFinesMobile = () => {
       dni: '',
       fecha_nacimiento: '',
     });
+    setModoEdicion(false);
+    setAlumnoEditando(null);
     setOpen(false);
   };
 
@@ -70,12 +85,29 @@ const TablaAlumnosFinesMobile = () => {
     }
 
     try {
-      await servicioDtc.agregarAlumnoFines(nuevoAlumno);
+      if (modoEdicion) {
+        await servicioDtc.editarAlumnoFines(nuevoAlumno); // Debés tener esta función en tu backend
+      } else {
+        await servicioDtc.agregarAlumnoFines(nuevoAlumno);
+      }
       handleClose();
       traerAlumnos();
     } catch (error) {
       console.error('Error al guardar alumno:', error);
     }
+  };
+
+  const handleEditar = (alumno) => {
+    setModoEdicion(true);
+    setAlumnoEditando(alumno);
+    setNuevoAlumno({
+      nombre: alumno.nombre,
+      apellido: alumno.apellido,
+      dni: alumno.dni,
+      fecha_nacimiento: alumno.fecha_nacimiento,
+      id: alumno.id,
+    });
+    setOpen(true);
   };
 
   useEffect(() => {
@@ -99,6 +131,7 @@ const TablaAlumnosFinesMobile = () => {
               <TableCell><strong>Apellido</strong></TableCell>
               <TableCell><strong>DNI</strong></TableCell>
               <TableCell><strong>Fecha Nacimiento</strong></TableCell>
+              <TableCell><strong>Acciones</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -108,6 +141,11 @@ const TablaAlumnosFinesMobile = () => {
                 <TableCell>{alumno.apellido}</TableCell>
                 <TableCell>{alumno.dni}</TableCell>
                 <TableCell>{alumno.fecha_nacimiento}</TableCell>
+                <TableCell>
+                  <Button variant="outlined" size="small" onClick={() => handleEditar(alumno)}>
+                    Editar
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -116,7 +154,9 @@ const TablaAlumnosFinesMobile = () => {
 
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Typography variant="h6" mb={2}>Nuevo Alumno</Typography>
+          <Typography variant="h6" mb={2}>
+            {modoEdicion ? 'Editar Alumno' : 'Nuevo Alumno'}
+          </Typography>
           <TextField
             fullWidth
             label="Nombre"
