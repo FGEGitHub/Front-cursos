@@ -56,7 +56,7 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <button  onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
+            <button  onClick={handleClickOpen}  style={{ marginLeft:'-25%', width: '153%' }} >
             Borrar
             </button>
             <Dialog open={open} onClose={handleClose}>

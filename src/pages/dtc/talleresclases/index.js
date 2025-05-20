@@ -66,7 +66,7 @@ export default function Paginas() {
       {( usuario.id == 317 ||  usuario.id == 325) ? <>
      
      
-    <Asis2/>si es</> :<>
+    <Asis2/></> :<>
    
     <Asis/>   
    </> }
