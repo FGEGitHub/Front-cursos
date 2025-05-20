@@ -14,8 +14,12 @@ const MobileNavigation = () => {
   const [cursado, setCursado] = useState([]);
   const [orderBy, setOrderBy] = useState("mail");
   const [order, setOrder] = useState("asc");
-
+ 
+  const [mostrarContenido, setMostrarContenido] = useState(false);
   useEffect(() => {
+       const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    const user = JSON.parse(loggedUserJSON);
+    setMostrarContenido(user)
     const fetchChicos = async () => {
       try {
         const data = await servicioDtc.listachiquesmomentaneo();
@@ -63,59 +67,77 @@ const MobileNavigation = () => {
       </Button>
       
       {/* Título */}
-      <Typography variant="h6" textAlign="center" fontWeight="bold">
-        Aquí puedes buscar los horarios de un usuario
-      </Typography>
+  {mostrarContenido.id !=325 && (
+  <>
+    <Typography variant="h6" textAlign="center" fontWeight="bold">
+      Aquí puedes buscar los horarios de un usuario
+    </Typography>
 
-      {/* Autocomplete más ancho */}
-      <Box width="80%">
-        <Autocomplete
-          options={chicos}
-          getOptionLabel={(option) => option.nombre ? `${option.nombre} ${option.apellido || ""}`.trim() : "Sin nombre"}
-          onChange={(event, newValue) => {
-            setSelectedChico(newValue);
-            if (newValue) verDetalles(newValue.id);
-          }}
-          renderInput={(params) => <TextField {...params} label="Buscar inscripto" variant="outlined" fullWidth />}
-        />
-      </Box>
-      
-      {selectedChico && (
-        <Box width="100%">
-          <Typography variant="h6" fontWeight="bold" mt={2} mb={1}>
-            Detalles del Inscripto
-          </Typography>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {["mail", "dia", "hora"].map((col) => (
-                    <TableCell key={col}>
-                      <TableSortLabel active={orderBy === col} direction={orderBy === col ? order : "asc"} onClick={() => handleSort(col)}>
-                        <b>{col.charAt(0).toUpperCase() + col.slice(1)}</b>
-                      </TableSortLabel>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {sortedCursado.map((item, idx) => (
-                  <TableRow key={idx}>
-                    <TableCell>{item.mail}</TableCell>
-                    <TableCell>{item.dia}</TableCell>
-                    <TableCell>{item.hora}</TableCell>
-                  </TableRow>
+    {/* Autocomplete más ancho */}
+    <Box width="80%">
+      <Autocomplete
+        options={chicos}
+        getOptionLabel={(option) =>
+          option.nombre ? `${option.nombre} ${option.apellido || ""}`.trim() : "Sin nombre"
+        }
+        onChange={(event, newValue) => {
+          setSelectedChico(newValue);
+          if (newValue) verDetalles(newValue.id);
+        }}
+        renderInput={(params) => (
+          <TextField {...params} label="Buscar inscripto" variant="outlined" fullWidth />
+        )}
+      />
+    </Box>
+
+    {selectedChico && (
+      <Box width="100%">
+        <Typography variant="h6" fontWeight="bold" mt={2} mb={1}>
+          Detalles del Inscripto
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {["mail", "dia", "hora"].map((col) => (
+                  <TableCell key={col}>
+                    <TableSortLabel
+                      active={orderBy === col}
+                      direction={orderBy === col ? order : "asc"}
+                      onClick={() => handleSort(col)}
+                    >
+                      <b>{col.charAt(0).toUpperCase() + col.slice(1)}</b>
+                    </TableSortLabel>
+                  </TableCell>
                 ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sortedCursado.map((item, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>{item.mail}</TableCell>
+                  <TableCell>{item.dia}</TableCell>
+                  <TableCell>{item.hora}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-          {/* Botón Atrás */}
-          <Button variant="contained" color="secondary" fullWidth sx={{ mt: 2 }} onClick={() => setSelectedChico(null)}>
-            Atrás
-          </Button>
-        </Box>
-      )}
+        {/* Botón Atrás */}
+        <Button
+          variant="contained"
+          color="secondary"
+          fullWidth
+          sx={{ mt: 2 }}
+          onClick={() => setSelectedChico(null)}
+        >
+          Atrás
+        </Button>
+      </Box>
+    )}
+  </>
+)}
     </Box>
   );
 };
