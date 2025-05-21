@@ -156,12 +156,12 @@ export default function MenuIzq2 ({children}) {
             flexShrink: 0,
             '& .MuiDrawer-paper': {
               width: drawerWidth,
-              backgroundColor: "#1f5627",
+              backgroundColor: "#2e7d32",
               boxSizing: 'border-box',
             },
           }}
           variant="permanent"
-          color="#1f5627"
+          color="#2e7d32"
           anchor="left"
         >
           <Navbar logout={{ hanleLogout }} />

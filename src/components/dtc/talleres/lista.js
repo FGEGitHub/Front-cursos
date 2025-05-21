@@ -54,34 +54,35 @@ const TablaNotificaciones = () => {
     </div>
 );
 
-    const columns = [
-     {
-  name: "fecha",
-  label: "Fecha",
-  options: {
-    customBodyRender: (value) => {
-      const [año, mes, día] = value.split("-");
-      return `${día}/${mes}/${año}`;
+  const columns = [
+  {
+    name: "Ver",
+    options: {
+      customBodyRenderLite: (dataIndex) =>
+        CutomButtonsRenderer(dataIndex),
     }
-  }
-},
-        {
-            name: "titulo",
-            label: "Título",
-        },
-         {
-            name: "descripcion",
-            label: "materia",
-        },
-        {
-            name: "Ver",
-            label: "Acciones",
-            options: {
-                customBodyRenderLite: (dataIndex) =>
-                    CutomButtonsRenderer(dataIndex)
-            }
-        }
-    ];
+  },
+  { name: "id", label: "ID" },
+  { name: "dni", label: "DNI" },
+  {
+    name: "kid",
+    label: "Dimensión",
+    options: {
+      customBodyRender: (value) => {
+        const labelMap = {
+          kid1: "Dimensión 1",
+          kid2: "Dimensión 2",
+          kid3: "Jóvenes",
+        };
+        return labelMap[value] || value;
+      }
+    }
+  },
+  { name: "apellido", label: "Apellido" },
+  { name: "nombre", label: "Nombre" },
+  { name: "porcentajeasis", label: "% Asistencia" },
+];
+
 
     const options = {
         responsive: "standard",
