@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import Tooltip from "@mui/material/Tooltip";
 import servicioDtc from "../../../services/dtc";
 import DialogActions from '@mui/material/DialogActions';
-
+import MenuItem from '@mui/material/MenuItem';
 export default function SelectTextFields(props) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
@@ -99,6 +99,22 @@ export default function SelectTextFields(props) {
             fullWidth
             variant="standard"
           />
+          <TextField
+    select
+    label="Materia"
+    name="detalle"
+    value={form.detalle || ''}
+    onChange={handleChange}
+    fullWidth
+    variant="standard"
+    sx={{ mt: 2 }}
+  >
+    <MenuItem value="Matematicas">Matematicas</MenuItem>
+    <MenuItem value="Lengua">Lengua</MenuItem>
+    <MenuItem value="Historia">Historia</MenuItem>
+    <MenuItem value="Geografia">Geografía</MenuItem>
+        <MenuItem value="Otra">Otra</MenuItem>
+  </TextField>
           <DialogActions>
             {form.fecha ? (
               <Button

@@ -69,6 +69,10 @@ const TablaNotificaciones = () => {
             name: "titulo",
             label: "Título",
         },
+         {
+            name: "materia",
+            label: "materia",
+        },
         {
             name: "Ver",
             label: "Acciones",
