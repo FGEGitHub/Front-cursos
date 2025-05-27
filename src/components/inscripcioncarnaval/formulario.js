@@ -101,7 +101,7 @@ const Estracto = () => {
             console.log(clients)
             await setExiste(clients);
             if (clients.length > 0) {
-                setInscrip({ ...inscrip, dni: clients[0].dni, nombre: clients[0].nombre, apellido: clients[0].apellido, barrio: clients[0].barrio, direccion: clients[0].direccion, tel: clients[0].tel, mail: clients[0].mail });
+                setInscrip({ ...inscrip, dni: clients[0].dni, nombre: clients[0].nombre, apellido: clients[0].apellido, barrio: clients[0].barrio, direccion: clients[0].direccion, localidad: clients[0].localidad, mail: clients[0].mail });
             }
 
             //traerpersona
@@ -111,10 +111,7 @@ const Estracto = () => {
 
     };
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        // getClients();
-    }, []);
+ 
     const islogo = {
         width: "40%",
         height: "40%",
@@ -182,22 +179,19 @@ const Estracto = () => {
                             <img style={islogoc2} className="islogoc" src={Logocuqui} alt="logo" />
                             <img style={islogo2} src={Logoccari} alt="logo" />
                         </Box>
-                   
+
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="h7" component="div" color="black">
                                 <StyledParagraph>
-                                Desde la Coalición Cívica ARI te invitamos a participar de los talleres abiertos y gratuitos de baile, peinado, maquillaje y armado de trajes de carnaval. Inscrribite acá hasta el 1 de noviembre de 2023
-                              
-
+                                    Desde la Coalición Cívica ARI te brindamos operativos oftalmológicos gratuitos en distintos puntos de la ciudad Capital y en otras localidades de la provincia, para que puedas acceder a una consulta con profesionales sin costo. Además, te ofrecemos la posibilidad de acceder a tus anteojos a través de una óptica a un costo bajo y distintas formas de pago. ¡Aprovechá y anotate al que te quede más cerca!
                                 </StyledParagraph>
                             </Typography>
+
                         </Box>
 
 
                         <Box sx={{ textAlign: 'center', marginLeft: "2em", marginRight: "2em", }}>
-                            <Typography variant="body2" color="textSecondary">
-                                Por favor, ingresa tu DNI sin puntos.
-                            </Typography>
+                         
                             <TextField
                                 margin="dense"
                                 id="name"
@@ -210,7 +204,9 @@ const Estracto = () => {
                                 style={{ width: '250px' }}
 
                             />
-
+   <Typography variant="body2" color="textSecondary">
+                                Por favor, ingresa tu DNI sin puntos.
+                            </Typography>
 
 
                             {existe.length > 0 ? <>
@@ -351,21 +347,7 @@ const Estracto = () => {
                                     {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
                                         Por favor, ingresa tu telefono
                                     </Typography></>}
-                                    <TextField
-
-                                        margin="dense"
-                                        id="name"
-                                        label="Correo Electronico"
-                                        name="mail"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        style={{ width: '250px' }}
-                                        variant="outlined"
-                                    />
-                                    {inscrip.mail ? <></> : <>  <Typography variant="body2" color="textSecondary">
-                                        Por favor, ingresa tu Correo electronico
-                                    </Typography>
-                                    </>}
+                           
                                     <TextField
 
 
@@ -403,11 +385,11 @@ const Estracto = () => {
                                 style={{ width: '250px' }}
                                 margin="dense"
                                 id="name"
-                                label="Telefono alternativo"
-                                name="tel2"
+                                label="Localidad"
+                                name="localidad"
                                 onChange={handleChange}
                                 fullWidth
-                                type="number"
+                               
                                 variant="outlined"
                             />
 
@@ -420,259 +402,27 @@ const Estracto = () => {
                                 id="date"
                                 label="Fecha de Nacimiento"
                                 type="date"
-                                defaultValue="2020-01-01"
+                                defaultValue="1990-01-01"
                                 sx={{ width: 220 }}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        <b>Datos adicionales que nos <br />
-                                            interesaria saber de vos  </b>
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Perteneces a una comparsa<br /> o agrupación musical?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'comparsa',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                            {inscrip.comparsa == "Si" ? <>
-                                <TextField
-                                    style={{ width: '250px' }}
-                                    margin="dense"
-                                    id="name"
-                                    label="Contanos a cual"
-                                    name="comparsa_cual"
-                                    onChange={handleChange}
-                                    fullWidth
-                                   
-                                    variant="outlined"
-                                />
-
-                            </> : <></>}
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Nivel educativo alcanzado
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                        </Box>
-                        <Box sx={{ textAlign: 'center', marginLeft: "1em", marginRight: "1em", }}>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'nivel_secundario',
-
-                                }}
-                                sx={'width:250px'}
-                            >
-
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Universitario incompleto'}>Primario incompleto</option>
-                                <option value={'Secundario completo'}>Secundario completo</option>
-                                <option value={'Secundario incompleto'}>Secundario incompleto</option>
-                                <option value={'Terciario completo'}>Terciario completo</option>
-                                <option value={'Tericario incompleto'}>Tericario incompleto</option>
-                                <option value={'Universitario incompleto'}>Universitario incompleto</option>
-                                <option value={'Universitario completo'}>Universitario completo</option>
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        Actualmente se encuentra trabajando?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'trabajo',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-                            {inscrip.trabajo == "Si" ? <>
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="p" component="div" color="black">
-                                        <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-                                <InputLabel variant="outlined" >
-                                    Formal se refiere a un empleo en relación <br />
-                                    de dependencia, registrado o  <br />
-                                    monotributista con acceso a  <br />
-                                    seguridad social
-                                </InputLabel>
-                                <br />
-                                <NativeSelect
-                                    defaultValue={30}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'tipo_trabajo',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    sx={'width:250px'}
-                                >
-                                    <option value={'Sin determinar'}>Elegir</option>
-
-
-
-                                    <option value={'Formal'}>Formal</option>
-                                    <option value={'Informal'}>Informal</option>
-
-                                </NativeSelect>
-
-                                <br />
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="p" component="div" color="black">
-                                        <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-
-                                <NativeSelect
-                                    defaultValue={30}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'tipo_empleo',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    sx={'width:250px'}
-                                >
-                                    <option value={'Sin determinar'}>Elegir</option>
-
-
-
-                                    <option value={'Monotributista/cuenta propista'}>Monotributista/cuenta propista</option>
-                                    <option value={'En relación de dependencia'}>En relación de dependencia</option>
-                                    <option value={'Ambos'}>Ambos</option>
-                                </NativeSelect>
-
-                                <br />
-
-                            </> : <></>}
-
-
-                            <br />
-
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿A que curso te queres inscribir?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
+                            
+                        
+                           
+                       
 
                         </Box>
 
-                        <FormControlLabel
-                            control={<Checkbox checked={options.option1} onChange={handleCheckboxChange('option1')} />}
-                            label="Maquillaje"
-                        /><br />
-                        <FormControlLabel
-                            control={<Checkbox checked={options.option2} onChange={handleCheckboxChange('option2')} />}
-                            label="Peinado "
-                        /><br />
-                        <FormControlLabel
-                            control={<Checkbox checked={options.option3} onChange={handleCheckboxChange('option3')} />}
-                            label="Confección de trajes "
-                        /><br />
-                        <FormControlLabel
-                            control={<Checkbox checked={options.option4} onChange={handleCheckboxChange('option4')} />}
-                            label="Baile"
-                        /><br />
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.localidad && inscrip.direccion  ?
                                     <>
-                                        {inscrip.trabajo === 'Si' ? <>
-
-                                            {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
-                                                {/*  Caso que sea trabajo si  y completo le tipo  */}
-
-                                                {inscrip.comparsa === 'Si' ? <>
-
-                                                    {inscrip.comparsa_cual ? <>
-                                                        {/*  Caso que sea hijos si y selecciono cuantos  */}
-
-
-                                                        {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                            <Dialogo formulario={inscrip} 
-                                                            opciones= {options}/>
-                                                        </> : <>Telefono no valido</>}
-                                                    </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                                </> : <>
-                                                    {/*  Caso que sea hijos no */}
-
-                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                        {  inscrip.tel.length > 9  ? <>
                                                         <Dialogo formulario={inscrip}
-                                                         opciones= {options} />
+                                                            opciones={options} />
                                                     </> : <>Telefono no valido</>}
-                                                </>}
-
-
-                                            </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                        </> : <>
-                                            {/*  Caso que sea trabajo no */}
-                                            {inscrip.comparsa == 'Si' ? <>
-
-                                                {inscrip.comparsa_cual ? <>
-                                                    {/*  Caso que sea hijos si y selecciono cuantos  */}
-
-
-                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                        <Dialogo formulario={inscrip} 
-                                                         opciones= {options}/>
-                                                    </> : <>Telefono no valido</>}
-                                                </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                            </> : <>
-                                                {/*  Caso que sea hijos no */}
-
-                                                {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                    <Dialogo formulario={inscrip}
-                                                     opciones= {options} />
-                                                </> : <>Telefono no valido</>}
-                                            </>}</>}
                                     </>
                                     : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
                             </>}
@@ -691,11 +441,11 @@ const Estracto = () => {
                             <img style={islogoc} className="islogoc" src={Logocuqui} alt="logo" />
                             <img style={islogo} src={Logoccari} alt="logo" />
                         </Box>
-                   
+
                         <Box sx={{ textAlign: 'center' }}>
                             <Typography variant="p" component="div" color="black">
                                 <StyledParagraph>
-                                Desde la Coalición Cívica ARI te invitamos a participar de los talleres abiertos y gratuitos de baile, peinado, maquillaje y armado de trajes de carnaval. Inscrribite acá hasta el 1 de noviembre de 2023
+                                    Desde la Coalición Cívica ARI te invitamos a participar de los talleres abiertos y gratuitos de baile, peinado, maquillaje y armado de trajes de carnaval. Inscrribite acá hasta el 1 de noviembre de 2023
                                 </StyledParagraph>
                             </Typography>
                         </Box>
@@ -1178,15 +928,15 @@ const Estracto = () => {
 
                                                         {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
                                                             <Dialogo formulario={inscrip}
-                                                             opciones= {options} />
+                                                                opciones={options} />
                                                         </> : <>Telefono no valido</>}
                                                     </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
                                                 </> : <>
                                                     {/*  Caso que sea hijos no */}
 
                                                     {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                        <Dialogo formulario={inscrip} 
-                                                         opciones= {options}/>
+                                                        <Dialogo formulario={inscrip}
+                                                            opciones={options} />
                                                     </> : <>Telefono no valido</>}
                                                 </>}
 
@@ -1201,16 +951,16 @@ const Estracto = () => {
 
 
                                                     {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                        <Dialogo formulario={inscrip} 
-                                                         opciones= {options}/>
+                                                        <Dialogo formulario={inscrip}
+                                                            opciones={options} />
                                                     </> : <>Telefono no valido</>}
                                                 </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
                                             </> : <>
                                                 {/*  Caso que sea hijos no */}
 
                                                 {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                    <Dialogo formulario={inscrip} 
-                                                     opciones= {options}/>
+                                                    <Dialogo formulario={inscrip}
+                                                        opciones={options} />
                                                 </> : <>Telefono no valido</>}
                                             </>}</>}
                                     </>

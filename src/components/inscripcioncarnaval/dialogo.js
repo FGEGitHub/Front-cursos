@@ -62,7 +62,7 @@ export default function AlertDialog(props) {
       >
       <DialogTitle id="alert-dialog-title" style={{ display: 'flex', alignItems: 'center' }}>
   <div>
-    {"Talleres de Carnaval"}
+    {"Operativo Oftalmologico"}
   </div>
   <img style={islogo} src={Logoesme} alt="logo" />
 </DialogTitle>
