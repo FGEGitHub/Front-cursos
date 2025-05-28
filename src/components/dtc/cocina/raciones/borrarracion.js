@@ -32,7 +32,7 @@ export default function Clasenueva(props) {
         event.preventDefault();
         try {
 
-         const respuesta=  await servicioDtc.borrarracion({id:props.id})
+         const respuesta=  await servicioDtc.borrarcolacion({id:props.id})
          alert(respuesta)
 
 
@@ -60,11 +60,11 @@ export default function Clasenueva(props) {
         color="error" 
         sx={{ width: '150px', height: '40px', margin: '8px', fontSize: '14px', textTransform: 'none' }}
  onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
-            Borrar merienda
+            Borrar colacion
             </Button>
             <Dialog open={open} onClose={handleClose}>
 
-                <DialogTitle>Borrar actividad</DialogTitle>
+                <DialogTitle>Borrar </DialogTitle>
                 <Paper
                     sx={{
                         cursor: 'pointer',

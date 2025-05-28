@@ -19,6 +19,7 @@ import servicioDtc from "../../../../services/dtc";
 import NuevaColacion from './nuevacolacion';
 import NuevaMerienda from './nuevamerienda';
 import Borrar from './borar';
+import BorrarColacion from './borrarracion';
 
 export default function TablaActividades() {
   const [activeStep, setActiveStep] = useState(0);
@@ -79,26 +80,24 @@ export default function TablaActividades() {
   const columns = [
     { name: "fecha", label: "Fecha" },
     { name: "cantidad", label: "Cantidad" },
-    {
-      name: "Actions",
-      label: "Acciones",
-      options: {
-        customBodyRenderLite: (dataIndex) => {
-          const data = activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas;
-          const rowData = data[dataIndex];
-          return (
-            rowData.ubicacion && (
-              <>
-                <Button variant="contained" color="primary" onClick={() => handleViewFile(rowData.id)}>
-                  Ver Imagen
-                </Button>
-                <Borrar id={rowData.id} traer={() => traerDatos()} />
-              </>
-            )
-          );
-        },
-      },
+   {
+  name: "Actions",
+  label: "Acciones",
+  options: {
+    customBodyRenderLite: (dataIndex) => {
+      const data = activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas;
+      const rowData = data[dataIndex];
+      return (
+        <>
+       
+          {activeStep === 0 ? 
+            <BorrarColacion id={rowData.id} traer={() => traerDatos()} />: <>   <Borrar id={rowData.id} traer={() => traerDatos()} /></>
+          }
+        </>
+      );
     },
+  },
+}
   ];
 
   const resumenMensual = agruparPorMes(activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas);
