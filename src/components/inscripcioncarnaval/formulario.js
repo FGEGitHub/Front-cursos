@@ -101,7 +101,7 @@ const Estracto = () => {
             console.log(clients)
             await setExiste(clients);
             if (clients.length > 0) {
-                setInscrip({ ...inscrip, dni: clients[0].dni, nombre: clients[0].nombre, apellido: clients[0].apellido, barrio: clients[0].barrio, direccion: clients[0].direccion, localidad: clients[0].localidad, mail: clients[0].mail });
+                setInscrip({ ...inscrip, dni: clients[0].dni, nombre: clients[0].nombre, apellido: clients[0].apellido, barrio: clients[0].barrio, direccion: clients[0].direccion, localidad: clients[0].localidad, tel: clients[0].tel });
             }
 
             //traerpersona

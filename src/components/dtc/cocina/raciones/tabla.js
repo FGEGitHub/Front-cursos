@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal, Box, Stepper, Step, StepLabel } from '@mui/material';
+import {
+  Button,
+  Modal,
+  Box,
+  Stepper,
+  Step,
+  StepLabel,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Typography,
+  Paper,
+} from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import servicioDtc from "../../../../services/dtc";
 import NuevaColacion from './nuevacolacion';
@@ -29,7 +43,7 @@ export default function TablaActividades() {
     if (loggedUserJSON) {
       const usuario = JSON.parse(loggedUserJSON);
       setUsuario(usuario);
-     const colaciones = await servicioDtc.traercolaciones();
+      const colaciones = await servicioDtc.traercolaciones();
       const meriendas = await servicioDtc.traermeriendas();
       setAsistenciasColaciones(colaciones);
       setAsistenciasMeriendas(meriendas);
@@ -46,10 +60,25 @@ export default function TablaActividades() {
     }
   };
 
+  const agruparPorMes = (datos) => {
+    if (!datos) return [];
+
+    const agrupado = datos.reduce((acc, item) => {
+      const mes = item.fecha.slice(0, 7); // formato "YYYY-MM"
+      if (!acc[mes]) acc[mes] = 0;
+      acc[mes] += (parseInt(item.cantidad));
+      return acc;
+    }, {});
+
+    return Object.entries(agrupado).map(([mes, total]) => ({
+      mes,
+      total,
+    }));
+  };
+
   const columns = [
     { name: "fecha", label: "Fecha" },
     { name: "cantidad", label: "Cantidad" },
-    { name: "ubicacion", label: "Ubicación" },
     {
       name: "Actions",
       label: "Acciones",
@@ -72,6 +101,8 @@ export default function TablaActividades() {
     },
   ];
 
+  const resumenMensual = agruparPorMes(activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas);
+
   return (
     <div className="App">
       <Stepper activeStep={activeStep} alternativeLabel>
@@ -83,15 +114,32 @@ export default function TablaActividades() {
         </Step>
       </Stepper>
 
-      <h1>
-      </h1>
-
-      {/* Botón para agregar según la pestaña activa */}
       {activeStep === 0 ? (
         <NuevaColacion id_trabajador={usuario.id} traer={() => traerDatos()} />
       ) : (
         <NuevaMerienda id_trabajador={usuario.id} traer={() => traerDatos()} />
       )}
+
+      {/* Tabla resumen de cantidades por mes */}
+      <Paper elevation={3} style={{ margin: '20px 0', padding: '10px', maxWidth: '400px' }}>
+        <Typography variant="h6" gutterBottom>Resumen mensual</Typography>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell><strong>Mes</strong></TableCell>
+              <TableCell><strong>Total</strong></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {resumenMensual.map((item) => (
+              <TableRow key={item.mes}>
+                <TableCell>{item.mes}</TableCell>
+                <TableCell>{item.total}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
 
       <MUIDataTable
         title={activeStep === 0 ? "Lista de Colaciones" : "Lista de Meriendas"}
