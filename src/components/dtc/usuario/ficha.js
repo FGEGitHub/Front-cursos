@@ -330,15 +330,6 @@ traer()
            
            
 
-              {chico && (
-                <Fragment>
-                  <Button onClick={toggleShowAllData}>
-                    {showAllData ? 'Ver menos' : 'Ver más'}
-                  </Button>
-                  {/* Agrega más campos adicionales aquí */}
-                </Fragment>
-              )}
-              {/* Agrega más campos aquí */}
             </Grid>
           </CardContent>
         </Card>

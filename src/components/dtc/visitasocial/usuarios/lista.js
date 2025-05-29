@@ -25,7 +25,7 @@ import {
     Button
 } from '@material-ui/core';
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
-
+import Nuevo from '../../usuario1/chiques/nuevo'
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -294,6 +294,25 @@ Ver                        </Button>
 </Alert> </>:<></>}
 
             <h2>Lista de chicos</h2>
+            <Nuevo 
+            traer={ async () => {
+        try {
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
+
+                setUsuario(usuario)
+
+                const novedades_aux = await servicioDtc.listachiques()
+                setchicos(novedades_aux[0])
+                setDatos(novedades_aux[1])
+            }
+
+        } catch (error) {
+
+        }
+
+    }}/>
             {chicos ? <>
                 <div>
 

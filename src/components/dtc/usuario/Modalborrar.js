@@ -57,7 +57,7 @@ export default function Clasenueva(props) {
         <div>
 
 < Tooltip title="Borrar">
-           <button  style={{ width: '80px' }} onClick={handleClickOpen}>Borrar</button> 
+           <button   sx={{ color: 'black', borderColor: 'black' }} onClick={handleClickOpen}>Borrar</button> 
         
             </Tooltip>
             <Dialog open={open} onClose={handleClose}>
