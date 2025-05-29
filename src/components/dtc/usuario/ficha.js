@@ -80,7 +80,7 @@ traer()
       {chico ? <>
         <Card variant="outlined" sx={{
           cursor: 'pointer',
-          backgroundColor: '#b0bec5'
+          backgroundColor: '#e0e0e0'
         }}>
           {chico && (
             <Fragment>
