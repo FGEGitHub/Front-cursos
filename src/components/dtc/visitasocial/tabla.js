@@ -274,11 +274,11 @@ export default function TablaActividades(props) {
 function Nivel(dataIndex, rowIndex, data, onClick) {
     return (
         <>
-<Button variant="contained" color="primary" onClick={() => handleOpen(asistencias[dataIndex])}>
+<Button variant="outlined" sx={{ color: "#37474f", borderColor: "black", fontSize: "0.65rem", }} color="primary" onClick={() => handleOpen(asistencias[dataIndex])}>
                   Ver detalles
                 </Button><br/>
                 {asistencias[dataIndex].ubicacion !== "no" && (
-                  <Button variant="contained" color="secondary" onClick={() => handleViewFile(asistencias[dataIndex].id)}>
+                  <Button variant="outlined" sx={{ color: "#37474f", borderColor: "black", fontSize: "0.65rem", }} onClick={() => handleViewFile(asistencias[dataIndex].id)}>
                     Ver Online
                   </Button>
                 )}

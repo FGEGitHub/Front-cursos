@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import DrawerNav from "./DrawerNav";
 import servicioPErsonas from '../../services/personas'
-import logo from '../../Assets/dtc.png'
+import logo from '../../Assets/inviernodtc.png'
 
 
 const Navbar = (props) => {

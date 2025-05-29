@@ -94,9 +94,7 @@ alert(nov)
             autoComplete="off"
         >
             < Tooltip title="Modificar">
-                <Button  variant="contained" 
-        color="success" 
-        sx={{ width: '150px', height: '40px', margin: '8px', fontSize: '14px', textTransform: 'none' }}
+                <Button  variant="outlined" sx={{ color: "grey", borderColor: "black", fontSize: "0.65rem", }}
  onClick={handleClickOpen}> Modificar   </Button>
 
             </Tooltip>
