@@ -147,9 +147,9 @@ traer()
                   </Grid>
                    <Grid item xs={2}>
                     <TextField
-                      label="Telefono"
+                      label="DNI"
                       name="Nombre"
-                      defaultValue={chico.telefono || ""}
+                      defaultValue={chico.dni || ""}
                       InputProps={{ readOnly: true }}
                       variant="outlined"
                       fullWidth
@@ -158,7 +158,7 @@ traer()
                   </Grid>
                    <Grid item xs={2}>
                     <TextField
-                      label="Telefono personal:"
+                      label="Telefono:"
                       name="Nombre"
                       defaultValue={chico.telefono || ""}
                       InputProps={{ readOnly: true }}
