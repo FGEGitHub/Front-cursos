@@ -10,6 +10,7 @@ import Borrarhorarios from './eliminarhorairos'
 import Avatar from "@mui/material/Avatar";
 import Agregarcurso from './modalinscribir'//boton dialogo
 import { useEffect, useState, Fragment } from "react";
+import TextField from "@mui/material/TextField";
 const FichaPersona = (props) => {
   let params = useParams()
   let id = params.id
@@ -119,91 +120,215 @@ traer()
             <Typography variant="h5" component="div">
               Información de {chico.apellido} {chico.nombre}  {chico.kid == "Sin determinar?" ? <></> : <>({chico.kid})</>}
             </Typography>
+
+
+            <Grid container spacing={2} sx={{ marginTop:"30px" }} >
+                  <Grid item xs={2}>
+                    <TextField
+                      label="Autorizadoa  retirar:"
+                      name="Nombre"
+                      defaultValue={chico.aut_retirar || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                    <Grid item xs={2}>
+                    <TextField
+                      label="Autorizacion de imagen:"
+                      name="Nombre"
+                      defaultValue={chico.autorizacion_imagen || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                   <Grid item xs={2}>
+                    <TextField
+                      label="Telefono"
+                      name="Nombre"
+                      defaultValue={chico.telefono || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                   <Grid item xs={2}>
+                    <TextField
+                      label="Telefono personal:"
+                      name="Nombre"
+                      defaultValue={chico.telefono || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+     <Grid item xs={2}>
+                    <TextField
+                      label="Telefono Responsable:"
+                      name="Nombre"
+                      defaultValue={chico.tel_responsable || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+    
+                  <Grid item xs={2}>
+                    <TextField
+                      label="Fotocopia de dni:"
+                      name="Nombre"
+                      defaultValue={chico.fotoc_dni || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                    <Grid item xs={2}>
+                    <TextField
+                      label="Fotocopia Responsable:"
+                      name="Nombre"
+                      defaultValue={chico.fotoc_responsable || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                   <Grid item xs={2}>
+                    <TextField
+                      label="Visita social:"
+                      name="Nombre"
+                      defaultValue={chico.visita_social || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                   <Grid item xs={2}>
+                    <TextField
+                      label="Egreso:"
+                      name="Nombre"
+                      defaultValue={chico.egreso || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                      <Grid item xs={2}>
+                    <TextField
+                      label="Escuela:"
+                      name="Nombre"
+                      defaultValue={chico.escuela || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                      <Grid item xs={2}>
+                    <TextField
+                      label="Grado:"
+                      name="Nombre"
+                      defaultValue={chico.grado || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                      <Grid item xs={2}>
+                    <TextField
+                      label="Fines:"
+                      name="Nombre"
+                      defaultValue={chico.fines || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                  
+     <Grid item xs={2}>
+                    <TextField
+                      label="Primer contacto:"
+                      name="Nombre"
+                      defaultValue={chico.primer_contacto || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                      <Grid item xs={2}>
+                    <TextField
+                      label="Admision:"
+                      name="Nombre"
+                      defaultValue={chico.admision || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                      <Grid item xs={2}>
+                    <TextField
+                      label="Dato escolar:"
+                      name="Nombre"
+                      defaultValue={chico.dato_escolar || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                      <Grid item xs={2}>
+                    <TextField
+                      label="Hora de la merienda:"
+                      name="Nombre"
+                      defaultValue={chico.hora_merienda || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                         <Grid item xs={2}>
+                    <TextField
+                      label="Fecha de Nacimiento:"
+                      name="Nombre"
+                      defaultValue={chico.fecha_nacimiento || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                         <Grid item xs={2}>
+                    <TextField
+                      label="Domicilio:"
+                      name="Nombre"
+                      defaultValue={chico.domicilio || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                 </Grid> 
             <Grid container spacing={2}>
 
 
-              <Grid item xs={12} sm={6}>
-                <Typography color="textSecondary">Autorizadoa  retirar:</Typography>
-                <Typography>{chico.aut_retirar}</Typography>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Typography color="textSecondary">Autorizacion de imagen:</Typography>
-                <Typography>{chico.autorizacion_imagen}</Typography>
-              </Grid>
-              {showAllData ? <>
-                <Grid item xs={12} sm={6}>
-                  <Grid item xs={12} sm={6}>
-                    <Grid item xs={12} sm={6}>
-                      <Typography color="textSecondary">DNI:</Typography>
-                      <Typography>{chico.dni}</Typography>
-                    </Grid>
-                    <Typography color="textSecondary">Telefono personal:</Typography>
-                    <Typography>{chico.telefono}</Typography>
-                  </Grid>
-
-                  <Typography color="textSecondary">Fotocopia de dni:</Typography>
-                  <Typography>{chico.fotoc_dni}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Fotocopia dni  Responsable:</Typography>
-                  <Typography>{chico.fotoc_responsable}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Telefono Responsable:</Typography>
-                  <Typography>{chico.tel_responsable}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Visita social:</Typography>
-                  <Typography>{chico.visita_social}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Egreso:</Typography>
-                  <Typography>{chico.egreso}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Escuela:</Typography>
-                  <Typography>{chico.escuela}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Grado:</Typography>
-                  <Typography>{chico.grado}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Fines:</Typography>
-                  <Typography>{chico.fines}</Typography>
-                </Grid>
-
-
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Primer contacto:</Typography>
-                  <Typography>{chico.primer_contacto}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Primer ingreso:</Typography>
-                  <Typography>{chico.primer_ingreso}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Admision:</Typography>
-                  <Typography>{chico.admision}</Typography>
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Dato  escolar:</Typography>
-                  <Typography>{chico.dato_escolar}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Hora de la merienda:</Typography>
-                  <Typography>{chico.hora_merienda}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Fecha de Nacimiento:</Typography>
-                  <Typography>{chico.fecha_nacimiento}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography color="textSecondary">Domicilio:</Typography>
-                  <Typography>{chico.domicilio}</Typography>
-                </Grid>
-              </> : <></>}
+           
+           
 
               {chico && (
                 <Fragment>
