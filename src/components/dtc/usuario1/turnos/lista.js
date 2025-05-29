@@ -596,7 +596,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Asistencia</b></TableCell>
                                                     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Psicologo/a</b></TableCell>
                                                    <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Ver</b></TableCell>
-
+     <TableCell style={{ backgroundColor: "black", color: 'white' }}><b>Agendado por </b></TableCell>
 
                                                 </TableRow>
                                             </TableHead>
@@ -644,14 +644,14 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                                                         
                                                         }} />
                                                       
-                                                       { row.estado == 'Agendado' ? <> {row.agendadopor}   <Modalimprimir nombrepsic={row.nombrepsiq}
+                                                       { row.estado == 'Agendado' ? <>  <Modalimprimir nombrepsic={row.nombrepsiq}
                                                        fecha={row.fecha}
                                                        detalle={row.detalle}
 
 
                                                        /></>:<></>}
                                                           </b> </StyledTableCell>
-                                                        <StyledTableCell component="th" scope="row"> <b>{row.estado} </b> </StyledTableCell>
+                                                        <StyledTableCell component="th" scope="row"> <b>{row.estado}  </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.presente == null ? <>Sin tomar</> :row.presente} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> <b>{row.nombrepsiq} </b> </StyledTableCell>
                                                         <StyledTableCell component="th" scope="row"> 
@@ -714,8 +714,9 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
                 }
               
               }}/> </StyledTableCell>
-
-
+              <StyledTableCell>
+{ row.estado == 'Agendado' && "Agendado por "+row.agendadopor }
+</StyledTableCell>
  
 
                                                     </StyledTableRow>
