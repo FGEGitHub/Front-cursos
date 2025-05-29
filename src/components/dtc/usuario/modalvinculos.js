@@ -106,7 +106,7 @@ export default function Clasenueva(props) {
         <div>
 
             < Tooltip title="Vinculos">
-                <Button variant='contained' color='success' style={{ width: '80px' }} onClick={handleClickOpen}>Vinculos</Button>
+                <Button variant='outlined' sx={{ color: "black", borderColor: "black", fontSize: "0.65rem", }} onClick={handleClickOpen}>Vinculos</Button>
 
             </Tooltip>
             <Dialog open={open} onClose={handleClose}>

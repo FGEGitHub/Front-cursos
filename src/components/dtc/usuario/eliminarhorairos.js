@@ -28,7 +28,7 @@ const EliminarHorarios = ({ id , traer}) => {
 
   return (
     <>
-      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
+      <Button variant="contained" sx={{ color: "black", borderColor: "black", fontSize: "0.65rem", }}  onClick={handleClickOpen}>
         Eliminar todos los horarios
       </Button>
       <Dialog open={open} onClose={handleClose}>

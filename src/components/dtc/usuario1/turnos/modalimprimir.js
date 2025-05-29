@@ -101,7 +101,7 @@ const ModalConstanciaTurno = ({ nombrepersona, nombrepsic, fecha, detalle }) => 
 
   return (
     <>
-      <Button variant="contained" color="success" onClick={handleOpen}>
+      <Button variant="outlined" sx={{ color: "#37474f", borderColor: "black", fontSize: "0.65rem", }}color="success" onClick={handleOpen}>
         Constancia
       </Button>
       <Dialog open={isOpen} onClose={handleClose} maxWidth="sm" fullWidth>

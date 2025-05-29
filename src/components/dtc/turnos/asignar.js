@@ -97,7 +97,7 @@ export default function SelectTextFields(props) {
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nueva Clase">
-        <Button variant="contained" onClick={handleClickOpen}> Agendar </Button>
+        <Button variant="outlined"sx={{ color: "green", borderColor: "green", fontSize: "0.65rem", }} onClick={handleClickOpen}> Agendar </Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>

@@ -69,7 +69,7 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="contained"  color="error" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
+            <Button variant="outlined"sx={{ color: "red", borderColor: "red", fontSize: "0.65rem", }}  color="error" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
             Eliminar
             </Button>
             <Dialog open={open} onClose={handleClose}>

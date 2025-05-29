@@ -355,7 +355,7 @@ traer()
       } catch (error) {}
     }}
   /> 
-  <Borrarusuaio id={chico.id} />
+ {/*  <Borrarusuaio id={chico.id} /> */}
   <Modificar
     id={chico.id}
     nombre={chico.nombre}

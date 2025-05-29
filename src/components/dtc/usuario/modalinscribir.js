@@ -181,7 +181,7 @@ const MyDialog = (props) => {
 
   return (
     <div>
-      <Button variant="contained" sx={{ color: 'black', borderColor: 'black' }} onClick={handleOpen}>
+      <Button variant="outlined" sx={{ color: "black", borderColor: "black", fontSize: "0.65rem", }}onClick={handleOpen}>
         Inscribir
       </Button>
 

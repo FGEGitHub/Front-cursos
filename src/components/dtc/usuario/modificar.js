@@ -114,7 +114,7 @@ alert(nov)
             autoComplete="off"
         >
             < Tooltip title="Nueva Clase">
-                <Button variant="outlined" onClick={handleClickOpen}> Modificar usuario  </Button>
+                <Button variant="outlined" sx={{ color: "black", borderColor: "black", fontSize: "0.65rem", }} onClick={handleClickOpen}> Modificar usuario  </Button>
 
             </Tooltip>
             <Dialog open={open} onClose={handleClose}>

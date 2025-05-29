@@ -68,7 +68,7 @@ export default function Clasenueva(props) {
         <div>
 
 
-            <Button variant="contained"  color="success" onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
+            <Button variant="outlined"  sx={{ color: "black", borderColor: "black", fontSize: "0.65rem", }} onClick={handleClickOpen} /* style={{ width: '25%' }} */ >
             Clasificar
             </Button>
             <Dialog open={open} onClose={handleClose}>
