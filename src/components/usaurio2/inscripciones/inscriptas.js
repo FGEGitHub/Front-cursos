@@ -180,26 +180,13 @@ const TablaNotificaciones = (props) => {
   
    
         
+  
         {
-            name: "descripcion",
-            label: "prioridad 1",
+            name: "fecha",
+            label: "fecha",
 
         },
-        {
-            name: "descripcion2",
-            label: "prioridad 2",
-
-        },
-        {
-            name: "estado",
-            label: "estado",
-
-        },
-        {
-            name: "descripcursado",
-            label: "Inscripta en",
-
-        },
+     
         {
             name: "Cambiar Estado",
             options: {
@@ -233,40 +220,43 @@ const TablaNotificaciones = (props) => {
     const options = {
         selectableRows: false, // Deshabilita los checkboxes
       };
+
+const exportarAExcel = () => {
+  if (!inscriptos || inscriptos.length === 0) return;
+
+  // Definir columnas que queremos exportar
+  const encabezados = ['DNI', 'Apellido', 'Nombre', 'Tel', 'Tel2', 'Fecha'];
+
+  // Crear el contenido CSV con separador punto y coma
+  const filas = inscriptos.map(item =>
+    [item.dni, item.apellido, item.nombre, item.tel, item.tel2, item.fecha]
+  );
+
+  const csvContent = [
+    encabezados.join(';'),
+    ...filas.map(fila => fila.map(valor => `"${valor || ''}"`).join(';'))
+  ].join('\n');
+
+  // Crear y disparar descarga
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", "inscriptos.csv");
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+
+
     // renderiza la data table
     return (
         <div>
 
             {inscriptos && datos ? <>       
-           {/*      {datos ? <>
-             <div className="home">
-                
-                <Widget  type="Cupos totales "
-                      cantidad={datos.cantidadturnos}
-                    />
-                          <Widget  type="Cantidad Preasignadas"
-                      cantidad={datos.cant_preasig}
-                    />
-                          <Widget  type="Cantidad confirmadas"
-                      cantidad={datos.cant_conf}
-                    />
-                          <Widget  type="Cupos disponibles"
-                      cantidad={datos.cantidaddis}
-                    />
-                           <Widget  type="No contestada"
-                      cantidad={datos.cant_nc}
-                    />
-                             <Widget  type="Rechazadas"
-                      cantidad={datos.cant_rech}
-                    />
-                             <Widget  type="pendientes por llamar"
-                      cantidad={datos.cant_pend}
-                    />
-                    </div>
-                    </>:<></>}
-                <Button variant="outlined" onClick={crearcursos}>
-       Crear Cursos 
-      </Button> */}
+          
                 <Paper
                                                 sx={{
                                                     cursor: 'pointer',
@@ -321,6 +311,9 @@ const TablaNotificaciones = (props) => {
 
 
                     <>
+         <Button variant="contained" color="primary" onClick={exportarAExcel} style={{ margin: '20px' }}>
+  Descargar Excel
+</Button>
                         <MUIDataTable
 
                             title={"Inscriptas"}
@@ -341,7 +334,7 @@ const TablaNotificaciones = (props) => {
                     </>
                 
                 </div>
-            </> : <><Carga/></>}  <Tablaprioridades/>
+            </> : <><Carga/></>}  
         </div>
       
     )
