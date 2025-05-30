@@ -642,15 +642,16 @@ const Estracto = () => {
                                 </>}
                             </>}
 
+                           
                             <TextField
-
+                                style={{ width: '250px' }}
                                 margin="dense"
                                 id="name"
-                                label="Telefono alternativo"
-                                name="tel2"
+                                label="Localidad"
+                                name="localidad"
                                 onChange={handleChange}
                                 fullWidth
-                                type="number"
+                               
                                 variant="outlined"
                             />
 
@@ -661,308 +662,27 @@ const Estracto = () => {
                                 onChange={handleChange}
                                 name="fecha_nac"
                                 id="date"
-                                label="Fecha de nacimiento"
+                                label="Fecha de Nacimiento"
                                 type="date"
-                                defaultValue="2000-01-01"
+                                defaultValue="1990-01-01"
                                 sx={{ width: 220 }}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        <b>Datos adicionales que nos interesaria saber de vos</b>
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
+                            
+                           
                         </Box>
 
-                        <Box sx={{ textAlign: 'center', marginLeft: "1em", marginRight: "1em", }}>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Perteneces a una comparsa<br /> o agrupación musical?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'comparsa',
-
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-                                <option value={'Si'}>Si</option>
-                                <option value={'No'}>No</option>
-
-
-
-                            </NativeSelect>
-                            {inscrip.comparsa == "Si" ? <>
-                                <br />
-                                <TextField
-                                    style={{ width: '250px' }}
-                                    margin="dense"
-                                    id="name"
-                                    label="Contanos a cual"
-                                    name="comparsa_cual"
-                                    onChange={handleChange}
-                                    fullWidth
-
-                                    variant="outlined"
-                                />
-
-                            </> : <></>}
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Nivel educativo alcanzado
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'nivel_secundario',
-
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-                                <option value={'Universitario incompleto'}>Primario incompleto</option>
-                                <option value={'Secundario completo'}>Secundario completo</option>
-                                <option value={'Secundario incompleto'}>Secundario incompleto</option>
-                                <option value={'Terciario completo'}>Terciario completo</option>
-                                <option value={'Tericario incompleto'}>Tericario incompleto</option>
-                                <option value={'Universitario incompleto'}>Universitario incompleto</option>
-                                <option value={'Universitario completo'}>Universitario completo</option>
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿Actualmente se encuentra trabajando?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'trabajo',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'} >Elegir</option>
-                                <option value={'Si'}>
-                                    <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                        Si
-                                    </Typography>
-                                </option>
-                                <option value={'No'}>No</option>
-
-                            </NativeSelect>
-
-                            {inscrip.trabajo == "Si" ? <>
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="h5" component="div" color="black">
-                                        <StyledParagraph>
-                                            ¿Qué tipo de empleo posee?
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-                                <InputLabel variant="outlined" >
-                                    Formal se refiere a un empleo en relación de dependencia,<br />
-                                    registrado o monotributista con acceso a seguridad social
-                                </InputLabel>
-                                <br />
-                                <NativeSelect
-                                    defaultValue={30}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'tipo_trabajo',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    sx={'width:250px'}
-                                >
-                                    <option value={'Sin determinar'}>Elegir</option>
-
-                                    <option value={'Formal'}>Formal</option>
-                                    <option value={'Informal'}>Informal</option>
-
-                                </NativeSelect>
-                                <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                    <Typography variant="h5" component="div" color="black">
-                                        <StyledParagraph>
-                                            Tipo de empleo
-                                        </StyledParagraph>
-                                    </Typography>
-                                </InputLabel>
-
-                                <NativeSelect
-                                    defaultValue={30}
-                                    onChange={handleChange}
-                                    inputProps={{
-                                        name: 'tipo_empleo',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    sx={'width:250px'}
-                                >
-                                    <option value={'Sin determinar'}>Elegir</option>
-
-
-
-                                    <option value={'Monotributista/cuenta propista'}>Monotributista/cuenta propista</option>
-                                    <option value={'En relación de dependencia'}>En relación de dependencia</option>
-                                    <option value={'Ambos'}>Ambos</option>
-                                </NativeSelect>
-                            </> : <></>}
-
-                            <br />
-
-
-
-
-
-
-
-
-                            {/*    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 1
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad1',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
-                                <option value={133}>Maquillaje y peinado para eventos</option>
-                                <option value={134}>Diseño de lenceria femenina</option>
-                                <option value={135}>Textiles y accesorios para el verano</option>
-                                <option value={136}>Refacción integral para el hogar</option>
-
-                            </NativeSelect>
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="h5" component="div" color="black">
-                                    <StyledParagraph>
-                                        Seleccionar prioridad 2
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-
-                            <NativeSelect
-                                defaultValue={30}
-                                onChange={handleChange}
-                                inputProps={{
-                                    name: 'prioridad2',
-                                    id: 'uncontrolled-native',
-                                }}
-                                sx={'width:250px'}
-                            >
-                                <option value={'Sin determinar'}>Elegir</option>
-
-                                <option value={132}>Elaboración de mesa de dulces para eventos</option>
-                                <option value={133}>Maquillaje y peinado para eventos</option>
-                                <option value={134}>Diseño de lenceria femenina</option>
-                                <option value={135}>Textiles y accesorios para el verano</option>
-                                <option value={136}>Refacción integral para el hogar</option>
-
-                            </NativeSelect> */}
-                            <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                                <Typography variant="p" component="div" color="black">
-                                    <StyledParagraph>
-                                        ¿A que curso te queres inscribir?
-                                    </StyledParagraph>
-                                </Typography>
-                            </InputLabel>
-                            <Box sx={{ textAlign: 'left', marginLeft: "1em", marginRight: "1em", }}>
-                                <FormControlLabel
-                                    control={<Checkbox checked={options.option1} onChange={handleCheckboxChange('option1')} />}
-                                    label="Maquillaje"
-                                /><br />
-                                <FormControlLabel
-                                    control={<Checkbox checked={options.option2} onChange={handleCheckboxChange('option2')} />}
-                                    label="Peinado "
-                                /><br />
-                                <FormControlLabel
-                                    control={<Checkbox checked={options.option3} onChange={handleCheckboxChange('option3')} />}
-                                    label="Confección de trajes "
-                                /><br />
-                                <FormControlLabel
-                                    control={<Checkbox checked={options.option4} onChange={handleCheckboxChange('option4')} />}
-                                    label="Baile"
-                                /></Box><br />
-                        </Box>
-
+                        
                         <CardActions sx={{ justifyContent: 'center' }}>
-                            {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.tel2 && inscrip.direccion && inscrip.trabajo && inscrip.mail && inscrip.nivel_secundario ?
+                               {cargando ? <> <Progreso /> </> : <>
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.localidad && inscrip.direccion  ?
                                     <>
-                                        {inscrip.trabajo === 'Si' ? <>
-
-                                            {inscrip.tipo_empleo && inscrip.tipo_trabajo ? <>
-                                                {/*  Caso que sea trabajo si  y completo le tipo  */}
-
-                                                {inscrip.comparsa === 'Si' ? <>
-
-                                                    {inscrip.comparsa_cual ? <>
-                                                        {/*  Caso que sea hijos si y selecciono cuantos  */}
-
-
-                                                        {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                            <Dialogo formulario={inscrip}
-                                                                opciones={options} />
-                                                        </> : <>Telefono no valido</>}
-                                                    </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                                </> : <>
-                                                    {/*  Caso que sea hijos no */}
-
-                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
+                                        {  inscrip.tel.length > 9  ? <>
                                                         <Dialogo formulario={inscrip}
                                                             opciones={options} />
                                                     </> : <>Telefono no valido</>}
-                                                </>}
-
-
-                                            </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                        </> : <>
-                                            {/*  Caso que sea trabajo no */}
-                                            {inscrip.comparsa === 'Si' ? <>
-
-                                                {inscrip.comparsa_cual ? <>
-                                                    {/*  Caso que sea hijos si y selecciono cuantos  */}
-
-
-                                                    {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                        <Dialogo formulario={inscrip}
-                                                            opciones={options} />
-                                                    </> : <>Telefono no valido</>}
-                                                </> : <><Button variant='contained' disabled>Enviar Inscripcion</Button> </>}
-                                            </> : <>
-                                                {/*  Caso que sea hijos no */}
-
-                                                {inscrip.tel.length > 9 && inscrip.tel2.length > 9 ? <>
-                                                    <Dialogo formulario={inscrip}
-                                                        opciones={options} />
-                                                </> : <>Telefono no valido</>}
-                                            </>}</>}
                                     </>
                                     : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
                             </>}
