@@ -183,7 +183,7 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-         Inscribite acá para el operativo oftalmológico del barrio SUR el próximo jueves 05 de mayo ¡es completamente gratuito! Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
+         Inscribite acá para el operativo oftalmológico del barrio SUR el próximo jueves 05 de junio ¡es completamente gratuito! Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
 Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
         </StyledParagraph>
 
@@ -453,7 +453,7 @@ Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros 
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-         Inscribite acá para el operativo oftalmológico del barrio SUR el próximo jueves 05 de mayo ¡es completamente gratuito! Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
+         Inscribite acá para el operativo oftalmológico del barrio SUR el próximo jueves 05 de junio ¡es completamente gratuito! Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
 Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
         </StyledParagraph>
 
