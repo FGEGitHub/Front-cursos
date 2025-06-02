@@ -14,7 +14,6 @@ import {
     Link
   } from "@mui/material";
   import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
 //import 'antd/dist/antd.css'
 import servicioUsuario from '../services/usuarios'
 import Registro from "./Registro"
@@ -70,7 +69,7 @@ const Login = () => {
          case 1: navigate('/usuario/novedades')
         window.location.reload(true);
           break; 
-          case 2:navigate('/administracion/callcenter')
+          case 2:navigate('/administracion/inscripciones')
                 window.location.reload(true);
           break;
           case 3:navigate('/coordinadores/cursos')

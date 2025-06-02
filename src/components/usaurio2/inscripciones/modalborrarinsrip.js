@@ -117,7 +117,14 @@ export default function SelectTextFields(props) {
       autoComplete="off"
     >
        < Tooltip title="Borrar clase">
-       <Button onClick={handleClickOpen} color='error'>Borrar<DeleteIcon/></Button> 
+       <Button onClick={handleClickOpen} variant="contained" color='error'sx={{
+
+    fontSize: '0.65rem',
+    margin: '20px',
+    '&:hover': {
+      backgroundColor: '#5a6268' // gris más oscuro al pasar el mouse
+    }
+  }}>Borrar<DeleteIcon/></Button> 
      
     
       </Tooltip>

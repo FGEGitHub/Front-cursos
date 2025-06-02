@@ -60,18 +60,6 @@ const TablaNotificaciones = (props) => {
 
     }
 
-    const crearcursos = async () => {
-              
-       
-
-       alert('Boton sin funcionar aun... probablemente tampoco vaya a funcionar')
-      // const novedades_aux = await servicioInscripciones.crearcursos2daetapa()
-
-
-
-
-
-}
     
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (
@@ -173,8 +161,8 @@ const TablaNotificaciones = (props) => {
 
         },
         {
-            name: "tel2",
-            label: "tel2",
+            name: "detalle",
+            label: "Edicion",
 
         },
   
@@ -188,7 +176,7 @@ const TablaNotificaciones = (props) => {
         },
      
         {
-            name: "Cambiar Estado",
+            name: "Borrar",
             options: {
                 customBodyRenderLite: (dataIndex, rowIndex) =>
                     CutomButtonsRenderer(
@@ -202,24 +190,24 @@ const TablaNotificaciones = (props) => {
         }, 
         
 
-        {
-            name: "Observaciones",
-            options: {
-                customBodyRenderLite: (dataIndex, rowIndex) =>
-                    Observacioness(
-                        dataIndex,
-                        rowIndex,
-                       // overbookingData,
-                       // handleEditOpen
-                    )
-            }
-        
-        }, 
+       
     ];
    
-    const options = {
-        selectableRows: false, // Deshabilita los checkboxes
-      };
+const options = {
+  selectableRows: false,
+  textLabels: {
+    body: {
+      noMatch: "Ninguna inscripción encontrada",
+    },
+  },
+  search: true,              // Habilita la búsqueda
+  filter: true,              // Habilita los filtros
+  download: false,           // Oculta botón de descarga
+  print: false,              // Oculta botón de impresión
+  viewColumns: false,        // Oculta botón de columnas
+  selectableRowsHeader: false,
+};
+
 
 const exportarAExcel = () => {
   if (!inscriptos || inscriptos.length === 0) return;
@@ -229,7 +217,7 @@ const exportarAExcel = () => {
 
   // Crear el contenido CSV con separador punto y coma
   const filas = inscriptos.map(item =>
-    [item.dni, item.apellido, item.nombre, item.tel, item.tel2, item.fecha]
+    [item.dni, item.apellido, item.nombre, item.tel, item.detalle, item.fecha]
   );
 
   const csvContent = [
@@ -272,46 +260,25 @@ const exportarAExcel = () => {
                                                 }}
                                             >
                                               
-                            {vista ? <>
-                                <Button  onClick={() =>setVista(!vista)}> Ocultar resumen</Button>
-                                                <TableContainer >
-                                                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                                        <TableHead>
-                                                            <TableRow>
-                                                                <TableCell>Detalles segun prioridad 1 </TableCell>
-                                                                <TableCell>Detalles cantidad </TableCell>
-                                                                <TableCell>porcentaje </TableCell>
-                                                                <TableCell>Cantidad de cursos a crear </TableCell>
-
-
-
-                                                            </TableRow>
-                                                        </TableHead>
-                                                        <TableBody>
-                                                            {deudaExigible ? <>
-                                                            {deudaExigible.map((row) => (
-                                                                <TableRow
-                                                                    key={row.name}
-                                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                                                >
-
-                                                                    <TableCell align="left">{row.datoa}</TableCell>
-                                                                    <TableCell align="left">{(row.datob)}</TableCell>
-                                                                    <TableCell align="left">{(row.datoc)}%</TableCell>
-                                                                    <TableCell align="left">{row.datod} - {Math.round(row.datod)} cursos</TableCell>
-
-                                                                </TableRow>
-                                                            ))}</>:<><CargaDeTabla/></>}
-                                                        </TableBody>
-                                                    </Table>
-                                                </TableContainer>
-                                                </>:<>  <Button onClick={() =>setVista(!vista)}> Ver resumen inscripciones</Button></> }
+                      
                                             </Paper>
                 <div>
 
 
                     <>
-         <Button variant="contained" color="primary" onClick={exportarAExcel} style={{ margin: '20px' }}>
+   <Button
+  variant="contained"
+  onClick={exportarAExcel}
+  sx={{
+    backgroundColor: '#6c757d', // gris medio
+    color: 'white',             // texto blanco
+    fontSize: '0.65rem',
+    margin: '20px',
+    '&:hover': {
+      backgroundColor: '#5a6268' // gris más oscuro al pasar el mouse
+    }
+  }}
+>
   Descargar Excel
 </Button>
                         <MUIDataTable

@@ -8,9 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Categorias from '../../../components/usaurio2/TablaClasificacion'
 import Lista from '../../../components/usaurio2/inscripciones/inscriptas'
 import Mantenimiento from '../../../Assets/mantenimiento2.jpeg';
-import TabladeCriterios from '../../../components/usaurio2/inscripciones/TablaPrioridades'
-import Footer from '../../../components/footer'
-import { Paper } from '@mui/material';
+
  
 export default function Paginas() {
 
