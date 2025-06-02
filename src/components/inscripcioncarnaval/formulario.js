@@ -183,17 +183,8 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-          Hola! Somos de la Coalición Cívica ARI y junto a Pampa Visión te acercamos operativos oftalmológicos gratuitos con profesionales médicos, y la posibilidad de hacer tus anteojos a bajo costo.
-
-          Estamos visitando distintos barrios de la Capital y otras localidades de la provincia.
-
-          Los cupos son limitados, por lo que es importante que te inscribas si vas a poder asistir al que te quede más cerca.
-
-          Para pagar tus lentes, vas a poder elegir el método más conveniente para vos.
-
-          IMPORTANTE:
-          Destinado a personas de más de 10 años (niños, adolescentes y adultos).
-          Si estás embarazada, tenés que esperar tres meses después del nacimiento de tu bebé para poder hacerte el chequeo oftalmológico.
+         Inscribite acá para el operativo oftalmológico del barrio SUR el próximo jueves 05 de mayo ¡es completamente gratuito! Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
+Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
         </StyledParagraph>
 
         <StyledParagraph>
@@ -462,22 +453,13 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-          Hola! Somos de la Coalición Cívica ARI y junto a Pampa Visión te acercamos operativos oftalmológicos gratuitos con profesionales médicos, y la posibilidad de hacer tus anteojos a bajo costo.
-
-          Estamos visitando distintos barrios de la Capital y otras localidades de la provincia.
-
-          Los cupos son limitados, por lo que es importante que te inscribas si vas a poder asistir al que te quede más cerca.
-
-          Para pagar tus lentes, vas a poder elegir el método más conveniente para vos.
-
-          IMPORTANTE:
-          Destinado a personas de más de 10 años (niños, adolescentes y adultos).
-          Si estás embarazada, tenés que esperar tres meses después del nacimiento de tu bebé para poder hacerte el chequeo oftalmológico.
+         Inscribite acá para el operativo oftalmológico del barrio SUR el próximo jueves 05 de mayo ¡es completamente gratuito! Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
+Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
         </StyledParagraph>
 
         <StyledParagraph>
-          DÍA: JUEVES 05/06{"\n"}
-          HORARIO: 8:30 A 13:30 HS{"\n"}
+          DÍA: JUEVES 05/06 {"\n"}
+          HORARIO: 8:30 A 13:30 HS por orden de llegada{"\n"}
           BARRIO: SUR{"\n"}
           DIRECCIÓN: LAMADRID 1528 (LAMADRID Y GUTEMBERG)
         </StyledParagraph>
