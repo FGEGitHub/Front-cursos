@@ -111,7 +111,7 @@ const Estracto = () => {
 
     };
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
- 
+
     const islogo = {
         width: "40%",
         height: "40%",
@@ -181,17 +181,34 @@ const Estracto = () => {
                         </Box>
 
                         <Box sx={{ textAlign: 'center' }}>
-                            <Typography variant="h7" component="div" color="black">
-                                <StyledParagraph>
-                                    Desde la Coalición Cívica ARI te brindamos operativos oftalmológicos gratuitos en distintos puntos de la ciudad Capital y en otras localidades de la provincia, para que puedas acceder a una consulta con profesionales sin costo. Además, te ofrecemos la posibilidad de acceder a tus anteojos a través de una óptica a un costo bajo y distintas formas de pago. ¡Aprovechá y anotate al que te quede más cerca!
-                                </StyledParagraph>
-                            </Typography>
+                                 <Typography variant="body1" component="div" color="black">
+        <StyledParagraph>
+          Hola! Somos de la Coalición Cívica ARI y junto a Pampa Visión te acercamos operativos oftalmológicos gratuitos con profesionales médicos, y la posibilidad de hacer tus anteojos a bajo costo.
+
+          Estamos visitando distintos barrios de la Capital y otras localidades de la provincia.
+
+          Los cupos son limitados, por lo que es importante que te inscribas si vas a poder asistir al que te quede más cerca.
+
+          Para pagar tus lentes, vas a poder elegir el método más conveniente para vos.
+
+          IMPORTANTE:
+          Destinado a personas de más de 10 años (niños, adolescentes y adultos).
+          Si estás embarazada, tenés que esperar tres meses después del nacimiento de tu bebé para poder hacerte el chequeo oftalmológico.
+        </StyledParagraph>
+
+        <StyledParagraph>
+          DÍA: JUEVES 05/06{"\n"}
+          HORARIO: 8:30 A 13:30 HS{"\n"}
+          BARRIO: SUR{"\n"}
+          DIRECCIÓN: LAMADRID 1528 (LAMADRID Y GUTEMBERG)
+        </StyledParagraph>
+      </Typography>
 
                         </Box>
 
 
                         <Box sx={{ textAlign: 'center', marginLeft: "2em", marginRight: "2em", }}>
-                         
+
                             <TextField
                                 margin="dense"
                                 id="name"
@@ -204,7 +221,7 @@ const Estracto = () => {
                                 style={{ width: '250px' }}
 
                             />
-   <Typography variant="body2" color="textSecondary">
+                            <Typography variant="body2" color="textSecondary">
                                 Por favor, ingresa tu DNI sin puntos.
                             </Typography>
 
@@ -347,7 +364,7 @@ const Estracto = () => {
                                     {inscrip.apellido ? <></> : <>  <Typography variant="body2" color="textSecondary">
                                         Por favor, ingresa tu telefono
                                     </Typography></>}
-                           
+
                                     <TextField
 
 
@@ -389,7 +406,7 @@ const Estracto = () => {
                                 name="localidad"
                                 onChange={handleChange}
                                 fullWidth
-                               
+
                                 variant="outlined"
                             />
 
@@ -408,21 +425,21 @@ const Estracto = () => {
                                     shrink: true,
                                 }}
                             />
-                            
-                        
-                           
-                       
+
+
+
+
 
                         </Box>
 
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.localidad && inscrip.direccion  ?
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.localidad && inscrip.direccion ?
                                     <>
-                                        {  inscrip.tel.length > 9  ? <>
-                                                        <Dialogo formulario={inscrip}
-                                                            opciones={options} />
-                                                    </> : <>Telefono no valido</>}
+                                        {inscrip.tel.length > 9 ? <>
+                                            <Dialogo formulario={inscrip}
+                                                opciones={options} />
+                                        </> : <>Telefono no valido</>}
                                     </>
                                     : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
                             </>}
@@ -443,11 +460,28 @@ const Estracto = () => {
                         </Box>
 
                         <Box sx={{ textAlign: 'center' }}>
-                            <Typography variant="p" component="div" color="black">
-                                <StyledParagraph>
-                                    Desde la Coalición Cívica ARI te invitamos a participar de los talleres abiertos y gratuitos de baile, peinado, maquillaje y armado de trajes de carnaval. Inscrribite acá hasta el 1 de noviembre de 2023
-                                </StyledParagraph>
-                            </Typography>
+                                                        <Typography variant="body1" component="div" color="black">
+        <StyledParagraph>
+          Hola! Somos de la Coalición Cívica ARI y junto a Pampa Visión te acercamos operativos oftalmológicos gratuitos con profesionales médicos, y la posibilidad de hacer tus anteojos a bajo costo.
+
+          Estamos visitando distintos barrios de la Capital y otras localidades de la provincia.
+
+          Los cupos son limitados, por lo que es importante que te inscribas si vas a poder asistir al que te quede más cerca.
+
+          Para pagar tus lentes, vas a poder elegir el método más conveniente para vos.
+
+          IMPORTANTE:
+          Destinado a personas de más de 10 años (niños, adolescentes y adultos).
+          Si estás embarazada, tenés que esperar tres meses después del nacimiento de tu bebé para poder hacerte el chequeo oftalmológico.
+        </StyledParagraph>
+
+        <StyledParagraph>
+          DÍA: JUEVES 05/06{"\n"}
+          HORARIO: 8:30 A 13:30 HS{"\n"}
+          BARRIO: SUR{"\n"}
+          DIRECCIÓN: LAMADRID 1528 (LAMADRID Y GUTEMBERG)
+        </StyledParagraph>
+      </Typography>
                         </Box>
 
 
@@ -642,7 +676,7 @@ const Estracto = () => {
                                 </>}
                             </>}
 
-                           
+
                             <TextField
                                 style={{ width: '250px' }}
                                 margin="dense"
@@ -651,7 +685,7 @@ const Estracto = () => {
                                 name="localidad"
                                 onChange={handleChange}
                                 fullWidth
-                               
+
                                 variant="outlined"
                             />
 
@@ -670,19 +704,19 @@ const Estracto = () => {
                                     shrink: true,
                                 }}
                             />
-                            
-                           
+
+
                         </Box>
 
-                        
+
                         <CardActions sx={{ justifyContent: 'center' }}>
-                               {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.localidad && inscrip.direccion  ?
+                            {cargando ? <> <Progreso /> </> : <>
+                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.localidad && inscrip.direccion ?
                                     <>
-                                        {  inscrip.tel.length > 9  ? <>
-                                                        <Dialogo formulario={inscrip}
-                                                            opciones={options} />
-                                                    </> : <>Telefono no valido</>}
+                                        {inscrip.tel.length > 9 ? <>
+                                            <Dialogo formulario={inscrip}
+                                                opciones={options} />
+                                        </> : <>Telefono no valido</>}
                                     </>
                                     : <> <Button variant='contained' disabled>Enviar Inscripcion</Button> <br /><p>Completar todos los datos</p></>}
                             </>}
