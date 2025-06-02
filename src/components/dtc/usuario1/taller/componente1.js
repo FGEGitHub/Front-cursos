@@ -16,7 +16,7 @@ import  { useEffect, useState } from "react";
 import Asistencia from  '../../talleres/tablasistenciaparaadmin'
 import InputLabel from '@mui/material/InputLabel';
 import NativeSelect from '@mui/material/NativeSelect';
-
+import Tallerestadistica from '../../talleres/estadisticastaller'
 //import Casasa from './asist'
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -120,7 +120,7 @@ const traer = async () => {
                                   </>:<>Cargando</>}
                             </NativeSelect>
 
-
+<Tallerestadistica/>
 
 {/*     {currentDate ? <>   <Asistencia id={currentDate}
                                     idt={id}/></>:<></>} */}

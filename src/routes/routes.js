@@ -163,6 +163,9 @@ import Dtcsolemapas from '../pages/dtc/sole/mapas';
 import Stcinventairo from '../pages/dtc/inventario';
 import Stcinventairopretacion from '../pages/dtc/inventarioprestacion';
 import DTCTallerPrinc from '../pages/dtc/talleresprincipal';
+import DTCTallerEstad from '../pages/dtc/tallerestadisticas';
+
+
 
 import DTCCocinaTurnos from '../pages/dtc/cocinamas/turnos';
 import STCcocinausuarios from '../pages/dtc/cocinamas/usuarios';
@@ -415,7 +418,9 @@ const Rutas = [
 		{ path: '/dtc/gimnasioasistencia', element: <DTCaGimnasioAsis/> },
 		{ path: '/dtc/alumnosdeltaller', element: <DTCAlumnosdelcurso/> },
 		{ path: '/dtc/tallerprincipal', element: <DTCTallerPrinc/> },
-		
+		{ path: '/dtc/tallerestadisticas', element: <DTCTallerEstad/> },
+
+
 		{ path: '/dtc/tallerasistencia/:id', element: <DTCTallerAsis/> },
 		{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest/> },
 		{ path: '/dtc/cargaetapascadia', element: <DTCcargaetapascadia/> },

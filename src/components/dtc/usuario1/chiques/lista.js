@@ -211,8 +211,8 @@ const TablaNotificaciones = (props) => {
       return (
           <div onClick={handleNavigation}>
               <Tooltip title="Ver">
-                  <Button onClick={handleNavigation} variant="contained" color="secondary">
-                      Ver
+                  <Button onClick={handleNavigation} variant="outlined" sx={{ color: "#5d4037", borderColor: "#5d4037", fontSize: "0.65rem" }} >
+                     <b>Ver</b> 
                   </Button>
               </Tooltip>
           </div>
