@@ -166,7 +166,11 @@ const TablaNotificaciones = (props) => {
 
         },
   
-   
+       {
+            name: "barrio",
+            label: "barrio",
+
+        },
         
   
         {
@@ -213,11 +217,11 @@ const exportarAExcel = () => {
   if (!inscriptos || inscriptos.length === 0) return;
 
   // Definir columnas que queremos exportar
-  const encabezados = ['DNI', 'Apellido', 'Nombre', 'Tel', 'Tel2', 'Fecha'];
+  const encabezados = ['DNI', 'Apellido', 'Nombre', 'Tel', 'Tel2',  'barrop','Fecha'];
 
   // Crear el contenido CSV con separador punto y coma
   const filas = inscriptos.map(item =>
-    [item.dni, item.apellido, item.nombre, item.tel, item.detalle, item.fecha]
+    [item.dni, item.apellido, item.nombre, item.tel, item.detalle,barrio, item.fecha]
   );
 
   const csvContent = [
