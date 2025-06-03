@@ -221,7 +221,7 @@ const exportarAExcel = () => {
 
   // Crear el contenido CSV con separador punto y coma
   const filas = inscriptos.map(item =>
-    [item.dni, item.apellido, item.nombre, item.tel, item.detalle,barrio, item.fecha]
+    [item.dni, item.apellido, item.nombre, item.tel, item.detalle,item.barrio, item.fecha]
   );
 
   const csvContent = [
