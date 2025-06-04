@@ -183,15 +183,20 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-         Inscribite acá para el operativo oftalmológico del barrio SUR el próximo jueves 05 de junio ¡es completamente gratuito! Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
+Inscribite acá para el operativo oftalmológico del barrio SANTA TERESITA el próximo LUNES 09 de junio ¡es completamente gratuito!
+
+Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
+
 Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
+
+Lunes 09 de junio de 8.30hs a 13.30hs por orden de llegada
         </StyledParagraph>
 
         <StyledParagraph>
-          DÍA: JUEVES 05/06{"\n"}
+          DÍA: LUNES 09/06{"\n"}
           HORARIO: 8:30 A 13:30 HS{"\n"}
-          BARRIO: SUR{"\n"}
-          DIRECCIÓN: LAMADRID 1528 (LAMADRID Y GUTEMBERG)
+          BARRIO: SANTA TERESITA{"\n"}
+          
         </StyledParagraph>
       </Typography>
 
@@ -452,19 +457,23 @@ Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros 
 
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
-        <StyledParagraph>
-         Inscribite acá para el operativo oftalmológico del barrio SUR el próximo jueves 05 de junio ¡es completamente gratuito! Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
+ <StyledParagraph>
+Inscribite acá para el operativo oftalmológico del barrio SANTA TERESITA el próximo LUNES 09 de junio ¡es completamente gratuito!
+
+Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
+
 Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
+
+Lunes 09 de junio de 8.30hs a 13.30hs por orden de llegada
         </StyledParagraph>
 
         <StyledParagraph>
-          DÍA: JUEVES 05/06 {"\n"}
-          HORARIO: 8:30 A 13:30 HS por orden de llegada{"\n"}
-          BARRIO: SUR{"\n"}
-          DIRECCIÓN: LAMADRID 1528 (LAMADRID Y GUTEMBERG)
+          DÍA: LUNES 09/06{"\n"}
+          HORARIO: 8:30 A 13:30 HS{"\n"}
+          BARRIO: SANTA TERESITA{"\n"}
+          
         </StyledParagraph>
-      </Typography>
-                        </Box>
+      </Typography>  </Box>
 
 
                         <Box sx={{ textAlign: 'left', marginLeft: "1em", marginRight: "1em", }}>
