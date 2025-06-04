@@ -183,19 +183,17 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-Inscribite acá para el operativo oftalmológico del barrio SANTA TERESITA el próximo LUNES 09 de junio ¡es completamente gratuito!
+Inscribite acá para el operativo oftalmológico del barrio QUINTANA el próximo MARTES 10 de junio ¡es completamente gratuito!
 
 Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
 
-Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
-
-Lunes 09 de junio de 8.30hs a 13.30hs por orden de llegada
+Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
         </StyledParagraph>
 
-        <StyledParagraph>
-          DÍA: LUNES 09/06{"\n"}
+           <StyledParagraph>
+          DÍA: MARTES 10 de junio{"\n"}
           HORARIO: 8:30 A 13:30 HS{"\n"}
-          BARRIO: SANTA TERESITA{"\n"}
+          BARRIO: Quintana{"\n"}
           
         </StyledParagraph>
       </Typography>
@@ -458,19 +456,17 @@ Lunes 09 de junio de 8.30hs a 13.30hs por orden de llegada
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
  <StyledParagraph>
-Inscribite acá para el operativo oftalmológico del barrio SANTA TERESITA el próximo LUNES 09 de junio ¡es completamente gratuito!
+Inscribite acá para el operativo oftalmológico del barrio QUINTANA el próximo MARTES 10 de junio ¡es completamente gratuito!
 
 Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
 
-Requisitos: Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
-
-Lunes 09 de junio de 8.30hs a 13.30hs por orden de llegada
+Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
         </StyledParagraph>
 
         <StyledParagraph>
-          DÍA: LUNES 09/06{"\n"}
+          DÍA: MARTES 10 de junio{"\n"}
           HORARIO: 8:30 A 13:30 HS{"\n"}
-          BARRIO: SANTA TERESITA{"\n"}
+          BARRIO: Quintana{"\n"}
           
         </StyledParagraph>
       </Typography>  </Box>
