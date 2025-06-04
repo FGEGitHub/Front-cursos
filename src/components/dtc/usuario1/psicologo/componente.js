@@ -58,7 +58,7 @@ const sinClasificar = asistencias.filter(a => a.presente !== true && a.presente 
             asistencias.map((asistencia, index) => (
               <tr key={index} className="border-b">
                 <td className="border px-4 py-2">{asistencia.fecha}</td>
-                <td className="border px-4 py-2">{asistencia.nombre}</td>
+                <td className="border px-4 py-2">{asistencia.nombre} {asistencia.apellido}</td>
                  <td className="border px-4 py-2">{asistencia.detalle} hs</td>
                 <td className="border px-4 py-2">{asistencia.presente ? 'Presente' : 'Ausente'}</td>
               </tr>
