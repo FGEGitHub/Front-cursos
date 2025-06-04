@@ -7,7 +7,7 @@ import Barrios from './barrios';
 import Circuitos from './circuitos';
 import Escuelas from './escuelas';
 import Recorridos from './recorridos';
-
+//import Satelite from './satelite';
 import * as React from 'react';
 import MuiAlert from '@mui/material/Alert';
 import DialogActions from '@mui/material/DialogActions';
@@ -152,9 +152,10 @@ const Arg = () => {
               transform: `translate(${translate.x}px, ${translate.y}px) scale(${scale})`,
             }}
           >
+            {mostrarEscuelas && <Escuelas handleOpenDialog={handleOpenDialog} lotes={lotes} />}
         {mostrarBarrios && <Barrios handleOpenDialog={handleOpenDialog} lotes={lotes} />}
 {mostrarCircuitos && <Circuitos handleOpenDialog={handleOpenDialog} lotes={lotes} />}
-{mostrarEscuelas && <Escuelas handleOpenDialog={handleOpenDialog} lotes={lotes} />}
+
 {mostrarRecorridos && <Recorridos handleOpenDialog={handleOpenDialog} lotes={lotes} />}
           </div>
         </div>

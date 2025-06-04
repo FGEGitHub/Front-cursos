@@ -19,10 +19,7 @@ export default function RecorridosSVG({ handleOpenDialog, lotes }) {
   </g>
 
           
-          {[1].map(() => (
-            <Tooltip title={'Sin datos'}>
-            </Tooltip>
-          ))}
+      
         
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
@@ -39,10 +36,7 @@ export default function RecorridosSVG({ handleOpenDialog, lotes }) {
   </g>
 
           
-          {[2].map(() => (
-            <Tooltip title={'Sin datos'}>
-            </Tooltip>
-          ))}
+        
         
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
   <g fill-opacity="0" transform="matrix(0.999751,0,0,0.999751,0,0)" font-weight="400" font-family="MS Shell Dlg 2" fill="#000000" stroke="none" font-size="32.5" font-style="normal">
@@ -53,6 +47,7 @@ export default function RecorridosSVG({ handleOpenDialog, lotes }) {
 
         {[2].map((tooltipValue) => {
           const objetoEncontrado = lotes.find(item => item.mapa1 == tooltipValue);
+          
           return (
             <Tooltip title={objetoEncontrado ? "Manzana "+objetoEncontrado.manzana+" Lote "+objetoEncontrado.lote : 'Sin datos'}>
             <path onClick={() => handleOpenDialog(2)}  vector-effect="none" d="M619.997,1088.98 L649.345,1092.64 L742.156,1104.16 L754.024,1105.64 L763.755,1028.49 L624.327,1015.46 L623.295,1032.98 L622.227,1051.14 L622.227,1051.17 L622.217,1051.31 L622.208,1051.53 L622.199,1051.56 L619.997,1088.98" fill-rule="evenodd"/></Tooltip>)})}
@@ -179,10 +174,7 @@ export default function RecorridosSVG({ handleOpenDialog, lotes }) {
   </g>
 
           
-          {[18].map(() => (
-            <Tooltip title={'Sin datos'}>
-            </Tooltip>
-          ))}
+          
         
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>

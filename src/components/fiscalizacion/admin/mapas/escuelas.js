@@ -18,10 +18,7 @@ export default function RecorridosSVG({ handleOpenDialog, lotes }) {
             <path onClick={() => handleOpenDialog(0)}  vector-effect="none" d="M-2,-2 L3510,-2 L3510,2483 L-2,2483 L-2,-2" fill-rule="evenodd"/></Tooltip>)})}
   </g>
 
-          {[1].map(() => (
-            <Tooltip title={'Sin datos'}>
-            </Tooltip>
-          ))}
+        
         
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
@@ -37,10 +34,7 @@ export default function RecorridosSVG({ handleOpenDialog, lotes }) {
             <path onClick={() => handleOpenDialog(1)}  vector-effect="none" d="M0,0 L297,0 L297,210 L0,210 L0,0" fill-rule="evenodd"/></Tooltip>)})}
   </g>
 
-          {[2].map(() => (
-            <Tooltip title={'Sin datos'}>
-            </Tooltip>
-          ))}
+        
         
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
   <g fill-opacity="0" transform="matrix(0.999751,0,0,0.999751,0,0)" font-weight="400" font-family="MS Shell Dlg 2" fill="#000000" stroke="none" font-size="32.5" font-style="normal">
@@ -728,10 +722,7 @@ export default function RecorridosSVG({ handleOpenDialog, lotes }) {
             <path onClick={() => handleOpenDialog(86)}  vector-effect="none" d="M819.302,1086.55 L842.924,1086.55 L842.924,1110.17 L819.302,1110.17 L819.302,1086.55" fill-rule="evenodd"/></Tooltip>)})}
   </g>
 
-          {[87].map(() => (
-            <Tooltip title={'Sin datos'}>
-            </Tooltip>
-          ))}
+          
         
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
   <g stroke-width="1" stroke-opacity="1" transform="matrix(11.8081,0,0,11.8081,0,0)" stroke-linecap="square" font-weight="400" font-family="MS Shell Dlg 2" fill="none" stroke="#000000" font-size="32.5" stroke-linejoin="bevel" font-style="normal"/>
