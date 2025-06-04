@@ -83,6 +83,16 @@ export default function MenuIzq2 ({children}) {
         icon: <WhereToVoteTwoToneIcon  />, 
         path: '/dtc/psicologa/turnos' 
       }, */
+          { 
+          text: 'personas', 
+          icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/turnos/personas' 
+        },
+            { 
+          text: 'psicologos', 
+          icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/turnos/psicologos' 
+        },
         { 
           text: 'turnos', 
           icon: <AccountBoxTwoToneIcon />, 

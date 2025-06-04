@@ -321,7 +321,7 @@ const TablaNotificaciones = (props) => {
     return (
         <>
 
-{chicos[dataIndex]['nombre'] ? <>{chicos[dataIndex]['nombre']}{chicos[dataIndex]['agendadopor'] ? <>   cargado por {chicos[dataIndex]['agendadopor']}</>:<></>} el dia  {chicos[dataIndex]['hora']} </> :<>Disponible</>}
+{chicos[dataIndex]['nombre'] ? <>{chicos[dataIndex]['nombre']} {chicos[dataIndex]['apellido']} <br/>agendado {chicos[dataIndex]['agendadopor'] ? <>   cargado por {chicos[dataIndex]['agendadopor']}</>:<></>} el dia  {chicos[dataIndex]['hora']} </> :<>Disponible</>}
 
         </>
     );

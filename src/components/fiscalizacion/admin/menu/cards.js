@@ -16,7 +16,7 @@ import CardDiez from './cards/CardDiez';
 import { useState, useEffect } from "react";
 import servicioInscripciones from '../../../../services/fiscalizacion'
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === 'dark' ? '#F5F7FA' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
@@ -39,11 +39,7 @@ useEffect(() => {
   <>
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Item>
-            <CardTres />
-          </Item>
-        </Grid>
+     
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <Item>
             <CardCuatro />
@@ -92,6 +88,8 @@ useEffect(() => {
         
       </Grid>
     </Box>
+          <iframe src="https://www.google.com/maps/d/embed?mid=1FwqAvnfkd7dO_22wfUZFpVuoI8ANlgM&ehbc=2E312F" width="640" height="480"></iframe>
+    
   </>
   );
 }

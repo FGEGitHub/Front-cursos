@@ -1,0 +1,141 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+
+#mapa {
+  width: 2500px; /* Ajusta el ancho según tus necesidades */
+  height: 1500px; /* Ajusta la altura según tus necesidades */
+/*    border: 1px solid #ccc;Bordes opcionales para resaltar el área del mapa */
+  /*  position: relative;Establece la posición relativa para que los elementos internos se posicionen correctamente */
+}
+
+#mapa img {
+  width: 100%; /* Hace que la imagen SVG ocupe el 100% del ancho del contenedor */
+  height: 100%; /* Hace que la imagen SVG ocupe el 100% de la altura del contenedor */
+  display: block; /* Elimina cualquier espacio adicional por debajo de la imagen */
+}
+
+
+
+.mi-path:hover {
+  fill: grey !important; /* Forzamos que se mantenga gris en el hover */
+  fill-opacity: 1 !important; /* Aseguramos que la opacidad sea 1 en hover */
+  cursor: pointer;
+}
+
+.App {
+  font-family: 'Human Nature - Demo', sans-serif;
+  text-align: center;
+}
+
+.vertical-timeline::before {
+  /* this is the vertical line */
+  background: black !important;
+}
+
+.empty {
+  height: 600px;
+  border: 1px solid red;
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.App {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+
+.vertical-timeline-element {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .vertical-timeline-element-content {
+      text-align: left;
+  }
+  
+  .vertical-timeline-element-date {
+      display: none;
+  }
+
+  .content {
+      padding: 10px;
+  }
+}
+.svgTextpinares {
+  fill: #fff; /* Relleno blanco */
+  stroke: #fff; /* Contorno blanco */
+  fill-opacity: 1; /* Opacidad sólida */
+  /* stroke-opacity: 1; Opacidad del contorno sólida */
+  font-size: 110px;
+  text-anchor: middle;
+  font-family: 'HumanNature', sans-serif;
+  font-weight: normal; /* Aseguramos que no esté en negrita */
+}
+
+.tituloStyle2 {
+  color: #2a6e6e;
+  font-family: 'HumanNature', sans-serif; 
+  font-size: 46px;
+  margin: 10px 0;
+  text-align: center;
+}
+.cardTitletarjeta1 {
+  font-size: 45px;
+  font-weight: bold;
+  color: #226d6f; /* Color verde del título */
+  margin-bottom: 15px;
+  font-family: 'Christian Sunday'; /* Asegúrate de que la fuente esté disponible */
+}
+.cardTitletarjeta2 {
+  font-size: 55px;
+  font-weight: bold;
+  color: #226d6f; /* Color verde del título */
+  margin-bottom: 15px;
+  font-family: 'HumanNature', sans-serif; /* Asegúrate de que la fuente esté disponible */
+  line-height: 1.2; /* Ajusta el espacio vertical si es necesario */
+  transform: scaleY(1.2); /* Estira la altura del texto */
+}
+

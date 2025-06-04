@@ -100,7 +100,7 @@ import Movilidad from '../pages/fiscalizacion/usuariomovilidad/escuelas'
 import Escru from '../pages/fiscalizacion/escrutinio/index'
 import Consultas from '../pages/fiscalizacion/Adminmobile/menu'
 import Circuitos from '../pages/fiscalizacion/Admin/circuitos'
-
+import Fiscamapacarga from '../pages/fiscalizacion/mapas/mapacarga'
 
 import Inscripcionesesme from '../pages/inscripciones'
 import Inscripcionesesmeprueba from '../pages/inscripcionespueba/index.js'
@@ -142,6 +142,13 @@ import DtcCocinastock from '../pages/dtc/cocinastock';
 import DtcInscripciones from '../pages/dtc/nivel1/inscripciones';
 import DtcInventario from '../pages/dtc/nivel1/inventario';
 import Dtcusuario1Psicologo from '../pages/dtc/nivel1/psicologos';
+
+import Dtcturnospsicologos from '../pages/dtc/turnospsicologos';
+import Dtcturnospsicologo from '../pages/dtc/turnospsicologo';
+import Dtcturnospersonas from '../pages/dtc/turnospersonas';
+import Dtcturnospersona from '../pages/dtc/turnopersona';
+
+
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
 import DTCactividadescarga from '../pages/dtc/cargaactividades';
@@ -227,247 +234,254 @@ import DTCmerienda from '../pages/dtc/merienda'
 
 
 const Rutas = [
-	 <Navbar/> ,
+	<Navbar />,
 
-	
 
-	
+
+
 	/*{	path: '/',	element: <NotFound />
 		}, */
-		{ path: '/', element: <Logindtc /> },
-		{ path: '/loginn', element: <Login /> },
-		{ path: '/login', element: <Logindtc /> },
-		{ path: '/deslogin', element: <Deslogin /> },
-
-
-		
-		
-		{ path: '/emprendedoras/login', element: <LogiEmprendedoras /> },
-		{ path: '/emprendedoras', element: <LogiEmprendedoras /> },
-
-		
-		{ path: '/subirexcel', element: <CargarExcel /> },
-		
-		{ path: '/usuario/novedades', element: <Novedades1 /> },
-		{ path: '/usuario/cursos', element: <Menu1 /> },
-		{ path: '/usuario/perfil', element: <Perfil /> },
-		{ path: '/usuario1/movimientos', element: <Movimientos/> },
-		{ path: '/usuario1/productos', element: <Productos/> },
-		{ path: '/usuario1/stock', element: <Stockesme/> },
-		{ path: '/usuario1/caja', element: <Cajaesme/> },
-		{ path: '/usuario1/minegocio', element: <Minegocio/> },
-		{ path: '/usuario1/informes', element: <Informesesme/> },
-
-
-		{ path: '/administracion/cursos', element: <Menu2 /> },
-		{ path: '/administracion/perfil', element: <Perfil2 /> },
-		{ path: '/administracion/detallecurso/:id', element: <Detallecurso /> },
-		{ path: '/administracion/asistencia/:id', element: <Asistencia /> },
-		{ path: '/administracion/personas', element: <Personas /> },
-		{ path: '/administracion/detallepersona/:id', element: <DetallePersonas /> },
-		{ path: '/administracion/inscripciones', element: <Inscripciones /> },
-		{ path: '/administracion/inscripciones/curso/:id', element: <InscripcionCurso /> },
-		{ path: '/administracion/usuarios', element: <Usuarios /> },
-		{ path: '/administracion/cargarinscripciones', element: <Cargadeinscrip /> },
-		{ path: '/administracion/turno/:id', element: <Turnoadmin /> },
-		{ path: '/administracion/clase/:id', element: <Claseadmin /> },
-		{ path: '/administracion/turnos', element: <TurnosAdmin /> },
-		{ path: '/administracion/sistemas', element: <Sistemas /> },
-		{ path: '/administracion/cursadocompleto', element: <Cursadocompleto /> },
-		{ path: '/administracion/alumnosdelturno/:id', element: <Alumnosdelturno2 /> },
-		{ path: '/administracion/curso/:id', element: <Curso2 /> },
-		{ path: '/administracion/estadoalumnas/:id', element: <Alumnosdelturno2 /> },
-		{ path: '/administracion/avancedelcurso/:id', element: <Avancedelcurso /> },
-		{ path: '/administracion/contacto', element: <Contacto /> },
-		{ path: '/administracion/egresadxs', element: <Egresadas /> },
-		{ path: '/administracion/consultasmobile', element: <Consultasinsc /> },
-		{ path: '/administracion/preinscriptas', element: <Preinscriptas /> },
-		{ path: '/administracion/callcenter', element: <Callcenter /> },
-		{ path: '/administracion/call/:id', element: <Call2 /> },
-		{ path: '/administracion/inscripcionescarnavales', element: <Inscripcionescarna /> },
-		{ path: '/administracion/llamadoscarnaval', element: <Llamadoscarnaval /> },
-		{ path: '/administracion/carnavalcall/:id', element: <Callcarnaval /> },
-		{ path: '/administracion/agregar', element: <Agreagremprendedora /> },
-		
-
-		{ path: '/coordinadores/novedades', element: <Novedades3 /> },
-		{ path: '/coordinadores/cursos', element: <Clases3 /> },
-		{ path: '/coordinadores/tareas', element: <Tareas3 /> },
-		{ path: '/coordinadores/curso/:id', element: <Curso3 /> },
-		{ path: '/coordinadores/turno/:id', element: <Turno3 /> },
-		{ path: '/coordinadores/alumnosdelturno/:id', element: <Alumnosdelturno3 /> },
-		{ path: '/coordinadores/estadoalumnas/:id', element: <Estadoalumnas3 /> },
-		{ path: '/coordinadores/contacto', element: <Contacto3 /> },
-		{ path: '/coordinadores/clase/:id', element: <Clase3 /> },
-		{ path: '/coordinadores/justificaciones', element: <Justificacion /> },
-		{ path: '/coordinadores/alertas', element: <Alertas /> },
-		
-
-
-		{ path: '/encargados/cursos', element: <Clases4 /> },
-		{ path: '/encargados/curso/:id', element: <Curso4 /> },
-		{ path: '/encargados/turno/:id', element: <Turno4 /> },
-		{ path: '/encargados/alumnosdelturno/:id', element: <Alumnosdelturno /> },
-		{ path: '/encargados/clase/:id', element: <Clase4 /> },
-		{ path: '/encargados/estadoalumnas/:id', element: <Estadoalumnas /> },
-		{ path: '/encargados/persona/:id', element: <DetallePersonas /> },
-		{ path: '/encargados/justificaciones', element: <JustificacionEncargados /> },
-		{ path: '/inscripciones', element: <Inscripcionesesme /> },
-		{ path: '/inscripcionesprueba', element: <Inscripcionesesmeprueba /> },
-
-		{ path: '/inscripcionescarnavales', element: <Inscripcionescarnaval /> },
-		{ path: '/prueba', element: <Prueba /> },
-
-		
-		{ path: '/fiscalizacion/login', element: <Loginfis /> },
-		{ path: '/fiscalizacion/administracion/menu', element: <Menuadmin /> },
-		{ path: '/fiscalizacion/administracion/cargar', element: <CargarFisca /> },
-		{ path: '/fiscalizacion/administracion/inscripciones', element: <Fiscainscripc /> },
-		{ path: '/fiscalizacion/administracion/mesas', element: <Mesasfisc /> },
-		{ path: '/fiscalizacion/administracion/subirescuelas', element: <Subiresc /> },
-	{ path: '/fiscalizacion/inscripcion', element: <InscripcionFisca /> }, 
-		{ path: '/fiscalizacion/usuarios', element: <Usersfisca /> },
-		{ path: '/fiscalizacion/alia', element: <Aliadoscarga /> },
-		{ path: '/fiscalizacion/administracion/escuelas', element: <EscuelasAdmin /> },
-		{ path: '/fiscalizacion/inscripcionadmin', element: <Inscripciondearmin /> },
-		{ path: '/fiscalizacion/administracion/personas', element: <Personas_fisca /> },
-		{ path: '/fiscalizacion/encargados/carga', element: <EncargadosCarga /> },
-		{ path: '/fiscalizacion/administracion/encargados', element: <AdminEncargados /> },
-		{ path: '/fiscalizacion/administracion/encargado/:id', element: <AdminEncargado /> },
-		{ path: '/fiscalizacion/persona/:id', element: <Personafisca /> },
-		{ path: '/fiscalizacion/administracion/aliados', element: <Aliadosfisca /> },
-		{ path: '/fiscalizacion/encargados/personas', element: <PersonasEncargados /> },
-		{ path: '/fiscalizacion/encargados/persona/:id', element: <Personaenc/> },
-		{ path: '/fiscalizacion/usuarioescuela/personas', element: <UsuarioescTabla/> },
-		{ path: '/fiscalizacion/usuarioescuela/persona/:id', element: <Escuelapersona/> },
-		{ path: '/fiscalizacion/administracion/suplentes', element: <Suplentes/> },
-		{ path: '/fiscalizacion/suplentes/asignados', element: <SuplentesPAgona/> },
-		{ path: '/fiscalizacion/consultas', element: <Consultas/> },
-		{ path: '/fiscalizacion/movilidad/escuelas', element: <Movilidad/> },
-		{ path: '/fiscalizacion/escrutinio', element: <Escru/> },
-		{ path: '/fiscalizacion/administracion/circuitos', element: <Circuitos/> },
-
-
-		{ path: '/vendedora/menu', element: <Vendedoramenu/> },
-		{ path: '/ventascarnaval', element: <Menutodoslosprod/> },
-		{ path: '/producto/:id', element: <Ventasproducto/> },
-		
-
-		{ path: '/llamados/todos', element: <Llamadas/> },
-		
+	{ path: '/', element: <Logindtc /> },
+	{ path: '/loginn', element: <Login /> },
+	{ path: '/login', element: <Logindtc /> },
+	{ path: '/deslogin', element: <Deslogin /> },
 
 
 
 
-		{ path: '/dtc/login', element: <Logindtc/> },
-		{ path: '/dtc/usuario1/menu', element: <DtcMenu/> },
-		{ path: '/dtc/usuario1/usuarios', element: <DetUsuarios/> },
-		{ path: '/dtc/usuario1/chiques', element: <DtcMedtchiques/> },
-		{ path: '/dtc/usuario1/personal', element: <DtcPersonal/> },
-		{ path: '/dtc/usuario1/usuario/:id', element: <Dtcusuario/> },
-		{ path: '/dtc/usuario1/talleres', element: <Dtctalleres/> },
-		{ path: '/dtc/usuario1/taller/:id', element: <Dtctaller/> },
-		{ path: '/dtc/usuario1/personaspsiq', element: <Dtcpersonal_psiq/> },
-		{ path: '/dtc/usuario1/personapsiq/:id', element: <Dtcpersonapsiq/> },
-		{ path: '/dtc/turnos/lista', element: <Dtcturnos/> },
-		{ path: '/dtc/usuario1/turnos', element: <Dtcturnosadmin/> },
-		{ path: '/dtc/usuario1/cumples', element: <DTCcumples/> },
-		{ path: '/dtc/usuario1/asistenciassoc', element: <DtcAsisenciasoc/> },
-		{ path: '/dtc/usuario1/inscripciones', element: <DtcInscripciones/> },
-		{ path: '/dtc/usuario1/psicologos', element: <Dtcusuario1Psicologo/> },
-		{ path: '/dtc/usuario1/psicologo/:id', element: <STCusuairo1psicologo/> },
-
-		{ path: '/usuario1/costosfijos', element: <Cstosfijos/> },
-
-		
-		
-		
-		{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic/> },
-		{ path: '/dtc/psicologa/informes', element: <Dtcpsiclogaacti/> },
-		{ path: '/dtc/psicologa/usuarios', element: <Dtcpsiclogausuarios/> },
-		{ path: '/dtc/psicologa/usuario/:id', element: <Dtcpsiclogausuario/> },
-		
-
-		{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio/> },
-		{ path: '/dtc/sole/cosas', element: <Dtcsolecosas/> },
-		{ path: '/dtc/sole/mapa', element: <Dtcsolemapas/> },
-		{ path: '/dtc/sole/informes', element: <Dtcsoleasitenciasco/> },
-		{ path: '/dtc/sole/intervenciones', element: <Dtcsoleinicio/> },
-		
-
-		{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia/> },
-		{ path: '/dtc/verfoto/:id', element: <DTCverfoto/> },
-		{ path: '/dtc/cocina', element: <Dtccocina/> },
-		{ path: '/dtc/cocinaasis', element: <DtccocinaAsis/> },
-		{ path: '/dtc/cocinastock', element: <DtcCocinastock/> },
-		{ path: '/dtc/cocinapacientes', element: <DTCcocinpacientes/> },
-		{ path: '/dtc/cocina/turnos', element: <DTCCocinaTurnos/> },
-		{ path: '/dtc/cocina/usuarios', element: <STCcocinausuarios/> },
-		{ path: '/dtc/cocina/usuario/:id', element: <DTCCocinausuario/> },
-		{ path: '/dtc/cocina/inscripciones', element: <DTCCocinainscripciones/> },
-		
-		{ path: '/dtc/usuario2/raciones', element: <Dtcraciones/> },
-		{ path: '/dtc/talleresver', element: <DTCTAlleresver/> },
-
-		{ path: '/dtc/actividades', element: <DTCactividadescarga/> },
-		{ path: '/dtc/presentes', element: <DTCpresentes/> },
-	
-		{ path: '/dtc/cargaetapas', element: <DTCetapas/> },
-		{ path: '/dtc/tallerclases', element: <DTCTallerclases/> },
-		{ path: '/dtc/gimnasioclases', element: <DTCGimnasioclases/> },
-		{ path: '/dtc/gimnasioasistencia', element: <DTCaGimnasioAsis/> },
-		{ path: '/dtc/alumnosdeltaller', element: <DTCAlumnosdelcurso/> },
-		{ path: '/dtc/tallerprincipal', element: <DTCTallerPrinc/> },
-		{ path: '/dtc/tallerestadisticas', element: <DTCTallerEstad/> },
+	{ path: '/emprendedoras/login', element: <LogiEmprendedoras /> },
+	{ path: '/emprendedoras', element: <LogiEmprendedoras /> },
 
 
-		{ path: '/dtc/tallerasistencia/:id', element: <DTCTallerAsis/> },
-		{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest/> },
-		{ path: '/dtc/cargaetapascadia', element: <DTCcargaetapascadia/> },
-		{ path: '/dtc/usuario1/intervenciones', element: <Dtcintervenciones/> },
-		{ path: '/dtc/usuario1/expedientes', element: <DTCExpedientes/> },
-		{ path: '/dtc/usuario1/usuariosgim', element: <Dtcusuariosgim/> },
-		{ path: '/dtc/usuario1/mapas', element: <DTCMapas/> },
-		{ path: '/dtc/usuario1/entregas', element: <	DtcEntregas/> },
-		{ path: '/dtc/usuario1/inventario', element: <	DtcInventario/> },
+	{ path: '/subirexcel', element: <CargarExcel /> },
 
-		
-		{ path: '/dtc/visitasocial/menu', element: <DTCVisitamenu/> },
-		{ path: '/dtc/visitasocial/usuarios', element: <DTCVisitausuarios/> },
-		{ path: '/dtc/visitasocial/usuario/:id', element: <Dtcvisitausuario/> },
-		{ path: '/dtc/visitasocial/mapas', element: <Dtcvisitamapa/> },
-		{ path: '/dtc/visitasocial/intervenciones', element: <Dtcintervencionesvis/> },
-		{ path: '/dtc/visitasocial/personastratamieto', element: <Dtcpersonastratamientods/> },
-		{ path: '/dtc/visitasocial/personatratamieto/:id', element: <Dtcpersonaratamientods/> },
-		{ path: '/dtc/visitasocial/informes', element: <Dtcasisenteinformes/> },
-		{ path: '/dtc/turnos/oficios', element: <Dtcturnosoficios/> },
-		{ path: '/dtc/visitasocial/inscripciones', element: <DTCInscripcionesvisita/> },
-		
-		{ path: '/dtc/inventario/menu', element: <Stcinventairo/> },
-		{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion/> },
-		{ path: '/dtc/cocinaraciones', element: <DTCcocinaraciones/> },
+	{ path: '/usuario/novedades', element: <Novedades1 /> },
+	{ path: '/usuario/cursos', element: <Menu1 /> },
+	{ path: '/usuario/perfil', element: <Perfil /> },
+	{ path: '/usuario1/movimientos', element: <Movimientos /> },
+	{ path: '/usuario1/productos', element: <Productos /> },
+	{ path: '/usuario1/stock', element: <Stockesme /> },
+	{ path: '/usuario1/caja', element: <Cajaesme /> },
+	{ path: '/usuario1/minegocio', element: <Minegocio /> },
+	{ path: '/usuario1/informes', element: <Informesesme /> },
 
-		{ path: '/dtc/meriendas', element: <DTCmerienda/> },
-		
-		
-		{ path: '/cadia/login', element: <LoginCadia/> },
-		{ path: '/cadia/usuario/calendario', element: <CalendarioCadia/> },
-		{ path: '/cadia/usuario/chicos', element: <ChicosCadia/> },
-		{ path: '/cadia/usuario/turnos', element: <TurnosCadia/> },
-		{ path: '/cadia/usuario/chico/:id', element: <CadiaChico/> },
-		{ path: '/cadia/usuario/usuarios', element: <CadiaUsuarios/> },
-		{ path: '/cadia/usuario/actividades', element: <Cadiaactivs/> },
 
-		{ path: '/cadia/usuario/profesionales', element: <CadiaProfesionales/> },
-		{ path: '/cadia/profesionales/turnos', element: <Cadiaprofturnos/> },
-		{ path: '/cadia/profesionales/inicio', element: <CadiaProfesionalesclases/> },
-		{ path: '/cadia/profesionales/asistencia/:id', element: <CadiaProfesionalesasistencia/> },
-		{ path: '/cadia/usuario/profesional/:id', element: <CadiaAdminprofesional/> },
-		{ path: '/cadia/usuario/calendario', element: <Cadiaadmincalendario/> },
-		{ path: '/cadia/profesionales/informes', element: <Cadiaprofinformes/> },
-		{ path: '/cadia/usuario/listaespera', element: <Cadialistaespera/> },
-		
-		{ path: '/dtc/fines/menu', element: <DTCFinesmenu/> },
+	{ path: '/administracion/cursos', element: <Menu2 /> },
+	{ path: '/administracion/perfil', element: <Perfil2 /> },
+	{ path: '/administracion/detallecurso/:id', element: <Detallecurso /> },
+	{ path: '/administracion/asistencia/:id', element: <Asistencia /> },
+	{ path: '/administracion/personas', element: <Personas /> },
+	{ path: '/administracion/detallepersona/:id', element: <DetallePersonas /> },
+	{ path: '/administracion/inscripciones', element: <Inscripciones /> },
+	{ path: '/administracion/inscripciones/curso/:id', element: <InscripcionCurso /> },
+	{ path: '/administracion/usuarios', element: <Usuarios /> },
+	{ path: '/administracion/cargarinscripciones', element: <Cargadeinscrip /> },
+	{ path: '/administracion/turno/:id', element: <Turnoadmin /> },
+	{ path: '/administracion/clase/:id', element: <Claseadmin /> },
+	{ path: '/administracion/turnos', element: <TurnosAdmin /> },
+	{ path: '/administracion/sistemas', element: <Sistemas /> },
+	{ path: '/administracion/cursadocompleto', element: <Cursadocompleto /> },
+	{ path: '/administracion/alumnosdelturno/:id', element: <Alumnosdelturno2 /> },
+	{ path: '/administracion/curso/:id', element: <Curso2 /> },
+	{ path: '/administracion/estadoalumnas/:id', element: <Alumnosdelturno2 /> },
+	{ path: '/administracion/avancedelcurso/:id', element: <Avancedelcurso /> },
+	{ path: '/administracion/contacto', element: <Contacto /> },
+	{ path: '/administracion/egresadxs', element: <Egresadas /> },
+	{ path: '/administracion/consultasmobile', element: <Consultasinsc /> },
+	{ path: '/administracion/preinscriptas', element: <Preinscriptas /> },
+	{ path: '/administracion/callcenter', element: <Callcenter /> },
+	{ path: '/administracion/call/:id', element: <Call2 /> },
+	{ path: '/administracion/inscripcionescarnavales', element: <Inscripcionescarna /> },
+	{ path: '/administracion/llamadoscarnaval', element: <Llamadoscarnaval /> },
+	{ path: '/administracion/carnavalcall/:id', element: <Callcarnaval /> },
+	{ path: '/administracion/agregar', element: <Agreagremprendedora /> },
+
+
+	{ path: '/coordinadores/novedades', element: <Novedades3 /> },
+	{ path: '/coordinadores/cursos', element: <Clases3 /> },
+	{ path: '/coordinadores/tareas', element: <Tareas3 /> },
+	{ path: '/coordinadores/curso/:id', element: <Curso3 /> },
+	{ path: '/coordinadores/turno/:id', element: <Turno3 /> },
+	{ path: '/coordinadores/alumnosdelturno/:id', element: <Alumnosdelturno3 /> },
+	{ path: '/coordinadores/estadoalumnas/:id', element: <Estadoalumnas3 /> },
+	{ path: '/coordinadores/contacto', element: <Contacto3 /> },
+	{ path: '/coordinadores/clase/:id', element: <Clase3 /> },
+	{ path: '/coordinadores/justificaciones', element: <Justificacion /> },
+	{ path: '/coordinadores/alertas', element: <Alertas /> },
+
+
+
+	{ path: '/encargados/cursos', element: <Clases4 /> },
+	{ path: '/encargados/curso/:id', element: <Curso4 /> },
+	{ path: '/encargados/turno/:id', element: <Turno4 /> },
+	{ path: '/encargados/alumnosdelturno/:id', element: <Alumnosdelturno /> },
+	{ path: '/encargados/clase/:id', element: <Clase4 /> },
+	{ path: '/encargados/estadoalumnas/:id', element: <Estadoalumnas /> },
+	{ path: '/encargados/persona/:id', element: <DetallePersonas /> },
+	{ path: '/encargados/justificaciones', element: <JustificacionEncargados /> },
+	{ path: '/inscripciones', element: <Inscripcionesesme /> },
+	{ path: '/inscripcionesprueba', element: <Inscripcionesesmeprueba /> },
+
+	{ path: '/inscripcionescarnavales', element: <Inscripcionescarnaval /> },
+	{ path: '/prueba', element: <Prueba /> },
+
+	{ path: '/fiscalizacion/administracion/mapacarga', element: <Fiscamapacarga /> },
+	{ path: '/fiscalizacion/login', element: <Loginfis /> },
+	{ path: '/fiscalizacion/administracion/menu', element: <Menuadmin /> },
+	{ path: '/fiscalizacion/administracion/cargar', element: <CargarFisca /> },
+	{ path: '/fiscalizacion/administracion/inscripciones', element: <Fiscainscripc /> },
+	{ path: '/fiscalizacion/administracion/mesas', element: <Mesasfisc /> },
+	{ path: '/fiscalizacion/administracion/subirescuelas', element: <Subiresc /> },
+	{ path: '/fiscalizacion/inscripcion', element: <InscripcionFisca /> },
+	{ path: '/fiscalizacion/usuarios', element: <Usersfisca /> },
+	{ path: '/fiscalizacion/alia', element: <Aliadoscarga /> },
+	{ path: '/fiscalizacion/administracion/escuelas', element: <EscuelasAdmin /> },
+	{ path: '/fiscalizacion/inscripcionadmin', element: <Inscripciondearmin /> },
+	{ path: '/fiscalizacion/administracion/personas', element: <Personas_fisca /> },
+	{ path: '/fiscalizacion/encargados/carga', element: <EncargadosCarga /> },
+	{ path: '/fiscalizacion/administracion/encargados', element: <AdminEncargados /> },
+	{ path: '/fiscalizacion/administracion/encargado/:id', element: <AdminEncargado /> },
+	{ path: '/fiscalizacion/persona/:id', element: <Personafisca /> },
+	{ path: '/fiscalizacion/administracion/aliados', element: <Aliadosfisca /> },
+	{ path: '/fiscalizacion/encargados/personas', element: <PersonasEncargados /> },
+	{ path: '/fiscalizacion/encargados/persona/:id', element: <Personaenc /> },
+	{ path: '/fiscalizacion/usuarioescuela/personas', element: <UsuarioescTabla /> },
+	{ path: '/fiscalizacion/usuarioescuela/persona/:id', element: <Escuelapersona /> },
+	{ path: '/fiscalizacion/administracion/suplentes', element: <Suplentes /> },
+	{ path: '/fiscalizacion/suplentes/asignados', element: <SuplentesPAgona /> },
+	{ path: '/fiscalizacion/consultas', element: <Consultas /> },
+	{ path: '/fiscalizacion/movilidad/escuelas', element: <Movilidad /> },
+	{ path: '/fiscalizacion/escrutinio', element: <Escru /> },
+	{ path: '/fiscalizacion/administracion/circuitos', element: <Circuitos /> },
+
+
+	{ path: '/vendedora/menu', element: <Vendedoramenu /> },
+	{ path: '/ventascarnaval', element: <Menutodoslosprod /> },
+	{ path: '/producto/:id', element: <Ventasproducto /> },
+
+
+	{ path: '/llamados/todos', element: <Llamadas /> },
+
+
+
+
+
+	{ path: '/dtc/login', element: <Logindtc /> },
+	{ path: '/dtc/usuario1/menu', element: <DtcMenu /> },
+	{ path: '/dtc/usuario1/usuarios', element: <DetUsuarios /> },
+	{ path: '/dtc/usuario1/chiques', element: <DtcMedtchiques /> },
+	{ path: '/dtc/usuario1/personal', element: <DtcPersonal /> },
+	{ path: '/dtc/usuario1/usuario/:id', element: <Dtcusuario /> },
+	{ path: '/dtc/usuario1/talleres', element: <Dtctalleres /> },
+	{ path: '/dtc/usuario1/taller/:id', element: <Dtctaller /> },
+	{ path: '/dtc/usuario1/personaspsiq', element: <Dtcpersonal_psiq /> },
+	{ path: '/dtc/usuario1/personapsiq/:id', element: <Dtcpersonapsiq /> },
+	{ path: '/dtc/turnos/lista', element: <Dtcturnos /> },
+	{ path: '/dtc/usuario1/turnos', element: <Dtcturnosadmin /> },
+	{ path: '/dtc/usuario1/cumples', element: <DTCcumples /> },
+	{ path: '/dtc/usuario1/asistenciassoc', element: <DtcAsisenciasoc /> },
+	{ path: '/dtc/usuario1/inscripciones', element: <DtcInscripciones /> },
+	{ path: '/dtc/usuario1/psicologos', element: <Dtcusuario1Psicologo /> },
+	{ path: '/dtc/usuario1/psicologo/:id', element: <STCusuairo1psicologo /> },
+
+	{ path: '/usuario1/costosfijos', element: <Cstosfijos /> },
+
+
+	{ path: '/dtc/turnos/psicologo/:id', element: <Dtcturnospsicologo /> },
+
+	{ path: '/dtc/turnos/psicologos', element: <Dtcturnospsicologos /> },
+
+	{ path: '/dtc/turnos/persona/:id', element: <Dtcturnospersona /> },
+
+	{ path: '/dtc/turnos/personas', element: <Dtcturnospersonas /> },
+
+
+	{ path: '/dtc/psicologa/turnos', element: <Dtcturnopsic /> },
+	{ path: '/dtc/psicologa/informes', element: <Dtcpsiclogaacti /> },
+	{ path: '/dtc/psicologa/usuarios', element: <Dtcpsiclogausuarios /> },
+	{ path: '/dtc/psicologa/usuario/:id', element: <Dtcpsiclogausuario /> },
+
+
+	{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio /> },
+	{ path: '/dtc/sole/cosas', element: <Dtcsolecosas /> },
+	{ path: '/dtc/sole/mapa', element: <Dtcsolemapas /> },
+	{ path: '/dtc/sole/informes', element: <Dtcsoleasitenciasco /> },
+	{ path: '/dtc/sole/intervenciones', element: <Dtcsoleinicio /> },
+
+
+	{ path: '/dtc/usuario2/asistencia', element: <DTCAsistencia /> },
+	{ path: '/dtc/verfoto/:id', element: <DTCverfoto /> },
+	{ path: '/dtc/cocina', element: <Dtccocina /> },
+	{ path: '/dtc/cocinaasis', element: <DtccocinaAsis /> },
+	{ path: '/dtc/cocinastock', element: <DtcCocinastock /> },
+	{ path: '/dtc/cocinapacientes', element: <DTCcocinpacientes /> },
+	{ path: '/dtc/cocina/turnos', element: <DTCCocinaTurnos /> },
+	{ path: '/dtc/cocina/usuarios', element: <STCcocinausuarios /> },
+	{ path: '/dtc/cocina/usuario/:id', element: <DTCCocinausuario /> },
+	{ path: '/dtc/cocina/inscripciones', element: <DTCCocinainscripciones /> },
+
+	{ path: '/dtc/usuario2/raciones', element: <Dtcraciones /> },
+	{ path: '/dtc/talleresver', element: <DTCTAlleresver /> },
+
+	{ path: '/dtc/actividades', element: <DTCactividadescarga /> },
+	{ path: '/dtc/presentes', element: <DTCpresentes /> },
+
+	{ path: '/dtc/cargaetapas', element: <DTCetapas /> },
+	{ path: '/dtc/tallerclases', element: <DTCTallerclases /> },
+	{ path: '/dtc/gimnasioclases', element: <DTCGimnasioclases /> },
+	{ path: '/dtc/gimnasioasistencia', element: <DTCaGimnasioAsis /> },
+	{ path: '/dtc/alumnosdeltaller', element: <DTCAlumnosdelcurso /> },
+	{ path: '/dtc/tallerprincipal', element: <DTCTallerPrinc /> },
+	{ path: '/dtc/tallerestadisticas', element: <DTCTallerEstad /> },
+
+
+	{ path: '/dtc/tallerasistencia/:id', element: <DTCTallerAsis /> },
+	{ path: '/dtc/usuario1/asisencias', element: <DTCasistenciasest /> },
+	{ path: '/dtc/cargaetapascadia', element: <DTCcargaetapascadia /> },
+	{ path: '/dtc/usuario1/intervenciones', element: <Dtcintervenciones /> },
+	{ path: '/dtc/usuario1/expedientes', element: <DTCExpedientes /> },
+	{ path: '/dtc/usuario1/usuariosgim', element: <Dtcusuariosgim /> },
+	{ path: '/dtc/usuario1/mapas', element: <DTCMapas /> },
+	{ path: '/dtc/usuario1/entregas', element: <	DtcEntregas /> },
+	{ path: '/dtc/usuario1/inventario', element: <	DtcInventario /> },
+
+
+	{ path: '/dtc/visitasocial/menu', element: <DTCVisitamenu /> },
+	{ path: '/dtc/visitasocial/usuarios', element: <DTCVisitausuarios /> },
+	{ path: '/dtc/visitasocial/usuario/:id', element: <Dtcvisitausuario /> },
+	{ path: '/dtc/visitasocial/mapas', element: <Dtcvisitamapa /> },
+	{ path: '/dtc/visitasocial/intervenciones', element: <Dtcintervencionesvis /> },
+	{ path: '/dtc/visitasocial/personastratamieto', element: <Dtcpersonastratamientods /> },
+	{ path: '/dtc/visitasocial/personatratamieto/:id', element: <Dtcpersonaratamientods /> },
+	{ path: '/dtc/visitasocial/informes', element: <Dtcasisenteinformes /> },
+	{ path: '/dtc/turnos/oficios', element: <Dtcturnosoficios /> },
+	{ path: '/dtc/visitasocial/inscripciones', element: <DTCInscripcionesvisita /> },
+
+	{ path: '/dtc/inventario/menu', element: <Stcinventairo /> },
+	{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion /> },
+	{ path: '/dtc/cocinaraciones', element: <DTCcocinaraciones /> },
+
+	{ path: '/dtc/meriendas', element: <DTCmerienda /> },
+
+
+	{ path: '/cadia/login', element: <LoginCadia /> },
+	{ path: '/cadia/usuario/calendario', element: <CalendarioCadia /> },
+	{ path: '/cadia/usuario/chicos', element: <ChicosCadia /> },
+	{ path: '/cadia/usuario/turnos', element: <TurnosCadia /> },
+	{ path: '/cadia/usuario/chico/:id', element: <CadiaChico /> },
+	{ path: '/cadia/usuario/usuarios', element: <CadiaUsuarios /> },
+	{ path: '/cadia/usuario/actividades', element: <Cadiaactivs /> },
+
+	{ path: '/cadia/usuario/profesionales', element: <CadiaProfesionales /> },
+	{ path: '/cadia/profesionales/turnos', element: <Cadiaprofturnos /> },
+	{ path: '/cadia/profesionales/inicio', element: <CadiaProfesionalesclases /> },
+	{ path: '/cadia/profesionales/asistencia/:id', element: <CadiaProfesionalesasistencia /> },
+	{ path: '/cadia/usuario/profesional/:id', element: <CadiaAdminprofesional /> },
+	{ path: '/cadia/usuario/calendario', element: <Cadiaadmincalendario /> },
+	{ path: '/cadia/profesionales/informes', element: <Cadiaprofinformes /> },
+	{ path: '/cadia/usuario/listaespera', element: <Cadialistaespera /> },
+
+	{ path: '/dtc/fines/menu', element: <DTCFinesmenu /> },
 
 ];
 
