@@ -1,5 +1,5 @@
-        
-export default function RecorridosSVG() {
+import Tooltip from '@mui/material/Tooltip';
+export default function RecorridosSVG({ handleOpenDialog, lotes }) {
   return (
 <svg width="296.926mm" height="209.973mm" baseProfile="tiny"  xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 3507 2480">
  <defs/>

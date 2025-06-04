@@ -147,6 +147,9 @@ import Dtcturnospsicologos from '../pages/dtc/turnospsicologos';
 import Dtcturnospsicologo from '../pages/dtc/turnospsicologo';
 import Dtcturnospersonas from '../pages/dtc/turnospersonas';
 import Dtcturnospersona from '../pages/dtc/turnopersona';
+import Dtcturnosusuario from '../pages/dtc/turnosusuario';
+
+import Dtcturnosusuarios from '../pages/dtc/turnosusuarios';
 
 
 
@@ -456,6 +459,10 @@ const Rutas = [
 	{ path: '/dtc/visitasocial/informes', element: <Dtcasisenteinformes /> },
 	{ path: '/dtc/turnos/oficios', element: <Dtcturnosoficios /> },
 	{ path: '/dtc/visitasocial/inscripciones', element: <DTCInscripcionesvisita /> },
+
+	{ path: '/dtc/turnos/usuarios', element: <Dtcturnosusuarios /> },
+{ path: '/dtc/turnos/usuario', element: <Dtcturnosusuario /> },
+
 
 	{ path: '/dtc/inventario/menu', element: <Stcinventairo /> },
 	{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion /> },

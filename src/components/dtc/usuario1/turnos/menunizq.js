@@ -9,14 +9,15 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
-import logo from "../../../../Assets/oficio.webp"
+ import PeopleIcon from '@mui/icons-material/People';
+ import logo from "../../../../Assets/oficio.webp"
 import servicioDtc from '../../../../services/dtc'
 import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useState, useEffect } from "react";
-import WhereToVoteTwoToneIcon from '@mui/icons-material/WhereToVoteTwoTone';//import logo from "../../Assets/logocuqui.webp";
+import PsychologyIcon from '@mui/icons-material/Psychology';
 import Navbar from '../../Navbar'
+import StorageIcon from '@mui/icons-material/Storage';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';const drawerWidth = 240;
 const darkTheme = createTheme({
   palette: {
@@ -84,8 +85,13 @@ export default function MenuIzq2 ({children}) {
         path: '/dtc/psicologa/turnos' 
       }, */
           { 
-          text: 'personas', 
+          text: 'usuarios', 
           icon: <AccountBoxTwoToneIcon />, 
+          path: '/dtc/turnos/usuarios' 
+        },
+          {
+          text: 'personas', 
+          icon: <PeopleIcon />, 
           path: '/dtc/turnos/personas' 
         },
             { 
@@ -95,12 +101,12 @@ export default function MenuIzq2 ({children}) {
         },
         { 
           text: 'turnos', 
-          icon: <AccountBoxTwoToneIcon />, 
+          icon: <PsychologyIcon />, 
           path: '/dtc/turnos/lista' 
         },
         { 
           text: 'oficios', 
-          icon: <AccountBoxTwoToneIcon />, 
+          icon: <StorageIcon />, 
           path: '/dtc/turnos/oficios' 
         },
      
