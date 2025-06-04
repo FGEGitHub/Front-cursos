@@ -461,7 +461,7 @@ const Rutas = [
 	{ path: '/dtc/visitasocial/inscripciones', element: <DTCInscripcionesvisita /> },
 
 	{ path: '/dtc/turnos/usuarios', element: <Dtcturnosusuarios /> },
-{ path: '/dtc/turnos/usuario', element: <Dtcturnosusuario /> },
+{ path: '/dtc/turnos/usuario/:id', element: <Dtcturnosusuario /> },
 
 
 	{ path: '/dtc/inventario/menu', element: <Stcinventairo /> },
