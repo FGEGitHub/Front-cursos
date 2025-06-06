@@ -183,17 +183,19 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-Inscribite acá para el operativo oftalmológico del barrio QUINTANA el próximo MARTES 10 de junio ¡es completamente gratuito!
+Inscribite acá para el operativo oftalmológico del barrio JUAN DE VERA el próximo MIÉRCOLES 11 de junio ¡es completamente gratuito!
 
 Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
 
 Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
+
+MIERCOLES 11 de junio de 8.30hs a 13.30hs por orden de llegada.
         </StyledParagraph>
 
            <StyledParagraph>
-          DÍA: MARTES 10 de junio{"\n"}
+          DÍA: MIERCOLES 11 de junio{"\n"}
           HORARIO: 8:30 A 13:30 HS{"\n"}
-          BARRIO: Quintana{"\n"}
+          BARRIO: JUAN DE VERA{"\n"}
           
         </StyledParagraph>
       </Typography>
@@ -455,18 +457,20 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
 
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
- <StyledParagraph>
-Inscribite acá para el operativo oftalmológico del barrio QUINTANA el próximo MARTES 10 de junio ¡es completamente gratuito!
+        <StyledParagraph>
+Inscribite acá para el operativo oftalmológico del barrio JUAN DE VERA el próximo MIÉRCOLES 11 de junio ¡es completamente gratuito!
 
 Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
 
 Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
+
+MIERCOLES 11 de junio de 8.30hs a 13.30hs por orden de llegada.
         </StyledParagraph>
 
-        <StyledParagraph>
-          DÍA: MARTES 10 de junio{"\n"}
+           <StyledParagraph>
+          DÍA: MIERCOLES 11 de junio{"\n"}
           HORARIO: 8:30 A 13:30 HS{"\n"}
-          BARRIO: Quintana{"\n"}
+          BARRIO: JUAN DE VERA{"\n"}
           
         </StyledParagraph>
       </Typography>  </Box>

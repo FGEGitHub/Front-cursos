@@ -1,179 +1,462 @@
-import { useState, useEffect, useRef } from "react";
-import DialogComponent from './modalbosqueslogin';
+import { useState, useEffect } from "react";
+import * as turf from "@turf/turf";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  GeoJSON,
+  Marker,
+ Popup,
+  useMapEvents,
+} from "react-leaflet";
+import {
+  Box,
+  Typography,
+  Button,
+  Autocomplete,
+  TextField,
+} from "@mui/material";
+import ReactDOMServer from 'react-dom/server';
+import SchoolIcon from '@mui/icons-material/School';
+import Imagen from '../../assets/caricat.jpeg';
+import { blue } from '@mui/material/colors';
+/**********************************
+ * CONFIGURACIÓN GENERAL
+ *********************************/
+const PROXIMITY_METERS = 400;
+const PROXIMITY_KM = PROXIMITY_METERS / 1000;
 
-import NativeSelect from '@mui/material/NativeSelect';
-
-import Barrios from './barrios';
-import Circuitos from './circuitos';
-import Escuelas from './escuelas';
-import Recorridos from './recorridos';
-//import Satelite from './satelite';
-import * as React from 'react';
-import MuiAlert from '@mui/material/Alert';
-import DialogActions from '@mui/material/DialogActions';
-import servicioDatos from '../../../../services/fiscalizacion';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import './config.css';
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+/**********************************
+ * ÍCONOS  (origen / destino)
+ *********************************/
+const iconoOrigen = new L.Icon({
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
 });
 
-const Arg = () => {
-  const dialogRef = useRef();
-  const [info, setInfo] = useState();
-  const [promedio, setPromedio] = useState(0);
-  const [lotes, setLotes] = useState();
-  const [seleccion, setSeleccion] = useState();
-  const [imagenDeFondoActivada, setImagenDeFondoActivada] = useState(false);
+const iconoDestino = new L.Icon({
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
+});
 
-  const [mostrarBarrios, setMostrarBarrios] = useState(true);
-  const [mostrarCircuitos, setMostrarCircuitos] = useState(false);
-  const [mostrarEscuelas, setMostrarEscuelas] = useState(false);
-  const [mostrarRecorridos, setMostrarRecorridos] = useState(false);
+const estiloBase = {
+  color: "#0077cc",
+  weight: 2,
+  fillOpacity: 0.4,
+};
 
-  const [scale, setScale] = useState(1);
-  const [translate, setTranslate] = useState({ x: 0, y: 0 });
-  const isDragging = useRef(false);
-  const lastPos = useRef({ x: 0, y: 0 });
+const modalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  backgroundColor: "white",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 2,
+};
+const iconoEscuela = new L.DivIcon({
+  html: ReactDOMServer.renderToString(
+    <SchoolIcon style={{ color: blue[700], fontSize: 36 }} />
+  ),
+  className: "",
+  iconSize: [36, 36],
+  iconAnchor: [18, 36],
+  popupAnchor: [0, -36],
+});
 
-  const zoomIn = () => setScale(prev => Math.min(prev + 0.1, 3));
-  const zoomOut = () => setScale(prev => Math.max(prev - 0.1, 0.5));
-  const resetZoom = () => {
-    setScale(1);
-    setTranslate({ x: 0, y: 0 });
+const formatearLinea = (props) => {
+  const num = props.linea || props.Linea || props.Name || "?";
+  const ramal = props.ramal ? ` - ${props.ramal}` : "";
+  const descrip = props.descrip ? ` (${props.descrip})` : "";
+  return `${num}${ramal}${descrip}`.replace(/\s+/g, " ").trim();
+};
+function formatearLineabarrio(props) {
+  return {
+    ...props,
+    label: props.description, // asegúrate que esto existe
   };
+}
 
-  const handleMouseDown = (e) => {
-    isDragging.current = true;
-    lastPos.current = { x: e.clientX, y: e.clientY };
-  };
+const distanciaPuntoLineaKm = (punto, geom) => {
+  if (!geom) return Infinity;
+  if (geom.type === "LineString") {
+    return turf.pointToLineDistance(punto, geom, { units: "kilometers" });
+  }
+  if (geom.type === "MultiLineString") {
+    return Math.min(
+      ...geom.coordinates.map((coords) =>
+        turf.pointToLineDistance(
+          punto,
+          { type: "LineString", coordinates: coords },
+          { units: "kilometers" }
+        )
+      )
+    );
+  }
+  return Infinity;
+};
 
-  const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
-    const dx = e.clientX - lastPos.current.x;
-    const dy = e.clientY - lastPos.current.y;
-    setTranslate(prev => ({ x: prev.x + dx, y: prev.y + dy }));
-    lastPos.current = { x: e.clientX, y: e.clientY };
-  };
+const MapClickHandler = ({ origen, destino, setOrigen, setDestino }) => {
+  useMapEvents({
+    click(e) {
+      const coord = [e.latlng.lng, e.latlng.lat];
+      if (!origen) setOrigen(coord);
+      else if (!destino) setDestino(coord);
+    },
+  });
+  return null;
+};
 
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
+const filtrarFeature = (feature, seleccionado, tipo) => {
+  if (!seleccionado) return true;
 
-  const handleChange = (e) => {
-    setSeleccion(e.target.value);
-  };
+  switch (tipo) {
+    case "escuela":
+      return feature.properties?.nombreEsta == seleccionado.properties?.nombreEsta;
 
-  const toggleImagenDeFondo = () => {
-    setImagenDeFondoActivada((prev) => !prev);
-  };
+    case "barrio":
+      const nombreFeature = formatearLineabarrio(feature.properties).label;
+      const barrioLabelSeleccionado = seleccionado.label;
+      return nombreFeature === barrioLabelSeleccionado;
 
-  const getClients = async () => {
-    const lotess = await servicioDatos.traerescuelas();
-    setLotes(lotess);
-    setPromedio(1 / 1);
-  };
+    case "recorrido":
+    default:
+      const nombreRecorrido = formatearLinea(feature.properties);
+      return nombreRecorrido === seleccionado;
+  }
+};
 
+const MapaConCapas = () => {
+  const [mostrarCapa1, setMostrarCapa1] = useState(false);
+  const [mostrarCapa2, setMostrarCapa2] = useState(false);
+  const [mostrarCapa3, setMostrarCapa3] = useState(false);
+
+  const [escuelas, setEscuelas] = useState(null);
+  const [recorridos, setRecorridos] = useState(null);
+  const [barrios, setBarrios] = useState(null);
+
+  const [origen, setOrigen] = useState(null);
+  const [destino, setDestino] = useState(null);
+  const [lineasOk, setLineasOk] = useState([]);
+  const [lineaSeleccionada, setLineaSeleccionada] = useState("");
+
+  const [escuelaSeleccionada, setEscuelaSeleccionada] = useState(null);
+  const [recorridoSeleccionado, setRecorridoSeleccionado] = useState(null);
+  const [barrioSeleccionado, setBarrioSeleccionado] = useState(null);
+
+  // Carga inicial de datos
   useEffect(() => {
-    getClients();
+    fetch("/escuelasgeo.geojson")
+      .then((r) => r.json())
+      .then(setEscuelas)
+      .catch(console.error);
+    fetch("/recorridogeoson.geojson")
+      .then((r) => r.json())
+      .then(setRecorridos)
+      .catch(console.error);
+    fetch("/barriosgeo.geojson")
+      .then((r) => r.json())
+      .then(setBarrios)
+      .catch(console.error);
   }, []);
 
-  const handleOpenDialog = async (p) => {
-    await setInfo(p);
-    dialogRef.current.openDialog();
+  // Calcular lineas cercanas a origen y destino
+  useEffect(() => {
+    if (!origen || !destino || !recorridos) return;
+
+    const pO = turf.point(origen);
+    const pD = turf.point(destino);
+
+    const candidatas = recorridos.features.filter((f) => {
+      const dO = distanciaPuntoLineaKm(pO, f.geometry);
+      const dD = distanciaPuntoLineaKm(pD, f.geometry);
+      return dO <= PROXIMITY_KM && dD <= PROXIMITY_KM;
+    });
+
+    const detalles = Array.from(
+      new Set(candidatas.map((f) => formatearLinea(f.properties)))
+    );
+    setLineasOk(detalles);
+
+    if (detalles.length == 1) {
+      setLineaSeleccionada(detalles[0]);
+      setMostrarCapa2(true);
+    } else {
+      setLineaSeleccionada("");
+      setMostrarCapa2(false);
+    }
+  }, [origen, destino, recorridos]);
+
+  const estiloRecorrido = (feature) => {
+    const desc = formatearLinea(feature.properties);
+    if (desc === lineaSeleccionada) return { color: "blue", weight: 5 };
+    if (lineasOk.includes(desc)) return { color: "gray", weight: 1, opacity: 0.3 };
+    return { color: "green", weight: 2 };
   };
 
+  // Cuando cambian las selecciones de escuela, barrio o recorrido, activamos la capa correspondiente y limpiamos las otras selecciones y capas
+  useEffect(() => {
+    if (escuelaSeleccionada) {
+      setMostrarCapa1(true);
+      setMostrarCapa3(false);
+      setMostrarCapa2(false);
+      setBarrioSeleccionado(null);
+      setRecorridoSeleccionado(null);
+      setLineaSeleccionada("");
+    } else {
+      setMostrarCapa1(false);
+    }
+  }, [escuelaSeleccionada]);
+
+  useEffect(() => {
+    if (barrioSeleccionado) {
+      setMostrarCapa3(true);
+      setMostrarCapa1(false);
+      setMostrarCapa2(false);
+      setEscuelaSeleccionada(null);
+      setRecorridoSeleccionado(null);
+      setLineaSeleccionada("");
+    } else {
+      setMostrarCapa3(false);
+    }
+  }, [barrioSeleccionado]);
+
+  useEffect(() => {
+    if (recorridoSeleccionado) {
+      setMostrarCapa2(true);
+      setMostrarCapa1(false);
+      setMostrarCapa3(false);
+      setEscuelaSeleccionada(null);
+      setBarrioSeleccionado(null);
+      setLineaSeleccionada(recorridoSeleccionado);
+    } else {
+      setMostrarCapa2(false);
+      setLineaSeleccionada("");
+    }
+  }, [recorridoSeleccionado]);
+
   return (
-    <>
-      <div>
-        <div style={{ marginBottom: '10px' }}>
-          <Button onClick={zoomIn} variant="contained" color="secondary" style={{ marginRight: '5px' }}>
-            Zoom +
-          </Button>
-          <Button onClick={zoomOut} variant="contained" color="secondary" style={{ marginRight: '5px' }}>
-            Zoom -
-          </Button>
-          <Button onClick={resetZoom} variant="contained" color="secondary" style={{ marginRight: '5px' }}>
-            Reset
-          </Button>
-          <Button
-            onClick={toggleImagenDeFondo}
-            variant="contained"
-            color="primary"
-            style={{ marginRight: '10px' }}
-          >
-            {imagenDeFondoActivada ? 'Desactivar' : 'Activar'} GPS
-          </Button>
-
-          <NativeSelect
-            defaultValue=""
-            onChange={handleChange}
-            inputProps={{ name: 'anio', id: 'uncontrolled-native' }}
-          >
-            <option value="">Elegir</option>
-            <option value="Verde">Verde</option>
-            <option value="Amarillo">Amarillo</option>
-            <option value="Rojo">Rojo</option>
-          </NativeSelect>
-        </div>
-
-        <div style={{ marginBottom: '10px' }}>
-          <FormControlLabel
-            control={<Checkbox checked={mostrarBarrios} onChange={() => setMostrarBarrios(v => !v)} />}
-            label="Barrios"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={mostrarCircuitos} onChange={() => setMostrarCircuitos(v => !v)} />}
-            label="Circuitos"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={mostrarEscuelas} onChange={() => setMostrarEscuelas(v => !v)} />}
-            label="Escuelas"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={mostrarRecorridos} onChange={() => setMostrarRecorridos(v => !v)} />}
-            label="Recorridos"
-          />
-        </div>
-
-        <div
-          className="zoom-pan-container"
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-        >
-          <div
-            className="zoom-pan-content"
-            style={{
-              transform: `translate(${translate.x}px, ${translate.y}px) scale(${scale})`,
+    <div>
+      {/* controles */}
+      <div style={{ marginBottom: "10px" }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={mostrarCapa1}
+            onChange={() => {
+              if (mostrarCapa1) setEscuelaSeleccionada(null);
+              setMostrarCapa1(!mostrarCapa1);
             }}
-          >
-            {mostrarEscuelas && <Escuelas handleOpenDialog={handleOpenDialog} lotes={lotes} />}
-        {mostrarBarrios && <Barrios handleOpenDialog={handleOpenDialog} lotes={lotes} />}
-{mostrarCircuitos && <Circuitos handleOpenDialog={handleOpenDialog} lotes={lotes} />}
-
-{mostrarRecorridos && <Recorridos handleOpenDialog={handleOpenDialog} lotes={lotes} />}
-          </div>
-        </div>
+          />
+         Mostrar todas las Escuelas
+        </label>
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="checkbox"
+            checked={mostrarCapa2}
+            onChange={() => {
+              if (mostrarCapa2) {
+                setRecorridoSeleccionado(null);
+                setLineaSeleccionada("");
+              }
+              setMostrarCapa2(!mostrarCapa2);
+            }}
+          />
+        Todos los Recorridos
+        </label>
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="checkbox"
+            checked={mostrarCapa3}
+            onChange={() => {
+              if (mostrarCapa3) setBarrioSeleccionado(null);
+              setMostrarCapa3(!mostrarCapa3);
+            }}
+          />
+         Todos los Barrios
+        </label>
       </div>
 
-      <DialogComponent
-        ref={dialogRef}
-        title=""
-        info={info}
-        mapa={'Bosques'}
-        getClients={async () => {
-          const lotess = await servicioDatos.traerloteslogin();
-          setLotes(lotess[0]);
-          setPromedio(lotess[1] / lotess[0].length);
-        }}
-      />
-    </>
+      {/* autocompletes */}
+<Box display="flex" alignItems="flex-start" gap={2}>
+  {/* Autocompletes en 2 columnas */}
+  <Box
+    display="grid"
+    gridTemplateColumns="1fr 1fr"
+    gap={2}
+    sx={{ maxWidth: 520 }}
+  >
+        <Autocomplete
+          options={escuelas?.features || []}
+          getOptionLabel={(option) => option?.properties?.nombreEsta || ""}
+          value={escuelaSeleccionada}
+          onChange={(e, val) => setEscuelaSeleccionada(val)}
+          renderInput={(params) => <TextField {...params} label="Escuela" />}
+          sx={{ width: 250 }}
+          clearOnEscape
+          isOptionEqualToValue={(option, value) =>
+            option?.properties?.nombreEsta === value?.properties?.nombreEsta
+          }
+        />
+
+        <Autocomplete
+          options={recorridos?.features.map((f) => formatearLinea(f.properties)) || []}
+          value={recorridoSeleccionado}
+          onChange={(e, val) => setRecorridoSeleccionado(val)}
+          renderInput={(params) => <TextField {...params} label="Recorrido" />}
+          sx={{ width: 250 }}
+          clearOnEscape
+        />
+
+        <Autocomplete
+          options={barrios?.features.map((f) => formatearLineabarrio(f.properties)) || []}
+          getOptionLabel={(option) => option.label || ""}
+          value={barrioSeleccionado}
+          onChange={(e, val) => setBarrioSeleccionado(val)}
+          renderInput={(params) => <TextField {...params} label="Barrio" />}
+          sx={{ width: 250 }}
+          clearOnEscape
+          isOptionEqualToValue={(option, value) => option.label === value.label}
+        />
+          <img
+    src={Imagen}
+    alt="Decorativa"
+    style={{ width: 60, height: 60, objectFit: "cover", borderRadius: 8 }}
+  /></Box>
+      </Box>
+      <h3>Selecciona 2 puntos en el mapa para encontrar las lineas de colectivos sugeridas</h3>
+      {/* líneas posibles */}
+      {origen && destino && (
+        <Box sx={{ mb: 2, p: 2, backgroundColor: "#e0f7fa", borderRadius: 2 }}>
+          <Typography variant="subtitle1">
+            Recorridos cercanos (≤ {PROXIMITY_METERS} m):
+          </Typography>
+          {lineasOk.length ? (
+            <>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                {lineasOk.join(", ")}
+              </Typography>
+              {lineasOk.length > 1 && (
+                <Autocomplete
+                  options={lineasOk}
+                  value={lineaSeleccionada}
+                  onChange={(e, val) => {
+                    setLineaSeleccionada(val || "");
+                    setMostrarCapa2(true); // 👉 Mostrar la capa al seleccionar
+                  }}
+                  renderInput={(params) => <TextField {...params} label="Seleccionar línea" />}
+                  clearOnEscape
+                  sx={{ width: 300 }}
+                />
+              )}
+              <Button sx={{ mt: 2 }} variant="outlined" onClick={() => {
+                setOrigen(null);
+                setDestino(null);
+                setLineasOk([]);
+                setLineaSeleccionada("");
+              }}>
+                Nueva búsqueda
+              </Button>
+            </>
+          ) : (<>
+            <Typography variant="body2" color="error">
+              No se encontraron líneas cercanas.
+            </Typography>
+            <Button sx={{ mt: 2 }} variant="outlined" onClick={() => {
+              setOrigen(null);
+              setDestino(null);
+              setLineasOk([]);
+              setLineaSeleccionada("");
+            }}>
+              Nueva búsqueda
+            </Button>
+          </>
+          )}
+        </Box>
+      )}
+
+      {/* Mapa */}
+      <MapContainer
+        center={[-27.500, -58.802]}
+        zoom={12}
+        style={{ height: "70vh", width: "90vw" }}
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+{escuelaSeleccionada && (
+          (() => {
+            const [lng, lat] = escuelaSeleccionada.geometry.coordinates;
+            return (
+              <Marker position={[lat, lng]} icon={iconoEscuela}>
+                <Popup>
+                  {escuelaSeleccionada.properties.nombreEsta}
+                  <br />
+                  {escuelaSeleccionada.properties.domicilio}
+                </Popup>
+              </Marker>
+            );
+          })()
+        )}
+        {/* Capa 1: Escuelas */}
+        {mostrarCapa1 && escuelas && (
+          <GeoJSON
+            data={escuelas}
+            style={() => ({
+              color: "#006400",
+              weight: 3,
+              fillOpacity: 0.2,
+            })}
+            filter={(feature) => filtrarFeature(feature, escuelaSeleccionada, "escuela")}
+            onEachFeature={(feature, layer) => {
+              layer.bindTooltip(feature.properties.nombreEsta);
+            }}
+          />
+        )}
+
+        {/* Capa 2: Recorridos */}
+        {mostrarCapa2 && recorridos && (
+          <GeoJSON
+            data={recorridos}
+            style={estiloRecorrido}
+            filter={(feature) =>
+              filtrarFeature(feature, lineaSeleccionada, "recorrido")
+            }
+          />
+        )}
+
+        {/* Capa 3: Barrios */}
+        {mostrarCapa3 && barrios && (
+          <GeoJSON
+            data={barrios}
+            style={() => ({
+              color: "#FF4500",
+              weight: 3,
+              fillOpacity: 0.3,
+            })}
+            filter={(feature) => filtrarFeature(feature, barrioSeleccionado, "barrio")}
+            onEachFeature={(feature, layer) => {
+              const label = formatearLineabarrio(feature.properties).label;
+              layer.bindTooltip(label);
+            }}
+          />
+        )}
+
+        {/* Marcadores origen y destino */}
+        {origen && <Marker position={[origen[1], origen[0]]} icon={iconoOrigen} />}
+        {destino && <Marker position={[destino[1], destino[0]]} icon={iconoDestino} />}
+
+        <MapClickHandler
+          origen={origen}
+          destino={destino}
+          setOrigen={setOrigen}
+          setDestino={setDestino}
+        />
+      </MapContainer>
+    </div>
   );
 };
 
-export default Arg;
+export default MapaConCapas;
