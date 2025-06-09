@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import servicioPersonas from '../../services/personas';
 import Dialogo from './dialogo'
-import { Paper, CircularProgress, Typography, Box, TextField, InputLabel, Card, CardActions } from '@mui/material';
+import { Paper, CircularProgress, Typography, Box, TextField, InputLabel,   Select, CardActions } from '@mui/material';
 import {
     useMediaQuery,
     useTheme,
@@ -79,7 +79,7 @@ const Estracto = () => {
     const [cargando, setCargando] = useState(false);
     const [loading, setLoading] = useState(false);
     const [existe, setExiste] = useState([]);
-    const [inscrip, setInscrip] = useState(['']);
+    const [inscrip, setInscrip] = useState({profesion:"No"});
     const [activo, setActivo] = useState(false);
     const theme = useTheme();
     const [zoomLevel, setZoomLevel] = useState(0.5);
@@ -183,19 +183,16 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-Inscribite acá para el operativo oftalmológico del barrio JUAN DE VERA el próximo MIÉRCOLES 11 de junio ¡es completamente gratuito!
-
-Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
-
-Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
-
-MIERCOLES 11 de junio de 8.30hs a 13.30hs por orden de llegada.
+La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por Hugo "Cuqui" Calvano, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades. 
         </StyledParagraph>
 
            <StyledParagraph>
-          DÍA: MIERCOLES 11 de junio{"\n"}
-          HORARIO: 8:30 A 13:30 HS{"\n"}
-          BARRIO: JUAN DE VERA{"\n"}
+          En esta oportunidad te ofrecemos 2 talleres distintos, <b>ediciones especiales por el día del padre:</b> BOX de dulces para regalar y marroquinería.{"\n"}<br/>
+<b>¿A quién está dirigido?</b><br/>
+👩‍🎓 Mujeres que desean aprender y desarrollar nuevos talentos y habilidades{"\n"}<br/>
+          <b>¿Cuándo y Donde?</b>
+BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
+ Marroquinería : billetera y morral - 13 y 14 de junio de 16 a 18hs en Pasaje Alvarez 838{"\n"}
           
         </StyledParagraph>
       </Typography>
@@ -424,13 +421,110 @@ MIERCOLES 11 de junio de 8.30hs a 13.30hs por orden de llegada.
 
 
 
+<Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
+        <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="alumna_anterior"
+       style={{ width: '250px' }}
 
+          label="¿Fuiste alumna?"
+          onChange={handleChange}
+        >
+          <MenuItem value="si">Si</MenuItem>
+          <MenuItem value="no">No</MenuItem>
+        </Select>
+   
+
+      {/* Profesión u oficio */}
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes alguna profesion u Oficio?</Typography>
+   <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="profesion"
+
+          label="¿Tenes alguna profesion u Oficio?"
+          onChange={handleChange}
+        >
+          <MenuItem value="Si">Sí</MenuItem>
+          <MenuItem value="No">No</MenuItem>
+        </Select>
+
+      {/* ¿Te gustaría enseñarlo? solo si hay profesión */}
+     {inscrip.profesion != 'No' && inscrip.profesion != '' && (
+      <>          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual?</Typography>
+
+         <TextField
+        margin="dense"
+        id="cursoDeseado"
+        label="- ¿¿Cual?"
+        name="profesion"
+        onChange={handleChange}
+        fullWidth
+        variant="outlined"
+      />
+          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Te gustaría enseñarlo?</Typography>
+          <Select
+            labelId="quiereEnsenar-label"
+            style={{ width: '250px' }}
+
+            name="enseniar"
+       
+            label="¿Te gustaría enseñarlo?"
+            onChange={handleChange}
+          >
+            <MenuItem value="si">Sí</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+        </>
+      )}
+
+      {/* ¿Tenés espacio para talleres? */}
+      <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes algún lugar y/o espacio para que realicemos algún taller?</Typography>
+          <Select
+            labelId="quiereEnsenar-label"
+            
+            name="tiene_espacio"
+       
+            label="¿Tenes algún lugar y/o espacio para que realicemos algún taller?"
+            onChange={handleChange}
+          >
+            <MenuItem value="si">Sí</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+
+      {/* ¿Qué otro curso te gustaría hacer? */}
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿Qué otro curso de te gustaría hacer?</Typography>
+      <TextField
+        style={{ width: '250px' }}
+        margin="dense"
+        id="cursoDeseado"
+        label="- ¿Qué otro curso de te gustaría hacer?"
+        name="curso_adic"
+        onChange={handleChange}
+        fullWidth
+        variant="outlined"
+      />
 
                         </Box>
 
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.localidad && inscrip.direccion ?
+                                {inscrip.nombre &&
+ inscrip.apellido &&
+ inscrip.dni &&
+ inscrip.fecha_nac &&
+ inscrip.tel &&
+ inscrip.localidad &&
+ inscrip.direccion &&
+ inscrip.alumna_anterior &&
+ inscrip.tiene_espacio &&
+ inscrip.curso_adic &&
+ (
+   inscrip.profesion === "No" || 
+   (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
+   (inscrip.profesion === "Si" && inscrip.enseniar)
+ ) ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
@@ -458,19 +552,16 @@ MIERCOLES 11 de junio de 8.30hs a 13.30hs por orden de llegada.
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-Inscribite acá para el operativo oftalmológico del barrio JUAN DE VERA el próximo MIÉRCOLES 11 de junio ¡es completamente gratuito!
-
-Además, podés acceder a anteojos a bajo costo a través de la óptica Pampa Visión. 
-
-Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros meses de pauperio. 
-
-MIERCOLES 11 de junio de 8.30hs a 13.30hs por orden de llegada.
+La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por Hugo "Cuqui" Calvano, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades. 
         </StyledParagraph>
 
            <StyledParagraph>
-          DÍA: MIERCOLES 11 de junio{"\n"}
-          HORARIO: 8:30 A 13:30 HS{"\n"}
-          BARRIO: JUAN DE VERA{"\n"}
+          En esta oportunidad te ofrecemos 2 talleres distintos, <b>ediciones especiales por el día del padre:</b> BOX de dulces para regalar y marroquinería.{"\n"}<br/>
+<b>¿A quién está dirigido?</b><br/>
+👩‍🎓 Mujeres que desean aprender y desarrollar nuevos talentos y habilidades{"\n"}<br/>
+          <b>¿Cuándo y Donde?</b><br/>
+BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
+ Marroquinería : billetera y morral - 13 y 14 de junio de 16 a 18hs en Pasaje Alvarez 838{"\n"}
           
         </StyledParagraph>
       </Typography>  </Box>
@@ -697,12 +788,110 @@ MIERCOLES 11 de junio de 8.30hs a 13.30hs por orden de llegada.
                             />
 
 
+<Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
+        <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="alumna_anterior"
+       style={{ width: '250px' }}
+
+          label="¿Fuiste alumna?"
+          onChange={handleChange}
+        >
+          <MenuItem value="si">Si</MenuItem>
+          <MenuItem value="no">No</MenuItem>
+        </Select>
+   
+      {/* Profesión u oficio */}
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes alguna profesion u Oficio?</Typography>
+   <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="profesion"
+
+          label="¿Tenes alguna profesion u Oficio?"
+          onChange={handleChange}
+        >
+          <MenuItem value="Si">Sí</MenuItem>
+          <MenuItem value="No">No</MenuItem>
+        </Select>
+
+      {/* ¿Te gustaría enseñarlo? solo si hay profesión */}
+     {inscrip.profesion != 'No' && inscrip.profesion != '' && (
+      <>          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual?</Typography>
+
+         <TextField
+        margin="dense"
+        id="cursoDeseado"
+        label="- ¿¿Cual?"
+        name="profesion"
+        onChange={handleChange}
+        fullWidth
+        variant="outlined"
+      />
+          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Te gustaría enseñarlo?</Typography>
+          <Select
+            labelId="quiereEnsenar-label"
+            style={{ width: '250px' }}
+
+            name="enseniar"
+       
+            label="¿Te gustaría enseñarlo?"
+            onChange={handleChange}
+          >
+            <MenuItem value="si">Sí</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+        </>
+      )}
+
+      {/* ¿Tenés espacio para talleres? */}
+      <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes algún lugar y/o espacio para que realicemos algún taller?</Typography>
+          <Select
+            labelId="quiereEnsenar-label"
+            
+            name="tiene_espacio"
+       
+            label="¿Tenes algún lugar y/o espacio para que realicemos algún taller?"
+            onChange={handleChange}
+          >
+            <MenuItem value="si">Sí</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+
+      {/* ¿Qué otro curso te gustaría hacer? */}
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿Qué otro curso de te gustaría hacer?</Typography>
+      <TextField
+        style={{ width: '250px' }}
+        margin="dense"
+        id="cursoDeseado"
+        label="- ¿Qué otro curso de te gustaría hacer?"
+        name="curso_adic"
+        onChange={handleChange}
+        fullWidth
+        variant="outlined"
+      />
+
                         </Box>
 
 
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                {inscrip.nombre && inscrip.apellido && inscrip.dni && inscrip.fecha_nac && inscrip.tel && inscrip.localidad && inscrip.direccion ?
+                                 {inscrip.nombre &&
+ inscrip.apellido &&
+ inscrip.dni &&
+ inscrip.fecha_nac &&
+ inscrip.tel &&
+ inscrip.localidad &&
+ inscrip.direccion &&
+ inscrip.alumna_anterior &&
+ inscrip.tiene_espacio &&
+ inscrip.curso_adic &&
+ (
+   inscrip.profesion === "No" || 
+   (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
+   (inscrip.profesion === "Si" && inscrip.enseniar)
+ ) ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
