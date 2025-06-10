@@ -65,9 +65,9 @@ const MobileNavigation = () => {
       <Button variant="contained" color="success" size="large" fullWidth onClick={() => navigate("/dtc/tallerclases")}>
         Ir a Asistencia
       </Button>
-       <Button variant="contained" color="success" size="large" fullWidth onClick={() => navigate("/dtc/tallerestadisticas")}>
+    {/*    <Button variant="contained" color="success" size="large" fullWidth onClick={() => navigate("/dtc/tallerestadisticas")}>
         Estadisticas
-      </Button>
+      </Button> */}
       
       {/* Título */}
   {mostrarContenido.id !=325 && (
