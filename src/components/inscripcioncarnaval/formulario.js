@@ -505,7 +505,18 @@ BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
         fullWidth
         variant="outlined"
       />
+    <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual curso quieres inscribirte?</Typography>
+   <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="curso"
 
+          label="¿Cual curso quieres inscribirte?"
+          onChange={handleChange}
+        >
+          <MenuItem value="BOX de dulces para regalar">BOX de dulces para regalar</MenuItem>
+          <MenuItem value="Marroquinería : billetera y morral">Marroquinería : billetera y morral</MenuItem>
+        </Select>
                         </Box>
 
                         <CardActions sx={{ justifyContent: 'center' }}>
@@ -520,6 +531,7 @@ BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
  inscrip.alumna_anterior &&
  inscrip.tiene_espacio &&
  inscrip.curso_adic &&
+ inscrip.curso &&
  (
    inscrip.profesion === "No" || 
    (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
@@ -871,6 +883,18 @@ BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
         fullWidth
         variant="outlined"
       />
+       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual curso quieres inscribirte?</Typography>
+   <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="curso"
+
+          label="¿Cual curso quieres inscribirte?"
+          onChange={handleChange}
+        >
+          <MenuItem value="BOX de dulces para regalar">BOX de dulces para regalar</MenuItem>
+          <MenuItem value="Marroquinería : billetera y morral">Marroquinería : billetera y morral</MenuItem>
+        </Select>
 
                         </Box>
 
@@ -887,6 +911,7 @@ BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
  inscrip.alumna_anterior &&
  inscrip.tiene_espacio &&
  inscrip.curso_adic &&
+ inscrip.curso &&
  (
    inscrip.profesion === "No" || 
    (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
