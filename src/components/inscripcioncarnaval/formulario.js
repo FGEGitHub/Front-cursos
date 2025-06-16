@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import servicioPersonas from '../../services/personas';
 import Dialogo from './dialogo'
-import { Paper, CircularProgress, Typography, Box, TextField, InputLabel,   Select, CardActions } from '@mui/material';
+import { Paper,  Typography, Box, TextField, InputLabel,   Select, CardActions } from '@mui/material';
 import {
     useMediaQuery,
     useTheme,
@@ -80,7 +80,6 @@ const Estracto = () => {
     const [loading, setLoading] = useState(false);
     const [existe, setExiste] = useState([]);
     const [inscrip, setInscrip] = useState({profesion:"No"});
-    const [activo, setActivo] = useState(false);
     const theme = useTheme();
     const [zoomLevel, setZoomLevel] = useState(0.5);
     const navigate = useNavigate();
@@ -187,8 +186,9 @@ La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalici�
         </StyledParagraph>
 
       
+
            <StyledParagraph>
-          En esta oportunidad te ofrecemos, <b>2 talleres distintos de cocina: </b> comidas típicas y pastas frescas.{"\n"}<br/>
+          En esta oportunidad te ofrecemos, <b> 2 talleres distintos de cocina: </b> comidas típicas y pastas frescas.{"\n"}<br/>
 <b>¿A quién está dirigido?</b><br/>
 👩‍🎓 Mujeres que desean aprender y desarrollar nuevos talentos y habilidades{"\n"}<br/>
           <b>¿Cuándo y Donde?</b><br/>
