@@ -186,13 +186,14 @@ const Estracto = () => {
 La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por Hugo "Cuqui" Calvano, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades. 
         </StyledParagraph>
 
+      
            <StyledParagraph>
-          En esta oportunidad te ofrecemos 2 talleres distintos, <b>ediciones especiales por el día del padre:</b> BOX de dulces para regalar y marroquinería.{"\n"}<br/>
+          En esta oportunidad te ofrecemos, <b>2 talleres distintos de cocina: </b> comidas típicas y pastas frescas.{"\n"}<br/>
 <b>¿A quién está dirigido?</b><br/>
 👩‍🎓 Mujeres que desean aprender y desarrollar nuevos talentos y habilidades{"\n"}<br/>
-          <b>¿Cuándo y Donde?</b>
-BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
- Marroquinería : billetera y morral - 13 y 14 de junio de 16 a 18hs en Pasaje Alvarez 838{"\n"}
+          <b>¿Cuándo y Donde?</b><br/>
+Comidas típicas - 18 y 19 de junio de 16 a 18hs en Pasaje Alvarez 838
+Pastas frescas - 18 y 19 de junio de 16 a 18hs en salón por costanera y edison (al lado del mirador).{"\n"}
           
         </StyledParagraph>
       </Typography>
@@ -506,7 +507,6 @@ BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
         variant="outlined"
       />
     <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual curso quieres inscribirte?</Typography>
-        <Typography style={{ fontSize: '12px', color: 'black', fontWeight: 500 }}>Solamente queda cupo en Marroquineria</Typography>
 
    <Select
           labelId="fueAlumna-label"
@@ -517,7 +517,9 @@ BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
           onChange={handleChange}
         >
           
-          <MenuItem value="Marroquinería : billetera y morral">Marroquinería : billetera y morral</MenuItem>
+          <MenuItem value="Comidas tipicas">Comidas típicas</MenuItem>
+                    <MenuItem value="Comidas tipicas">Pastas frescas</MenuItem>
+
         </Select>
                         </Box>
 
@@ -570,12 +572,12 @@ La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalici�
         </StyledParagraph>
 
            <StyledParagraph>
-          En esta oportunidad te ofrecemos 2 talleres distintos, <b>ediciones especiales por el día del padre:</b> BOX de dulces para regalar y marroquinería.{"\n"}<br/>
+          En esta oportunidad te ofrecemos, <b>2 talleres distintos de cocina: </b> comidas típicas y pastas frescas.{"\n"}<br/>
 <b>¿A quién está dirigido?</b><br/>
 👩‍🎓 Mujeres que desean aprender y desarrollar nuevos talentos y habilidades{"\n"}<br/>
           <b>¿Cuándo y Donde?</b><br/>
-BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
- Marroquinería : billetera y morral - 13 y 14 de junio de 16 a 18hs en Pasaje Alvarez 838{"\n"}
+Comidas típicas - 18 y 19 de junio de 16 a 18hs en Pasaje Alvarez 838
+Pastas frescas - 18 y 19 de junio de 16 a 18hs en salón por costanera y edison (al lado del mirador).{"\n"}
           
         </StyledParagraph>
       </Typography>  </Box>
@@ -895,7 +897,8 @@ BOX de dulces para regalar - 11 y 12 de junio de 16 a 18hs en Pasaje Alvarez 838
           onChange={handleChange}
         >
           
-          <MenuItem value="Marroquinería : billetera y morral">Marroquinería : billetera y morral</MenuItem>
+    <MenuItem value="Comidas tipicas">Comidas típicas</MenuItem>
+                    <MenuItem value="Comidas tipicas">Pastas frescas</MenuItem>
         </Select>
 
                         </Box>
