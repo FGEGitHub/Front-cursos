@@ -518,7 +518,7 @@ Pastas frescas - 18 y 19 de junio de 16 a 18hs en salón por costanera y edison 
         >
           
           <MenuItem value="Comidas tipicas">Comidas típicas</MenuItem>
-                    <MenuItem value="Comidas tipicas">Pastas frescas</MenuItem>
+                    <MenuItem value="Pastas frescas">Pastas frescas</MenuItem>
 
         </Select>
                         </Box>
@@ -898,7 +898,7 @@ Pastas frescas - 18 y 19 de junio de 16 a 18hs en salón por costanera y edison 
         >
           
     <MenuItem value="Comidas tipicas">Comidas típicas</MenuItem>
-                    <MenuItem value="Comidas tipicas">Pastas frescas</MenuItem>
+                    <MenuItem value="Pastas frescas">Pastas frescas</MenuItem>
         </Select>
 
                         </Box>
