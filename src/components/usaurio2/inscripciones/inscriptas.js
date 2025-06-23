@@ -217,11 +217,11 @@ const exportarAExcel = () => {
   if (!inscriptos || inscriptos.length === 0) return;
 
   // Definir columnas que queremos exportar
-  const encabezados = ['DNI', 'Apellido', 'Nombre','Curso inscripto', 'Tel', 'Tel2',  'barrio','alumnaanteior','profesion','enseniar','tiene espacio para oficios','curso_adic','Fecha'];
+  const encabezados = ['DNI', 'Apellido', 'Nombre','Curso inscripto', 'Tel', 'Tel2',  'barrio','alumnaanteior','profesion','enseniar','tiene espacio para oficios','curso_adic','Agregar a whatsap','Fecha'];
 
   // Crear el contenido CSV con separador punto y coma
   const filas = inscriptos.map(item =>
-    [item.dni, item.apellido, item.nombre, item.curso, item.tel, item.detalle,item.barrio,item.alumna_anterior,item.profesion,item.enseniar,item.tiene_espacio, item.curso_adic,item.fecha]
+    [item.dni, item.apellido, item.nombre, item.curso, item.tel, item.detalle,item.barrio,item.alumna_anterior,item.profesion,item.enseniar,item.tiene_espacio, item.curso_adic,item.agregar_whatsap,item.fecha]
   );
 
   const csvContent = [

@@ -504,6 +504,20 @@ En esta oportunidad te ofrecemos  ¡Taller de Peluquería  Express  !
         fullWidth
         variant="outlined"
       />
+              <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿ Te gustaria que te agreguemos a la comunidad whatsapp ?</Typography>
+
+
+ <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="agregar_whatsap"
+
+          label="¿Tenes alguna profesion u Oficio?"
+          onChange={handleChange}
+        >
+          <MenuItem value="Si">Sí</MenuItem>
+          <MenuItem value="No">No</MenuItem>
+        </Select>
                         </Box>
 
                         <CardActions sx={{ justifyContent: 'center' }}>
@@ -518,7 +532,7 @@ En esta oportunidad te ofrecemos  ¡Taller de Peluquería  Express  !
   inscrip.alumna_anterior &&
  inscrip.tiene_espacio &&
  inscrip.curso_adic &&
-
+  inscrip.agregar_whatsap &&
  (
    inscrip.profesion === "No" || 
    (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
@@ -869,7 +883,20 @@ En esta oportunidad te ofrecemos  ¡Taller de Peluquería  Express  !
         variant="outlined"
       />
 
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿ Te gustaria que te agreguemos a la comunidad whatsapp ?</Typography>
 
+
+ <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="agregar_whatsap"
+
+          label="¿Tenes alguna profesion u Oficio?"
+          onChange={handleChange}
+        >
+          <MenuItem value="Si">Sí</MenuItem>
+          <MenuItem value="No">No</MenuItem>
+        </Select>
 
                         </Box>
 
@@ -886,7 +913,7 @@ En esta oportunidad te ofrecemos  ¡Taller de Peluquería  Express  !
  inscrip.alumna_anterior &&
  inscrip.tiene_espacio &&
  inscrip.curso_adic &&
- 
+  inscrip.agregar_whatsap &&
  
  
  (
