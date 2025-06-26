@@ -207,33 +207,7 @@ const TablaNotificaciones = (props) => {
           },
         },
       });
-    const traer = async (fecha) => {
-        try {
-          console.log(fecha)
-            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-            if (loggedUserJSON) {
-                const usuario = JSON.parse(loggedUserJSON)
-
-                setUsuario(usuario)
-                if(usuario.nivel==41){
-                  const novedades_aux = await servicioDtc.traertodoslosturnosfechacadia({fecha:fecha})
-                  setchicos(novedades_aux[0])
-                  setDatos(novedades_aux[1])
-                  setDatos2(novedades_aux[2])
-                }else{
-                  const novedades_aux = await servicioDtc.traertodoslosturnosfecha({fecha:fecha})
-                  setchicos(novedades_aux[0])
-                  setDatos(novedades_aux[1])
-                  setDatos2(novedades_aux[2])
-                }
-                
-            }
-
-        } catch (error) {
-
-        }
-
-    }
+   
 
     function CutomButtonsRenderer(dataIndex, rowIndex, data, onClick) {
         return (

@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, Checkbox, FormControlLabel, Select, MenuItem } from '@mui/material';
+import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -16,34 +16,16 @@ const StyledParagraph = styled.p`
 
 export default function SelectTextFields(props) {
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
-  const [selectedValue2, setSelectedValue2] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(null);
   const [form, setForm] = useState({});
-  const [usarSegundaLista, setUsarSegundaLista] = useState(false);
   const [nuevoUsuario, setNuevoUsuario] = useState(false);
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
-  const [chicos, setChicos] = useState([]);
-
-  const handleSelection = (event) => {
-    const selected = props.chicos.find(option => option.id === event.target.value) || null;
-    setSelectedValue(selected);
-  };
-
-  const handleSelection2 = (event, value) => {
-    setSelectedValue2(value || null);
-  };
-
 
   const handleClickOpen = () => {
     setForm({ id: props.id, observaciones: "Sin observaciones" });
-    setSelectedValue("");
-    setSelectedValue2(null);
+    setSelectedValue(null);
     setNuevoUsuario(false);
-    setUsarSegundaLista(false);
-    setChicos(props.chicos || []);
-    console.log(props.chicos);
-    console.log(props.chicos2);
     setOpen(true);
   };
 
@@ -63,18 +45,17 @@ export default function SelectTextFields(props) {
         nombre,
         apellido,
         agendadopor: usuario.usuario,
-        usuariodispositivo: "No",
+        usuariodispositivo: "No", // por defecto para nuevos
         observaciones: form.observaciones
       };
     } else {
-      const selected = usarSegundaLista ? selectedValue2 : selectedValue;
-      if (!selected) return;
+      if (!selectedValue) return;
 
       data = {
-        id_persona: selected.id, // Enviar solo el ID de la persona
+        id_persona: selectedValue.id,
         id: form.id,
         agendadopor: usuario.usuario,
-        usuariodispositivo: usarSegundaLista ? "Si" : "No",
+        usuariodispositivo: selectedValue.usuariodispositivo, // viene desde el backend
         observaciones: form.observaciones
       };
     }
@@ -93,32 +74,14 @@ export default function SelectTextFields(props) {
     handleClose();
   };
 
-
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nueva Clase">
-        <Button variant="outlined"sx={{ color: "green", borderColor: "green", fontSize: "0.65rem", }} onClick={handleClickOpen}> Agendar </Button>
+        <Button variant="outlined" sx={{ color: "green", borderColor: "green", fontSize: "0.65rem" }} onClick={handleClickOpen}> Agendar </Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <h3> <b> Agendar Turno</b></h3>
-
-          {/* Checkbox para activar la segunda lista */}
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={usarSegundaLista}
-                onChange={(e) => {
-                  setUsarSegundaLista(e.target.checked);
-                  setNuevoUsuario(false);
-                  setSelectedValue("");
-                  setSelectedValue2(null);
-                }}
-                disabled={nuevoUsuario}
-              />
-            }
-            label="Es usuario del dispositivo"
-          />
+          <h3><b>Agendar Turno</b></h3>
 
           {/* Checkbox para usuario nuevo */}
           <FormControlLabel
@@ -127,71 +90,41 @@ export default function SelectTextFields(props) {
                 checked={nuevoUsuario}
                 onChange={(e) => {
                   setNuevoUsuario(e.target.checked);
-                  setUsarSegundaLista(false);
-                  setSelectedValue("");
-                  setSelectedValue2(null);
+                  setSelectedValue(null);
                 }}
               />
             }
             label="Usuario Nuevo"
           />
 
-          {/* Formulario para usuario nuevo */}
           {nuevoUsuario ? (
             <>
               <TextField label="Nombre" variant="outlined" value={nombre} onChange={(e) => setNombre(e.target.value)} fullWidth />
               <TextField label="Apellido" variant="outlined" value={apellido} onChange={(e) => setApellido(e.target.value)} fullWidth />
             </>
           ) : (
-            <>
-              {/* Select en lugar del primer Autocomplete */}
-           {/*    <Select
-                value={selectedValue?.id || ""}
-                onChange={handleSelection}
-                fullWidth
-                displayEmpty
-                variant="outlined"
-                disabled={usarSegundaLista}
-              >
-                <MenuItem value="" disabled>Selecciona una opción</MenuItem>
-                {props.chicos.map((option) => (
-                  <MenuItem key={option.id} value={option.id}>
-                    {option.apellido} {option.nombre} {option.nombrepsic && "  -   se atiende normalmente con " + option.nombrepsic}
-                  </MenuItem>
-                ))}
-              </Select> */}
-              <Autocomplete
-  options={props.chicos}
-  value={selectedValue}
-  onChange={(event, newValue) => setSelectedValue(newValue)}
-  getOptionLabel={(option) => `${option.apellido} ${option.nombre} ${option.nombrepsic ? `` : ''}`}
-  isOptionEqualToValue={(option, value) => option.id === value?.id}
-  renderInput={(params) => (
-    <TextField {...params} label="Selecciona una opción" variant="outlined" />
-  )}
-  disabled={usarSegundaLista}
-/>
-              {/* Segundo Autocomplete */}
-              <Autocomplete
-                options={props.chicos2}
-                value={selectedValue2}
-                onChange={handleSelection2}
-                getOptionLabel={(option) => `${option.nombre} ${option.apellido}`}
-                isOptionEqualToValue={(option, value) => option.id === value?.id}
-                renderInput={(params) => (
-                  <TextField {...params} label="Selecciona una opción" variant="outlined" />
-                )}
-                disabled={!usarSegundaLista}
-              />
-            </>
+            <Autocomplete
+              options={props.chicos} // unificado: psicólogas + chicos
+              value={selectedValue}
+              onChange={(event, newValue) => setSelectedValue(newValue)}
+              getOptionLabel={(option) =>
+                `${option.apellido} ${option.nombre} ${option.nombrepsic ? `- se atiende normalmente con ${option.nombrepsic}` : ''}`
+              }
+              isOptionEqualToValue={(option, value) => option.id === value?.id}
+              renderInput={(params) => (
+                <TextField {...params} label="Selecciona una opción" variant="outlined" />
+              )}
+            />
           )}
+
           <TextField
             label="Observaciones"
             variant="outlined"
-            value={form.apellido}
+            value={form.observaciones}
             onChange={(e) => setForm({ ...form, observaciones: e.target.value })}
             fullWidth
           />
+
           <DialogActions>
             <Button variant="outlined" color="success" onClick={handleBackendCall}>Asignar turno</Button>
             <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
