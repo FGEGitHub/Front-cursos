@@ -182,7 +182,14 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-Inscribite acá para los operativos oftalmológicos que se van a hacer el 25 de junio en el barrio SANTA ROSA, el 26 de junio en el barrio VILLA RAQUEL y el 27 de junio en el barrio POPULAR de 8.30 a 13.30hs por orden de llegada.        </StyledParagraph>
+Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:📅 2 de julio
+📍 San Roque Oeste<br/>
+
+📅 3 de julio
+📍 Barrio 17 de Agosto<br/>
+
+📅 7 de julio
+📍 Barrio Sol de Mayo     <br/>   </StyledParagraph>
 
        ¡es completamente gratuito!
 
@@ -426,10 +433,10 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
           label="¿Cual curso quieres inscribirte?"
           onChange={handleChange}
         >
-              <MenuItem value="Miercoles 25 de junio, barrio Santa Rosa">Miercoles 25 de junio, barrio Santa Rosa</MenuItem>
+              <MenuItem value="San Roque Oeste">San Roque Oeste</MenuItem>
 
-    <MenuItem value="Jueves 26 de junio, barrio Villa Raquel">Jueves 26 de junio, barrio Villa Raquel</MenuItem>
-                    <MenuItem value="Viernes 27 de junio, barrio popular">Viernes 27 de junio, barrio popular</MenuItem>
+    <MenuItem value="Barrio 17 de Agosto">Barrio 17 de Agosto</MenuItem>
+                    <MenuItem value="Barrio Sol de Mayo">Barrio Sol de Mayo</MenuItem>
         </Select>
                         </Box>
 
@@ -443,12 +450,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
  inscrip.localidad &&
  inscrip.direccion &&
  
- inscrip.curso &&
- (
-   inscrip.profesion === "No" || 
-   (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
-   (inscrip.profesion === "Si" && inscrip.enseniar)
- ) ?
+ inscrip.curso  ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
@@ -476,7 +478,14 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
            <StyledParagraph>
-Inscribite acá para los operativos oftalmológicos que se van a hacer el 25 de junio en el barrio SANTA ROSA, el 26 de junio en el barrio VILLA RAQUEL y el 27 de junio en el barrio POPULAR de 8.30 a 13.30hs por orden de llegada.        </StyledParagraph>
+Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:📅 2 de julio
+📍 San Roque Oeste<br/>
+
+📅 3 de julio
+📍 Barrio 17 de Agosto<br/>
+
+📅 7 de julio
+📍 Barrio Sol de Mayo    <br/>    </StyledParagraph>
 
        ¡es completamente gratuito!
 
@@ -718,10 +727,10 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
           label="¿Cual curso quieres inscribirte?"
           onChange={handleChange}
         >
-              <MenuItem value="Miercoles 25 de junio, barrio Santa Rosa">Miercoles 25 de junio, barrio Santa Rosa</MenuItem>
+              <MenuItem value="San Roque Oeste">San Roque Oeste</MenuItem>
 
-    <MenuItem value="Jueves 26 de junio, barrio Villa Raquel">Jueves 26 de junio, barrio Villa Raquel</MenuItem>
-                    <MenuItem value="Viernes 27 de junio, barrio popular">Viernes 27 de junio, barrio popular</MenuItem>
+    <MenuItem value="Barrio 17 de Agosto">Barrio 17 de Agosto</MenuItem>
+                    <MenuItem value="Barrio Sol de Mayo">Barrio Sol de Mayo</MenuItem>
         </Select>
 
                         </Box>
@@ -737,12 +746,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
  inscrip.localidad &&
  inscrip.direccion &&
  
- inscrip.curso &&
- (
-   inscrip.profesion === "No" || 
-   (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
-   (inscrip.profesion === "Si" && inscrip.enseniar)
- ) ?
+ inscrip.curso  ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
