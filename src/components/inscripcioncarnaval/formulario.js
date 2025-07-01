@@ -435,7 +435,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
         >
               <MenuItem value="San Roque Oeste">San Roque Oeste</MenuItem>
 
-    <MenuItem value="Barrio 17 de Agosto">Barrio 17 de Agosto</MenuItem>
+    
                     <MenuItem value="Barrio Sol de Mayo">Barrio Sol de Mayo</MenuItem>
         </Select>
                         </Box>
@@ -729,7 +729,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
         >
               <MenuItem value="San Roque Oeste">San Roque Oeste</MenuItem>
 
-    <MenuItem value="Barrio 17 de Agosto">Barrio 17 de Agosto</MenuItem>
+    
                     <MenuItem value="Barrio Sol de Mayo">Barrio Sol de Mayo</MenuItem>
         </Select>
 
