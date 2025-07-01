@@ -74,6 +74,7 @@ export default function SelectTextFields(props) {
     handleClose();
   };
 
+
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nueva Clase">

@@ -150,7 +150,7 @@ import Dtcturnospersona from '../pages/dtc/turnopersona';
 import Dtcturnosusuario from '../pages/dtc/turnosusuario';
 
 import Dtcturnosusuarios from '../pages/dtc/turnosusuarios';
-
+import DtcEstadisticastodas from '../pages/dtc/estadisticastodas';
 
 
 import DTCAsistencia from '../pages/dtc/nivel2/asistencia';
@@ -368,7 +368,7 @@ const Rutas = [
 
 
 
-
+	{ path: '/dtc/estadisticastodas', element: <DtcEstadisticastodas /> },
 	{ path: '/dtc/login', element: <Logindtc /> },
 	{ path: '/dtc/usuario1/menu', element: <DtcMenu /> },
 	{ path: '/dtc/usuario1/usuarios', element: <DetUsuarios /> },
