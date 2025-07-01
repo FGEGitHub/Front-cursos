@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import servicioDtc from "../../../services/dtc"; // Ajustá esta ruta si es necesario
+import servicioDtc from "../../../services/dtc";
 
 const App = () => {
   const [chicos, setChicos] = useState([]);
   const [asistencias2025, setAsistencias2025] = useState([]);
   const [pacientes, setPacientes] = useState([]);
   const [turnos, setTurnos] = useState([]);
-  const [usuarios, setUsuarios] = useState([]); // Usuarios de gimnasio
+  const [usuarios, setUsuarios] = useState([]);
+  const [colaciones, setColaciones] = useState([]);
+  const [meriendas, setMeriendas] = useState([]);
 
   useEffect(() => {
     const traerDatos = async () => {
@@ -18,7 +20,9 @@ const App = () => {
         setAsistencias2025(data[1]);
         setPacientes(data[2]);
         setTurnos(data[3]);
-        setUsuarios(data[4]); // Dato nuevo: usuarios de gimnasio
+        setUsuarios(data[4]);
+        setColaciones(data[5]);
+        setMeriendas(data[6]);
       } catch (error) {
         console.error("Error al traer datos:", error);
       }
@@ -27,7 +31,6 @@ const App = () => {
     traerDatos();
   }, []);
 
-  // 🔢 Agrupar por mes YYYY-MM
   const agruparPorMes = (datos, campoFecha) => {
     const porMes = {};
     datos.forEach((item) => {
@@ -40,7 +43,6 @@ const App = () => {
     return porMes;
   };
 
-  // 📆 Contar días únicos con clases por mes
   const contarDiasDistintosPorMes = (datos, campoFecha) => {
     const diasPorMes = {};
     datos.forEach((item) => {
@@ -61,7 +63,6 @@ const App = () => {
     return resultado;
   };
 
-  // 🧩 Agrupar usuarios de gimnasio por clase
   const agruparPorClase = (usuarios) => {
     const clases = {};
     usuarios.forEach((usuario) => {
@@ -71,10 +72,28 @@ const App = () => {
     return clases;
   };
 
+  // 🔢 Agrupar cantidades por mes (ej: colaciones, meriendas)
+const sumarCantidadPorMes = (datos) => {
+  const porMes = {};
+  datos.forEach((item) => {
+    const mes = item.fecha?.substring(0, 7);
+    if (!mes) return;
+    porMes[mes] = (porMes[mes] || 0) + Number(item.cantidad || 0); // 👈 Parseo aquí
+  });
+  return porMes;
+};
+
+
   const asistenciasPorMes = agruparPorMes(asistencias2025, "fecha");
   const diasConClasesPorMes = contarDiasDistintosPorMes(asistencias2025, "fecha");
   const turnosPorMes = agruparPorMes(turnos, "fecha");
   const usuariosPorClase = agruparPorClase(usuarios);
+  const colacionesPorMes = sumarCantidadPorMes(colaciones);
+  const meriendasPorMes = sumarCantidadPorMes(meriendas);
+
+const totalColaciones = colaciones.reduce((acc, item) => acc + Number(item.cantidad || 0), 0);
+const totalMeriendas = meriendas.reduce((acc, item) => acc + Number(item.cantidad || 0), 0);
+
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
@@ -102,7 +121,7 @@ const App = () => {
         <ul>
           {Object.entries(asistenciasPorMes).map(([mes, cantidad]) => (
             <li key={mes}>
-              {mes}: {cantidad} asistencias ({diasConClasesPorMes[mes] || 0} Dias laborables)
+              {mes}: {cantidad} asistencias ({diasConClasesPorMes[mes] || 0} días con clases)
             </li>
           ))}
         </ul>
@@ -119,6 +138,28 @@ const App = () => {
         </ul>
       ) : (
         <p>Sin datos.</p>
+      )}
+
+      <h2>🍎 Total colaciones: {totalColaciones}</h2>
+      {Object.keys(colacionesPorMes).length > 0 ? (
+        <ul>
+          {Object.entries(colacionesPorMes).map(([mes, cantidad]) => (
+            <li key={mes}>{mes}: {cantidad}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Sin datos de colaciones.</p>
+      )}
+
+      <h2>🥛 Total meriendas: {totalMeriendas}</h2>
+      {Object.keys(meriendasPorMes).length > 0 ? (
+        <ul>
+          {Object.entries(meriendasPorMes).map(([mes, cantidad]) => (
+            <li key={mes}>{mes}: {cantidad}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Sin datos de meriendas.</p>
       )}
     </div>
   );
