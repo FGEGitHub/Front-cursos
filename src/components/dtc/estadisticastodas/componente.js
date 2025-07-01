@@ -9,6 +9,7 @@ const App = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [colaciones, setColaciones] = useState([]);
   const [meriendas, setMeriendas] = useState([]);
+  const [talleres, setTalleres] = useState([]); // 👈 NUEVO
 
   useEffect(() => {
     const traerDatos = async () => {
@@ -23,6 +24,7 @@ const App = () => {
         setUsuarios(data[4]);
         setColaciones(data[5]);
         setMeriendas(data[6]);
+        setTalleres(data[7]); // 👈 NUEVO
       } catch (error) {
         console.error("Error al traer datos:", error);
       }
@@ -72,39 +74,47 @@ const App = () => {
     return clases;
   };
 
-  // 🔢 Agrupar cantidades por mes (ej: colaciones, meriendas)
-const sumarCantidadPorMes = (datos) => {
-  const porMes = {};
-  datos.forEach((item) => {
-    const mes = item.fecha?.substring(0, 7);
-    if (!mes) return;
-    porMes[mes] = (porMes[mes] || 0) + Number(item.cantidad || 0); // 👈 Parseo aquí
-  });
-  return porMes;
-};
+  const sumarCantidadPorMes = (datos) => {
+    const porMes = {};
+    datos.forEach((item) => {
+      const mes = item.fecha?.substring(0, 7);
+      if (!mes) return;
+      porMes[mes] = (porMes[mes] || 0) + Number(item.cantidad || 0);
+    });
+    return porMes;
+  };
 
-
+  // Procesamientos
   const asistenciasPorMes = agruparPorMes(asistencias2025, "fecha");
   const diasConClasesPorMes = contarDiasDistintosPorMes(asistencias2025, "fecha");
   const turnosPorMes = agruparPorMes(turnos, "fecha");
   const usuariosPorClase = agruparPorClase(usuarios);
   const colacionesPorMes = sumarCantidadPorMes(colaciones);
   const meriendasPorMes = sumarCantidadPorMes(meriendas);
+  const talleresPorMes = agruparPorMes(talleres, "fecha"); // ✅ NUEVO
 
-const totalColaciones = colaciones.reduce((acc, item) => acc + Number(item.cantidad || 0), 0);
-const totalMeriendas = meriendas.reduce((acc, item) => acc + Number(item.cantidad || 0), 0);
-
+  const totalColaciones = colaciones.length > 0 ? colaciones.reduce((acc, item) => acc + Number(item.cantidad || 0), 0) : 0;
+  const totalMeriendas = meriendas.length > 0 ? meriendas.reduce((acc, item) => acc + Number(item.cantidad || 0), 0) : 0;
+  const totalTalleres = talleres.length; // ✅ NUEVO
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
       <h1>📊 Resumen de Estadísticas 2025</h1>
+<h2><strong>👦 Cantidad de usuarios inscriptos en el dispositivo 2025:</strong> {chicos.length +pacientes.length + usuarios.length }</h2>
 
-      <p><strong>👦 Cantidad de chicos:</strong> {chicos.length}</p>
-      <p><strong>📝 Cantidad de asistencias 2025:</strong> {asistencias2025.length}</p>
-      <p><strong>🏥 Cantidad de pacientes:</strong> {pacientes.length}</p>
-      <p><strong>📅 Cantidad de turnos:</strong> {turnos.length}</p>
+      <p><strong>👦 Cantidad de usuarios que asisten a los talleres 2025:</strong> {chicos.length}</p>
+     
+  
+      <p><strong>🏥 Cantidad de usuarios  en tratamiento:</strong> {pacientes.length}</p>
       <p><strong>🏋️‍♀️ Cantidad de usuarios de gimnasio:</strong> {usuarios.length}</p>
-
+          <p><strong>📝 Cantidad de asistencias 2025:</strong> {asistencias2025.length}</p>
+      <p><strong>📅 Cantidad de turnos:</strong> {turnos.length}</p>
+      
+     <p><strong>🏋️‍♀️ Cantidad de asistencias a talleres:</strong>{totalTalleres}</p>
+      <h3>👦 Cantidad de usuarios 2024: </h3>
+  <p> Cantidad de usuarios que asisten a los talleres en 2024 : 191</p>
+        <p>🏥 Cantidad de usuarios  en tratamiento 2024: 84</p>
+                <p>🏥 Cantidad de asistencias sociales 2024: 51</p>
       <h2>🧩 Usuarios de gimnasio por clase</h2>
       {Object.keys(usuariosPorClase).length > 0 ? (
         <ul>
@@ -160,6 +170,17 @@ const totalMeriendas = meriendas.reduce((acc, item) => acc + Number(item.cantida
         </ul>
       ) : (
         <p>Sin datos de meriendas.</p>
+      )}
+
+      <h2>🎨 Total de asistencia a los talleres: {totalTalleres}</h2>
+      {Object.keys(talleresPorMes).length > 0 ? (
+        <ul>
+          {Object.entries(talleresPorMes).map(([mes, cantidad]) => (
+            <li key={mes}>{mes}: {cantidad} asistencias</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Sin datos de talleres.</p>
       )}
     </div>
   );
