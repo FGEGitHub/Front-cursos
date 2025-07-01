@@ -99,23 +99,31 @@ const App = () => {
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
-      <h1>📊 Resumen de Estadísticas 2025</h1>
-<h2><strong>👦 Cantidad de usuarios inscriptos en el dispositivo 2025:</strong> {chicos.length +pacientes.length + usuarios.length }</h2>
+      <h1>📊 Resumen de Estadísticas julio-2025</h1>
+       <p>🏥 {totalTalleres + asistencias2025.length +usuarios.length} prestaciones en 2025 (enero-julio): </p>
 
+<h2><strong>👦 Cantidad de usuarios inscriptos en el dispositivo 2025:</strong> {chicos.length +pacientes.length + usuarios.length }</h2>
       <p><strong>👦 Cantidad de usuarios que asisten a los talleres 2025:</strong> {chicos.length}</p>
-     
-  
+
       <p><strong>🏥 Cantidad de usuarios  en tratamiento:</strong> {pacientes.length}</p>
       <p><strong>🏋️‍♀️ Cantidad de usuarios de gimnasio:</strong> {usuarios.length}</p>
-          <p><strong>📝 Cantidad de asistencias 2025:</strong> {asistencias2025.length}</p>
-      <p><strong>📅 Cantidad de turnos:</strong> {turnos.length}</p>
-      
+{/*           <p><strong>📝 Cantidad de asistencias 2025:</strong> {asistencias2025.length}</p>
+ */}      <p><strong>📅 Cantidad de turnos:</strong> {turnos.length}</p>
+       <p>🏥 Cantidad de asistencias sociales: 133</p>
      <p><strong>🏋️‍♀️ Cantidad de asistencias a talleres:</strong>{totalTalleres}</p>
-      <h3>👦 Cantidad de usuarios 2024: </h3>
-  <p> Cantidad de usuarios que asisten a los talleres en 2024 : 191</p>
+  <p><strong>Total colaciones: {totalColaciones}</strong></p>
+    <p><strong>🥛 Total meriendas: {totalMeriendas}</strong></p>
+
+---------------2024----------------
+       <p>🏥 7841 prestaciones en 2024: </p>
+
+      <h3>👦 Cantidad de usuarios 2024: 654  </h3>
+
+  <p> Cantidad de usuarios que asisten a los talleres en 2024 : 190</p>
         <p>🏥 Cantidad de usuarios  en tratamiento 2024: 84</p>
+          <p><strong>🏋️‍♀️ Cantidad de usuarios de gimnasio:</strong> 93</p>
                 <p>🏥 Cantidad de asistencias sociales 2024: 51</p>
-      <h2>🧩 Usuarios de gimnasio por clase</h2>
+              
       {Object.keys(usuariosPorClase).length > 0 ? (
         <ul>
           {Object.entries(usuariosPorClase).map(([clase, cantidad]) => (
