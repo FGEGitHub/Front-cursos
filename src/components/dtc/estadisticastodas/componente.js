@@ -108,7 +108,7 @@ const App = () => {
       <p><strong>🏥 Cantidad de usuarios  en tratamiento:</strong> {pacientes.length}</p>
       <p><strong>🏋️‍♀️ Cantidad de usuarios de gimnasio:</strong> {usuarios.length}</p>
 {/*           <p><strong>📝 Cantidad de asistencias 2025:</strong> {asistencias2025.length}</p>
- */}      <p><strong>📅 Cantidad de turnos:</strong> {turnos.length}</p>
+ */}      <p><strong>📅 Cantidad de prestaciones a personas en tratamiento:</strong> {turnos.length}</p>
        <p>🏥 Cantidad de asistencias sociales: 133</p>
      <p><strong>🏋️‍♀️ Cantidad de asistencias a talleres:</strong>{totalTalleres}</p>
   <p><strong>Total colaciones: {totalColaciones}</strong></p>
@@ -122,7 +122,7 @@ const App = () => {
   <p> Cantidad de usuarios que asisten a los talleres en 2024 : 190</p>
         <p>🏥 Cantidad de usuarios  en tratamiento 2024: 84</p>
           <p><strong>🏋️‍♀️ Cantidad de usuarios de gimnasio:</strong> 93</p>
-                <p>🏥 Cantidad de asistencias sociales 2024: 51</p>
+              {/*   <p>🏥 Cantidad de asistencias sociales 2024: 51</p> */}
               
       {Object.keys(usuariosPorClase).length > 0 ? (
         <ul>
