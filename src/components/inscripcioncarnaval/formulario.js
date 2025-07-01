@@ -433,7 +433,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
           label="¿Cual curso quieres inscribirte?"
           onChange={handleChange}
         >
-              <MenuItem value="San Roque Oeste">San Roque Oeste</MenuItem>
+              
 
     
                     <MenuItem value="Barrio Sol de Mayo">Barrio Sol de Mayo</MenuItem>
@@ -727,7 +727,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
           label="¿Cual curso quieres inscribirte?"
           onChange={handleChange}
         >
-              <MenuItem value="San Roque Oeste">San Roque Oeste</MenuItem>
+              
 
     
                     <MenuItem value="Barrio Sol de Mayo">Barrio Sol de Mayo</MenuItem>
