@@ -2,11 +2,9 @@
 
 
 
-import Asis from '../../../../components/dtc/usuario2/asistencia/tabla'
+import Asis from '../../../components/dtc/estadisticastodas/estadisticas2'
 import { useNavigate, useParams } from "react-router-dom";
-import Login from '../../../../components/dtc/usuario1/usuarios/todos'
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../../components/dtc/Navbar'
 
 import {
 
