@@ -113,7 +113,7 @@ const App = () => {
      <p><strong>🏋️‍♀️ Cantidad de asistencias a talleres:</strong>{totalTalleres}</p>
   <p><strong>Total colaciones: {totalColaciones}</strong></p>
     <p><strong>🥛 Total meriendas: {totalMeriendas}</strong></p>
-
+{/* 
 ---------------2024----------------
 
               
@@ -182,8 +182,8 @@ const App = () => {
         </ul>
       ) : (
         <p>Sin datos de talleres.</p>
-      )}
-    </div>
+      )}*/}
+    </div> 
   );
 };
 
