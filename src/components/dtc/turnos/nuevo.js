@@ -37,8 +37,9 @@ export default function ExpedienteForm(props) {
     const respuesta = await serviciodtc.nuevooficio(form)
     
     
-      alert(respuesta.mensaje);
+      alert("Realizado");
     } catch (error) {
+      alert("Error al enviar, contacta al administrador");
       console.error("Error al enviar el formulario", error);
     }
     setOpen(false);

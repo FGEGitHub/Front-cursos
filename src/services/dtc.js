@@ -1191,8 +1191,8 @@ const borrarusoconsumo = async (datos) => {
 };
 
 const nuevooficio = async (datos) => {
-  const {data } = await axios.post(baseUrl+'nuevooficio',datos,config)
-  
+  const data= await axios.post(baseUrl+'nuevooficio',datos,config)
+  console.log(data)
     return data
 };
 
