@@ -346,7 +346,7 @@ function Nivel(dataIndex, rowIndex, data, onClick) {
 const columns = [
       {
         name: "id",
-        label: "ID",
+        label: "ID",    
     },
     {
         name: "trabajador_nombre",

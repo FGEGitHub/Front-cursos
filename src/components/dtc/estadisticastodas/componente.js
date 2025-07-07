@@ -17,14 +17,14 @@ const App = () => {
         const data = await servicioDtc.traerestadisticastodas();
         console.log("Datos recibidos:", data);
 
-        setChicos(data[0]);
-        setAsistencias2025(data[1]);
-        setPacientes(data[2]);
+        setChicos(data[0]);///usuarios
+        setAsistencias2025(data[1]);//asistenciasliteral
+        setPacientes(data[2]);////
         setTurnos(data[3]);
-        setUsuarios(data[4]);
+        setUsuarios(data[4]);////gimnasio
         setColaciones(data[5]);
         setMeriendas(data[6]);
-        setTalleres(data[7]); // 👈 NUEVO
+        setTalleres(data[7]); // 
       } catch (error) {
         console.error("Error al traer datos:", error);
       }
@@ -100,9 +100,9 @@ const App = () => {
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
       <h1>📊 Resumen de Estadísticas julio-2025</h1>
-       <p>🏥 {totalTalleres + asistencias2025.length +usuarios.length} prestaciones en 2025 (enero-julio): </p>
+       <p>🏥 {totalTalleres + asistencias2025.length +usuarios.length+375} prestaciones en 2025 (enero-julio): </p>
 
-<h2><strong>👦 Cantidad de usuarios inscriptos en el dispositivo 2025:</strong> {chicos.length +pacientes.length + usuarios.length }</h2>
+<h2><strong>👦 Cantidad de usuarios inscriptos en el dispositivo 2025:</strong> {chicos.length +pacientes.length + usuarios.length+60+35+25}(usuarios talleres+ tratamiento + gimansio + fines + asesoramientos juridicos+ abuelos)</h2>
       <p><strong>👦 Cantidad de usuarios que asisten a los talleres 2025:</strong> {chicos.length}</p>
 
       <p><strong>🏥 Cantidad de usuarios  en tratamiento:</strong> {pacientes.length}</p>
