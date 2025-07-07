@@ -100,7 +100,7 @@ const App = () => {
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
       <h1>📊 Resumen de Estadísticas julio-2025</h1>
-       <p>🏥 {totalTalleres + asistencias2025.length +usuarios.length+375} prestaciones en 2025 (enero-julio): </p>
+       <p>🏥 {totalTalleres + asistencias2025.length +usuarios.length+375+turnos.length+60} prestaciones en 2025 (enero-julio): </p>
 
 <h2><strong>👦 Cantidad de usuarios inscriptos en el dispositivo 2025:</strong> {chicos.length +pacientes.length + usuarios.length+60+35+25}(usuarios talleres+ tratamiento + gimansio + fines + asesoramientos juridicos+ abuelos)</h2>
       <p><strong>👦 Cantidad de usuarios que asisten a los talleres 2025:</strong> {chicos.length}</p>

@@ -1,8 +1,8 @@
 
 
 import { useNavigate, useParams } from "react-router-dom";
-import Formulario from '../../components/inscripcioncarnaval/formulario'
-//import Formulario from '../../components/inscripcioncarnaval/formularioexpres'
+//import Formulario from '../../components/inscripcioncarnaval/formulario'
+import Formulario from '../../components/inscripcioncarnaval/formularioexpres'
 
 //import Formulario from '../../components/componenteinscripcion/cerrado'
 

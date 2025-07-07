@@ -181,15 +181,15 @@ const Estracto = () => {
 
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
-           <StyledParagraph>
-La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por Hugo "Cuqui" Calvano, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.       </StyledParagraph>
-En esta oportunidad te ofrecemos  ¡Taller de Peluquería  Express  !
+  <StyledParagraph>
+La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
+En esta oportunidad te ofrecemos el taller de COCINA EXPRESS: tips para alimentos congelados.
 
            <StyledParagraph>
       ¿A quién está dirigido? <br/>
-      👩‍🎓 Mujeres que desean aprender y desarrollar nuevos talentos y habilidades <br/>
-¿Cuándo y Donde? <br/>
-¡Taller de Peluquería  Express  ! - 25 y 26 de junio de 16 a 18hs en *Pasaje Alvarez 838{"\n"}
+      👩‍🎓 Mujeres que desean aprender más sobre las formas y cuidados para la venta de productos congelados.
+       <br/>
+11 y 12 de julio de 16 a 18hs en Pasaje Alvarez 838{"\n"}
           
         </StyledParagraph>
       </Typography>
@@ -565,14 +565,14 @@ En esta oportunidad te ofrecemos  ¡Taller de Peluquería  Express  !
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
            <StyledParagraph>
-La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por Hugo "Cuqui" Calvano, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.       </StyledParagraph>
-En esta oportunidad te ofrecemos  ¡Taller de Peluquería  Express  !
+La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
+En esta oportunidad te ofrecemos el taller de COCINA EXPRESS: tips para alimentos congelados.
 
            <StyledParagraph>
       ¿A quién está dirigido? <br/>
-      👩‍🎓 Mujeres que desean aprender y desarrollar nuevos talentos y habilidades <br/>
-¿Cuándo y Donde? <br/>
-¡Taller de Peluquería  Express  ! - 25 y 26 de junio de 16 a 18hs en *Pasaje Alvarez 838{"\n"}
+      👩‍🎓 Mujeres que desean aprender más sobre las formas y cuidados para la venta de productos congelados.
+       <br/>
+11 y 12 de julio de 16 a 18hs en Pasaje Alvarez 838{"\n"}
           
         </StyledParagraph>
       </Typography>  </Box>
