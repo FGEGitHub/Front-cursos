@@ -73,6 +73,7 @@ import JustificacionEncargados from '../pages/usuario4/justificaciones'
 
 
 
+import InscripcionFiscainterna from '../pages/fiscalizacion/inscripcioninterna';
 import Loginfis from '../pages/fiscalizacion/login';
 import Menuadmin from '../pages/fiscalizacion/Admin/Menuprinc';
 import CargarFisca from '../pages/fiscalizacion/Admin/cargarexcel';
@@ -339,6 +340,7 @@ const Rutas = [
 	{ path: '/fiscalizacion/administracion/mesas', element: <Mesasfisc /> },
 	{ path: '/fiscalizacion/administracion/subirescuelas', element: <Subiresc /> },
 	{ path: '/fiscalizacion/inscripcion', element: <InscripcionFisca /> },
+		{ path: '/fiscalizacion/inscripcioninterna', element: <InscripcionFiscainterna /> },
 	{ path: '/fiscalizacion/usuarios', element: <Usersfisca /> },
 	{ path: '/fiscalizacion/alia', element: <Aliadoscarga /> },
 	{ path: '/fiscalizacion/administracion/escuelas', element: <EscuelasAdmin /> },
