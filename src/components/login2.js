@@ -1,239 +1,142 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import loginService from '../services/login'
+import loginService from '../services/login';
+import servicioUsuario from '../services/usuarios';
+import Registro from "./Registro2";
+
 import {
-    Button,
-    Card,
-    CardContent,
-    Grid,
-    TextField,
-    Typography,
-    CircularProgress,
-    Paper,
-    Avatar,
-    Link
-  } from "@mui/material";
-  import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
-//import 'antd/dist/antd.css'
-import servicioUsuario from '../services/usuarios'
-import Registro from "./Registro2"
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  TextField,
+  Typography,
+  CircularProgress,
+  Avatar,
+  Link,
+  Box
+} from "@mui/material";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Login = () => {
-
-    const [loginVisible, setLoginvisible] = useState(false)
-  const [usuario, setUsuario] = useState({
-    cuil_cuit: "",
-    password: "",
-  });
-  const [user, setUser] = useState(null)
-
-
+  const [usuario, setUsuario] = useState({ cuil_cuit: "", password: "" });
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  //const [editing, setEditing] = useState(false);
-
   const navigate = useNavigate();
-  const params = useParams();
-
-
 
   const hanleLogout = () => {
-    setUser(null)
-    servicioUsuario.setToken(user.token)
-    window.localStorage.removeItem('loggedNoteAppUser')
-  }
+    setUser(null);
+    servicioUsuario.setToken(null);
+    window.localStorage.removeItem('loggedNoteAppUser');
+  };
 
   const loginSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     try {
-
       const user = await loginService.login({
         usuario: usuario.usuario,
         password: usuario.password
-      })
-
-      window.localStorage.setItem(
-        'loggedNoteAppUser', JSON.stringify(user)
-      )
-
-      servicioUsuario.setToken(user.token)
-      console.log(user)
-      setUser(user)
-
+      });
+      window.localStorage.setItem('loggedNoteAppUser', JSON.stringify(user));
+      servicioUsuario.setToken(user.token);
+      setUser(user);
       setLoading(false);
 
-      console.log(user.nivel)
-      switch(user.nivel){
-       
-          case 50:navigate('/fiscalizacion/administracion/menu')
-
-         
-          break;
-          case 6:alert('Error, solo acceso administradores')
-        
-          break;
-          case 7:alert('Error, solo acceso administradores')
-        
-          break;
-          case 8:navigate('/fiscalizacion/inscripcionadmin')
-        
-          break;
-          case 9:navigate('/fiscalizacion/encargados/carga')
-        
-          break;
-          case 10:navigate('/fiscalizacion/usuarioescuela/personas')
-        
-          break;
-          case 11:alert('Error, solo acceso administradores')
-        
-          break;
-          case 12:navigate('/fiscalizacion/movilidad/escuelas')
-        
-          break;
-        /*   case 6:navigate('/fiscalizacion/fiscal')
-        
-          break;
-          case 7:navigate('/fiscalizacion/alia')
-        
-          break;
-          case 8:navigate('/fiscalizacion/inscripcionadmin')
-        
-          break;
-          case 9:navigate('/fiscalizacion/encargados/carga')
-        
-          break;
-          case 10:navigate('/fiscalizacion/usuarioescuela/personas')
-        
-          break;
-          case 11:navigate('/fiscalizacion/suplentes/asignados')
-        
-          break;
-          case 12:navigate('/fiscalizacion/movilidad/escuelas')
-        
-          break; */
-          
-            default:hanleLogout();
-          break;
-
-
+      switch (user.nivel) {
+        case 50: navigate('/fiscalizacion/administracion/menu'); break;
+        case 8: navigate('/fiscalizacion/inscripcionadmin'); break;
+        case 9: navigate('/fiscalizacion/encargados/carga'); break;
+        case 10: navigate('/fiscalizacion/usuarioescuela/personas'); break;
+        case 12: navigate('/fiscalizacion/movilidad/escuelas'); break;
+        default: hanleLogout(); break;
       }
     } catch (error) {
       console.error(error);
-      console.log('error credenciales')
-      window.location.reload(true);
-      alert('error credenciales')
-    
+      alert('Credenciales incorrectas');
+      window.location.reload();
     }
-
   };
-
 
   const handleChange = (e) =>
     setUsuario({ ...usuario, [e.target.name]: e.target.value });
 
-
-
-  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
-  const avatarStyle = { backgroundColor: '#2196f3' }
-  const btnstyle = { margin: '8px 0' }
-
-  const LoginReturn = () => (
-
-
-    <div>
-  
-      <div>
-        <Button></Button>
-      </div>
-    <div>
-        <Grid>
-          <Paper elevation={10} style={paperStyle}>
-            <Grid align='center'>
-              <Avatar style={avatarStyle}><LockOutlinedIcon /></Avatar>
-              <h2>Ingresar</h2>
-            </Grid>
-            <form onSubmit={loginSubmit}>
-              <TextField
-                variant="outlined"
-                label="Usuario"
-                sx={{
-                  display: "block",
-                  margin: ".5rem 0",
-                }}
-                name="usuario"
-                onChange={handleChange}
-              
-                inputProps={{ style: { color: "black" } }}
-                InputLabelProps={{ style: { color: "black" } }}
-              />
-              <TextField
-                variant="outlined"
-                label="Contraseña"
-                type="password"
-                sx={{
-                  display: "block",
-                  margin: ".5rem 0",
-                }}
-                name="password"
-                onChange={handleChange}
-                value={usuario.password}
-                inputProps={{ style: { color: "black" } }}
-                InputLabelProps={{ style: { color: "black" } }}
-              />
-
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-              /*  disabled={!usuario.cuil_cuit || !usuario.password} */
-              >
-                {loading ? (
-                  <CircularProgress color="inherit" size={25} />
-                ) : (
-                  "Ingresar"
-                )}
-              </Button>
-            </form>
-            <Typography >
-              <Link href="#" >
-               ¿Olvidaste la contraseña?
-              </Link>
-            </Typography>
-            <Typography >¿No estas registrado?
-                <Registro />
-            </Typography>
-          </Paper>
-        </Grid>
-      </div>
-
-
-    </div>
-  )
-
-  /*   const onFinish = (values) => {
-      enviarDatos(urll, values)
-    }
-  
-  
-  
-  
-   */
   return (
+    <Box
+      sx={{
+        height: '100vh',
+        background: 'linear-gradient(135deg, #3EDB63, #50D0F3, #A64FF2, #F04A3E, #F28C2D)',
+        backgroundSize: '600% 600%',
+        animation: 'gradientShift 10s ease infinite',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      <Card sx={{ width: 350, padding: 3, backgroundColor: '#ffffffdd', borderRadius: 4 }}>
+        <Grid align="center">
+          <Avatar sx={{ bgcolor: "#3EDB63", marginBottom: 1 }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography variant="h5" fontWeight="bold" color="#3EDB63" gutterBottom>
+            ¡Vamos Ctes!
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Iniciar sesión
+          </Typography>
+        </Grid>
 
-    <>
+        <form onSubmit={loginSubmit}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Usuario"
+            name="usuario"
+            onChange={handleChange}
+            margin="normal"
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Contraseña"
+            type="password"
+            name="password"
+            value={usuario.password}
+            onChange={handleChange}
+            margin="normal"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ marginTop: 2, bgcolor: "#3EDB63", '&:hover': { bgcolor: '#34c657' } }}
+          >
+            {loading ? <CircularProgress color="inherit" size={24} /> : "Ingresar"}
+          </Button>
+        </form>
 
-  
-<br></br><br></br><br></br>
-  
-        {LoginReturn()}
+        <Typography align="center" sx={{ marginTop: 2 }}>
+          <Link href="#" underline="hover">
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </Typography>
 
+        <Typography align="center" sx={{ marginTop: 2 }}>
+          ¿No estás registrado? <Registro />
+        </Typography>
+      </Card>
 
-
-        
-
-    </>
-  )
-}
+      <style>
+        {`
+          @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        `}
+      </style>
+    </Box>
+  );
+};
 
 export default Login;

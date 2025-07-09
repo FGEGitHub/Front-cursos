@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../Assets/logocoalicion.png";
-import Typography from '@mui/material/Typography';
 import {
   AppBar,
   Button,
@@ -10,98 +9,98 @@ import {
   Toolbar,
   useMediaQuery,
   useTheme,
+  Box
 } from "@mui/material";
 import DrawerNav from "./DrawerNav";
 
-
-
-const Navbar = (props) => {
-  
-  const [user, setUser] = useState(null)
-  const [cargado, setCargado] = useState(false)
-
+const Navbar = () => {
+  const [user, setUser] = useState(null);
   const [value, setValue] = useState();
   const theme = useTheme();
-
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-  const islogo = {
-                  width: "130px",                  
-                  };
   const navigate = useNavigate();
+
   useEffect(() => {
-    traer()
-}, [])
-  const traer = async () => {
+    const traer = async () => {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+      if (loggedUserJSON) {
+        const user = JSON.parse(loggedUserJSON);
+        setUser(user);
+      }
+    };
+    traer();
+  }, []);
 
-
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-  
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-
-    /* if (notificaciones>0) {
-      document.title= 'Santa Catalina ('+notificaciones+')'
-   
-    }   */
-  }
   const handleClick = () => {
     navigate("/login");
   };
-  const hanleLogout = () => {
-    /* console.log('click')
-     setUser(null)
-     servicioUsuario.setToken(user.token) 
-        //  navigate('/login')
-     */
-   
-  
-     window.localStorage.removeItem('loggedNoteAppUser')
-   
-     navigate("/fiscalizacion/login")
-   } 
 
- 
+  const hanleLogout = () => {
+    window.localStorage.removeItem('loggedNoteAppUser');
+    navigate("/fiscalizacion/login");
+  };
+
   return (
-    <React.Fragment>
-      <AppBar sx={{ background: "#Primary" }}>
+    <>
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: "#3EDB63", // ✅ Color fijo vibrante
+          boxShadow: 3
+        }}
+      >
         <Toolbar>
-           <img style={islogo} src={logo} alt="logo" /> 
+          <Box component="img" src={logo} alt="logo" sx={{ width: 130 }} />
           {isMatch ? (
-            <>
-              <DrawerNav />
-            </>
+            <DrawerNav />
           ) : (
             <>
-              
               <Tabs
                 sx={{ marginLeft: "auto" }}
-                indicatorColor="Secondary"
+                indicatorColor="secondary"
                 textColor="inherit"
                 value={value}
                 onChange={(e, value) => setValue(value)}
               >
-              <Tab label= '' />
-
-              {user ? <>
-              <Button onClick={hanleLogout} sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`Cerrar sesion`}/>
-              </Button>
-              </>:<>
-              <Button sx={{ marginLeft: "10px" }} variant="Outlined">
-                  <Tab label= {`Iniciar sesion`}/>
-              </Button></>}
-               
+                <Tab label="" />
               </Tabs>
-             
 
-
-             
-
+              {user ? (
+                <Button
+                  onClick={hanleLogout}
+                  variant="contained"
+                  sx={{
+                    marginLeft: 2,
+                    backgroundColor: "#ffffff",
+                    color: "#3EDB63",
+                    '&:hover': {
+                      backgroundColor: "#f0f0f0"
+                    }
+                  }}
+                >
+                  Cerrar sesión
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleClick}
+                  variant="contained"
+                  sx={{
+                    marginLeft: 2,
+                    backgroundColor: "#ffffff",
+                    color: "#3EDB63",
+                    '&:hover': {
+                      backgroundColor: "#f0f0f0"
+                    }
+                  }}
+                >
+                  Iniciar sesión
+                </Button>
+              )}
             </>
           )}
         </Toolbar>
       </AppBar>
-    </React.Fragment>
+    </>
   );
 };
 
