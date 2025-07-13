@@ -1,7 +1,7 @@
 import { useState } from "react";
 import servicioPersonas from '../../services/personas';
 import Dialogo from './dialogo'
-import { Paper,  Typography, Box, TextField, InputLabel,   Select, CardActions } from '@mui/material';
+import { Paper, Typography, Box, TextField, InputLabel, Select, CardActions } from '@mui/material';
 import {
     useMediaQuery,
     useTheme,
@@ -79,7 +79,7 @@ const Estracto = () => {
     const [cargando, setCargando] = useState(false);
     const [loading, setLoading] = useState(false);
     const [existe, setExiste] = useState([]);
-    const [inscrip, setInscrip] = useState({profesion:"No"});
+    const [inscrip, setInscrip] = useState({ profesion: "No" });
     const theme = useTheme();
     const [zoomLevel, setZoomLevel] = useState(0.5);
     const navigate = useNavigate();
@@ -180,19 +180,23 @@ const Estracto = () => {
                         </Box>
 
                         <Box sx={{ textAlign: 'center' }}>
-                                 <Typography variant="body1" component="div" color="black">
-  <StyledParagraph>
-La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
-En esta oportunidad te ofrecemos el taller de COCINA EXPRESS: tips para alimentos congelados.
+                            <Typography variant="body1" component="div" color="black">
+                                <StyledParagraph>
+                                    La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
+                                En esta oportunidad te ofrecemos dos talleres, el de <b>Deco home y accesorios para el hogar para regalar en el día del amigo y el de Semipermanente.</b>
 
-           <StyledParagraph>
-      ¿A quién está dirigido? <br/>
-      👩‍🎓 Mujeres que desean aprender más sobre las formas y cuidados para la venta de productos congelados.
-       <br/>
-11 y 12 de julio de 16 a 18hs en Pasaje Alvarez 838{"\n"}
-          
-        </StyledParagraph>
-      </Typography>
+                                <StyledParagraph>
+                                    ¿A quién está dirigido? <br />
+                                    👩‍🎓 Mujeres que desean aprender a hacer manualidades para regalar o más de semipermanente para uñas.
+                                    <br />
+                                    15 y 16 de julio - taller de decohome especial día del amigo<br />
+
+                                    18 y 19 de julio - taller de semipermanente<br />
+
+                                    De 16 a 18hs en pasaje Álvarez 838.{"\n"}
+
+                                </StyledParagraph>
+                            </Typography>
 
                         </Box>
 
@@ -416,128 +420,140 @@ En esta oportunidad te ofrecemos el taller de COCINA EXPRESS: tips para alimento
                                 }}
                             />
 
-{/*  */}
+                            {/*  */}
 
-     
+       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?</Typography>
+                            <Select
+                                labelId="quiereEnsenar-label"
 
-<Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
-        <Select
-          labelId="fueAlumna-label"
-          id="fueAlumna"
-          name="alumna_anterior"
-       style={{ width: '250px' }}
+                                name="curso"
 
-          label="¿Fuiste alumna?"
-          onChange={handleChange}
-        >
-          <MenuItem value="si">Si</MenuItem>
-          <MenuItem value="no">No</MenuItem>
-        </Select>
-   
+                                label="¿A cual curso te gustaria anotarte?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="Taller de decohome">Taller de decohome - 15 y 16 de julio </MenuItem>
+                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 8 y 19 de julio</MenuItem>
+                            </Select>
 
-      {/* Profesión u oficio */}
-        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes alguna profesion u Oficio?</Typography>
-   <Select
-          labelId="fueAlumna-label"
-          id="fueAlumna"
-          name="profesion"
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
+                            <Select
+                                labelId="fueAlumna-label"
+                                id="fueAlumna"
+                                name="alumna_anterior"
+                                style={{ width: '250px' }}
 
-          label="¿Tenes alguna profesion u Oficio?"
-          onChange={handleChange}
-        >
-          <MenuItem value="Si">Sí</MenuItem>
-          <MenuItem value="No">No</MenuItem>
-        </Select>
-
-      {/* ¿Te gustaría enseñarlo? solo si hay profesión */}
-     {inscrip.profesion != 'No' && inscrip.profesion != '' && (
-      <>          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual?</Typography>
-
-         <TextField
-        margin="dense"
-        id="cursoDeseado"
-        label="- ¿¿Cual?"
-        name="profesion"
-        onChange={handleChange}
-        fullWidth
-        variant="outlined"
-      />
-          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Te gustaría enseñarlo?</Typography>
-          <Select
-            labelId="quiereEnsenar-label"
-            style={{ width: '250px' }}
-
-            name="enseniar"
-       
-            label="¿Te gustaría enseñarlo?"
-            onChange={handleChange}
-          >
-            <MenuItem value="si">Sí</MenuItem>
-            <MenuItem value="no">No</MenuItem>
-          </Select>
-        </>
-      )}
-
-      {/* ¿Tenés espacio para talleres? */}
-      <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes algún lugar y/o espacio para que realicemos algún taller?</Typography>
-          <Select
-            labelId="quiereEnsenar-label"
-            
-            name="tiene_espacio"
-       
-            label="¿Tenes algún lugar y/o espacio para que realicemos algún taller?"
-            onChange={handleChange}
-          >
-            <MenuItem value="si">Sí</MenuItem>
-            <MenuItem value="no">No</MenuItem>
-          </Select>
-
-      {/* ¿Qué otro curso te gustaría hacer? */}
-       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿Qué otro curso de te gustaría hacer?</Typography>
-      <TextField
-        style={{ width: '250px' }}
-        margin="dense"
-        id="cursoDeseado"
-        label="- ¿Qué otro curso de te gustaría hacer?"
-        name="curso_adic"
-        onChange={handleChange}
-        fullWidth
-        variant="outlined"
-      />
-              <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿ Te gustaria que te agreguemos a la comunidad whatsapp ?</Typography>
+                                label="¿Fuiste alumna?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="si">Si</MenuItem>
+                                <MenuItem value="no">No</MenuItem>
+                            </Select>
 
 
- <Select
-          labelId="fueAlumna-label"
-          id="fueAlumna"
-          name="agregar_whatsap"
+                            {/* Profesión u oficio */}
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes alguna profesion u Oficio?</Typography>
+                            <Select
+                                labelId="fueAlumna-label"
+                                id="fueAlumna"
+                                name="profesion"
 
-          label="¿Tenes alguna profesion u Oficio?"
-          onChange={handleChange}
-        >
-          <MenuItem value="Si">Sí</MenuItem>
-          <MenuItem value="No">No</MenuItem>
-        </Select>
+                                label="¿Tenes alguna profesion u Oficio?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="Si">Sí</MenuItem>
+                                <MenuItem value="No">No</MenuItem>
+                            </Select>
+
+                            {/* ¿Te gustaría enseñarlo? solo si hay profesión */}
+                            {inscrip.profesion != 'No' && inscrip.profesion != '' && (
+                                <>          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual?</Typography>
+
+                                    <TextField
+                                        margin="dense"
+                                        id="cursoDeseado"
+                                        label="- ¿¿Cual?"
+                                        name="profesion"
+                                        onChange={handleChange}
+                                        fullWidth
+                                        variant="outlined"
+                                    />
+                                    <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Te gustaría enseñarlo?</Typography>
+                                    <Select
+                                        labelId="quiereEnsenar-label"
+                                        style={{ width: '250px' }}
+
+                                        name="enseniar"
+
+                                        label="¿Te gustaría enseñarlo?"
+                                        onChange={handleChange}
+                                    >
+                                        <MenuItem value="si">Sí</MenuItem>
+                                        <MenuItem value="no">No</MenuItem>
+                                    </Select>
+                                </>
+                            )}
+
+                            {/* ¿Tenés espacio para talleres? */}
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes algún lugar y/o espacio para que realicemos algún taller?</Typography>
+                            <Select
+                                labelId="quiereEnsenar-label"
+
+                                name="tiene_espacio"
+
+                                label="¿Tenes algún lugar y/o espacio para que realicemos algún taller?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="si">Sí</MenuItem>
+                                <MenuItem value="no">No</MenuItem>
+                            </Select>
+
+                            {/* ¿Qué otro curso te gustaría hacer? */}
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿Qué otro curso de te gustaría hacer?</Typography>
+                            <TextField
+                                style={{ width: '250px' }}
+                                margin="dense"
+                                id="cursoDeseado"
+                                label="- ¿Qué otro curso de te gustaría hacer?"
+                                name="curso_adic"
+                                onChange={handleChange}
+                                fullWidth
+                                variant="outlined"
+                            />
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿ Te gustaria que te agreguemos a la comunidad whatsapp ?</Typography>
+
+
+                            <Select
+                                labelId="fueAlumna-label"
+                                id="fueAlumna"
+                                name="agregar_whatsap"
+
+                                label="¿Tenes alguna profesion u Oficio?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="Si">Sí</MenuItem>
+                                <MenuItem value="No">No</MenuItem>
+                            </Select>
                         </Box>
 
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
                                 {inscrip.nombre &&
- inscrip.apellido &&
- inscrip.dni &&
- inscrip.fecha_nac &&
- inscrip.tel &&
- inscrip.localidad &&
- inscrip.direccion &&
-  inscrip.alumna_anterior &&
- inscrip.tiene_espacio &&
- inscrip.curso_adic &&
-  inscrip.agregar_whatsap &&
- (
-   inscrip.profesion === "No" || 
-   (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
-   (inscrip.profesion === "Si" && inscrip.enseniar)
- ) ?
+                                    inscrip.apellido &&
+                                    inscrip.dni &&
+                                     inscrip.curso &&
+                                    inscrip.fecha_nac &&
+                                    inscrip.tel &&
+                                    inscrip.localidad &&
+                                    inscrip.direccion &&
+                                    inscrip.alumna_anterior &&
+                                    inscrip.tiene_espacio &&
+                                    inscrip.curso_adic &&
+                                    inscrip.agregar_whatsap &&
+                                    (
+                                        inscrip.profesion === "No" ||
+                                        (inscrip.profesion !== "" && inscrip.profesion !== "Si") ||
+                                        (inscrip.profesion === "Si" && inscrip.enseniar)
+                                    ) ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
@@ -563,19 +579,22 @@ En esta oportunidad te ofrecemos el taller de COCINA EXPRESS: tips para alimento
                         </Box>
 
                         <Box sx={{ textAlign: 'center' }}>
-                                                        <Typography variant="body1" component="div" color="black">
-           <StyledParagraph>
-La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
-En esta oportunidad te ofrecemos el taller de COCINA EXPRESS: tips para alimentos congelados.
+                            <Typography variant="body1" component="div" color="black">
+                                <StyledParagraph>
+                                    La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
+                                En esta oportunidad te ofrecemos dos talleres, el de <b>Deco home y accesorios para el hogar para regalar en el día del amigo y el de Semipermanente.</b>
+                                <StyledParagraph>
+                                    ¿A quién está dirigido? <br />
+                                    👩‍🎓 Mujeres que desean aprender a hacer manualidades para regalar o más de semipermanente para uñas.
+                                    <br />
+                                    15 y 16 de julio - taller de decohome especial día del amigo<br />
 
-           <StyledParagraph>
-      ¿A quién está dirigido? <br/>
-      👩‍🎓 Mujeres que desean aprender más sobre las formas y cuidados para la venta de productos congelados.
-       <br/>
-11 y 12 de julio de 16 a 18hs en Pasaje Alvarez 838{"\n"}
-          
-        </StyledParagraph>
-      </Typography>  </Box>
+                                    18 y 19 de julio - taller de semipermanente<br />
+
+                                    De 16 a 18hs en pasaje Álvarez 838.{"\n"}
+
+                                </StyledParagraph>
+                            </Typography>  </Box>
 
 
                         <Box sx={{ textAlign: 'left', marginLeft: "1em", marginRight: "1em", }}>
@@ -797,130 +816,143 @@ En esta oportunidad te ofrecemos el taller de COCINA EXPRESS: tips para alimento
                                     shrink: true,
                                 }}
                             />
-<Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?</Typography>
+                            <Select
+                                labelId="quiereEnsenar-label"
 
-        <Select
-          labelId="fueAlumna-label"
-          id="fueAlumna"
-          name="alumna_anterior"
-       style={{ width: '250px' }}
+                                name="curso"
 
-          label="¿Fuiste alumna?"
-          onChange={handleChange}
-        >
-          <MenuItem value="si">Si</MenuItem>
-          <MenuItem value="no">No</MenuItem>
-        </Select>
-   
+                                label="¿A cual curso te gustaria anotarte?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="Taller de decohome">Taller de decohome - 15 y 16 de julio </MenuItem>
+                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 8 y 19 de julio</MenuItem>
+                            </Select>
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
 
-      {/* Profesión u oficio */}
-        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes alguna profesion u Oficio?</Typography>
-   <Select
-          labelId="fueAlumna-label"
-          id="fueAlumna"
-          name="profesion"
+                            <Select
+                                labelId="fueAlumna-label"
+                                id="fueAlumna"
+                                name="alumna_anterior"
+                                style={{ width: '250px' }}
 
-          label="¿Tenes alguna profesion u Oficio?"
-          onChange={handleChange}
-        >
-          <MenuItem value="Si">Sí</MenuItem>
-          <MenuItem value="No">No</MenuItem>
-        </Select>
-
-      {/* ¿Te gustaría enseñarlo? solo si hay profesión */}
-     {inscrip.profesion != 'No' && inscrip.profesion != '' && (
-      <>          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual?</Typography>
-
-         <TextField
-        margin="dense"
-        id="cursoDeseado"
-        label="- ¿¿Cual?"
-        name="profesion"
-        onChange={handleChange}
-        fullWidth
-        variant="outlined"
-      />
-          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Te gustaría enseñarlo?</Typography>
-          <Select
-            labelId="quiereEnsenar-label"
-            style={{ width: '250px' }}
-
-            name="enseniar"
-       
-            label="¿Te gustaría enseñarlo?"
-            onChange={handleChange}
-          >
-            <MenuItem value="si">Sí</MenuItem>
-            <MenuItem value="no">No</MenuItem>
-          </Select>
-        </>
-      )}
-
-      {/* ¿Tenés espacio para talleres? */}
-      <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes algún lugar y/o espacio para que realicemos algún taller?</Typography>
-          <Select
-            labelId="quiereEnsenar-label"
-            
-            name="tiene_espacio"
-       
-            label="¿Tenes algún lugar y/o espacio para que realicemos algún taller?"
-            onChange={handleChange}
-          >
-            <MenuItem value="si">Sí</MenuItem>
-            <MenuItem value="no">No</MenuItem>
-          </Select>
-
-      {/* ¿Qué otro curso te gustaría hacer? */}
-        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿Qué otro curso de te gustaría hacer?</Typography>
-      <TextField
-        style={{ width: '250px' }}
-        margin="dense"
-        id="cursoDeseado"
-        label="- ¿Qué otro curso de te gustaría hacer?"
-        name="curso_adic"
-        onChange={handleChange}
-        fullWidth
-        variant="outlined"
-      />
-
-        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿ Te gustaria que te agreguemos a la comunidad whatsapp ?</Typography>
+                                label="¿Fuiste alumna?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="si">Si</MenuItem>
+                                <MenuItem value="no">No</MenuItem>
+                            </Select>
 
 
- <Select
-          labelId="fueAlumna-label"
-          id="fueAlumna"
-          name="agregar_whatsap"
+                            {/* Profesión u oficio */}
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes alguna profesion u Oficio?</Typography>
+                            <Select
+                                labelId="fueAlumna-label"
+                                id="fueAlumna"
+                                name="profesion"
 
-          label="¿Tenes alguna profesion u Oficio?"
-          onChange={handleChange}
-        >
-          <MenuItem value="Si">Sí</MenuItem>
-          <MenuItem value="No">No</MenuItem>
-        </Select>
+                                label="¿Tenes alguna profesion u Oficio?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="Si">Sí</MenuItem>
+                                <MenuItem value="No">No</MenuItem>
+                            </Select>
+
+                            {/* ¿Te gustaría enseñarlo? solo si hay profesión */}
+                            {inscrip.profesion != 'No' && inscrip.profesion != '' && (
+                                <>          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual?</Typography>
+
+                                    <TextField
+                                        margin="dense"
+                                        id="cursoDeseado"
+                                        label="- ¿¿Cual?"
+                                        name="profesion"
+                                        onChange={handleChange}
+                                        fullWidth
+                                        variant="outlined"
+                                    />
+                                    <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Te gustaría enseñarlo?</Typography>
+                                    <Select
+                                        labelId="quiereEnsenar-label"
+                                        style={{ width: '250px' }}
+
+                                        name="enseniar"
+
+                                        label="¿Te gustaría enseñarlo?"
+                                        onChange={handleChange}
+                                    >
+                                        <MenuItem value="si">Sí</MenuItem>
+                                        <MenuItem value="no">No</MenuItem>
+                                    </Select>
+                                </>
+                            )}
+
+                            {/* ¿Tenés espacio para talleres? */}
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes algún lugar y/o espacio para que realicemos algún taller?</Typography>
+                            <Select
+                                labelId="quiereEnsenar-label"
+
+                                name="tiene_espacio"
+
+                                label="¿Tenes algún lugar y/o espacio para que realicemos algún taller?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="si">Sí</MenuItem>
+                                <MenuItem value="no">No</MenuItem>
+                            </Select>
+
+                            {/* ¿Qué otro curso te gustaría hacer? */}
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿Qué otro curso de te gustaría hacer?</Typography>
+                            <TextField
+                                style={{ width: '250px' }}
+                                margin="dense"
+                                id="cursoDeseado"
+                                label="- ¿Qué otro curso de te gustaría hacer?"
+                                name="curso_adic"
+                                onChange={handleChange}
+                                fullWidth
+                                variant="outlined"
+                            />
+
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿ Te gustaria que te agreguemos a la comunidad whatsapp ?</Typography>
+
+
+                            <Select
+                                labelId="fueAlumna-label"
+                                id="fueAlumna"
+                                name="agregar_whatsap"
+
+                                label="¿Tenes alguna profesion u Oficio?"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value="Si">Sí</MenuItem>
+                                <MenuItem value="No">No</MenuItem>
+                            </Select>
 
                         </Box>
 
 
                         <CardActions sx={{ justifyContent: 'center' }}>
                             {cargando ? <> <Progreso /> </> : <>
-                                 {inscrip.nombre &&
- inscrip.apellido &&
- inscrip.dni &&
- inscrip.fecha_nac &&
- inscrip.tel &&
- inscrip.localidad &&
- inscrip.direccion &&
- inscrip.alumna_anterior &&
- inscrip.tiene_espacio &&
- inscrip.curso_adic &&
-  inscrip.agregar_whatsap &&
- 
- 
- (
-   inscrip.profesion === "No" || 
-   (inscrip.profesion !== "" && inscrip.profesion !== "Si") || 
-   (inscrip.profesion === "Si" && inscrip.enseniar)
- ) ?
+                                {inscrip.nombre &&
+                                    inscrip.apellido &&
+                                    inscrip.dni &&
+                                     inscrip.curso &&
+                                    inscrip.fecha_nac &&
+                                    inscrip.tel &&
+                                    inscrip.localidad &&
+                                    inscrip.direccion &&
+                                    inscrip.alumna_anterior &&
+                                    inscrip.tiene_espacio &&
+                                    inscrip.curso_adic &&
+                                    inscrip.agregar_whatsap &&
+
+
+                                    (
+                                        inscrip.profesion === "No" ||
+                                        (inscrip.profesion !== "" && inscrip.profesion !== "Si") ||
+                                        (inscrip.profesion === "Si" && inscrip.enseniar)
+                                    ) ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
