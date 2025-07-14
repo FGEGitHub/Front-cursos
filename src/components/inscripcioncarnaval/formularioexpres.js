@@ -432,7 +432,7 @@ const Estracto = () => {
                                 onChange={handleChange}
                             >
                                 <MenuItem value="Taller de decohome">Taller de decohome - 15 y 16 de julio </MenuItem>
-                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 8 y 19 de julio</MenuItem>
+                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 18 y 19 de julio</MenuItem>
                             </Select>
 
                             <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
@@ -826,7 +826,7 @@ const Estracto = () => {
                                 onChange={handleChange}
                             >
                                 <MenuItem value="Taller de decohome">Taller de decohome - 15 y 16 de julio </MenuItem>
-                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 8 y 19 de julio</MenuItem>
+                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 18 y 19 de julio</MenuItem>
                             </Select>
                             <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
 
