@@ -56,7 +56,7 @@ const styles2 = {
         maxWidth: 400,
         margin: '20px auto', // Margen superior e inferior de 20px, centrado horizontalmente
         display: 'grid',
-        gridTemplateRows: 'auto 1fr',
+        //gridTemplateRows: 'auto 1fr',
         alignItems: 'start',
         padding: 5,
         transform: 'scale(0.95)', /* Esto escalará el contenido al 50% del tamaño original */
@@ -183,17 +183,17 @@ const Estracto = () => {
                             <Typography variant="body1" component="div" color="black">
                                 <StyledParagraph>
                                     La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
-                                En esta oportunidad te ofrecemos dos talleres, el de <b>Deco home y accesorios para el hogar para regalar en el día del amigo y el de Semipermanente.</b>
+                                En esta oportunidad te ofrecemos dos talleres, el de <b>Armado de peluche capibara, Semipermanente y costura creativa especial mascotas.</b>
 
                                 <StyledParagraph>
                                     ¿A quién está dirigido? <br />
                                     👩‍🎓 Mujeres que desean aprender a hacer manualidades para regalar o más de semipermanente para uñas.
                                     <br />
-                                    15 y 16 de julio - taller de decohome especial día del amigo<br />
+                                    23 y 24 de julio - armado de peluche capibara de 16 a 18hs en pasaje Álvarez 838.<br />
 
-                                    18 y 19 de julio - taller de semipermanente<br />
+                                    25 y 26 de julio - semipermanente de 16 a 18hs en pasaje Álvarez 838.<br />
 
-                                    De 16 a 18hs en pasaje Álvarez 838.{"\n"}
+                                    26 de julio - costura creativa especial mascotas de 10 a 12hs en el sindicato de canillitas (placido martinez 1598).{"\n"}
 
                                 </StyledParagraph>
                             </Typography>
@@ -431,8 +431,10 @@ const Estracto = () => {
                                 label="¿A cual curso te gustaria anotarte?"
                                 onChange={handleChange}
                             >
-                                <MenuItem value="Taller de decohome">Taller de decohome - 15 y 16 de julio </MenuItem>
-                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 18 y 19 de julio</MenuItem>
+                                <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem>
+                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 25 y 26 de julio</MenuItem>
+                                <MenuItem value="Costura creativa especial mascota">Costura creativa especial mascota - 26 de julio </MenuItem>
+
                             </Select>
 
                             <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
@@ -582,16 +584,16 @@ const Estracto = () => {
                             <Typography variant="body1" component="div" color="black">
                                 <StyledParagraph>
                                     La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
-                                En esta oportunidad te ofrecemos dos talleres, el de <b>Deco home y accesorios para el hogar para regalar en el día del amigo y el de Semipermanente.</b>
+                                En esta oportunidad te ofrecemos dos talleres, el de <b>Armado de peluche capibara, Semipermanente y costura creativa especial mascotas.</b>
                                 <StyledParagraph>
                                     ¿A quién está dirigido? <br />
                                     👩‍🎓 Mujeres que desean aprender a hacer manualidades para regalar o más de semipermanente para uñas.
                                     <br />
-                                    15 y 16 de julio - taller de decohome especial día del amigo<br />
+                                    23 y 24 de julio - armado de peluche capibara de 16 a 18hs en pasaje Álvarez 838.<br />
 
-                                    18 y 19 de julio - taller de semipermanente<br />
+                                    25 y 26 de julio - semipermanente de 16 a 18hs en pasaje Álvarez 838.<br />
 
-                                    De 16 a 18hs en pasaje Álvarez 838.{"\n"}
+                                    26 de julio - costura creativa especial mascotas de 10 a 12hs en el sindicato de canillitas (placido martinez 1598).{"\n"}
 
                                 </StyledParagraph>
                             </Typography>  </Box>
@@ -825,8 +827,9 @@ const Estracto = () => {
                                 label="¿A cual curso te gustaria anotarte?"
                                 onChange={handleChange}
                             >
-                                <MenuItem value="Taller de decohome">Taller de decohome - 15 y 16 de julio </MenuItem>
-                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 18 y 19 de julio</MenuItem>
+                                <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem>
+                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 25 y 26 de julio</MenuItem>
+                                <MenuItem value="Costura creativa especial mascota">Costura creativa especial mascota - 26 de julio </MenuItem>
                             </Select>
                             <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
 
