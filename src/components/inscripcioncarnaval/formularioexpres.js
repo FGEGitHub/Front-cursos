@@ -422,7 +422,7 @@ const Estracto = () => {
 
                             {/*  */}
 
-       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?(Armado d ecapibara lleno)</Typography>
+       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?(Armado de capibara lleno)</Typography>
                             <Select
                                 labelId="quiereEnsenar-label"
 
@@ -818,7 +818,7 @@ const Estracto = () => {
                                     shrink: true,
                                 }}
                             />
-                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?(Armado d ecapibara lleno)</Typography>
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?(Armado de capibara lleno)</Typography>
                             <Select
                                 labelId="quiereEnsenar-label"
 
