@@ -422,7 +422,7 @@ const Estracto = () => {
 
                             {/*  */}
 
-       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?</Typography>
+       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?(Armado d ecapibara lleno)</Typography>
                             <Select
                                 labelId="quiereEnsenar-label"
 
@@ -431,7 +431,7 @@ const Estracto = () => {
                                 label="¿A cual curso te gustaria anotarte?"
                                 onChange={handleChange}
                             >
-                                <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem>
+                               {/*  <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem> */}
                                 <MenuItem value="Taller de semipermanente">Taller de semipermanente - 25 y 26 de julio</MenuItem>
                                 <MenuItem value="Costura creativa especial mascota">Costura creativa especial mascota - 26 de julio </MenuItem>
 
@@ -818,7 +818,7 @@ const Estracto = () => {
                                     shrink: true,
                                 }}
                             />
-                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?</Typography>
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?(Armado d ecapibara lleno)</Typography>
                             <Select
                                 labelId="quiereEnsenar-label"
 
@@ -827,7 +827,7 @@ const Estracto = () => {
                                 label="¿A cual curso te gustaria anotarte?"
                                 onChange={handleChange}
                             >
-                                <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem>
+                               {/*  <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem> */}
                                 <MenuItem value="Taller de semipermanente">Taller de semipermanente - 25 y 26 de julio</MenuItem>
                                 <MenuItem value="Costura creativa especial mascota">Costura creativa especial mascota - 26 de julio </MenuItem>
                             </Select>
