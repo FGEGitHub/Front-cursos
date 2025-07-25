@@ -432,8 +432,8 @@ const Estracto = () => {
                                 onChange={handleChange}
                             >
                                {/*  <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem> */}
-                            <MenuItem value="Catering para eventos">Catering para eventos - 28 y 29 de julio </MenuItem>
-                                <MenuItem value=" Fotoproducto y redes sociales"> Fotoproducto y redes sociales - 30 y 31 de julio </MenuItem>
+                            <MenuItem value="Catering para eventos">Catering para eventos - 30 y 31 de julio </MenuItem>
+                                <MenuItem value=" Fotoproducto y redes sociales"> Fotoproducto y redes sociales - 28 y 29 de julio </MenuItem>
 
                             </Select>
 
@@ -828,8 +828,8 @@ const Estracto = () => {
                                 onChange={handleChange}
                             >
                                {/*  <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem> */}
-                                <MenuItem value="Catering para eventos">Catering para eventos - 28 y 29 de julio </MenuItem>
-                                <MenuItem value=" Fotoproducto y redes sociales"> Fotoproducto y redes sociales - 30 y 31 de julio </MenuItem>
+                                <MenuItem value="Catering para eventos">Catering para eventos - 30 y 31 de julio </MenuItem>
+                                <MenuItem value=" Fotoproducto y redes sociales"> Fotoproducto y redes sociales - 28 y 29 de julio </MenuItem>
                             </Select>
                             <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
 
