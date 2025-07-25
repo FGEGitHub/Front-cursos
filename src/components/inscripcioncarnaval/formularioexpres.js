@@ -183,17 +183,17 @@ const Estracto = () => {
                             <Typography variant="body1" component="div" color="black">
                                 <StyledParagraph>
                                     La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
-                                En esta oportunidad te ofrecemos dos talleres, el de <b>Armado de peluche capibara, Semipermanente y costura creativa especial mascotas.</b>
+                                En esta oportunidad te ofrecemos dos talleres, el de <b>Catering para eventos y fotoproducto y redes sociales</b>
 
                                 <StyledParagraph>
                                     ¿A quién está dirigido? <br />
-                                    👩‍🎓 Mujeres que desean aprender a hacer manualidades para regalar o más de semipermanente para uñas.
+                                    👩‍🎓  Mujeres que desean aprender más herramientas para su oficio.
                                     <br />
-                                    23 y 24 de julio - armado de peluche capibara de 16 a 18hs en pasaje Álvarez 838.<br />
+                                    28 y 29 de julio - Fotoproducto y redes sociales 16 a 18hs en pasaje Álvarez 838.<br />
 
-                                    25 y 26 de julio - semipermanente de 16 a 18hs en pasaje Álvarez 838.<br />
+                                    30 y 31 de julio - catering de eventos de 16 a 18hs en pasaje Álvarez 838.<br />
 
-                                    26 de julio - costura creativa especial mascotas de 10 a 12hs en el sindicato de canillitas (placido martinez 1598).{"\n"}
+                                  
 
                                 </StyledParagraph>
                             </Typography>
@@ -422,7 +422,7 @@ const Estracto = () => {
 
                             {/*  */}
 
-       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?(Armado de capibara lleno)</Typography>
+       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?</Typography>
                             <Select
                                 labelId="quiereEnsenar-label"
 
@@ -432,8 +432,8 @@ const Estracto = () => {
                                 onChange={handleChange}
                             >
                                {/*  <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem> */}
-                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 25 y 26 de julio</MenuItem>
-                                <MenuItem value="Costura creativa especial mascota">Costura creativa especial mascota - 26 de julio </MenuItem>
+                            <MenuItem value="Catering para eventos">Catering para eventos - 28 y 29 de julio </MenuItem>
+                                <MenuItem value=" Fotoproducto y redes sociales"> Fotoproducto y redes sociales - 30 y 31 de julio </MenuItem>
 
                             </Select>
 
@@ -584,16 +584,16 @@ const Estracto = () => {
                             <Typography variant="body1" component="div" color="black">
                                 <StyledParagraph>
                                     La Escuela de Mujeres Emprendedoras nace desde la Mesa de Género de la Coalición Cívica ARI - Corrientes, liderada por <b>Hugo "Cuqui" Calvano</b>, con el objetivo de ofrecer herramientas para lograr una rápida salida laboral. A través de este espacio brindaremos capacitaciones gratuitas (certificadas) para el empoderamiento de las mujeres, impulsando la formación y promoviendo la igualdad de oportunidades.      </StyledParagraph>
-                                En esta oportunidad te ofrecemos dos talleres, el de <b>Armado de peluche capibara, Semipermanente y costura creativa especial mascotas.</b>
+                                En esta oportunidad te ofrecemos dos talleres, el de <b>Catering para eventos y fotoproducto y redes sociales</b>
                                 <StyledParagraph>
                                     ¿A quién está dirigido? <br />
-                                    👩‍🎓 Mujeres que desean aprender a hacer manualidades para regalar o más de semipermanente para uñas.
+                                    👩‍🎓  Mujeres que desean aprender más herramientas para su oficio.
                                     <br />
-                                    23 y 24 de julio - armado de peluche capibara de 16 a 18hs en pasaje Álvarez 838.<br />
+                                    28 y 29 de julio - Fotoproducto y redes sociales 16 a 18hs en pasaje Álvarez 838.<br />
 
-                                    25 y 26 de julio - semipermanente de 16 a 18hs en pasaje Álvarez 838.<br />
+                                    30 y 31 de julio - catering de eventos de 16 a 18hs en pasaje Álvarez 838.<br />
 
-                                    26 de julio - costura creativa especial mascotas de 10 a 12hs en el sindicato de canillitas (placido martinez 1598).{"\n"}
+                                  
 
                                 </StyledParagraph>
                             </Typography>  </Box>
@@ -818,7 +818,7 @@ const Estracto = () => {
                                     shrink: true,
                                 }}
                             />
-                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?(Armado de capibara lleno)</Typography>
+                            <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿A cual curso te gustaria anotarte?</Typography>
                             <Select
                                 labelId="quiereEnsenar-label"
 
@@ -828,8 +828,8 @@ const Estracto = () => {
                                 onChange={handleChange}
                             >
                                {/*  <MenuItem value="Armado de peluche capibara">Armado de peluche capibara - 23 y 24 de julio </MenuItem> */}
-                                <MenuItem value="Taller de semipermanente">Taller de semipermanente - 25 y 26 de julio</MenuItem>
-                                <MenuItem value="Costura creativa especial mascota">Costura creativa especial mascota - 26 de julio </MenuItem>
+                                <MenuItem value="Catering para eventos">Catering para eventos - 28 y 29 de julio </MenuItem>
+                                <MenuItem value=" Fotoproducto y redes sociales"> Fotoproducto y redes sociales - 30 y 31 de julio </MenuItem>
                             </Select>
                             <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
 
