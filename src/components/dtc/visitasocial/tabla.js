@@ -146,6 +146,12 @@ export default function TablaActividades() {
       item.fecha_referencia?.includes(filtroFechaReferencia)
     );
   });
+const formatearFecha = (fecha) => {
+  if (!fecha) return "-";
+  const d = new Date(fecha);
+  if (isNaN(d)) return fecha;
+  return d.toLocaleDateString('es-AR'); // DD/MM/YYYY
+};
 
   return (
     <div>
@@ -191,8 +197,8 @@ export default function TablaActividades() {
                     : row.psicologa_nombre}
                 </TableCell>
                 <TableCell>{row.titulo}</TableCell>
-                <TableCell>{row.fecha_carga}</TableCell>
-                <TableCell>{row.fecha_referencia}</TableCell>
+         <TableCell>{formatearFecha(row.fecha_carga)}</TableCell>
+<TableCell>{formatearFecha(row.fecha_referencia)}</TableCell>
                 <TableCell>
                   <Button size="small" onClick={() => handleOpen(row)}>Ver</Button>
                   {row.ubicacion !== "no" && (
