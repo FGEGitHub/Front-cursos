@@ -148,6 +148,10 @@ export default function TablaActividades() {
   });
 const formatearFecha = (fecha) => {
   if (!fecha) return "-";
+  // Si es formato "YYYY-MM-DD", agregamos la zona horaria local (falsa hora)
+  if (/^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
+    fecha += 'T00:00:00'; // hora local sin desfase
+  }
   const d = new Date(fecha);
   if (isNaN(d)) return fecha;
   return d.toLocaleDateString('es-AR'); // DD/MM/YYYY
