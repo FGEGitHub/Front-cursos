@@ -197,7 +197,7 @@ const formatearFecha = (fecha) => {
                     : row.psicologa_nombre}
                 </TableCell>
                 <TableCell>{row.titulo}</TableCell>
-         <TableCell>{formatearFecha(row.fecha_carga)}</TableCell>
+         <TableCell>{(row.fecha_carga)}</TableCell>
 <TableCell>{formatearFecha(row.fecha_referencia)}</TableCell>
                 <TableCell>
                   <Button size="small" onClick={() => handleOpen(row)}>Ver</Button>
@@ -229,6 +229,74 @@ const formatearFecha = (fecha) => {
                       />
                     </>
                   )}
+                </TableCell>
+                <TableCell>
+                          <>
+<Button variant="outlined" sx={{ color: "#37474f", borderColor: "black", fontSize: "0.65rem", }} color="primary" onClick={() => handleOpen(row)}>
+                  Ver detalles
+                </Button><br/>
+                {row.ubicacion !== "no" && (
+                  <Button variant="outlined" sx={{ color: "#37474f", borderColor: "black", fontSize: "0.65rem", }} onClick={() => handleViewFile(row.id)}>
+                    Ver Online
+                  </Button>
+                )}
+               <Modificar id={row.id} 
+                  fecha_referencia={row.fecha_referencia}
+                  titulo={row.titulo}
+                  detalle={row.detalle}
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                      setAsistencias(novedades_aux);
+                    }
+                  }}/>
+                    <Borrar id={row.id} 
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                      setAsistencias(novedades_aux);
+                    }
+                  }}/>
+                {usuario ? <>
+      
+                {usuario.id==row.idu ? <>
+                  <Borrar id={row.id} 
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                       setAsistencias(novedades_aux);
+                    }
+                  }}/>
+                <Modificar id={row.id} 
+                  fecha_referencia={row.fecha_referencia}
+                  titulo={row.titulo}
+                  detalle={row.detalle}
+                  traer={ async () => {
+                    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+                    if (loggedUserJSON) {
+                      const usuario = JSON.parse(loggedUserJSON);
+                      setUsuario(usuario);
+                      const novedades_aux = await servicioDtc.traerasitenciasociales(usuario.id);
+                    
+                      setAsistencias(novedades_aux);
+                    }
+                  }}/>
+             
+                  
+                  </>:<></>}
+                
+                </>:<></>}
+               
+        </>
                 </TableCell>
               </TableRow>
             ))}
