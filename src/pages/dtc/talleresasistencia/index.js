@@ -65,7 +65,7 @@ export default function Paginas() {
      <br/>
      <br/>
      {  usuario ? <>
-      { (usuario.id == 317 || usuario.id ==325 )?<>
+      { (usuario.id == 317 || usuario.id ==325 || usuario.id ==326 )?<>
         <Tablaasis/>
      
     {/* <Asis2/> */}</> :<>

@@ -183,14 +183,15 @@ const Estracto = () => {
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
 Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:📅 2 de julio
-📍 San Roque Oeste<br/>
-
-📅 3 de julio
-📍 Barrio 17 de Agosto<br/>
-
-📅 7 de julio
-📍 Barrio Sol de Mayo     <br/>   </StyledParagraph>
-
+📅 4 de julio
+📍 San Marcelo
+<br/>
+📅 5 de julio
+📍 Barrio Molina punta
+<br/>
+📅 6 de julio
+📍 Barrio Niño Jesús </StyledParagraph>
+<br/>
        ¡es completamente gratuito!
 
            <StyledParagraph>
@@ -436,7 +437,11 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                    <MenuItem value="Barrio Sol de Mayo">Barrio Sol de Mayo</MenuItem>
+                        <MenuItem value="San Marcelo">San Marcelo 4 de julio</MenuItem>
+                                        <MenuItem value="Barrio Molina punta">Barrio Molina punta 5 de julio</MenuItem>
+
+                    <MenuItem value="Barrio Niño Jesus">Barrio Niño Jesus 5 de julio</MenuItem>
+
         </Select>
                         </Box>
 
@@ -730,7 +735,11 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                    <MenuItem value="Barrio Sol de Mayo">Barrio Sol de Mayo</MenuItem>
+                    <MenuItem value="San Marcelo">San Marcelo 4 de julio</MenuItem>
+                                        <MenuItem value="Barrio Molina punta">Barrio Molina punta 5 de julio</MenuItem>
+
+                    <MenuItem value="Barrio Niño Jesus">Barrio Niño Jesus 5 de julio</MenuItem>
+
         </Select>
 
                         </Box>
