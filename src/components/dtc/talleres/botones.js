@@ -70,7 +70,7 @@ const MobileNavigation = () => {
       </Button> */}
       
       {/* Título */}
-  {mostrarContenido.id !=325 && (
+  {(mostrarContenido.id !=325 &&mostrarContenido.id !=326 )&& (
   <>
     <Typography variant="h6" textAlign="center" fontWeight="bold">
       Aquí puedes buscar los horarios de un usuario

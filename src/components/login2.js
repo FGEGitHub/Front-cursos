@@ -65,7 +65,9 @@ const Login = () => {
     <Box
       sx={{
         height: '100vh',
-        background: 'linear-gradient(135deg, #3EDB63, #50D0F3, #A64FF2, #F04A3E, #F28C2D)',
+      //  background: 'linear-gradient(135deg, #3EDB63, #50D0F3, #A64FF2, #F04A3E, #F28C2D)',
+  background: '#50D0F3',
+
         backgroundSize: '600% 600%',
         animation: 'gradientShift 10s ease infinite',
         display: 'flex',

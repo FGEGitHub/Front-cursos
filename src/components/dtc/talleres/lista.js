@@ -55,31 +55,16 @@ const TablaNotificaciones = () => {
 );
 
   const columns = [
-  {
+
+  { name: "titulo", label: "titulo" },
+  { name: "materia", label: "materia" },
+    {
     name: "Ver",
     options: {
       customBodyRenderLite: (dataIndex) =>
         CutomButtonsRenderer(dataIndex),
     }
   },
-  { name: "id", label: "ID" },
-  { name: "dni", label: "DNI" },
-  {
-    name: "kid",
-    label: "Dimensión",
-    options: {
-      customBodyRender: (value) => {
-        const labelMap = {
-          kid1: "Dimensión 1",
-          kid2: "Dimensión 2",
-          kid3: "Jóvenes",
-        };
-        return labelMap[value] || value;
-      }
-    }
-  },
-  { name: "apellido", label: "Apellido" },
-  { name: "nombre", label: "Nombre" },
   { name: "porcentajeasis", label: "% Asistencia" },
 ];
 
