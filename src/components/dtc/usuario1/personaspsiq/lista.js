@@ -313,7 +313,7 @@ Ver                        </Button>
 
 </Alert> </>:<></>}
 
-            <h2>Lista de chicos</h2>
+            <h2>Lista de personas asistiendo </h2>
             {chicos ? <>
                 <div>
 

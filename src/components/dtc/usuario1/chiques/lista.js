@@ -398,9 +398,9 @@ const TablaNotificaciones = (props) => {
           }}
   >
   
-    { datos ? <>  <Alert variant="filled" severity="success">
+    { datos ? <>  <h1>
  <b> Actualmente {datos.total} usuarios a talleres + 152 personas en tratamiento, total {datos.total + 152} usuarios</b> 
-</Alert> </>:<></>}
+</h1> </>:<></>}
 
             <h2>Lista de chicos</h2>
             {chicos ? <>
