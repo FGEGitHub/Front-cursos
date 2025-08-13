@@ -182,15 +182,13 @@ const Estracto = () => {
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
-Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:📅 2 de julio
-📅 4 de julio
-📍 San Marcelo
+Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
+📅 Lunes 18 de agosto 
+📍 Santa Rita Sur
 <br/>
-📅 5 de julio
-📍 Barrio Molina punta
-<br/>
-📅 6 de julio
-📍 Barrio Niño Jesús </StyledParagraph>
+📅 Martes 19 de agosto 
+📍 Barrio: Juan de Vera
+ </StyledParagraph>
 <br/>
        ¡es completamente gratuito!
 
@@ -437,10 +435,10 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                        <MenuItem value="San Marcelo">San Marcelo 4 de julio</MenuItem>
-                                        <MenuItem value="Barrio Molina punta">Barrio Molina punta 5 de julio</MenuItem>
+                        <MenuItem value="Santa Rita Sur">Santa Rita Sur Lunes 18/08</MenuItem>
+                                        <MenuItem value="Juan de Vera">Barrio: Juan de Vera Martes 19/08</MenuItem>
 
-                    <MenuItem value="Barrio Niño Jesus">Barrio Niño Jesus 5 de julio</MenuItem>
+              
 
         </Select>
                         </Box>
@@ -483,14 +481,12 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
            <StyledParagraph>
-Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:📅 2 de julio
-📍 San Roque Oeste<br/>
-
-📅 3 de julio
-📍 Barrio 17 de Agosto<br/>
-
-📅 7 de julio
-📍 Barrio Sol de Mayo    <br/>    </StyledParagraph>
+Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
+📅 Lunes 18 de agosto 
+📍 Santa Rita Sur
+<br/>
+📅 Martes 19 de agosto 
+📍 Barrio: Juan de Vera   </StyledParagraph>
 
        ¡es completamente gratuito!
 
@@ -735,11 +731,10 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                    <MenuItem value="San Marcelo">San Marcelo 4 de julio</MenuItem>
-                                        <MenuItem value="Barrio Molina punta">Barrio Molina punta 5 de julio</MenuItem>
+                    <MenuItem value="Santa Rita Sur">Santa Rita Sur Lunes 18/08</MenuItem>
+                                        <MenuItem value="Juan de Vera">Barrio: Juan de Vera Martes 19/08</MenuItem>
 
-                    <MenuItem value="Barrio Niño Jesus">Barrio Niño Jesus 5 de julio</MenuItem>
-
+                   
         </Select>
 
                         </Box>
