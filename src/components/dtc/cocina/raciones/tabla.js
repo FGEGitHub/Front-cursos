@@ -14,7 +14,6 @@ import {
   Typography,
   Paper,
 } from '@mui/material';
-import MUIDataTable from "mui-datatables";
 import servicioDtc from "../../../../services/dtc";
 import NuevaColacion from './nuevacolacion';
 import NuevaMerienda from './nuevamerienda';
@@ -67,7 +66,7 @@ export default function TablaActividades() {
     const agrupado = datos.reduce((acc, item) => {
       const mes = item.fecha.slice(0, 7); // formato "YYYY-MM"
       if (!acc[mes]) acc[mes] = 0;
-      acc[mes] += (parseInt(item.cantidad));
+      acc[mes] += parseInt(item.cantidad);
       return acc;
     }, {});
 
@@ -77,30 +76,8 @@ export default function TablaActividades() {
     }));
   };
 
-  const columns = [
-    { name: "fecha", label: "Fecha" },
-    { name: "cantidad", label: "Cantidad" },
-   {
-  name: "Actions",
-  label: "Acciones",
-  options: {
-    customBodyRenderLite: (dataIndex) => {
-      const data = activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas;
-      const rowData = data[dataIndex];
-      return (
-        <>
-       
-          {activeStep === 0 ? 
-            <BorrarColacion id={rowData.id} traer={() => traerDatos()} />: <>   <Borrar id={rowData.id} traer={() => traerDatos()} /></>
-          }
-        </>
-      );
-    },
-  },
-}
-  ];
-
   const resumenMensual = agruparPorMes(activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas);
+  const datosTabla = activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas;
 
   return (
     <div className="App">
@@ -140,11 +117,41 @@ export default function TablaActividades() {
         </Table>
       </Paper>
 
-      <MUIDataTable
-        title={activeStep === 0 ? "Lista de Colaciones" : "Lista de Meriendas"}
-        data={activeStep === 0 ? asistenciasColaciones : asistenciasMeriendas}
-        columns={columns}
-      />
+      {/* Tabla principal */}
+      <Paper elevation={3} style={{ marginTop: 20, padding: 10 }}>
+        <Typography variant="h6" gutterBottom>
+          {activeStep === 0 ? "Lista de Colaciones" : "Lista de Meriendas"}
+        </Typography>
+
+        {!datosTabla ? (
+          <Typography variant="body1">Cargando...</Typography>
+        ) : (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Fecha</TableCell>
+                <TableCell>Cantidad</TableCell>
+                <TableCell>Acciones</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {datosTabla.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.fecha}</TableCell>
+                  <TableCell>{row.cantidad}</TableCell>
+                  <TableCell>
+                    {activeStep === 0 ? (
+                      <BorrarColacion id={row.id} traer={() => traerDatos()} />
+                    ) : (
+                      <Borrar id={row.id} traer={() => traerDatos()} />
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </Paper>
 
       <Modal open={open} onClose={handleClose}>
         <Box sx={{ width: 400, padding: 2, bgcolor: 'background.paper', boxShadow: 24, borderRadius: 1 }}>
