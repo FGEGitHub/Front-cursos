@@ -173,6 +173,8 @@ const FichaPersona = (props) => {
         <TableHead>
           <TableRow>
             <TableCell>Fecha</TableCell>
+              <TableCell>Otorgado</TableCell>
+                <TableCell>Agendado por</TableCell>
             <TableCell>Estado</TableCell>
             <TableCell>Presente</TableCell>
           </TableRow>
@@ -181,6 +183,9 @@ const FichaPersona = (props) => {
           {turnos.map((ob, index) => (
             <TableRow key={index}>
               <TableCell>{ob.fecha}- {ob.detalle}</TableCell>
+                         <TableCell>{ob.hora}</TableCell>
+                                  <TableCell>{ob.agendadopor}</TableCell>
+                         
               <TableCell>{ob.estado}</TableCell>
               <TableCell>{ob.presente}</TableCell>
              
