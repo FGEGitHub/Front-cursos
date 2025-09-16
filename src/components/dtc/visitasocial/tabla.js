@@ -51,6 +51,11 @@ export default function TablaActividades() {
     };
     traer();
   }, []);
+const normalizar = (texto) => {
+  return texto
+    ? texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+    : "";
+};
 
   const handleOpen = (row) => {
     setSelectedRow(row);
@@ -136,16 +141,20 @@ export default function TablaActividades() {
 
     handleClose();
   };
+const datosFiltrados = asistencias?.filter((item) => {
+  const trabajador = normalizar(item.trabajador_nombre);
+  const usuarioCompleto = normalizar(`${item.usuario_nombre} ${item.usuario_apellido}`);
+  const fechaCarga = normalizar(item.fecha_carga);
+  const fechaReferencia = normalizar(item.fecha_referencia);
 
-  const datosFiltrados = asistencias?.filter((item) => {
-    const usuarioCompleto = `${item.usuario_nombre} ${item.usuario_apellido}`.toLowerCase();
-    return (
-      item.trabajador_nombre?.toLowerCase().includes(filtroTrabajador.toLowerCase()) &&
-      usuarioCompleto.includes(filtroUsuario.toLowerCase()) &&
-      item.fecha_carga?.includes(filtroFechaCarga) &&
-      item.fecha_referencia?.includes(filtroFechaReferencia)
-    );
-  });
+  return (
+    trabajador.includes(normalizar(filtroTrabajador)) &&
+    usuarioCompleto.includes(normalizar(filtroUsuario)) &&
+    fechaCarga.includes(normalizar(filtroFechaCarga)) &&
+    fechaReferencia.includes(normalizar(filtroFechaReferencia))
+  );
+});
+
 const formatearFecha = (fecha) => {
   if (!fecha) return "-";
   // Si es formato "YYYY-MM-DD", agregamos la zona horaria local (falsa hora)
