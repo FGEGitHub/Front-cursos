@@ -79,9 +79,7 @@ const TablaNotificaciones = () => {
         <Alert variant="filled" severity="success"></Alert>
       ) : null}
 
-      <Button variant="contained" color="primary" onClick={toggleVista}>
-        {vistaCelular ? "Cambiar a Vista de PC" : "Cambiar a Vista del Cel"}
-      </Button>
+      
 
       <h2>Lista de etapas</h2>
 
@@ -100,19 +98,20 @@ const TablaNotificaciones = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Fecha</TableCell>
-                <TableCell>Título</TableCell>
+            
                 <TableCell>Proyecto / Etapa</TableCell>
                 <TableCell>Estado </TableCell>
                 <TableCell>Proyectar (Pipo)</TableCell>
-              
+                      <TableCell>Título</TableCell>
                 <TableCell>Acciones</TableCell>
+            
               </TableRow>
             </TableHead>
             <TableBody>
               {chicos.map((row, index) => (
                 <TableRow key={index}>
                   <TableCell>{row.fecha}</TableCell>
-                  <TableCell>{row.titulo}</TableCell>
+
                   <TableCell>{row.proyecto} {row.etapa}</TableCell>
 
                   <TableCell
@@ -132,7 +131,7 @@ const TablaNotificaciones = () => {
                   </TableCell>
 
               
-
+   <TableCell>{row.titulo}</TableCell>
                   <TableCell>
                     <Actualizar
                       id={row.id}
@@ -153,6 +152,7 @@ const TablaNotificaciones = () => {
                       traer={traer}
                     />
                   </TableCell>
+                                 
                 </TableRow>
               ))}
             </TableBody>

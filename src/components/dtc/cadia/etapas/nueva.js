@@ -90,7 +90,7 @@ const getFieldError = (field) => {
       autoComplete="off"
     >
       <Tooltip title="Nueva">
-        <Button variant="outlined" onClick={handleClickOpen}>
+        <Button variant="contained" onClick={handleClickOpen}>
           Nuevo
         </Button>
       </Tooltip>
