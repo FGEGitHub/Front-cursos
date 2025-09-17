@@ -2,7 +2,7 @@ import servicioDtc from '../../../../services/dtc'
 import ModaNueva from './nueva'
 import React, { useEffect, useState } from "react";
 import Actualizar from './modificarr';
-import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
+import Modalborrar from './borrar';
 import { useNavigate, useParams } from "react-router-dom";
 import Tooltip from '@material-ui/core/Tooltip';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -13,8 +13,7 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Alert from '@mui/material/Alert';
-import { useTheme, Button } from '@material-ui/core';
-import Modalborrar from './borrar';
+import { useTheme, Button, TextField } from '@material-ui/core';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,7 +39,7 @@ const TablaNotificaciones = () => {
   const [chicos, setChicos] = useState(null);
   const [usuario, setUsuario] = useState(null);
   const [datos, setDatos] = useState(null);
-  const [vistaCelular, setVistaCelular] = useState(true);
+  const [busqueda, setBusqueda] = useState(""); // estado para el buscador
   const navigate = useNavigate();
   const params = useParams();
   let id = params.id;
@@ -64,74 +63,64 @@ const TablaNotificaciones = () => {
     }
   };
 
-  const toggleVista = () => {
-    setVistaCelular(!vistaCelular);
-  };
+  // Función para filtrar
+  const chicosFiltrados = chicos
+    ? chicos.filter((row) => {
+        const texto = `${row.proyecto} ${row.etapa} ${row.proyectar}`.toLowerCase();
+        return texto.includes(busqueda.toLowerCase());
+      })
+    : [];
 
   return (
-    <div
-      style={{
-        cursor: 'pointer',
-
-      }}
-    >
-      {datos ? (
-        <Alert variant="filled" severity="success"></Alert>
-      ) : null}
-
-      
+    <div style={{ cursor: 'pointer' }}>
+      {datos ? <Alert variant="filled" severity="success"></Alert> : null}
 
       <h2>Lista de etapas</h2>
 
-      <ModaNueva
-        id_usuario={usuario?.id}
-        traer={traer}
+      <ModaNueva id_usuario={usuario?.id} traer={traer} />
+
+      {/* Input de búsqueda */}
+      <TextField
+        label="Buscar por Proyecto/Etapa o Proyectar"
+        variant="outlined"
+        size="small"
+        fullWidth
+        margin="normal"
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
       />
 
       {!chicos ? (
         <p>Cargando...</p>
-      ) : chicos.length === 0 ? (
-        <h2>Aún no hay etapas</h2>
+      ) : chicosFiltrados.length === 0 ? (
+        <h2>No hay coincidencias</h2>
       ) : (
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Fecha</TableCell>
-            
                 <TableCell>Proyecto / Etapa</TableCell>
                 <TableCell>Estado </TableCell>
                 <TableCell>Proyectar (Pipo)</TableCell>
-                      <TableCell>Título</TableCell>
+                <TableCell>Título</TableCell>
                 <TableCell>Acciones</TableCell>
-            
               </TableRow>
             </TableHead>
             <TableBody>
-              {chicos.map((row, index) => (
+              {chicosFiltrados.map((row, index) => (
                 <TableRow key={index}>
                   <TableCell>{row.fecha}</TableCell>
-
                   <TableCell>{row.proyecto} {row.etapa}</TableCell>
-
-                  <TableCell
-                  
-                  >
+                  <TableCell>
                     <b>
                       {row.fecha_fin === null
                         ? `Iniciado - Fecha: ${row.fecha}`
                         : `Finalizado - Fecha: ${row.fecha} - ${row.fecha_fin}`}
                     </b>
                   </TableCell>
-
-                  <TableCell
-                 
-                  >
-                    {row.proyectar}
-                  </TableCell>
-
-              
-   <TableCell>{row.titulo}</TableCell>
+                  <TableCell>{row.proyectar}</TableCell>
+                  <TableCell>{row.titulo}</TableCell>
                   <TableCell>
                     <Actualizar
                       id={row.id}
@@ -152,7 +141,6 @@ const TablaNotificaciones = () => {
                       traer={traer}
                     />
                   </TableCell>
-                                 
                 </TableRow>
               ))}
             </TableBody>
