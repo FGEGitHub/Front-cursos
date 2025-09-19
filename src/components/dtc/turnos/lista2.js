@@ -21,11 +21,13 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import serviciodtc from "../../../services/dtc";
-import Nuevo from "./nuevo"
+import Nuevo from "./nuevo";
 
 export default function OficiosTable() {
     const [oficios, setOficios] = useState([]);
-   
+    const [filteredOficios, setFilteredOficios] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedOficio, setSelectedOficio] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
@@ -44,7 +46,18 @@ export default function OficiosTable() {
     const traerOficios = async () => {
         const data = await serviciodtc.traaeroficios();
         setOficios(data[0]);
+        setFilteredOficios(data[0]); // Inicialmente muestra todos
     };
+
+    // 🔹 Filtrar oficios según búsqueda
+    useEffect(() => {
+        const filtered = oficios.filter((oficio) => {
+            const combinedFields =
+                `${oficio.fecha} ${oficio.oficio} ${oficio.juzgado}-${oficio.expediente} ${oficio.causa}`.toLowerCase();
+            return combinedFields.includes(searchTerm.toLowerCase());
+        });
+        setFilteredOficios(filtered);
+    }, [searchTerm, oficios]);
 
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -77,13 +90,11 @@ export default function OficiosTable() {
         }
     };
 
-    // 🟢 Función para abrir el modal con datos cargados
     const handleOpenModal = (oficio) => {
         setEditedOficio(oficio);
         setModalOpen(true);
     };
 
-    // 🟢 Función para manejar cambios en los campos del formulario
     const handleChange = (e) => {
         setEditedOficio({
             ...editedOficio,
@@ -91,7 +102,6 @@ export default function OficiosTable() {
         });
     };
 
-    // 🟢 Función para actualizar el oficio
     const handleUpdateOficio = async () => {
         try {
             await serviciodtc.actualizarOficio(editedOficio);
@@ -105,32 +115,38 @@ export default function OficiosTable() {
 
     return (
         <Paper sx={{ padding: 2 }}>
-            <Nuevo
-            traer={traerOficios}/>
+            <Nuevo traer={traerOficios} />
+
+            {/* 🔹 Buscador */}
+            <TextField
+                fullWidth
+                margin="dense"
+                label="Buscar por fecha, oficio, juzgado o causa"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+
             <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRow>
-                        <TableCell>Fecha</TableCell>
+                            <TableCell>Fecha</TableCell>
                             <TableCell>A travez de</TableCell>
                             <TableCell>Juzgado-expte</TableCell>
                             <TableCell>Causa</TableCell>
                             <TableCell>Acciones</TableCell>
                             <TableCell>Solicitud</TableCell>
-                       
-                     
-                       
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {oficios.map((oficio) => (
+                        {filteredOficios.map((oficio) => (
                             <TableRow key={oficio.id}>
-                                 <TableCell>{oficio.fecha}</TableCell>
+                                <TableCell>{oficio.fecha}</TableCell>
                                 <TableCell>{oficio.oficio}</TableCell>
                                 <TableCell>{oficio.juzgado}-{oficio.expediente}</TableCell>
                                 <TableCell>{oficio.causa}</TableCell>
                                 <TableCell>
-                                <Button variant="contained" color="secondary" onClick={() => handleOpenModal(oficio)}>
+                                    <Button variant="contained" color="secondary" onClick={() => handleOpenModal(oficio)}>
                                         Modificar
                                     </Button>
                                     <Accordion>
@@ -176,19 +192,13 @@ export default function OficiosTable() {
                                         </AccordionDetails>
                                     </Accordion>
                                 </TableCell>
-                                <TableCell>
-                                  {oficio.solicitud} 
-                                </TableCell>
-                                
-                               
-                              
+                                <TableCell>{oficio.solicitud}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
 
-            {/* 🟢 MODAL PARA EDITAR OFICIO */}
             <Dialog open={modalOpen} onClose={() => setModalOpen(false)}>
                 <DialogTitle>Modificar Oficio</DialogTitle>
                 <DialogContent>
@@ -198,12 +208,8 @@ export default function OficiosTable() {
                     <TextField fullWidth margin="dense" label="Fecha" type="date" name="fecha" value={editedOficio.fecha} onChange={handleChange} />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setModalOpen(false)} color="error">
-                        Cancelar
-                    </Button>
-                    <Button onClick={handleUpdateOficio} color="primary" variant="contained">
-                        Guardar Cambios
-                    </Button>
+                    <Button onClick={() => setModalOpen(false)} color="error">Cancelar</Button>
+                    <Button onClick={handleUpdateOficio} color="primary" variant="contained">Guardar Cambios</Button>
                 </DialogActions>
             </Dialog>
         </Paper>
