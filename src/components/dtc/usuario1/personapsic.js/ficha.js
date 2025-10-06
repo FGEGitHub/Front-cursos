@@ -88,14 +88,15 @@ const FichaPersona = (props) => {
   
        
                   <Grid item xs={12} sm={6}>
-            <Typography color="textSecondary">Primer contacto:</Typography>
-            <Typography>{chico.primer_contacto}</Typography>
+            <Typography color="textSecondary">Obra Social:</Typography>
+            <Typography>{chico.obra_social}</Typography>
+            {chico.obra_social &&<> <Typography color="textSecondary">Cual:</Typography>
+            <Typography>{chico.obra_social_cual}</Typography></>}
           </Grid>
          
    
           <Grid item xs={12} sm={6}>
-            <Typography color="textSecondary">Fecha de Nacimiento:</Typography>
-            <Typography>{chico.fecha_nacimiento}</Typography>
+           
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography color="textSecondary">Domicilio:</Typography>
@@ -133,6 +134,8 @@ const FichaPersona = (props) => {
        aut_retirar={chico.aut_retirar}
        dato_escolar={chico.dato_escolar}
        kid={chico.kid}
+         obra_social={chico.obra_social}
+       obra_social_cual={chico.obra_social_cual}
        hora_merienda={chico.hora_merienda}
        traer ={async () => {
         try {

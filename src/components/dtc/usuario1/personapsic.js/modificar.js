@@ -43,6 +43,8 @@ export default function SelectTextFields(props) {
         aut_retirar: props.aut_retirar,
         dato_escolar: props.dato_escolar,
         hora_merienda: props.hora_merienda,
+            obra_social: props.obra_social,
+        obra_social_cual: props.obra_social_cual,
     })
     const [datos, setDatos] = useState()
     const [activo, setActivo] = useState(false)
@@ -154,7 +156,37 @@ alert(nov)
                         fullWidth
                         variant="standard"
                     /><br/>
-                
+                  <InputLabel variant="outlined" htmlFor="obra_social">
+            <Typography variant="p" component="div" color="black">
+              <StyledParagraph>¿Tiene obra social?</StyledParagraph>
+            </Typography>
+          </InputLabel>
+          <NativeSelect
+            defaultValue={props.obra_social}
+            onChange={handleChange}
+            inputProps={{
+              name: 'obra_social',
+              id: 'obra_social',
+            }}
+            sx={{ width: 250 }}
+          >
+            <option value={'Sin determinar'}>Elegir</option>
+            <option value={'Si'}>Sí</option>
+            <option value={'No'}>No</option>
+          </NativeSelect>
+
+          {/* 🔹 Campo adicional: ¿Cuál? (solo texto libre) */}
+          <TextField
+            margin="dense"
+            id="obra_social_cual"
+            label="¿Cuál obra social?"
+            name="obra_social_cual"
+            onChange={handleChange}
+            defaultValue={props.obra_social_cual}
+            fullWidth
+            variant="standard"
+          />
+          <br/>
                     <br />
                     <TextField
 

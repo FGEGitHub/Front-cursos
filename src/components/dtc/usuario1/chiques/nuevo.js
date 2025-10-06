@@ -1,206 +1,164 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { Button } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import servicioDtc from '../../../../services/dtc'
-import NativeSelect from '@mui/material/NativeSelect';
-import Tooltip from '@material-ui/core/Tooltip';
-import { Paper, CircularProgress, Typography, Card, CardActions } from '@mui/material';
-import React, { useEffect, useState, Fragment } from "react";
-import DialogActions from '@mui/material/DialogActions';
-import InputLabel from '@mui/material/InputLabel';
+import { Button, Dialog, DialogContent, NativeSelect, Tooltip, Typography, InputLabel, DialogActions } from '@mui/material';
+import servicioDtc from '../../../../services/dtc';
+import React, { useState } from "react";
 import styled from 'styled-components';
-
 
 const StyledParagraph = styled.p`
   font-family: 'Montserrat', sans-serif;
 `;
 
 export default function SelectTextFields(props) {
-  const [open, setOpen] = React.useState(false);
-  //const usuario  = useUser().userContext
+  const [open, setOpen] = useState(false);
+
   const [form, setForm] = useState({
-    fecha_nacimiento:"Sin determinar",
-    observaciones:"Sin determinar",
-    primer_contacto:"Sin determinar",
-    primer_ingreso:"Sin determinar",
-    admision:"Sin determinar",
-    
-    dni:"Sin determinar",
-    domicilio:"Sin determinar",
-    telefono:"Sin determinar",
-    autorizacion_imagen:"Sin determinar",
-    fotoc_dni:"Sin determinar",
-    fotoc_responsable:"Sin determinar",
-    tel_responsable:"Sin determinar",
-    visita_social:"Sin determinar",
-    egreso:"Sin determinar",
-    aut_retirar:"Sin determinar",
-    dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",
-  })
-  const [datos, setDatos] = useState()
-  const [activo, setActivo] = useState(false)
-
-
-
-
-
-
+    fecha_nacimiento: "Sin determinar",
+    observaciones: "Sin determinar",
+    primer_contacto: "Sin determinar",
+    primer_ingreso: "Sin determinar",
+    admision: "Sin determinar",
+    dni: "Sin determinar",
+    domicilio: "Sin determinar",
+    telefono: "Sin determinar",
+    autorizacion_imagen: "Sin determinar",
+    fotoc_dni: "Sin determinar",
+    fotoc_responsable: "Sin determinar",
+    tel_responsable: "Sin determinar",
+    visita_social: "Sin determinar",
+    egreso: "Sin determinar",
+    aut_retirar: "Sin determinar",
+    dato_escolar: "Sin determinar",
+    hora_merienda: "Sin determinar",
+    escuela: "Sin determinar",
+    fines: "Sin determinar",
+    grado: "Sin determinar",
+    obra_social: "Sin determinar",
+    obra_social_cual: "",
+    talle: "Sin determinar",
+  });
 
   const handleChange = (e) => {
-    console.log(form)
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
-
-
-  const handleClickOpen = () => {
-
-    setOpen(true);
-
-
+    const { name, value } = e.target;
+    setForm(prev => ({
+      ...prev,
+      [name]: value,
+      ...(name === "obra_social" && value !== "Si" ? { obra_social_cual: "" } : {})
+    }));
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClickOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleDeterminar = async (event) => {
+    event.preventDefault();
+
+    // Validación: si tiene obra social, debe especificarla
+    if (form.obra_social === "Si" && !form.obra_social_cual.trim()) {
+      alert("Debe indicar cuál es la obra social.");
+      return;
+    }
 
     try {
-      event.preventDefault();
-
-      const nov = await servicioDtc.nuevochique(form)
-alert(nov)
+      const nov = await servicioDtc.nuevochique(form);
+      alert(nov);
+      props.traer();
+      setOpen(false);
     } catch (error) {
       console.error(error);
-      console.log('Error algo sucedio')
-
-
+      alert("Error: algo sucedió al guardar el usuario.");
     }
-   setForm({ fecha_nacimiento:"Sin determinar",
-    observaciones:"Sin determinar",
-    primer_contacto:"Sin determinar",
-    primer_ingreso:"Sin determinar",
-    admision:"Sin determinar",
-    kid:"Sin determinar",
-    dni:"Sin determinar",
-    domicilio:"Sin determinar",
-    telefono:"Sin determinar",
-    autorizacion_imagen:"Sin determinar",
-    fotoc_dni:"Sin determinar",
-    fotoc_responsable:"Sin determinar",
-    tel_responsable:"Sin determinar",
-    visita_social:"Sin determinar",
-    egreso:"Sin determinar",
-    aut_retirar:"Sin determinar",
-    dato_escolar:"Sin determinar",
-    hora_merienda:"Sin determinar",
-    escuela:"Sin determinar",
-    talle:"Sin determinar",
-    fines:"Sin determinar",
-    grado:"Sin determinar",})
-    props.traer()
 
-    setOpen(false);
+    // Reset del formulario
+    setForm({
+      fecha_nacimiento: "Sin determinar",
+      observaciones: "Sin determinar",
+      primer_contacto: "Sin determinar",
+      primer_ingreso: "Sin determinar",
+      admision: "Sin determinar",
+      kid: "Sin determinar",
+      dni: "Sin determinar",
+      domicilio: "Sin determinar",
+      telefono: "Sin determinar",
+      autorizacion_imagen: "Sin determinar",
+      fotoc_dni: "Sin determinar",
+      fotoc_responsable: "Sin determinar",
+      tel_responsable: "Sin determinar",
+      visita_social: "Sin determinar",
+      egreso: "Sin determinar",
+      aut_retirar: "Sin determinar",
+      dato_escolar: "Sin determinar",
+      hora_merienda: "Sin determinar",
+      escuela: "Sin determinar",
+      talle: "Sin determinar",
+      fines: "Sin determinar",
+      obra_social: "Sin determinar",
+      obra_social_cual: "",
+      grado: "Sin determinar",
+    });
   };
 
-  const [currency, setCurrency] = React.useState('EUR');
-
-  /*   const handleChange = (event) => {
-      setCurrency(event.target.value);
-    }; */
-
-
   return (
-
-
-
-
-    <Box
-
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      < Tooltip title="Nueva Clase">
-        <Button variant="contained" onClick={handleClickOpen}> Nuevo  </Button>
-
+    <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}>
+      <Tooltip title="Nuevo Usuario">
+        <Button variant="contained" onClick={handleClickOpen}>
+          Nuevo
+        </Button>
       </Tooltip>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
+          <Typography variant="h6" gutterBottom>
+            <b>NUEVO USUARIO</b>
+          </Typography>
 
-        
-            <h3>
-              <b> NUEVO USUARIO</b></h3>
-             
-                        <Typography variant="p" component="div" color="black">
-                            
-                               <b> KID1/KID2/ADOLESCENTES</b>
-                          
-                        </Typography>
-                    
-                    <br/>
-                    <NativeSelect
-                        defaultValue={props.kid}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'kid',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'kid1'}>
-                             Kids1
-                        
-                        </option>
-                        <option value={'kid2'}>Kids2</option>
-                        <option value={'kid3'}>Adolescentes</option>
+          <Typography variant="body1" color="black">
+            <b>KID1 / KID2 / ADOLESCENTES</b>
+          </Typography>
 
-                    </NativeSelect>
-                    <br />
-              <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Nombre"
-              name="nombre"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
+          <NativeSelect
+            defaultValue={props.kid}
+            onChange={handleChange}
+            inputProps={{ name: 'kid', id: 'uncontrolled-native' }}
+            sx={{ width: 250 }}
+          >
+            <option value="Sin determinar">Elegir</option>
+            <option value="kid1">Kids 1</option>
+            <option value="kid2">Kids 2</option>
+            <option value="kid3">Adolescentes</option>
+          </NativeSelect>
 
-<TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              
-              label="Apellido"
-              name="apellido"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
+          <TextField label="Nombre" name="nombre" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Apellido" name="apellido" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="DNI" name="dni" onChange={handleChange} variant="standard" fullWidth />
+
+          {/* Selector de obra social */}
+          <InputLabel htmlFor="obra_social">
+            <StyledParagraph>¿Tiene obra social?</StyledParagraph>
+          </InputLabel>
+          <NativeSelect
+            value={form.obra_social}
+            onChange={handleChange}
+            inputProps={{ name: 'obra_social', id: 'obra_social' }}
+            sx={{ width: 250 }}
+          >
+            <option value="Sin determinar">Elegir</option>
+            <option value="Si">Sí</option>
+            <option value="No">No</option>
+          </NativeSelect>
+       <br/>
+          {/* Aparece solo si selecciona "Sí" */}
+          {form.obra_social === "Si" && (
             <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="DNI"
-              name="dni"
+              label="¿Cuál obra social?"
+              name="obra_social_cual"
               onChange={handleChange}
-              fullWidth
               variant="standard"
+              fullWidth
+              required
             />
-            <br/>
+          )}
+          <br/>
             <TextField
 
               onChange={handleChange}
@@ -415,127 +373,32 @@ InputLabelProps={{
                                 <option value={'No asiste'}>No asiste</option>
                                 <option value={'Asiste'}>Asiste</option>
                             </NativeSelect>
-<TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Domicilio"
-              name="domicilio"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Telefono"
-              name="telefono"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Telefono responsable"
-              name="tel_responsable"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="autorizado a retirar"
-              name="aut_retirar"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-             <TextField
-              autoFocus
-              margin="dense"
-              id="dni"
-              
-              label="Hora merienda"
-              name="hora_merienda"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Escuela"
-              name="escuela"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Grado"
-              name="grado"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Fines"
-              name="fines"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Talle "
-              name="talle"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
-<TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Observaciones"
-              name="observaciones"
-              onChange={handleChange}
-              fullWidth
-              variant="standard"
-            />
 
-          
-            <DialogActions>
+          <TextField label="Domicilio" name="domicilio" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Teléfono" name="telefono" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Teléfono responsable" name="tel_responsable" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Autorizado a retirar" name="aut_retirar" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Hora merienda" name="hora_merienda" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Escuela" name="escuela" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Grado" name="grado" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Fines" name="fines" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Talle" name="talle" onChange={handleChange} variant="standard" fullWidth />
+          <TextField label="Observaciones" name="observaciones" onChange={handleChange} variant="standard" fullWidth />
 
-
-              <>
-              {form.nombre &&form.apellido  ? <> <Button variant="contained" color="primary" onClick={handleDeterminar}> crear </Button></> :  <>Completar los datos</>}
-             </>
-              <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
-            </DialogActions>
-
-
+          <DialogActions>
+            {form.nombre && form.apellido ? (
+              <Button variant="contained" color="primary" onClick={handleDeterminar}>
+                Crear
+              </Button>
+            ) : (
+              <>Completar los datos</>
+            )}
+            <Button variant="outlined" color="error" onClick={handleClose}>
+              Cancelar
+            </Button>
+          </DialogActions>
         </DialogContent>
       </Dialog>
-    </Box >
-
-
+    </Box>
   );
 }

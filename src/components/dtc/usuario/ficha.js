@@ -323,6 +323,28 @@ traer()
                       size="small"
                     />
                   </Grid>
+                         <Grid item xs={2}>
+                    <TextField
+                      label="Obra social:"
+                      name="Nombre"
+                      defaultValue={chico.obra_social || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                         <Grid item xs={2}>
+                    <TextField
+                      label="Cual :"
+                      name="Nombre"
+                      defaultValue={chico.obra_social_cual || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
                  </Grid> 
             <Grid container spacing={2}>
 
@@ -377,6 +399,8 @@ traer()
     aut_retirar={chico.aut_retirar}
     dato_escolar={chico.dato_escolar}
     kid={chico.kid}
+     obra_social={chico.obra_social}
+      obra_social_cual={chico.obra_social_cual}
     escuela={chico.escuela}
     grado={chico.grado}
     fines={chico.fines}

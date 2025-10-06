@@ -47,6 +47,9 @@ export default function SelectTextFields(props) {
         escuela: props.escuela,
         grado: props.grado,
         fines:props.fines,
+            obra_social: props.obra_social,          // 🆕 agregado
+    obra_social_cual: props.obra_social_cual
+
     })
     const [datos, setDatos] = useState()
     const [activo, setActivo] = useState(false)
@@ -184,6 +187,37 @@ alert(nov)
 
                     </NativeSelect>
                     <br />
+                            <InputLabel variant="outlined" htmlFor="obra_social">
+            <Typography variant="p" component="div" color="black">
+              <StyledParagraph>¿Tiene obra social?</StyledParagraph>
+            </Typography>
+          </InputLabel>
+          <NativeSelect
+            defaultValue={props.obra_social}
+            onChange={handleChange}
+            inputProps={{
+              name: 'obra_social',
+              id: 'obra_social',
+            }}
+            sx={{ width: 250 }}
+          >
+            <option value={'Sin determinar'}>Elegir</option>
+            <option value={'Si'}>Sí</option>
+            <option value={'No'}>No</option>
+          </NativeSelect>
+
+          {/* 🔹 Campo adicional: ¿Cuál? (solo texto libre) */}
+          <TextField
+            margin="dense"
+            id="obra_social_cual"
+            label="¿Cuál obra social?"
+            name="obra_social_cual"
+            onChange={handleChange}
+            defaultValue={props.obra_social_cual}
+            fullWidth
+            variant="standard"
+          />
+          <br/>
                     <TextField
 
                         onChange={handleChange}
@@ -451,7 +485,7 @@ alert(nov)
                         variant="standard"
                     />
                       <TextField
-              autoFocus
+              
               margin="dense"
               id="name"
               label="Escuela"
@@ -462,7 +496,7 @@ alert(nov)
               variant="standard"
             />
             <TextField
-              autoFocus
+              
               margin="dense"
               id="name"
               label="Grado"
@@ -473,7 +507,7 @@ alert(nov)
               variant="standard"
             />
             <TextField
-              autoFocus
+              
               margin="dense"
               id="name"
               label="Fines"
@@ -484,7 +518,7 @@ alert(nov)
               variant="standard"
             />
               <TextField
-              autoFocus
+              
               margin="dense"
               id="name"
               label="Talle"

@@ -168,6 +168,34 @@ props.traer()
               variant="standard"
             />
             <br/>
+
+              <InputLabel htmlFor="obra_social">
+                        <StyledParagraph>¿Tiene obra social?</StyledParagraph>
+                      </InputLabel>
+                      <NativeSelect
+                        value={form.obra_social}
+                        onChange={handleChange}
+                        inputProps={{ name: 'obra_social', id: 'obra_social' }}
+                        sx={{ width: 250 }}
+                      >
+                        <option value="Sin determinar">Elegir</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                      </NativeSelect>
+                   <br/>
+                      {/* Aparece solo si selecciona "Sí" */}
+                      {form.obra_social === "Si" && (
+                        <TextField
+                          label="¿Cuál obra social?"
+                          name="obra_social_cual"
+                          onChange={handleChange}
+                          variant="standard"
+                          fullWidth
+                          required
+                        />
+                      )}
+
+                      <br/>
             <TextField
 
               onChange={handleChange}
