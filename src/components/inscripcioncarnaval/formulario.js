@@ -183,11 +183,11 @@ const Estracto = () => {
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
 Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
-📅 Lunes 18 de agosto 
-📍 Santa Rita Sur
-<br/>
+📅 Lunes 13 de octubre 
+📍 Barrio Sur
+{/* <br/>
 📅 Martes 19 de agosto 
-📍 Barrio: Juan de Vera
+📍 Barrio: Juan de Vera */}
  </StyledParagraph>
 <br/>
        ¡es completamente gratuito!
@@ -423,7 +423,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
 
 {/*  */}
 
-       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
+   {/*     <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
    <Select
           labelId="fueAlumna-label"
           id="fueAlumna"
@@ -435,12 +435,12 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                        <MenuItem value="Santa Rita Sur">Santa Rita Sur Lunes 18/08</MenuItem>
+                        <MenuItem value="Barrio Sur">Barrio Sur Lunes 18/08</MenuItem>
                                         <MenuItem value="Juan de Vera">Barrio: Juan de Vera Martes 19/08</MenuItem>
 
               
 
-        </Select>
+        </Select> */}
                         </Box>
 
                         <CardActions sx={{ justifyContent: 'center' }}>
@@ -451,9 +451,9 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
  inscrip.fecha_nac &&
  inscrip.tel &&
  inscrip.localidad &&
- inscrip.direccion &&
+ inscrip.direccion/*  &&
  
- inscrip.curso  ?
+ inscrip.curso  */ ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
@@ -482,11 +482,11 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
                                                         <Typography variant="body1" component="div" color="black">
            <StyledParagraph>
 Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
-📅 Lunes 18 de agosto 
-📍 Santa Rita Sur
-<br/>
+📅 Lunes 13 de octubre 
+📍 Barrio Sur
+{/* <br/>
 📅 Martes 19 de agosto 
-📍 Barrio: Juan de Vera   </StyledParagraph>
+📍 Barrio: Juan de Vera    */}</StyledParagraph>
 
        ¡es completamente gratuito!
 
@@ -719,7 +719,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
                             />
 
 
-       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
+       {/* <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
    <Select
           labelId="fueAlumna-label"
           id="fueAlumna"
@@ -731,11 +731,11 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                    <MenuItem value="Santa Rita Sur">Santa Rita Sur Lunes 18/08</MenuItem>
+                    <MenuItem value="Barrio Sur">Barrio Sur Lunes 18/08</MenuItem>
                                         <MenuItem value="Juan de Vera">Barrio: Juan de Vera Martes 19/08</MenuItem>
 
                    
-        </Select>
+        </Select> */}
 
                         </Box>
 
@@ -748,9 +748,9 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
  inscrip.fecha_nac &&
  inscrip.tel &&
  inscrip.localidad &&
- inscrip.direccion &&
+ inscrip.direccion /* &&
  
- inscrip.curso  ?
+ inscrip.curso */  ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
