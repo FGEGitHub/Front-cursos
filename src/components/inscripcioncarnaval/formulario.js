@@ -449,9 +449,9 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
  inscrip.fecha_nac &&
  inscrip.tel &&
  inscrip.localidad &&
- inscrip.direccion/*  &&
+ inscrip.direccion &&
  
- inscrip.curso  */ ?
+ inscrip.curso   ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
@@ -746,9 +746,9 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
  inscrip.fecha_nac &&
  inscrip.tel &&
  inscrip.localidad &&
- inscrip.direccion /* &&
+ inscrip.direccion  &&
  
- inscrip.curso */  ?
+ inscrip.curso   ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
