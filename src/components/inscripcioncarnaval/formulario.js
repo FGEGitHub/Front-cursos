@@ -185,9 +185,9 @@ const Estracto = () => {
 Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
 📅 Lunes 13 de octubre 
 📍 Barrio Sur
-{/* <br/>
-📅 Martes 19 de agosto 
-📍 Barrio: Juan de Vera */}
+<br/>
+📅 Martes 14 de octubre 
+📍 Barrio: Juan de Vera 
  </StyledParagraph>
 <br/>
        ¡es completamente gratuito!
@@ -423,7 +423,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
 
 {/*  */}
 
-   {/*     <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
+    <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
    <Select
           labelId="fueAlumna-label"
           id="fueAlumna"
@@ -435,12 +435,10 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                        <MenuItem value="Barrio Sur">Barrio Sur Lunes 18/08</MenuItem>
-                                        <MenuItem value="Juan de Vera">Barrio: Juan de Vera Martes 19/08</MenuItem>
+             <MenuItem value="Barrio Sur">Barrio Sur Lunes 13 de octubre</MenuItem>
+                                        <MenuItem value="Juan de Vera">Barrio: Juan de Vera Martes 14 de octubre</MenuItem>
 
-              
-
-        </Select> */}
+        </Select> 
                         </Box>
 
                         <CardActions sx={{ justifyContent: 'center' }}>
@@ -484,9 +482,9 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
 Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
 📅 Lunes 13 de octubre 
 📍 Barrio Sur
-{/* <br/>
+<br/>
 📅 Martes 19 de agosto 
-📍 Barrio: Juan de Vera    */}</StyledParagraph>
+📍 Barrio: Juan de Vera    </StyledParagraph>
 
        ¡es completamente gratuito!
 
@@ -719,7 +717,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
                             />
 
 
-       {/* <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
+       <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
    <Select
           labelId="fueAlumna-label"
           id="fueAlumna"
@@ -731,11 +729,11 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                    <MenuItem value="Barrio Sur">Barrio Sur Lunes 18/08</MenuItem>
-                                        <MenuItem value="Juan de Vera">Barrio: Juan de Vera Martes 19/08</MenuItem>
+                    <MenuItem value="Barrio Sur">Barrio Sur Lunes 13 de octubre</MenuItem>
+                                        <MenuItem value="Juan de Vera">Barrio: Juan de Vera Martes 14 de octubre</MenuItem>
 
                    
-        </Select> */}
+        </Select> 
 
                         </Box>
 
