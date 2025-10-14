@@ -21,11 +21,20 @@ export default function SelectTextFields(props) {
   const [nuevoUsuario, setNuevoUsuario] = useState(false);
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
+  const [dni, setDni] = useState('');
+  const [domicilio, setDomicilio] = useState('');
+    const [barrio, setBarrio] = useState('');
+  const [observaciones, setObservaciones] = useState('Sin observaciones');
 
   const handleClickOpen = () => {
-    setForm({ id: props.id, observaciones: "Sin observaciones" });
+    setForm({ id: props.id });
     setSelectedValue(null);
     setNuevoUsuario(false);
+    setNombre('');
+    setApellido('');
+    setDni('');
+    setDomicilio('');
+    setObservaciones('Sin observaciones');
     setOpen(true);
   };
 
@@ -39,47 +48,60 @@ export default function SelectTextFields(props) {
     const usuario = JSON.parse(loggedUserJSON);
 
     if (nuevoUsuario) {
+      // Datos para usuario nuevo
       data = {
         id: form.id,
         nuevoUsuario: true,
         nombre,
         apellido,
+        dni,
+        domicilio,
+        observaciones,
+         barrio,
         agendadopor: usuario.usuario,
-        usuariodispositivo: "No", // por defecto para nuevos
-        observaciones: form.observaciones
+        usuariodispositivo: "No"
       };
     } else {
+      // Datos para usuario existente
       if (!selectedValue) return;
 
       data = {
         id_persona: selectedValue.id,
         id: form.id,
         agendadopor: usuario.usuario,
-        usuariodispositivo: selectedValue.usuariodispositivo, // viene desde el backend
-        observaciones: form.observaciones
+        usuariodispositivo: selectedValue.usuariodispositivo,
+        observaciones
       };
     }
 
     console.log("Datos enviados al backend:", data);
 
-    if (usuario.nivel === 40 || usuario.nivel === 41) {
-      const response = await servicioDtc.agendarturnocadia(data);
+    try {
+      const response =
+        usuario.nivel === 40 || usuario.nivel === 41
+          ? await servicioDtc.agendarturnocadia(data)
+          : await servicioDtc.agendarturno(data);
       alert(response);
-    } else {
-      const response = await servicioDtc.agendarturno(data);
-      alert(response);
+      props.traer();
+      handleClose();
+    } catch (error) {
+      console.error("Error al enviar:", error);
+      alert("Hubo un error al enviar los datos");
     }
-
-    props.traer();
-    handleClose();
   };
-
 
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nueva Clase">
-        <Button variant="outlined" sx={{ color: "green", borderColor: "green", fontSize: "0.65rem" }} onClick={handleClickOpen}> Agendar </Button>
+        <Button
+          variant="outlined"
+          sx={{ color: "green", borderColor: "green", fontSize: "0.65rem" }}
+          onClick={handleClickOpen}
+        >
+          Agendar
+        </Button>
       </Tooltip>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <h3><b>Agendar Turno</b></h3>
@@ -102,29 +124,35 @@ export default function SelectTextFields(props) {
             <>
               <TextField label="Nombre" variant="outlined" value={nombre} onChange={(e) => setNombre(e.target.value)} fullWidth />
               <TextField label="Apellido" variant="outlined" value={apellido} onChange={(e) => setApellido(e.target.value)} fullWidth />
+              <TextField label="DNI" variant="outlined" value={dni} onChange={(e) => setDni(e.target.value)} fullWidth />
+              <TextField label="Domicilio" variant="outlined" value={domicilio} onChange={(e) => setDomicilio(e.target.value)} fullWidth />
+
+              <TextField label="Barrio" variant="outlined" value={barrio} onChange={(e) => setBarrio(e.target.value)} fullWidth />
+              <TextField label="Observaciones" variant="outlined" value={observaciones} onChange={(e) => setObservaciones(e.target.value)} fullWidth />
             </>
           ) : (
-            <Autocomplete
-              options={props.chicos} // unificado: psicólogas + chicos
-              value={selectedValue}
-              onChange={(event, newValue) => setSelectedValue(newValue)}
-              getOptionLabel={(option) =>
-                `${option.apellido} ${option.nombre} ${option.nombrepsic ? `- se atiende normalmente con ${option.nombrepsic}` : ''}`
-              }
-              isOptionEqualToValue={(option, value) => option.id === value?.id}
-              renderInput={(params) => (
-                <TextField {...params} label="Selecciona una opción" variant="outlined" />
-              )}
-            />
+            <>
+              <Autocomplete
+                options={props.chicos}
+                value={selectedValue}
+                onChange={(event, newValue) => setSelectedValue(newValue)}
+                getOptionLabel={(option) =>
+                  `${option.apellido} ${option.nombre} ${option.nombrepsic ? `- se atiende normalmente con ${option.nombrepsic}` : ''}`
+                }
+                isOptionEqualToValue={(option, value) => option.id === value?.id}
+                renderInput={(params) => (
+                  <TextField {...params} label="Selecciona una opción" variant="outlined" />
+                )}
+              />
+              <TextField
+                label="Observaciones"
+                variant="outlined"
+                value={observaciones}
+                onChange={(e) => setObservaciones(e.target.value)}
+                fullWidth
+              />
+            </>
           )}
-
-          <TextField
-            label="Observaciones"
-            variant="outlined"
-            value={form.observaciones}
-            onChange={(e) => setForm({ ...form, observaciones: e.target.value })}
-            fullWidth
-          />
 
           <DialogActions>
             <Button variant="outlined" color="success" onClick={handleBackendCall}>Asignar turno</Button>
