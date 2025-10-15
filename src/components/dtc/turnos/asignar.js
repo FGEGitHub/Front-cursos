@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, Checkbox, FormControlLabel } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Typography } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -23,7 +23,7 @@ export default function SelectTextFields(props) {
   const [apellido, setApellido] = useState('');
   const [dni, setDni] = useState('');
   const [domicilio, setDomicilio] = useState('');
-    const [barrio, setBarrio] = useState('');
+  const [barrio, setBarrio] = useState('');
   const [observaciones, setObservaciones] = useState('Sin observaciones');
 
   const handleClickOpen = () => {
@@ -34,6 +34,7 @@ export default function SelectTextFields(props) {
     setApellido('');
     setDni('');
     setDomicilio('');
+    setBarrio('');
     setObservaciones('Sin observaciones');
     setOpen(true);
   };
@@ -48,7 +49,6 @@ export default function SelectTextFields(props) {
     const usuario = JSON.parse(loggedUserJSON);
 
     if (nuevoUsuario) {
-      // Datos para usuario nuevo
       data = {
         id: form.id,
         nuevoUsuario: true,
@@ -56,13 +56,12 @@ export default function SelectTextFields(props) {
         apellido,
         dni,
         domicilio,
+        barrio,
         observaciones,
-         barrio,
         agendadopor: usuario.usuario,
         usuariodispositivo: "No"
       };
     } else {
-      // Datos para usuario existente
       if (!selectedValue) return;
 
       data = {
@@ -90,6 +89,20 @@ export default function SelectTextFields(props) {
     }
   };
 
+  // ✅ Verifica si faltan datos o están completos
+  const verificarDatos = (option) => {
+    const faltantes = [];
+    if (!option.dni) faltantes.push("DNI");
+    if (!option.domicilio) faltantes.push("Dirección");
+    if (!option.barrio) faltantes.push("Barrio");
+
+    if (faltantes.length === 0) return { texto: "Datos completos", color: "green" };
+    if (faltantes.length === 1) return { texto: `Falta ${faltantes[0]}`, color: "red" };
+    return { texto: `Faltan ${faltantes.join(" y ")}`, color: "red" };
+  };
+
+  const mensajeDatos = selectedValue ? verificarDatos(selectedValue) : null;
+
   return (
     <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off">
       <Tooltip title="Nueva Clase">
@@ -106,7 +119,6 @@ export default function SelectTextFields(props) {
         <DialogContent>
           <h3><b>Agendar Turno</b></h3>
 
-          {/* Checkbox para usuario nuevo */}
           <FormControlLabel
             control={
               <Checkbox
@@ -126,7 +138,6 @@ export default function SelectTextFields(props) {
               <TextField label="Apellido" variant="outlined" value={apellido} onChange={(e) => setApellido(e.target.value)} fullWidth />
               <TextField label="DNI" variant="outlined" value={dni} onChange={(e) => setDni(e.target.value)} fullWidth />
               <TextField label="Domicilio" variant="outlined" value={domicilio} onChange={(e) => setDomicilio(e.target.value)} fullWidth />
-
               <TextField label="Barrio" variant="outlined" value={barrio} onChange={(e) => setBarrio(e.target.value)} fullWidth />
               <TextField label="Observaciones" variant="outlined" value={observaciones} onChange={(e) => setObservaciones(e.target.value)} fullWidth />
             </>
@@ -137,13 +148,30 @@ export default function SelectTextFields(props) {
                 value={selectedValue}
                 onChange={(event, newValue) => setSelectedValue(newValue)}
                 getOptionLabel={(option) =>
-                  `${option.apellido} ${option.nombre} ${option.nombrepsic ? `- se atiende normalmente con ${option.nombrepsic}` : ''}`
+                  `${option.apellido} ${option.nombre}`
                 }
                 isOptionEqualToValue={(option, value) => option.id === value?.id}
                 renderInput={(params) => (
-                  <TextField {...params} label="Selecciona una opción" variant="outlined" />
+                  <TextField {...params} label="Selecciona una persona" variant="outlined" />
                 )}
               />
+<br />
+              {/* ✅ Mensaje dinámico debajo */}
+              {mensajeDatos && (
+                <Typography
+                  variant="body2"
+                  sx={{
+                    mt: 1,
+                    ml: 1,
+                    color: mensajeDatos.color,
+                    fontWeight: 500,
+                    fontFamily: 'Montserrat, sans-serif'
+                  }}
+                >
+                  {mensajeDatos.texto}
+                </Typography>
+              )}
+
               <TextField
                 label="Observaciones"
                 variant="outlined"
