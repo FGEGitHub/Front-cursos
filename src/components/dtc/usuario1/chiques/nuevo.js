@@ -126,6 +126,7 @@ export default function SelectTextFields(props) {
             <option value="kid1">Kids 1</option>
             <option value="kid2">Kids 2</option>
             <option value="kid3">Adolescentes</option>
+              <option value="Sala Blanda">Sala Blanda</option>
           </NativeSelect>
 
           <TextField label="Nombre" name="nombre" onChange={handleChange} variant="standard" fullWidth />

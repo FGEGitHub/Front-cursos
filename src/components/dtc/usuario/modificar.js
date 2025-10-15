@@ -184,6 +184,8 @@ alert(nov)
                         </option>
                         <option value={'kid2'}>Kids2</option>
                         <option value={'kid3'}>Adolescentes</option>
+                                      <option value="Sala Blanda">Sala Blanda</option>
+
 
                     </NativeSelect>
                     <br />
