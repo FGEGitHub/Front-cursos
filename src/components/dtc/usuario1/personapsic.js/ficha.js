@@ -96,9 +96,11 @@ const FichaPersona = (props) => {
          
    
           <Grid item xs={12} sm={6}>
-           
+            <Typography color="textSecondary">Barrio:</Typography>
+            <Typography>{chico.barrio}</Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
+            
             <Typography color="textSecondary">Domicilio:</Typography>
             <Typography>{chico.domicilio}</Typography>
           </Grid>
