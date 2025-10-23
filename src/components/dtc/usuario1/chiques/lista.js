@@ -361,13 +361,7 @@ const TablaNotificaciones = (props) => {
 
         },
        
-      
-        {
-          name: "porcentajeasis",
-          label: "porcentajeasis",
-
-      },
-     
+ 
 
         {
             name: "Ver",
@@ -398,9 +392,22 @@ const TablaNotificaciones = (props) => {
           }}
   >
   
-    { datos ? <>  <h1>
- <b> Actualmente {datos.total} usuarios a talleres + 152 personas en tratamiento, total {datos.total + 152} usuarios</b> 
-</h1> </>:<></>}
+{datos ? (
+  <>
+    <h1>
+      <b>
+        Actualmente {datos.total} usuarios a talleres + {datos.psicologa} personas en tratamiento psicológico,
+        total {datos.total + datos.psicologa} usuarios
+      </b>
+    </h1>
+
+    <h3 style={{ marginTop: "10px" }}>
+      <b>📊 Obra social:</b> {datos.promedio_obra_social} de los usuarios poseen cobertura médica (Esto implica solo usuarios del dispositivo)
+    </h3>
+  </>
+) : (
+  <></>
+)}
 
             <h2>Lista de chicos</h2>
             {chicos ? <>
