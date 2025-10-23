@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, Checkbox, FormControlLabel, Typography } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Typography, MenuItem } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -25,8 +25,11 @@ export default function SelectTextFields(props) {
   const [domicilio, setDomicilio] = useState('');
   const [barrio, setBarrio] = useState('');
   const [observaciones, setObservaciones] = useState('Sin observaciones');
+  const [obraSocial, setObraSocial] = useState('No');
+  const [obraSocialCual, setObraSocialCual] = useState('');
 
   const handleClickOpen = () => {
+    console.log(props.chicos);
     setForm({ id: props.id });
     setSelectedValue(null);
     setNuevoUsuario(false);
@@ -36,6 +39,8 @@ export default function SelectTextFields(props) {
     setDomicilio('');
     setBarrio('');
     setObservaciones('Sin observaciones');
+    setObraSocial('No');
+    setObraSocialCual('');
     setOpen(true);
   };
 
@@ -58,6 +63,8 @@ export default function SelectTextFields(props) {
         domicilio,
         barrio,
         observaciones,
+        obra_social: obraSocial,
+        obra_social_cual: obraSocial === "Sí" ? obraSocialCual : "No",
         agendadopor: usuario.usuario,
         usuariodispositivo: "No"
       };
@@ -89,7 +96,6 @@ export default function SelectTextFields(props) {
     }
   };
 
-  // ✅ Verifica si faltan datos o están completos
   const verificarDatos = (option) => {
     const faltantes = [];
     if (!option.dni) faltantes.push("DNI");
@@ -139,7 +145,36 @@ export default function SelectTextFields(props) {
               <TextField label="DNI" variant="outlined" value={dni} onChange={(e) => setDni(e.target.value)} fullWidth />
               <TextField label="Domicilio" variant="outlined" value={domicilio} onChange={(e) => setDomicilio(e.target.value)} fullWidth />
               <TextField label="Barrio" variant="outlined" value={barrio} onChange={(e) => setBarrio(e.target.value)} fullWidth />
-              <TextField label="Observaciones" variant="outlined" value={observaciones} onChange={(e) => setObservaciones(e.target.value)} fullWidth />
+
+              {/* ✅ Obra Social */}
+              <TextField
+                select
+                label="¿Tiene obra social?"
+                value={obraSocial}
+                onChange={(e) => setObraSocial(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value="Sí">Sí</MenuItem>
+                <MenuItem value="No">No</MenuItem>
+              </TextField>
+
+              {obraSocial === "Sí" && (
+                <TextField
+                  label="¿Cuál?"
+                  variant="outlined"
+                  value={obraSocialCual}
+                  onChange={(e) => setObraSocialCual(e.target.value)}
+                  fullWidth
+                />
+              )}
+
+              <TextField
+                label="Observaciones"
+                variant="outlined"
+                value={observaciones}
+                onChange={(e) => setObservaciones(e.target.value)}
+                fullWidth
+              />
             </>
           ) : (
             <>
@@ -155,8 +190,7 @@ export default function SelectTextFields(props) {
                   <TextField {...params} label="Selecciona una persona" variant="outlined" />
                 )}
               />
-<br />
-              {/* ✅ Mensaje dinámico debajo */}
+              <br />
               {mensajeDatos && (
                 <Typography
                   variant="body2"
@@ -171,7 +205,6 @@ export default function SelectTextFields(props) {
                   {mensajeDatos.texto}
                 </Typography>
               )}
-
               <TextField
                 label="Observaciones"
                 variant="outlined"
