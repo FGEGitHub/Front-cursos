@@ -16,8 +16,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
-import Alert from '@mui/material/Alert';
-import Dtcito from '../bot'
+import Modificar from '../../usuario/modificar'
 import {
 
     makeStyles,
@@ -209,12 +208,59 @@ const TablaNotificaciones = (props) => {
       };
   
       return (
-          <div onClick={handleNavigation}>
-              <Tooltip title="Ver">
+          <div>
+            
                   <Button onClick={handleNavigation} variant="outlined" sx={{ color: "#5d4037", borderColor: "#5d4037", fontSize: "0.65rem" }} >
                      <b>Ver</b> 
                   </Button>
-              </Tooltip>
+                  <Modificar
+                  id={chicos[dataIndex].id}
+    nombre={chicos[dataIndex].nombre}
+    apellido={chicos[dataIndex].apellido}
+    fecha_nacimiento={chicos[dataIndex].fecha_nacimiento}
+    observaciones={chicos[dataIndex].observaciones}
+    primer_contacto={chicos[dataIndex].primer_contacto}
+    primer_ingreso={chicos[dataIndex].primer_ingreso}
+    admision={chicos[dataIndex].admision}
+    dni={chicos[dataIndex].dni}
+    domicilio={chicos[dataIndex].domicilio}
+    telefono={chicos[dataIndex].telefono}
+    autorizacion_imagen={chicos[dataIndex].autorizacion_imagen}
+    fotoc_dni={chicos[dataIndex].fotoc_dni}
+    fotoc_responsable={chicos[dataIndex].fotoc_responsable}
+    tel_responsable={chicos[dataIndex].tel_responsable}
+    visita_social={chicos[dataIndex].visita_social}
+    egreso={chicos[dataIndex].egreso}
+    aut_retirar={chicos[dataIndex].aut_retirar}
+    dato_escolar={chicos[dataIndex].dato_escolar}
+    kid={chicos[dataIndex].kid}
+     obra_social={chicos[dataIndex].obra_social}
+      obra_social_cual={chicos[dataIndex].obra_social_cual}
+    escuela={chicos[dataIndex].escuela}
+    grado={chicos[dataIndex].grado}
+    fines={chicos[dataIndex].fines}
+    hora_merienda={chicos[dataIndex].hora_merienda}
+    traer={ async () => {
+        try {
+            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+            if (loggedUserJSON) {
+                const usuario = JSON.parse(loggedUserJSON)
+
+                setUsuario(usuario)
+               
+               //const novedades_aux = await servicioDtc.listachiques()
+                const novedades_aux = await servicioDtc.listachiquesmomentaneo()
+                setchicos(novedades_aux[0])
+                setDatos(novedades_aux[1])
+            }
+
+        } catch (error) {
+
+        }
+
+    }}
+                  />
+              
           </div>
       );
   }
@@ -287,19 +333,7 @@ const TablaNotificaciones = (props) => {
 
     ]; */
     const columns = [
-      {
-        name: "Ver",
-        options: {
-            customBodyRenderLite: (dataIndex, rowIndex) =>
-                CutomButtonsRenderer(
-                    dataIndex,
-                    rowIndex,
-                    // overbookingData,
-                    // handleEditOpen
-                )
-        }
-
-    },
+      
       {
         name: "id",
         label: "id",
