@@ -69,9 +69,8 @@ export default function CambiarEstadoPsico(props) {
             sx={{ width: 250 }}
           >
             <option value="Activo">Activo</option>
-            <option value="Baja">Baja</option>
-            <option value="Dejó">Dejó</option>
-            <option value="Fallecido">Fallecido</option>
+            <option value="Inactivo">Inactivo</option>
+         
           </NativeSelect>
         </DialogContent>
 
