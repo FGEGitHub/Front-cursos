@@ -1,82 +1,86 @@
-import servicioDtc from '../../../../services/dtc'
-import ModaNueva from './nuevo'
 import React, { useEffect, useState } from "react";
-import { Paper } from '@mui/material';
-import MUIDataTable from "mui-datatables";
 import { useNavigate, useParams } from "react-router-dom";
-import TableHead from '@mui/material/TableHead';
-import Tooltip from '@material-ui/core/Tooltip';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { styled } from '@mui/material/styles';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import TableContainer from '@mui/material/TableContainer';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableRow from '@mui/material/TableRow';
-import Alert from '@mui/material/Alert';
+import servicioDtc from "../../../../services/dtc";
+import ModaNueva from "./nuevo";
+
 import {
-    makeStyles,
-    useMediaQuery,
-    useTheme,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Alert,
     Button,
     TextField,
     InputAdornment
-} from '@material-ui/core';
-import SearchIcon from '@mui/icons-material/Search';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+} from "@mui/material";
+
+import { styled } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/material";
+import { makeStyles } from "@material-ui/core";
+
+import MUIDataTable from "mui-datatables";
+import Tooltip from "@material-ui/core/Tooltip";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: '#2b6777',
-        color: '#fff',
-        fontWeight: 'bold',
+    [`&.${TableCell.head}`]: {
+        backgroundColor: "#2b6777",
+        color: "#fff",
+        fontWeight: "bold",
     },
-    [`&.${tableCellClasses.body}`]: {
+    [`&.${TableCell.body}`]: {
         fontSize: 14,
     },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: '#f3f8ff',
+    "&:nth-of-type(odd)": {
+        backgroundColor: "#f3f8ff",
     },
-    '&:hover': {
-        backgroundColor: '#e3f2fd',
+    "&:hover": {
+        backgroundColor: "#e3f2fd",
     },
 }));
 
 const useStyles = makeStyles({
     searchField: {
-        marginBottom: '16px',
-        backgroundColor: 'white',
-        borderRadius: '4px',
+        marginBottom: "16px",
+        backgroundColor: "white",
+        borderRadius: "4px",
     },
     buttonBar: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        gap: '10px',
-        marginBottom: '16px',
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: "10px",
+        marginBottom: "16px",
     },
     button: {
-        textTransform: 'none',
-        fontWeight: 'bold',
-        borderRadius: '8px',
+        textTransform: "none",
+        fontWeight: "bold",
+        borderRadius: "8px",
     },
 });
 
 const TablaNotificaciones = () => {
     const theme = useTheme();
-    const [chicos, setchicos] = useState([]);
+    const classes = useStyles();
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
+    const [chicos, setChicos] = useState([]);
     const [usuario, setUsuario] = useState([]);
     const [datos, setDatos] = useState(null);
     const [porcentajeObraSocial, setPorcentajeObraSocial] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState("");
     const [openNuevo, setOpenNuevo] = useState(false);
-    const navigate = useNavigate();
-    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-    const classes = useStyles();
-    const { id } = useParams();
 
     useEffect(() => {
         traer();
@@ -84,17 +88,16 @@ const TablaNotificaciones = () => {
 
     const traer = async () => {
         try {
-            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+            const loggedUserJSON = window.localStorage.getItem("loggedNoteAppUser");
             if (loggedUserJSON) {
                 const usuario = JSON.parse(loggedUserJSON);
                 setUsuario(usuario);
 
                 const novedades_aux = await servicioDtc.listadepersonaspsiq();
                 const listaChicos = novedades_aux[0];
-                setchicos(listaChicos);
+                setChicos(listaChicos);
                 setDatos(novedades_aux[1]);
 
-                // Calcular porcentaje con obra social válida
                 if (listaChicos && listaChicos.length > 0) {
                     const total = listaChicos.length;
                     const conObra = listaChicos.filter(
@@ -108,11 +111,11 @@ const TablaNotificaciones = () => {
                 }
             }
         } catch (error) {
-            console.error('Error al traer datos:', error);
+            console.error("Error al traer datos:", error);
         }
     };
 
-    const filteredChicos = chicos.filter(persona => {
+    const filteredChicos = chicos.filter((persona) => {
         if (!searchTerm) return true;
         const searchLower = searchTerm.toLowerCase();
         return (
@@ -121,18 +124,6 @@ const TablaNotificaciones = () => {
             (persona.apellido && persona.apellido.toLowerCase().includes(searchLower))
         );
     });
-
-    const options = {
-        selectableRows: false,
-        stickyHeader: true,
-        responsive: 'scroll',
-        rowsPerPage: 5,
-        rowsPerPageOptions: [5, 10, 15],
-        downloadOptions: { filename: 'personas.csv', separator: ',' },
-        textLabels: {
-            body: { noMatch: "No se encontraron registros" },
-        },
-    };
 
     const columns = [
         { name: "id", label: "ID" },
@@ -154,11 +145,11 @@ const TablaNotificaciones = () => {
                                 size="small"
                                 onClick={() => {
                                     if (usuario.nivel === 20) {
-                                        navigate('/dtc/usuario1/personapsiq/' + persona.id);
+                                        navigate("/dtc/usuario1/personapsiq/" + persona.id);
                                     } else if (usuario.nivel === 24) {
-                                        navigate('/dtc/psicologa/usuario/' + persona.id);
+                                        navigate("/dtc/psicologa/usuario/" + persona.id);
                                     } else {
-                                        navigate('/dtc/visitasocial/personatratamieto/' + persona.id);
+                                        navigate("/dtc/visitasocial/personatratamieto/" + persona.id);
                                     }
                                 }}
                             >
@@ -166,10 +157,22 @@ const TablaNotificaciones = () => {
                             </Button>
                         </Tooltip>
                     );
-                }
-            }
-        }
+                },
+            },
+        },
     ];
+
+    const options = {
+        selectableRows: false,
+        stickyHeader: true,
+        responsive: "scroll",
+        rowsPerPage: 5,
+        rowsPerPageOptions: [5, 10, 15],
+        downloadOptions: { filename: "personas.csv", separator: "," },
+        textLabels: {
+            body: { noMatch: "No se encontraron registros" },
+        },
+    };
 
     const MobileSearchField = () => (
         <TextField
@@ -192,15 +195,15 @@ const TablaNotificaciones = () => {
     return (
         <div
             style={{
-                cursor: 'pointer',
-                backgroundImage: 'linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%)',
-                color: '#212121',
+                cursor: "pointer",
+                backgroundImage: "linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%)",
+                color: "#212121",
                 padding: 20,
-                borderRadius: '12px',
+                borderRadius: "12px",
             }}
         >
             {datos && (
-                <Alert variant="filled" severity="success" style={{ marginBottom: '10px' }}>
+                <Alert variant="filled" severity="success" sx={{ mb: 2 }}>
                     Datos importantes para rellenar
                 </Alert>
             )}
@@ -209,10 +212,10 @@ const TablaNotificaciones = () => {
                 <Alert
                     variant="filled"
                     severity="info"
-                    style={{
-                        marginBottom: '15px',
-                        fontSize: '16px',
-                        backgroundColor: '#0288d1',
+                    sx={{
+                        mb: 2,
+                        fontSize: "16px",
+                        backgroundColor: "#0288d1",
                     }}
                 >
                     <b>Porcentaje con obra social:</b> {porcentajeObraSocial}%
@@ -220,8 +223,8 @@ const TablaNotificaciones = () => {
             )}
 
             <div className={classes.buttonBar}>
-                 <ModaNueva onClose={() => setOpenNuevo(false)} onSave={traer} />
-            
+                <ModaNueva onClose={() => setOpenNuevo(false)} onSave={traer} />
+
                 <Button
                     variant="contained"
                     color="primary"
@@ -233,7 +236,7 @@ const TablaNotificaciones = () => {
                 </Button>
             </div>
 
-            <h2 style={{ textAlign: 'center', marginBottom: 20 }}>Lista de Personas Asistiendo</h2>
+            <h2 style={{ textAlign: "center", marginBottom: 20 }}>Lista de Personas Asistiendo</h2>
 
             {chicos.length > 0 ? (
                 isMatch ? (
@@ -259,14 +262,14 @@ const TablaNotificaciones = () => {
                                                 <AccountBoxIcon
                                                     onClick={() => {
                                                         if (usuario.nivel === 20) {
-                                                            navigate('/dtc/usuario1/personapsiq/' + row.id);
+                                                            navigate("/dtc/usuario1/personapsiq/" + row.id);
                                                         } else if (usuario.nivel === 24) {
-                                                            navigate('/dtc/psicologa/usuario/' + row.id);
+                                                            navigate("/dtc/psicologa/usuario/" + row.id);
                                                         } else {
-                                                            navigate('/dtc/visitasocial/personatratamieto/' + row.id);
+                                                            navigate("/dtc/visitasocial/personatratamieto/" + row.id);
                                                         }
                                                     }}
-                                                    style={{ cursor: 'pointer', color: '#1565c0' }}
+                                                    style={{ cursor: "pointer", color: "#1565c0" }}
                                                 />
                                             </StyledTableCell>
                                         </StyledTableRow>
@@ -286,8 +289,7 @@ const TablaNotificaciones = () => {
             ) : (
                 <p>Cargando...</p>
             )}
-
-          </div>
+        </div>
     );
 };
 

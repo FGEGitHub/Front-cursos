@@ -5,6 +5,7 @@ import servicioDtc from '../../../../services/dtc'
 import Modificar from './modificar'
 import imagen from "../../../../Assets/fondopsiq.avif"
 import Borrarusuaio from "./modalborrarusuario"
+import Estado from "./estado"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import  { useEffect, useState, Fragment } from "react";
 const FichaPersona = (props) => {
@@ -65,7 +66,7 @@ const FichaPersona = (props) => {
             
       <CardContent>
         <Typography variant="h5" component="div">
-          Información de {chico.apellido} {chico.nombre}
+          Información de {chico.apellido} {chico.nombre} ({chico.estado})
         </Typography>
         <Grid container spacing={2}>
          
@@ -114,49 +115,64 @@ const FichaPersona = (props) => {
     </Card>
     {chico && (
                 <Fragment>
-                  <Modificar 
-    id ={chico.id}
-    
+                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+  <Modificar 
+    id={chico.id}
     nombre={chico.nombre}
     apellido={chico.apellido}
-       fecha_nacimiento={chico.fecha_nacimiento}
-       observaciones={chico.observaciones}
-       primer_contacto={chico.primer_contacto}
-       primer_ingreso={chico.primer_ingreso}
-       admision={chico.admision}
-       dni={chico.dni}
-       domicilio={chico.domicilio}
-       telefono={chico.telefono}
-       autorizacion_imagen={chico.autorizacion_imagen}
-       fotoc_dni={chico.fotoc_dni}
-       fotoc_responsable={chico.fotoc_responsable}
-       tel_responsable={chico.tel_responsable}
-       visita_social={chico.visita_social}
-       egreso={chico.egreso}
-       aut_retirar={chico.aut_retirar}
-       dato_escolar={chico.dato_escolar}
-       kid={chico.kid}
-         obra_social={chico.obra_social}
-       obra_social_cual={chico.obra_social_cual}
-       hora_merienda={chico.hora_merienda}
-       traer ={async () => {
-        try {
-            const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-            if (loggedUserJSON) {
-                const usuario = JSON.parse(loggedUserJSON)
-
-
-                const novedades_aux = await servicioDtc.datosdepersonapsi(id == undefined ? props.id : id)
-                setchico(novedades_aux[0][0])
-            }
-
-        } catch (error) {
-
+    fecha_nacimiento={chico.fecha_nacimiento}
+    observaciones={chico.observaciones}
+    primer_contacto={chico.primer_contacto}
+    primer_ingreso={chico.primer_ingreso}
+    admision={chico.admision}
+    dni={chico.dni}
+    domicilio={chico.domicilio}
+    telefono={chico.telefono}
+    autorizacion_imagen={chico.autorizacion_imagen}
+    fotoc_dni={chico.fotoc_dni}
+    fotoc_responsable={chico.fotoc_responsable}
+    tel_responsable={chico.tel_responsable}
+    visita_social={chico.visita_social}
+    egreso={chico.egreso}
+    aut_retirar={chico.aut_retirar}
+    dato_escolar={chico.dato_escolar}
+    kid={chico.kid}
+    obra_social={chico.obra_social}
+    obra_social_cual={chico.obra_social_cual}
+    hora_merienda={chico.hora_merienda}
+    traer={async () => {
+      try {
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+        if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON);
+          const novedades_aux = await servicioDtc.datosdepersonapsi(
+            id === undefined ? props.id : id
+          );
+          setchico(novedades_aux[0][0]);
         }
-
+      } catch (error) {
+        console.error("Error al traer los datos:", error);
+      }
     }}
-    
+  />
+
+  <Estado id={chico.id}
+  traer={async () => {
+      try {
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+        if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON);
+          const novedades_aux = await servicioDtc.datosdepersonapsi(
+            id === undefined ? props.id : id
+          );
+          setchico(novedades_aux[0][0]);
+        }
+      } catch (error) {
+        console.error("Error al traer los datos:", error);
+      }
+    }}
     />
+</div>
                   { usuario ? <>
                   {usuario.nivel ==20?<>
 
