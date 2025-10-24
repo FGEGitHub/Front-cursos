@@ -12,6 +12,29 @@ import React, { useEffect, useState, Fragment } from "react";
 import DialogActions from '@mui/material/DialogActions';
 import InputLabel from '@mui/material/InputLabel';
 import styled from 'styled-components';
+import {
+    makeStyles,
+    useMediaQuery,
+
+} from '@material-ui/core';
+const useStyles = makeStyles({
+    searchField: {
+        marginBottom: '16px',
+        backgroundColor: 'white',
+        borderRadius: '4px',
+    },
+    buttonBar: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '10px',
+        marginBottom: '16px',
+    },
+    button: {
+        textTransform: 'none',
+        fontWeight: 'bold',
+        borderRadius: '8px',
+    },
+});
 
 
 const StyledParagraph = styled.p`
@@ -43,7 +66,7 @@ export default function SelectTextFields(props) {
   })
   const [datos, setDatos] = useState()
   const [activo, setActivo] = useState(false)
-
+ const classes = useStyles();
 
 
 
@@ -124,7 +147,7 @@ props.traer()
       autoComplete="off"
     >
       < Tooltip title="Nueva Clase">
-        <Button variant="contained" onClick={handleClickOpen}> Nuevo  </Button>
+        <Button variant="contained"  className={classes.button} onClick={handleClickOpen}> Nuevo  </Button>
 
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
