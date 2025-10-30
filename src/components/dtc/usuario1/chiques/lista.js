@@ -344,46 +344,7 @@ const TablaNotificaciones = (props) => {
       label: "dni",
 
   },
-      {
-        
-        name: "kid",
-        label: "Dimension",
-        options: {
-          customHeadRender: (columnMeta) => (
-            <TableCell
-              key={columnMeta.index}
-              style={{
-                width: "200px",
-                minWidth: "200px",
-              }}
-            >
-              {columnMeta.label}
-            </TableCell>
-          ),
-          customBodyRender: (value) => {
-            let displayedValue = value; // Default value
-    
-            if (value === "kid1") {
-              displayedValue = "Dimensión 1";
-            } else if (value === "kid2") {
-              displayedValue = "Dimensión 2";
-            } else if (value === "kid3") {
-              displayedValue = "Jóvenes";
-            }
-    
-            return (
-              <TableCell
-                style={{
-                  width: "200px",
-                  minWidth: "200px",
-                }}
-              >
-                {displayedValue}
-              </TableCell>
-            );
-          },
-        },
-      },
+     
         {
             name: "apellido",
             label: "apellido",
@@ -396,7 +357,12 @@ const TablaNotificaciones = (props) => {
         },
        
  
+   {
+            name: "escuela",
+            label: "escuela",
 
+        },
+       
         {
             name: "Ver",
             options: {
