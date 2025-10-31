@@ -127,6 +127,12 @@ export default function MenuIzq2 ({children}) {
       path: '/dtc/usuario1/turnos',
      // tooltip: 'Agenda de turnos'
     },
+      {
+      text: 'Oficios',
+      icon: <ArchitectureIcon color="primary" />,
+      path: '/dtc/usuario1/oficios',
+      //tooltip: 'Detalle de asistencias de usuarios'
+    },
     {
       text: 'Asistencias',
       icon: <ArchitectureIcon color="primary" />,

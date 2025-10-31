@@ -143,6 +143,10 @@ import DtcCocinastock from '../pages/dtc/cocinastock';
 import DtcInscripciones from '../pages/dtc/nivel1/inscripciones';
 import DtcInventario from '../pages/dtc/nivel1/inventario';
 import Dtcusuario1Psicologo from '../pages/dtc/nivel1/psicologos';
+import Dtcusuario1oficios from '../pages/dtc/nivel1/oficios';
+
+
+
 
 import Dtcturnospsicologos from '../pages/dtc/turnospsicologos';
 import Dtcturnospsicologo from '../pages/dtc/turnospsicologo';
@@ -271,6 +275,7 @@ const Rutas = [
 	{ path: '/usuario1/caja', element: <Cajaesme /> },
 	{ path: '/usuario1/minegocio', element: <Minegocio /> },
 	{ path: '/usuario1/informes', element: <Informesesme /> },
+		{ path: 'dtc/usuario1/oficios', element: <Dtcusuario1oficios /> },
 
 
 	{ path: '/administracion/cursos', element: <Menu2 /> },
