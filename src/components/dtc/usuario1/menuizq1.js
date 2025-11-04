@@ -20,7 +20,7 @@ import Tooltip from '@mui/material/Tooltip';
 import ArchitectureIcon from '@mui/icons-material/Architecture';
 import Navbar from '../Navbar'
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-
+import PsychologyIcon from '@mui/icons-material/Psychology';
 const drawerWidth = 240;
 
 const darkTheme = createTheme({
@@ -121,12 +121,16 @@ export default function MenuIzq2 ({children}) {
       path: '/dtc/usuario1/personaspsiq',
     //  tooltip: 'Lista de personas con tratamiento'
     },
-    {
-      text: 'Turnos psiq',
-      icon: <ArchitectureIcon color="primary" />,
-      path: '/dtc/usuario1/turnos',
-     // tooltip: 'Agenda de turnos'
-    },
+      { 
+          text: 'turnos calendario', 
+          icon: <PsychologyIcon />, 
+          path: '/dtc/usuario1/lista' 
+        },
+ { 
+          text: 'Todos los turnos', 
+          icon: <PsychologyIcon />, 
+          path: '/dtc/usuario1/listatodoslosturnos' 
+        },
       {
       text: 'Oficios',
       icon: <ArchitectureIcon color="primary" />,

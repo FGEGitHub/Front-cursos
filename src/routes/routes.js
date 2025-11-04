@@ -182,7 +182,7 @@ import Stcinventairo from '../pages/dtc/inventario';
 import Stcinventairopretacion from '../pages/dtc/inventarioprestacion';
 import DTCTallerPrinc from '../pages/dtc/talleresprincipal';
 import DTCTallerEstad from '../pages/dtc/tallerestadisticas';
-
+import DTCTodoslosturnos from '../pages/dtc/nivel1/listadeturnospsiq';
 
 
 import DTCCocinaTurnos from '../pages/dtc/cocinamas/turnos';
@@ -398,7 +398,7 @@ const Rutas = [
 	{ path: '/dtc/usuario1/inscripciones', element: <DtcInscripciones /> },
 	{ path: '/dtc/usuario1/psicologos', element: <Dtcusuario1Psicologo /> },
 	{ path: '/dtc/usuario1/psicologo/:id', element: <STCusuairo1psicologo /> },
-
+	{ path: '/dtc/usuario1/listatodoslosturnos', element: <DTCTodoslosturnos /> },
 	{ path: '/usuario1/costosfijos', element: <Cstosfijos /> },
 
 
@@ -479,7 +479,6 @@ const Rutas = [
 	{ path: '/dtc/inventario/menu', element: <Stcinventairo /> },
 	{ path: '/dtc/inventario/prestaicones/:id', element: <Stcinventairopretacion /> },
 	{ path: '/dtc/cocinaraciones', element: <DTCcocinaraciones /> },
-
 	{ path: '/dtc/meriendas', element: <DTCmerienda /> },
 
 

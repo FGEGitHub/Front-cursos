@@ -414,97 +414,7 @@ function customaagendar(dataIndex, rowIndex, data, onClick) {
   }
 
 }}/></>:<></>}
-          {/* <TableContainer>
-            {!datos[0] ? (
-              <Skeleton />
-            ) : (
-              <>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Nombre</b></TableCell>
-                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Estado</b></TableCell>
-                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Horario</b></TableCell>
-                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Asitencia</b></TableCell>
-                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Psicólogo</b></TableCell>
-                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Asignar</b></TableCell>
-                      <TableCell style={{ backgroundColor: "#37474f", color: 'white' }}><b>Acciones</b></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {datos[0].map((row) => (
-                      <StyledTableRow key={row.id}>
-                        <StyledTableCell component="th" scope="row">
-                          {row.apellido ? `${row.apellido} ${row.nombre}` : "Disponible"}
-                        </StyledTableCell>
-                        <StyledTableCell component="th" scope="row">{row.estado}</StyledTableCell>
-                        <StyledTableCell component="th" scope="row">{row.detalle}</StyledTableCell>
-                        <StyledTableCell component="th" scope="row">{row.presente != undefined ?row.presente:<>Sin determ</>}</StyledTableCell>
-                        <StyledTableCell component="th" scope="row">{row.nombrepsiq}</StyledTableCell>
-                        <StyledTableCell component="th" scope="row">
-                          <Asignar id={row.id} chicos={datos[1]} traer={async () => {
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                const user = JSON.parse(loggedUserJSON);
-                setUsuario(user);
-                if(user.nivel==40 || user.nivel==41 ){
-                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha);
-                  setDatos(historial);
-                  setFecha(fecha);
-                }else{
-                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha);
-                setDatos(historial);
-                setFecha(fecha);
-                }
-              
-              }} />
-                        </StyledTableCell>
-                        <StyledTableCell component="th" scope="row">
-                        
-<Clasificar 
-
-              id={row.id}
-              traer={async (fecha) => {
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                const user = JSON.parse(loggedUserJSON);
-                setUsuario(user);
-                if(user.nivel==40 || user.nivel==41 ){
-                  const historial = await servicioDtc.traertodoslosturnosfechacadia(fecha.fecha);
-                  setDatos(historial);
-                  setFecha(fecha);
-                }else{
-                  const historial = await servicioDtc.traertodoslosturnosfecha(fecha.fecha);
-                setDatos(historial);
-                setFecha(fecha);
-                }
-              
-              }}/>
-           
-              <Borrar 
-               id={row.id}
-               traer={async (fecha) => {
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-                const user = JSON.parse(loggedUserJSON);
-                setUsuario(user);
-                if(user.nivel==40 || user.nivel==41 ){
-                  const historial = await servicioDtc.traertodoslosturnosfechacadia(form);
-                  setDatos(historial);
-                  setFecha(fecha);
-                }else{
-                  const historial = await servicioDtc.traertodoslosturnosfecha(form);
-                setDatos(historial);
-                setFecha(fecha);
-                }
-              
-              }}/>
-                        </StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </>
-            )}
-          </TableContainer> */}
-          <MUIDataTable
+        {datos && datos[0].length<400 ?  <MUIDataTable
 
 title={"Lista de Turnos"}
 data={datos[0]}
@@ -517,13 +427,10 @@ actions={[
     }
 ]}
 options={options}
-//className={classes.table} // Aplica el estilo de la tabla
-//classes={{
- // bodyCell: classes.bodyCell, // Aplica el estilo del texto en las celdas del cuerpo
- // selectCell: classes.selectCell, // Aplica el estilo de las celdas de selección
-//}}
 
-/>
+
+/>:<></> }
+          
         </>
       ) : (
         <></>
