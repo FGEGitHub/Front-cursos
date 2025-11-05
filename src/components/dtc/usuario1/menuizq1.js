@@ -124,7 +124,7 @@ export default function MenuIzq2 ({children}) {
       { 
           text: 'turnos calendario', 
           icon: <PsychologyIcon />, 
-          path: '/dtc/usuario1/lista' 
+          path: '/dtc/usuario1/turnos' 
         },
  { 
           text: 'Todos los turnos', 

@@ -19,6 +19,7 @@ import {
     DialogActions,
     TextField
 } from "@mui/material";
+import Asignar from './Asignarusuarioaoficio'
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import serviciodtc from "../../../services/dtc";
 import Nuevo from "./nuevo";
@@ -131,6 +132,7 @@ export default function OficiosTable() {
                     <TableHead>
                         <TableRow>
                             <TableCell>Fecha</TableCell>
+                              <TableCell>Personas/usaurio</TableCell>
                             <TableCell>A travez de</TableCell>
                             <TableCell>Juzgado-expte</TableCell>
                             <TableCell>Causa</TableCell>
@@ -142,6 +144,18 @@ export default function OficiosTable() {
                         {filteredOficios.map((oficio) => (
                             <TableRow key={oficio.id}>
                                 <TableCell>{oficio.fecha}</TableCell>
+                                        <TableCell>
+  {oficio.nombre
+    ? `${oficio.apellido} ${oficio.nombre}`
+    : (
+      <>
+        Sin enlazar <Asignar 
+        id_oficio={oficio.id}
+        traer={traerOficios}/>
+      </>
+    )
+  }
+</TableCell>
                                 <TableCell>{oficio.oficio}</TableCell>
                                 <TableCell>{oficio.juzgado}-{oficio.expediente}</TableCell>
                                 <TableCell>{oficio.causa}</TableCell>
