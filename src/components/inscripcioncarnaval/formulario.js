@@ -183,11 +183,11 @@ const Estracto = () => {
                                  <Typography variant="body1" component="div" color="black">
         <StyledParagraph>
 Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
-📅 Lunes 10 de noviembre
-📍 Barrio quintana
+<br/>📅 Lunes 10 de noviembre
+📍 Barrio San Jose
 <br/>
 📅 Martes 11 de noviembre 
-📍 Barrio: Barrio Juan de Vera
+📍 Barrio: Barrio Quintana
  </StyledParagraph>
 <br/>
        ¡es completamente gratuito!
@@ -435,8 +435,8 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-       <MenuItem value="Barrio san jose">Barrio san jose Lunes 10 de Noviembre</MenuItem>
-                                        <MenuItem value="Barrio quintana">Barrio quintana Martes 11 de Noviembre</MenuItem>
+       <MenuItem value="Barrio san jose">Barrio San Jose Lunes 10 de Noviembre</MenuItem>
+                                        <MenuItem value="Barrio quintana">Barrio Quintana Martes 11 de Noviembre</MenuItem>
 
         </Select> 
                         </Box>
@@ -480,11 +480,11 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
                                                         <Typography variant="body1" component="div" color="black">
            <StyledParagraph>
 Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
-📅 Lunes 10 de noviembre
-📍 Barrio quintana
+<br/>📅 Lunes 10 de noviembre
+📍 Barrio San Jose
 <br/>
 📅 Martes 11 de Noviembre 
-📍 Barrio: Barrio Juan de Vera   </StyledParagraph>
+📍 Barrio: Quintana <br/> </StyledParagraph>
 
        ¡es completamente gratuito!
 
@@ -729,8 +729,8 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
               
 
     
-                    <MenuItem value="Barrio san jose">Barrio san jose Lunes 10 de Noviembre</MenuItem>
-                                        <MenuItem value="Barrio quintana">Barrio quintana Martes 11 de Noviembre</MenuItem>
+                    <MenuItem value="Barrio san jose">Barrio San jose Lunes 10 de Noviembre</MenuItem>
+                                        <MenuItem value="Barrio quintana">Barrio Quintana Martes 11 de Noviembre</MenuItem>
 
                    
         </Select> 
