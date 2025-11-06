@@ -37,24 +37,37 @@ const TablaTurnosPsiq = () => {
 
   const traerTurnos = async () => {
     try {
+            console.log('respuesta[0].length')
       const respuesta = await servicioDtc.traertodoslosturnospsiq();
       // Estructura esperada: [ [listado_turnos], [resumen_por_mes] ]
-      console.log(respuesta[0].length)
-        console.log(respuesta[1].length)
-      setTurnos(respuesta[0] || []);
-      setResumen(respuesta[1] || []);
+           console.log(respuesta)
+console.log("Ejemplo de turno:", respuesta.todos[0]);
+
+      setTurnos(respuesta.todos || []);
+      setResumen(respuesta.resumen || []);
     } catch (error) {
       console.error("Error al traer los turnos:", error);
     }
   };
 
   // Filtrado local por persona y psicólogo
-  const turnosFiltrados = turnos.filter((t) => {
-    const coincidePersona = t.persona?.toLowerCase().includes(filtroPersona.toLowerCase());
-    const coincidePsicologo = t.psicologo?.toLowerCase().includes(filtroPsicologo.toLowerCase());
-    return coincidePersona && coincidePsicologo;
-  });
+const turnosFiltrados = turnos.filter((t) => {
+  const persona = t.persona?.toLowerCase() || "";
+  const psicologo = t.psicologo?.toLowerCase() || "";
 
+  // Si no hay ningún filtro, mostrar todos los turnos
+  if (!filtroPersona && !filtroPsicologo) return true;
+
+  const coincidePersona = filtroPersona
+    ? persona.includes(filtroPersona.toLowerCase())
+    : true;
+
+  const coincidePsicologo = filtroPsicologo
+    ? psicologo.includes(filtroPsicologo.toLowerCase())
+    : true;
+
+  return coincidePersona && coincidePsicologo;
+});
   return (
     <div style={{ padding: 20, background: "rgba(255,255,255,0.8)", borderRadius: 10 }}>
       <h2>Turnos de Psicología</h2>
