@@ -33,7 +33,8 @@ export default function OficiosTable() {
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [oficioToDelete, setOficioToDelete] = useState(null);
-
+const [confirmDeleteExp, setConfirmDeleteExp] = useState(false);
+const [expedienteToDelete, setExpedienteToDelete] = useState(null);
   const [editedOficio, setEditedOficio] = useState({
     id: "",
     oficio: "",
@@ -47,12 +48,26 @@ export default function OficiosTable() {
   useEffect(() => {
     traerOficios();
   }, []);
-
+const handleDeleteExpediente = (id) => {
+  setExpedienteToDelete(id);
+  setConfirmDeleteExp(true);
+};
   const traerOficios = async () => {
     const data = await serviciodtc.traaeroficios();
     setOficios(data[0]);
     setFilteredOficios(data[0]);
   };
+const confirmDeleteExpediente = async () => {
+  try {
+    await serviciodtc.borrarexpediente(expedienteToDelete);
+    traerOficios(); // refresca la lista
+    setConfirmDeleteExp(false);
+    setExpedienteToDelete(null);
+  } catch (error) {
+    console.error("Error al borrar expediente:", error);
+    alert("No se pudo borrar el expediente.");
+  }
+};
 
   useEffect(() => {
     const filtered = oficios.filter((oficio) => {
@@ -217,19 +232,28 @@ export default function OficiosTable() {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {oficio.expedientes.map((exp) => (
-                              <TableRow key={exp.id}>
-                                <TableCell>{exp.nombre}</TableCell>
-                                <TableCell>
-                                  <Button
-                                    variant="outlined"
-                                    onClick={() => handleVerExpediente(exp.id)}
-                                  >
-                                    Ver
-                                  </Button>
-                                </TableCell>
-                              </TableRow>
-                            ))}
+                         {oficio.expedientes.map((exp) => (
+  <TableRow key={exp.id}>
+    <TableCell>{exp.nombre}</TableCell>
+    <TableCell>
+      <Button
+        variant="outlined"
+        onClick={() => handleVerExpediente(exp.id)}
+        sx={{ mr: 1 }}
+      >
+        Ver
+      </Button>
+
+      <Button
+        variant="contained"
+        color="error"
+        onClick={() => handleDeleteExpediente(exp.id)}
+      >
+        Borrar
+      </Button>
+    </TableCell>
+  </TableRow>
+))}
                           </TableBody>
                         </Table>
                       ) : (
@@ -352,6 +376,20 @@ export default function OficiosTable() {
           </Button>
         </DialogActions>
       </Dialog>
+      <Dialog open={confirmDeleteExp} onClose={() => setConfirmDeleteExp(false)}>
+  <DialogTitle>¿Seguro que quieres borrar este expediente?</DialogTitle>
+  <DialogActions>
+    <Button onClick={() => setConfirmDeleteExp(false)}>Cancelar</Button>
+    <Button
+      onClick={confirmDeleteExpediente}
+      color="error"
+      variant="contained"
+    >
+      Borrar
+    </Button>
+  </DialogActions>
+</Dialog>
     </Paper>
+    
   );
 }
