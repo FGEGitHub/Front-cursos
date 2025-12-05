@@ -181,14 +181,13 @@ const Estracto = () => {
 
                         <Box sx={{ textAlign: 'center' }}>
                                  <Typography variant="body1" component="div" color="black">
-        <StyledParagraph>
-Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
-<br/>📅 Lunes 10 de noviembre
-📍 Barrio San Jose
-<br/>
-📅 Martes 11 de noviembre 
-📍 Barrio: Barrio Quintana
- </StyledParagraph>
+     <StyledParagraph>
+  <strong>Inscribite acá para el operativo de salud visual</strong><br/><br/>
+
+  📅 <strong>Viernes 12 de diciembre</strong><br/>
+  🕒 08:30 a 12:30 hs — por orden de llegada<br/>
+  📍 <strong>Barrio San Roque</strong>
+</StyledParagraph>
 <br/>
        ¡es completamente gratuito!
 
@@ -423,7 +422,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
 
 {/*  */}
 
-    <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
+{/*     <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
    <Select
           labelId="fueAlumna-label"
           id="fueAlumna"
@@ -438,7 +437,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
        <MenuItem value="Barrio san jose">Barrio San Jose Lunes 10 de Noviembre</MenuItem>
                                         <MenuItem value="Barrio quintana">Barrio Quintana Martes 11 de Noviembre</MenuItem>
 
-        </Select> 
+        </Select>  */}
                         </Box>
 
                         <CardActions sx={{ justifyContent: 'center' }}>
@@ -449,9 +448,9 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
  inscrip.fecha_nac &&
  inscrip.tel &&
  inscrip.localidad &&
- inscrip.direccion &&
+ inscrip.direccion /* &&
  
- inscrip.curso   ?
+ inscrip.curso  */  ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
@@ -478,13 +477,13 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
 
                         <Box sx={{ textAlign: 'center' }}>
                                                         <Typography variant="body1" component="div" color="black">
-           <StyledParagraph>
-Inscribite acá para los operativos oftalmológicos que se realizan los próximos días en los siguientes barrios de 08.30 a 12.30hs por orden de llegada:
-<br/>📅 Lunes 10 de noviembre
-📍 Barrio San Jose
-<br/>
-📅 Martes 11 de Noviembre 
-📍 Barrio: Quintana <br/> </StyledParagraph>
+<StyledParagraph>
+  <strong>Inscribite acá para el operativo de salud visual</strong><br/><br/>
+
+  📅 <strong>Viernes 12 de diciembre</strong><br/>
+  🕒 08:30 a 12:30 hs — por orden de llegada<br/>
+  📍 <strong>Barrio San Roque</strong>
+</StyledParagraph>
 
        ¡es completamente gratuito!
 
@@ -716,7 +715,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
                                 }}
                             />
 
-
+{/* 
        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual de los operativos quieres inscribirte?</Typography>
    <Select
           labelId="fueAlumna-label"
@@ -733,7 +732,7 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
                                         <MenuItem value="Barrio quintana">Barrio Quintana Martes 11 de Noviembre</MenuItem>
 
                    
-        </Select> 
+        </Select>  */}
 
                         </Box>
 
@@ -746,9 +745,9 @@ Requisitos : Tener más de 10 años. No estar cursando embarazo, ni los primeros
  inscrip.fecha_nac &&
  inscrip.tel &&
  inscrip.localidad &&
- inscrip.direccion  &&
+ inscrip.direccion /*  &&
  
- inscrip.curso   ?
+ inscrip.curso */   ?
                                     <>
                                         {inscrip.tel.length > 9 ? <>
                                             <Dialogo formulario={inscrip}
