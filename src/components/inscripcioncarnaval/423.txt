@@ -1,0 +1,171 @@
+
+
+<Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
+        <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="alumna_anterior"
+       style={{ width: '250px' }}
+
+          label="¿Fuiste alumna?"
+          onChange={handleChange}
+        >
+          <MenuItem value="si">Si</MenuItem>
+          <MenuItem value="no">No</MenuItem>
+        </Select>
+   
+
+      {/* Profesión u oficio */}
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes alguna profesion u Oficio?</Typography>
+   <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="profesion"
+
+          label="¿Tenes alguna profesion u Oficio?"
+          onChange={handleChange}
+        >
+          <MenuItem value="Si">Sí</MenuItem>
+          <MenuItem value="No">No</MenuItem>
+        </Select>
+
+      {/* ¿Te gustaría enseñarlo? solo si hay profesión */}
+     {inscrip.profesion != 'No' && inscrip.profesion != '' && (
+      <>          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual?</Typography>
+
+         <TextField
+        margin="dense"
+        id="cursoDeseado"
+        label="- ¿¿Cual?"
+        name="profesion"
+        onChange={handleChange}
+        fullWidth
+        variant="outlined"
+      />
+          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Te gustaría enseñarlo?</Typography>
+          <Select
+            labelId="quiereEnsenar-label"
+            style={{ width: '250px' }}
+
+            name="enseniar"
+       
+            label="¿Te gustaría enseñarlo?"
+            onChange={handleChange}
+          >
+            <MenuItem value="si">Sí</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+        </>
+      )}
+
+      {/* ¿Tenés espacio para talleres? */}
+      <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes algún lugar y/o espacio para que realicemos algún taller?</Typography>
+          <Select
+            labelId="quiereEnsenar-label"
+            
+            name="tiene_espacio"
+       
+            label="¿Tenes algún lugar y/o espacio para que realicemos algún taller?"
+            onChange={handleChange}
+          >
+            <MenuItem value="si">Sí</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+
+      {/* ¿Qué otro curso te gustaría hacer? */}
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿Qué otro curso de te gustaría hacer?</Typography>
+      <TextField
+        style={{ width: '250px' }}
+        margin="dense"
+        id="cursoDeseado"
+        label="- ¿Qué otro curso de te gustaría hacer?"
+        name="curso_adic"
+        onChange={handleChange}
+        fullWidth
+        variant="outlined"
+      />
+
+      
+<Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Fuiste alumna de la Escuela de Mujeres Emprendedoras?</Typography>
+        <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="alumna_anterior"
+       style={{ width: '250px' }}
+
+          label="¿Fuiste alumna?"
+          onChange={handleChange}
+        >
+          <MenuItem value="si">Si</MenuItem>
+          <MenuItem value="no">No</MenuItem>
+        </Select>
+   
+      {/* Profesión u oficio */}
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes alguna profesion u Oficio?</Typography>
+   <Select
+          labelId="fueAlumna-label"
+          id="fueAlumna"
+          name="profesion"
+
+          label="¿Tenes alguna profesion u Oficio?"
+          onChange={handleChange}
+        >
+          <MenuItem value="Si">Sí</MenuItem>
+          <MenuItem value="No">No</MenuItem>
+        </Select>
+
+      {/* ¿Te gustaría enseñarlo? solo si hay profesión */}
+     {inscrip.profesion != 'No' && inscrip.profesion != '' && (
+      <>          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Cual?</Typography>
+
+         <TextField
+        margin="dense"
+        id="cursoDeseado"
+        label="- ¿¿Cual?"
+        name="profesion"
+        onChange={handleChange}
+        fullWidth
+        variant="outlined"
+      />
+          <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Te gustaría enseñarlo?</Typography>
+          <Select
+            labelId="quiereEnsenar-label"
+            style={{ width: '250px' }}
+
+            name="enseniar"
+       
+            label="¿Te gustaría enseñarlo?"
+            onChange={handleChange}
+          >
+            <MenuItem value="si">Sí</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+        </>
+      )}
+
+      {/* ¿Tenés espacio para talleres? */}
+      <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }}>¿Tenes algún lugar y/o espacio para que realicemos algún taller?</Typography>
+          <Select
+            labelId="quiereEnsenar-label"
+            
+            name="tiene_espacio"
+       
+            label="¿Tenes algún lugar y/o espacio para que realicemos algún taller?"
+            onChange={handleChange}
+          >
+            <MenuItem value="si">Sí</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+
+      {/* ¿Qué otro curso te gustaría hacer? */}
+        <Typography style={{ fontSize: '18px', color: 'black', fontWeight: 500 }} >¿Qué otro curso de te gustaría hacer?</Typography>
+      <TextField
+        style={{ width: '250px' }}
+        margin="dense"
+        id="cursoDeseado"
+        label="- ¿Qué otro curso de te gustaría hacer?"
+        name="curso_adic"
+        onChange={handleChange}
+        fullWidth
+        variant="outlined"
+      />
