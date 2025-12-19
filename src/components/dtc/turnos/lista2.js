@@ -54,7 +54,10 @@ const years = React.useMemo(() => {
   return Array.from(yearsSet).sort((a, b) => b - a);
 }, [oficios]);
 
-useEffect(() => {
+  useEffect(() => {
+    traerOficios();
+  }, []);
+  useEffect(() => {
   const filtered = oficios.filter((oficio) => {
     const matchesSearch = `${oficio.fecha} ${oficio.oficio} ${oficio.juzgado}-${oficio.expediente} ${oficio.causa}`
       .toLowerCase()
@@ -69,7 +72,6 @@ useEffect(() => {
 
   setFilteredOficios(filtered);
 }, [searchTerm, selectedYear, oficios]);
-
 const handleDeleteExpediente = (id) => {
   setExpedienteToDelete(id);
   setConfirmDeleteExp(true);
@@ -210,6 +212,7 @@ const confirmDeleteExpediente = async () => {
     </Button>
   ))}
 </div>
+
       <TextField
         fullWidth
         margin="dense"
