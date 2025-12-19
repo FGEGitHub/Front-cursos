@@ -44,10 +44,32 @@ const [expedienteToDelete, setExpedienteToDelete] = useState(null);
     solicitud: "",
     fecha: "",
   });
+const [selectedYear, setSelectedYear] = useState("ALL");
+const years = React.useMemo(() => {
+  const yearsSet = new Set(
+    oficios
+      .filter(o => o.fecha)
+      .map(o => o.fecha.substring(0, 4))
+  );
+  return Array.from(yearsSet).sort((a, b) => b - a);
+}, [oficios]);
 
-  useEffect(() => {
-    traerOficios();
-  }, []);
+useEffect(() => {
+  const filtered = oficios.filter((oficio) => {
+    const matchesSearch = `${oficio.fecha} ${oficio.oficio} ${oficio.juzgado}-${oficio.expediente} ${oficio.causa}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const matchesYear =
+      selectedYear === "ALL" ||
+      (oficio.fecha && oficio.fecha.startsWith(selectedYear));
+
+    return matchesSearch && matchesYear;
+  });
+
+  setFilteredOficios(filtered);
+}, [searchTerm, selectedYear, oficios]);
+
 const handleDeleteExpediente = (id) => {
   setExpedienteToDelete(id);
   setConfirmDeleteExp(true);
@@ -160,7 +182,34 @@ const confirmDeleteExpediente = async () => {
   return (
     <Paper sx={{ padding: 2 }}>
       <Nuevo traer={traerOficios} />
+<TextField
+  fullWidth
+  margin="dense"
+  label="Buscar por fecha, oficio, juzgado o causa"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+/>
 
+<div style={{ marginBottom: 16 }}>
+  <Button
+    variant={selectedYear === "ALL" ? "contained" : "outlined"}
+    sx={{ mr: 1 }}
+    onClick={() => setSelectedYear("ALL")}
+  >
+    Todos
+  </Button>
+
+  {years.map((year) => (
+    <Button
+      key={year}
+      variant={selectedYear === year ? "contained" : "outlined"}
+      sx={{ mr: 1 }}
+      onClick={() => setSelectedYear(year)}
+    >
+      {year}
+    </Button>
+  ))}
+</div>
       <TextField
         fullWidth
         margin="dense"
@@ -171,20 +220,23 @@ const confirmDeleteExpediente = async () => {
 
       <TableContainer>
         <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Fecha</TableCell>
-              <TableCell>Personas/usuario</TableCell>
-              <TableCell>A través de</TableCell>
-              <TableCell>Juzgado-expte</TableCell>
-              <TableCell>Causa</TableCell>
-              <TableCell>Acciones</TableCell>
-              <TableCell>Solicitud</TableCell>
-            </TableRow>
-          </TableHead>
+        <TableHead>
+  <TableRow>
+    <TableCell>ID</TableCell>
+    <TableCell>Fecha</TableCell>
+    <TableCell>Personas/usuario</TableCell>
+    <TableCell>A través de</TableCell>
+    <TableCell>Juzgado-expte</TableCell>
+    <TableCell>Causa</TableCell>
+    <TableCell>Acciones</TableCell>
+    <TableCell>Solicitud</TableCell>
+  </TableRow>
+</TableHead>
           <TableBody>
             {filteredOficios.map((oficio) => (
               <TableRow key={oficio.id}>
+                  <TableCell>{oficio.id}</TableCell>
+
                 <TableCell>{oficio.fecha}</TableCell>
                 <TableCell>
                   {oficio.nombre ? (
