@@ -12,8 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FirmaAugusto from "../../../Assets/firmaaugusto.jpeg";
 import FirmaSole from "../../../Assets/firmasole.jpeg";
-import Fotosole from "../../../Assets/fotosole.jpeg";
-import Fotoaugusto from "../../../Assets/fotoaugusto.webp";
+
 import servicioDtc from "../../../services/dtc";
 import Nueva from './nueva';
 import Modificar from './editaractividad';
@@ -93,8 +92,35 @@ export default function TablaActividades(props) {
     }
   
     const row = selectedRow;
-    let content = /* Aquí iría el contenido de tu fila seleccionado */ "";
-  
+let content = `
+  <div class="informe">
+
+    <h2 class="titulo-informe">
+      ${row.titulo ?? ""}
+    </h2>
+
+    <p class="fecha">
+      Corrientes, ${row.fecha_referencia ?? ""}
+    </p>
+
+    <p class="parrafo">
+      En el marco del <strong>Dispositivo Territorial Comunitario</strong>, se deja constancia
+      de la siguiente intervención realizada:
+    </p>
+
+    <p class="parrafo detalle">
+      ${row.detalle ?? ""}
+    </p>
+
+    <p class="parrafo">
+      Intervención realizada por: <strong>${row.nombree ?? ""} ${row.apellido ?? ""}</strong>.
+    </p>
+
+  </div>
+`;
+
+
+
     const printWindow = window.open('', '', 'width=800,height=600');
     printWindow.document.write(`
       <html>
@@ -178,9 +204,38 @@ export default function TablaActividades(props) {
                 height: 50px;
               }
               /* Añadimos más margen a la izquierda */
-              .print-container {
-                margin-left: 50px; /* Ajusta este valor según el margen que desees */
-              }
+            .print-container {
+  position: relative;
+  width: 85%;
+  margin: 0 auto;
+}
+                .informe {
+  margin-top: 40px;
+  line-height: 1.8;
+}
+
+.titulo-informe {
+  text-align: center;
+  font-size: 22px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.fecha {
+  text-align: right;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+.parrafo {
+  margin-bottom: 10px;
+  text-align: justify;
+  font-size: 15px;
+}
+
+.detalle {
+  text-indent: 40px;
+}
             }
   
             @keyframes colorTransition {
@@ -227,7 +282,7 @@ export default function TablaActividades(props) {
             <div class="header">
               <img src="${logoBase64}" alt="Logo 1" />
               <div class="title">
-                <h1>Dispositivo territorial comunitario</h1>
+                <h1>Dispositivo Territorial Comunitario</h1>
               </div>
               <img src="${logo2Base64}" alt="Logo 2" class="logo2" />
             </div>
