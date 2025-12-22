@@ -98,7 +98,7 @@ let content = `
     <h2 class="titulo-informe">
       ${row.titulo ?? ""}
     </h2>
-
+ 
     <p class="fecha">
       Corrientes, ${row.fecha_referencia ?? ""}
     </p>
