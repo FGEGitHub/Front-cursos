@@ -406,8 +406,8 @@ const [mostrarDetalles, setMostrarDetalles] = useState(false);
 
           <h1>
             <b>
-              Actualmente {datos.total} usuarios a talleres + {datos.psicologa} personas en tratamiento psicológico,
-              total {datos.total + datos.psicologa} usuarios
+              Actualmente {datos.total} usuarios ({datos.psicologa} personas en tratamiento psicológico)
+           
             </b>
           </h1>
 
