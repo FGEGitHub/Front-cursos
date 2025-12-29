@@ -25,7 +25,7 @@ import {
   Button
 } from '@material-ui/core';
 import { createTheme, MuiThemeProvider } from '@material-ui/core/styles';
-
+import Fusioanr from './fusionar'
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -276,71 +276,6 @@ const [mostrarDetalles, setMostrarDetalles] = useState(false);
 
 
 
-
-
-  // definimos las columnas
-  /*    const columns = [
-       {
-         name: "kid",
-         label: "kid",
- 
-     },
-         {
-             name: "apellido",
-             label: "apellido",
- 
-         },
-         {
-             name: "nombre",
-             label: "nombre",
- 
-         },
-         {
-           name: "dni",
-           label: "dni",
-       },
-     
-         {
-             name: "fecha_nacimiento",
-             label: "Fecha de nacimiento",
- 
-         },
-         
-         {
-           name: "edad",
-           label: "edad",
- 
-       },
-         {
-             name: "falta",
-             label: "falta",
- 
-         },
- 
-         {
-             name: "Ver",
-             options: {
-                 customBodyRenderLite: (dataIndex, rowIndex) =>
-                     CutomButtonsRenderer(
-                         dataIndex,
-                         rowIndex,
-                         // overbookingData,
-                         // handleEditOpen
-                     )
-             }
- 
-         },
-         {
-           name: "tel_responsable",
-           label: "responsable",
-       },
-       {
-         name: "tel",
-         label: "tel",
-     },
- 
- 
-     ]; */
   const columns = [
 
     {
@@ -489,7 +424,7 @@ const [mostrarDetalles, setMostrarDetalles] = useState(false);
       <h2>Lista de chicos</h2>
       {chicos ? <>
         <div>
-
+<Fusioanr/>
 
           <ModaNueva
             id_turno={id}
