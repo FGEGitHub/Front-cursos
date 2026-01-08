@@ -53,7 +53,21 @@ const years = React.useMemo(() => {
   );
   return Array.from(yearsSet).sort((a, b) => b - a);
 }, [oficios]);
+const resumenPorAnio = React.useMemo(() => {
+  const conteo = {};
 
+  oficios.forEach((o) => {
+    if (!o.fecha) return;
+
+    const anio = o.fecha.substring(0, 4);
+    conteo[anio] = (conteo[anio] || 0) + 1;
+  });
+
+  // lo devolvemos ordenado por año descendente
+  return Object.entries(conteo)
+    .sort((a, b) => b[0] - a[0])
+    .map(([anio, cantidad]) => ({ anio, cantidad }));
+}, [oficios]);
   useEffect(() => {
     traerOficios();
   }, []);
@@ -183,6 +197,29 @@ const confirmDeleteExpediente = async () => {
 
   return (
     <Paper sx={{ padding: 2 }}>
+      <Paper sx={{ mb: 2, p: 2 }}>
+  <Typography variant="h6" gutterBottom>
+    Resumen por año
+  </Typography>
+
+  <Table size="small">
+    <TableHead>
+      <TableRow>
+        <TableCell><strong>Año</strong></TableCell>
+        <TableCell><strong>Cantidad de oficios</strong></TableCell>
+      </TableRow>
+    </TableHead>
+
+    <TableBody>
+      {resumenPorAnio.map((row) => (
+        <TableRow key={row.anio}>
+          <TableCell>{row.anio}</TableCell>
+          <TableCell>{row.cantidad}</TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</Paper>
       <Nuevo traer={traerOficios} />
 <TextField
   fullWidth
@@ -225,7 +262,7 @@ const confirmDeleteExpediente = async () => {
         <Table>
         <TableHead>
   <TableRow>
-    <TableCell>ID</TableCell>
+    <TableCell>ID por año</TableCell>
     <TableCell>Fecha</TableCell>
     <TableCell>Personas/usuario</TableCell>
     <TableCell>A través de</TableCell>
@@ -238,7 +275,7 @@ const confirmDeleteExpediente = async () => {
           <TableBody>
             {filteredOficios.map((oficio) => (
               <TableRow key={oficio.id}>
-                  <TableCell>{oficio.id}</TableCell>
+                  <TableCell>{oficio.id_anio}</TableCell>
 
                 <TableCell>{oficio.fecha}</TableCell>
                 <TableCell>
