@@ -2,7 +2,7 @@
 
 
 
-import Asis from '../../../../components/dtc/usuario1/personapsic.js/ficha'
+import Asis from '../../../../components/dtc/usuario/ficha'
 import Calendario from '../../../../components/dtc/turnos/calendario'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
