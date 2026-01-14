@@ -93,7 +93,7 @@ const TablaNotificaciones = () => {
                 const usuario = JSON.parse(loggedUserJSON);
                 setUsuario(usuario);
 
-                const novedades_aux = await servicioDtc.listadepersonaspsiq();
+                const novedades_aux = await servicioDtc.listachiquesmomentaneo();
                 const listaChicos = novedades_aux[0];
                 setChicos(listaChicos);
                 setDatos(novedades_aux[1]);

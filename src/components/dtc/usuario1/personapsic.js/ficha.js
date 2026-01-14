@@ -34,7 +34,7 @@ const FichaPersona = (props) => {
                 const usuario = JSON.parse(loggedUserJSON)
 
                 setUsuario(usuario)
-                const novedades_aux = await servicioDtc.datosdepersonapsi(id == undefined ? props.id : id)
+                const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
                 setfoto(novedades_aux[1])
                 setchico(novedades_aux[0][0])
                 setTurnos(novedades_aux[1])
@@ -145,7 +145,7 @@ const FichaPersona = (props) => {
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
         if (loggedUserJSON) {
           const usuario = JSON.parse(loggedUserJSON);
-          const novedades_aux = await servicioDtc.datosdepersonapsi(
+          const novedades_aux = await servicioDtc.datosdechique(
             id === undefined ? props.id : id
           );
           setchico(novedades_aux[0][0]);
@@ -162,7 +162,7 @@ const FichaPersona = (props) => {
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
         if (loggedUserJSON) {
           const usuario = JSON.parse(loggedUserJSON);
-          const novedades_aux = await servicioDtc.datosdepersonapsi(
+          const novedades_aux = await servicioDtc.datosdechique(
             id === undefined ? props.id : id
           );
           setchico(novedades_aux[0][0]);
