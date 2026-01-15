@@ -11,6 +11,15 @@ import Avatar from "@mui/material/Avatar";
 import Agregarcurso from './modalinscribir'//boton dialogo
 import { useEffect, useState, Fragment } from "react";
 import TextField from "@mui/material/TextField";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from "@mui/material";
 const FichaPersona = (props) => {
   let params = useParams()
   let id = params.id
@@ -22,7 +31,7 @@ const FichaPersona = (props) => {
   const [foto, setfoto] = useState()
   // La función para alternar entre "Ver más" y "Ver menos"
   const [orden, setOrden] = useState({ columna: null, asc: true });
-
+const [turnos, setTurnos] = useState();
   const ordenarPor = (columna) => {
     const esAsc = orden.columna === columna ? !orden.asc : true;
     setOrden({ columna, asc: esAsc });
@@ -45,24 +54,24 @@ const FichaPersona = (props) => {
   }, [])
 
   const traer = async () => {
-    try {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-      if (loggedUserJSON) {
-        const usuario = JSON.parse(loggedUserJSON)
+  try {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+    if (loggedUserJSON) {
+      const usuario = JSON.parse(loggedUserJSON)
+      setUsuario(usuario)
 
-        setUsuario(usuario)
-        const novedades_aux = await servicioDtc.datosdechique(id == undefined ? props.id : id)
-        setfoto(novedades_aux[1])
-        setchico(novedades_aux[0][0])
-        setVinculos(novedades_aux[2])
-        setHorario(novedades_aux[3])
-      }
+      const novedades_aux = await servicioDtc.datosdechique(
+        id == undefined ? props.id : id
+      )
 
-    } catch (error) {
-
+      setfoto(novedades_aux[1])
+      setchico(novedades_aux[0][0])
+      setVinculos(novedades_aux[2])
+      setHorario(novedades_aux[3])
+      setTurnos(novedades_aux[4]) // 👈 ACA
     }
-
-  }
+  } catch (error) {}
+}
   
   const eliminarHorario = async (ido) => {
     try {
@@ -485,6 +494,35 @@ traer()
   </>
 ) : (
   <></>
+)}{turnos && turnos.length > 0 && (
+
+  <TableContainer component={Paper} sx={{ marginTop: "20px" }}>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Fecha</TableCell>
+          <TableCell>Otorgado</TableCell>
+          <TableCell>Agendado por</TableCell>
+          <TableCell>Estado</TableCell>
+          <TableCell>Presente</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {turnos.map((ob, index) => (
+          <TableRow key={index}>
+            <TableCell>
+              {ob.fecha} {ob.detalle ? `- ${ob.detalle}` : ""}
+            </TableCell>
+            <TableCell>{ob.hora}</TableCell>
+            <TableCell>{ob.agendadopor}</TableCell>
+            <TableCell>{ob.estado}</TableCell>
+            <TableCell>{ob.presente}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+
 )}
       
     </>
