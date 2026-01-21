@@ -27,7 +27,7 @@ export default function SelectTextFields(props) {
   const handleClickOpen = async () => {
     setOpen(true);
     try {
-      const novedades_aux = await servicioDtc.listadepersonaspsiq();
+      const novedades_aux = await servicioDtc.listachiquesmomentaneo();
       setUsuarios(novedades_aux[0]);
     } catch (error) {
       console.error('Error al cargar usuarios:', error);
