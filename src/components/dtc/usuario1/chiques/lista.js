@@ -68,7 +68,29 @@ const useStyles = makeStyles({
   },
 });
 
-
+const theme2 = createTheme({
+  overrides: {
+    MUIDataTableHeadCell: {
+      fixedHeader: {
+        backgroundColor: '#0d47a1',
+        color: 'white',
+        fontWeight: 'bold',
+      },
+    },
+    MUIDataTableBodyRow: {
+      root: {
+        '&:hover': {
+          backgroundColor: '#e3f2fd !important',
+        },
+      },
+    },
+    MUIDataTableBodyCell: {
+      root: {
+        fontSize: '0.9rem',
+      },
+    },
+  },
+});
 
 const TablaNotificaciones = (props) => {
   const theme = useTheme();
@@ -92,68 +114,30 @@ const [mostrarDetalles, setMostrarDetalles] = useState(false);
   }, [])
 
 
-  const options = {
-    setTableProps: () => {
-      return {
-        style: {
-          backgroundColor: "#e3f2fd", // Cambia el color de fondo de la tabla
-        },
-      };
-    },
-    customHeadRender: (columnMeta, handleToggleColumn) => ({
-      TableCell: {
-        style: {
-          backgroundColor: '#1565c0', // Cambia el color de fondo del encabezado
-          color: 'white', // Cambia el color del texto del encabezado
-        },
-      },
-    }),
-    selectableRows: false, // Desactivar la selección de filas
-    stickyHeader: true,
-    selectableRowsHeader: false,
-    selectableRowsOnClick: true,
-    responsive: 'scroll',
-    rowsPerPage: 5,
-    rowsPerPageOptions: [5, 10, 15],
-    downloadOptions: { filename: 'tableDownload.csv', separator: ',' },
-    print: true,
-    filter: true,
-    viewColumns: true,
-    pagination: true,
+const options = {
+  setTableProps: () => ({
+    style: { backgroundColor: "#e3f2fd" }
+  }),
 
-    textLabels: {
-      body: {
-        noMatch: "No se encontraron registros",
-        toolTip: "Ordenar",
-      },
-      pagination: {
-        next: "Siguiente",
-        previous: "Anterior",
-        rowsPerPage: "Filas por página:",
-        displayRows: "de",
-      },
-      toolbar: {
-        search: "Buscar",
-        downloadCsv: "Descargar CSV",
-        print: "Imprimir",
-        viewColumns: "Ver columnas",
-        filterTable: "Filtrar tabla",
-      },
-      filter: {
-        all: "Todos",
-        title: "FILTROS",
-        reset: "RESETEAR",
-      },
-      viewColumns: {
-        title: "Mostrar columnas",
-        titleAria: "Mostrar/ocultar columnas de la tabla",
-      },
-      selectedRows: {
-        text: "fila(s) seleccionada(s)",
-        delete: "Eliminar",
-        deleteAria: "Eliminar filas seleccionadas",
-      },
-    },
+  selectableRows: false,
+  stickyHeader: true,
+  responsive: "scroll",
+  rowsPerPage: 10,
+  rowsPerPageOptions: [5, 10, 15, 20],
+
+  filter: true,
+  search: true,
+  viewColumns: true,
+  pagination: true,
+  print: true,
+
+  // 👉 DESCARGA EXCEL FILTRADO
+  download: true,
+  downloadOptions: {
+    filename: "dtc_filtrado.xlsx",
+    separator: ","
+  },
+
 
   };
 
@@ -275,55 +259,84 @@ const [mostrarDetalles, setMostrarDetalles] = useState(false);
   }
 
 
+const columns = [
+ {
+   name: "dni",
+   label: "DNI",
+ },
 
-  const columns = [
+ {
+   name: "apellido",
+   label: "Apellido",
+ },
 
-    {
-      name: "id",
-      label: "id",
+ {
+   name: "nombre",
+   label: "Nombre",
+ },
 
-    },
-    {
-      name: "dni",
-      label: "dni",
+ {
+   name: "psico",
+   label: "Psico",
+   options: {
+     filter: true,
+     filterType: "checkbox",
+     filterOptions: {
+       names: ["Si", "No"],
+     },
+     customBodyRender: (value) => (
+       value === "Si"
+         ? <span style={{
+             background:"#c8e6c9",
+             padding:"3px 8px",
+             borderRadius:10,
+             fontWeight:"bold"
+           }}>SI</span>
+         : ""
+     )
+   }
+ },
 
-    },
+ {
+   name: "fecha_nacimiento",
+   label: "Edad",
+   options: {
+     customBodyRender: (value) => {
+       if(!value) return "";
+       const hoy = new Date();
+       const fn = new Date(value);
+       let edad = hoy.getFullYear() - fn.getFullYear();
+       const m = hoy.getMonth() - fn.getMonth();
+       if (m < 0 || (m === 0 && hoy.getDate() < fn.getDate())) edad--;
+       return edad;
+     }
+   }
+ },
 
-    {
-      name: "apellido",
-      label: "apellido",
+ {
+   name: "escuela",
+   label: "Escuela",
+ },
 
-    },
-    {
-      name: "nombre",
-      label: "nombre",
+ {
+   name: "grado",
+   label: "Grado",
+ },
 
-    },
+ {
+   name: "obra_social_cual",
+   label: "Obra Social",
+ },
 
+ {
+   name: "Ver",
+   options: {
+     customBodyRenderLite: (dataIndex) =>
+       CutomButtonsRenderer(dataIndex)
+   }
+ }
+];
 
-    {
-      name: "escuela",
-      label: "escuela",
-
-    },
-
-    {
-      name: "Ver",
-      options: {
-        customBodyRenderLite: (dataIndex, rowIndex) =>
-          CutomButtonsRenderer(
-            dataIndex,
-            rowIndex,
-            // overbookingData,
-            // handleEditOpen
-          )
-      }
-
-    },
-
-
-
-  ];
 
   // renderiza la data table
   return (
@@ -494,7 +507,7 @@ const [mostrarDetalles, setMostrarDetalles] = useState(false);
                 </TableContainer>
               </> : <><>
 
-
+<MuiThemeProvider theme={theme2}>
                 <MUIDataTable
 
                   title={"Lista de chicos"}
@@ -515,7 +528,7 @@ const [mostrarDetalles, setMostrarDetalles] = useState(false);
                   }}
 
                 />
-
+</MuiThemeProvider>
               </></>}
 
           </> : <> <h2>El curso aun no tiene chicos</h2></>}
