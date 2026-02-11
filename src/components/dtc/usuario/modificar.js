@@ -48,7 +48,9 @@ export default function SelectTextFields(props) {
         grado: props.grado,
         fines:props.fines,
             obra_social: props.obra_social,          // 🆕 agregado
-    obra_social_cual: props.obra_social_cual
+    obra_social_cual: props.obra_social_cual,
+      sexo: props.sexo,
+        hijos:props.hijos,
 
     })
     const [datos, setDatos] = useState()
@@ -61,7 +63,6 @@ export default function SelectTextFields(props) {
 
 
     const handleChange = (e) => {
-        console.log(form)
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
@@ -83,7 +84,9 @@ export default function SelectTextFields(props) {
             event.preventDefault();
 
             const nov = await servicioDtc.modificarusuario(form)
+
 alert(nov)
+props.traer()
         } catch (error) {
             console.error(error);
             console.log('Error algo sucedio')
@@ -189,6 +192,33 @@ alert(nov)
 
                     </NativeSelect>
                     <br />
+                      <InputLabel>
+                        <StyledParagraph>Sexo</StyledParagraph>
+                    </InputLabel>
+                    <NativeSelect
+                        value={form.sexo}
+                        onChange={handleChange}
+                        inputProps={{ name: 'sexo' }}
+                        sx={{ width: 250 }}
+                    >
+                        <option value="Sin determinar">Elegir</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </NativeSelect>
+
+                    {/* 🔥 HIJOS (cantidad directa) */}
+                    <TextField
+                        margin="dense"
+                        label="Cantidad de hijos"
+                        name="hijos"
+                        type="number"
+                        value={form.hijos}
+                        onChange={handleChange}
+                        fullWidth
+                        variant="standard"
+                        helperText="Si no tiene hijos, dejar vacío"
+                    />
+                    <br/>
                             <InputLabel variant="outlined" htmlFor="obra_social">
             <Typography variant="p" component="div" color="black">
               <StyledParagraph>¿Tiene obra social?</StyledParagraph>

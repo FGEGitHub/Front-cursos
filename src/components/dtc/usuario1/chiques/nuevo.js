@@ -4,6 +4,7 @@ import { Button, Dialog, DialogContent, NativeSelect, Tooltip, Typography, Input
 import servicioDtc from '../../../../services/dtc';
 import React, { useState } from "react";
 import styled from 'styled-components';
+import { Checkbox, FormControlLabel } from '@mui/material';
 
 const StyledParagraph = styled.p`
   font-family: 'Montserrat', sans-serif;
@@ -36,16 +37,21 @@ export default function SelectTextFields(props) {
     obra_social: "Sin determinar",
     obra_social_cual: "",
     talle: "Sin determinar",
+    sexo: "Sin determinar",
+tiene_hijos: false,
+cantidad_hijos: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm(prev => ({
-      ...prev,
-      [name]: value,
-      ...(name === "obra_social" && value !== "Si" ? { obra_social_cual: "" } : {})
-    }));
-  };
+const handleChange = (e) => {
+  const { name, value, type, checked } = e.target;
+
+  setForm(prev => ({
+    ...prev,
+    [name]: type === "checkbox" ? checked : value,
+    ...(name === "obra_social" && value !== "Si" ? { obra_social_cual: "" } : {}),
+    ...(name === "tiene_hijos" && !checked ? { cantidad_hijos: "" } : {})
+  }));
+};
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -129,10 +135,23 @@ export default function SelectTextFields(props) {
               <option value="Sala Blanda">Sala Blanda</option>
           </NativeSelect>
 
+
           <TextField label="Nombre" name="nombre" onChange={handleChange} variant="standard" fullWidth />
           <TextField label="Apellido" name="apellido" onChange={handleChange} variant="standard" fullWidth />
           <TextField label="DNI" name="dni" onChange={handleChange} variant="standard" fullWidth />
-
+<InputLabel htmlFor="sexo">
+  <StyledParagraph>Sexo</StyledParagraph>
+</InputLabel>
+<NativeSelect
+  value={form.sexo}
+  onChange={handleChange}
+  inputProps={{ name: 'sexo', id: 'sexo' }}
+  sx={{ width: 250 }}
+>
+  <option value="Sin determinar">Elegir</option>
+  <option value="Masculino">Masculino</option>
+  <option value="Femenino">Femenino</option>
+</NativeSelect>
           {/* Selector de obra social */}
           <InputLabel htmlFor="obra_social">
             <StyledParagraph>¿Tiene obra social?</StyledParagraph>
@@ -160,6 +179,32 @@ export default function SelectTextFields(props) {
             />
           )}
           <br/>
+          <FormControlLabel
+  control={
+    <Checkbox
+      checked={form.tiene_hijos}
+      onChange={handleChange}
+      name="tiene_hijos"
+    />
+  }
+  label="Tiene hijos"
+/>
+
+<br/>
+{form.tiene_hijos && (
+  <TextField
+    label="¿Cuántos hijos?"
+    name="cantidad_hijos"
+    type="number"
+    value={form.cantidad_hijos}
+    onChange={handleChange}
+    variant="standard"
+    fullWidth
+    required
+  />
+)}
+
+<br/>
             <TextField
 
               onChange={handleChange}

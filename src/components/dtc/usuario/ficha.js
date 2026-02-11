@@ -354,6 +354,28 @@ traer()
                       size="small"
                     />
                   </Grid>
+                     <Grid item xs={2}>
+                    <TextField
+                      label="Sexo :"
+                      name="Sexo"
+                      defaultValue={chico.sexo || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
+                     <Grid item xs={2}>
+                    <TextField
+                      label="hijos :"
+                      name="hijos"
+                      defaultValue={chico.hijos || ""}
+                      InputProps={{ readOnly: true }}
+                      variant="outlined"
+                      fullWidth
+                      size="small"
+                    />
+                  </Grid>
                  </Grid> 
             <Grid container spacing={2}>
 
@@ -413,6 +435,8 @@ traer()
     escuela={chico.escuela}
     grado={chico.grado}
     fines={chico.fines}
+        sexo={chico.sexo}
+    hijos={chico.hijos}
     hora_merienda={chico.hora_merienda}
     traer={ async () => {
       try {
