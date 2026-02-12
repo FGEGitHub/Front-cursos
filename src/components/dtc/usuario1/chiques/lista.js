@@ -351,8 +351,8 @@ const columns = [
 
       {datos ? (
         <>
-{datos && <MujeresStats datos={datos} />}
 
+{datos && <MujeresStats datos={datos} total={chicos.length} />}
           <h1>
             <b>
               Actualmente {datos.total} usuarios ({datos.psicologa} personas en tratamiento psicológico)
