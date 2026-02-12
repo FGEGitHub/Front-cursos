@@ -6,7 +6,7 @@ import MUIDataTable from "mui-datatables";
 import ForwardToInboxTwoToneIcon from '@mui/icons-material/ForwardToInboxTwoTone';
 import { useNavigate } from "react-router-dom";
 import TableHead from '@mui/material/TableHead';
-import Tooltip from '@material-ui/core/Tooltip';
+import MujeresStats from "./estadistMujeres";
 import { useParams } from "react-router-dom"
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
@@ -351,6 +351,7 @@ const columns = [
 
       {datos ? (
         <>
+{datos && <MujeresStats datos={datos} />}
 
           <h1>
             <b>
