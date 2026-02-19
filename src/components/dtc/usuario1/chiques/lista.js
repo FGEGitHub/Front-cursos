@@ -260,6 +260,10 @@ const options = {
 
 
 const columns = [
+   {
+   name: "id",
+   label: "id",
+ },
  {
    name: "dni",
    label: "DNI",
@@ -318,10 +322,7 @@ const columns = [
    label: "Escuela",
  },
 
- {
-   name: "grado",
-   label: "Grado",
- },
+
 
  {
    name: "obra_social_cual",
