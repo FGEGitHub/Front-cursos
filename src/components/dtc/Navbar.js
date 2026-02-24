@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import DrawerNav from "./DrawerNav";
 import servicioPErsonas from '../../services/personas'
-import logo from '../../Assets/inviernodtc.png'
+import logo from '../../Assets/logonuevo.png'
 
 
 const Navbar = (props) => {
@@ -29,7 +29,7 @@ const Navbar = (props) => {
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const islogo = {
    
-                  width: "80px",                  
+                  width: "180px",                  
                   };
   const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ const traer = async () => {
   }
   return (
     <React.Fragment>
-      <AppBar sx={{ background: '#2e7d32' }}>
+      <AppBar sx={{ background: '#61f668' }}>
         <Toolbar>
            <img style={islogo} src={logo} alt="logo" />  
           {isMatch ? (

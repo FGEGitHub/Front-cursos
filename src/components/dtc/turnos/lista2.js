@@ -23,7 +23,7 @@ import Asignar from "./Asignarusuarioaoficio";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import serviciodtc from "../../../services/dtc";
 import Nuevo from "./nuevo";
-
+import EstadisticasFuero from "./estadoficiosfuero";
 export default function OficiosTable() {
   const [oficios, setOficios] = useState([]);
   const [filteredOficios, setFilteredOficios] = useState([]);
@@ -92,6 +92,7 @@ const handleDeleteExpediente = (id) => {
 };
   const traerOficios = async () => {
     const data = await serviciodtc.traaeroficios();
+    console.log("Oficios traídos:", data[0]);
     setOficios(data[0]);
     setFilteredOficios(data[0]);
   };
@@ -197,6 +198,7 @@ const confirmDeleteExpediente = async () => {
 
   return (
     <Paper sx={{ padding: 2 }}>
+      <EstadisticasFuero oficios={oficios} />
       <Paper sx={{ mb: 2, p: 2 }}>
   <Typography variant="h6" gutterBottom>
     Resumen por año
