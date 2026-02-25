@@ -21,13 +21,14 @@ const StyledParagraph = styled.p`
 export default function SelectTextFields(props) {
     const [open, setOpen] = React.useState(false);
     //const usuario  = useUser().userContext
-    const [form, setForm] = useState({
-        id: props.id,
-        fecha_referencia: props.fecha_referencia,
-        detalle: props.detalle,
-        titulo: props.titulo,
-        
-    })
+   const [form, setForm] = useState({
+  id: props.id,
+  fecha_referencia: props.fecha_referencia,
+  detalle: props.detalle,
+  titulo: props.titulo,
+  trabajo: props.trabajo || "",
+
+})
     const [datos, setDatos] = useState()
     const [activo, setActivo] = useState(false)
 
@@ -144,7 +145,15 @@ alert(nov)
                         }}
                     />
       
-
+<TextField
+  margin="dense"
+  label="Trabajo"
+  name="trabajo"
+  defaultValue={props.trabajo}
+  onChange={handleChange}
+  fullWidth
+  variant="standard"
+/>
 
                     <DialogActions>
 

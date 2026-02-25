@@ -193,6 +193,7 @@ const formatearFecha = (fecha) => {
               <TableCell>ID</TableCell>
               <TableCell>Quién cargó</TableCell>
               <TableCell>Usuario</TableCell>
+                 <TableCell>Tipo</TableCell>
               <TableCell>Título</TableCell>
               <TableCell>Fecha de carga</TableCell>
               <TableCell>Fecha de referencia</TableCell>
@@ -209,6 +210,7 @@ const formatearFecha = (fecha) => {
                     ? `${row.usuario_nombre} ${row.usuario_apellido}`
                     : row.psicologa_nombre}
                 </TableCell>
+                  <TableCell>{row.trabajo}</TableCell>
                 <TableCell>{row.titulo}</TableCell>
          <TableCell>{(row.fecha_carga)}</TableCell>
 <TableCell>{formatearFecha(row.fecha_referencia)}</TableCell>
@@ -223,6 +225,7 @@ const formatearFecha = (fecha) => {
                         id={row.id}
                         fecha_referencia={row.fecha_referencia}
                         titulo={row.titulo}
+                           trabajo={row.trabajo}
                         detalle={row.detalle}
                         traer={async () => {
                           const usuario = JSON.parse(localStorage.getItem('loggedNoteAppUser'));

@@ -98,7 +98,7 @@ export default function MenuIzq2 ({children}) {
      // tooltip: 'Lista de usuarios del dispositivo'
     },
     {
-      text: 'Asistencias sociales',
+      text: 'Trabajo territorial',
       icon: <GradingTwoToneIcon color="primary" />,
       path: '/dtc/usuario1/asistenciassoc',
    //   tooltip: 'Informes de las trabajadoras sociales'
