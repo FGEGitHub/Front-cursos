@@ -14,7 +14,7 @@ import CardInformacionDia from './tarjetahoy';
 import CardSeleccionFecha from './tarjetaselecionar';
 import  Acordeon   from '../actividades/acordeon';
 import  { useEffect, useState } from "react";
-import Estadisticas from './estadistivcas'
+import Estadisticas from '../chiques/act2'
 import Asistencia from  '../../usuario2/asistencia/tabla'
 
 import Dtcito from '../bot';
