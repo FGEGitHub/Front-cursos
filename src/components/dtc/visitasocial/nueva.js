@@ -67,6 +67,7 @@ export default function SelectTextFields(props) {
     formData.append("id_trabajador", props.id_trabajador);
     formData.append("fecha_referencia", form.fecha_referencia);
     formData.append("usuariodispositivo", form.usuariodispositivo); // Se envía el campo
+    formData.append("trabajo", form.trabajo);
   
     try {
       await servicioDtc.nuevaintervencion(formData);
@@ -143,7 +144,15 @@ export default function SelectTextFields(props) {
             name="detalle"
             fullWidth
           />
-
+<TextField
+  margin="dense"
+  id="trabajo"
+  label="Trabajo"
+  name="trabajo"
+  onChange={handleChange}
+  fullWidth
+  variant="standard"
+/>
           <InputLabel>Adjuntar archivo o imagen</InputLabel>
           <input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif" onChange={handleFileChange} />
 
