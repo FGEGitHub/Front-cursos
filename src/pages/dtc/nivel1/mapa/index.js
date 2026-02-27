@@ -7,7 +7,7 @@ import MenuuCel from '../../../../components/dtc/usuario1/menuresp'
 
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../Assets/mantenimiento2.jpeg'
-import Menu from '../../../../components/dtc/usuario1/mapa/componente todos'
+import Menu from '../../../../components/dtc/usuario1/mapa/componentenuevo'
 import React, { useEffect, useState } from "react";
 import {
 
@@ -36,10 +36,10 @@ export default function Paginas() {
     useEffect(() => {
       
         const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-        console.log(loggedUserJSON) 
+      
         if (loggedUserJSON) {
           const user = JSON.parse(loggedUserJSON)
-          console.log(user)
+       
           switch (user.nivel) {
             case 20:
              break;
