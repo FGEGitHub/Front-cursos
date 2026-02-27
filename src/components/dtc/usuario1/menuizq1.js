@@ -85,6 +85,12 @@ export default function MenuIzq2 ({children}) {
       path: '/dtc/usuario1/menu',
    //  tooltip: 'Asistencia y actividades de hoy'
     },
+      {
+      text: 'Mapa',
+      icon: <GradingTwoToneIcon color="primary" />,
+      path: '/dtc/usuario1/mapas',
+   //  tooltip: 'Asistencia y actividades de hoy'
+    },
     {
       text: 'Personal',
       icon: <PeopleAltTwoToneIcon color="primary" />,
