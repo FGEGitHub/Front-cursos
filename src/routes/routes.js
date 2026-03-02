@@ -367,16 +367,13 @@ const Rutas = [
 	{ path: '/fiscalizacion/escrutinio', element: <Escru /> },
 	{ path: '/fiscalizacion/administracion/circuitos', element: <Circuitos /> },
 
-
 	{ path: '/vendedora/menu', element: <Vendedoramenu /> },
 	{ path: '/ventascarnaval', element: <Menutodoslosprod /> },
 	{ path: '/producto/:id', element: <Ventasproducto /> },
 
-
 	{ path: '/llamados/todos', element: <Llamadas /> },
 
 	{ path: '/dtc/estadisticas3', element: <DtcEstadisticastodas3 /> },
-
 
 	{ path: '/dtc/estadisticas', element: <DtcEstadisticastodas2 /> },
 

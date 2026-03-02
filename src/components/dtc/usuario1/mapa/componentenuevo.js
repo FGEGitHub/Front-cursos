@@ -70,10 +70,13 @@ export default function MapComponent() {
   const [puntos, setPuntos] = useState([]);
     const [usuario, setUsuario] = useState(null);
   const [nuevoPunto, setNuevoPunto] = useState(null);
+  const [asistencias, setAsistencias] = useState([]);
+const [mostrarSelectAsistencia, setMostrarSelectAsistencia] = useState(false);
   const [formData, setFormData] = useState({
     titulo: "",
     categoria: "",
-    observaciones: ""
+    observaciones: "",
+      id_asistencia: ""
   });
 
   // 🔹 Traer puntos del backend
@@ -102,12 +105,25 @@ export default function MapComponent() {
       }
   
     }
+
+    const traerAsistencias = async () => {
+  try {
+    const data = await servicioDtc.traerasitenciasociales();
+    setAsistencias(data);
+    setMostrarSelectAsistencia(true);
+  } catch (error) {
+    console.error("Error trayendo asistencias:", error);
+  }
+};
+
+
+
   // 🔹 Crear punto en backend
 const guardarPunto = async () => {
   try {
 
     if (!nuevoPunto) return alert("Toca el mapa primero");
-
+console.log("FORM DATA:", formData);
     const nuevo = await servicioDtc.crearpuntos({
       ...formData,
       lat: nuevoPunto.lat,
@@ -119,11 +135,12 @@ const guardarPunto = async () => {
 
     // Limpiar
     setNuevoPunto(null);
-    setFormData({
-      titulo: "",
-      categoria: "",
-      observaciones: ""
-    });
+setFormData({
+  titulo: "",
+  categoria: "",
+  observaciones: "",
+  id_asistencia: ""
+});
 
   } catch (error) {
     console.error("Error al guardar:", error);
@@ -156,7 +173,30 @@ const guardarPunto = async () => {
         />
         <button onClick={guardarPunto}>Crear Punto</button>
       </div>
+<button onClick={traerAsistencias}>
+  Nueva Asistencia
+</button>
 
+{mostrarSelectAsistencia && (
+  <select
+    value={formData.id_asistencia}
+    onChange={(e) =>
+      setFormData({
+        ...formData,
+        id_asistencia: e.target.value
+      })
+    }
+  >
+    <option value="">Seleccionar asistencia</option>
+   {asistencias.map((a) => (
+  <option key={a.id} value={a.id}>
+    {a.titulo} - {a.detalle.length > 25 
+      ? a.detalle.substring(0, 25) + "..." 
+      : a.detalle}
+  </option>
+))}
+  </select>
+)}
       <MapContainer center={[-27.47, -58.83]} zoom={13} style={{ height: "500px" }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
