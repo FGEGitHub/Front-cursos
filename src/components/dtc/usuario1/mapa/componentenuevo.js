@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaf
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import servicioDtc from '../../../../services/dtc';
-
+import { Autocomplete, TextField } from "@mui/material";
 // Fix iconos
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -262,23 +262,31 @@ const [errores, setErrores] = useState({
       )}
 
       {mostrarSelectCasa && (
-        <select
-          value={formData.id_chique}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              id_chique: e.target.value
-            })
-          }
-        >
-          <option value="">Seleccionar chique</option>
-          {chiques.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.nombre} {c.apellido}
-            </option>
-          ))}
-        </select>
-      )}
+  <Autocomplete
+    options={chiques}
+    getOptionLabel={(option) =>
+      `${option.nombre} ${option.apellido}`
+    }
+    value={
+      chiques.find(c => c.id === formData.id_chique) || null
+    }
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        id_chique: newValue ? newValue.id : ""
+      });
+    }}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        label="Seleccionar chique"
+        variant="outlined"
+        size="small"
+      />
+    )}
+    sx={{ width: 300, marginTop: 2 }}
+  />
+)}
 
       <MapContainer center={[-27.51, -58.83]} zoom={15} style={{ height: "500px" }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
