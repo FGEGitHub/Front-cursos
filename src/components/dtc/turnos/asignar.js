@@ -27,7 +27,7 @@ export default function SelectTextFields(props) {
   const [observaciones, setObservaciones] = useState('Sin observaciones');
   const [obraSocial, setObraSocial] = useState('No');
   const [obraSocialCual, setObraSocialCual] = useState('');
-
+  const [telefonoo, setTelefono] = useState('');
   const handleClickOpen = () => {
     console.log(props.chicos);
     setForm({ id: props.id });
@@ -38,6 +38,7 @@ export default function SelectTextFields(props) {
     setDni('');
     setDomicilio('');
     setBarrio('');
+    setTelefono('');
     setObservaciones('Sin observaciones');
     setObraSocial('No');
     setObraSocialCual('');
@@ -62,6 +63,7 @@ export default function SelectTextFields(props) {
         dni,
         domicilio,
         barrio,
+        telefonoo,
         observaciones,
         obra_social: obraSocial,
         obra_social_cual: obraSocial === "Sí" ? obraSocialCual : "No",
@@ -145,6 +147,7 @@ export default function SelectTextFields(props) {
               <TextField label="DNI" variant="outlined" value={dni} onChange={(e) => setDni(e.target.value)} fullWidth />
               <TextField label="Domicilio" variant="outlined" value={domicilio} onChange={(e) => setDomicilio(e.target.value)} fullWidth />
               <TextField label="Barrio" variant="outlined" value={barrio} onChange={(e) => setBarrio(e.target.value)} fullWidth />
+              <TextField label="Telefono" variant="outlined" value={telefonoo} onChange={(e) => setTelefono(e.target.value)} fullWidth />
 
               {/* ✅ Obra Social */}
               <TextField
