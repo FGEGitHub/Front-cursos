@@ -263,7 +263,15 @@ export default function TablaNotificaciones() {
     'En tratamiento': MAIN_COLORS.tratamiento,
     'Sin tratamiento': MAIN_COLORS.sinTratamiento,
   };
+const judicialSegments = [
+  { name: 'Judicializados', value: stats.judicializados },
+  { name: 'No judicializados', value: stats.noJudicializados },
+];
 
+const judicialColors = {
+  Judicializados: MAIN_COLORS.judicializados,
+  'No judicializados': MAIN_COLORS.noJudicializados,
+};
   return (
     <Box sx={{ p: { xs: 1.5, md: 3 }, background: '#f8fafc' }}>
       <Grid container spacing={2} sx={{ mb: 3 }}>
@@ -344,115 +352,309 @@ export default function TablaNotificaciones() {
           >
             <Grid container spacing={3}>
               <Grid item xs={12} lg={6}>
-                <Card
-                  sx={{
-                    borderRadius: '24px',
-                    border: '1px solid #e2e8f0',
-                    boxShadow: '0 1px 8px rgba(15,23,42,0.05)',
-                    p: 2,
-                    height: '100%',
-                  }}
-                >
+         <Card
+  sx={{
+    borderRadius: '24px',
+    border: '1px solid #e2e8f0',
+    boxShadow: '0 1px 8px rgba(15,23,42,0.05)',
+    p: 2,
+    height: '100%',
+  }}
+>
+  <Box
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 3,
+      height: '100%',
+    }}
+  >
+    {/* Gráfico general */}
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : 'minmax(0,1.6fr) 180px',
+        gap: 2,
+        alignItems: 'start',
+      }}
+    >
+      <DonutChart
+        title="General"
+        subtitle={`Total usuarios: ${stats.total}`}
+        data={treatmentSegments}
+        total={stats.total}
+        colors={treatmentColors}
+      />
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          pt: isMobile ? 0 : 2,
+        }}
+      >
+        <Box
+          sx={{
+            borderRadius: '18px',
+            border: '1px solid #d7ebc9',
+            background: '#f7fbf3',
+            p: 2,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.18em',
+              color: '#64748b',
+            }}
+          >
+            Total usuarios
+          </Typography>
+
+          <Typography
+            sx={{
+              mt: 1,
+              fontSize: 44,
+              fontWeight: 700,
+              color: '#0f172a',
+            }}
+          >
+            {stats.total}
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            borderRadius: '18px',
+            border: '1px solid #e2e8f0',
+            p: 2,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.18em',
+              color: '#64748b',
+            }}
+          >
+            Referencias
+          </Typography>
+
+          <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+            {treatmentSegments.map((item) => (
+              <Box
+                key={item.name}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  gap: 1,
+                  px: 1.5,
+                  py: 1.2,
+                  borderRadius: '12px',
+                  background: '#f8fafc',
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                   <Box
                     sx={{
-                      display: 'grid',
-                      gridTemplateColumns: isMobile ? '1fr' : 'minmax(0,1.6fr) 180px',
-                      gap: 2,
-                      alignItems: 'start',
+                      width: 10,
+                      height: 10,
+                      borderRadius: '50%',
+                      background: treatmentColors[item.name],
                     }}
-                  >
-                    <DonutChart
-                      title="General"
-                      subtitle={`Total usuarios: ${stats.total}`}
-                      data={treatmentSegments}
-                      total={stats.total}
-                      colors={treatmentColors}
-                    />
+                  />
+                  <Typography sx={{ fontSize: 13, color: '#334155' }}>
+                    {item.name}
+                  </Typography>
+                </Box>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: isMobile ? 0 : 2 }}>
-                      <Box
-                        sx={{
-                          borderRadius: '18px',
-                          border: '1px solid #d7ebc9',
-                          background: '#f7fbf3',
-                          p: 2,
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontSize: 11,
-                            fontWeight: 700,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.18em',
-                            color: '#64748b',
-                          }}
-                        >
-                          Total usuarios
-                        </Typography>
+                <Typography sx={{ fontSize: 13, fontWeight: 700 }}>
+                  {item.value}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      </Box>
+    </Box>
 
-                        <Typography sx={{ mt: 1, fontSize: 44, fontWeight: 700, color: '#0f172a' }}>
-                          {stats.total}
-                        </Typography>
-                      </Box>
+    {/* Gráfico judicializados dentro de tratamiento */}
+    <Box
+      sx={{
+        borderTop: '1px solid #e2e8f0',
+        pt: 3,
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : 'minmax(0,1.6fr) 180px',
+        gap: 2,
+        alignItems: 'start',
+      }}
+    >
+      <DonutChart
+        title="Judicializados en tratamiento"
+        subtitle={`Personas en tratamiento: ${stats.tratamiento}`}
+        data={[
+          {
+            name: 'Judicializados',
+            value: stats.judicializados,
+          },
+          {
+            name: 'No judicializados',
+            value: stats.noJudicializados,
+          },
+        ]}
+        total={stats.tratamiento}
+        colors={{
+          Judicializados: MAIN_COLORS.judicializados,
+          'No judicializados': MAIN_COLORS.noJudicializados,
+        }}
+      />
 
-                      <Box
-                        sx={{
-                          borderRadius: '18px',
-                          border: '1px solid #e2e8f0',
-                          p: 2,
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontSize: 11,
-                            fontWeight: 700,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.18em',
-                            color: '#64748b',
-                          }}
-                        >
-                          Referencias
-                        </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          pt: isMobile ? 0 : 2,
+        }}
+      >
+        <Box
+          sx={{
+            borderRadius: '18px',
+            border: '1px solid #f2c7c7',
+            background: '#fff7f7',
+            p: 2,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.18em',
+              color: '#64748b',
+            }}
+          >
+            % Judicializados
+          </Typography>
 
-                        <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
-                          {treatmentSegments.map((item) => (
-                            <Box
-                              key={item.name}
-                              sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                gap: 1,
-                                px: 1.5,
-                                py: 1.2,
-                                borderRadius: '12px',
-                                background: '#f8fafc',
-                              }}
-                            >
-                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <Box
-                                  sx={{
-                                    width: 10,
-                                    height: 10,
-                                    borderRadius: '50%',
-                                    background: treatmentColors[item.name],
-                                  }}
-                                />
-                                <Typography sx={{ fontSize: 13, color: '#334155' }}>
-                                  {item.name}
-                                </Typography>
-                              </Box>
+          <Typography
+            sx={{
+              mt: 1,
+              fontSize: 44,
+              fontWeight: 700,
+              color: MAIN_COLORS.judicializados,
+            }}
+          >
+            {stats.tratamiento > 0
+              ? Math.round((stats.judicializados / stats.tratamiento) * 100)
+              : 0}
+            %
+          </Typography>
 
-                              <Typography sx={{ fontSize: 13, fontWeight: 700 }}>
-                                {item.value}
-                              </Typography>
-                            </Box>
-                          ))}
-                        </Box>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Card>
+          <Typography
+            sx={{
+              mt: 0.5,
+              fontSize: 13,
+              color: '#64748b',
+            }}
+          >
+            {stats.judicializados} de {stats.tratamiento} personas en tratamiento
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            borderRadius: '18px',
+            border: '1px solid #e2e8f0',
+            p: 2,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.18em',
+              color: '#64748b',
+            }}
+          >
+            Referencias
+          </Typography>
+
+          <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: 1,
+                px: 1.5,
+                py: 1.2,
+                borderRadius: '12px',
+                background: '#f8fafc',
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Box
+                  sx={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    background: MAIN_COLORS.judicializados,
+                  }}
+                />
+                <Typography sx={{ fontSize: 13, color: '#334155' }}>
+                  Judicializados
+                </Typography>
+              </Box>
+
+              <Typography sx={{ fontSize: 13, fontWeight: 700 }}>
+                {stats.judicializados}
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: 1,
+                px: 1.5,
+                py: 1.2,
+                borderRadius: '12px',
+                background: '#f8fafc',
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Box
+                  sx={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    background: MAIN_COLORS.noJudicializados,
+                  }}
+                />
+                <Typography sx={{ fontSize: 13, color: '#334155' }}>
+                  No judicializados
+                </Typography>
+              </Box>
+
+              <Typography sx={{ fontSize: 13, fontWeight: 700 }}>
+                {stats.noJudicializados}
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  </Box>
+</Card>
               </Grid>
 
               <Grid item xs={12} lg={6}>
