@@ -140,14 +140,16 @@ export default function MenuIzq2({ children }) {
       <CssBaseline />
 
       <Box sx={{ display: 'flex', minHeight: '100vh', background: '#f8fafc' }}>
-       <Drawer
+      <Drawer
   variant="permanent"
   sx={{
     width: drawerWidth,
     flexShrink: 0,
+    zIndex: (theme) => theme.zIndex.appBar + 2,
     '& .MuiDrawer-paper': {
       width: drawerWidth,
       border: 'none',
+      zIndex: (theme) => theme.zIndex.appBar + 2,
       background:
         'linear-gradient(180deg, #245d27 0%, #2e7d32 30%, #3f9a44 100%)',
       color: '#fff',
@@ -156,6 +158,10 @@ export default function MenuIzq2({ children }) {
       overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
+      position: 'fixed',
+      left: 0,
+      top: 0,
+      height: '100vh',
     },
   }}
 >

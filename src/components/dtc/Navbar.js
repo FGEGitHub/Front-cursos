@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import DrawerNav from "./DrawerNav";
 import servicioPErsonas from '../../services/personas'
-import logo from '../../Assets/logonuevo.png'
+import logo from '../../Assets/logo_blanco.png'
 
 
 const Navbar = (props) => {
@@ -78,7 +78,13 @@ const traer = async () => {
   }
   return (
     <React.Fragment>
-      <AppBar sx={{ background: '#41a346' }}>
+<AppBar
+  sx={{
+    background:
+      'linear-gradient(90deg, #184d1a 0%, #2c6f30 20%, #66bb6a 50%, #2c6f30 80%, #184d1a 100%)',
+    boxShadow: '0 6px 18px rgba(0,0,0,0.18)',
+  }}
+>
         <Toolbar>
            <img style={islogo} src={logo} alt="logo" />  
           {isMatch ? (
