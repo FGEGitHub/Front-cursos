@@ -1,240 +1,396 @@
+
 import * as React from 'react';
-import { useNavigate } from "react-router-dom";
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { useNavigate, useLocation } from 'react-router-dom';
+import {
+  Box,
+  Drawer,
+  CssBaseline,
+  Toolbar,
+  List,
+  Divider,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  Avatar,
+  Chip,
+} from '@mui/material';
 import PeopleAltTwoToneIcon from '@mui/icons-material/PeopleAltTwoTone';
-import logo from "../../../Assets/dtcletra.png"
-import servicioDtc from '../../../services/dtc'
 import WcTwoToneIcon from '@mui/icons-material/WcTwoTone';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useState, useEffect } from "react";
 import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
-import Tooltip from '@mui/material/Tooltip';
 import ArchitectureIcon from '@mui/icons-material/Architecture';
-import Navbar from '../Navbar'
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import PsychologyIcon from '@mui/icons-material/Psychology';
-const drawerWidth = 240;
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import CakeRoundedIcon from '@mui/icons-material/CakeRounded';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import logo from '../../../Assets/dtcletra.png';
+import Navbar from '../Navbar';
+import servicioDtc from '../../../services/dtc';
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#b2dfdb',
-    },
-    secondary: {
-      main: '#b2dfdb',
-    },
-  },
-});
+const drawerWidth = 290;
 
-export default function MenuIzq2 ({children}) {
-  const [cumple, setCumple] = useState()
-  const [estemes, setEstemes] = useState()
+export default function MenuIzq2({ children }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  useEffect(() => {
-    traer()
-  }, [])
+  const [cumple, setCumple] = React.useState([]);
+  const [estemes, setEstemes] = React.useState([]);
+
+  React.useEffect(() => {
+    traer();
+  }, []);
 
   const traer = async () => {
     try {
       const today = new Date();
       const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-      const historial = await servicioDtc.traercumples({ fecha: formattedDate })
+      const historial = await servicioDtc.traercumples({ fecha: formattedDate });
 
-      setCumple(historial[0])
-      setEstemes(historial[1])
+      setCumple(historial[0] || []);
+      setEstemes(historial[1] || []);
     } catch (error) {
-      console.error("Error fetching data", error);
+      console.error(error);
     }
-  }
+  };
 
   const handleClick = (path) => {
     navigate(path);
   };
 
-  const hanleLogout = () => {
-    window.localStorage.removeItem('loggedNoteAppUser')
-    window.location.reload(true);
-  }
+  const handleLogout = () => {
+    localStorage.removeItem('loggedNoteAppUser');
+    window.location.reload();
+  };
 
   const menuItems = [
     {
-      text: (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          Inscripciones
-      
-      
-        </div>
-      ),
-      icon: <ArchitectureIcon color="primary" />,
+      text: 'Inscripciones',
+      icon: <ArchitectureIcon />,
       path: '/dtc/usuario1/inscripciones',
-    //  tooltip: 'Detalle de asistencias de usuarios',
     },
     {
       text: 'Actividades',
-      icon: <GradingTwoToneIcon color="primary" />,
+      icon: <GradingTwoToneIcon />,
       path: '/dtc/usuario1/menu',
-   //  tooltip: 'Asistencia y actividades de hoy'
     },
-      {
+    {
       text: 'Mapa',
-      icon: <GradingTwoToneIcon color="primary" />,
+      icon: <GradingTwoToneIcon />,
       path: '/dtc/usuario1/mapas',
-   //  tooltip: 'Asistencia y actividades de hoy'
     },
     {
       text: 'Personal',
-      icon: <PeopleAltTwoToneIcon color="primary" />,
+      icon: <PeopleAltTwoToneIcon />,
       path: '/dtc/usuario1/usuarios',
-     // tooltip: 'Usuarios del sistema '
     },
     {
       text: 'Usuarios',
-      icon: <WcTwoToneIcon color="primary" />,
+      icon: <WcTwoToneIcon />,
       path: '/dtc/usuario1/chiques',
-     // tooltip: 'Lista de usuarios del dispositivo'
     },
     {
       text: 'Trabajo territorial',
-      icon: <GradingTwoToneIcon color="primary" />,
+      icon: <GradingTwoToneIcon />,
       path: '/dtc/usuario1/asistenciassoc',
-   //   tooltip: 'Informes de las trabajadoras sociales'
     },
     {
-      text: 'Talleres,clases,asistencia',
-      icon: <ArchitectureIcon color="primary" />,
+      text: 'Talleres, clases, asistencia',
+      icon: <ArchitectureIcon />,
       path: '/dtc/usuario1/talleres',
-    //  tooltip: 'Clases y asistencia de talleres'
     },
     {
-      text: 'Psicologos',
-      icon: <ArchitectureIcon color="primary" />,
+      text: 'Psicólogos',
+      icon: <ArchitectureIcon />,
       path: '/dtc/usuario1/psicologos',
-    //  tooltip: 'Lista de personas con tratamiento'
     },
     {
       text: 'Personas Psiq',
-      icon: <ArchitectureIcon color="primary" />,
+      icon: <ArchitectureIcon />,
       path: '/dtc/usuario1/personaspsiq',
-    //  tooltip: 'Lista de personas con tratamiento'
     },
-      { 
-          text: 'turnos calendario', 
-          icon: <PsychologyIcon />, 
-          path: '/dtc/usuario1/turnos' 
-        },
- { 
-          text: 'Todos los turnos', 
-          icon: <PsychologyIcon />, 
-          path: '/dtc/usuario1/listatodoslosturnos' 
-        },
-      {
+    {
+      text: 'Turnos calendario',
+      icon: <PsychologyIcon />,
+      path: '/dtc/usuario1/turnos',
+    },
+    {
+      text: 'Todos los turnos',
+      icon: <PsychologyIcon />,
+      path: '/dtc/usuario1/listatodoslosturnos',
+    },
+    {
       text: 'Oficios',
-      icon: <ArchitectureIcon color="primary" />,
+      icon: <ArchitectureIcon />,
       path: '/dtc/usuario1/oficios',
-      //tooltip: 'Detalle de asistencias de usuarios'
     },
     {
       text: 'Asistencias',
-      icon: <ArchitectureIcon color="primary" />,
+      icon: <ArchitectureIcon />,
       path: '/dtc/usuario1/asisencias',
-      //tooltip: 'Detalle de asistencias de usuarios'
     },
     {
       text: 'Inventario',
-      icon: <ArchitectureIcon color="primary" />,
+      icon: <ArchitectureIcon />,
       path: '/dtc/usuario1/inventario',
-      //tooltip: 'Detalle de asistencias de usuarios'
-    }
+    },
   ];
-
-  const islogo = {
-    marginTop: '10%',
-    width: "70%",
-  };
 
   return (
     <>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
+      <CssBaseline />
+
+      <Box sx={{ display: 'flex', minHeight: '100vh', background: '#f8fafc' }}>
         <Drawer
+          variant="permanent"
           sx={{
             width: drawerWidth,
             flexShrink: 0,
             '& .MuiDrawer-paper': {
               width: drawerWidth,
-              backgroundColor: "#2e7d32",
-              boxSizing: 'border-box',
+              border: 'none',
+              background:
+                'linear-gradient(180deg, #245d27 0%, #2e7d32 30%, #3f9a44 100%)',
+              color: '#fff',
+              padding: '18px 14px',
+              boxShadow: '8px 0 30px rgba(0,0,0,0.18)',
+              overflowX: 'hidden',
             },
           }}
-          variant="permanent"
-          color="#2e7d32"
-          anchor="left"
         >
-          <Navbar logout={{ hanleLogout }} />
-          <Toolbar />
-          <img style={islogo} src={logo} alt="logo" />
-          <Toolbar />
-          <Divider />
-          <List sx={{ color: "#fafafa" }}>
-            {menuItems.map((item) => (
-              <Tooltip title={item.tooltip} arrow key={item.text}>
-                <ListItem button onClick={() => { handleClick(item.path); }}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItem>
-              </Tooltip>
-            ))} 
+          <Navbar logout={{ handleLogout }} />
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              mt: 2,
+              mb: 3,
+            }}
+          ><br/><br/><br/>
+            <Box
+              sx={{
+                width: 86,
+                height: 86,
+                borderRadius: '26px',
+                background: 'rgba(255,255,255,0.12)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backdropFilter: 'blur(12px)',
+                boxShadow: '0 12px 24px rgba(0,0,0,0.18)',
+                mb: 2,
+              }}
+            >
+              <img
+                src={logo}
+                alt="logo"
+                style={{ width: '70%', objectFit: 'contain' }}
+              />
+            </Box>
+
+            <Typography
+              sx={{
+                fontSize: '1.2rem',
+                fontWeight: 700,
+                letterSpacing: '.4px',
+              }}
+            >
+              Inclusión Social
+            </Typography>
+
+            <Typography
+              sx={{
+                fontSize: '0.82rem',
+                opacity: 0.75,
+                mt: 0.5,
+              }}
+            >
+              Panel de administración DTC
+            </Typography>
+          </Box>
+
+          <Divider sx={{ borderColor: 'rgba(255,255,255,0.12)', mb: 2 }} />
+
+          <List
+            sx={{
+              flex: 'unset',
+              overflowY: 'auto',
+              pr: 0.5,
+              '&::-webkit-scrollbar': {
+                width: '8px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                background: 'rgba(255,255,255,0.22)',
+                borderRadius: '999px',
+              },
+            }}
+          >
+            {menuItems.map((item) => {
+              const active = location.pathname === item.path;
+
+              return (
+                <ListItemButton
+                  key={item.path}
+                  onClick={() => handleClick(item.path)}
+                  sx={{
+                    borderRadius: '18px',
+                    minHeight: 54,
+                    mb: 1,
+                    px: 1.5,
+                    transition: 'all .22s ease',
+                    background: active
+                      ? 'rgba(255,255,255,0.18)'
+                      : 'transparent',
+                    border: active
+                      ? '1px solid rgba(255,255,255,0.18)'
+                      : '1px solid transparent',
+                    boxShadow: active
+                      ? '0 10px 18px rgba(0,0,0,0.12)'
+                      : 'none',
+                    '&:hover': {
+                      background: 'rgba(255,255,255,0.14)',
+                      transform: 'translateX(4px)',
+                    },
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 42,
+                      color: active ? '#d9ffd3' : 'rgba(255,255,255,0.85)',
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+
+                  <ListItemText
+                    primary={item.text}
+                    primaryTypographyProps={{
+                      fontSize: '0.92rem',
+                      fontWeight: active ? 700 : 500,
+                      color: '#fff',
+                    }}
+                  />
+                </ListItemButton>
+              );
+            })}
           </List>
-          {cumple ? <>
-            {cumple.length > 0 ? <>
-              {cumple.map((item) => (
-                <ListItem>
-                  HOY HAY CUMPLE
-                  <p style={{ color: 'white' }}>{item.nombre} {item.apellido}</p>
-                </ListItem>
-              ))}
-            </> : <><p style={{ color: 'white' }}>Hoy no hay cumples <SentimentVeryDissatisfiedIcon /> </p></>}
-          </> : <></>}
-          {estemes ? <>
-            {estemes.length > 0 ? <>
-              Cumples este mes
-              {estemes.map((item) => (
-                <ListItem>
-                  <ListItemIcon style={{ color: 'white' }}>{item.nombre} {item.apellido} <br />el dia ({item.fecha_nacimiento})</ListItemIcon>
-                </ListItem>
-              ))}
-            </> : <></>}
-          </> : <></>}
-          <Divider />
+
+          <Box
+            sx={{
+              mt: 5,
+              borderRadius: '22px',
+              p: 2,
+              background: 'rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.12)',
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+              <CakeRoundedIcon sx={{ color: '#ffe082' }} />
+              <Typography sx={{ fontWeight: 700, fontSize: '0.92rem' }}>
+                Cumpleaños
+              </Typography>
+            </Box>
+
+            {cumple.length > 0 ? (
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                {cumple.map((item, index) => (
+                  <Chip
+                    key={index}
+                    avatar={
+                      <Avatar sx={{ background: '#81c784', color: '#1b5e20' }}>
+                        {item.nombre?.charAt(0)}
+                      </Avatar>
+                    }
+                    label={`${item.nombre} ${item.apellido}`}
+                    sx={{
+                      justifyContent: 'flex-start',
+                      background: 'rgba(255,255,255,0.16)',
+                      color: '#fff',
+                      height: 42,
+                      borderRadius: '14px',
+                    }}
+                  />
+                ))}
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  color: 'rgba(255,255,255,0.78)',
+                  fontSize: '0.85rem',
+                }}
+              >
+                <SentimentVeryDissatisfiedIcon fontSize="small" />
+                Hoy no hay cumpleaños
+              </Box>
+            )}
+
+            {estemes.length > 0 && (
+              <Box sx={{ mt: 2 }}>
+                <Typography
+                  sx={{
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    color: 'rgba(255,255,255,0.8)',
+                    mb: 1,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px',
+                  }}
+                >
+                  Este mes
+                </Typography>
+
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                  {estemes.slice(0, 6).map((item, index) => (
+                    <Chip
+                      key={index}
+                      size="small"
+                      label={`${item.nombre} ${item.apellido}`}
+                      sx={{
+                        background: 'rgba(255,255,255,0.12)',
+                        color: '#fff',
+                        borderRadius: '10px',
+                      }}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            )}
+          </Box>
+
+          
         </Drawer>
+
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 0, /* backgroundColor: "#88f78e" */ }}
+          sx={{
+            flexGrow: 1,
+            p: 4,
+            minHeight: '100vh',
+            background:
+              'linear-gradient(180deg, #f8fafc 0%, #eef5f1 100%)',
+          }}
         >
           <Toolbar />
-          <div>
-            <br />    <br />    <br />
+
+          <Box
+            sx={{
+              background: '#fff',
+              borderRadius: '28px',
+              p: { xs: 2, md: 4 },
+              boxShadow: '0 20px 45px rgba(15,23,42,0.08)',
+              minHeight: 'calc(100vh - 120px)',
+            }}
+          >
             {children}
-          </div>
+          </Box>
         </Box>
       </Box>
-      <style>{`
-        @keyframes pulsate {
-          0% { background-color: #ffeb3b; }
-          50% { background-color: #ff9800; }
-          100% { background-color: #ffeb3b; }
-        }
-      `}</style>
     </>
   );
 }
+
