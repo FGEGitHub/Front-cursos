@@ -1,150 +1,202 @@
-import servicioDtc from '../../../../services/dtc'
-import React, { useEffect, useState, useRef } from "react";
-import { useMediaQuery, useTheme } from "@mui/material"; // ✅ MUI v5
-import { Card, CardContent, Typography, Grid, Button } from "@mui/material";
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import servicioDtc from '../../../../services/dtc';
+import {
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  Typography,
+  Button,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
-// 🎨 COLORES FIJOS PARA GRAFICO PRINCIPAL
-const COLOR_MAP = {
-  "En Tratamiento": "#2e7d32",
-  "Judicializados": "#c62828",
-  "Sin Tratamiento": "#1565c0",
-  "No Judicializados": "#ff9800",
-  "Total": "#9c27b0",
+const MAIN_COLORS = {
+  tratamiento: '#6abb3a',
+  sinTratamiento: '#dbe9d1',
+  judicializados: '#c62828',
+  noJudicializados: '#ff9800',
 };
 
-// 🎨 COLORES AUTOMATICOS PARA CATEGORIAS DINAMICAS
-const randomColor = (i) => {
-  const colors = ["#2196f3","#e91e63","#ff9800","#4caf50","#9c27b0","#00bcd4","#ffc107"];
-  return colors[i % colors.length];
+const INTERVENTION_COLORS = {
+  'Sin dato': '#cbd5c0',
+  'Asistencia Social': '#9ac97b',
+  intervencion: '#86bb65',
+  'Intervencion interinstitucional': '#729f53',
+  'Intervencion Social': '#6abb3a',
+  'Visita Domiciliaria': '#4f8b33',
+  'visita social': '#bedb9d',
 };
 
-// =====================
-// PIE CHART
-// =====================
-const PieChartCanvas = ({ data, onSliceClick }) => {
+const normalizeName = (value) => {
+  const txt = String(value || '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+  if (!txt) return 'Sin dato';
+  if (txt === 'visita domicialiria' || txt === 'visista domiciliaria') return 'Visita Domiciliaria';
+  if (txt === 'sin dato') return 'Sin dato';
+  if (txt === 'asistencia social') return 'Asistencia Social';
+  if (txt === 'intervencion') return 'intervencion';
+  if (txt === 'intervencion interinstitucional') return 'Intervencion interinstitucional';
+  if (txt === 'intervencion social') return 'Intervencion Social';
+  if (txt === 'visita domiciliaria') return 'Visita Domiciliaria';
+  if (txt === 'visita social') return 'visita social';
+
+  return value;
+};
+
+const DashboardMetricCard = ({ label, value }) => (
+  <Card
+    sx={{
+      borderRadius: '22px',
+      border: '1px solid #e2e8f0',
+      boxShadow: '0 2px 10px rgba(15,23,42,0.05)',
+      background: '#fff',
+      height: '100%',
+    }}
+  >
+    <CardContent sx={{ p: 2.5 }}>
+      <Typography
+        sx={{
+          fontSize: 12,
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: '0.18em',
+          color: '#64748b',
+        }}
+      >
+        {label}
+      </Typography>
+
+      <Typography
+        sx={{
+          mt: 1.5,
+          fontSize: { xs: 34, md: 38 },
+          fontWeight: 700,
+          color: '#6abb3a',
+          lineHeight: 1,
+        }}
+      >
+        {value}
+      </Typography>
+    </CardContent>
+  </Card>
+);
+
+const DonutChart = ({ title, subtitle, data, total, colors }) => {
   const canvasRef = useRef(null);
-  const slicesRef = useRef([]);
-  const [tooltip, setTooltip] = useState(null);
 
   useEffect(() => {
-    if (!data || data.length === 0) return;
+    if (!canvasRef.current || !data?.length) return;
+
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
+    const size = 360;
+    const center = size / 2;
+    const radius = 118;
+    const innerRadius = 74;
 
-    const total = data.reduce((a, b) => a + b.value, 0);
-    if (!total) return;
+    canvas.width = size;
+    canvas.height = size;
 
-    ctx.clearRect(0, 0, 400, 400);
-    slicesRef.current = [];
-    let startAngle = 0;
+    ctx.clearRect(0, 0, size, size);
 
-    data.forEach((slice, index) => {
-      const sliceAngle = (slice.value / total) * 2 * Math.PI;
-      const percent = ((slice.value / total) * 100).toFixed(1);
+    let startAngle = -Math.PI / 2;
+    const totalValue = data.reduce((acc, item) => acc + item.value, 0);
 
-      slicesRef.current.push({
-        startAngle,
-        endAngle: startAngle + sliceAngle,
-        name: slice.name,
-        value: slice.value,
-        percent,
-      });
+    data.forEach((item) => {
+      const angle = (item.value / totalValue) * Math.PI * 2;
 
       ctx.beginPath();
-      ctx.moveTo(200, 200);
-      ctx.arc(200, 200, 150, startAngle, startAngle + sliceAngle);
+      ctx.arc(center, center, radius, startAngle, startAngle + angle);
+      ctx.arc(center, center, innerRadius, startAngle + angle, startAngle, true);
       ctx.closePath();
-      ctx.fillStyle = COLOR_MAP[slice.name] || randomColor(index);
+      ctx.fillStyle = colors[item.name] || '#6abb3a';
       ctx.fill();
 
-      const mid = startAngle + sliceAngle / 2;
-      const x = 200 + Math.cos(mid) * 90;
-      const y = 200 + Math.sin(mid) * 90;
-      ctx.fillStyle = "white";
-      ctx.font = "bold 14px Arial";
-      ctx.fillText(`${percent}%`, x - 15, y);
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
 
-      startAngle += sliceAngle;
+      startAngle += angle;
     });
-  }, [data]);
 
-  const detectSlice = (e) => {
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - 200;
-    const y = e.clientY - rect.top - 200;
-    const angle = Math.atan2(y, x);
-    const fixed = angle < 0 ? angle + 2 * Math.PI : angle;
-    return slicesRef.current.find(s => fixed >= s.startAngle && fixed <= s.endAngle);
-  };
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '600 16px Inter, Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Total', center, center - 8);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = '700 34px Inter, Arial';
+    ctx.fillText(String(total), center, center + 26);
+  }, [data, total, colors]);
 
   return (
-    <div style={{ position: "relative" }}>
-      <canvas
-        ref={canvasRef}
-        width="400"
-        height="400"
-        onClick={(e) => {
-          const s = detectSlice(e);
-          if (s && onSliceClick) onSliceClick(s.name);
+    <Box>
+      <Typography
+        sx={{
+          textAlign: 'center',
+          fontWeight: 700,
+          color: '#1e293b',
+          fontSize: 28,
         }}
-        onMouseMove={(e) => {
-          const s = detectSlice(e);
-          if (s) setTooltip({ x: e.clientX, y: e.clientY, text: `${s.name}: ${s.value} (${s.percent}%)` });
-          else setTooltip(null);
-        }}
-        onMouseLeave={() => setTooltip(null)}
-        style={{ cursor: "pointer", borderRadius: "50%", boxShadow: "0 0 15px rgba(0,0,0,.3)" }}
-      />
+      >
+        {title}
+      </Typography>
 
-      {tooltip && (
-        <div style={{
-          position: "fixed",
-          left: tooltip.x + 10,
-          top: tooltip.y + 10,
-          background: "black",
-          color: "white",
-          padding: "6px 10px",
-          borderRadius: 5,
-          fontSize: 12,
-          zIndex: 9999
-        }}>
-          {tooltip.text}
-        </div>
-      )}
-    </div>
+      <Typography
+        sx={{
+          textAlign: 'center',
+          color: '#4f8b33',
+          fontWeight: 700,
+          mb: 1,
+        }}
+      >
+        {subtitle}
+      </Typography>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <canvas
+          ref={canvasRef}
+          style={{
+            width: '100%',
+            maxWidth: 360,
+            height: 'auto',
+          }}
+        />
+      </Box>
+    </Box>
   );
 };
 
-// =====================
-// COMPONENTE PRINCIPAL
-// =====================
-const TablaNotificaciones = () => {
-
+export default function TablaNotificaciones() {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-const [totalVisitas, setTotalVisitas] = useState(0);
-  const [nivel, setNivel] = useState(1);
-  const [grafico, setGrafico] = useState([]);
-  const [graficoTratamiento, setGraficoTratamiento] = useState(null);
-  const [graficoBackend2, setGraficoBackend2] = useState([]);
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [stats, setStats] = useState({
     total: 0,
     tratamiento: 0,
     judicializados: 0,
-    sinTratamiento: 0,
     noJudicializados: 0,
+    sinTratamiento: 0,
   });
+
+  const [interventions, setInterventions] = useState([]);
 
   useEffect(() => {
     traer();
   }, []);
 
-  // ===================== TRAER DATOS =====================
   const traer = async () => {
     try {
       const loggedUserJSON = localStorage.getItem('loggedNoteAppUser');
       if (!loggedUserJSON) return;
+
       const usuario = JSON.parse(loggedUserJSON);
 
       const today = new Date();
@@ -152,159 +204,389 @@ const [totalVisitas, setTotalVisitas] = useState(0);
 
       const historial = await servicioDtc.traerestadisticas({
         fecha: formattedDate,
-        id_usuario: usuario.id
+        id_usuario: usuario.id,
       });
 
-      console.log("HISTORIAL", historial);
+      const resumen = historial?.[1];
 
-      // ================= POSICION 1 =================
-      const s = historial?.[1];
-      if (s) {
-        const total = Number(s.cantidad_usuarios || 0);
-        const tratamiento = Number(s.cantidad_tratamiento || 0);
-        const judicializados = Number(s.cantidad_judicializados || 0);
-        const sinTratamiento = total - tratamiento;
-        const noJudicializados = tratamiento - judicializados;
+      if (resumen) {
+        const total = Number(resumen.cantidad_usuarios || 0);
+        const tratamiento = Number(resumen.cantidad_tratamiento || 0);
+        const judicializados = Number(resumen.cantidad_judicializados || 0);
 
-        setStats({ total, tratamiento, judicializados, sinTratamiento, noJudicializados });
-
-        setGrafico([
-          { name: "En Tratamiento", value: tratamiento },
-          { name: "Sin Tratamiento", value: sinTratamiento },
-        ]);
+        setStats({
+          total,
+          tratamiento,
+          judicializados,
+          noJudicializados: Math.max(tratamiento - judicializados, 0),
+          sinTratamiento: Math.max(total - tratamiento, 0),
+        });
       }
 
-      // ================= POSICION 2 DINAMICO =================
-      const s2 = historial?.[2];
+      const raw = historial?.[2]?.OTRAS2 || historial?.[2] || [];
 
-      // si viene como {OTRAS2: []}
-      const arrayData = s2?.OTRAS2 || s2;
+      if (Array.isArray(raw)) {
+        const grouped = {};
 
-      if (Array.isArray(arrayData)) {
-        const normalizado = {};
+        raw.forEach((item) => {
+          const name = normalizeName(item.name);
+          const value = Number(item.value || 0);
 
-        const FIX = {
-          "Visita Domicialiria": "Visita Domiciliaria",
-          "Visista Domiciliaria": "Visita Domiciliaria",
-        };
-
-        arrayData.forEach(item => {
-          const nombre = FIX[item.name?.trim()] || item.name?.trim() || "Sin dato";
-          const valor = Number(item.value || 0);
-
-          if (!normalizado[nombre]) normalizado[nombre] = 0;
-          normalizado[nombre] += valor;
+          grouped[name] = (grouped[name] || 0) + value;
         });
 
-        const dataGrafico = Object.entries(normalizado).map(([name, value]) => ({
-  name,
-  value
-}));
+        const normalized = Object.keys(INTERVENTION_COLORS)
+          .map((name) => ({
+            name,
+            value: grouped[name] || 0,
+          }))
+          .filter((x) => x.value > 0);
 
-// 🔥 SUMAR TOTAL DE VISITAS
-const total = dataGrafico.reduce((acc, item) => acc + item.value, 0);
-setTotalVisitas(total);
-
-setGraficoBackend2(dataGrafico);
+        setInterventions(normalized);
       }
-
-    } catch (e) {
-      console.error("❌ ERROR traer", e);
+    } catch (error) {
+      console.error(error);
     }
   };
 
-  // ================= CLICK TORTA =================
-  const handleSliceClick = (name) => {
-    if (name === "En Tratamiento") {
-      setNivel(2);
-      setGraficoTratamiento([
-        { name: "Judicializados", value: stats.judicializados },
-        { name: "No Judicializados", value: stats.noJudicializados },
-      ]);
-    }
-  };
+  const totalVisitas = useMemo(
+    () => interventions.reduce((acc, item) => acc + item.value, 0),
+    [interventions]
+  );
 
-  const volver = () => {
-    setGraficoTratamiento(null);
-    setNivel(1);
+  const treatmentSegments = [
+    { name: 'En tratamiento', value: stats.tratamiento },
+    { name: 'Sin tratamiento', value: stats.sinTratamiento },
+  ];
+
+  const treatmentColors = {
+    'En tratamiento': MAIN_COLORS.tratamiento,
+    'Sin tratamiento': MAIN_COLORS.sinTratamiento,
   };
 
   return (
-    <div style={{ padding: 20 }}>
-
-      {/* ================= KPI CARDS ================= */}
-      <Grid container spacing={2}>
-        {[
-          { title: "Total Usuarios", value: stats.total, color: "#212121" },
-          { title: "En Tratamiento", value: stats.tratamiento, color: "#2e7d32" },
-          { title: "No Judicializados", value: stats.noJudicializados, color: "#ff9800" },
-          { title: "Judicializados", value: stats.judicializados, color: "#c62828" },
-          { title: "Sin Tratamiento", value: stats.sinTratamiento, color: "#1565c0" },
-        ].map((k, i) => (
-          <Grid item xs={12} md={2} key={i}>
-            <Card sx={{ background: k.color, color: "white" }}>
-              <CardContent>
-                <Typography>{k.title}</Typography>
-                <Typography variant="h3">{k.value}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
+    <Box sx={{ p: { xs: 1.5, md: 3 }, background: '#f8fafc' }}>
+      <Grid container spacing={2} sx={{ mb: 3 }}>
+        <Grid item xs={12} md={6} xl={2.4}>
+          <DashboardMetricCard label="Total Usuarios" value={stats.total} />
+        </Grid>
+        <Grid item xs={12} md={6} xl={2.4}>
+          <DashboardMetricCard label="En Tratamiento" value={stats.tratamiento} />
+        </Grid>
+        <Grid item xs={12} md={6} xl={2.4}>
+          <DashboardMetricCard label="No Judicializados" value={stats.noJudicializados} />
+        </Grid>
+        <Grid item xs={12} md={6} xl={2.4}>
+          <DashboardMetricCard label="Judicializados" value={stats.judicializados} />
+        </Grid>
+        <Grid item xs={12} md={6} xl={2.4}>
+          <DashboardMetricCard label="Sin Tratamiento" value={stats.sinTratamiento} />
+        </Grid>
       </Grid>
 
-      {/* ================= GRAFICOS ================= */}
-      <Card sx={{ mt: 3, p: 2 }}>
-        <Typography variant="h5" align="center">📊 Situación Psicosocial</Typography>
+      <Card
+        sx={{
+          borderRadius: '28px',
+          border: '1px solid #e2e8f0',
+          boxShadow: '0 2px 12px rgba(15,23,42,0.06)',
+          overflow: 'hidden',
+        }}
+      >
+        <Box sx={{ p: { xs: 2, md: 3 } }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              gap: 2,
+              alignItems: 'center',
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Box
+                sx={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: '14px',
+                  background: '#eef8e6',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6abb3a',
+                }}
+              >
+                <BarChartIcon />
+              </Box>
 
-        <div style={{ display: "flex", justifyContent: "center", gap: 40, flexWrap: isMobile ? "wrap" : "nowrap" }}>
+              <Box>
+                <Typography sx={{ fontSize: 34, fontWeight: 300, color: '#334155' }}>
+                  Situacion Psicosocial
+                </Typography>
+                <Typography sx={{ color: '#64748b', fontSize: 14 }}>
+                  Lectura general del dispositivo e intervenciones registradas
+                </Typography>
+              </Box>
+            </Box>
 
-          {/* GRAFICO 1 */}
-          <div>
-            <Typography align="center" fontWeight="bold">General</Typography>
-            <PieChartCanvas data={grafico} onSliceClick={handleSliceClick} />
-          </div>
+            <Typography sx={{ color: '#4f7f2c', fontWeight: 700, fontSize: 15 }}>
+              Total visitas: {totalVisitas}
+            </Typography>
+          </Box>
 
-          {/* GRAFICO 2 BACKEND */}
-          {graficoBackend2.length > 0 && (
-            <div>
-              <Typography align="center" fontWeight="bold">
-  Otras Intervenciones
-</Typography>
+          <Box
+            sx={{
+              mt: 3,
+              p: { xs: 1.5, md: 2 },
+              borderRadius: '28px',
+              border: '1px solid #e2e8f0',
+              background: 'rgba(248,250,252,0.9)',
+            }}
+          >
+            <Grid container spacing={3}>
+              <Grid item xs={12} lg={6}>
+                <Card
+                  sx={{
+                    borderRadius: '24px',
+                    border: '1px solid #e2e8f0',
+                    boxShadow: '0 1px 8px rgba(15,23,42,0.05)',
+                    p: 2,
+                    height: '100%',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'grid',
+                      gridTemplateColumns: isMobile ? '1fr' : 'minmax(0,1.6fr) 180px',
+                      gap: 2,
+                      alignItems: 'start',
+                    }}
+                  >
+                    <DonutChart
+                      title="General"
+                      subtitle={`Total usuarios: ${stats.total}`}
+                      data={treatmentSegments}
+                      total={stats.total}
+                      colors={treatmentColors}
+                    />
 
-<Typography align="center" sx={{ fontSize: 18, fontWeight: "bold", color: "#673ab7" }}>
-  Total visitas: {totalVisitas}
-</Typography>
-              <PieChartCanvas data={graficoBackend2} />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: isMobile ? 0 : 2 }}>
+                      <Box
+                        sx={{
+                          borderRadius: '18px',
+                          border: '1px solid #d7ebc9',
+                          background: '#f7fbf3',
+                          p: 2,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: 11,
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.18em',
+                            color: '#64748b',
+                          }}
+                        >
+                          Total usuarios
+                        </Typography>
 
-              {/* LEYENDA */}
-              <div style={{ display:"flex", flexWrap:"wrap", gap:10, marginTop:10 }}>
-                {graficoBackend2.map((g,i)=>(
-                  <span key={i} style={{ color: randomColor(i) }}>
-                    ● {g.name} ({g.value})
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
+                        <Typography sx={{ mt: 1, fontSize: 44, fontWeight: 700, color: '#0f172a' }}>
+                          {stats.total}
+                        </Typography>
+                      </Box>
 
-          {/* GRAFICO DETALLE */}
-          {graficoTratamiento && (
-            <div>
-              <Typography align="center" fontWeight="bold">Detalle Tratamiento</Typography>
-              <PieChartCanvas data={graficoTratamiento} />
-              <div style={{ textAlign: "center", marginTop: 10 }}>
-                <Button variant="contained" onClick={volver}>
-                  ⬅ Cerrar detalle
-                </Button>
-              </div>
-            </div>
-          )}
-        </div>
+                      <Box
+                        sx={{
+                          borderRadius: '18px',
+                          border: '1px solid #e2e8f0',
+                          p: 2,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: 11,
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.18em',
+                            color: '#64748b',
+                          }}
+                        >
+                          Referencias
+                        </Typography>
 
+                        <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+                          {treatmentSegments.map((item) => (
+                            <Box
+                              key={item.name}
+                              sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                gap: 1,
+                                px: 1.5,
+                                py: 1.2,
+                                borderRadius: '12px',
+                                background: '#f8fafc',
+                              }}
+                            >
+                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <Box
+                                  sx={{
+                                    width: 10,
+                                    height: 10,
+                                    borderRadius: '50%',
+                                    background: treatmentColors[item.name],
+                                  }}
+                                />
+                                <Typography sx={{ fontSize: 13, color: '#334155' }}>
+                                  {item.name}
+                                </Typography>
+                              </Box>
+
+                              <Typography sx={{ fontSize: 13, fontWeight: 700 }}>
+                                {item.value}
+                              </Typography>
+                            </Box>
+                          ))}
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Card>
+              </Grid>
+
+              <Grid item xs={12} lg={6}>
+                <Card
+                  sx={{
+                    borderRadius: '24px',
+                    border: '1px solid #e2e8f0',
+                    boxShadow: '0 1px 8px rgba(15,23,42,0.05)',
+                    p: 2,
+                    height: '100%',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'grid',
+                      gridTemplateColumns: isMobile ? '1fr' : 'minmax(0,1.6fr) 180px',
+                      gap: 2,
+                      alignItems: 'start',
+                    }}
+                  >
+                    <DonutChart
+                      title="Otras Intervenciones"
+                      subtitle={`Total visitas: ${totalVisitas}`}
+                      data={interventions}
+                      total={totalVisitas}
+                      colors={INTERVENTION_COLORS}
+                    />
+
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: isMobile ? 0 : 2 }}>
+                      <Box
+                        sx={{
+                          borderRadius: '18px',
+                          border: '1px solid #d7ebc9',
+                          background: '#f7fbf3',
+                          p: 2,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: 11,
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.18em',
+                            color: '#64748b',
+                          }}
+                        >
+                          Total visitas
+                        </Typography>
+
+                        <Typography sx={{ mt: 1, fontSize: 44, fontWeight: 700, color: '#0f172a' }}>
+                          {totalVisitas}
+                        </Typography>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          borderRadius: '18px',
+                          border: '1px solid #e2e8f0',
+                          p: 2,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: 11,
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.18em',
+                            color: '#64748b',
+                          }}
+                        >
+                          Referencias
+                        </Typography>
+
+                        <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+                          {interventions.map((item) => (
+                            <Box
+                              key={item.name}
+                              sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                gap: 1,
+                                px: 1.5,
+                                py: 1.2,
+                                borderRadius: '12px',
+                                background: '#f8fafc',
+                              }}
+                            >
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: 1,
+                                  minWidth: 0,
+                                }}
+                              >
+                                <Box
+                                  sx={{
+                                    width: 10,
+                                    height: 10,
+                                    borderRadius: '50%',
+                                    background: INTERVENTION_COLORS[item.name],
+                                    flexShrink: 0,
+                                  }}
+                                />
+
+                                <Typography
+                                  sx={{
+                                    fontSize: 13,
+                                    color: '#334155',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                  }}
+                                >
+                                  {item.name}
+                                </Typography>
+                              </Box>
+
+                              <Typography sx={{ fontSize: 13, fontWeight: 700, flexShrink: 0 }}>
+                                {item.value}
+                              </Typography>
+                            </Box>
+                          ))}
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Card>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
       </Card>
-
-    </div>
+    </Box>
   );
-};
-
-export default TablaNotificaciones;
+}
