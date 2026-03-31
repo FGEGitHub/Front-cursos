@@ -140,23 +140,25 @@ export default function MenuIzq2({ children }) {
       <CssBaseline />
 
       <Box sx={{ display: 'flex', minHeight: '100vh', background: '#f8fafc' }}>
-        <Drawer
-          variant="permanent"
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: drawerWidth,
-              border: 'none',
-              background:
-                'linear-gradient(180deg, #245d27 0%, #2e7d32 30%, #3f9a44 100%)',
-              color: '#fff',
-              padding: '18px 14px',
-              boxShadow: '8px 0 30px rgba(0,0,0,0.18)',
-              overflowX: 'hidden',
-            },
-          }}
-        >
+       <Drawer
+  variant="permanent"
+  sx={{
+    width: drawerWidth,
+    flexShrink: 0,
+    '& .MuiDrawer-paper': {
+      width: drawerWidth,
+      border: 'none',
+      background:
+        'linear-gradient(180deg, #245d27 0%, #2e7d32 30%, #3f9a44 100%)',
+      color: '#fff',
+      padding: '18px 14px',
+      boxShadow: '8px 0 30px rgba(0,0,0,0.18)',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+  }}
+>
           <Navbar logout={{ handleLogout }} />
 
           <Box
@@ -212,20 +214,22 @@ export default function MenuIzq2({ children }) {
 
           <Divider sx={{ borderColor: 'rgba(255,255,255,0.12)', mb: 2 }} />
 
-          <List
-            sx={{
-              flex: 'unset',
-              overflowY: 'auto',
-              pr: 0.5,
-              '&::-webkit-scrollbar': {
-                width: '8px',
-              },
-              '&::-webkit-scrollbar-thumb': {
-                background: 'rgba(255,255,255,0.22)',
-                borderRadius: '999px',
-              },
-            }}
-          >
+        <List
+  sx={{
+    flex: 1,
+    minHeight: 0,
+    overflowY: 'auto',
+    pr: 0.5,
+    pb: 1,
+    '&::-webkit-scrollbar': {
+      width: '8px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: 'rgba(255,255,255,0.22)',
+      borderRadius: '999px',
+    },
+  }}
+>
             {menuItems.map((item) => {
               const active = location.pathname === item.path;
 
@@ -234,25 +238,26 @@ export default function MenuIzq2({ children }) {
                   key={item.path}
                   onClick={() => handleClick(item.path)}
                   sx={{
-                    borderRadius: '18px',
-                    minHeight: 54,
-                    mb: 1,
-                    px: 1.5,
-                    transition: 'all .22s ease',
-                    background: active
-                      ? 'rgba(255,255,255,0.18)'
-                      : 'transparent',
-                    border: active
-                      ? '1px solid rgba(255,255,255,0.18)'
-                      : '1px solid transparent',
-                    boxShadow: active
-                      ? '0 10px 18px rgba(0,0,0,0.12)'
-                      : 'none',
-                    '&:hover': {
-                      background: 'rgba(255,255,255,0.14)',
-                      transform: 'translateX(4px)',
-                    },
-                  }}
+  borderRadius: '18px',
+  minHeight: 58,
+  mb: 1,
+  px: 2,
+  py: 1,
+  transition: 'all .22s ease',
+  background: active
+    ? 'rgba(255,255,255,0.18)'
+    : 'transparent',
+  border: active
+    ? '1px solid rgba(255,255,255,0.18)'
+    : '1px solid transparent',
+  boxShadow: active
+    ? '0 10px 18px rgba(0,0,0,0.12)'
+    : 'none',
+  '&:hover': {
+    background: 'rgba(255,255,255,0.14)',
+    transform: 'translateX(4px)',
+  },
+}}
                 >
                   <ListItemIcon
                     sx={{
@@ -277,15 +282,18 @@ export default function MenuIzq2({ children }) {
           </List>
 
           <Box
-            sx={{
-              mt: 5,
-              borderRadius: '22px',
-              p: 2,
-              background: 'rgba(255,255,255,0.1)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255,255,255,0.12)',
-            }}
-          >
+  sx={{
+    mt: 2,
+    borderRadius: '18px',
+    p: 1.25,
+    background: 'rgba(255,255,255,0.08)',
+    backdropFilter: 'blur(10px)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    maxHeight: 170,
+    overflowY: 'auto',
+    flexShrink: 0,
+  }}
+>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
               <CakeRoundedIcon sx={{ color: '#ffe082' }} />
               <Typography sx={{ fontWeight: 700, fontSize: '0.92rem' }}>
@@ -296,22 +304,34 @@ export default function MenuIzq2({ children }) {
             {cumple.length > 0 ? (
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                 {cumple.map((item, index) => (
-                  <Chip
-                    key={index}
-                    avatar={
-                      <Avatar sx={{ background: '#81c784', color: '#1b5e20' }}>
-                        {item.nombre?.charAt(0)}
-                      </Avatar>
-                    }
-                    label={`${item.nombre} ${item.apellido}`}
-                    sx={{
-                      justifyContent: 'flex-start',
-                      background: 'rgba(255,255,255,0.16)',
-                      color: '#fff',
-                      height: 42,
-                      borderRadius: '14px',
-                    }}
-                  />
+                 <Chip
+  key={index}
+  avatar={
+    <Avatar
+      sx={{
+        background: '#81c784',
+        color: '#1b5e20',
+        width: 24,
+        height: 24,
+        fontSize: '0.75rem',
+      }}
+    >
+      {item.nombre?.charAt(0)}
+    </Avatar>
+  }
+  label={`${item.nombre} ${item.apellido}`}
+  sx={{
+    justifyContent: 'flex-start',
+    background: 'rgba(255,255,255,0.14)',
+    color: '#fff',
+    height: 32,
+    borderRadius: '10px',
+    fontSize: '0.78rem',
+    '& .MuiChip-label': {
+      px: 1,
+    },
+  }}
+/>
                 ))}
               </Box>
             ) : (
