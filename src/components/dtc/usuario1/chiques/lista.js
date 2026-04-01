@@ -379,14 +379,19 @@ const columns = [
   <div style={{ marginTop: "20px" }}>
 
     <Button 
-      variant="contained" 
-      color="secondary"
-      onClick={() => setMostrarDetalles(!mostrarDetalles)}
-      style={{ marginBottom: "15px" }}
-    >
-      {mostrarDetalles ? "Ocultar detalles" : "Ver detalles de obras sociales"}
-    </Button>
-
+  variant="contained"
+  onClick={() => setMostrarDetalles(!mostrarDetalles)}
+  sx={{
+    backgroundColor: "#8BC34A", // verde manzana
+    color: "#1bbe06",
+    mb: 2,
+    "&:hover": {
+      backgroundColor: "#7CB342", // un poco más oscuro
+    }
+  }}
+>
+  {mostrarDetalles ? "Ocultar detalles" : "Ver detalles de obras sociales"}
+</Button>
     {mostrarDetalles && (
       <div>
 
