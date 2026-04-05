@@ -183,7 +183,7 @@ import Stcinventairopretacion from '../pages/dtc/inventarioprestacion';
 import DTCTallerPrinc from '../pages/dtc/talleresprincipal';
 import DTCTallerEstad from '../pages/dtc/tallerestadisticas';
 import DTCTodoslosturnos from '../pages/dtc/nivel1/listadeturnospsiq';
-
+import DTCNuevochique from '../pages/dtc/nivel1/nuevochiquie';
 
 import DTCCocinaTurnos from '../pages/dtc/cocinamas/turnos';
 import STCcocinausuarios from '../pages/dtc/cocinamas/usuarios';
@@ -397,6 +397,7 @@ const Rutas = [
 	{ path: '/dtc/usuario1/psicologo/:id', element: <STCusuairo1psicologo /> },
 	{ path: '/dtc/usuario1/listatodoslosturnos', element: <DTCTodoslosturnos /> },
 	{ path: '/usuario1/costosfijos', element: <Cstosfijos /> },
+	{ path: '/dtc/usuario1/nuevo', element: <DTCNuevochique /> },
 
 
 	{ path: '/dtc/turnos/psicologo/:id', element: <Dtcturnospsicologo /> },
