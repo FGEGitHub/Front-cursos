@@ -29,7 +29,9 @@ const HorariosTalleres = () => {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [idAEliminar, setIdAEliminar] = useState(null);
 
-  // 👉 ahora incluye detalle
+  const [editando, setEditando] = useState(false);
+  const [idEditando, setIdEditando] = useState(null);
+
   const [form, setForm] = useState({
     detalle: "",
     dia: "",
@@ -51,20 +53,37 @@ const HorariosTalleres = () => {
 
   const handleGuardar = async () => {
     try {
-      console.log("Guardando horario con datos:", form);
-      await servicioDtc.agregarHorario({ 
-        id_tallerista: id,
-        detalle: form.detalle,
-        dia: form.dia,
-        horario: form.horario
-      });
+      if (editando) {
+        await servicioDtc.modificarHorario({
+          id: idEditando,
+          ...form
+        });
+      } else {
+        await servicioDtc.agregarHorario({
+          id_tallerista: id,
+          ...form
+        });
+      }
 
       setOpen(false);
+      setEditando(false);
+      setIdEditando(null);
       setForm({ detalle: "", dia: "", horario: "" });
       traerDatos();
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleEditar = (row) => {
+    setForm({
+      detalle: row.detalle,
+      dia: row.dia,
+      horario: row.horario
+    });
+    setIdEditando(row.id);
+    setEditando(true);
+    setOpen(true);
   };
 
   const handleEliminar = async () => {
@@ -81,7 +100,11 @@ const HorariosTalleres = () => {
   return (
     <Box>
       <Box sx={{ mb: 2 }}>
-        <Button variant="contained" onClick={() => setOpen(true)}>
+        <Button variant="contained" onClick={() => {
+          setEditando(false);
+          setForm({ detalle: "", dia: "", horario: "" });
+          setOpen(true);
+        }}>
           Nuevo Horario
         </Button>
       </Box>
@@ -96,6 +119,7 @@ const HorariosTalleres = () => {
               <TableCell>Acciones</TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {data.map((row) => (
               <TableRow key={row.id}>
@@ -103,6 +127,10 @@ const HorariosTalleres = () => {
                 <TableCell>{row.dia}</TableCell>
                 <TableCell>{row.horario}</TableCell>
                 <TableCell>
+                  <Button onClick={() => handleEditar(row)}>
+                    Modificar
+                  </Button>
+
                   <Button
                     color="error"
                     onClick={() => {
@@ -119,15 +147,16 @@ const HorariosTalleres = () => {
         </Table>
       </TableContainer>
 
-      {/* Dialog agregar */}
+      {/* Dialog agregar / editar */}
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>Agregar Horario</DialogTitle>
-        <DialogContent>
+        <DialogTitle>
+          {editando ? "Modificar Horario" : "Agregar Horario"}
+        </DialogTitle>
 
-          {/* 👉 NUEVO CAMPO DETALLE */}
+        <DialogContent>
           <TextField
             fullWidth
-            label="Detalle (opcional)"
+            label="Detalle"
             value={form.detalle}
             onChange={(e) =>
               setForm({ ...form, detalle: e.target.value })
@@ -152,7 +181,7 @@ const HorariosTalleres = () => {
 
           <TextField
             fullWidth
-            label="Horario (ej: 14:30)"
+            label="Horario"
             value={form.horario}
             onChange={(e) =>
               setForm({ ...form, horario: e.target.value })
@@ -164,16 +193,13 @@ const HorariosTalleres = () => {
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancelar</Button>
           <Button variant="contained" onClick={handleGuardar}>
-            Guardar
+            {editando ? "Actualizar" : "Guardar"}
           </Button>
         </DialogActions>
       </Dialog>
 
-      {/* Dialog confirmación eliminar */}
-      <Dialog
-        open={openConfirm}
-        onClose={() => setOpenConfirm(false)}
-      >
+      {/* Confirmación eliminar */}
+      <Dialog open={openConfirm} onClose={() => setOpenConfirm(false)}>
         <DialogTitle>Confirmar eliminación</DialogTitle>
         <DialogContent>
           ¿Seguro que quieres borrar este horario?
@@ -182,11 +208,7 @@ const HorariosTalleres = () => {
           <Button onClick={() => setOpenConfirm(false)}>
             Cancelar
           </Button>
-          <Button
-            color="error"
-            variant="contained"
-            onClick={handleEliminar}
-          >
+          <Button color="error" variant="contained" onClick={handleEliminar}>
             Eliminar
           </Button>
         </DialogActions>
