@@ -222,39 +222,9 @@ const CursoDialog = () => {
               onClick={() => navigate("/dtc/usuario1/taller/" + row.id_curso)}
               style={{ cursor: "pointer" }}
             >
-              <b>
-                {row.nombre_curso}
-                {row.nombre_curso === "FISICO" && (
-                 <div>
-                 {((row.hora === "15:00" && row.dia === "lunes") ||
-                 (row.hora === "15:00" && row.dia === "miércoles")) &&
-                   "Futbol de 6 a 10 años"}
-                   
-                 {((row.hora === "15:00" && row.dia === "viernes") ||
-                 (row.hora === "16:00" && row.dia === "miércoles") )&&
-                   "Fútbol mayores de 11 años"}
-                   
-                 {row.hora === "14:00" && "FISICO - Gimnasio"}
-                 
-                {/*  {row.hora === "15:00" &&
-                   ["lunes", "miércoles", "viernes"].includes(row.dia) &&
-                   "FISICO - Fútbol masculino"} */}
-                   
-                 {row.hora === "15:00" && row.dia === "martes" && "FISICO - Vóley femenino"}
-                 
-                 {row.hora === "15:00" && row.dia === "jueves" && "FISICO - Básquet femenino"}
-                 
-                 {row.hora === "16:00" &&
-                   ["lunes", "viernes"].includes(row.dia) &&
-                   "FISICO - Fútbol femenino"}
-                   
-                 {row.hora === "16:00" && row.dia === "martes" && "FISICO - Vóley masculino"}
-                 
-                 {row.hora === "16:00" && row.dia === "jueves" && "FISICO - Básquet masculino"}
-               </div>
-               
-                )}
-              </b>
+         <b>
+{row.detalle}
+</b>
             </div>
           </TableCell>
           <TableCell>

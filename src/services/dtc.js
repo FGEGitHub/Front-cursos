@@ -1296,6 +1296,31 @@ const relacionar = async (datos) => {
 };
 
 
+const agregarHorario = async (data) => {
+  try {
+    
+    const response = await axios.post(`${baseUrl}horarios`, {
+      id_tallerista: data.id_tallerista,
+      dia: data.dia,
+      horario: data.horario,
+      detalle: data.detalle
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error al agregar horario:', error);
+    throw error;
+  }
+};
+const eliminarHorario = async (id) => {
+  try {
+    console.log(id)
+    const response = await axios.delete(`${baseUrl}eliminarHorario/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error al eliminar horario:', error);
+    throw error;
+  }
+};
 
 const subirExpediente = async (FormData) => {
 
@@ -1324,6 +1349,11 @@ const listatodosdeldtc = async (id) => {
   return data;
 };
 
+const traerhorairoastalleres = async (id) => {
+  const {data} = await axios.get(`${baseUrl}traerhorairoastalleres/`+id);
+  
+  return data;
+};
 
 const eliminartodosloshorariosdeusuario = async (id) => {
   const {data} = await axios.get(`${baseUrl}eliminartodosloshorariosdeusuario/`+id);
@@ -1356,4 +1386,4 @@ const traerestadisticastodas = async () => {
 };
 
 
-export default {borrarpunto, puntos, crearpuntos, relacionar, borrarexpediente, borraroficio, asignarOficioAChico,  traertodoslosturnospsiq, cambiarestadopsico, traerestadisticastodas, ponerpresenteingreso, traerestadisticastaller,borrarcolacion, modificar_alumno_fines, agregarAlumnoFines, traeralumnosfines, traerpresentesfines, traerturnosdepsico, traterpsicologos2, ponerpresenteclase2,traerclasestaller2,enviarconsumocolacion,traercolaciones,traerpresentescocina,eliminartodosloshorariosdeusuario,listatodosdeldtc,traerproximosturnos,actualizarOficio,obtenerExpediente,subirExpediente,nuevooficio,traaeroficios,borrarusoconsumo,borrarrecepcion,verusosdeproducto,borrarracion,traerpresentesdeclase2,verimagendemerienda,traermeriendas,enviarconsumomerienda,traerdatosdeclasehorausuario,listachiquesparainscribir,verarchivopsiq,agregarvariasfechasdtc,informaciondeinscriptos,obtenerinfodecursostodos,eliminarhorario,obtenerinfodecursos,inscribiracurso,agregarConsumo,sumarstock,traerparasumar,nuevoproducto,traerstock,modificaretapa,traermapaentregas,borrarpuntoenmapaentregas,guardarmapaentregas,borrarpuntoenmapa,guardarMapa,traermapa,listachiquesmomentaneo,listachicoscadiaespera,modificarinterv,traerarcchivoo,borrarcosa,traercosassole,nuevacosa,traeractividadesprofcadiaadmin,borraractividadchicocadia,nuevoinformepsiqcadia,traeractividadesprofcadia,enviarhorariosdlchico,traerhorariosdisponiblescadia,agregarvariasfechas, traerclasestallercadia,clasificarturno,clasificarturnocadia,traercitascadia,traerpsicologos,agendarturnocadia,traercitastodoscadia,traerparaturnoscadia,borrarturnocadia,agregarturnocadia,traertodoslosturnosfechacadia,tablaprestacionesa,nuevaprestacioninv,listainventario,borrarinformeps,modificarinformeps,nuevoinformepsiq,traerinformes,modificarasist,traercosassole,borraractividadsocial,verArchivo,nuevaintervencion,traerasitenciasociales,determinaprofesional,listaprofs,traerhorarioschicos,traerhorariosprofesionales,agregarhorariochico,traerhorarioschico,agregarhorario,traerhorariosprofesional,ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}
+export default {eliminarHorario,agregarHorario,  traerhorairoastalleres, borrarpunto, puntos, crearpuntos, relacionar, borrarexpediente, borraroficio, asignarOficioAChico,  traertodoslosturnospsiq, cambiarestadopsico, traerestadisticastodas, ponerpresenteingreso, traerestadisticastaller,borrarcolacion, modificar_alumno_fines, agregarAlumnoFines, traeralumnosfines, traerpresentesfines, traerturnosdepsico, traterpsicologos2, ponerpresenteclase2,traerclasestaller2,enviarconsumocolacion,traercolaciones,traerpresentescocina,eliminartodosloshorariosdeusuario,listatodosdeldtc,traerproximosturnos,actualizarOficio,obtenerExpediente,subirExpediente,nuevooficio,traaeroficios,borrarusoconsumo,borrarrecepcion,verusosdeproducto,borrarracion,traerpresentesdeclase2,verimagendemerienda,traermeriendas,enviarconsumomerienda,traerdatosdeclasehorausuario,listachiquesparainscribir,verarchivopsiq,agregarvariasfechasdtc,informaciondeinscriptos,obtenerinfodecursostodos,eliminarhorario,obtenerinfodecursos,inscribiracurso,agregarConsumo,sumarstock,traerparasumar,nuevoproducto,traerstock,modificaretapa,traermapaentregas,borrarpuntoenmapaentregas,guardarmapaentregas,borrarpuntoenmapa,guardarMapa,traermapa,listachiquesmomentaneo,listachicoscadiaespera,modificarinterv,traerarcchivoo,borrarcosa,traercosassole,nuevacosa,traeractividadesprofcadiaadmin,borraractividadchicocadia,nuevoinformepsiqcadia,traeractividadesprofcadia,enviarhorariosdlchico,traerhorariosdisponiblescadia,agregarvariasfechas, traerclasestallercadia,clasificarturno,clasificarturnocadia,traercitascadia,traerpsicologos,agendarturnocadia,traercitastodoscadia,traerparaturnoscadia,borrarturnocadia,agregarturnocadia,traertodoslosturnosfechacadia,tablaprestacionesa,nuevaprestacioninv,listainventario,borrarinformeps,modificarinformeps,nuevoinformepsiq,traerinformes,modificarasist,traercosassole,borraractividadsocial,verArchivo,nuevaintervencion,traerasitenciasociales,determinaprofesional,listaprofs,traerhorarioschicos,traerhorariosprofesionales,agregarhorariochico,traerhorarioschico,agregarhorario,traerhorariosprofesional,ponerpresenteclaseprofs,traerpresentesdeclaseprof,nuevaclaseprof,traerclasesprof,traerprofesionales,traercitastodos,traercitas,nuevapersonagim,listadepersonasgim,nuevoexpediente,listaexpedientes,modificarusuariocadia,borrarusuariocadia,datosdechiquecadia,nuevochiquecadia,listachicoscadia,obtenerdetalle,traerintervenciones,traeretapacocinacadia,nuevaetapacadia,modificarclase,borraretapa,borrarclasee,consultarasitencias,ponerausenteclase,ponerpresenteclase,traerpresentesdeclase,nuevaclasetaller,traerclasestaller,nuevaetapa,traeretapacocina,traertodoslosturnosfecha,agregarturno,establecerregreso,establecerretiro,restar1p,sumar1p,determinarvinculo,traerracionesmes,restar1,sumar1,traertodoslosturnosaprobac,borrarturno,traerparaturnos,sacarturno,agendarturno,borrarusuariodtcpsiq,modificarusuariopsiq,listadepersonaspsiq,datosdepersonapsi,nuevapersonapsiq,borrarusuariodtc,traercumples,listachiques,traerestadisticas,traerasistencia,traerasistenciasdetaller,clasesdetaller,traertalleres,nuevochique,traerfoto,nuevaactividadchico,subirfotoperfil,borraractividadchico,traertodaslasactividades,traeractividadeschico,traeractividades,nuevaactividad,borraractividad,datosdechique,subirlegajo,listadelegajos,borrarlegajo,modificarusuario,traerpresentes,ponerpresente}

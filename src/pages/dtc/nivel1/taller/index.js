@@ -1,9 +1,10 @@
 import Menuizq from '../../../../components/dtc/usuario1/menuizq1';
 import { useNavigate, useParams } from "react-router-dom";
 import Login from '../../../../components/dtc/usuario1/taller/componente1';
+import Horarioss from '../../../../components/dtc/talleres/horariosdeltaller';
 import Inscriptos from '../../../../components/dtc/talleres/infodeincriptos';
 import React, { useEffect, useState } from "react";
-import MenuuCel from '../../../../components/dtc/usuario1/menuresp';
+
 
 import {
   makeStyles,
@@ -61,6 +62,7 @@ export default function Paginas() {
       </>
       ) : (
         <Menuizq>
+          <Horarioss />
           <Login />
           <Inscriptos id={id} /> {/* Pasando el id como prop */}
         </Menuizq>

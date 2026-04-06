@@ -447,29 +447,9 @@ const columns = [
         <div>
 <Fusioanr/>
 
-          <ModaNueva
-            id_turno={id}
-            traer={async () => {
-              try {
-                const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-                if (loggedUserJSON) {
-                  const usuario = JSON.parse(loggedUserJSON)
-
-                  setUsuario(usuario)
-
-                  //    const novedades_aux = await servicioDtc.listachiques()
-                  const novedades_aux = await servicioDtc.listachiquesmomentaneo()
-
-                  setchicos(novedades_aux[0])
-                  setDatos(novedades_aux[1])
-                }
-
-              } catch (error) {
-
-              }
-
-            }}
-          />
+        <Button onClick={() => navigate('/dtc/usuario1/nuevo' )} variant="outlined" sx={{ color: "#5d4037", borderColor: "#5d4037", fontSize: "0.65rem" }} >
+          <b>Nuevo</b>
+        </Button>
           {chicos.length > 0 ? <>
 
 
