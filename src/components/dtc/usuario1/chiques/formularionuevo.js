@@ -19,6 +19,44 @@ const sectionStyle = {
   borderRadius: 1,
   mb: 3,
 };
+
+
+const opcionesViolencia = [
+  "Física - Ejerce",
+  "Física - Es víctima",
+  "Psicológica - Ejerce",
+  "Psicológica - Es víctima",
+  "Sexual - Ejerce",
+  "Sexual - Es víctima",
+  "Económica y patrimonial - Ejerce",
+  "Económica y patrimonial - Es víctima",
+  "Simbólica - Ejerce",
+  "Simbólica - Es víctima",
+  "Explotación Sexual - Ejerce",
+  "Explotación Sexual - Es víctima",
+  "Explotación Laboral - Ejerce",
+  "Explotación Laboral - Es víctima",
+
+];
+
+const opcionesModalidad= [
+  
+  // MODALIDAD
+  "Doméstica / Familiar - Ejerce",
+  "Doméstica / Familiar - Es víctima",
+  "Institucional - Ejerce",
+  "Institucional - Es víctima",
+  "Laboral (Modalidad) - Ejerce",
+  "Laboral (Modalidad) - Es víctima",
+  "Comunitaria - Ejerce",
+  "Comunitaria - Es víctima",
+  "Autoinfligida - Ejerce",
+  "Autoinfligida - Es víctima",
+  "Género - Ejerce",
+  "Género - Es víctima",
+  "Trata - Ejerce",
+  "Trata - Es víctima"
+];
 const opcionesBeneficiario = [
   "Asignación Universal por hijo",
   "Asignación por embarazo para protección social",
@@ -73,7 +111,7 @@ const NuevoUsuarioDTC = () => {
     telefono: "",
     tel_responsable: "",
     domicilio: "",
-
+presenta_violencia: "",
     país: "",
     provincia: "",
 
@@ -111,7 +149,7 @@ const NuevoUsuarioDTC = () => {
     egreso: "",
     egresoconquien: "",
 
-    responsableinscripcion: "",
+    responsable_inscripcion: "",
 situacion_habitacional: "",
     aut_retirar: "",
     hora_merienda: "",
@@ -134,17 +172,20 @@ situacion_habitacional: "",
     });
   };
 
-  const handleGuardar = async () => {
-    try {
-      const rta =await servicioDtc.nuevochique(form);
-      alert(rta)
-      navigate(-1);
-    } catch (error) {
-      console.error(error);
-      alert("Error al guardar");
-    }
-  };
+const handleGuardar = async () => {
+  try {
+    const rta = await servicioDtc.nuevochique(form);
+    alert(rta);
 
+    if (rta === "Agregado") {
+      navigate(-1);
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert("Error al guardar");
+  }
+};
   return (
     <Card sx={{ maxWidth: 1200, margin: "auto", mt: 4 }}>
       <CardContent>
@@ -152,7 +193,19 @@ situacion_habitacional: "",
         <Typography variant="h6" align="center" sx={{ mb: 2, fontWeight: "bold" }}>
           FICHA DTC
         </Typography>
-
+<Grid container spacing={2} sx={{ mb: 2 }}>
+  <Grid item xs={12}>
+    <TextField
+      label="Responsable de inscripción"
+      name="responsable_inscripcion"
+      fullWidth
+      size="small"
+      value={form.responsable_inscripcion}
+      onChange={handleChange}
+       helperText="* Nombre de la persona que completó el formulario"
+    />
+  </Grid>
+</Grid>
         {/* DATOS PERSONALES */}
         <Box sx={sectionStyle}>
           <Box sx={sectionHeader}>DATOS PERSONALES</Box>
@@ -260,7 +313,7 @@ situacion_habitacional: "",
             <Grid container spacing={2}>
 
               <Grid item xs={4}>
-                <TextField type="date" label="Primer contacto" name="primer_contacto"
+                <TextField type="date" label="Presentacion al dispositivo" name="primer_contacto"
                   InputLabelProps={{ shrink: true }}
                   fullWidth size="small"
                   value={form.primer_contacto}
@@ -634,6 +687,77 @@ situacion_habitacional: "",
 
                </Box>
         </Box>
+
+
+
+
+
+
+
+
+          <Box sx={sectionStyle}>
+          <Box sx={sectionHeader}>VIOLENCIA</Box>
+          <Box sx={sectionBody}>
+            <Grid container spacing={2}>
+  <Grid item xs={6}>
+ <TextField
+  select
+  label="¿Presenta situacion de violencia?"
+  name="presenta_violencia"
+  fullWidth
+  size="small"
+  value={form.presenta_violencia || ""}
+  onChange={handleChange}
+>
+  <MenuItem value="Si">Sí</MenuItem>
+  <MenuItem value="No">No</MenuItem>
+</TextField>
+  </Grid>
+  <Grid item xs={6}>
+  <TextField
+    select
+    label="Tipo  de violencia"
+    name="tipo_violencia"
+    fullWidth
+    size="small"
+   // SelectProps={{ multiple: true }}
+    value={form.tipo_violencia || []}
+    onChange={handleChange}
+    helperText="Seleccionar todas las opciones que correspondan (Ejerce / Es víctima)"
+  >
+    {opcionesViolencia.map((op) => (
+      <MenuItem key={op} value={op}>
+        {op}
+      </MenuItem>
+    ))}
+  </TextField>
+    
+  </Grid>
+<Grid item xs={6}>
+
+ <TextField
+    select
+    label="Modalidad de violencia"
+    name="modalidad_violencia"
+    fullWidth
+    size="small"
+  //  SelectProps={{ multiple: true }}
+    value={form.modalidad_violencia || []}
+    onChange={handleChange}
+    helperText="Seleccionar todas las opciones que correspondan (Ejerce / Es víctima)"
+  >
+    {opcionesModalidad.map((op) => (
+      <MenuItem key={op} value={op}>
+        {op}
+      </MenuItem>
+    ))}
+  </TextField>
+</Grid>
+
+  </Grid>
+
+  </Box>
+   </Box>
         {/* BOTONES */}
         <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
           <Button variant="contained" onClick={handleGuardar}>
