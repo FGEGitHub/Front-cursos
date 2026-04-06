@@ -52,7 +52,7 @@ const HorariosTalleres = () => {
   const handleGuardar = async () => {
     try {
       console.log("Guardando horario con datos:", form);
-      await servicioDtc.agregarHorario({
+      await servicioDtc.agregarHorario({ 
         id_tallerista: id,
         detalle: form.detalle,
         dia: form.dia,
@@ -69,7 +69,7 @@ const HorariosTalleres = () => {
 
   const handleEliminar = async () => {
     try {
-      await servicioDtc.eliminarHorario(idAEliminar);
+      await servicioDtc.eliminarHorarioo(idAEliminar);
       setOpenConfirm(false);
       setIdAEliminar(null);
       traerDatos();
