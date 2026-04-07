@@ -214,6 +214,7 @@ import DTCcocinpacientes from '../pages/dtc/cocinapacientes';
 import DTCcocinaraciones from '../pages/dtc/cocinaraciones';
 import DTCInscripcionesvisita from '../pages/dtc/visitasoc/inscripciones'
 import STCusuairo1psicologo from '../pages/dtc/nivel1/psicologo'
+import Dtcpsiconuevoch from '../pages/dtc/nuevochiquepsicologo'
 
 
 
@@ -413,6 +414,7 @@ const Rutas = [
 	{ path: '/dtc/psicologa/informes', element: <Dtcpsiclogaacti /> },
 	{ path: '/dtc/psicologa/usuarios', element: <Dtcpsiclogausuarios /> },
 	{ path: '/dtc/psicologa/usuario/:id', element: <Dtcpsiclogausuario /> },
+	{ path: '/dtc/psicologa/nuevousuario', element: <Dtcpsiconuevoch /> },
 
 
 	{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio /> },

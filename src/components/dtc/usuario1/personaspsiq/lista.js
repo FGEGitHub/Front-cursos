@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import servicioDtc from "../../../../services/dtc";
-import ModaNueva from "./nuevo";
 
 import {
     Paper,
@@ -223,7 +222,15 @@ const TablaNotificaciones = () => {
             )}
 
             <div className={classes.buttonBar}>
-                <ModaNueva onClose={() => setOpenNuevo(false)} onSave={traer} />
+                    <Button
+                                variant="contained"
+                                color="primary"
+                                size="small"
+                                onClick={() => {navigate("/dtc/psicologa/nuevousuario")
+                                }}
+                            >
+                                Nuevo usuario
+                            </Button>
 
                 <Button
                     variant="contained"
