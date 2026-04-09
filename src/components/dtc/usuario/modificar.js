@@ -1,588 +1,269 @@
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { Button } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import servicioDtc from '../../../services/dtc'
-import NativeSelect from '@mui/material/NativeSelect';
-import Tooltip from '@material-ui/core/Tooltip';
-import { Paper, CircularProgress, Typography, Card, CardActions } from '@mui/material';
-import React, { useEffect, useState, Fragment } from "react";
-import DialogActions from '@mui/material/DialogActions';
-import InputLabel from '@mui/material/InputLabel';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import {
+  Box, TextField, MenuItem, Button, Dialog, DialogContent,
+  DialogActions, Typography, Checkbox, FormControlLabel
+} from "@mui/material";
+import { Autocomplete } from "@mui/material";
+import servicioDtc from "../../../services/dtc";
 
+const opcionesViolencia = [
+  "Física - Ejerce","Física - Es víctima","Psicológica - Ejerce","Psicológica - Es víctima",
+  "Sexual - Ejerce","Sexual - Es víctima","Económica y patrimonial - Ejerce","Económica y patrimonial - Es víctima",
+  "Simbólica - Ejerce","Simbólica - Es víctima","Explotación Sexual - Ejerce","Explotación Sexual - Es víctima",
+  "Explotación Laboral - Ejerce","Explotación Laboral - Es víctima"
+];
 
-const StyledParagraph = styled.p`
-  font-family: 'Montserrat', sans-serif;
-`;
+const opcionesModalidad = [
+  "Doméstica / Familiar - Ejerce","Doméstica / Familiar - Es víctima",
+  "Institucional - Ejerce","Institucional - Es víctima",
+  "Laboral (Modalidad) - Ejerce","Laboral (Modalidad) - Es víctima",
+  "Comunitaria - Ejerce","Comunitaria - Es víctima",
+  "Autoinfligida - Ejerce","Autoinfligida - Es víctima",
+  "Género - Ejerce","Género - Es víctima",
+  "Trata - Ejerce","Trata - Es víctima"
+];
 
-export default function SelectTextFields(props) {
-    const [open, setOpen] = React.useState(false);
-    //const usuario  = useUser().userContext
-    const [form, setForm] = useState({
-        id: props.id,
-        kid: props.kid,
-        fecha_nacimiento: props.fecha_nacimiento,
-        observaciones: props.observaciones,
-        primer_contacto: props.primer_contacto,
-        primer_ingreso: props.primer_ingreso,
-        admision: props.admision,
-        nombre: props.nombre,
-        apellido: props.apellido,
-        dni: props.dni,
-        talle: props.talle,
-        domicilio: props.domicilio,
-        telefono: props.telefono,
-        autorizacion_imagen: props.autorizacion_imagen,
-        fotoc_dni: props.fotoc_dni,
-        fotoc_responsable: props.fotoc_responsable,
-        tel_responsable: props.tel_responsable,
-        visita_social: props.visita_social,
-        egreso: props.egreso,
-        aut_retirar: props.aut_retirar,
-        dato_escolar: props.dato_escolar,
-        hora_merienda: props.hora_merienda,
-        escuela: props.escuela,
-        grado: props.grado,
-        fines:props.fines,
-            obra_social: props.obra_social,          // 🆕 agregado
-    obra_social_cual: props.obra_social_cual,
-      sexo: props.sexo,
-        hijos:props.hijos,
+const opcionesDiscapacidad = [
+  "Auditiva","Visual","Motriz","Mental","Del habla","No presenta dificultad permanente","Otro"
+];
 
-    })
-    const [datos, setDatos] = useState()
-    const [activo, setActivo] = useState(false)
+const opcionesBeneficiario = [
+  "Asignación Universal por hijo","Asignación por embarazo para protección social",
+  "Pensión por discapacidad/invalidez","Pensión a adultos mayores",
+  "Pensión por madre de 7 o más hijos","Pensión por fallecimiento del trabajador",
+  "Retiro por invalidez","Jubilación","Seguro de desempleo",
+  "Subsidio habitacional","Programa PROGRESAR",
+  "Seguro de capacitación y empleo","Asignación provincial","Asignación municipal","Otros"
+];
 
+export default function ModificarUsuario(props) {
 
+  const [open, setOpen] = useState(false);
 
+  const [form, setForm] = useState({
+    ...props,
+    motivo_consulta: props.motivo_consulta || [],
+    discapacidad: props.discapacidad || [],
+    beneficiario: props.beneficiario || [],
+    tiene_hijos: props.tiene_hijos || false
+  });
 
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value })
+    setForm({
+      ...form,
+      [name]: type === "checkbox" ? checked : value,
+      ...(name === "obra_social" && value !== "Si" ? { obra_social_cual: "" } : {}),
+      ...(name === "tiene_hijos" && !checked ? { cantidad_hijos: "" } : {})
+    });
+  };
+
+  const handleGuardar = async () => {
+    try {
+      await servicioDtc.modificarusuario(form);
+      props.traer();
+      setOpen(false);
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    const handleClickOpen = () => {
+  return (
+    <>
+      <Button variant="outlined" onClick={() => setOpen(true)}>
+        Modificar usuario
+      </Button>
 
-        setOpen(true);
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
+        <DialogContent dividers>
 
+          <Typography variant="h6">Modificar {form.nombre}</Typography>
 
-    };
+          {/* RESPONSABLE */}
+          <TextField label="Responsable inscripción" name="responsable_inscripcion"
+            value={form.responsable_inscripcion || ""} onChange={handleChange} fullWidth />
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+          {/* DATOS PERSONALES */}
+          <Typography sx={{ mt: 2 }}>Datos personales</Typography>
 
-    const handleDeterminar = async (event) => {
+          <TextField label="Nombre" name="nombre" value={form.nombre} onChange={handleChange} fullWidth />
+          <TextField label="Apellido" name="apellido" value={form.apellido} onChange={handleChange} fullWidth />
+          <TextField label="DNI" name="dni" value={form.dni} onChange={handleChange} fullWidth />
 
-        try {
-            event.preventDefault();
+          <TextField select label="Sexo" name="sexo" value={form.sexo} onChange={handleChange} fullWidth>
+            <MenuItem value="Masculino">Masculino</MenuItem>
+            <MenuItem value="Femenino">Femenino</MenuItem>
+            <MenuItem value="Trans">Trans</MenuItem>
+            <MenuItem value="Otro">Otro</MenuItem>
+          </TextField>
 
-            const nov = await servicioDtc.modificarusuario(form)
+          <TextField type="date" name="fecha_nacimiento"
+            value={form.fecha_nacimiento || ""} onChange={handleChange} fullWidth />
 
-alert(nov)
-props.traer()
-        } catch (error) {
-            console.error(error);
-            console.log('Error algo sucedio')
+          <TextField select label="Estado civil" name="estadocivil"
+            value={form.estadocivil || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Soltero">Soltero</MenuItem>
+            <MenuItem value="Casado">Casado</MenuItem>
+            <MenuItem value="Divorciado">Divorciado</MenuItem>
+            <MenuItem value="Viudo">Viudo</MenuItem>
+          </TextField>
 
+          <TextField label="País" name="pais" value={form.pais || ""} onChange={handleChange} fullWidth />
+          <TextField label="Provincia" name="provincia" value={form.provincia || ""} onChange={handleChange} fullWidth />
 
-        }
+          <TextField select label="Situación habitacional" name="situacion_habitacional"
+            value={form.situacion_habitacional || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Vivienda digna">Vivienda digna</MenuItem>
+            <MenuItem value="Situación de calle">Situación de calle</MenuItem>
+            <MenuItem value="Hacinamiento">Hacinamiento</MenuItem>
+            <MenuItem value="Vivienda precaria">Vivienda precaria</MenuItem>
+          </TextField>
 
-        props.traer()
+          {/* CONTACTO */}
+          <Typography sx={{ mt: 2 }}>Contacto</Typography>
 
-        setOpen(false);
-    };
+          <TextField label="Teléfono" name="telefono" value={form.telefono || ""} onChange={handleChange} fullWidth />
+          <TextField label="Tel. responsable" name="tel_responsable" value={form.tel_responsable || ""} onChange={handleChange} fullWidth />
+          <TextField label="Domicilio" name="domicilio" value={form.domicilio || ""} onChange={handleChange} fullWidth />
+          <TextField label="Barrio" name="barrio" value={form.barrio || ""} onChange={handleChange} fullWidth />
 
-    const [currency, setCurrency] = React.useState('EUR');
+          {/* PRIMER CONTACTO */}
+          <Typography sx={{ mt: 2 }}>Primer contacto</Typography>
 
-    /*   const handleChange = (event) => {
-        setCurrency(event.target.value);
-      }; */
+          <TextField type="date" label="Primer contacto" name="primer_contacto"
+            value={form.primer_contacto || ""} onChange={handleChange} fullWidth />
 
+          <TextField select label="Presentación" name="presentacion_dispositivo"
+            value={form.presentacion_dispositivo || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Solo">Solo</MenuItem>
+            <MenuItem value="Acompañado">Acompañado</MenuItem>
+          </TextField>
 
-    return (
+          <TextField select label="Modo acceso" name="modo_acceso"
+            value={form.modo_acceso || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Presencia en el barrio">Presencia en el barrio</MenuItem>
+            <MenuItem value="Referente afectivo">Referente afectivo</MenuItem>
+            <MenuItem value="Otra institución">Otra institución</MenuItem>
+            <MenuItem value="Otro">Otro</MenuItem>
+          </TextField>
 
-
-
-
-        <Box
-
-            sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            < Tooltip title="Nueva Clase">
-                <Button variant="outlined" sx={{ color: "black", borderColor: "black", fontSize: "0.65rem", }} onClick={handleClickOpen}> Modificar usuario  </Button>
-
-            </Tooltip>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogContent>
-
-
-                    <h3>
-                        <b> Modificar a {props.nombre}</b></h3>
-
-                    <TextField
-
-                        defaultValue={props.nombre}
-                        margin="dense"
-                        id="name"
-                        label="Nombre"
-                        name="nombre"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-
-                    <TextField
-
-                        margin="dense"
-                        id="name"
-                        defaultValue={props.apellido}
-                        label="Apellido"
-                        name="apellido"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-
-                        margin="dense"
-                        id="dni"
-                        defaultValue={props.dni}
-                        label="DNI"
-                        name="dni"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    /><br/>
-                     <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                KID1/KID2/ADOLESCENTES
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.kid}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'kid',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'kid1'}>
-                             Kids1
-                        
-                        </option>
-                        <option value={'kid2'}>Kids2</option>
-                        <option value={'kid3'}>Adolescentes</option>
-                                      <option value="Sala Blanda">Sala Blanda</option>
-
-
-                    </NativeSelect>
-                    <br />
-                      <InputLabel>
-                        <StyledParagraph>Sexo</StyledParagraph>
-                    </InputLabel>
-                    <NativeSelect
-                        value={form.sexo}
-                        onChange={handleChange}
-                        inputProps={{ name: 'sexo' }}
-                        sx={{ width: 250 }}
-                    >
-                        <option value="Sin determinar">Elegir</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                    </NativeSelect>
-
-                    {/* 🔥 HIJOS (cantidad directa) */}
-                    <TextField
-                        margin="dense"
-                        label="Cantidad de hijos"
-                        name="hijos"
-                        type="number"
-                        value={form.hijos}
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                        helperText="Si no tiene hijos, dejar vacío"
-                    />
-                    <br/>
-                            <InputLabel variant="outlined" htmlFor="obra_social">
-            <Typography variant="p" component="div" color="black">
-              <StyledParagraph>¿Tiene obra social?</StyledParagraph>
-            </Typography>
-          </InputLabel>
-          <NativeSelect
-            defaultValue={props.obra_social}
-            onChange={handleChange}
-            inputProps={{
-              name: 'obra_social',
-              id: 'obra_social',
-            }}
-            sx={{ width: 250 }}
-          >
-            <option value={'Sin determinar'}>Elegir</option>
-            <option value={'Si'}>Sí</option>
-            <option value={'No'}>No</option>
-          </NativeSelect>
-
-          {/* 🔹 Campo adicional: ¿Cuál? (solo texto libre) */}
-          <TextField
-            margin="dense"
-            id="obra_social_cual"
-            label="¿Cuál obra social?"
-            name="obra_social_cual"
-            onChange={handleChange}
-            defaultValue={props.obra_social_cual}
-            fullWidth
-            variant="standard"
+          {/* MOTIVO */}
+          <Autocomplete
+            multiple
+            freeSolo
+            options={[]}
+            value={form.motivo_consulta}
+            onChange={(e, val) => setForm({ ...form, motivo_consulta: val })}
+            renderInput={(params) => <TextField {...params} label="Motivo consulta" />}
           />
-          <br/>
-                    <TextField
 
-                        onChange={handleChange}
+          {/* RELACIONES */}
+          <Typography sx={{ mt: 2 }}>Relaciones</Typography>
 
-                        name="fecha_nacimiento"
-                        id="date"
-                        label="Fecha de nacimiento"
-                        type="date"
-                        defaultValue={props.fecha_nacimiento}
-                        sx={{ width: 220 }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    <TextField
+          <FormControlLabel
+            control={<Checkbox checked={form.tiene_hijos} onChange={handleChange} name="tiene_hijos" />}
+            label="Tiene hijos"
+          />
 
-                        onChange={handleChange}
-                        name="primer_contacto"
-                        id="date"
-                        label="primer_contacto"
-                        type="date"
-                        defaultValue={props.primer_contacto} sx={{ width: 220 }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    <TextField
+          {form.tiene_hijos && (
+            <TextField label="Cantidad hijos" name="cantidad_hijos"
+              value={form.cantidad_hijos || ""} onChange={handleChange} fullWidth />
+          )}
 
-                        onChange={handleChange}
-                        name="primer_ingreso"
-                        id="date"
-                        label="primer_ingreso"
-                        type="date"
-                        defaultValue={props.primer_ingreso} sx={{ width: 220 }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    <TextField
+          <TextField label="Con quién vive" name="con_quien_vive"
+            value={form.con_quien_vive || ""} onChange={handleChange} fullWidth />
 
-                        onChange={handleChange}
-                        name="admision"
-                        id="date"
-                        label="admision"
-                        type="date"
-                        defaultValue={props.admision}
-                        sx={{ width: 220 }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Autorizacion de imagen?
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.autorizacion_imagen}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'autorizacion_imagen',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Si'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Si
-                            </Typography>
-                        </option>
-                        <option value={'No'}>No</option>
+          {/* EDUCACIÓN */}
+          <Typography sx={{ mt: 2 }}>Educación</Typography>
 
-                    </NativeSelect>
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Fotocopia de DNI?
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.fotoc_dni}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'fotoc_dni',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Si'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Si
-                            </Typography>
-                        </option>
-                        <option value={'No'}>No</option>
+          <TextField select label="¿Sabe leer?" name="sabe_leer"
+            value={form.sabe_leer || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Si">Si</MenuItem>
+            <MenuItem value="No">No</MenuItem>
+          </TextField>
 
-                    </NativeSelect>
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Fotocopia DNI Responsable?
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.fotoc_responsable}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'fotoc_responsable',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Si'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Si
-                            </Typography>
-                        </option>
-                        <option value={'No'}>No</option>
+          <TextField label="Nivel educativo" name="nivel_educativo"
+            value={form.nivel_educativo || ""} onChange={handleChange} fullWidth />
 
-                    </NativeSelect>
+          {/* TRABAJO */}
+          <Typography sx={{ mt: 2 }}>Trabajo</Typography>
 
+          <TextField select label="Situación laboral" name="situacion_laboral"
+            value={form.situacion_laboral || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Con empleo">Con empleo</MenuItem>
+            <MenuItem value="Sin empleo">Sin empleo</MenuItem>
+          </TextField>
 
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Visita social?
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.visita_social}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'visita_social',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Si'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Si
-                            </Typography>
-                        </option>
-                        <option value={'No'}>No</option>
+          <TextField
+            select
+            label="Beneficiario"
+            name="beneficiario"
+            SelectProps={{ multiple: true }}
+            value={form.beneficiario}
+            onChange={handleChange}
+            fullWidth
+          >
+            {opcionesBeneficiario.map(op => <MenuItem key={op} value={op}>{op}</MenuItem>)}
+          </TextField>
 
-                    </NativeSelect>
+          {/* DISCAPACIDAD */}
+          <Typography sx={{ mt: 2 }}>Discapacidad</Typography>
 
+          <TextField select multiple label="Discapacidad" name="discapacidad"
+            value={form.discapacidad} onChange={handleChange} fullWidth>
+            {opcionesDiscapacidad.map(op => <MenuItem key={op} value={op}>{op}</MenuItem>)}
+          </TextField>
 
+          {/* VIOLENCIA */}
+          <Typography sx={{ mt: 2 }}>Violencia</Typography>
 
+          <TextField select label="¿Presenta violencia?" name="presenta_violencia"
+            value={form.presenta_violencia || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Si">Si</MenuItem>
+            <MenuItem value="No">No</MenuItem>
+          </TextField>
 
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                ¿Egreso del DTC
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.egreso}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'egreso',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Solo'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Solo
-                            </Typography>
-                        </option>
-                        <option value={'Con acompaniante'}>Con acompañante</option>
+          <TextField select label="Tipo violencia" name="tipo_violencia"
+            value={form.tipo_violencia || ""} onChange={handleChange} fullWidth>
+            {opcionesViolencia.map(op => <MenuItem key={op} value={op}>{op}</MenuItem>)}
+          </TextField>
 
-                    </NativeSelect>
+          <TextField select label="Modalidad violencia" name="modalidad_violencia"
+            value={form.modalidad_violencia || ""} onChange={handleChange} fullWidth>
+            {opcionesModalidad.map(op => <MenuItem key={op} value={op}>{op}</MenuItem>)}
+          </TextField>
 
+          {/* ESCOLAR */}
+          <Typography sx={{ mt: 2 }}>Escolar</Typography>
 
+          <TextField label="Escuela" name="escuela" value={form.escuela || ""} onChange={handleChange} fullWidth />
+          <TextField label="Grado" name="grado" value={form.grado || ""} onChange={handleChange} fullWidth />
+          <TextField label="Talle" name="talle" value={form.talle || ""} onChange={handleChange} fullWidth />
 
-                    <InputLabel variant="outlined" htmlFor="uncontrolled-native">
-                        <Typography variant="p" component="div" color="black">
-                            <StyledParagraph>
-                                Dato escolar
-                            </StyledParagraph>
-                        </Typography>
-                    </InputLabel>
-                    <NativeSelect
-                        defaultValue={props.dato_escolar}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: 'dato_escolar',
-                            id: 'uncontrolled-native',
-                        }}
-                        sx={'width:250px'}
-                    >
-                        <option value={'Sin determinar'} >Elegir</option>
-                        <option value={'Turno maniana'}>
-                            <Typography variant="body1" component="div" color="black" fontFamily="Montserrat" >
-                                Turno mañana
-                            </Typography>
-                        </option>
-                        <option value={'Turno tarde'}>Turno tarde</option>
-                        <option value={'Turno noche'}>Turno noche</option>
-                        <option value={'Horario extendido'}>Horario extendido</option>
-                        <option value={'No asiste'}>No asiste</option>
-                        <option value={'Asiste'}>Asiste</option>
-                    </NativeSelect>
-                    <TextField
+          {/* OBS */}
+          <Typography sx={{ mt: 2 }}>Observaciones</Typography>
 
-                        margin="dense"
-                        id="dni"
-                        defaultValue={props.domicilio}
-                        label="Domicilio"
-                        name="domicilio"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
+          <TextField
+            multiline
+            rows={3}
+            name="observaciones"
+            value={form.observaciones || ""}
+            onChange={handleChange}
+            fullWidth
+          />
 
-                        margin="dense"
-                        id="dni"
-                        defaultValue={props.telefono}
-                        label="Telefono"
-                        name="telefono"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
+        </DialogContent>
 
-                        margin="dense"
-                        defaultValue={props.tel_responsable}
-                        label="Telefono responsable"
-                        name="tel_responsable"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-
-                        margin="dense"
-                        defaultValue={props.aut_retirar}
-                        label="autorizado a retirar"
-                        name="aut_retirar"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField
-
-                        margin="dense"
-                        id="dni"
-                        defaultValue={props.hora_merienda}
-                        label="Hora merienda"
-                        name="hora_merienda"
-                        onChange={handleChange}
-                        fullWidth
-                        variant="standard"
-                    />
-                      <TextField
-              
-              margin="dense"
-              id="name"
-              label="Escuela"
-              name="escuela"
-              onChange={handleChange}
-              defaultValue={props.escuela}
-
-              variant="standard"
-            />
-            <TextField
-              
-              margin="dense"
-              id="name"
-              label="Grado"
-              name="grado"
-              onChange={handleChange}
-              defaultValue={props.grado}
-
-              variant="standard"
-            />
-            <TextField
-              
-              margin="dense"
-              id="name"
-              label="Fines"
-              name="fines"
-              onChange={handleChange}
-              defaultValue={props.fines}
-
-              variant="standard"
-            />
-              <TextField
-              
-              margin="dense"
-              id="name"
-              label="Talle"
-              name="talle"
-              onChange={handleChange}
-              defaultValue={props.fines}
-
-              variant="standard"
-            />
-                    <TextField
-
-                        margin="dense"
-                        id="name"
-                        label="Observaciones"
-                        name="observaciones"
-                        onChange={handleChange}
-                        defaultValue={props.observaciones}
-                        variant="standard"
-                    />
-
-
-                    <DialogActions>
-
-
-                        <>
-                            <> <Button variant="contained" color="primary" onClick={handleDeterminar}> Modificar </Button></>
-                        </>
-                        <Button variant="outlined" color="error" style={{ marginLeft: "auto" }} onClick={handleClose}>Cancelar</Button>
-                    </DialogActions>
-
-
-                </DialogContent>
-            </Dialog>
-        </Box >
-
-
-    );
+        <DialogActions>
+          <Button variant="contained" onClick={handleGuardar}>
+            Guardar
+          </Button>
+          <Button variant="outlined" color="error" onClick={() => setOpen(false)}>
+            Cancelar
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
 }

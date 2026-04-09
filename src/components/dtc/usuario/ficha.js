@@ -123,23 +123,7 @@ const FichaPersona = (props) => {
       {chico ? (
         <Card sx={{ maxWidth: 1200, margin: "auto", mt: 4 }}>
           <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginBottom: "20px" }}>
-            {!editando ? (
-              <button onClick={() => setEditando(true)}>
-                ✏️ Editar
-              </button>
-            ) : (
-              <>
-                <button onClick={guardarCambios}>
-                  💾 Guardar
-                </button>
-                <button onClick={() => {
-                  setEditando(false);
-                  setForm(chico); // vuelve a los datos originales
-                }}>
-                  ❌ Cancelar
-                </button>
-              </>
-            )}
+          
           </div>
           {/* FOTO */}
           <Grid item xs={12} sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
