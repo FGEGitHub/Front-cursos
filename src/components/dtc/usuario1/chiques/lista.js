@@ -366,8 +366,8 @@ const columns = [
             <b>📊 Estadísticas de obra social:</b><br />
 
             🔵 <b>Total general:</b> {datos.promedio_obra_social}<br />
-            🟢 <b>Chicos:</b> {datos.promedio_obra_social_chicos}<br />
-            🟣 <b>Psicóloga:</b> {datos.promedio_obra_social_psicologa}<br />
+            🟢 <b>Promedio de obra social:</b> {datos.promedio_obra_social_chicos}<br />
+            🟣 <b>Promedio de obra social de personas con tratamiento :</b> {datos.promedio_obra_social_psicologa}<br />
           </h3>
 
 

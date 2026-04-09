@@ -375,7 +375,7 @@ export default function MenuIzq2({ children }) {
                     <Chip
                       key={index}
                       size="small"
-                      label={`${item.nombre} ${item.apellido}`}
+                      label={`${item.nombre} ${item.apellido}  (${new Date(item.fecha_nacimiento).getDate()}/${new Date(item.fecha_nacimiento).getMonth() + 1})`}
                       sx={{
                         background: 'rgba(255,255,255,0.12)',
                         color: '#fff',
