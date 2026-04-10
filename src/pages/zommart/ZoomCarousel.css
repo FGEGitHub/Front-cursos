@@ -1,0 +1,90 @@
+.zoom-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.zoom-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform-origin: center center;
+  opacity: 0;
+}
+
+/* la imagen que ya está visible */
+.zoom-slide.current {
+  opacity: 1;
+  z-index: 1;
+  animation: currentZoom 12s linear forwards;
+}
+
+.zoom-slide.next {
+  opacity: 1;
+  z-index: 2;
+  animation: nextZoom 12s linear forwards;
+}
+
+/* 
+La velocidad percibida se mantiene pareja:
+cuando la imagen ya es grande, los saltos son proporcionalmente más chicos.
+*/
+@keyframes currentZoom {
+  0%   { transform: scale(0.35); }
+
+  8%   { transform: scale(0.45); }
+  12%  { transform: scale(0.45); }
+
+  20%  { transform: scale(0.65); }
+  24%  { transform: scale(0.65); }
+
+  32%  { transform: scale(0.95); }
+  36%  { transform: scale(0.95); }
+
+  44%  { transform: scale(1.35); }
+  48%  { transform: scale(1.35); }
+
+  56%  { transform: scale(1.9); }
+  60%  { transform: scale(1.9); }
+
+  68%  { transform: scale(2.8); }
+  72%  { transform: scale(2.8); }
+
+  80%  { transform: scale(4); }
+  84%  { transform: scale(4); }
+
+  100% { transform: scale(6); }
+}
+
+
+
+@keyframes nextZoom {
+  0%   { transform: scale(0.02); }
+
+  8%   { transform: scale(0.03); }
+  12%  { transform: scale(0.03); }
+
+  20%  { transform: scale(0.05); }
+  24%  { transform: scale(0.05); }
+
+  32%  { transform: scale(0.09); }
+  36%  { transform: scale(0.09); }
+
+  44%  { transform: scale(0.16); }
+  48%  { transform: scale(0.16); }
+
+  56%  { transform: scale(0.28); }
+  60%  { transform: scale(0.28); }
+
+  68%  { transform: scale(0.5); }
+  72%  { transform: scale(0.5); }
+
+  80%  { transform: scale(0.85); }
+  84%  { transform: scale(0.85); }
+
+  100% { transform: scale(1.12); }
+}

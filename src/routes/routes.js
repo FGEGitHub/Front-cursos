@@ -244,7 +244,7 @@ import DTCFinesmenu from '../pages/dtc/fines/menu'
 import DTCmerienda from '../pages/dtc/merienda'
 
 
-
+import Zooom from '../pages/zommart'
 const Rutas = [
 	<Navbar />,
 
@@ -254,6 +254,7 @@ const Rutas = [
 	/*{	path: '/',	element: <NotFound />
 		}, */
 	{ path: '/', element: <Logindtc /> },
+	{ path: '/zoom', element: <Zooom /> },
 	{ path: '/loginn', element: <Login /> },
 	{ path: '/login', element: <Logindtc /> },
 	{ path: '/deslogin', element: <Deslogin /> },
