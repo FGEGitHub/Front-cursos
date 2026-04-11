@@ -26,19 +26,24 @@
 /* ========================= */
 .zoom-slide.current {
   z-index: 1;
-
-  transform-origin: calc(var(--fx) * 1%) calc(var(--fy) * 1%);
-
-  --e: var(--t);
+  opacity: calc(1 - var(--t));
 
   /*
-    🔥 MÁS RÁPIDO
-    antes: 3.4
+    🔥 zoom fuerte
   */
-  --s: calc(exp(var(--e) * 5.4));
+  --s: calc(exp(var(--t) * 4.5));
+
+  /*
+    🔥 DIRECTO al foco de la next
+    (NO interpolar, NO centro)
+  */
+  transform-origin: calc(var(--fx-next) * 1%) calc(var(--fy-next) * 1%);
 
   transform: scale(var(--s));
 }
+
+
+
 
 /* ========================= */
 /* 🔵 NEXT (sincronizada PERFECTA) */
@@ -46,16 +51,31 @@
 .zoom-slide.next {
   z-index: 2;
 
-  transform-origin: calc(var(--fx) * 1%) calc(var(--fy) * 1%);
-
   --e: var(--t);
   --s: calc(exp(var(--e) * 3.4));
 
+  /*
+    🔥 normalización REAL (0 → 1 exacto)
+  */
   --n: calc((var(--s) - 1) / (var(--max-scale) - 1));
 
-  transform: scale(
-    calc(var(--n) * var(--n) * 0.7 + var(--n) * 0.3)
-  );
+  /*
+    🔥 clamp manual (evita quedarse en 0.999 visual)
+  */
+  --nn: calc(min(var(--n), 1));
+
+  /*
+    🔥 posición basada en nn (NO en n)
+  */
+  --dx: calc((var(--fx) - 50) * 1%);
+  --dy: calc((var(--fy) - 50) * 1%);
+
+  transform:
+    translate(
+      calc(var(--dx) * (1 - var(--nn))),
+      calc(var(--dy) * (1 - var(--nn)))
+    )
+    scale(var(--nn));
 
   opacity: 1;
 }

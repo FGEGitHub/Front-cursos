@@ -5,32 +5,33 @@ const DURATION = 12000;
 
 const ZoomCarousel = ({ images = [] }) => {
   const [index, setIndex] = useState(0);
+  
   const requestRef = useRef();
   const startRef = useRef();
+const prev =
+  images[(index - 1 + images.length) % images.length];
+const animate = (time) => {
+  if (!startRef.current) startRef.current = time;
 
-  const animate = (time) => {
-    if (!startRef.current) startRef.current = time;
+  const elapsed = time - startRef.current;
+  const rawT = (elapsed % DURATION) / DURATION;
 
-    const elapsed = time - startRef.current;
+  // 🔥 evitamos el frame final exacto
+  const t = Math.min(rawT, 0.999);
 
-    // 🔥 tiempo continuo (NO resetea)
-    const t = (elapsed % DURATION) / DURATION;
+  const newIndex = Math.floor(elapsed / DURATION) % images.length;
 
-    // 🔥 índice sin cortes
-    const newIndex = Math.floor(elapsed / DURATION) % images.length;
+  if (newIndex !== index) {
+    setIndex(newIndex);
+  }
 
-    if (newIndex !== index) {
-      setIndex(newIndex);
-    }
+  const container = document.querySelector(".zoom-container");
+  if (container) {
+    container.style.setProperty("--t", t);
+  }
 
-    // 🔥 actualiza variable CSS
-    const container = document.querySelector(".zoom-container");
-    if (container) {
-      container.style.setProperty("--t", t);
-    }
-
-    requestRef.current = requestAnimationFrame(animate);
-  };
+  requestRef.current = requestAnimationFrame(animate);
+};
 
   useEffect(() => {
     requestRef.current = requestAnimationFrame(animate);
@@ -42,14 +43,16 @@ const ZoomCarousel = ({ images = [] }) => {
 
   return (
     <div className="zoom-container">
-      <div
-        className="zoom-slide current"
-        style={{
-          backgroundImage: `url(${current.src})`,
-          "--fx": current.focus.x,
-          "--fy": current.focus.y,
-        }}
-      />
+     <div
+  className="zoom-slide current"
+  style={{
+    backgroundImage: `url(${current.src})`,
+    "--fx-prev": prev.focus.x,
+    "--fy-prev": prev.focus.y,
+    "--fx-next": next.focus.x,
+    "--fy-next": next.focus.y,
+  }}
+/>
 
       <div
         className="zoom-slide next"
