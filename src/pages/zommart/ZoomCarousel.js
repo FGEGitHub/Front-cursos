@@ -1,51 +1,64 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ZoomCarousel.css";
 
 const DURATION = 12000;
-const SWITCH_TIME = 12000;
 
 const ZoomCarousel = ({ images = [] }) => {
-  const [current, setCurrent] = useState(0);
-  const [next, setNext] = useState(images.length > 1 ? 1 : null);
+  const [index, setIndex] = useState(0);
+  const requestRef = useRef();
+  const startRef = useRef();
+
+  const animate = (time) => {
+    if (!startRef.current) startRef.current = time;
+
+    const elapsed = time - startRef.current;
+
+    // 🔥 tiempo continuo (NO resetea)
+    const t = (elapsed % DURATION) / DURATION;
+
+    // 🔥 índice sin cortes
+    const newIndex = Math.floor(elapsed / DURATION) % images.length;
+
+    if (newIndex !== index) {
+      setIndex(newIndex);
+    }
+
+    // 🔥 actualiza variable CSS
+    const container = document.querySelector(".zoom-container");
+    if (container) {
+      container.style.setProperty("--t", t);
+    }
+
+    requestRef.current = requestAnimationFrame(animate);
+  };
 
   useEffect(() => {
-    if (images.length <= 1) return;
+    requestRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(requestRef.current);
+  }, [index]);
 
-    const timeout = setTimeout(() => {
-      const newCurrent = next;
-      const newNext = (next + 1) % images.length;
-
-      setCurrent(newCurrent);
-      setNext(newNext);
-    }, SWITCH_TIME);
-
-    return () => clearTimeout(timeout);
-  }, [current, next, images.length]);
+  const current = images[index];
+  const next = images[(index + 1) % images.length];
 
   return (
     <div className="zoom-container">
-      {images.map((img, i) => {
-        let className = "zoom-slide";
+      <div
+        className="zoom-slide current"
+        style={{
+          backgroundImage: `url(${current.src})`,
+          "--fx": current.focus.x,
+          "--fy": current.focus.y,
+        }}
+      />
 
-        if (i === current) className += " current";
-        if (i === next) className += " next";
-
-        return (
-       <div
-  key={i}
-  className={className}
-  style={{
-    backgroundImage: `url(${img.src})`,
-
-    "--fx": img.focus.x,
-    "--fy": img.focus.y,
-
-    "--nfx": images[next]?.focus.x ?? img.focus.x,
-    "--nfy": images[next]?.focus.y ?? img.focus.y,
-  }}
-/>
-        );
-      })}
+      <div
+        className="zoom-slide next"
+        style={{
+          backgroundImage: `url(${next.src})`,
+          "--fx": next.focus.x,
+          "--fy": next.focus.y,
+        }}
+      />
     </div>
   );
 };

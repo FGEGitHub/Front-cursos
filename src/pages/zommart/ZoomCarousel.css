@@ -3,153 +3,58 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #000;
+  background: black;
+
+  --t: 0;
+--max-scale: 30;
 }
+
+/* ========================= */
+/* BASE */
+/* ========================= */
 
 .zoom-slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: 1;
-
-  /* centramos y dejamos listo para mover */
-  transform: translate(0%, 0%) scale(1);
+  will-change: transform;
 }
 
-/* la imagen que ya está visible */
+/* ========================= */
+/* 🟢 CURRENT (zoom real) */
+/* ========================= */
 .zoom-slide.current {
-  opacity: 1;
   z-index: 1;
-  animation: currentZoom 12s linear forwards;
+
+  transform-origin: calc(var(--fx) * 1%) calc(var(--fy) * 1%);
+
+  --e: var(--t);
+
+  --s: calc(1 + (var(--max-scale) - 1) * var(--e));
+
+  transform: scale(var(--s));
 }
+
+/* ========================= */
+/* 🔵 NEXT (sincronizada PERFECTA) */
+/* ========================= */
 
 .zoom-slide.next {
+  z-index: 2;
+
+  transform-origin: calc(var(--fx) * 1%) calc(var(--fy) * 1%);
+
+  --e: var(--t);
+
+  --s: calc(1 + (var(--max-scale) - 1) * var(--e));
+
+  /*
+    🔥 ESTE NÚMERO ES EL QUE VAS A AJUSTAR
+  */
+  --k: 30;
+
+  transform: scale(calc(var(--s) / var(--k)));
+
   opacity: 1;
-  z-index: 3;
-  animation: nextZoom 12s linear forwards;
-}
-
-/* 
-La velocidad percibida se mantiene pareja:
-cuando la imagen ya es grande, los saltos son proporcionalmente más chicos.
-*/
-@keyframes currentZoom {
-  0% {
-    transform: translate(0%, 0%) scale(1);
-  }
-
-  10% {
-    transform: translate(calc((var(--nfx) - 50) * 0.2%), calc((var(--nfy) - 50) * 0.2%)) scale(1.15);
-  }
-
-  14% {
-    transform: translate(calc((var(--nfx) - 50) * 0.2%), calc((var(--nfy) - 50) * 0.2%)) scale(1.15);
-  }
-
-  24% {
-    transform: translate(calc((var(--nfx) - 50) * 0.35%), calc((var(--nfy) - 50) * 0.35%)) scale(1.35);
-  }
-
-  28% {
-    transform: translate(calc((var(--nfx) - 50) * 0.35%), calc((var(--nfy) - 50) * 0.35%)) scale(1.35);
-  }
-
-  38% {
-    transform: translate(calc((var(--nfx) - 50) * 0.5%), calc((var(--nfy) - 50) * 0.5%)) scale(1.7);
-  }
-
-  42% {
-    transform: translate(calc((var(--nfx) - 50) * 0.5%), calc((var(--nfy) - 50) * 0.5%)) scale(1.7);
-  }
-
-  52% {
-    transform: translate(calc((var(--nfx) - 50) * 0.7%), calc((var(--nfy) - 50) * 0.7%)) scale(2.3);
-  }
-
-  56% {
-    transform: translate(calc((var(--nfx) - 50) * 0.7%), calc((var(--nfy) - 50) * 0.7%)) scale(2.3);
-  }
-
-  66% {
-    transform: translate(calc((var(--nfx) - 50) * 0.85%), calc((var(--nfy) - 50) * 0.85%)) scale(3.2);
-  }
-
-  70% {
-    transform: translate(calc((var(--nfx) - 50) * 0.85%), calc((var(--nfy) - 50) * 0.85%)) scale(3.2);
-  }
-
-  80% {
-    transform: translate(calc((var(--nfx) - 50) * 1%), calc((var(--nfy) - 50) * 1%)) scale(4.5);
-  }
-
-  84% {
-    transform: translate(calc((var(--nfx) - 50) * 1%), calc((var(--nfy) - 50) * 1%)) scale(4.5);
-  }
-
-  100% {
-    transform: translate(calc((var(--nfx) - 50) * 1.2%), calc((var(--nfy) - 50) * 1.2%)) scale(7);
-  }
-}
-
-
-
-
-
-@keyframes nextZoom {
-  0% {
-    transform: translate(calc((var(--fx) - 50) * -1.2%), calc((var(--fy) - 50) * -1.2%)) scale(0.005);
-  }
-
-  10% {
-    transform: translate(calc((var(--fx) - 50) * -1%), calc((var(--fy) - 50) * -1%)) scale(0.014);
-  }
-
-  14% {
-    transform: translate(calc((var(--fx) - 50) * -1%), calc((var(--fy) - 50) * -1%)) scale(0.014);
-  }
-
-  24% {
-    transform: translate(calc((var(--fx) - 50) * -0.85%), calc((var(--fy) - 50) * -0.85%)) scale(0.028);
-  }
-
-  28% {
-    transform: translate(calc((var(--fx) - 50) * -0.85%), calc((var(--fy) - 50) * -0.85%)) scale(0.028);
-  }
-
-  38% {
-    transform: translate(calc((var(--fx) - 50) * -0.7%), calc((var(--fy) - 50) * -0.7%)) scale(0.056);
-  }
-
-  42% {
-    transform: translate(calc((var(--fx) - 50) * -0.7%), calc((var(--fy) - 50) * -0.7%)) scale(0.056);
-  }
-
-  52% {
-    transform: translate(calc((var(--fx) - 50) * -0.5%), calc((var(--fy) - 50) * -0.5%)) scale(0.112);
-  }
-
-  56% {
-    transform: translate(calc((var(--fx) - 50) * 0.5%), calc((var(--fy) - 50) * -0.5%)) scale(0.112);
-  }
-
-  66% {
-    transform: translate(calc((var(--fx) - 50) * -0.35%), calc((var(--fy) - 50) * -0.35%)) scale(0.252);
-  }
-
-  70% {
-    transform: translate(calc((var(--fx) - 50) * -0.35%), calc((var(--fy) - 50) * -0.35%)) scale(0.252);
-  }
-
-  80% {
-    transform: translate(calc((var(--fx) - 50) * -0.2%), calc((var(--fy) - 50) * -0.2%)) scale(0.7);
-  }
-
-  84% {
-    transform: translate(calc((var(--fx) - 50) * -0.2%), calc((var(--fy) - 50) * -0.2%)) scale(0.7);
-  }
-
-  100% {
-    transform: translate(0%, 0%) scale(1);
-  }
 }
