@@ -31,7 +31,11 @@
 
   --e: var(--t);
 
-  --s: calc(1 + (var(--max-scale) - 1) * var(--e));
+  /*
+    🔥 MÁS RÁPIDO
+    antes: 3.4
+  */
+  --s: calc(exp(var(--e) * 4.5));
 
   transform: scale(var(--s));
 }
@@ -39,7 +43,6 @@
 /* ========================= */
 /* 🔵 NEXT (sincronizada PERFECTA) */
 /* ========================= */
-
 .zoom-slide.next {
   z-index: 2;
 
@@ -47,14 +50,14 @@
 
   --e: var(--t);
 
-  --s: calc(1 + (var(--max-scale) - 1) * var(--e));
+  --s: calc(exp(var(--e) * 3.4));
 
   /*
-    🔥 ESTE NÚMERO ES EL QUE VAS A AJUSTAR
+    🔥 NORMALIZACIÓN PERFECTA
   */
-  --k: 30;
-
-  transform: scale(calc(var(--s) / var(--k)));
+  transform: scale(
+    calc((var(--s) - 1) / (var(--max-scale) - 1))
+  );
 
   opacity: 1;
 }
