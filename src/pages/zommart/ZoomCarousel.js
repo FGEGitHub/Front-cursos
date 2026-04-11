@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ZoomCarousel.css";
 
 const DURATION = 12000;
-const SWITCH_TIME = 10800;
+const SWITCH_TIME = 12000;
 
 const ZoomCarousel = ({ images = [] }) => {
   const [current, setCurrent] = useState(0);

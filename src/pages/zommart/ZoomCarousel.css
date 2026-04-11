@@ -10,10 +10,9 @@
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-position: 50% 50%;
   transform-origin: center center;
-  opacity: 0;
+  opacity: 1;
 }
 
 /* la imagen que ya está visible */
@@ -25,7 +24,7 @@
 
 .zoom-slide.next {
   opacity: 1;
-  z-index: 2;
+  z-index: 3;
   animation: nextZoom 12s linear forwards;
 }
 
@@ -93,58 +92,28 @@ cuando la imagen ya es grande, los saltos son proporcionalmente más chicos.
 
 @keyframes nextZoom {
   0% {
-    transform: scale(0.005); /* más chica que antes */
+    transform: scale(0.005);
   }
 
-  10% {
-    transform: scale(0.01);
-  }
+  10%  { transform: scale(0.014); }
+  14%  { transform: scale(0.014); }
 
-  14% {
-    transform: scale(0.01);
-  }
+  24%  { transform: scale(0.028); }
+  28%  { transform: scale(0.028); }
 
-  24% {
-    transform: scale(0.02);
-  }
+  38%  { transform: scale(0.056); }
+  42%  { transform: scale(0.056); }
 
-  28% {
-    transform: scale(0.02);
-  }
+  52%  { transform: scale(0.112); }
+  56%  { transform: scale(0.112); }
 
-  38% {
-    transform: scale(0.04);
-  }
+  66%  { transform: scale(0.252); }
+  70%  { transform: scale(0.252); }
 
-  42% {
-    transform: scale(0.04);
-  }
-
-  52% {
-    transform: scale(0.08);
-  }
-
-  56% {
-    transform: scale(0.08);
-  }
-
-  66% {
-    transform: scale(0.18);
-  }
-
-  70% {
-    transform: scale(0.18);
-  }
-
-  80% {
-    transform: scale(0.5);
-  }
-
-  84% {
-    transform: scale(0.5);
-  }
+  80%  { transform: scale(0.7); }
+  84%  { transform: scale(0.7); }
 
   100% {
-    transform: scale(1);
+    transform: scale(1); /* 👈 llega justo a pantalla */
   }
 }
