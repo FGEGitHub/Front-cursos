@@ -31,11 +31,19 @@ const ZoomCarousel = ({ images = [] }) => {
         if (i === next) className += " next";
 
         return (
-          <div
-            key={i}
-            className={className}
-            style={{ backgroundImage: `url(${img})` }}
-          />
+       <div
+  key={i}
+  className={className}
+  style={{
+    backgroundImage: `url(${img.src})`,
+
+    "--fx": img.focus.x,
+    "--fy": img.focus.y,
+
+    "--nfx": images[next]?.focus.x ?? img.focus.x,
+    "--nfy": images[next]?.focus.y ?? img.focus.y,
+  }}
+/>
         );
       })}
     </div>
