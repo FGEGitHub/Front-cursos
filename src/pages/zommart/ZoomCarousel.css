@@ -35,7 +35,7 @@
     🔥 MÁS RÁPIDO
     antes: 3.4
   */
-  --s: calc(exp(var(--e) * 4.5));
+  --s: calc(exp(var(--e) * 5.4));
 
   transform: scale(var(--s));
 }
@@ -49,14 +49,12 @@
   transform-origin: calc(var(--fx) * 1%) calc(var(--fy) * 1%);
 
   --e: var(--t);
-
   --s: calc(exp(var(--e) * 3.4));
 
-  /*
-    🔥 NORMALIZACIÓN PERFECTA
-  */
+  --n: calc((var(--s) - 1) / (var(--max-scale) - 1));
+
   transform: scale(
-    calc((var(--s) - 1) / (var(--max-scale) - 1))
+    calc(var(--n) * var(--n) * 0.7 + var(--n) * 0.3)
   );
 
   opacity: 1;
