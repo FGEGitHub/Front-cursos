@@ -520,7 +520,7 @@ const enviarconsumocolacion= async  (datos) => {
  
   const nuevochique= async  (datos) => {
     console.log(datos)
-     const {data } = await axios.post(baseUrl+'nuevochique',datos,config)
+     const data  = await axios.post(baseUrl+'nuevochique',datos,config)
      
      return data   
  } 

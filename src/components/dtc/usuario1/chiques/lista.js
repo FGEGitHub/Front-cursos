@@ -202,58 +202,79 @@ const options = {
     };
 
     return (
-      <div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
 
         <Button onClick={handleNavigation} variant="outlined" sx={{ color: "#5d4037", borderColor: "#5d4037", fontSize: "0.65rem" }} >
           <b>Ver</b>
         </Button>
-        <Modificar
-          id={chicos[dataIndex].id}
-          nombre={chicos[dataIndex].nombre}
-          apellido={chicos[dataIndex].apellido}
-          fecha_nacimiento={chicos[dataIndex].fecha_nacimiento}
-          observaciones={chicos[dataIndex].observaciones}
-          primer_contacto={chicos[dataIndex].primer_contacto}
-          primer_ingreso={chicos[dataIndex].primer_ingreso}
-          admision={chicos[dataIndex].admision}
-          dni={chicos[dataIndex].dni}
-          domicilio={chicos[dataIndex].domicilio}
-          telefono={chicos[dataIndex].telefono}
-          autorizacion_imagen={chicos[dataIndex].autorizacion_imagen}
-          fotoc_dni={chicos[dataIndex].fotoc_dni}
-          fotoc_responsable={chicos[dataIndex].fotoc_responsable}
-          tel_responsable={chicos[dataIndex].tel_responsable}
-          visita_social={chicos[dataIndex].visita_social}
-          egreso={chicos[dataIndex].egreso}
-          aut_retirar={chicos[dataIndex].aut_retirar}
-          dato_escolar={chicos[dataIndex].dato_escolar}
-          kid={chicos[dataIndex].kid}
-          obra_social={chicos[dataIndex].obra_social}
-          obra_social_cual={chicos[dataIndex].obra_social_cual}
-          escuela={chicos[dataIndex].escuela}
-          grado={chicos[dataIndex].grado}
-          fines={chicos[dataIndex].fines}
-          hora_merienda={chicos[dataIndex].hora_merienda}
-          traer={async () => {
-            try {
-              const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-              if (loggedUserJSON) {
-                const usuario = JSON.parse(loggedUserJSON)
+       <Modificar
+  id={chicos[dataIndex].id}
+  nombre={chicos[dataIndex].nombre}
+  apellido={chicos[dataIndex].apellido}
+  dni={chicos[dataIndex].dni}
+  sexo={chicos[dataIndex].sexo}
+  estadocivil={chicos[dataIndex].estadocivil}
+  fecha_nacimiento={chicos[dataIndex].fecha_nacimiento}
+  pais={chicos[dataIndex].pais}
+  provincia={chicos[dataIndex].provincia}
+  situacion_habitacional={chicos[dataIndex].situacion_habitacional}
 
-                setUsuario(usuario)
+  telefono={chicos[dataIndex].telefono}
+  tel_responsable={chicos[dataIndex].tel_responsable}
+  domicilio={chicos[dataIndex].domicilio}
+  barrio={chicos[dataIndex].barrio}
 
-                //const novedades_aux = await servicioDtc.listachiques()
-                const novedades_aux = await servicioDtc.listachiquesmomentaneo()
-                setchicos(novedades_aux[0])
-                setDatos(novedades_aux[1])
-              }
+  primer_contacto={chicos[dataIndex].primer_contacto}
+  presentacion_dispositivo={chicos[dataIndex].presentacion_dispositivo}
+  modo_acceso={chicos[dataIndex].modo_acceso}
+  motivo_consulta={chicos[dataIndex].motivo_consulta}
 
-            } catch (error) {
+  tiene_hijos={chicos[dataIndex].tiene_hijos}
+  cantidad_hijos={chicos[dataIndex].cantidad_hijos}
+  con_quien_vive={chicos[dataIndex].con_quien_vive}
 
-            }
+  sabe_leer={chicos[dataIndex].sabe_leer}
+  nivel_educativo={chicos[dataIndex].nivel_educativo}
 
-          }}
-        />
+  situacion_laboral={chicos[dataIndex].situacion_laboral}
+  beneficiario={chicos[dataIndex].beneficiario}
+
+  discapacidad={chicos[dataIndex].discapacidad}
+
+  presenta_violencia={chicos[dataIndex].presenta_violencia}
+  tipo_violencia={chicos[dataIndex].tipo_violencia}
+  modalidad_violencia={chicos[dataIndex].modalidad_violencia}
+
+  escuela={chicos[dataIndex].escuela}
+  grado={chicos[dataIndex].grado}
+  talle={chicos[dataIndex].talle}
+
+  observaciones={chicos[dataIndex].observaciones}
+
+  responsable_inscripcion={chicos[dataIndex].responsable_inscripcion}
+
+  obra_social={chicos[dataIndex].obra_social}
+  obra_social_cual={chicos[dataIndex].obra_social_cual}
+
+  kid={chicos[dataIndex].kid}
+  fines={chicos[dataIndex].fines}
+  hora_merienda={chicos[dataIndex].hora_merienda}
+
+  traer={async () => {
+    try {
+      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+      if (loggedUserJSON) {
+        const usuario = JSON.parse(loggedUserJSON)
+
+        setUsuario(usuario)
+
+        const novedades_aux = await servicioDtc.listachiquesmomentaneo()
+        setchicos(novedades_aux[0])
+        setDatos(novedades_aux[1])
+      }
+    } catch (error) {}
+  }}
+/>
 
       </div>
     );
@@ -264,6 +285,10 @@ const columns = [
    {
    name: "id",
    label: "id",
+ },
+  {
+   name: "kid",
+   label: "Dimension",
  },
  {
    name: "dni",
@@ -319,10 +344,14 @@ const columns = [
  },
 
  {
-   name: "escuela",
-   label: "Escuela",
+   name: "fines",
+   label: "fines",
  },
 
+ {
+   name: "psico",
+   label: "Tratamiento",
+ },
 
 
  {

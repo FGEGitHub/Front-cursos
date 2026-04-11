@@ -107,28 +107,31 @@ const NuevoUsuarioDTC = () => {
     sexo: "",
     estadocivil: "",
     fecha_nacimiento: "",
-
+asistencia_colegio: "",
     telefono: "",
     tel_responsable: "",
     domicilio: "",
 presenta_violencia: "",
     país: "",
     provincia: "",
-
+barrio: "",
     primer_contacto: "",
     primer_ingreso: "",
     admision: "",
-
+asiste_institucion: "",
     presentacion_dispositivo: "",
     modo_acceso: "",
     derivado_institucion: "",
     cual_institucion: "",
     se_articulo: "",
     motivo_consulta: "",
-
+busca_trabajo: "",
     tiene_hijos: false,
     cantidad_hijos: "",
-
+cud: "",
+discapacidad:  "",
+discapacidad_otro: "",
+tratamiento_cud: "",
     con_quien_vive: "",
 
     sabe_leer: "",
@@ -145,6 +148,8 @@ presenta_violencia: "",
     fotoc_dni: "",
     fotoc_responsable: "",
     visita_social: "",
+  fines: "No",   // booleano (para BD)
+  psico: "No",      // texto "Si" o "No"
 
     egreso: "",
     egresoconquien: "",
@@ -155,9 +160,9 @@ situacion_habitacional: "",
     hora_merienda: "",
     escuela: "",
     grado: "",
-    fines: "",
+   
     talle: "",
-
+kid: "",
     observaciones: ""
   });
 
@@ -175,15 +180,40 @@ situacion_habitacional: "",
 const handleGuardar = async () => {
   try {
     const rta = await servicioDtc.nuevochique(form);
-    alert(rta);
 
-    if (rta === "Agregado") {
+    console.log("Respuesta backend:", rta);
+  console.log("Respuesta backend:", rta.data);
+    // Si usás el formato nuevo { ok, mensaje, error }
+    if (rta?.ok === false) {
+      console.error("Error backend:", rta.error);
+      alert(`${rta.mensaje}\n${rta.error || ""}`);
+      return;
+    }
+
+    // Compatibilidad con tu lógica actual
+    if (rta.data.mensaje === "Agregado" || rta?.ok === true) {
+      alert("Agregado correctamente");
       navigate(-1);
+    } else {
+      alert("Respuesta inesperada");
     }
 
   } catch (error) {
-    console.error(error);
-    alert("Error al guardar");
+    console.error("Error completo:", error);
+
+    // 🔍 Esto es CLAVE para Axios o fetch
+    if (error.response) {
+      console.error("Data:", error.response.data);
+      console.error("Status:", error.response.status);
+
+      alert(
+        `Error del servidor:\n${error.response.data?.mensaje || ""}\n${error.response.data?.error || ""}`
+      );
+    } else if (error.request) {
+      alert("No hubo respuesta del servidor");
+    } else {
+      alert("Error al guardar: " + error.message);
+    }
   }
 };
   return (
@@ -206,6 +236,49 @@ const handleGuardar = async () => {
     />
   </Grid>
 </Grid>
+<Box sx={{ ...sectionStyle, border: "2px solid #1976d2" }}>
+  <Box sx={{ ...sectionHeader, backgroundColor: "#1976d2" }}>
+    INFORMACIÓN DESTACADA
+  </Box>
+
+  <Box sx={sectionBody}>
+    <Grid container spacing={2}>
+
+      {/* FINES (booleano) */}
+      <Grid item xs={6}>
+      <TextField
+  select
+  label="Fines"
+  name="fines"
+  fullWidth
+  size="small"
+  value={form.fines }
+       onChange={handleChange}
+>
+  <MenuItem value="Si">Sí</MenuItem>
+  <MenuItem value="No">No</MenuItem>
+</TextField>
+      </Grid>
+
+      {/* PSICO (texto) */}
+      <Grid item xs={6}>
+        <TextField
+          select
+          label="Persona en tratamiento"
+          name="psico"
+          fullWidth
+          size="small"
+          value={form.psico}
+          onChange={handleChange}
+        >
+          <MenuItem value="Si">Sí</MenuItem>
+          <MenuItem value="No">No</MenuItem>
+        </TextField>
+      </Grid>
+
+    </Grid>
+  </Box>
+</Box>
         {/* DATOS PERSONALES */}
         <Box sx={sectionStyle}>
           <Box sx={sectionHeader}>DATOS PERSONALES</Box>
@@ -241,7 +314,14 @@ const handleGuardar = async () => {
                   onChange={handleChange}
                 />
               </Grid>
-
+   <Grid item xs={4}>
+                <TextField select label="Dimension" name="kid" fullWidth size="small" value={form.kid} onChange={handleChange}>
+                  <MenuItem value="Sala Blanda">Sala Blanda</MenuItem>
+                  <MenuItem value="Dimension 1">Dimension 1</MenuItem>
+                  <MenuItem value="Dimension 2">Dimension 2</MenuItem>
+                  <MenuItem value="Jovenes">Jovenes</MenuItem>
+                </TextField>
+              </Grid>
               <Grid item xs={6}>
  <TextField select label="Estado civil" name="estadocivil" fullWidth size="small" value={form.estadocivil} onChange={handleChange}>
                   <MenuItem value="Soltero">Soltero</MenuItem>
@@ -251,7 +331,7 @@ const handleGuardar = async () => {
                 </TextField>              </Grid>
 
               <Grid item xs={6}>
-                <TextField label="País" name="país" fullWidth size="small" value={form.país} onChange={handleChange}/>
+                <TextField label="País" name="pais" fullWidth size="small" value={form.pais} onChange={handleChange}/>
               </Grid>
 
               <Grid item xs={6}>
@@ -367,7 +447,7 @@ const handleGuardar = async () => {
     Otro 
   </MenuItem>
 </TextField>
-            {form.modo_acceso === "Otro" && (
+          {/*   {form.modo_acceso === "Otro" && (
   <TextField
     label="Especificar"
     name="modo_acceso_otro"
@@ -377,7 +457,7 @@ const handleGuardar = async () => {
     onChange={handleChange}
     sx={{ mt: 2 }}
   />
-)}
+)} */}
               </Grid>
 
 
@@ -634,10 +714,10 @@ const handleGuardar = async () => {
   select
   label="Discapacidad"
   name="discapacidad"
-  value={form.discapacidad || []}
+  value={form.discapacidad || ""}
   fullWidth
   size="small"
-  SelectProps={{ multiple: true }}
+  SelectProps={{ multiple: false }}
  
   onChange={handleChange}
 >
