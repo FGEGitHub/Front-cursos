@@ -1,0 +1,92 @@
+.zoom-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+
+  --t: 0;
+--max-scale: 30;
+}
+
+/* ========================= */
+/* BASE */
+/* ========================= */
+
+.zoom-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+
+/* ========================= */
+/* 🟢 CURRENT (zoom real) */
+/* ========================= */
+.zoom-slide.current {
+  z-index: 1;
+  opacity: calc(1 - var(--t));
+
+  --e: var(--t);
+
+  /*
+    🔥 zoom exponencial
+  */
+  --s: calc(exp(var(--e) * 4.5));
+
+  /*
+    🔥 punto objetivo (next)
+  */
+  --fx: var(--fx-next);
+  --fy: var(--fy-next);
+
+  /*
+    🔥 desplazamiento LINEAL (NO depende del scale)
+  */
+  --dx: calc((50 - var(--fx)) * var(--t) * 1%);
+  --dy: calc((50 - var(--fy)) * var(--t) * 1%);
+
+  /*
+    🔥 ORDEN CORRECTO:
+    primero mover, después escalar
+  */
+  transform:
+    translate(var(--dx), var(--dy))
+    scale(var(--s));
+}
+
+/* ========================= */
+/* 🔵 NEXT (sincronizada PERFECTA) */
+/* ========================= */
+.zoom-slide.next {
+  z-index: 2;
+
+  --e: var(--t);
+  --s: calc(exp(var(--e) * 3.4));
+
+  /*
+    🔥 normalización REAL (0 → 1 exacto)
+  */
+  --n: calc((var(--s) - 1) / (var(--max-scale) - 1));
+
+  /*
+    🔥 clamp manual (evita quedarse en 0.999 visual)
+  */
+  --nn: calc(min(var(--n), 1));
+
+  /*
+    🔥 posición basada en nn (NO en n)
+  */
+  --dx: calc((var(--fx) - 50) * 1%);
+  --dy: calc((var(--fy) - 50) * 1%);
+
+  transform:
+    translate(
+      calc(var(--dx) * (1 - var(--nn))),
+      calc(var(--dy) * (1 - var(--nn)))
+    )
+    scale(var(--nn));
+
+  opacity: 1;
+}
