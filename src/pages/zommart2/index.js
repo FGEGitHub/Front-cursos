@@ -9,8 +9,8 @@ function App() {
     <>
     <ZoomCarousel
       images={[  { src: img1, focus: { x: 50, y: 50 } }, // centro
-  { src: img2, focus: { x: 70, y: 40 } }, // arriba derecha
-  { src: img3, focus: { x: 30, y: 70 } }, // abajo izquierda
+  { src: img2, focus: { x: 71, y: 40 } }, // arriba derecha
+  { src: img3, focus: { x: 30, y: 65 } }, // abajo izquierda
   { src: img4, focus: { x: 60, y: 40 } },]}
     /></>
   );
