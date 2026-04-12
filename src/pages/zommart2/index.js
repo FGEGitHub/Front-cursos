@@ -7,12 +7,13 @@ import img4 from "../../Assets/foto3.jpeg";
 function App() {
   return (
     <>
-    <ZoomCarousel
-      images={[  { src: img1, focus: { x: 50, y: 50 } }, // centro
-  { src: img2, focus: { x: 71, y: 40 } }, // arriba derecha
-  { src: img3, focus: { x: 30, y: 65 } }, // abajo izquierda
-  { src: img4, focus: { x: 60, y: 40 } },]}
-    /></>
+   <ZoomCarousel
+  images={[
+    { src: img1, focus: { x: 70, y: 55 } }, // montaña → ciudad
+    { src: img2, focus: { x: 75, y: 40 } }, // ciudad → isla
+    { src: img3, focus: { x: 25, y: 45 } }, // isla → montaña
+  ]}
+/></>
   );
 }
 

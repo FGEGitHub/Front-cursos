@@ -29,7 +29,7 @@
   opacity: calc(1 - var(--t));
 
   --e: var(--t);
-  --s: calc(exp(var(--e) * 4.5));
+  --s: calc(exp(var(--e) * 4.6));
 
   /*
     🔥 MISMO SISTEMA QUE NEXT
@@ -59,14 +59,22 @@
   --n: calc((var(--s) - 1) / (var(--max-scale) - 1));
   --nn: calc(min(var(--n), 1));
 
+  --scale: calc(var(--nn) * var(--nn) * 0.6 + var(--nn) * 0.4);
+
   --dx: calc((var(--fx) - 50) * 1%);
   --dy: calc((var(--fy) - 50) * 1%);
 
+  /*
+    🔥 compensación correcta
+  */
   transform:
     translate(
-      calc(var(--dx) * (1 - var(--nn)))
-    ,
-      calc(var(--dy) * (1 - var(--nn)))
+      calc(var(--dx) * (1 - var(--scale))),
+      calc(var(--dy) * (1 - var(--scale)))
     )
-    scale(var(--nn));
+    scale(var(--scale));
+
+  transform-origin: center; /* 🔥 IMPORTANTE */
+
+  opacity: 1;
 }
