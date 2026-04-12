@@ -8,13 +8,28 @@
   --t: 0;
   --max-scale: 30;
 
-
   --steps: 8;
---t2: calc(
-  var(--t)
-  + sin(var(--t) * var(--steps) * 3.1416) * 0.02
-  + sin(var(--t) * var(--steps) * 6.28) * 0.005
-);
+
+  --t2: calc(
+    var(--t)
+    + sin(var(--t) * var(--steps) * 3.1416) * 0.02
+    + sin(var(--t) * var(--steps) * 6.28) * 0.005
+  );
+}
+
+/* 🔴 DEBUG: punto destino del zoom */
+.zoom-container::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--fx-next) * 1%);
+  top: calc(var(--fy-next) * 1%);
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  pointer-events: none;
 }
 
 /* ========================= */
@@ -30,59 +45,61 @@
 }
 
 /* ========================= */
-/* 🟢 CURRENT (zoom real) */
+/* 🟢 CURRENT */
 /* ========================= */
+
 .zoom-slide.current {
   z-index: 1;
   opacity: 1;
 
-  /* 🔥 usamos t2 en vez de t */
   --e: var(--t2);
   --s: calc(exp(var(--e) * 4.6));
 
   --dx: calc((var(--fx-next) - 50) * 1%);
   --dy: calc((var(--fy-next) - 50) * 1%);
 
+  /* 🔥 easing más lento al inicio */
+  --move: calc(var(--t2) * var(--t2));
+
   transform:
     translate(
-      calc(var(--dx) * var(--t2)),
-      calc(var(--dy) * var(--t2))
+      calc(var(--dx) * var(--move)),
+      calc(var(--dy) * var(--move))
     )
     scale(var(--s));
 }
 
 /* ========================= */
-/* 🔵 NEXT (sincronizada PERFECTA) */
+/* 🔵 NEXT */
 /* ========================= */
+
 .zoom-slide.next {
   z-index: 2;
 
-  /* 🔥 MISMO tiempo con ráfagas */
   --e: var(--t2);
   --s: calc(exp(var(--e) * 3.4));
 
   --n: calc((var(--s) - 1) / (var(--max-scale) - 1));
   --nn: calc(min(var(--n), 1));
 
---ease: calc(var(--nn) * var(--nn)); /* t² */
+  --ease: calc(var(--nn) * var(--nn));
 
---scale: calc(var(--ease) * var(--ease) * 0.6 + var(--ease) * 0.4);
+  --scale: calc(var(--ease) * var(--ease) * 0.6 + var(--ease) * 0.4);
 
   --fxp: calc(var(--fx) * 1%);
   --fyp: calc(var(--fy) * 1%);
 
   transform-origin: var(--fxp) var(--fyp);
 
-  /* 🔥 atracción leve al centro */
---cx: calc((50 - var(--fx)) * 0.75);
---cy: calc((50 - var(--fy)) * 0.75);
+  --cx: calc((50 - var(--fx)) * 0.75);
+  --cy: calc((50 - var(--fy)) * 0.75);
 
-transform:
-  scale(var(--scale))
-  translate(
-    calc(((50 - var(--fx)) + var(--cx) * var(--ease)) * (var(--scale) - 1) * 1%),
-    calc(((50 - var(--fy)) + var(--cy) * var(--ease)) * (var(--scale) - 1) * 1%)
-  );
+  transform:
+    scale(var(--scale))
+    translate(
+      calc(((50 - var(--fx)) + var(--cx) * var(--ease)) * (var(--scale) - 1) * 1%),
+      calc(((50 - var(--fy)) + var(--cy) * var(--ease)) * (var(--scale) - 1) * 1%)
+    );
 
   opacity: 1;
 }
