@@ -64,19 +64,25 @@
   --n: calc((var(--s) - 1) / (var(--max-scale) - 1));
   --nn: calc(min(var(--n), 1));
 
-  --scale: calc(var(--nn) * var(--nn) * 0.6 + var(--nn) * 0.4);
+--ease: calc(var(--nn) * var(--nn)); /* t² */
+
+--scale: calc(var(--ease) * var(--ease) * 0.6 + var(--ease) * 0.4);
 
   --fxp: calc(var(--fx) * 1%);
   --fyp: calc(var(--fy) * 1%);
 
   transform-origin: var(--fxp) var(--fyp);
 
-  transform:
-    scale(var(--scale))
-    translate(
-      calc((50 - var(--fx)) * (var(--scale) - 1) * 1%),
-      calc((50 - var(--fy)) * (var(--scale) - 1) * 1%)
-    );
+  /* 🔥 atracción leve al centro */
+--cx: calc((50 - var(--fx)) * 0.75);
+--cy: calc((50 - var(--fy)) * 0.75);
+
+transform:
+  scale(var(--scale))
+  translate(
+    calc(((50 - var(--fx)) + var(--cx) * var(--ease)) * (var(--scale) - 1) * 1%),
+    calc(((50 - var(--fy)) + var(--cy) * var(--ease)) * (var(--scale) - 1) * 1%)
+  );
 
   opacity: 1;
 }
