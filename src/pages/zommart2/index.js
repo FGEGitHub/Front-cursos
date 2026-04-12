@@ -10,7 +10,7 @@ function App() {
    <ZoomCarousel
   images={[
     { src: img1, focus: { x: 70, y: 55 } }, // montaña → ciudad
-    { src: img2, focus: { x: 75, y: 40 } }, // ciudad → isla
+    { src: img2, focus: { x: 70, y: 40 } }, // ciudad → isla
     { src: img3, focus: { x: 25, y: 45 } }, // isla → montaña
   ]}
 /></>
