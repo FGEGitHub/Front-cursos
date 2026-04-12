@@ -246,6 +246,9 @@ import DTCmerienda from '../pages/dtc/merienda'
 
 import Zooom from '../pages/zommart'
 import Zooom2 from '../pages/zommart2'
+
+
+import Zooom3 from '../pages/zommart3'
 const Rutas = [
 	<Navbar />,
 
@@ -257,7 +260,10 @@ const Rutas = [
 	{ path: '/', element: <Logindtc /> },
 	{ path: '/zoom', element: <Zooom /> },
 { path: '/zoom2', element: <Zooom2 /> },
-	
+	{ path: '/zoom3', element: <Zooom3 /> },
+
+
+
 	{ path: '/loginn', element: <Login /> },
 	{ path: '/login', element: <Logindtc /> },
 	{ path: '/deslogin', element: <Deslogin /> },

@@ -6,7 +6,15 @@
   background: black;
 
   --t: 0;
---max-scale: 30;
+  --max-scale: 30;
+
+
+  --steps: 8;
+--t2: calc(
+  var(--t)
+  + sin(var(--t) * var(--steps) * 3.1416) * 0.02
+  + sin(var(--t) * var(--steps) * 6.28) * 0.005
+);
 }
 
 /* ========================= */
@@ -26,26 +34,22 @@
 /* ========================= */
 .zoom-slide.current {
   z-index: 1;
- opacity: 1;
+  opacity: 1;
 
-  --e: var(--t);
+  /* 🔥 usamos t2 en vez de t */
+  --e: var(--t2);
   --s: calc(exp(var(--e) * 4.6));
 
-  /*
-    🔥 MISMO SISTEMA QUE NEXT
-  */
   --dx: calc((var(--fx-next) - 50) * 1%);
   --dy: calc((var(--fy-next) - 50) * 1%);
 
   transform:
     translate(
-      calc(var(--dx) * var(--t)),
-      calc(var(--dy) * var(--t))
+      calc(var(--dx) * var(--t2)),
+      calc(var(--dy) * var(--t2))
     )
     scale(var(--s));
 }
-
-
 
 /* ========================= */
 /* 🔵 NEXT (sincronizada PERFECTA) */
@@ -53,7 +57,8 @@
 .zoom-slide.next {
   z-index: 2;
 
-  --e: var(--t);
+  /* 🔥 MISMO tiempo con ráfagas */
+  --e: var(--t2);
   --s: calc(exp(var(--e) * 3.4));
 
   --n: calc((var(--s) - 1) / (var(--max-scale) - 1));
