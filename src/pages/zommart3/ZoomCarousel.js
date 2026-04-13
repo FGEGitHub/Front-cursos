@@ -16,13 +16,14 @@ const animate = (time) => {
   const elapsed = time - startRef.current;
   const rawT = (elapsed % DURATION) / DURATION;
 
-  // 🔥 evitamos el frame final exacto
   const t = Math.min(rawT, 0.999);
 
-  const newIndex = Math.floor(elapsed / DURATION) % images.length;
+  const cycle = Math.floor(elapsed / DURATION);
+  const nextIndex = cycle % images.length;
 
-  if (newIndex !== index) {
-    setIndex(newIndex);
+  /* 🔥 CAMBIO SOLO AL INICIO DEL CICLO */
+  if (nextIndex !== index && rawT < 0.02) {
+    setIndex(nextIndex);
   }
 
   const container = document.querySelector(".zoom-container");
@@ -32,7 +33,6 @@ const animate = (time) => {
 
   requestRef.current = requestAnimationFrame(animate);
 };
-
   useEffect(() => {
     requestRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(requestRef.current);

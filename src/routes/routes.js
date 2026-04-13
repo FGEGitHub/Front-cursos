@@ -249,6 +249,7 @@ import Zooom2 from '../pages/zommart2'
 
 
 import Zooom3 from '../pages/zommart3'
+import Zooom4 from '../pages/zoomart4'
 const Rutas = [
 	<Navbar />,
 
@@ -261,7 +262,7 @@ const Rutas = [
 	{ path: '/zoom', element: <Zooom /> },
 { path: '/zoom2', element: <Zooom2 /> },
 	{ path: '/zoom3', element: <Zooom3 /> },
-
+	{ path: '/zoom4', element: <Zooom4 /> },
 
 
 	{ path: '/loginn', element: <Login /> },
