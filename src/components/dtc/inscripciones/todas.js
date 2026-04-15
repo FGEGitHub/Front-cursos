@@ -31,8 +31,7 @@ const CursoDialog = () => {
   const [openCells, setOpenCells] = useState({}); // Para controlar la expansión de celdas en modo semanal
   const [usuarioo, setUsuarioo] = useState();
   const navigate = useNavigate();
-  const horarios = ['14:00', '14:00', '15:00', '15:00', '16:00', '16:00']; // Nuevos horarios agregados
-
+const horarios = ['14:30', '15:30', '16:30', '17:00'];
   const diasSemana = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
 
   useEffect(() => {
@@ -107,24 +106,39 @@ const CursoDialog = () => {
 
   // Agrupar los datos por día y hora para el modo semanal
   const getDataByDayAndHour = () => {
-    const groupedData = {};
-    diasSemana.forEach((dia) => {
-      groupedData[dia] = {};
-      horarios.forEach((hora) => {
-        // Agrupamos los datos por día y hora
-        const data = filteredData.filter((row) => row.dia == dia && row.hora == hora);
-  
-        // Creamos una lista con el nombre del curso y la cantidad de chicos
-        const courses = data.map((row) => ({
-          nombreCurso: row.nombre_curso,
-          cantidadChicos: row.cantidad_kids,
-        }));
-  
-        groupedData[dia][hora] = courses;
+  const groupedData = {};
+
+  diasSemana.forEach((dia) => {
+    groupedData[dia] = {};
+
+    horarios.forEach((hora) => {
+      const data = filteredData.filter(
+        (row) => row.dia === dia && row.hora === hora
+      );
+
+      const agrupado = {};
+
+      data.forEach((row) => {
+        const key = row.detalle || row.nombre_curso;
+
+        if (!agrupado[key]) {
+          agrupado[key] = 0;
+        }
+
+        agrupado[key] += row.cantidad_kids || 0;
       });
+
+      const courses = Object.entries(agrupado).map(([nombre, cantidad]) => ({
+        nombreCurso: nombre,
+        cantidadChicos: cantidad,
+      }));
+
+      groupedData[dia][hora] = courses;
     });
-    return groupedData;
-  };
+  });
+
+  return groupedData;
+};
 
   const toggleCell = (dia, hora) => {
     const key = `${dia}-${hora}`;
@@ -223,13 +237,13 @@ const CursoDialog = () => {
               style={{ cursor: "pointer" }}
             >
          <b>
-{row.detalle}
+{row.detalle} - 
 </b>
             </div>
           </TableCell>
           <TableCell>
             <b>
-              {row.dia}-{row.hora} hs
+               {row.dia}-{row.hora} hs
             </b>
           </TableCell>
           <TableCell>
