@@ -10,7 +10,7 @@ const MobileNavigation = () => {
 
   if (loggedUserJSON) {
     const usuario = JSON.parse(loggedUserJSON);
-    if ([240, 265, 266, 306,307,308] .includes(usuario.id)) {
+    if ([240, 265, 266, 306,307,308,326,244,246] .includes(usuario.id)) {
       botones = ["14:30", "15:30", "16:30"];
     } else if (usuario.id == 304) {
       botones = ["14:30", "15:30", "16:30"];
