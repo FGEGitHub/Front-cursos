@@ -19,6 +19,7 @@ import {
   DialogActions,
   TextField,
 } from "@mui/material";
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import Asignar from "./Asignarusuarioaoficio";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import serviciodtc from "../../../services/dtc";
@@ -35,6 +36,7 @@ export default function OficiosTable() {
   const [oficioToDelete, setOficioToDelete] = useState(null);
 const [confirmDeleteExp, setConfirmDeleteExp] = useState(false);
 const [expedienteToDelete, setExpedienteToDelete] = useState(null);
+const [selectedFuero, setSelectedFuero] = useState("ALL");
   const [editedOficio, setEditedOficio] = useState({
     id: "",
     oficio: "",
@@ -52,6 +54,13 @@ const years = React.useMemo(() => {
       .map(o => o.fecha.substring(0, 4))
   );
   return Array.from(yearsSet).sort((a, b) => b - a);
+}, [oficios]);
+
+const fueros = React.useMemo(() => {
+  const setFueros = new Set(
+    oficios.map(o => o.fuero).filter(f => f)
+  );
+  return Array.from(setFueros);
 }, [oficios]);
 const resumenPorAnio = React.useMemo(() => {
   const conteo = {};
@@ -71,7 +80,7 @@ const resumenPorAnio = React.useMemo(() => {
   useEffect(() => {
     traerOficios();
   }, []);
-  useEffect(() => {
+useEffect(() => {
   const filtered = oficios.filter((oficio) => {
     const matchesSearch = `${oficio.fecha} ${oficio.oficio} ${oficio.juzgado}-${oficio.expediente} ${oficio.causa}`
       .toLowerCase()
@@ -81,11 +90,15 @@ const resumenPorAnio = React.useMemo(() => {
       selectedYear === "ALL" ||
       (oficio.fecha && oficio.fecha.startsWith(selectedYear));
 
-    return matchesSearch && matchesYear;
+    const matchesFuero =
+      selectedFuero === "ALL" ||
+      oficio.fuero === selectedFuero;
+
+    return matchesSearch && matchesYear && matchesFuero;
   });
 
   setFilteredOficios(filtered);
-}, [searchTerm, selectedYear, oficios]);
+}, [searchTerm, selectedYear, selectedFuero, oficios]);
 const handleDeleteExpediente = (id) => {
   setExpedienteToDelete(id);
   setConfirmDeleteExp(true);
@@ -251,7 +264,21 @@ const confirmDeleteExpediente = async () => {
     </Button>
   ))}
 </div>
-
+<FormControl size="small" sx={{ minWidth: 200, ml: 2 }}>
+  <InputLabel>Fuero</InputLabel>
+  <Select
+    value={selectedFuero}
+    label="Fuero"
+    onChange={(e) => setSelectedFuero(e.target.value)}
+  >
+    <MenuItem value="ALL">Todos</MenuItem>
+    {fueros.map((fuero) => (
+      <MenuItem key={fuero} value={fuero}>
+        {fuero}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
       <TextField
         fullWidth
         margin="dense"
