@@ -119,7 +119,7 @@ export default function MenuIzq2({ children }) {
       path: '/dtc/usuario1/listatodoslosturnos',
     },
     {
-      text: 'Oficios',
+      text: 'Intervenciones juridicas',
       icon: <ArchitectureIcon />,
       path: '/dtc/usuario1/oficios',
     },

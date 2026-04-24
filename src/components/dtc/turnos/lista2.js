@@ -267,6 +267,7 @@ const confirmDeleteExpediente = async () => {
     <TableCell>ID por año</TableCell>
     <TableCell>Fecha</TableCell>
     <TableCell>Personas/usuario</TableCell>
+      <TableCell>Fuero</TableCell>
     <TableCell>A través de</TableCell>
     <TableCell>Juzgado-expte</TableCell>
     <TableCell>Causa</TableCell>
@@ -290,6 +291,7 @@ const confirmDeleteExpediente = async () => {
                     </>
                   )}
                 </TableCell>
+                 <TableCell>{oficio.fuero}</TableCell>
                 <TableCell>{oficio.oficio}</TableCell>
                 <TableCell>
                   {oficio.juzgado}-{oficio.expediente}
