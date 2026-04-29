@@ -41,7 +41,7 @@ export default function ModificarUsuario(props) {
   const [open, setOpen] = useState(false);
 
   const [form, setForm] = useState({
-    ...props,
+    ...props.datos,
     motivo_consulta: props.motivo_consulta || [],
     discapacidad: props.discapacidad || [],
     beneficiario: props.beneficiario || [],
@@ -50,7 +50,7 @@ export default function ModificarUsuario(props) {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
+console.log(form)
     setForm({
       ...form,
       [name]: type === "checkbox" ? checked : value,
@@ -141,6 +141,38 @@ export default function ModificarUsuario(props) {
           <TextField type="date" name="fecha_nacimiento" value={form.fecha_nacimiento || ""} onChange={handleChange} fullWidth />
         </Grid>
       </Grid>
+      <Grid container spacing={2}>
+  <Grid item xs={4}>
+    <TextField
+      fullWidth
+      label="País"
+      name="pais"
+      value={form.pais}
+      onChange={handleChange}
+    />
+  </Grid>
+
+  <Grid item xs={4}>
+    <TextField
+      fullWidth
+      label="Provincia"
+      name="provincia"
+      value={form.provincia}
+      onChange={handleChange}
+    />
+  </Grid>
+
+  <Grid item xs={4}>
+    <TextField
+      fullWidth
+      label="Situacion habitacional"
+      name="situacion_habitacional"
+      value={form.situacion_habitacional}
+      onChange={handleChange}
+    />
+  </Grid>
+</Grid>
+        
     </Box>
 
     {/* CONTACTO */}
@@ -153,8 +185,11 @@ export default function ModificarUsuario(props) {
         <Grid item xs={6}>
           <TextField label="Tel. responsable" name="tel_responsable" value={form.tel_responsable || ""} onChange={handleChange} fullWidth />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={6}>
           <TextField label="Domicilio" name="domicilio" value={form.domicilio || ""} onChange={handleChange} fullWidth />
+        </Grid>
+            <Grid item xs={6}>
+          <TextField label="Barrio" name="barrio" value={form.barrio || ""} onChange={handleChange} fullWidth />
         </Grid>
       </Grid>
     </Box>
