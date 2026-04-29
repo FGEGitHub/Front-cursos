@@ -86,7 +86,7 @@ console.log(form)
 
     {/* RESPONSABLE */}
     <Box>
-      <Typography variant="subtitle2">Responsable</Typography>
+      <Typography variant="h4">Responsable</Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <TextField
@@ -118,7 +118,7 @@ console.log(form)
 
     {/* DATOS PERSONALES */}
     <Box>
-      <Typography variant="subtitle2">Datos personales</Typography>
+      <Typography variant="h4">Datos personales</Typography>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField label="Nombre" name="nombre" value={form.nombre} onChange={handleChange} fullWidth />
@@ -177,7 +177,7 @@ console.log(form)
 
     {/* CONTACTO */}
     <Box>
-      <Typography variant="subtitle2">Contacto</Typography>
+      <Typography variant="h4">Contacto</Typography><br/>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField label="Teléfono" name="telefono" value={form.telefono || ""} onChange={handleChange} fullWidth />
@@ -186,18 +186,79 @@ console.log(form)
           <TextField label="Tel. responsable" name="tel_responsable" value={form.tel_responsable || ""} onChange={handleChange} fullWidth />
         </Grid>
         <Grid item xs={6}>
-          <TextField label="Domicilio" name="domicilio" value={form.domicilio || ""} onChange={handleChange} fullWidth />
+          <TextField label="Domicilio" name="domicilio" value={form.domicilio || ""} onChange={handleChange}
+          inputProps={{ maxLength: 144 }}
+  helperText={`${(form.domicilio || "").length}/144`} 
+          fullWidth />
         </Grid>
             <Grid item xs={6}>
-          <TextField label="Barrio" name="barrio" value={form.barrio || ""} onChange={handleChange} fullWidth />
+          <TextField label="Barrio" name="barrio" value={form.barrio || ""} onChange={handleChange}   inputProps={{ maxLength: 44 }}
+  helperText={`${(form.barrio || "").length}/44`} />
         </Grid>
       </Grid>
     </Box>
 
+
+
+ {/* Primer Contacto */}
+  <Box>
+      <Typography variant="h4">Primer Contacto</Typography><br/>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <TextField type="date" name="primer_contacto" value={form.primer_contacto || ""} onChange={handleChange}  />
+        </Grid>
+        <Grid item xs={6}>
+ <TextField
+            select
+            label="Presentacion al dispositivo"
+            name="presentacion_dispositivo"
+            value={form.presentacion_dispositivo || ""}
+            onChange={handleChange}
+            fullWidth
+          >
+            <MenuItem value="Solo">Solo</MenuItem>
+            <MenuItem value="Acompañado">Acompañado</MenuItem>
+
+          </TextField>        </Grid>
+        <Grid item xs={6}>
+<TextField
+            select
+            label="Modo de acceso"
+            name="modo_acceso"
+            value={form.modo_acceso || ""}
+            onChange={handleChange}
+            fullWidth
+          >
+            <MenuItem value="Conocia el dispositivo por su presencia en el barrio">Conocia el dispositivo por su presencia en el barrio</MenuItem>
+            <MenuItem value="Se lo recomendo un referente afectivo">Se lo recomendo un referente afectivo</MenuItem>
+            <MenuItem value="Lo oriento otra institucion">Lo oriento otra institucion</MenuItem>
+            <MenuItem value="Lo oriento otro dispositivo">Lo oriento otro dispositivo</MenuItem>
+     <MenuItem value="Oficio judicial">Oficio judicial</MenuItem>
+      <MenuItem value="Otro">Otro</MenuItem>
+          </TextField>          </Grid>
+            <Grid item xs={6}>
+<TextField
+            select
+            label="Motivo de consulta"
+            name="motivo_consulta"
+            value={form.motivo_consulta || ""}
+            onChange={handleChange}
+            fullWidth
+          >
+            <MenuItem value="Apoyo economico">Apoyo economico</MenuItem>
+            <MenuItem value="Orientacion laboral">Orientacion laboral</MenuItem>
+            <MenuItem value="Orientacion educativa">Orientacion educativa</MenuItem>
+            <MenuItem value="Orientacion a la niñez">Orientacion a la niñez</MenuItem>
+     <MenuItem value="Orientacion en problemas comunitarios">Orientacion en problemas comunitarios</MenuItem>
+   
+          </TextField>            </Grid>
+      </Grid>
+    </Box>
+
+
     {/* RELACIONES */}
     <Box>
-      <Typography variant="subtitle2">Relaciones</Typography>
-
+      <Typography variant="h4">Relaciones</Typography><br/>
       <FormControlLabel
         control={
           <Checkbox
@@ -219,34 +280,77 @@ console.log(form)
         />
       )}
 
-      <TextField
-        label="Con quién vive"
-        name="con_quien_vive"
-        value={form.con_quien_vive || ""}
-        onChange={handleChange}
-        fullWidth
-      />
+    <TextField
+  label="Con quién vive"
+  name="con_quien_vive"
+  value={form.con_quien_vive || ""}
+  onChange={handleChange}
+  fullWidth
+  inputProps={{ maxLength: 44 }}
+  helperText={`${(form.con_quien_vive || "").length}/44`}
+/>
     </Box>
 
     {/* EDUCACIÓN */}
     <Box>
-      <Typography variant="subtitle2">Educación</Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <TextField select label="¿Sabe leer?" name="sabe_leer" value={form.sabe_leer || ""} onChange={handleChange} fullWidth>
-            <MenuItem value="Si">Si</MenuItem>
-            <MenuItem value="No">No</MenuItem>
-          </TextField>
-        </Grid>
-        <Grid item xs={6}>
-          <TextField label="Nivel educativo" name="nivel_educativo" value={form.nivel_educativo || ""} onChange={handleChange} fullWidth />
-        </Grid>
-      </Grid>
+      <Typography  variant="h4">Educación</Typography><br/>
+     <Grid container spacing={2}>
+  <Grid item xs={4}>
+    <TextField
+      select
+      label="¿Sabe leer?"
+      name="sabe_leer"
+      value={form.sabe_leer || ""}
+      onChange={handleChange}
+      fullWidth
+    >
+      <MenuItem value="Si">Si</MenuItem>
+      <MenuItem value="No">No</MenuItem>
+    </TextField>
+  </Grid>
+
+  <Grid item xs={4}>
+    <TextField
+      label="Nivel educativo"
+      name="nivel_educativo"
+      value={form.nivel_educativo || ""}
+      onChange={handleChange}
+      fullWidth
+      inputProps={{ maxLength: 44 }}
+      helperText={`${(form.nivel_educativo || "").length}/44`}
+    />
+  </Grid>
+
+  <Grid item xs={4}>
+    <TextField
+      label="Completo el nivel educativo"
+      name="completo_nivel"
+      value={form.completo_nivel || ""}
+      onChange={handleChange}
+      fullWidth
+      inputProps={{ maxLength: 44 }}
+      helperText={`${(form.completo_nivel || "").length}/44`}
+    />
+  </Grid>
+  <Grid item xs={4}>
+    <TextField
+      select
+      label="¿Asiste a institucion?"
+      name="asiste_institucion"
+      value={form.asiste_institucion || ""}
+      onChange={handleChange}
+      fullWidth
+    >
+      <MenuItem value="Si">Si</MenuItem>
+      <MenuItem value="No">No</MenuItem>
+    </TextField>
+  </Grid>
+</Grid>
     </Box>
 
     {/* TRABAJO */}
     <Box>
-      <Typography variant="subtitle2">Trabajo</Typography>
+      <Typography variant="h4">Trabajo</Typography><br/>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField select label="Situación laboral" name="situacion_laboral" value={form.situacion_laboral || ""} onChange={handleChange} fullWidth>
@@ -254,7 +358,20 @@ console.log(form)
             <MenuItem value="Sin empleo">Sin empleo</MenuItem>
           </TextField>
         </Grid>
-
+   <Grid item xs={6}>
+          <TextField select label="Modalidad de trabajo" name="modalidad_trabajo" value={form.modalidad_trabajo || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Registrado">Registrado</MenuItem>
+            <MenuItem value="No registrado">No registrado</MenuItem>
+          </TextField>
+          
+        </Grid>
+           <Grid item xs={6}>
+          <TextField select label="Búsqueda de trabajo" name="busca_trabajo" value={form.busca_trabajo || ""} onChange={handleChange} fullWidth>
+            <MenuItem value="Si">Si</MenuItem>
+            <MenuItem value="No">No</MenuItem>
+          </TextField>
+          
+        </Grid>
         <Grid item xs={6}>
           <TextField
             select
