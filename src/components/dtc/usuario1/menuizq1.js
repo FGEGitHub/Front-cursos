@@ -53,7 +53,7 @@ const traer = async () => {
     setEstemes(historial[1] || []);
 
     // TEMPORAL
-    setWhatsappActivo(historial[2]?.whatsapp || false);
+  setWhatsappActivo(historial[2]?.conectado || false);
 
   } catch (error) {
     console.error(error);
