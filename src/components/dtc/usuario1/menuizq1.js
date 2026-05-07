@@ -32,7 +32,7 @@ const drawerWidth = 290;
 export default function MenuIzq2({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
-
+const [whatsappActivo, setWhatsappActivo] = React.useState(false);
   const [cumple, setCumple] = React.useState([]);
   const [estemes, setEstemes] = React.useState([]);
 
@@ -40,18 +40,25 @@ export default function MenuIzq2({ children }) {
     traer();
   }, []);
 
-  const traer = async () => {
-    try {
-      const today = new Date();
-      const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
-      const historial = await servicioDtc.traercumples({ fecha: formattedDate });
+const traer = async () => {
+  try {
+    const today = new Date();
+    const formattedDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+    
+    const historial = await servicioDtc.traercumples({
+      fecha: formattedDate,
+    });
 
-      setCumple(historial[0] || []);
-      setEstemes(historial[1] || []);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    setCumple(historial[0] || []);
+    setEstemes(historial[1] || []);
+
+    // TEMPORAL
+    setWhatsappActivo(historial[2]?.whatsapp || false);
+
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   const handleClick = (path) => {
     navigate(path);
@@ -219,7 +226,46 @@ export default function MenuIzq2({ children }) {
           </Box>
 
           <Divider sx={{ borderColor: 'rgba(255,255,255,0.12)', mb: 2 }} />
+<Box
+  sx={{
+    mb: 2,
+    p: 1.5,
+    borderRadius: '14px',
+    background: whatsappActivo
+      ? 'rgba(76, 175, 80, 0.18)'
+      : 'rgba(244, 67, 54, 0.18)',
+    border: whatsappActivo
+      ? '1px solid rgba(76,175,80,0.35)'
+      : '1px solid rgba(244,67,54,0.35)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 1,
+  }}
+>
+  <Box
+    sx={{
+      width: 10,
+      height: 10,
+      borderRadius: '50%',
+      background: whatsappActivo ? '#4caf50' : '#f44336',
+      boxShadow: whatsappActivo
+        ? '0 0 12px #4caf50'
+        : '0 0 12px #f44336',
+    }}
+  />
 
+  <Typography
+    sx={{
+      color: '#fff',
+      fontSize: '0.82rem',
+      fontWeight: 600,
+    }}
+  >
+    {whatsappActivo
+      ? 'WhatsApp conectado'
+      : 'WhatsApp desconectado'}
+  </Typography>
+</Box>
         <List
   sx={{
     flex: 1,
