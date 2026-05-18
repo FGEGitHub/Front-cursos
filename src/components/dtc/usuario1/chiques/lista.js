@@ -207,74 +207,76 @@ const options = {
         <Button onClick={handleNavigation} variant="outlined" sx={{ color: "#5d4037", borderColor: "#5d4037", fontSize: "0.65rem" }} >
           <b>Ver</b>
         </Button>
-       <Modificar
-  id={chicos[dataIndex].id}
-  nombre={chicos[dataIndex].nombre}
-  apellido={chicos[dataIndex].apellido}
-  dni={chicos[dataIndex].dni}
-  sexo={chicos[dataIndex].sexo}
-  estadocivil={chicos[dataIndex].estadocivil}
-  fecha_nacimiento={chicos[dataIndex].fecha_nacimiento}
-  pais={chicos[dataIndex].pais}
-  provincia={chicos[dataIndex].provincia}
-  situacion_habitacional={chicos[dataIndex].situacion_habitacional}
+{usuario?.nivel == 20 && (
+  <Modificar
+    id={chicos[dataIndex].id}
+    nombre={chicos[dataIndex].nombre}
+    apellido={chicos[dataIndex].apellido}
+    dni={chicos[dataIndex].dni}
+    sexo={chicos[dataIndex].sexo}
+    estadocivil={chicos[dataIndex].estadocivil}
+    fecha_nacimiento={chicos[dataIndex].fecha_nacimiento}
+    pais={chicos[dataIndex].pais}
+    provincia={chicos[dataIndex].provincia}
+    situacion_habitacional={chicos[dataIndex].situacion_habitacional}
 
-  telefono={chicos[dataIndex].telefono}
-  tel_responsable={chicos[dataIndex].tel_responsable}
-  domicilio={chicos[dataIndex].domicilio}
-  barrio={chicos[dataIndex].barrio}
+    telefono={chicos[dataIndex].telefono}
+    tel_responsable={chicos[dataIndex].tel_responsable}
+    domicilio={chicos[dataIndex].domicilio}
+    barrio={chicos[dataIndex].barrio}
 
-  primer_contacto={chicos[dataIndex].primer_contacto}
-  presentacion_dispositivo={chicos[dataIndex].presentacion_dispositivo}
-  modo_acceso={chicos[dataIndex].modo_acceso}
-  motivo_consulta={chicos[dataIndex].motivo_consulta}
+    primer_contacto={chicos[dataIndex].primer_contacto}
+    presentacion_dispositivo={chicos[dataIndex].presentacion_dispositivo}
+    modo_acceso={chicos[dataIndex].modo_acceso}
+    motivo_consulta={chicos[dataIndex].motivo_consulta}
 
-  tiene_hijos={chicos[dataIndex].tiene_hijos}
-  cantidad_hijos={chicos[dataIndex].cantidad_hijos}
-  con_quien_vive={chicos[dataIndex].con_quien_vive}
+    tiene_hijos={chicos[dataIndex].tiene_hijos}
+    cantidad_hijos={chicos[dataIndex].cantidad_hijos}
+    con_quien_vive={chicos[dataIndex].con_quien_vive}
 
-  sabe_leer={chicos[dataIndex].sabe_leer}
-  nivel_educativo={chicos[dataIndex].nivel_educativo}
+    sabe_leer={chicos[dataIndex].sabe_leer}
+    nivel_educativo={chicos[dataIndex].nivel_educativo}
 
-  situacion_laboral={chicos[dataIndex].situacion_laboral}
-  beneficiario={chicos[dataIndex].beneficiario}
+    situacion_laboral={chicos[dataIndex].situacion_laboral}
+    beneficiario={chicos[dataIndex].beneficiario}
 
-  discapacidad={chicos[dataIndex].discapacidad}
+    discapacidad={chicos[dataIndex].discapacidad}
 
-  presenta_violencia={chicos[dataIndex].presenta_violencia}
-  tipo_violencia={chicos[dataIndex].tipo_violencia}
-  modalidad_violencia={chicos[dataIndex].modalidad_violencia}
+    presenta_violencia={chicos[dataIndex].presenta_violencia}
+    tipo_violencia={chicos[dataIndex].tipo_violencia}
+    modalidad_violencia={chicos[dataIndex].modalidad_violencia}
 
-  escuela={chicos[dataIndex].escuela}
-  grado={chicos[dataIndex].grado}
-  talle={chicos[dataIndex].talle}
+    escuela={chicos[dataIndex].escuela}
+    grado={chicos[dataIndex].grado}
+    talle={chicos[dataIndex].talle}
 
-  observaciones={chicos[dataIndex].observaciones}
+    observaciones={chicos[dataIndex].observaciones}
 
-  responsable_inscripcion={chicos[dataIndex].responsable_inscripcion}
+    responsable_inscripcion={chicos[dataIndex].responsable_inscripcion}
 
-  obra_social={chicos[dataIndex].obra_social}
-  obra_social_cual={chicos[dataIndex].obra_social_cual}
+    obra_social={chicos[dataIndex].obra_social}
+    obra_social_cual={chicos[dataIndex].obra_social_cual}
 
-  kid={chicos[dataIndex].kid}
-  fines={chicos[dataIndex].fines}
-  hora_merienda={chicos[dataIndex].hora_merienda}
+    kid={chicos[dataIndex].kid}
+    fines={chicos[dataIndex].fines}
+    hora_merienda={chicos[dataIndex].hora_merienda}
 
-  traer={async () => {
-    try {
-      const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
-      if (loggedUserJSON) {
-        const usuario = JSON.parse(loggedUserJSON)
+    traer={async () => {
+      try {
+        const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser')
+        if (loggedUserJSON) {
+          const usuario = JSON.parse(loggedUserJSON)
 
-        setUsuario(usuario)
+          setUsuario(usuario)
 
-        const novedades_aux = await servicioDtc.listachiquesmomentaneo()
-        setchicos(novedades_aux[0])
-        setDatos(novedades_aux[1])
-      }
-    } catch (error) {}
-  }}
-/>
+          const novedades_aux = await servicioDtc.listachiquesmomentaneo()
+          setchicos(novedades_aux[0])
+          setDatos(novedades_aux[1])
+        }
+      } catch (error) {}
+    }}
+  />
+)}
 
       </div>
     );
@@ -474,7 +476,7 @@ const columns = [
       <h2>Lista de chicos</h2>
       {chicos ? <>
         <div>
-<Fusioanr/>
+{usuario?.nivel == 20 && <Fusioanr />}
 
         <Button onClick={() => navigate('/dtc/usuario1/nuevo' )} variant="outlined" sx={{ color: "#5d4037", borderColor: "#5d4037", fontSize: "0.65rem" }} >
           <b>Nuevo</b>

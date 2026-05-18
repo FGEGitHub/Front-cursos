@@ -271,13 +271,25 @@ console.log(form)
       />
 
       {form.tiene_hijos && (
-        <TextField
-          label="Cantidad hijos"
-          name="cantidad_hijos"
-          value={form.cantidad_hijos || ""}
-          onChange={handleChange}
-          fullWidth
-        />
+       <TextField
+  label="Cantidad hijos"
+  name="cantidad_hijos"
+  type="number"
+  value={form.cantidad_hijos || ""}
+  onChange={(e) => {
+    const value = e.target.value;
+
+    // Solo permitir enteros positivos
+    if (/^\d*$/.test(value)) {
+      handleChange(e);
+    }
+  }}
+  inputProps={{
+    step: 1,
+    min: 0
+  }}
+  fullWidth
+/>
       )}
 
     <TextField
