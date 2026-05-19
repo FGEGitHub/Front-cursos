@@ -38,7 +38,7 @@ export default function Paginas() {
   <MenuuCel/>
   <br/> 
   <br/>   <br/>  <br/>  
-  <button onClick={() =>   navigate("/dtc/talleresver") }>Ir a talleres </button>
+
   <Asis/>
 
      <br/> 

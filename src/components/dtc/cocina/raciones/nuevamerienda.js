@@ -8,7 +8,7 @@ import servicioDtc from '../../../../services/dtc';
 import InputLabel from '@mui/material/InputLabel';
 import { useParams } from "react-router-dom"
 import CircularProgress from '@mui/material/CircularProgress';
-
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 
 export default function SelectTextFields(props) {
@@ -90,7 +90,34 @@ props.traer()
 <>
 
 
-<Button onClick={handleClickOpen} variant='containded' >Agregar consumo MEriena</Button>
+<Button
+  onClick={handleClickOpen}
+  startIcon={<AddPhotoAlternateIcon />}
+  sx={{
+    background: 'linear-gradient(135deg, #2e7d32, #4caf50)',
+    color: 'white',
+    fontWeight: 'bold',
+    padding: '14px 24px',
+    borderRadius: '16px',
+    fontSize: '16px',
+    textTransform: 'none',
+    boxShadow: '0px 6px 15px rgba(46,125,50,0.35)',
+    transition: 'all 0.3s ease',
+    marginBottom: '20px',
+
+    '&:hover': {
+      background: 'linear-gradient(135deg, #1b5e20, #388e3c)',
+      transform: 'translateY(-2px) scale(1.03)',
+      boxShadow: '0px 10px 20px rgba(46,125,50,0.45)',
+    },
+
+    '&:active': {
+      transform: 'scale(0.98)',
+    },
+  }}
+>
+  Agregar consumo merienda
+</Button>
 
 
 

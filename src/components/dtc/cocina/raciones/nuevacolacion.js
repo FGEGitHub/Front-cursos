@@ -3,7 +3,7 @@ import { TextField, Button, Input, Card, CardContent, CardMedia } from '@mui/mat
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import servicioDtc from '../../../../services/dtc';
 import InputLabel from '@mui/material/InputLabel';
 import { useParams } from "react-router-dom"
@@ -90,7 +90,30 @@ props.traer()
 <>
 
 
-<Button onClick={handleClickOpen} variant='containded' >Agregar consumo COLACION </Button>
+<Button onClick={handleClickOpen} variant='containded' 
+ startIcon={<AddPhotoAlternateIcon />}
+ sx={{
+    background: 'linear-gradient(135deg, #2e7d32, #4caf50)',
+    color: 'white',
+    fontWeight: 'bold',
+    padding: '14px 24px',
+    borderRadius: '16px',
+    fontSize: '16px',
+    textTransform: 'none',
+    boxShadow: '0px 6px 15px rgba(46,125,50,0.35)',
+    transition: 'all 0.3s ease',
+    marginBottom: '20px',
+
+    '&:hover': {
+      background: 'linear-gradient(135deg, #1b5e20, #388e3c)',
+      transform: 'translateY(-2px) scale(1.03)',
+      boxShadow: '0px 10px 20px rgba(46,125,50,0.45)',
+    },
+
+    '&:active': {
+      transform: 'scale(0.98)',
+    },
+  }}>Agregar consumo COLACION </Button>
 
 
 
