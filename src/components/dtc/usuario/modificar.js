@@ -187,13 +187,13 @@ console.log(form)
         </Grid>
         <Grid item xs={6}>
           <TextField label="Domicilio" name="domicilio" value={form.domicilio || ""} onChange={handleChange}
-          inputProps={{ maxLength: 144 }}
-  helperText={`${(form.domicilio || "").length}/144`} 
+          inputProps={{ maxLength: 544 }}
+  helperText={`${(form.domicilio || "").length}/544`} 
           fullWidth />
         </Grid>
             <Grid item xs={6}>
-          <TextField label="Barrio" name="barrio" value={form.barrio || ""} onChange={handleChange}   inputProps={{ maxLength: 44 }}
-  helperText={`${(form.barrio || "").length}/44`} />
+          <TextField label="Barrio" name="barrio" value={form.barrio || ""} onChange={handleChange}   inputProps={{ maxLength: 544 }}
+  helperText={`${(form.barrio || "").length}/544`} />
         </Grid>
       </Grid>
     </Box>
@@ -298,8 +298,8 @@ console.log(form)
   value={form.con_quien_vive || ""}
   onChange={handleChange}
   fullWidth
-  inputProps={{ maxLength: 44 }}
-  helperText={`${(form.con_quien_vive || "").length}/44`}
+  inputProps={{ maxLength: 544 }}
+  helperText={`${(form.con_quien_vive || "").length}/544`}
 />
     </Box>
 
@@ -328,8 +328,8 @@ console.log(form)
       value={form.nivel_educativo || ""}
       onChange={handleChange}
       fullWidth
-      inputProps={{ maxLength: 44 }}
-      helperText={`${(form.nivel_educativo || "").length}/44`}
+      inputProps={{ maxLength: 544 }}
+      helperText={`${(form.nivel_educativo || "").length}/544`}
     />
   </Grid>
 
@@ -340,8 +340,8 @@ console.log(form)
       value={form.completo_nivel || ""}
       onChange={handleChange}
       fullWidth
-      inputProps={{ maxLength: 44 }}
-      helperText={`${(form.completo_nivel || "").length}/44`}
+      inputProps={{ maxLength: 544 }}
+      helperText={`${(form.completo_nivel || "").length}/544`}
     />
   </Grid>
   <Grid item xs={4}>
