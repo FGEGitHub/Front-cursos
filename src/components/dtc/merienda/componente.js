@@ -216,7 +216,7 @@ const formattedDate = `${today.getFullYear()}-${String(
   );
 
 
-
+       
   return (
     <Paper sx={{ padding: 2 }}>
       {nuevos > 0 && (
