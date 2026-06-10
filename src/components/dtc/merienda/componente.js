@@ -16,6 +16,14 @@ import RemoveCircleRoundedIcon from '@mui/icons-material/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import servicioDtc from '../../../services/dtc';
 import Asistencia from  '../usuario2/asistencia/tabla'
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import IconButton from "@mui/material/IconButton";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+
+} from "@mui/material";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${TableCell.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -72,6 +80,9 @@ export default function Ingresos(props) {
   const [premerienda, setPremerienda] = useState();
   const [nuevos, setNuevos] = useState(0);
   const [currentDate, setCurrentDate] = useState('');
+const [horarios, setHorarios] = useState([]);
+const [chicoSeleccionado, setChicoSeleccionado] = useState(null);
+  const [openHorarios, setOpenHorarios] = useState(false);
 
   const traer = async () => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
@@ -121,6 +132,22 @@ export default function Ingresos(props) {
     await servicioDtc.revisto();
     traer();
   };
+  const verHorarios = async (row) => {
+  setChicoSeleccionado(row);
+
+  try {
+    const resp = await servicioDtc.traerhorariosusuario({
+      id_usuario: row.id_usuario
+    });
+
+    console.log("Horarios:", resp);
+
+    setHorarios(resp || []);
+    setOpenHorarios(true);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   const renderTable = (inscrip, title) => (
     <Box sx={{ overflowX: 'auto', marginBottom: '20px' }}>
@@ -132,6 +159,15 @@ export default function Ingresos(props) {
               <StyledTableCell data-label="Apellido y Nombre">
                 {row.apellido} {row.nombre}
               </StyledTableCell>
+              <StyledTableCell data-label="Horarios">
+    <Button
+      size="small"
+      variant="contained"
+      onClick={() => verHorarios(row)}
+    >
+      horarios
+    </Button>
+  </StyledTableCell>
               <StyledTableCell data-label="Premerienda">
                 Restar
                 <RemoveCircleRoundedIcon onClick={() => checkedep(row.id)} />
@@ -146,7 +182,7 @@ export default function Ingresos(props) {
                 <AddCircleRoundedIcon onClick={() => checkedemas(row.id)} />
                 Añadir
               </StyledTableCell>
-              <StyledTableCell data-label="Kid">{row.kid}</StyledTableCell>
+             
             </StyledTableRow>
           ))}
         </TableBody>
@@ -201,6 +237,59 @@ const formattedDate = `${today.getFullYear()}-${String(
       )}
   
       {renderTable(inscrip, "Listado completo")}
+      <Dialog
+        open={openHorarios}
+        onClose={() => setOpenHorarios(false)}
+        fullWidth
+        maxWidth="xs"
+      >
+        <DialogTitle>
+          Horarios de {chicoSeleccionado?.apellido} {chicoSeleccionado?.nombre}
+        </DialogTitle>
+      
+        <DialogContent>
+          {!horarios || Object.keys(horarios).length === 0 ? (
+            <Alert severity="info">
+              No posee horarios asignados
+            </Alert>
+          ) : (
+            Object.entries(horarios).map(([dia, lista]) => (
+              <Paper
+                key={dia}
+                elevation={2}
+                sx={{
+                  p: 1,
+                  mb: 2,
+                  borderRadius: 2
+                }}
+              >
+                <b style={{ fontSize: 18 }}>{dia}</b>
+      
+                {lista.map((item, i) => (
+                  <Box
+                    key={i}
+                    sx={{
+                      mt: 1,
+                      p: 1,
+                      background: "#f5f5f5",
+                      borderRadius: 1
+                    }}
+                  >
+                    <div>
+                      <b>{item.hora}</b>
+                    </div>
+      
+                    <div>
+                      {item.detalle}     {item.hora}
+                    </div>
+                  </Box>
+                ))}
+              </Paper>
+            ))
+          )}
+        </DialogContent>
+      </Dialog>
     </Paper>
+    
   );
 }

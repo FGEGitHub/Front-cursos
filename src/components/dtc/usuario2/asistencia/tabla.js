@@ -168,13 +168,18 @@ props.fecha == undefined ? setCurrentDate(formattedDate) : setCurrentDate(props.
                 {datos[0].map((row) => (
                   <StyledTableRow key={row.name}>
                     <StyledTableCell component="th" scope="row">{row.apellido}  {row.nombre}</StyledTableCell>
-              <StyledTableCell component="th" scope="row">
+            <StyledTableCell component="th" scope="row">
   <Button
     variant="contained"
     size="small"
+    sx={{
+      minWidth: "32px",
+      padding: "2px 4px",
+      fontSize: "0.65rem"
+    }}
     onClick={() => verHorarios(row)}
   >
-    Ver horarios
+    Ver horario
   </Button>
 </StyledTableCell>
        
