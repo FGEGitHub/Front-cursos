@@ -374,19 +374,16 @@ const columns = [
         label: "Cargado por",
     },
 
-    {
-      name: "Nombre usuario",
-      options: {
-          customBodyRenderLite: (dataIndex, rowIndex) =>
-              CutomButtonsRenderer(
-                  dataIndex,
-                  rowIndex,
-                  // overbookingData,
-                  // handleEditOpen
-              )
-      }
+     {
+        name: "apellido",
+        label: "Apellido",
 
-  },
+    },
+     {
+        name: "nombre",
+        label: "nombre",
+
+    },
 
     {
         name: "titulo",

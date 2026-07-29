@@ -17,7 +17,19 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import Modificar from '../../usuario/modificar'
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Button as MuiButton
+} from "@mui/material";
 import {
 
   makeStyles,
@@ -101,6 +113,30 @@ const TablaNotificaciones = (props) => {
 const [obrasChicos, setObrasChicos] = useState([]);
 const [obrasPsico, setObrasPsico] = useState([]);
 const [mostrarDetalles, setMostrarDetalles] = useState(false);
+const [openExportar, setOpenExportar] = useState(false);
+
+const CAMPOS = [
+  { key: "nombre", label: "Nombre" },
+  { key: "apellido", label: "Apellido" },
+  { key: "dni", label: "DNI" },
+  { key: "sexo", label: "Sexo" },
+  { key: "fecha_nacimiento", label: "Fecha nacimiento" },
+  { key: "telefono", label: "Teléfono" },
+  { key: "tel_responsable", label: "Teléfono responsable" },
+  { key: "domicilio", label: "Domicilio" },
+  { key: "barrio", label: "Barrio" },
+  { key: "escuela", label: "Escuela" },
+  { key: "grado", label: "Grado" },
+  { key: "obra_social_cual", label: "Obra Social" },
+  { key: "kid", label: "Dimensión" },
+  { key: "fines", label: "Fines" },
+  { key: "hora_merienda", label: "Hora Merienda" },
+  { key: "observaciones", label: "Observaciones" }
+];
+
+const [camposSeleccionados, setCamposSeleccionados] = useState(
+    CAMPOS.map(c=>c.key)
+);
   const navigate = useNavigate();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const classes = useStyles();
@@ -113,7 +149,41 @@ const [mostrarDetalles, setMostrarDetalles] = useState(false);
 
 
   }, [])
+const exportarExcel = () => {
 
+    const datos = chicos.map(chico=>{
+
+        let fila={};
+
+        camposSeleccionados.forEach(campo=>{
+
+            const info=CAMPOS.find(x=>x.key===campo);
+
+            fila[info.label]=chico[campo];
+
+        });
+
+        return fila;
+
+    });
+
+    const ws=XLSX.utils.json_to_sheet(datos);
+
+    const wb=XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(wb,ws,"Listado");
+
+    const excel=XLSX.write(wb,{
+        bookType:"xlsx",
+        type:"array"
+    });
+
+    saveAs(
+        new Blob([excel]),
+        "Listado_Chicos.xlsx"
+    );
+
+}
 
 const options = {
   setTableProps: () => ({
@@ -475,7 +545,13 @@ const columns = [
 ) : null}
       <h2>Lista de chicos</h2>
       {chicos ? <>
-        <div>
+        <div><Button
+    variant="contained"
+    color="success"
+    onClick={()=>setOpenExportar(true)}
+>
+    Exportar listado
+</Button>
 {usuario?.nivel == 20 && <Fusioanr />}
 
         <Button onClick={() => navigate('/dtc/usuario1/nuevo' )} variant="outlined" sx={{ color: "#5d4037", borderColor: "#5d4037", fontSize: "0.65rem" }} >
@@ -556,6 +632,112 @@ const columns = [
 
         </div>
       </> : <></>}
+      <Dialog
+    open={openExportar}
+    onClose={()=>setOpenExportar(false)}
+    maxWidth="md"
+    fullWidth
+>
+
+<DialogTitle>
+
+Seleccionar columnas
+
+</DialogTitle>
+
+<DialogContent>
+
+<Grid container>
+
+{
+
+CAMPOS.map(c=>(
+
+<Grid item xs={6} md={4} key={c.key}>
+
+<FormControlLabel
+
+control={
+
+<Checkbox
+
+checked={camposSeleccionados.includes(c.key)}
+
+onChange={()=>{
+
+if(camposSeleccionados.includes(c.key)){
+
+setCamposSeleccionados(
+camposSeleccionados.filter(x=>x!==c.key)
+);
+
+}else{
+
+setCamposSeleccionados([
+...camposSeleccionados,
+c.key
+]);
+
+}
+
+}}
+
+/>
+
+}
+
+label={c.label}
+
+/>
+
+</Grid>
+
+))
+
+}
+
+</Grid>
+
+<MuiButton
+onClick={()=>setCamposSeleccionados(CAMPOS.map(c=>c.key))}
+>
+
+Seleccionar todos
+
+</MuiButton>
+
+<MuiButton
+onClick={()=>setCamposSeleccionados([])}
+>
+
+Quitar todos
+
+</MuiButton>
+
+</DialogContent>
+
+<DialogActions>
+
+<MuiButton
+onClick={()=>setOpenExportar(false)}
+>
+
+Cancelar
+
+</MuiButton>
+
+<MuiButton
+variant="contained"
+onClick={exportarExcel}
+>
+
+Descargar Excel
+
+</MuiButton>
+
+</DialogActions>
+
+</Dialog>
     </div>
   )
 }
