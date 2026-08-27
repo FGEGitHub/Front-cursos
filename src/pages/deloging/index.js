@@ -8,7 +8,7 @@ export default function Paginas() {
         // Eliminar sesión
         window.localStorage.removeItem("loggedNoteAppUser");
 
-        // Redirigir al login
+        // Redirigir al login 
         navigate("/login");
     }, [navigate]);
 
