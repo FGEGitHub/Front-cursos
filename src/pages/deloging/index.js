@@ -9,7 +9,7 @@ export default function Paginas() {
         window.localStorage.removeItem("loggedNoteAppUser");
 
         // Redirigir al login
-        navigate("/loginn");
+        navigate("/login");
     }, [navigate]);
 
     return (
