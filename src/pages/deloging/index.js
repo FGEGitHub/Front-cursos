@@ -1,22 +1,20 @@
-
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Paginas() {
-    const [loginVisible, setLoginvisible] = useState(false)
+    const navigate = useNavigate();
 
- /*    useEffect(() => {
-      
-        window.localStorage.removeItem('loggedNoteAppUser')
-        navigate('/login')
-      }, []) */
+    useEffect(() => {
+        // Eliminar sesión
+        window.localStorage.removeItem("loggedNoteAppUser");
+
+        // Redirigir al login
+        navigate("/loginn");
+    }, [navigate]);
 
     return (
         <>
-        hola
-       
+            hola
         </>
-   
     );
-
 }
