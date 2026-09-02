@@ -284,7 +284,7 @@ const FichaPersona = (props) => {
           {chico && (
             <Fragment>
               {usuario ? <>
-                {(usuario.nivel == 20 || usuario.nivel == 28) ? <>
+                {(usuario.nivel == 20 || usuario.nivel == 28 || usuario.nivel == 24) ? <>
 
                   <div style={{ display: 'flex', gap: '10px' }}>
                     <Agregarcurso
