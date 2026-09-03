@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+
 import {
   Button,
   Checkbox,
@@ -12,8 +13,12 @@ import {
   FormControl,
   InputLabel,
   Select,
-  MenuItem
+  MenuItem,
+  OutlinedInput,
+  Chip,
+  Box as MuiBox
 } from '@mui/material';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import React, { useState, useEffect } from "react";
 import serviciodtc from '../../../services/dtc';
@@ -25,20 +30,21 @@ export default function ExpedienteForm(props) {
   const [nuevoUsuario, setNuevoUsuario] = useState(false);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
 
- const [form, setForm] = useState({
-  expediente: "",
-  juzgado: "",
-  causa: "",
-  solicitud: "",
-  oficio: "",
-  fecha: "",
-  fuero: "",
-  id_usuario: null,
-  nombre: "",
-  apellido: "",
-  dni: "",
-  tel: ""
-});
+  const [form, setForm] = useState({
+    expediente: "",
+    juzgado: "",
+    causa: "",
+    solicitud: "",
+    oficio: "",
+    fecha: "",
+    fuero: "",
+    intervencion: [],
+    id_usuario: null,
+    nombre: "",
+    apellido: "",
+    dni: "",
+    tel: ""
+  });
 
   useEffect(() => {
     if (usarExistente) {
@@ -56,7 +62,10 @@ export default function ExpedienteForm(props) {
   };
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleClickOpen = () => {
@@ -68,6 +77,7 @@ export default function ExpedienteForm(props) {
     setUsarExistente(false);
     setNuevoUsuario(false);
     setUsuarioSeleccionado(null);
+
     setForm({
       expediente: "",
       juzgado: "",
@@ -75,6 +85,8 @@ export default function ExpedienteForm(props) {
       solicitud: "",
       oficio: "",
       fecha: "",
+      fuero: "",
+      intervencion: [],
       id_usuario: null,
       nombre: "",
       apellido: "",
@@ -95,14 +107,26 @@ export default function ExpedienteForm(props) {
     }
 
     if (nuevoUsuario) {
-      if (!form.nombre.trim() || !form.apellido.trim() || !form.dni.trim()) {
-        alert("Faltan datos obligatorios del nuevo usuario (nombre, apellido o DNI).");
+      if (
+        !form.nombre.trim() ||
+        !form.apellido.trim() ||
+        !form.dni.trim()
+      ) {
+        alert(
+          "Faltan datos obligatorios del nuevo usuario (nombre, apellido o DNI)."
+        );
         return false;
       }
     }
 
-    if (!form.expediente.trim() || !form.juzgado.trim() || !form.causa.trim()) {
-      alert("Por favor completa los campos de expediente, juzgado y causa.");
+    if (
+      !form.expediente.trim() ||
+      !form.juzgado.trim() ||
+      !form.causa.trim()
+    ) {
+      alert(
+        "Por favor completa los campos de expediente, juzgado y causa."
+      );
       return false;
     }
 
@@ -121,12 +145,20 @@ export default function ExpedienteForm(props) {
         datosEnviar.id_usuario = usuarioSeleccionado.id;
       }
 
+      console.log("Datos a enviar:", datosEnviar);
+
       const respuesta = await serviciodtc.nuevooficio(datosEnviar);
+
       alert("Realizado correctamente.");
+
       props.traer();
+
     } catch (error) {
       console.error("Error al enviar el formulario", error);
-      alert("Error al enviar los datos. Verifica la conexión o contacta al administrador.");
+
+      alert(
+        "Error al enviar los datos. Verifica la conexión o contacta al administrador."
+      );
     }
 
     handleClose();
@@ -134,17 +166,36 @@ export default function ExpedienteForm(props) {
 
   return (
     <Box>
+
       <Tooltip title="Nuevo Expediente">
-        <Button variant="contained" onClick={handleClickOpen}>Nuevo</Button>
+        <Button
+          variant="contained"
+          onClick={handleClickOpen}
+        >
+          Nuevo
+        </Button>
       </Tooltip>
 
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth="sm"
+        fullWidth
+      >
+
         <DialogContent>
-          <Typography variant="h6" gutterBottom>
+
+          <Typography
+            variant="h6"
+            gutterBottom
+          >
             Nuevo Expediente
           </Typography>
 
-          {/* Checkbox - seleccionar usuario existente */}
+          {/* =========================
+              USUARIO EXISTENTE
+          ========================== */}
+
           <FormControlLabel
             control={
               <Checkbox
@@ -168,12 +219,20 @@ export default function ExpedienteForm(props) {
                 setUsuarioSeleccionado(newValue);
               }}
               renderInput={(params) => (
-                <TextField {...params} label="Buscar usuario" margin="dense" fullWidth />
+                <TextField
+                  {...params}
+                  label="Buscar usuario"
+                  margin="dense"
+                  fullWidth
+                />
               )}
             />
           )}
 
-          {/* Checkbox - agregar nuevo usuario */}
+          {/* =========================
+              NUEVO USUARIO
+          ========================== */}
+
           <FormControlLabel
             control={
               <Checkbox
@@ -189,55 +248,230 @@ export default function ExpedienteForm(props) {
 
           {nuevoUsuario && (
             <>
-              <TextField label="Nombre" name="nombre" fullWidth margin="dense" onChange={handleChange} />
-              <TextField label="Apellido" name="apellido" fullWidth margin="dense" onChange={handleChange} />
-              <TextField label="DNI" name="dni" fullWidth margin="dense" onChange={handleChange} />
-              <TextField label="Teléfono" name="tel" fullWidth margin="dense" onChange={handleChange} />
+              <TextField
+                label="Nombre"
+                name="nombre"
+                fullWidth
+                margin="dense"
+                onChange={handleChange}
+              />
+
+              <TextField
+                label="Apellido"
+                name="apellido"
+                fullWidth
+                margin="dense"
+                onChange={handleChange}
+              />
+
+              <TextField
+                label="DNI"
+                name="dni"
+                fullWidth
+                margin="dense"
+                onChange={handleChange}
+              />
+
+              <TextField
+                label="Teléfono"
+                name="tel"
+                fullWidth
+                margin="dense"
+                onChange={handleChange}
+              />
             </>
           )}
 
-          {/* Campos de expediente */}
+          {/* =========================
+              FUERO
+          ========================== */}
 
-<FormControl fullWidth margin="dense">
-  <InputLabel id="fuero-label">Fuero</InputLabel>
-  <Select
-    labelId="fuero-label"
-    name="fuero"
-    value={form.fuero}
-    label="Fuero"
-    onChange={handleChange}
-  >
-    <MenuItem value="Sin fuero">Sin fuero</MenuItem>
-    <MenuItem value="Penal">Penal</MenuItem>
-    <MenuItem value="Familia">Familia</MenuItem>
-    <MenuItem value="Civil y comercial">Civil y comercial</MenuItem>
-      <MenuItem value="Dipna">Dipna</MenuItem>
-        <MenuItem value="Hospital Vidal">Hospital Vidal</MenuItem>
-    <MenuItem value="Otros">Otros</MenuItem>
-  
-  </Select>
-</FormControl>
-          <TextField label="Expediente" name="expediente" fullWidth margin="dense" onChange={handleChange} />
-          <TextField label="Juzgado" name="juzgado" fullWidth margin="dense" onChange={handleChange} />
-          <TextField label="Causa" name="causa" fullWidth margin="dense" onChange={handleChange} />
-          <TextField label="Solicitud" name="solicitud" fullWidth margin="dense" onChange={handleChange} />
-          <TextField label="A través de" name="oficio" fullWidth margin="dense" onChange={handleChange} />
+          <FormControl
+            fullWidth
+            margin="dense"
+          >
+            <InputLabel id="fuero-label">
+              Fuero
+            </InputLabel>
+
+            <Select
+              labelId="fuero-label"
+              name="fuero"
+              value={form.fuero}
+              label="Fuero"
+              onChange={handleChange}
+            >
+              <MenuItem value="Sin fuero">
+                Sin fuero
+              </MenuItem>
+
+              <MenuItem value="Penal">
+                Penal
+              </MenuItem>
+
+              <MenuItem value="Familia">
+                Familia
+              </MenuItem>
+
+              <MenuItem value="Civil y comercial">
+                Civil y comercial
+              </MenuItem>
+
+              <MenuItem value="Dipna">
+                Dipna
+              </MenuItem>
+
+              <MenuItem value="Hospital Vidal">
+                Hospital Vidal
+              </MenuItem>
+
+              <MenuItem value="Otros">
+                Otros
+              </MenuItem>
+            </Select>
+          </FormControl>
+
+          {/* =========================
+              INTERVENCIÓN MÚLTIPLE
+          ========================== */}
+
+          <FormControl
+            fullWidth
+            margin="dense"
+          >
+            <InputLabel id="intervencion-label">
+              Intervención
+            </InputLabel>
+
+            <Select
+              labelId="intervencion-label"
+              multiple
+              name="intervencion"
+              value={form.intervencion}
+              onChange={handleChange}
+              input={
+                <OutlinedInput label="Intervención" />
+              }
+              renderValue={(selected) => (
+                <MuiBox
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 0.5
+                  }}
+                >
+                  {selected.map((value) => (
+                    <Chip
+                      key={value}
+                      label={value}
+                    />
+                  ))}
+                </MuiBox>
+              )}
+            >
+
+              <MenuItem value="Turnos">
+                Turnos
+              </MenuItem>
+
+              <MenuItem value="Informes">
+                Informes
+              </MenuItem>
+
+              <MenuItem value="Articulacion">
+                Articulación
+              </MenuItem>
+
+              <MenuItem value="Oficios">
+                Oficios
+              </MenuItem>
+
+              <MenuItem value="Asesoramiento">
+                Asesoramiento
+              </MenuItem>
+
+            </Select>
+          </FormControl>
+
+          {/* =========================
+              CAMPOS DEL EXPEDIENTE
+          ========================== */}
+
+          <TextField
+            label="Expediente"
+            name="expediente"
+            fullWidth
+            margin="dense"
+            onChange={handleChange}
+          />
+
+          <TextField
+            label="Juzgado"
+            name="juzgado"
+            fullWidth
+            margin="dense"
+            onChange={handleChange}
+          />
+
+          <TextField
+            label="Causa"
+            name="causa"
+            fullWidth
+            margin="dense"
+            onChange={handleChange}
+          />
+
+          <TextField
+            label="Solicitud"
+            name="solicitud"
+            fullWidth
+            margin="dense"
+            onChange={handleChange}
+          />
+
+          <TextField
+            label="A través de"
+            name="oficio"
+            fullWidth
+            margin="dense"
+            onChange={handleChange}
+          />
+
           <TextField
             label="Fecha"
             name="fecha"
             type="date"
             fullWidth
             margin="dense"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{
+              shrink: true
+            }}
             onChange={handleChange}
           />
+
         </DialogContent>
 
+        {/* =========================
+            BOTONES
+        ========================== */}
+
         <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button variant="contained" onClick={handleSubmit}>Guardar</Button>
+
+          <Button onClick={handleClose}>
+            Cancelar
+          </Button>
+
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+          >
+            Guardar
+          </Button>
+
         </DialogActions>
+
       </Dialog>
+
     </Box>
   );
 }
