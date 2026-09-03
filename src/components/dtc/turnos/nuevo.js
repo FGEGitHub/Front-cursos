@@ -119,16 +119,7 @@ export default function ExpedienteForm(props) {
       }
     }
 
-    if (
-      !form.expediente.trim() ||
-      !form.juzgado.trim() ||
-      !form.causa.trim()
-    ) {
-      alert(
-        "Por favor completa los campos de expediente, juzgado y causa."
-      );
-      return false;
-    }
+  
 
     return true;
   };
