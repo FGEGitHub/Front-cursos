@@ -1239,7 +1239,7 @@ const nuevooficio = async (datos) => {
 
   console.log("Respuesta del backend:", data.data);
 
-  return data.data;
+  return data;
 };
 
 
