@@ -879,7 +879,7 @@ const traerOficios = async () => {
               </Typography>
 
               <Typography variant="body2">
-                oficios
+                Intervenciones
               </Typography>
 
             </CardContent>
