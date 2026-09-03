@@ -153,6 +153,10 @@ import Dtcturnospsicologo from '../pages/dtc/turnospsicologo';
 import Dtcturnospersonas from '../pages/dtc/turnospersonas';
 import Dtcturnospersona from '../pages/dtc/turnopersona';
 import Dtcturnosusuario from '../pages/dtc/turnosusuario';
+import Dtcpsactividades from '../pages/dtc/psicactividades';
+import Dtcpsoficios from '../pages/dtc/psoficios';
+import Dtcpsasistenciassoc from '../pages/dtc/psasistenciassoc';
+import Dtcpsmapa from '../pages/dtc/psmapa';
 
 import Dtcturnosusuarios from '../pages/dtc/turnosusuarios';
 import DtcEstadisticastodas from '../pages/dtc/estadisticastodas';
@@ -260,7 +264,7 @@ const Rutas = [
 		}, */
 	{ path: '/', element: <Logindtc /> },
 	{ path: '/zoom', element: <Zooom /> },
-{ path: '/zoom2', element: <Zooom2 /> },
+	{ path: '/zoom2', element: <Zooom2 /> },
 	{ path: '/zoom3', element: <Zooom3 /> },
 	{ path: '/zoom4', element: <Zooom4 /> },
 
@@ -426,6 +430,12 @@ const Rutas = [
 	{ path: '/dtc/psicologa/usuarios', element: <Dtcpsiclogausuarios /> },
 	{ path: '/dtc/psicologa/usuario/:id', element: <Dtcpsiclogausuario /> },
 	{ path: '/dtc/psicologa/nuevousuario', element: <Dtcpsiconuevoch /> },
+{ path: '/dtc/psicologa/nuevousuario', element: <Dtcpsiconuevoch /> },
+{ path: '/dtc/psicologa/actividades', element: <Dtcpsactividades /> },
+{ path: '/dtc/psicologa/oficios', element: <Dtcpsoficios /> },
+{ path: '/dtc/psicologa/asistenciassoc', element: <Dtcpsasistenciassoc /> },
+{ path: '/dtc/psicologa/mapa', element: <Dtcpsmapa /> },
+
 
 
 	{ path: '/dtc/sole/inicio', element: <Dtcsoleinicio /> },
