@@ -138,11 +138,13 @@ export default function ExpedienteForm(props) {
 
       console.log("Datos a enviar:", datosEnviar);
 
-      const respuesta = await serviciodtc.nuevooficio(datosEnviar);
+     const respuesta = await serviciodtc.nuevooficio(datosEnviar);
 
-      alert("Realizado correctamente.");
+console.log("Respuesta del backend:", respuesta);
 
-      props.traer();
+alert(respuesta.mensaje);
+
+props.traer();
 
     } catch (error) {
       console.error("Error al enviar el formulario", error);

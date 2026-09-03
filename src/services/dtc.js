@@ -1230,9 +1230,16 @@ const borrarusoconsumo = async (datos) => {
 };
 
 const nuevooficio = async (datos) => {
-  const data= await axios.post(baseUrl+'nuevooficio',datos,config)
-  console.log(data)
-    return data
+
+  const data = await axios.post(
+    baseUrl + "nuevooficio",
+    datos,
+    config
+  );
+
+  console.log("Respuesta del backend:", data.data);
+
+  return data.data;
 };
 
 
