@@ -819,7 +819,7 @@ const traerOficios = async () => {
           </Typography>
 
           <Typography variant="body2">
-            Oficios
+            Intervenciones juridicas
           </Typography>
 
         </CardContent>
@@ -997,7 +997,7 @@ const traerOficios = async () => {
                     </Typography>
 
                     <Typography variant="body2">
-                      oficios
+                      Intervenciones juridicas
                     </Typography>
 
                   </CardContent>
