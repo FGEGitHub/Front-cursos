@@ -211,8 +211,10 @@ export default function ExpedienteForm(props) {
     <MenuItem value="Penal">Penal</MenuItem>
     <MenuItem value="Familia">Familia</MenuItem>
     <MenuItem value="Civil y comercial">Civil y comercial</MenuItem>
+      <MenuItem value="Dipna">Dipna</MenuItem>
+        <MenuItem value="Hospital Vidal">Hospital Vidal</MenuItem>
     <MenuItem value="Otros">Otros</MenuItem>
-    <MenuItem value="Dipna">Dipna</MenuItem>
+  
   </Select>
 </FormControl>
           <TextField label="Expediente" name="expediente" fullWidth margin="dense" onChange={handleChange} />
