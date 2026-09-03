@@ -8,7 +8,11 @@ import {
   DialogContent,
   DialogActions,
   Typography,
-  Autocomplete
+  Autocomplete,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from '@mui/material';
 import Tooltip from '@material-ui/core/Tooltip';
 import React, { useState, useEffect } from "react";
@@ -21,19 +25,20 @@ export default function ExpedienteForm(props) {
   const [nuevoUsuario, setNuevoUsuario] = useState(false);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
 
-  const [form, setForm] = useState({
-    expediente: "",
-    juzgado: "",
-    causa: "",
-    solicitud: "",
-    oficio: "",
-    fecha: "",
-    id_usuario: null,
-    nombre: "",
-    apellido: "",
-    dni: "",
-    tel: ""
-  });
+ const [form, setForm] = useState({
+  expediente: "",
+  juzgado: "",
+  causa: "",
+  solicitud: "",
+  oficio: "",
+  fecha: "",
+  fuero: "",
+  id_usuario: null,
+  nombre: "",
+  apellido: "",
+  dni: "",
+  tel: ""
+});
 
   useEffect(() => {
     if (usarExistente) {
@@ -192,6 +197,24 @@ export default function ExpedienteForm(props) {
           )}
 
           {/* Campos de expediente */}
+
+<FormControl fullWidth margin="dense">
+  <InputLabel id="fuero-label">Fuero</InputLabel>
+  <Select
+    labelId="fuero-label"
+    name="fuero"
+    value={form.fuero}
+    label="Fuero"
+    onChange={handleChange}
+  >
+    <MenuItem value="Sin fuero">Sin fuero</MenuItem>
+    <MenuItem value="Penal">Penal</MenuItem>
+    <MenuItem value="Familia">Familia</MenuItem>
+    <MenuItem value="Civil y comercial">Civil y comercial</MenuItem>
+    <MenuItem value="Otros">Otros</MenuItem>
+    <MenuItem value="Dipna">Dipna</MenuItem>
+  </Select>
+</FormControl>
           <TextField label="Expediente" name="expediente" fullWidth margin="dense" onChange={handleChange} />
           <TextField label="Juzgado" name="juzgado" fullWidth margin="dense" onChange={handleChange} />
           <TextField label="Causa" name="causa" fullWidth margin="dense" onChange={handleChange} />
