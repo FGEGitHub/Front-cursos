@@ -153,10 +153,10 @@ import Dtcturnospsicologo from '../pages/dtc/turnospsicologo';
 import Dtcturnospersonas from '../pages/dtc/turnospersonas';
 import Dtcturnospersona from '../pages/dtc/turnopersona';
 import Dtcturnosusuario from '../pages/dtc/turnosusuario';
-import Dtcpsactividades from '../pages/dtc/psicactividades';
-import Dtcpsoficios from '../pages/dtc/psoficios';
-import Dtcpsasistenciassoc from '../pages/dtc/psasistenciassoc';
-import Dtcpsmapa from '../pages/dtc/psmapa';
+import Dtcvisactividades from '../pages/dtc/visitaicactividades/index.js';
+import Dtcvisoficios from '../pages/dtc/visitaoficios/index.js';
+import Dtcvisasistenciassoc from '../pages/dtc/visitaasistenciassoc/index.js';
+import Dtcvismapa from '../pages/dtc/visitamapa/index.js';
 
 import Dtcturnosusuarios from '../pages/dtc/turnosusuarios';
 import DtcEstadisticastodas from '../pages/dtc/estadisticastodas';
@@ -431,10 +431,7 @@ const Rutas = [
 	{ path: '/dtc/psicologa/usuario/:id', element: <Dtcpsiclogausuario /> },
 	{ path: '/dtc/psicologa/nuevousuario', element: <Dtcpsiconuevoch /> },
 { path: '/dtc/psicologa/nuevousuario', element: <Dtcpsiconuevoch /> },
-{ path: '/dtc/psicologa/actividades', element: <Dtcpsactividades /> },
-{ path: '/dtc/psicologa/oficios', element: <Dtcpsoficios /> },
-{ path: '/dtc/psicologa/asistenciassoc', element: <Dtcpsasistenciassoc /> },
-{ path: '/dtc/psicologa/mapa', element: <Dtcpsmapa /> },
+
 
 
 
@@ -492,6 +489,11 @@ const Rutas = [
 	{ path: '/dtc/visitasocial/informes', element: <Dtcasisenteinformes /> },
 	{ path: '/dtc/turnos/oficios', element: <Dtcturnosoficios /> },
 	{ path: '/dtc/visitasocial/inscripciones', element: <DTCInscripcionesvisita /> },
+{ path: '/dtc/visitasocial/actividades', element: <Dtcvisactividades /> },
+{ path: '/dtc/visitasocial/oficios', element: <Dtcvisoficios /> },
+{ path: '/dtc/visitasocial/asistenciassoc', element: <Dtcvisasistenciassoc /> },
+{ path: '/dtc/visitasocial/mapa', element: <Dtcvismapa /> },
+
 
 	{ path: '/dtc/turnos/usuarios', element: <Dtcturnosusuarios /> },
 { path: '/dtc/turnos/usuario/:id', element: <Dtcturnosusuario /> },
