@@ -98,7 +98,7 @@ const TablaNotificaciones = (props) => {
             <>
 <button style={{ width: '80px' }} onClick={() => window.open('/dtc/verfoto/'+chicos[dataIndex]['id'], '_blank')}>Ver imagen</button>
 
-<button style={{ width: '80px' }} onClick={() => window.open('https://esme.cuquicalvano.com:4000/dtc/traerfoto/'+chicos[dataIndex]['id'], '_blank')}>Ver PDF</button>
+<button style={{ width: '80px' }} onClick={() => window.open('https://backpipo.ciudaddecorrientes.gov.ar/dtc/traerfoto/'+chicos[dataIndex]['id'], '_blank')}>Ver PDF</button>
 {/* <Ver 
                         imagenBase64 = {chicos[dataIndex]['imagenBase64']}
                         descripcion = {chicos[dataIndex]['descripcion']}/> */}

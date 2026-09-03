@@ -35,7 +35,13 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import serviciodtc from "../../../services/dtc";
 import Nuevo from "./nuevo";
 import EstadisticasFuero from "./estadoficiosfuero";
-
+const INTERVENCIONES = [
+  "Oficios",
+  "Turnos",
+  "Informes",
+  "Articulación",
+  "Asesoramiento"
+];
 export default function OficiosTable() {
 
   // =====================================================
@@ -112,60 +118,96 @@ export default function OficiosTable() {
 
   }, [oficios]);
 
+// =====================================================
+// INTERVENCIONES FIJAS
+// =====================================================
 
-  // =====================================================
-  // INTERVENCIONES DISPONIBLES
-  // =====================================================
+const intervenciones = INTERVENCIONES;
 
-  const intervenciones = React.useMemo(() => {
-  const todas = [];
 
-  oficios.forEach((oficio) => {
-    const lista = oficio.intervenciones || [];
+// =====================================================
+// ESTADÍSTICAS DE INTERVENCIÓN
+// =====================================================
 
-    lista.forEach((intervencion) => {
-      if (
-        intervencion &&
-        !todas.includes(intervencion)
-      ) {
-        todas.push(intervencion);
-      }
-    });
+const estadisticasIntervencion = React.useMemo(() => {
+
+  const conteo = {};
+
+  // Inicializamos siempre las 5 categorías
+  INTERVENCIONES.forEach((intervencion) => {
+    conteo[intervencion] = 0;
   });
 
-  return todas;
+  oficios.forEach((oficio) => {
+
+    const lista = Array.isArray(oficio.intervenciones)
+      ? oficio.intervenciones
+      : [];
+
+    lista.forEach((intervencion) => {
+
+      if (!intervencion) return;
+
+      if (conteo[intervencion] !== undefined) {
+        conteo[intervencion] += 1;
+      }
+
+    });
+
+  });
+
+  return conteo;
+
 }, [oficios]);
 
 
-  // =====================================================
-  // ESTADÍSTICAS DE INTERVENCIÓN
-  // =====================================================
+// =====================================================
+// ESTADÍSTICAS DE FUERO SEGÚN INTERVENCIÓN
+// =====================================================
 
-  const estadisticasIntervencion = React.useMemo(() => {
+const estadisticasFueroIntervencion = React.useMemo(() => {
 
-    const conteo = {};
+  const conteo = {};
 
-    oficios.forEach((oficio) => {
-
-      const lista = Array.isArray(oficio.intervencion)
-        ? oficio.intervencion
-        : [];
-
-      lista.forEach((intervencion) => {
-
-        if (!intervencion) return;
-
-        conteo[intervencion] =
-          (conteo[intervencion] || 0) + 1;
-
-      });
-
-    });
-
+  // Si no hay intervención seleccionada
+  if (selectedIntervencion === "ALL") {
     return conteo;
+  }
 
-  }, [oficios]);
+  oficios.forEach((oficio) => {
 
+    const lista = Array.isArray(oficio.intervenciones)
+      ? oficio.intervenciones
+      : [];
+
+    // El oficio pertenece a la intervención seleccionada
+    if (!lista.includes(selectedIntervencion)) {
+      return;
+    }
+
+    // Si querés que respete también el año seleccionado
+    if (
+      selectedYear !== "ALL" &&
+      (!oficio.fecha ||
+        !oficio.fecha.startsWith(selectedYear))
+    ) {
+      return;
+    }
+
+    const fuero = oficio.fuero || "Sin fuero";
+
+    conteo[fuero] =
+      (conteo[fuero] || 0) + 1;
+
+  });
+
+  return conteo;
+
+}, [
+  oficios,
+  selectedIntervencion,
+  selectedYear
+]);
 
   // =====================================================
   // TOTAL DE OFICIOS
@@ -216,17 +258,23 @@ export default function OficiosTable() {
   // CONVERTIR INTERVENCION JSON -> ARRAY
   // =====================================================
 const procesarOficio = (oficio) => {
+
   let intervenciones = [];
-console.log("Procesando oficio:", oficio);
+
   const valor = oficio.intervencion;
 
   if (Array.isArray(valor)) {
+
     intervenciones = valor;
-  } else if (typeof valor == "string") {
+
+  } else if (typeof valor === "string") {
+
     const texto = valor.trim();
 
-    if (texto) {
+    if (texto !== "") {
+
       try {
+
         const parsed = JSON.parse(texto);
 
         if (Array.isArray(parsed)) {
@@ -234,15 +282,44 @@ console.log("Procesando oficio:", oficio);
         } else if (parsed) {
           intervenciones = [String(parsed)];
         }
+
       } catch (error) {
+
+        // Compatibilidad con registros viejos
         intervenciones = [texto];
+
       }
+
     }
+
   }
+
+  // Normalizamos nombres
+  intervenciones = intervenciones
+    .map((intervencion) => {
+
+      if (!intervencion) return null;
+
+      const valor = String(intervencion).trim();
+
+      // Unificamos ambas formas
+      if (
+        valor === "Articulacion" ||
+        valor === "Articulación"
+      ) {
+        return "Articulación";
+      }
+
+      return valor;
+    })
+    .filter(Boolean);
 
   return {
     ...oficio,
-    intervenciones: intervenciones.filter(Boolean),
+
+    // Este será el campo que usaremos en TODO React
+    intervenciones,
+
     expedientes: Array.isArray(oficio.expedientes)
       ? oficio.expedientes
       : []
@@ -303,10 +380,10 @@ console.log("Procesando oficio:", oficio);
       // INTERVENCIÓN
       // -------------------------
 
-      const listaIntervenciones =
-        Array.isArray(oficio.intervencion)
-          ? oficio.intervencion
-          : [];
+   const listaIntervenciones =
+  Array.isArray(oficio.intervenciones)
+    ? oficio.intervenciones
+    : [];
 
 
       const matchesIntervencion =
@@ -680,97 +757,231 @@ const traerOficios = async () => {
           ESTADÍSTICAS DE INTERVENCIÓN
       ================================================== */}
 
-      <Paper
+    {/* =================================================
+    ESTADÍSTICAS DE INTERVENCIÓN
+================================================== */}
+
+<Paper
+  sx={{
+    mb: 2,
+    p: 2
+  }}
+>
+
+  <Typography
+    variant="h6"
+    gutterBottom
+  >
+    Estadísticas por intervención
+  </Typography>
+
+  <Grid
+    container
+    spacing={2}
+  >
+
+    {/* ============================================
+        TOTAL
+    ============================================ */}
+
+    <Grid
+      item
+      xs={12}
+      sm={6}
+      md={2}
+    >
+
+      <Card
         sx={{
-          mb: 2,
-          p: 2
+          cursor: "pointer",
+          height: "100%",
+          border:
+            selectedIntervencion === "ALL"
+              ? "3px solid"
+              : "1px solid #ddd"
         }}
+        onClick={() =>
+          setSelectedIntervencion("ALL")
+        }
       >
 
-        <Typography
-          variant="h6"
-          gutterBottom
-        >
-          Estadísticas por intervención
-        </Typography>
+        <CardContent>
 
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+          >
+            Total
+          </Typography>
+
+          <Typography variant="h4">
+            {totalOficios}
+          </Typography>
+
+          <Typography variant="body2">
+            Oficios
+          </Typography>
+
+        </CardContent>
+
+      </Card>
+
+    </Grid>
+
+
+    {/* ============================================
+        LAS 5 INTERVENCIONES
+    ============================================ */}
+
+    {INTERVENCIONES.map(
+      (intervencion) => (
 
         <Grid
-          container
-          spacing={2}
+          item
+          xs={12}
+          sm={6}
+          md={2}
+          key={intervencion}
         >
 
-          {/* TOTAL */}
+          <Card
+            sx={{
+              cursor: "pointer",
+              height: "100%",
+              border:
+                selectedIntervencion ===
+                intervencion
+                  ? "3px solid"
+                  : "1px solid #ddd"
+            }}
+            onClick={() =>
+              filtrarIntervencion(
+                intervencion
+              )
+            }
+          >
 
-          <Grid item xs={12} sm={6} md={2}>
+            <CardContent>
 
-            <Card
-              sx={{
-                cursor: "pointer",
-                height: "100%"
-              }}
-              onClick={() =>
-                setSelectedIntervencion("ALL")
-              }
-            >
+              <Typography
+                variant="subtitle2"
+                color="text.secondary"
+              >
+                {intervencion}
+              </Typography>
 
-              <CardContent>
+              <Typography variant="h4">
+                {
+                  estadisticasIntervencion[
+                    intervencion
+                  ] || 0
+                }
+              </Typography>
 
-                <Typography
-                  variant="subtitle2"
-                  color="text.secondary"
-                >
-                  Total
-                </Typography>
+              <Typography variant="body2">
+                oficios
+              </Typography>
 
-                <Typography
-                  variant="h4"
-                >
-                  {totalOficios}
-                </Typography>
+            </CardContent>
 
-                <Typography
-                  variant="body2"
-                >
-                  Oficios
-                </Typography>
+          </Card>
 
-              </CardContent>
+        </Grid>
 
-            </Card>
+      )
+    )}
 
-          </Grid>
+  </Grid>
 
 
-          {/* INTERVENCIONES */}
+  {/* ============================================
+      FUEROS DE LA INTERVENCIÓN SELECCIONADA
+  ============================================ */}
 
-          {intervenciones.map(
-            (intervencion) => (
+  {selectedIntervencion !== "ALL" && (
+
+    <Paper
+      elevation={0}
+      sx={{
+        mt: 3,
+        p: 2,
+        border: "1px solid #ddd",
+        borderRadius: 2
+      }}
+    >
+
+      <Typography
+        variant="h6"
+        gutterBottom
+      >
+        Fuero de la intervención:{" "}
+        <strong>
+          {selectedIntervencion}
+        </strong>
+      </Typography>
+
+      <Grid
+        container
+        spacing={2}
+      >
+
+        {/* TOTAL DE LA INTERVENCIÓN */}
+
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={2}
+        >
+
+          <Card>
+
+            <CardContent>
+
+              <Typography
+                variant="subtitle2"
+                color="text.secondary"
+              >
+                Total
+              </Typography>
+
+              <Typography variant="h4">
+                {
+                  estadisticasIntervencion[
+                    selectedIntervencion
+                  ] || 0
+                }
+              </Typography>
+
+              <Typography variant="body2">
+                {selectedIntervencion}
+              </Typography>
+
+            </CardContent>
+
+          </Card>
+
+        </Grid>
+
+
+        {/* FUEROS */}
+
+        {Object.entries(
+          estadisticasFueroIntervencion
+        )
+          .sort((a, b) => b[1] - a[1])
+          .map(
+            ([fuero, cantidad]) => (
 
               <Grid
                 item
                 xs={12}
                 sm={6}
                 md={2}
-                key={intervencion}
+                key={fuero}
               >
 
-                <Card
-                  sx={{
-                    cursor: "pointer",
-                    height: "100%",
-                    border:
-                      selectedIntervencion ===
-                      intervencion
-                        ? "3px solid"
-                        : "1px solid #ddd"
-                  }}
-                  onClick={() =>
-                    filtrarIntervencion(
-                      intervencion
-                    )
-                  }
-                >
+                <Card>
 
                   <CardContent>
 
@@ -778,23 +989,15 @@ const traerOficios = async () => {
                       variant="subtitle2"
                       color="text.secondary"
                     >
-                      {intervencion}
+                      {fuero}
                     </Typography>
 
-                    <Typography
-                      variant="h4"
-                    >
-                      {
-                        estadisticasIntervencion[
-                          intervencion
-                        ] || 0
-                      }
+                    <Typography variant="h4">
+                      {cantidad}
                     </Typography>
 
-                    <Typography
-                      variant="body2"
-                    >
-                      intervenciones
+                    <Typography variant="body2">
+                      oficios
                     </Typography>
 
                   </CardContent>
@@ -806,41 +1009,13 @@ const traerOficios = async () => {
             )
           )}
 
-        </Grid>
+      </Grid>
 
+    </Paper>
 
-        {/* FILTRO ACTIVO */}
+  )}
 
-        {selectedIntervencion !== "ALL" && (
-
-          <Box
-            sx={{
-              mt: 2,
-              display: "flex",
-              alignItems: "center",
-              gap: 1
-            }}
-          >
-
-            <Typography>
-              Filtrando por:
-            </Typography>
-
-            <Chip
-              label={selectedIntervencion}
-              color="primary"
-              onDelete={() =>
-                setSelectedIntervencion(
-                  "ALL"
-                )
-              }
-            />
-
-          </Box>
-
-        )}
-
-      </Paper>
+</Paper>
 
 
       {/* =================================================
