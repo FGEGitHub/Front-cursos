@@ -93,30 +93,7 @@ export default function MenuIzq2 ({children}) {
           icon: <AccountBoxTwoToneIcon />, 
           path: '/dtc/psicologa/usuarios' 
         },
-          { 
-          text: 'actividades', 
-          icon: <AccountBoxTwoToneIcon />, 
-          path: '/dtc/psicologa/actividades' 
-        },
-     
-          { 
-          text: 'Intervenciones juridicas', 
-          icon: <AccountBoxTwoToneIcon />, 
-          path: '/dtc/psicologa/oficios' 
-        },
-     
-          { 
-          text: 'trabajo territorial', 
-          icon: <AccountBoxTwoToneIcon />, 
-          path: '/dtc/psicologa/asistenciassoc' 
-        },
-     
-          { 
-          text: 'mapa', 
-          icon: <AccountBoxTwoToneIcon />, 
-          path: '/dtc/psicologa/mapa' 
-        },
-     
+         
      
       
       ];

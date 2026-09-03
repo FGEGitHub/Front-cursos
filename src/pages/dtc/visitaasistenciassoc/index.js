@@ -6,8 +6,7 @@ import Asis from '../../../components/dtc/visitasocial/tabla'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MenuuCel from '../../../components/dtc/vale/menuresp'
-import Menuizq from '../../../components/dtc/vale/menuizqval'
-
+import Menuizq from '../../../components/dtc/visitasocial/menuizq'
 import {
 
   makeStyles,
@@ -42,7 +41,7 @@ export default function Paginas() {
           switch (user.nivel) {
             case 21:
              break;
-             case 24:
+               case 28:
               break;
            //   navigate('/')
            
@@ -65,7 +64,7 @@ export default function Paginas() {
     return (
       <>
             {isMatch ? <>
-              <MenuuCel/>
+              <Menuizq/>
               
               <Asis/>
             </>:<>

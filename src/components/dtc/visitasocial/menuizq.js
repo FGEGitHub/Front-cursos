@@ -120,6 +120,30 @@ export default function MenuIzq2 ({children}) {
           icon: <AccountBoxTwoToneIcon />, 
           path: '/dtc/visitasocial/informes' 
         },
+         { 
+                  text: 'actividades', 
+                  icon: <AccountBoxTwoToneIcon />, 
+                  path: '/dtc/visitasocial/actividades' 
+                },
+             
+                  { 
+                  text: 'Intervenciones juridicas', 
+                  icon: <AccountBoxTwoToneIcon />, 
+                  path: '/dtc/visitasocial/oficios' 
+                },
+             
+                  { 
+                  text: 'trabajo territorial', 
+                  icon: <AccountBoxTwoToneIcon />, 
+                  path: '/dtc/visitasocial/asistenciassoc' 
+                },
+             
+                  { 
+                  text: 'mapa', 
+                  icon: <AccountBoxTwoToneIcon />, 
+                  path: '/dtc/visitasocial/mapa' 
+                },
+             
       ];
       const islogo = {
         width: "70%",                  
