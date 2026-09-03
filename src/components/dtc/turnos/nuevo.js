@@ -169,7 +169,7 @@ export default function ExpedienteForm(props) {
 
       <Dialog
         open={open}
-        onClose={handleClose}
+      
         maxWidth="sm"
         fullWidth
       >
