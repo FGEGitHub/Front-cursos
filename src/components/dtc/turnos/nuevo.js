@@ -362,7 +362,9 @@ props.traer();
                 </MuiBox>
               )}
             >
-
+ <MenuItem value="Audiencia">
+                Audiencia
+              </MenuItem>
               <MenuItem value="Turnos">
                 Turnos
               </MenuItem>
