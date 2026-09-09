@@ -37,6 +37,7 @@ import Nuevo from "./nuevo";
 import EstadisticasFuero from "./estadoficiosfuero";
 const INTERVENCIONES = [
   "Oficios",
+  "Audiencia",
   "Turnos",
   "Informes",
   "Articulación",
