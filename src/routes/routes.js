@@ -220,7 +220,7 @@ import DTCInscripcionesvisita from '../pages/dtc/visitasoc/inscripciones'
 import STCusuairo1psicologo from '../pages/dtc/nivel1/psicologo'
 import Dtcpsiconuevoch from '../pages/dtc/nuevochiquepsicologo'
 
-
+import DtcVisitaturnos from '../pages/dtc/visitaturnos'
 
 import DTCTAlleresver from '../pages/dtc/talleresver'
 import DTCAlumnosdelcurso from '../pages/dtc/alumnosdeltaller';
@@ -493,7 +493,7 @@ const Rutas = [
 { path: '/dtc/visitasocial/oficios', element: <Dtcvisoficios /> },
 { path: '/dtc/visitasocial/asistenciassoc', element: <Dtcvisasistenciassoc /> },
 { path: '/dtc/visitasocial/mapa', element: <Dtcvismapa /> },
-
+{ path: '/dtc/visitasocial/turnos', element: <DtcVisitaturnos /> },
 
 	{ path: '/dtc/turnos/usuarios', element: <Dtcturnosusuarios /> },
 { path: '/dtc/turnos/usuario/:id', element: <Dtcturnosusuario /> },

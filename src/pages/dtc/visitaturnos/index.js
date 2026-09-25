@@ -2,12 +2,12 @@
 
 
 
-import Asis from '../../../components/dtc/visitasocial/tabla'
+import Asis from '../../../components/dtc/usuario1/turnos/lista'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
-
 import Menuizq from '../../../components/dtc/visitasocial/menuizq'
+
 import {
 
   makeStyles,
@@ -42,7 +42,7 @@ export default function Paginas() {
           switch (user.nivel) {
             case 21:
              break;
-               case 28:
+              case 28:
               break;
            //   navigate('/')
            

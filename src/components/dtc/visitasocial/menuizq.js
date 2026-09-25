@@ -84,6 +84,11 @@ export default function MenuIzq2 ({children}) {
         window.location.reload(true);
       } 
     const menuItems = [
+         { 
+        text: ' turnos', 
+        icon: <PeopleAltTwoToneIcon />, 
+        path: '/dtc/visitasocial/turnos' 
+      },
       { 
         text: ' inscripciones', 
         icon: <PeopleAltTwoToneIcon />, 
