@@ -34,6 +34,7 @@ const TablaNotificaciones = () => {
   }, []);
 
   useEffect(() => {
+    console.log(clases)
     const filtrado = clases.filter((c) =>
       c.titulo.toLowerCase().includes(search.toLowerCase())
     );

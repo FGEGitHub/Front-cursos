@@ -156,7 +156,7 @@ const MobileFriendlyTable = (props) => {
         </TableContainer>
       </> : <></>}
 
-      <br />  <br />  <br />  <br />  <br /></div>
+      <br />  <br /></div>
   );
 };
 

@@ -46,7 +46,10 @@ const MobileAutocomplete = (props) => {
     }else if (user.id == 326) {
       // ponerpresenteclase3
       ta = await servicioDtc.ponerpresenteclase2(mergedJSON);
-    } else {
+    } else if (user.id == 353) {
+      // ponerpresenteclase3
+      ta = await servicioDtc.ponerpresenteclase2(mergedJSON);
+    }else {
       // por defecto
       ta = await servicioDtc.ponerpresenteclase(mergedJSON);
     }
